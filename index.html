@@ -60,9 +60,30 @@
   .lang { display: flex; gap: 8px; align-items: center; font-size: .85rem; font-weight: 600; }
   .lang .on { color: #fff; }
   .lang .off { color: #5f7f9e; cursor: default; }
+  .menu-toggle {
+    display: none; align-items: center; justify-content: center; width: 34px; height: 34px;
+    padding: 0; border: 1px solid rgba(255,255,255,.28); border-radius: 9px;
+    background: rgba(255,255,255,.12); color: #fff; cursor: pointer;
+  }
+  .menu-toggle svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; }
+  .menu-toggle .menu-close { display: none; }
+  .menu-toggle[aria-expanded="true"] .menu-open { display: none; }
+  .menu-toggle[aria-expanded="true"] .menu-close { display: block; }
   @media (max-width: 760px) {
-    .topnav .links { display: none; }
+    .topnav .wrap { position: relative; flex-wrap: wrap; gap: 10px; }
+    .topnav .links {
+      display: flex; order: 10; flex: 0 0 100%; max-height: 0; margin-left: 0; padding: 0;
+      flex-direction: column; align-items: stretch; gap: 0; overflow: hidden; opacity: 0; visibility: hidden;
+      border-top: 1px solid transparent; pointer-events: none;
+      transition: max-height .22s ease, opacity .16s ease, padding .22s ease, border-color .22s ease;
+    }
+    .topnav .links.open {
+      max-height: 320px; padding: 8px 0 2px; opacity: 1; visibility: visible;
+      border-top-color: rgba(255,255,255,.14); pointer-events: auto;
+    }
+    .topnav .links a { padding: 9px 4px; font-size: .95rem; }
     .topnav .social { margin-left: auto; }
+    .menu-toggle { display: inline-flex; }
   }
 
   header {
@@ -164,28 +185,89 @@
     box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease;
   }
   .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -14px rgba(15,41,66,.28); }
-  .card h3 { font-size: 1.08rem; margin-bottom: 10px; color: var(--accent-dark); }
-  .card p { font-size: .95rem; color: var(--muted); }
+  .card h3 { font-size: 1.08rem; margin-bottom: 10px; color: var(--accent-dark); text-wrap: balance; }
+  .card p { font-size: .95rem; color: var(--muted); text-wrap: pretty; }
+  .card p strong { color: var(--text); font-weight: 700; }
+
+  .profile-panel {
+    display: grid; grid-template-columns: 170px 1fr; gap: 30px; align-items: start;
+    margin-bottom: 32px; padding: 30px; border: 1px solid var(--line); border-radius: 18px;
+    background: linear-gradient(135deg, var(--bg-soft), var(--card) 70%); box-shadow: var(--shadow);
+  }
+  .profile-photo-frame {
+    width: 170px; height: 170px; overflow: hidden; border-radius: 50%;
+    border: 3px solid #fff; background: var(--bg-soft);
+    box-shadow: 0 14px 28px -16px rgba(15,41,66,.55);
+  }
+  .profile-photo { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.55); transform-origin: 50% 46%; }
+  .profile-name { margin-bottom: 2px; color: var(--ink); font-size: 1.35rem; line-height: 1.35; }
+  .profile-role { margin-bottom: 14px; color: var(--accent-dark); font-weight: 600; }
+  .profile-bio { margin-bottom: 10px; color: var(--muted); text-wrap: pretty; }
+  .linkedin-link {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 9px 14px;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line)); border-radius: 9px;
+    color: var(--accent-dark); font-size: .9rem; font-weight: 600; text-decoration: none;
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+  .linkedin-link:hover { background: var(--bg-soft); border-color: var(--accent); transform: translateY(-1px); }
+  .linkedin-link svg { width: 18px; height: 18px; fill: currentColor; }
+  .about-title { margin-bottom: 14px; color: var(--ink); font-size: 1.15rem; }
+  .expertise-title { margin-top: 32px; }
+  .education-title { margin-top: 32px; }
+  .education-list { display: grid; gap: 12px; list-style: none; }
+  .education-list li { position: relative; padding-left: 24px; color: var(--text); }
+  .education-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .education-list strong { display: block; color: var(--ink); }
+  .education-list span { color: var(--muted); font-size: .92rem; }
+
+  #about {
+    color: #d7e6f0;
+    background: linear-gradient(145deg, #051f3d 0%, #08375d 58%, #07516b 100%);
+  }
+  #about h2, #about .about-title, #about .cert-title, #about .profile-name { color: #fff; }
+  #about .sub, #about .profile-bio, #about .education-list span { color: #bfd0dc; }
+  #about .profile-role { color: #5cc9e0; }
+  #about .profile-panel {
+    background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18);
+    box-shadow: 0 22px 48px -26px rgba(0,0,0,.65);
+  }
+  #about .profile-photo-frame { border-color: rgba(255,255,255,.9); background: rgba(255,255,255,.1); }
+  #about .linkedin-link {
+    color: #fff; border-color: rgba(92,201,224,.65); background: rgba(255,255,255,.06);
+  }
+  #about .linkedin-link:hover { background: rgba(255,255,255,.13); border-color: #5cc9e0; }
+  #about .education-list li::before, #about ul.checks li::before { color: var(--mint); }
+  #about .education-list strong, #about .certs strong { color: #fff; }
 
   .article-tag {
     display: block; margin-bottom: 10px; font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: .68rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 500; color: var(--accent);
   }
-  .read-more { display: inline-block; margin-top: 14px; color: var(--accent-dark); font-weight: 600; font-size: .9rem; text-decoration: none; }
-  .read-more::after { content: " →"; transition: margin-left .15s; }
-  .read-more:hover { color: var(--accent); }
-  .read-more:hover::after { margin-left: 4px; }
-
   ul.checks { list-style: none; }
   ul.checks li { padding-left: 28px; position: relative; margin-bottom: 10px; }
   ul.checks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-  ul.checks.certs { margin-top: 28px; }
+  .cert-title { margin-top: 32px; margin-bottom: 12px; color: var(--ink); font-size: 1.15rem; }
+  ul.checks.certs { margin-top: 0; }
 
+  .slider-wrap { position: relative; }
   .slider {
     position: relative;
     display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
     scroll-behavior: smooth; padding-bottom: 14px;
+    scrollbar-width: none;
   }
+  .slider::-webkit-scrollbar { display: none; }
+  .snav {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line);
+    background: rgba(255,255,255,.95); color: var(--accent-dark);
+    font-size: 1.4rem; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s;
+  }
+  .snav:hover { transform: translateY(-50%) scale(1.1); box-shadow: 0 14px 30px -12px rgba(15,41,66,.35); }
+  .snav.prev { left: -10px; }
+  .snav.next { right: -10px; }
   .slider figure {
     flex: 0 0 min(85%, 520px); scroll-snap-align: center; margin: 0;
     border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--card);
@@ -240,11 +322,19 @@
   .card .ic {
     display: inline-flex; align-items: center; justify-content: center;
     width: 46px; height: 46px; border-radius: 12px; margin-bottom: 16px;
-    background: linear-gradient(135deg, var(--accent), var(--mint));
+    background: linear-gradient(135deg, #07517b, #0b6a8f);
     color: #fff;
   }
+  .grid .card:nth-child(3n + 2) .ic { background: linear-gradient(135deg, #0b6a8f, #0a97be); }
+  .grid .card:nth-child(3n) .ic { background: linear-gradient(135deg, #087f9f, #169c91); }
   .card .ic svg { width: 24px; height: 24px; stroke: #fff; stroke-width: 2; fill: none;
     stroke-linecap: round; stroke-linejoin: round; }
+  .features-grid .card:last-child {
+    grid-column: 1 / -1; display: grid; grid-template-columns: 46px 1fr;
+    column-gap: 18px; align-items: start;
+  }
+  .features-grid .card:last-child .ic { grid-row: 1 / span 2; margin-bottom: 0; }
+  .features-grid .card:last-child h3 { margin-top: 2px; }
 
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: none; }
@@ -255,6 +345,8 @@
   .grid .reveal:nth-child(6) { transition-delay: .40s; }
   .grid .reveal:nth-child(7) { transition-delay: .48s; }
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .topnav .links { transition: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
@@ -275,6 +367,10 @@
     header h1 { font-size: 1.75rem; }
     section { padding: 52px 0; }
     h2 { font-size: 1.45rem; }
+    .features-grid .card:last-child { grid-column: auto; display: block; }
+    .features-grid .card:last-child .ic { margin-bottom: 16px; }
+    .profile-panel { grid-template-columns: 1fr; gap: 20px; padding: 24px; }
+    .profile-photo-frame { width: 140px; height: 140px; }
   }
 </style>
 </head>
@@ -294,12 +390,12 @@
       </svg>
       <span class="wordmark"><b>JH</b><i>Localize</i></span>
     </a>
-    <div class="links">
+    <div class="links" id="primary-nav">
       <a href="#top">หน้าแรก</a>
       <a href="#features">ฟังก์ชัน</a>
-      <a href="#about">ผู้ให้บริการ</a>
       <a href="#reports">ตัวอย่างรายงาน</a>
       <a href="#articles">บทความ</a>
+      <a href="#about">เกี่ยวกับเรา</a>
       <a href="#contact">ติดต่อเรา</a>
     </div>
     <div class="social">
@@ -311,6 +407,10 @@
       </a>
     </div>
     <div class="lang"><span class="on">TH</span><span class="off" title="เร็ว ๆ นี้">EN</span></div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="เปิดเมนู">
+      <svg class="menu-open" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg class="menu-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -335,7 +435,7 @@
       Microsoft Dynamics 365 Business Central Specialist
     </span>
     <h1>บริการวางระบบ Business Central<br>พร้อม Thai Localization ครบวงจร</h1>
-    <p class="lead">วางระบบ ERP สำหรับธุรกิจไทย ดูแลตั้งแต่ต้นจนจบ — วิเคราะห์กระบวนการ ตั้งค่าระบบ พัฒนาเพิ่มเติม ย้ายข้อมูล อบรมผู้ใช้ และดูแลต่อเนื่องหลังขึ้นระบบจริง รองรับข้อกำหนดภาษีไทยได้จริง</p>
+    <p class="lead">รับวางระบบ ERP สำหรับธุรกิจไทย ดูแลครบตั้งแต่วิเคราะห์กระบวนการ ตั้งค่าระบบ พัฒนาเพิ่มเติม และย้ายข้อมูล ไปจนถึงอบรมผู้ใช้และดูแลหลังเริ่มใช้งาน พร้อมรองรับงานบัญชีและภาษีไทย</p>
     <a class="cta" href="#contact">ติดต่อสอบถาม</a>
     </div>
     <div class="hero-doc" aria-hidden="true">
@@ -385,33 +485,33 @@
 
 <section id="features">
   <div class="wrap">
-    <h2>ฟังก์ชันหลักที่รองรับ</h2>
-    <p class="sub">ขอบเขตงานปรับได้ตามขนาดธุรกิจและงบประมาณ — เสนอราคาชัดเจน โปร่งใสตามเนื้องานจริง</p>
-    <div class="grid">
+    <h2>ฟังก์ชันสำหรับธุรกิจไทย</h2>
+    <p class="sub">เลือกขอบเขตงานให้เหมาะกับขนาดธุรกิจและงบประมาณได้ โดยประเมินราคาอย่างชัดเจนตามงานที่ต้องทำจริง</p>
+    <div class="grid features-grid">
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
         <h3>ภาษีมูลค่าเพิ่ม</h3>
-        <p>รายงานภาษีซื้อ–ขาย <strong>รองรับสำนักงานใหญ่/สาขา แยกยื่นรายสาขาได้</strong> และ<strong>ออกแบบ ภ.พ.30 ลงฟอร์มของกรมสรรพากรให้อัตโนมัติ ครบทุกช่องในคลิกเดียว</strong> — รองรับภาษีไม่ถึงกำหนด (Unrealized VAT) และใบแทนใบกำกับภาษี</p>
+        <p>จัดทำรายงานภาษีซื้อ–ขาย <strong>รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</strong> พร้อม<strong>กรอกข้อมูลลงแบบ ภ.พ.30 ของกรมสรรพากรให้อัตโนมัติ</strong> รองรับภาษีไม่ถึงกำหนด (Unrealized VAT) และใบแทนใบกำกับภาษี</p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="15" x2="9" y2="15"/></svg></span>
         <h3>ภาษีหัก ณ ที่จ่าย</h3>
-        <p><strong>คำนวณและหักภาษี ณ ที่จ่ายให้อัตโนมัติตอนจ่ายเงินจริง</strong> — ออกหนังสือรับรอง 50 ทวิ รวมหลายประเภทเงินได้ในใบเดียว, แบบ ภ.ง.ด.2/3/53/54 และไฟล์นำเข้าโปรแกรม RD Prep</p>
+        <p><strong>คำนวณภาษีหัก ณ ที่จ่ายอัตโนมัติเมื่อบันทึกการจ่ายเงินจริง</strong> ออกหนังสือรับรอง 50 ทวิที่รวมเงินได้หลายประเภทไว้ในใบเดียว พร้อมจัดทำแบบ ภ.ง.ด.2/3/53/54 และไฟล์สำหรับนำเข้า RD Prep</p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
         <h3>ระบบวางบิล–รับชำระเงิน (Billing → Receipt)</h3>
-        <p>วางบิลตามรอบ "วันรับวางบิล" ของลูกค้าแต่ละราย, ติดตามสถานะการวางบิลและการรับชำระ, <strong>แยกออกใบเสร็จรับเงินหรือใบกำกับภาษีให้อัตโนมัติตามภาษีที่ถึง/ไม่ถึงกำหนด</strong></p>
+        <p>จัดรอบวางบิลตามวันรับวางบิลของลูกค้าแต่ละราย ติดตามสถานะตั้งแต่วางบิลจนถึงรับชำระ และ<strong>ออกใบเสร็จรับเงินหรือใบกำกับภาษีให้ถูกต้องตามสถานะภาษีที่ถึงหรือยังไม่ถึงกำหนด</strong></p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></span>
         <h3>รายงานสต็อกและทรัพย์สิน</h3>
-        <p>ทะเบียนทรัพย์สิน (Fixed Asset Register) รูปแบบไทย พร้อมค่าเสื่อมสะสม, และ Stock Card แสดงการเคลื่อนไหวสินค้าคงเหลือรายตัว</p>
+        <p>จัดทำทะเบียนทรัพย์สิน (Fixed Asset Register) รูปแบบไทยพร้อมค่าเสื่อมสะสม และ Stock Card สำหรับดูความเคลื่อนไหวของสินค้าแต่ละรายการ</p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
         <h3>ฟอร์มเอกสารภาษาไทยครบชุด (20+ แบบ)</h3>
-        <p>ใบเสนอราคา, ใบสั่งซื้อ/ขาย, ใบกำกับภาษี/ใบแจ้งหนี้, ใบเสร็จรับเงิน, ใบลดหนี้–เพิ่มหนี้, ใบวางบิล — layout ภาษาไทยถูกต้อง พิมพ์ลงฟอร์มจริงได้ทันที</p>
+        <p>มีทั้งใบเสนอราคา ใบสั่งซื้อ/ขาย ใบกำกับภาษี/ใบแจ้งหนี้ ใบเสร็จรับเงิน ใบลดหนี้–เพิ่มหนี้ และใบวางบิล จัดวางในรูปแบบภาษาไทยและพร้อมพิมพ์ใช้งาน</p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
@@ -421,7 +521,7 @@
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
         <h3>ปรับแต่งระบบตามกระบวนการธุรกิจ</h3>
-        <p>Workflow & Approval, รายงานสำหรับผู้บริหาร, ย้าย/นำเข้าข้อมูลจากระบบเดิม และฟังก์ชันเพิ่มเติมตามกระบวนการของแต่ละธุรกิจ</p>
+        <p>เพิ่ม Workflow และ Approval จัดทำรายงานสำหรับผู้บริหาร ย้ายหรือนำเข้าข้อมูลจากระบบเดิม รวมถึงพัฒนาฟังก์ชันให้เข้ากับวิธีทำงานของแต่ละธุรกิจ</p>
       </div>
     </div>
   </div>
@@ -430,50 +530,39 @@
 <section class="alt">
   <div class="wrap">
     <h2>ทำไมต้องเรา</h2>
-    <p class="sub">เราเชื่อว่า Localization ของเราตอบโจทย์ความต้องการพื้นฐานของงานบัญชีไทยได้ครบ — พร้อมใช้งานได้ทันที โดยไม่ต้องพัฒนาโปรแกรมเพิ่ม</p>
+    <p class="sub">Thai Localization ครอบคลุมงานบัญชีและภาษีไทยที่จำเป็น พร้อมนำไปใช้งานได้โดยไม่ต้องเริ่มพัฒนาใหม่ทั้งหมด</p>
     <ul class="checks">
-      <li><strong>พร้อมใช้ได้ทันที ครบตามความต้องการงานบัญชีไทย</strong> — ครอบคลุมงานภาษีและเอกสารที่ธุรกิจใช้ทุกวัน</li>
-      <li>วางระบบตาม <strong>Best Practice</strong> ด้วยแนวทาง <strong>Fast Implementation</strong> — ขึ้นระบบได้รวดเร็วขึ้น เริ่มใช้งานจริงได้ไว และลดต้นทุนการวางระบบ</li>
-      <li>ยอดในแบบยื่นภาษีตรงกับสมุดบัญชีเสมอ — ตรวจสอบย้อนกลับได้ ไม่ต้องนั่งกระทบยอดเอง</li>
-      <li>พัฒนาต่อยอดบนระบบมาตรฐานของ Microsoft — อัปเกรด Business Central เวอร์ชันใหม่ได้ต่อเนื่อง โดยระบบเดิมไม่พัง</li>
+      <li><strong>มีฟังก์ชันพื้นฐานสำหรับงานบัญชีไทยพร้อมใช้</strong> ครอบคลุมงานภาษีและเอกสารที่ธุรกิจใช้เป็นประจำ</li>
+      <li>วางระบบตาม <strong>Best Practice</strong> และแนวทาง <strong>Fast Implementation</strong> เพื่อให้เริ่มใช้งานได้เร็วขึ้นและควบคุมค่าใช้จ่ายได้ง่ายขึ้น</li>
+      <li>ออกแบบให้ยอดในแบบยื่นภาษีสอดคล้องกับสมุดบัญชี ช่วยลดเวลาการกระทบยอดและตรวจสอบข้อมูลย้อนหลังได้</li>
+      <li>พัฒนาบนมาตรฐานของ Microsoft จึงอัปเกรด Business Central เป็นเวอร์ชันใหม่ได้ต่อเนื่องโดยลดผลกระทบต่อส่วนที่ใช้งานอยู่</li>
     </ul>
-  </div>
-</section>
-
-<section id="about">
-  <div class="wrap">
-    <h2>ผู้ให้บริการ</h2>
-    <p class="sub">ดูแลโดยที่ปรึกษาที่จบด้านบัญชีโดยตรง และมีประสบการณ์วางระบบ ERP ให้กับธุรกิจไทยมากกว่า 10 ปี ตั้งแต่ Dynamics AX 2012, D365 Finance & Operations ไปจนถึง Business Central<br><br>ด้วยความเข้าใจทั้งงานบัญชีและการทำงานของระบบ จึงสามารถนำความต้องการของธุรกิจมาออกแบบเป็นกระบวนการทำงานที่ใช้งานได้จริง ตรวจสอบได้ และช่วยให้ทีมงานทำงานต่อได้อย่างเป็นระบบ</p>
+    <h3 class="about-title expertise-title">ประสบการณ์และแนวทางการทำงาน</h3>
     <div class="grid">
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-        <h3>พื้นฐานสายบัญชีโดยตรง</h3>
-        <p>เข้าใจหลักบัญชีและภาษีไทยจากพื้นฐานจริง — สื่อสารกับฝ่ายบัญชีและโปรแกรมเมอร์ได้เข้าใจตรงกัน</p>
+        <h3>เข้าใจงานบัญชีและกระบวนการธุรกิจ</h3>
+        <p>มีพื้นฐานด้านบัญชีและเคยทำงานกับกระบวนการด้าน<strong>การเงิน การขาย การจัดซื้อ สินค้าคงคลัง คลังสินค้า และการผลิต</strong> จึงช่วยเชื่อมความต้องการของแต่ละฝ่ายให้เป็นภาพเดียวกันได้</p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
-        <h3>ประสบการณ์ ERP กว่า 10 ปี</h3>
-        <p>Implement มาตั้งแต่ Dynamics AX 2012, D365 Finance & Operations จนถึง Business Central — วิเคราะห์กระบวนการ ตั้งค่าระบบ และอบรมผู้ใช้จริง</p>
+        <h3>ประสบการณ์วางระบบ ERP</h3>
+        <p>ทำงานด้านการวางระบบ ERP หลังจบด้านบัญชี โดยมีประสบการณ์กับ Dynamics AX 2012 และ D365 Finance &amp; Operations ปัจจุบันทำงานกับ <strong>Business Central สำหรับธุรกิจโรงงาน ซื้อมาขายไป และบริการ</strong></p>
       </div>
       <div class="card reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
-        <h3>ถนัดงาน Finance & Supply Chain</h3>
-        <p>เชี่ยวชาญ Finance, การตั้งค่า Warehouse ขั้นสูง และการออกแบบต้นทุนการผลิต (Production Costing)</p>
+        <h3>ดูแลและประสานงานโครงการ</h3>
+        <p>ช่วยดูแล<strong>ขอบเขตงาน แผนงาน และความคืบหน้า</strong> พร้อมประสานงานระหว่างผู้ใช้งานกับทีมพัฒนา เพื่อให้แต่ละฝ่ายเข้าใจงานและเดินโครงการไปในทิศทางเดียวกัน</p>
       </div>
     </div>
-    <ul class="checks certs">
-      <li>Microsoft Certified: <strong>Dynamics 365 Business Central Functional Consultant Associate</strong></li>
-      <li>Microsoft Certified: <strong>Dynamics 365 Finance Functional Consultant Associate</strong></li>
-      <li>Microsoft Certified: <strong>Dynamics 365 Supply Chain Management Functional Consultant Expert</strong></li>
-      <li>Microsoft Certified: <strong>AI Business Professional</strong></li>
-    </ul>
   </div>
 </section>
 
-<section id="reports" class="alt">
+<section id="reports">
   <div class="wrap">
     <h2>ตัวอย่างรายงาน</h2>
-    <p class="sub">รายงานและเอกสารภาษาไทยที่พัฒนาบน Business Central จริง — คลิกที่รูปเพื่อดูเต็ม</p>
+    <p class="sub">ตัวอย่างรายงานและเอกสารภาษาไทยที่พัฒนาบน Business Central คลิกที่ภาพเพื่อดูขนาดเต็ม</p>
+    <div class="slider-wrap">
     <div class="slider">
       <figure class="reveal">
         <a href="img/bc-home.png"><img src="img/bc-home.png" alt="หน้า Home ของ Business Central พร้อมเมนู Thai Localization" loading="lazy"></a>
@@ -481,15 +570,19 @@
       </figure>
       <figure class="reveal">
         <a href="img/bc-dashboard.png"><img src="img/bc-dashboard.png" alt="Dashboard วิเคราะห์ธุรกิจใน Business Central" loading="lazy"></a>
-        <figcaption>Dashboard วิเคราะห์ยอดขาย งบทดลอง และบัญชีสำคัญแบบเรียลไทม์</figcaption>
+        <figcaption>Dashboard วิเคราะห์ยอดขาย งบทดลอง แบบ Real-time</figcaption>
       </figure>
       <figure class="reveal">
         <a href="img/sales-vat-report.png"><img src="img/sales-vat-report.png" alt="รายงานภาษีขาย" loading="lazy"></a>
         <figcaption>รายงานภาษีขาย พร้อมเลขสาขา</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/pp30-report.png"><img src="img/pp30-report.png" alt="หน้าคำนวณแบบ ภ.พ.30 ใน Business Central" loading="lazy"></a>
-        <figcaption>แบบ ภ.พ.30 — ระบบคำนวณภาษีซื้อ–ขายครบทุกช่อง พร้อมดาวน์โหลดยื่นสรรพากร</figcaption>
+        <a href="img/pp30-form.png"><img src="img/pp30-form.png" alt="หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 ใน Business Central" loading="lazy"></a>
+        <figcaption>หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 พร้อม Download แบบฟอร์ม</figcaption>
+      </figure>
+      <figure class="reveal">
+        <a href="img/pp30-report.png"><img src="img/pp30-report.png" alt="แบบ ภ.พ.30 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
+        <figcaption>แบบฟอร์ม ภ.พ.30 ของกรมสรรพากร — ระบบกรอกตัวเลขให้อัตโนมัติ พร้อมยื่น</figcaption>
       </figure>
       <figure class="reveal">
         <a href="img/billing-worklist.png"><img src="img/billing-worklist.png" alt="Billing Worklist — รายการรอวางบิลตามรอบของลูกค้าแต่ละราย" loading="lazy"></a>
@@ -504,15 +597,22 @@
         <figcaption>ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/credit-note.png"><img src="img/credit-note.png" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
-        <figcaption>ใบลดหนี้ / ใบกำกับภาษี (Credit Note)</figcaption>
+        <a href="img/receivable-receipt.png"><img src="img/receivable-receipt.png" alt="ใบเสร็จรับเงิน / ใบกำกับภาษี (Tax Receipt)" loading="lazy"></a>
+        <figcaption>ใบเสร็จรับเงิน / ใบกำกับภาษี (Tax Receipt)</figcaption>
       </figure>
+      <figure class="reveal">
+        <a href="img/credit-note.png"><img src="img/credit-note.png" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
+        <figcaption>ใบลดหนี้ (Credit Note)</figcaption>
+      </figure>
+    </div>
+    <button class="snav prev" type="button" aria-label="ตัวอย่างก่อนหน้า">‹</button>
+    <button class="snav next" type="button" aria-label="ตัวอย่างถัดไป">›</button>
     </div>
     <p class="slider-hint">← เลื่อนเพื่อดูตัวอย่างเพิ่มเติม →</p>
   </div>
 </section>
 
-<section id="articles">
+<section id="articles" class="alt">
   <div class="wrap">
     <h2>บทความ</h2>
     <p class="sub">เกร็ดการตั้งค่าและแนวทางทำ Thai Localization บน Business Central จากงานจริง</p>
@@ -521,28 +621,58 @@
         <span class="article-tag">VAT</span>
         <h3>ตั้งค่า Unrealized VAT ให้ยอด ภ.พ.30 ตรงสมุดบัญชี</h3>
         <p>ภาษีซื้อ/ขายที่ยังไม่ถึงกำหนด ต้องแยกพักบัญชียังไงให้กระทบยอดกับ GL ได้โดยไม่ต้องปรับมือทุกงวด</p>
-        <a class="read-more" href="#">อ่านต่อ</a>
       </article>
       <article class="card reveal">
         <span class="article-tag">WHT</span>
         <h3>ออก 50 ทวิ และไฟล์ RD Prep จาก BC โดยไม่ต้องคีย์ซ้ำ</h3>
         <p>ตั้งค่า WHT ให้ระบบสร้างหนังสือรับรอง ภ.ง.ด. และ export text file เข้าโปรแกรมกรมสรรพากรได้ในคลิกเดียว</p>
-        <a class="read-more" href="#">อ่านต่อ</a>
       </article>
       <article class="card reveal">
         <span class="article-tag">API / Integration</span>
         <h3>ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า BC อัตโนมัติ</h3>
         <p>เชื่อม API ธนาคารแห่งประเทศไทย ให้ BC อัปเดตเรตและปฏิทินวันหยุดเองทุกวัน ไม่ต้องกรอกเอง</p>
-        <a class="read-more" href="#">อ่านต่อ</a>
       </article>
     </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About JH Localize</h2>
+    <p class="sub">Business Central consulting built on accounting knowledge, end-to-end process understanding, and hands-on ERP implementation experience.</p>
+    <div class="profile-panel reveal">
+      <div class="profile-photo-frame">
+        <img class="profile-photo" src="img/jirapat.jpg" alt="Jirapat Wichayapong (Sun)" width="800" height="800">
+      </div>
+      <div>
+        <h3 class="profile-name">Jirapat Wichayapong (Sun)</h3>
+        <p class="profile-role">Microsoft Dynamics 365 Business Central Functional Consultant &amp; AL Developer</p>
+        <p class="profile-bio">I have worked in ERP implementation since graduating with a degree in accounting, building hands-on experience with Dynamics AX 2012 and Dynamics 365 Finance &amp; Operations. Today, I focus on Business Central, combining functional consulting with AL development and applying my end-to-end understanding of finance, sales, purchasing, inventory, and warehouse processes to design solutions that fit the way each business works.</p>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/jirapat-wichayapong-886003146/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13Zm1.78 13.04H3.54V8.98H7.1v11.47Z"/></svg>
+          View my LinkedIn profile
+        </a>
+      </div>
+    </div>
+    <h3 class="about-title education-title">Education</h3>
+    <ul class="education-list">
+      <li><strong>Thammasat University</strong><span>Master of Business Administration, Business Innovation</span></li>
+      <li><strong>Thammasat Business School</strong><span>Bachelor of Accounting</span></li>
+    </ul>
+    <h3 class="cert-title">Certified by Microsoft</h3>
+    <ul class="checks certs">
+      <li>Microsoft Certified: <strong>Dynamics 365 Business Central Functional Consultant Associate</strong></li>
+      <li>Microsoft Certified: <strong>Dynamics 365 Finance Functional Consultant Associate</strong></li>
+      <li>Microsoft Certified: <strong>Dynamics 365 Supply Chain Management Functional Consultant Expert</strong></li>
+      <li>Microsoft Certified: <strong>AI Business Professional</strong></li>
+    </ul>
   </div>
 </section>
 
 <section id="contact" class="alt">
   <div class="wrap">
     <h2>Contact</h2>
-    <p class="sub">สนใจติดต่อเพื่อปรึกษาหรือนัดนำเสนอระบบ — ยินดีให้คำปรึกษาเบื้องต้นโดยไม่มีค่าใช้จ่าย</p>
+    <p class="sub">Get in touch to discuss your requirements or schedule a system demonstration.</p>
     <div class="contact-grid">
       <div class="contact-info">
         <p class="ci-name">Jirapat Wichayapong (Sun)</p>
@@ -572,18 +702,18 @@
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" class="hp" autocomplete="off" tabindex="-1">
         <div class="field">
-          <label for="cf-name">ชื่อ / Name</label>
+          <label for="cf-name">Name</label>
           <input id="cf-name" type="text" name="name" required>
         </div>
         <div class="field">
-          <label for="cf-contact">อีเมล หรือ เบอร์ติดต่อกลับ</label>
+          <label for="cf-contact">Email or phone number</label>
           <input id="cf-contact" type="text" name="email" required>
         </div>
         <div class="field">
-          <label for="cf-msg">ข้อความ / Message</label>
+          <label for="cf-msg">Message</label>
           <textarea id="cf-msg" name="message" required></textarea>
         </div>
-        <button type="submit">ส่งข้อความ</button>
+        <button type="submit">Send Message</button>
       </form>
     </div>
   </div>
@@ -596,6 +726,72 @@
 </footer>
 
 <script>
+  // เมนูมือถือ
+  const menuToggle = document.querySelector('.menu-toggle');
+  const primaryNav = document.querySelector('#primary-nav');
+  function setMobileMenu(open) {
+    if (!menuToggle || !primaryNav) return;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+    primaryNav.classList.toggle('open', open);
+  }
+  if (menuToggle && primaryNav) {
+    menuToggle.addEventListener('click', () => setMobileMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+    primaryNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMobileMenu(false)));
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.topnav')) setMobileMenu(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { setMobileMenu(false); menuToggle.focus(); }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 760) setMobileMenu(false);
+    });
+  }
+
+  // เลื่อนหน้าแบบควบคุมระยะเวลา ไม่ให้ CSS smooth ซ้อนกับ requestAnimationFrame
+  const reducePageMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let pageScrollFrame = 0;
+  function stopPageScroll() {
+    if (pageScrollFrame) cancelAnimationFrame(pageScrollFrame);
+    pageScrollFrame = 0;
+    document.documentElement.style.scrollBehavior = '';
+  }
+  function scrollPageTo(targetY) {
+    stopPageScroll();
+    const root = document.documentElement;
+    const from = window.scrollY;
+    const distance = targetY - from;
+    root.style.scrollBehavior = 'auto';
+    if (reducePageMotion.matches || Math.abs(distance) < 2) {
+      window.scrollTo(0, targetY);
+      root.style.scrollBehavior = '';
+      return;
+    }
+    const duration = Math.min(520, Math.max(320, Math.abs(distance) * .085));
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, from + distance * eased);
+      if (progress < 1) pageScrollFrame = requestAnimationFrame(step);
+      else { pageScrollFrame = 0; root.style.scrollBehavior = ''; }
+    }
+    pageScrollFrame = requestAnimationFrame(step);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const targetY = target.id === 'top' ? 0 : Math.max(0, target.offsetTop - 58);
+      scrollPageTo(targetY);
+      history.replaceState(null, '', a.getAttribute('href'));
+    });
+  });
+  window.addEventListener('wheel', stopPageScroll, { passive: true });
+  window.addEventListener('touchstart', stopPageScroll, { passive: true });
+
   // ponytail: vanilla IntersectionObserver reveal, no lib
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -604,29 +800,11 @@
   }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ponytail: smooth scroll เองด้วย rAF — CSS smooth โดนปิดเมื่อเครื่องตั้งลด animation
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      const nav = document.querySelector('.topnav');
-      const to = target.getBoundingClientRect().top + window.scrollY - (nav ? nav.offsetHeight + 6 : 0);
-      const from = window.scrollY, start = performance.now(), dur = 700;
-      const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      (function step(now) {
-        const p = Math.min(1, (now - start) / dur);
-        window.scrollTo(0, from + (to - from) * ease(p));
-        if (p < 1) requestAnimationFrame(step);
-      })(performance.now());
-      history.replaceState(null, '', a.getAttribute('href'));
-    });
-  });
-
   // ponytail: slider เลื่อนอัตโนมัติ — vanilla, หยุดเฉพาะตอน hover/แตะ/อยู่นอกจอ
   const slider = document.querySelector('.slider');
   if (slider) {
     const figs = Array.from(slider.querySelectorAll('figure'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let paused = false, inView = false, idx = 0;
     slider.addEventListener('pointerenter', () => paused = true);
     slider.addEventListener('pointerleave', () => paused = false);
@@ -634,23 +812,11 @@
     slider.addEventListener('touchend', () => setTimeout(() => paused = false, 6000), { passive: true });
     new IntersectionObserver(en => inView = en[0].isIntersecting, { threshold: .3 }).observe(slider);
 
-    // animate เองด้วย rAF — ไม่พึ่ง smooth scroll ของ browser
     function glide(to) {
-      const from = slider.scrollLeft, start = performance.now(), dur = 750;
-      const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      slider.style.scrollSnapType = 'none';
-      slider.style.scrollBehavior = 'auto';
-      function step(now) {
-        const p = Math.min(1, (now - start) / dur);
-        slider.scrollLeft = from + (to - from) * ease(p);
-        if (p < 1) requestAnimationFrame(step);
-        else { slider.style.scrollSnapType = ''; slider.style.scrollBehavior = ''; }
-      }
-      requestAnimationFrame(step);
+      slider.scrollTo({ left: to, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     }
 
-    setInterval(() => {
-      if (paused || !inView || document.hidden || figs.length < 2) return;
+    function advance(dir) {
       // sync ตำแหน่งปัจจุบันก่อน เผื่อผู้ใช้ปัดเอง
       const center = slider.scrollLeft + slider.clientWidth / 2;
       let best = Infinity;
@@ -658,9 +824,17 @@
         const d = Math.abs(f.offsetLeft + f.offsetWidth / 2 - center);
         if (d < best) { best = d; idx = i; }
       });
-      idx = (idx + 1) % figs.length;
+      idx = (idx + dir + figs.length) % figs.length;
       const f = figs[idx];
       glide(Math.max(0, f.offsetLeft - (slider.clientWidth - f.offsetWidth) / 2));
+    }
+
+    document.querySelector('.snav.prev').addEventListener('click', () => advance(-1));
+    document.querySelector('.snav.next').addEventListener('click', () => advance(1));
+
+    setInterval(() => {
+      if (paused || !inView || document.hidden || figs.length < 2) return;
+      advance(1);
     }, 3500);
   }
 </script>
