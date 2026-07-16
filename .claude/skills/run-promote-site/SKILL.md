@@ -1,6 +1,6 @@
 ---
 name: run-promote-site
-description: Run, serve, screenshot, or drive the JH Consulting landing page (index.html) headlessly — take screenshots, click the cookie banner, inspect DOM/localStorage. Use for "run the site", "screenshot the page", "test the cookie consent".
+description: Run, serve, screenshot, or drive the JWIC Consulting landing page (index.html) headlessly — take screenshots, click the cookie banner, inspect DOM/localStorage. Use for "run the site", "screenshot the page", "test the cookie consent".
 ---
 
 # Run promote-site
