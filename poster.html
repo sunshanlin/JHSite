@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>JWIC Consulting — Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* โปสเตอร์ A4 โทนเดียวกับ index-green: teal + ไวน์แดง + plum + ivory */
+  @page { size: A4; margin: 0; }
+  :root {
+    --teal-1: #0D5257; --teal-2: #1F7A87; --teal-3: #35AF9E;
+    --wine: #7D2440; --wine-2: #A63A56; --plum: #8B5697;
+    --ink: #122e33; --muted: #0f4a52; --ivory: #fbf6ea; --line: #d8e6e2;
+    --h1: #072d30; --h3: #10535f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 210mm; height: 297mm; }
+  body {
+    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+    color: var(--ink); background: #fff; font-size: 10.5px; line-height: 1.55;
+    display: flex; flex-direction: column;
+  }
+  /* header */
+  .head {
+    padding: 26px 34px 22px; color: #fff; position: relative;
+    background:
+      radial-gradient(circle at 88% 20%, rgba(166,58,86,.16), transparent 32%),
+      linear-gradient(125deg, var(--h1) 0%, #0a3e41 48%, var(--h3) 100%);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .head .kicker { font-size: 9px; font-weight: 700; letter-spacing: .22em; color: #CCA4CD; margin-bottom: 6px; }
+  .head h1 { font-size: 27px; line-height: 1.2; letter-spacing: -.01em; margin-bottom: 7px; }
+  .head p { color: #cfe6e4; font-size: 10.5px; max-width: 132mm; }
+  .head svg { width: 58px; height: 58px; flex-shrink: 0; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35)); }
+  /* tip */
+  .tip {
+    margin: 14px 34px 0; padding: 10px 16px; background: var(--ivory);
+    border-left: 3px solid var(--wine-2); border-radius: 0 10px 10px 0;
+    display: flex; gap: 10px; align-items: baseline;
+  }
+  .tip b { color: var(--wine); white-space: nowrap; font-size: 11px; }
+  .tip p { color: var(--muted); }
+  /* two columns */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 34px 0; flex: 1; }
+  .col { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 10px; background: #fff; }
+  .col.services { border-top: 3px solid var(--teal-2); }
+  .col.features { border-top: 3px solid var(--wine-2); background: linear-gradient(170deg, #fdf7f8, #fff 45%); }
+  .col h2 { font-size: 13.5px; margin-bottom: 10px; color: var(--h1); }
+  .col.features h2 { color: var(--wine); }
+  .item { display: flex; gap: 9px; margin-bottom: 9px; align-items: flex-start; }
+  .item .n {
+    width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 9px; font-weight: 800;
+  }
+  .item b { display: block; color: var(--ink); font-size: 10.5px; }
+  .item p { color: var(--muted); font-size: 9.6px; line-height: 1.5; }
+  /* ramp เขียว→เบอร์กันดี เหมือนการ์ดเฟสบนเว็บ */
+  .services .item:nth-child(2) .n { background: #0D5257; }
+  .services .item:nth-child(3) .n { background: #2F5468; }
+  .services .item:nth-child(4) .n { background: #5C4B72; }
+  .services .item:nth-child(5) .n { background: #7C3960; }
+  .services .item:nth-child(6) .n { background: #7D2440; }
+  .features .item .n { background: var(--wine-2); font-size: 8px; }
+  /* reasons */
+  .reasons { margin: 12px 34px 0; }
+  .reasons h2 { font-size: 13.5px; color: var(--h1); margin-bottom: 9px; }
+  .reason-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .reason {
+    border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; text-align: center;
+  }
+  .reason:nth-child(1) { border-top: 3px solid var(--teal-2); }
+  .reason:nth-child(2) { border-top: 3px solid var(--plum); }
+  .reason:nth-child(3) { border-top: 3px solid var(--wine-2); }
+  .reason b { display: block; font-size: 11px; color: var(--ink); margin-bottom: 3px; }
+  .reason p { color: var(--muted); font-size: 9.3px; }
+  .strip {
+    margin: 10px 34px 0; padding: 7px 14px; border-radius: 9px; text-align: center;
+    background: var(--ivory); color: var(--muted); font-weight: 700; font-size: 10px;
+  }
+  /* footer */
+  .foot {
+    margin-top: 14px; padding: 18px 34px 14px; color: #fff;
+    background: linear-gradient(115deg, var(--h1) 0%, #0a3e41 55%, var(--h3) 100%);
+  }
+  .foot-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .foot h2 { font-size: 15px; line-height: 1.35; }
+  .foot .who { color: #cfe6e4; font-size: 10px; margin-top: 3px; }
+  .cta {
+    flex-shrink: 0; padding: 11px 22px; border-radius: 11px; color: #fff; font-weight: 800; font-size: 12px;
+    background: linear-gradient(135deg, var(--wine-2), var(--wine));
+    box-shadow: 0 14px 26px -12px rgba(166,58,86,.8);
+  }
+  .contact { display: flex; gap: 18px; margin-top: 12px; color: #e9f5f4; font-size: 10px; font-weight: 600; }
+  .contact span { color: #CCA4CD; }
+  .legal { margin-top: 9px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.16); color: #9fc5c2; font-size: 8.5px; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="kicker">J W I C &nbsp; C O N S U L T I N G</div>
+    <h1>Business Central สำหรับธุรกิจไทย</h1>
+    <p>Microsoft Dynamics 365 Business Central สำหรับธุรกิจไทย พร้อมระบบภาษี เอกสาร และบริการดูแลครบวงจร</p>
+  </div>
+  <svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Business Central">
+    <path d="M34 33.9998C41.732 41.7317 54.268 41.7318 62 33.9999C69.732 26.2679 69.732 13.7318 62 5.99986C54.268 -1.73209 41.732 -1.73214 34 5.99979C26.268 13.7318 26.2681 26.2678 34 33.9998Z" fill="url(#bc0)"/>
+    <path d="M62 62.0002C54.268 54.2683 41.732 54.2682 34 62.0001C26.268 69.7321 26.268 82.2682 34 90.0001C41.732 97.7321 54.268 97.7321 62 90.0002C69.732 82.2682 69.7319 69.7322 62 62.0002Z" fill="url(#bc3)"/>
+    <path d="M34 62C41.732 69.732 54.268 69.732 62 62C69.732 54.268 69.732 41.732 62 34C54.268 26.268 41.732 26.268 34 34C26.268 41.732 26.268 54.268 34 62Z" fill="url(#bc6)"/>
+    <path d="M6.00002 34L34 5.99998C26.2681 13.732 26.268 26.2681 34 34.0001C41.732 41.7321 41.732 54.2681 34 62.0001C26.268 69.732 13.732 69.732 6.00004 62C-1.73195 54.268 -1.73198 41.732 6.00002 34Z" fill="url(#bc9)"/>
+    <path d="M90 62L62 90C69.7319 82.268 69.732 69.7319 62 61.9999C54.268 54.2679 54.268 41.7319 62 33.9999C69.732 26.268 82.268 26.268 90 34C97.732 41.732 97.732 54.268 90 62Z" fill="url(#bc11)"/>
+    <defs>
+      <linearGradient id="bc0" x1="30" y1="9.5" x2="67" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#0C74A1"/><stop offset=".468" stop-color="#1384B1"/><stop offset="1" stop-color="#16BBDA"/></linearGradient>
+      <linearGradient id="bc3" x1="68.5" y1="79.5" x2="29" y2="71" gradientUnits="userSpaceOnUse"><stop stop-color="#06517B"/><stop offset=".508" stop-color="#09638E"/><stop offset="1" stop-color="#0C74A1"/></linearGradient>
+      <linearGradient id="bc6" x1="44.5" y1="29.5" x2="45" y2="68.5" gradientUnits="userSpaceOnUse"><stop stop-color="#43E5CA"/><stop offset=".371" stop-color="#26CFE8"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
+      <linearGradient id="bc9" x1="14.5" y1="26" x2="43.5" y2="55" gradientUnits="userSpaceOnUse"><stop stop-color="#B6F6C7"/><stop offset=".277" stop-color="#43E5CA"/><stop offset="1" stop-color="#26CFE8"/></linearGradient>
+      <linearGradient id="bc11" x1="63" y1="30" x2="92.5" y2="59.5" gradientUnits="userSpaceOnUse"><stop stop-color="#9FF2E4"/><stop offset=".266" stop-color="#2BDABE"/><stop offset=".620" stop-color="#16BBDA"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
+    </defs>
+  </svg>
+</div>
+
+<div class="tip">
+  <b>💡 Localization คืออะไร?</b>
+  <p>การปรับระบบการทำงานมาตรฐานให้รองรับกฎหมาย ภาษา เอกสาร และวิธีการทำงาน ซึ่งแตกต่างกันไปในแต่ละประเทศ</p>
+</div>
+
+<div class="cols">
+  <div class="col services">
+    <h2>บริการวางระบบครบวงจร</h2>
+    <div class="item"><span class="n">1</span><div><b>วิเคราะห์ &amp; ออกแบบ</b><p>รวบรวมความต้องการจากผู้ใช้งาน และออกแบบการทำงานให้เข้ากับระบบ</p></div></div>
+    <div class="item"><span class="n">2</span><div><b>ติดตั้ง On-cloud</b><p>ลดปัญหาในการดูแลระบบ ใช้งานผ่าน Cloud database ได้ทุกที่ทุกเวลา พร้อม Mobile application</p></div></div>
+    <div class="item"><span class="n">3</span><div><b>ย้ายข้อมูล</b><p>นำเข้า Master data และยอดยกมาจากระบบเดิม</p></div></div>
+    <div class="item"><span class="n">4</span><div><b>อบรมทีมงาน</b><p>สอนใช้งานจริงตามหน้างาน พร้อมคู่มือภาษาไทย</p></div></div>
+    <div class="item"><span class="n">5</span><div><b>ดูแลหลังขึ้นระบบ</b><p>Support แก้ไขปัญหา สามารถปิดบัญชีในระบบได้</p></div></div>
+  </div>
+  <div class="col features">
+    <h2>JWIC Localization — ส่วนเสริมธุรกิจไทย</h2>
+    <div class="item"><span class="n">฿</span><div><b>ภาษีหัก ณ ที่จ่าย (WHT)</b><p>หนังสือรับรอง 50 ทวิ, ภ.ง.ด.2, 3, 53, 54 พร้อม Text file ยื่น online</p></div></div>
+    <div class="item"><span class="n">%</span><div><b>VAT ตามสรรพากร</b><p>รายงานภาษีซื้อ–ขาย, ภ.พ.30, ภ.พ.36, ภาษีซื้อ-ไม่ถึงกำหนด</p></div></div>
+    <div class="item"><span class="n">฿</span><div><b>ระบบวางบิล</b><p>ออกใบวางบิล กำหนดเงื่อนไขวันวางบิลลูกค้า</p></div></div>
+    <div class="item"><span class="n">≡</span><div><b>ชุดเอกสารสำหรับธุรกิจไทย</b><p>ใบแจ้งหนี้/ใบกำกับภาษี, ใบวางบิล, ใบเสร็จรับเงิน, ใบลดหนี้, ใบสั่งซื้อ, ใบเสนอราคา พร้อมใช้งานโดยไม่มีค่าบริการเพิ่มเติม</p></div></div>
+    <div class="item"><span class="n">FX</span><div><b>API อัตราแลกเปลี่ยน BOT</b><p>ดึงอัตราอ้างอิงจากธนาคารแห่งประเทศไทยอัตโนมัติ</p></div></div>
+  </div>
+</div>
+
+<div class="reasons">
+  <h2>เหตุผลที่ธุรกิจเลือกเรา</h2>
+  <div class="reason-grid">
+    <div class="reason"><b>ภาษีถูกต้อง ใช้ยื่นจริง</b><p>ออกแบบตรงตามประมวลรัษฎากร ทดสอบกับงานจริง</p></div>
+    <div class="reason"><b>ปรึกษาตรงกับผู้พัฒนา</b><p>ตัดสินใจไว แก้ไขเร็ว ไม่ต้องผ่านหลายชั้น โดยผู้พัฒนาจากสายบัญชีการเงิน</p></div>
+    <div class="reason"><b>ราคาไม่แพง</b><p>ค่าใช้จ่ายเหมาะกับ SME พร้อมแพ็กเกจชัดเจน</p></div>
+  </div>
+</div>
+
+<div class="strip">ออกแบบเพื่อ SME ไทย &nbsp;·&nbsp; ขึ้นระบบได้จริง &nbsp;·&nbsp; ดูแลต่อเนื่องโดยผู้เชี่ยวชาญ</div>
+
+<div class="foot">
+  <div class="foot-row">
+    <div>
+      <h2>พร้อมยกระดับระบบบัญชีและภาษีของคุณหรือยัง?</h2>
+      <p class="who">Jirapat Wichayapong · ERP Consultant</p>
+    </div>
+    <div class="cta">นัดปรึกษา พร้อม Demo ระบบฟรี</div>
+  </div>
+  <div class="contact">
+    <div><span>Phone</span> 084-148-7480</div>
+    <div><span>LINE</span> 0841487480</div>
+    <div><span>Email</span> jirapat.wi@outlook.com</div>
+  </div>
+  <div class="legal">JWIC Consulting — Microsoft Dynamics 365 Business Central · Thai Localization Specialist</div>
+</div>
+
+</body>
+</html>

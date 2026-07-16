@@ -31,7 +31,10 @@ const server = http.createServer(async (req, res) => {
   } catch { res.writeHead(404); res.end("nf"); }
 });
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
-const url = `http://127.0.0.1:${server.address().port}/`;
+// e.g. --url index-purple.html — no leading slash needed (Git Bash mangles "/x" into a Windows path)
+let urlPath = argAfter("--url") ?? "/";
+if (!urlPath.startsWith("/")) urlPath = "/" + urlPath.replace(/^.*[\\/]/, "");
+const url = `http://127.0.0.1:${server.address().port}${urlPath}`;
 
 const CHROME = ["C:/Program Files/Google/Chrome/Application/chrome.exe",
                 "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"].find(existsSync);

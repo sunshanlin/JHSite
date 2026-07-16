@@ -1116,6 +1116,53 @@
   .stat-row .stat:nth-child(2) b { color: #5F2161; }
   .stat-row .stat:nth-child(3) b { color: #9E5FA9; }
 
+  /* Hero object: translucent flowing ribbon — unique to the purple variant. */
+  header { isolation: isolate; }
+  header > .wrap { z-index: 1; }
+  .hero-ribbon-scene {
+    position: absolute; inset: -6% -10%; z-index: 0; width: 120%; height: 112%;
+    pointer-events: none; opacity: .82;
+  }
+  .hero-ribbon-scene .ribbon-fill { fill: url(#purpleHeroRibbonGradient); }
+  .hero-ribbon-scene .ribbon-edge {
+    fill: none; stroke: #CCA4CD; stroke-opacity: .18; stroke-width: 1.4; stroke-linecap: round;
+  }
+  .hero-ribbon-scene .ribbon-edge.secondary { stroke: #E08CA2; stroke-opacity: .12; }
+
+  @media (max-width: 900px) {
+    .hero-ribbon-scene { inset: -4% -22%; width: 144%; opacity: .58; }
+  }
+  @media (max-width: 560px) {
+    .hero-ribbon-scene { inset: -3% -34%; width: 168%; opacity: .4; }
+    .hero-ribbon-scene .ribbon-edge.secondary { display: none; }
+  }
+
+
+  /* Original Success by Design icon system. */
+  .step-heading {
+    display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 9px; align-items: center;
+  }
+  .step-icon {
+    width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px;
+    color: var(--stage-text, var(--phase, var(--accent)));
+    border: 1px solid color-mix(in srgb, var(--stage-text, var(--phase, var(--accent))) 32%, #fff);
+    background: color-mix(in srgb, var(--stage-text, var(--phase, var(--accent))) 10%, #fff);
+    box-shadow: 0 12px 24px -18px color-mix(in srgb, var(--stage-text, var(--phase, var(--accent))) 58%, transparent);
+  }
+  .step-icon svg {
+    width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.75;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .steps .step-heading h3 {
+    min-width: 0; margin: 0; font-size: clamp(1.2rem, 1.6vw, 1.45rem); overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 720px) {
+    #services .step-heading { grid-template-columns: 28px minmax(0, 1fr); gap: 8px; align-items: center; }
+    #services .step-icon { width: 28px; height: 28px; border-radius: 8px; }
+    #services .step-icon svg { width: 17px; height: 17px; stroke-width: 1.9; }
+  }
+
 </style>
 </head>
 <body>
@@ -1166,6 +1213,19 @@
 
 <main id="main-content">
 <header id="top">
+  <svg class="hero-ribbon-scene" viewBox="0 0 1440 780" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="purpleHeroRibbonGradient" x1="520" y1="20" x2="1390" y2="660" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#CCA4CD" stop-opacity=".2"/>
+        <stop offset=".5" stop-color="#9E5FA9" stop-opacity=".1"/>
+        <stop offset="1" stop-color="#E08CA2" stop-opacity=".17"/>
+      </linearGradient>
+    </defs>
+    <path class="ribbon-fill" d="M478 -92 C818 48 760 286 1024 392 C1204 464 1384 384 1530 218 L1530 414 C1352 558 1138 618 932 508 C692 380 748 168 462 24 Z"/>
+    <path class="ribbon-edge" d="M462 24 C748 168 692 380 932 508 C1138 618 1352 558 1530 414"/>
+    <path class="ribbon-edge secondary" d="M402 700 C650 566 824 570 1004 676 C1154 764 1318 732 1494 620"/>
+    <path class="ribbon-edge secondary" d="M862 -48 C1016 104 1144 188 1452 152"/>
+  </svg>
   <div class="wrap hero-grid">
     <div class="hero-copy">
     <span class="badge">
@@ -1251,19 +1311,34 @@
     <div class="steps" aria-label="ขั้นตอนการวางระบบ">
       <div class="steps-progress" aria-hidden="true"><span></span></div>
       <div class="step reveal" data-step="1">
-        <h3>Discover <span>เข้าใจธุรกิจและเป้าหมาย</span></h3>
+        <div class="step-heading">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="10.5" cy="11.5" r="6.5"/><circle cx="10.5" cy="11.5" r="2.25"/><path d="M10.5 5V3M17 11.5h2M10.5 18v2M4 11.5H2"/><path d="M18.5 3.5v4M16.5 5.5h4"/></svg></span>
+          <h3>Discover <span>เข้าใจธุรกิจและเป้าหมาย</span></h3>
+        </div>
       </div>
       <div class="step reveal" data-step="2">
-        <h3>Initiate <span>วางแผนและออกแบบ</span></h3>
+        <div class="step-heading">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 20V5"/><path d="m7 10 5-5 5 5"/><path d="M5 20h14M7 16h10"/><path d="M19 3v4M17 5h4"/></svg></span>
+          <h3>Initiate <span>วางแผนและออกแบบ</span></h3>
+        </div>
       </div>
       <div class="step reveal" data-step="3">
-        <h3>Implement <span>ลงมือพัฒนา</span></h3>
+        <div class="step-heading">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="M4 7.5v9L12 21l8-4.5v-9M12 12v9M8 5.25l8 4.5"/></svg></span>
+          <h3>Implement <span>ลงมือพัฒนา</span></h3>
+        </div>
       </div>
       <div class="step reveal" data-step="4">
-        <h3>Prepare <span>เตรียมขึ้นระบบ</span></h3>
+        <div class="step-heading">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="m7.5 8.5 1.5 1.5 3-3M14.5 8.5h3M7.5 14.5 9 16l3-3M14.5 14.5h3"/></svg></span>
+          <h3>Prepare <span>เตรียมขึ้นระบบ</span></h3>
+        </div>
       </div>
       <div class="step reveal" data-step="5">
-        <h3>Operate <span>ดูแลต่อเนื่อง</span></h3>
+        <div class="step-heading">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 8V4h-4M4 16v4h4"/><path d="M19 7a8 8 0 0 0-13-1L4 8M5 17a8 8 0 0 0 13 1l2-2"/><path d="M7 12h2l1.5-3 3 6 1.5-3h3"/></svg></span>
+          <h3>Operate <span>ดูแลต่อเนื่อง</span></h3>
+        </div>
       </div>
     </div>
     <div class="service-highlight reveal">
@@ -1276,7 +1351,7 @@
           <li>รองรับบัญชี ภาษี และเอกสารไทย</li>
           <li>ดูแลต่อเนื่องตั้งแต่เริ่มจนใช้งานจริง</li>
         </ul>
-        <a class="text-link" href="#contact">คุยรายละเอียดโครงการ <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="#contact">ปรึกษารายละเอียดโครงการ <span aria-hidden="true">→</span></a>
       </div>
       <figure class="poster">
         <a href="img/jh-poster.png" target="_blank" rel="noopener">
@@ -1996,7 +2071,7 @@
     ['.mini-checks li:nth-child(1)', 'Designed around how your business actually works'],
     ['.mini-checks li:nth-child(2)', 'Thai accounting, tax, and documents covered'],
     ['.mini-checks li:nth-child(3)', 'Continuous care from kickoff to go-live'],
-    ['.service-highlight-copy .text-link', 'Discuss your project <span aria-hidden="true">→</span>'],
+    ['.service-highlight-copy .text-link', 'Ask us about your project <span aria-hidden="true">→</span>'],
     ['.poster figcaption', 'Click to view the full service overview'],
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
