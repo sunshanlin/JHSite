@@ -1051,6 +1051,27 @@
   }
   .steps .step { min-height: 0; }
   .steps .step h3 { font-size: 1.7rem; letter-spacing: -.01em; }
+
+  /* why-us: ไล่เฉดการ์ด 6 ใบ + ตัวเลขสถิติ ตามพาเลตต์เดียวกับ tile เฟส */
+  .why-list li:nth-child(1) { --phase: #0b5e86; }
+  .why-list li:nth-child(2) { --phase: #0a86ad; }
+  .why-list li:nth-child(3) { --phase: #0a97be; }
+  .why-list li:nth-child(4) { --phase: #16bbda; }
+  .why-list li:nth-child(5) { --phase: #1fcfc2; }
+  .why-list li:nth-child(6) { --phase: #2fdec0; }
+  .why-list li {
+    border-left: 3px solid var(--phase, var(--line));
+    background: linear-gradient(150deg, color-mix(in srgb, var(--phase, var(--accent)) 10%, #fff), #fff 60%);
+  }
+  .why-list li::before {
+    color: color-mix(in srgb, var(--phase, var(--accent)) 60%, #073042);
+    background: color-mix(in srgb, var(--phase, var(--accent)) 16%, #fff);
+    border: 1.5px solid color-mix(in srgb, var(--phase, var(--accent)) 55%, #fff);
+    font-weight: 800;
+  }
+  .stat-row .stat:nth-child(1) b { color: #0b5e86; }
+  .stat-row .stat:nth-child(2) b { color: #0a97be; }
+  .stat-row .stat:nth-child(3) b { color: #0fa693; }
 </style>
 </head>
 <body>

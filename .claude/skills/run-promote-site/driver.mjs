@@ -64,7 +64,9 @@ const cdp = (method, params = {}) => new Promise((resolve, reject) => {
 const waitEvent = (method) => new Promise((r) => events.set(method, r));
 
 await cdp("Page.enable");
-await cdp("Emulation.setDeviceMetricsOverride", { width: 1400, height: 1000, deviceScaleFactor: 1, mobile: false });
+// ponytail: 2x DPR so screenshots look crisp; full-page stays 1x to keep the file size sane
+const dpr = fullPage ? 1 : 2;
+await cdp("Emulation.setDeviceMetricsOverride", { width: 1400, height: 1000, deviceScaleFactor: dpr, mobile: false });
 const loaded = waitEvent("Page.loadEventFired");
 await cdp("Page.navigate", { url });
 await loaded;
@@ -77,7 +79,7 @@ if (printJs) console.log("print:", JSON.stringify((await run(printJs)).result.va
 let clip;
 if (fullPage) {
   const { result } = await run("Math.ceil(document.documentElement.scrollHeight)");
-  await cdp("Emulation.setDeviceMetricsOverride", { width: 1400, height: result.value, deviceScaleFactor: 1, mobile: false });
+  await cdp("Emulation.setDeviceMetricsOverride", { width: 1400, height: result.value, deviceScaleFactor: dpr, mobile: false });
   await new Promise((r) => setTimeout(r, 300));
 }
 const shot = await cdp("Page.captureScreenshot", { format: "png" });
