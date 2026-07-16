@@ -18,7 +18,7 @@
     --navy: #062a52;
     --ink: #0f2942;
     --text: #1e3448;
-    --muted: #5f7285;
+    --muted: #4c6175; /* เข้มขึ้นจาก #5f7285 เพื่อ contrast ที่อ่านสบายตา */
     --accent: #0a97be;
     --accent-dark: #0b6a8f;
     --cyan: #16bbda;
@@ -35,6 +35,9 @@
     color: var(--text);
     background: var(--bg);
     line-height: 1.7;
+    /* ตัวหนังสือไทยน้ำหนัก 400 บางเกินไป อ่านแล้วเหนื่อย — ขยับเป็น 17px/500 ทั้งหน้า */
+    font-size: 17px;
+    font-weight: 500;
   }
   h1, h2, .card h3, .brand .wordmark {
     font-family: "Anuphan", "Segoe UI", sans-serif;
@@ -101,7 +104,7 @@
   }
   header .wrap { position: relative; z-index: 1; }
   header h1 { font-size: clamp(2.1rem, 5vw, 3rem); line-height: 1.22; margin-bottom: 20px; letter-spacing: -.02em; font-weight: 700; }
-  header p.lead { font-size: 1.18rem; font-weight: 400; color: #d5f2f7; max-width: 620px; }
+  header p.lead { font-size: 1.18rem; font-weight: 500; color: #d5f2f7; max-width: 620px; }
   header .tagline {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: .82rem; text-transform: uppercase; letter-spacing: .16em;
@@ -1049,7 +1052,7 @@
           </linearGradient>
         </defs>
       </svg>
-      <span class="wordmark"><b>JWIC</b><i>Consulting</i></span>
+      <span class="wordmark"><b>JWIC</b> <i>Consulting</i></span>
     </a>
     <div class="links" id="primary-nav">
       <a href="#top">หน้าแรก</a>
