@@ -271,6 +271,13 @@
   }
   .step h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--ink); }
   .step p { font-size: .92rem; color: var(--muted); }
+  .step h3 span { display: block; font-size: .78rem; font-weight: 500; color: var(--muted); margin-top: 3px; }
+  .phase-items { list-style: none; margin-top: 14px; display: grid; gap: 6px; }
+  .phase-items li {
+    font-size: .78rem; line-height: 1.5; color: var(--text);
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 7px; padding: 6px 10px;
+  }
 
   .poster { max-width: 440px; margin: 44px auto 0; text-align: center; }
   .poster img {
@@ -1163,25 +1170,50 @@
 
 <section id="services" class="alt">
   <div class="wrap">
-    <p class="section-kicker">End-to-end implementation</p>
+    <p class="section-kicker">Success by Design</p>
     <h2>บริการวางระบบครบวงจร</h2>
-    <p class="sub">ดูแลครบทุกขั้นตอนตั้งแต่เริ่มโครงการจนถึงหลังเริ่มใช้งานจริง โดยคนเดียวกันตลอดโครงการ</p>
+    <p class="sub">ส่งมอบตามแนวทาง Success by Design ของ Microsoft — 5 เฟสตั้งแต่ทำความเข้าใจธุรกิจจนถึงดูแลหลังใช้งานจริง โดยคนเดียวกันตลอดโครงการ</p>
     <div class="steps" aria-label="ขั้นตอนการวางระบบ">
       <div class="steps-progress" aria-hidden="true"><span></span></div>
       <div class="step reveal" data-step="1">
-        <h3>วิเคราะห์ &amp; ออกแบบ</h3>
+        <h3>Discover <span>เข้าใจธุรกิจและเป้าหมาย</span></h3>
+        <ul class="phase-items">
+          <li>เก็บความต้องการทางธุรกิจ</li>
+          <li>กำหนดขอบเขตโครงการ</li>
+          <li>Demo ระบบเบื้องต้น</li>
+        </ul>
       </div>
       <div class="step reveal" data-step="2">
-        <h3>ติดตั้ง On-cloud</h3>
+        <h3>Initiate <span>วางแผนและออกแบบ</span></h3>
+        <ul class="phase-items">
+          <li>วิเคราะห์ Fit–Gap</li>
+          <li>ออกแบบการทำงานให้เข้ากับระบบ</li>
+          <li>Kickoff โครงการ</li>
+        </ul>
       </div>
       <div class="step reveal" data-step="3">
-        <h3>ย้ายข้อมูล</h3>
+        <h3>Implement <span>ลงมือพัฒนา</span></h3>
+        <ul class="phase-items">
+          <li>ตั้งค่าระบบ On-cloud</li>
+          <li>พัฒนาเพิ่มเติมและฟอร์มเอกสาร</li>
+          <li>ย้ายข้อมูลจากระบบเดิม</li>
+        </ul>
       </div>
       <div class="step reveal" data-step="4">
-        <h3>อบรมทีมงาน</h3>
+        <h3>Prepare <span>เตรียมขึ้นระบบ</span></h3>
+        <ul class="phase-items">
+          <li>ทดสอบและ UAT</li>
+          <li>อบรมทีมงานพร้อมคู่มือไทย</li>
+          <li>วางแผน Go-Live และ Cut-over</li>
+        </ul>
       </div>
       <div class="step reveal" data-step="5">
-        <h3>ดูแลหลังขึ้นระบบ</h3>
+        <h3>Operate <span>ดูแลต่อเนื่อง</span></h3>
+        <ul class="phase-items">
+          <li>Support หลัง Go-Live</li>
+          <li>ปิดบัญชีในระบบได้จริง</li>
+          <li>ปรับปรุงต่อเนื่อง</li>
+        </ul>
       </div>
     </div>
     <div class="service-highlight reveal">
@@ -1904,12 +1936,17 @@
     ['.hero-proof li:nth-child(2)', 'Accounting background with real business-process understanding'],
     ['.hero-proof li:nth-child(3)', 'Work directly with the person who builds your system'],
     ['#services h2', 'End-to-End Implementation Service'],
-    ['#services > .wrap > .sub', 'Every step covered — from project kickoff to life after go-live, with the same person throughout.'],
-    ['.step[data-step="1"] h3', 'Analyze &amp; Design'],
-    ['.step[data-step="2"] h3', 'Cloud Deployment'],
-    ['.step[data-step="3"] h3', 'Data Migration'],
-    ['.step[data-step="4"] h3', 'Team Training'],
-    ['.step[data-step="5"] h3', 'Post-Go-Live Support'],
+    ['#services > .wrap > .sub', 'Delivery follows Microsoft\'s Success by Design — five phases from understanding your business to caring for the live system, with the same person throughout.'],
+    ['.step[data-step="1"] h3', 'Discover <span>Understand the business</span>'],
+    ['.step[data-step="1"] .phase-items', '<li>Gather business requirements</li><li>Define project scope</li><li>Initial system demo</li>'],
+    ['.step[data-step="2"] h3', 'Initiate <span>Plan &amp; design</span>'],
+    ['.step[data-step="2"] .phase-items', '<li>Fit–gap analysis</li><li>Design workflows to fit the system</li><li>Project kickoff</li>'],
+    ['.step[data-step="3"] h3', 'Implement <span>Build the system</span>'],
+    ['.step[data-step="3"] .phase-items', '<li>Cloud system setup</li><li>Custom development &amp; Thai documents</li><li>Data migration from the legacy system</li>'],
+    ['.step[data-step="4"] h3', 'Prepare <span>Get ready for go-live</span>'],
+    ['.step[data-step="4"] .phase-items', '<li>Testing &amp; UAT</li><li>Team training with Thai guides</li><li>Go-live &amp; cut-over planning</li>'],
+    ['.step[data-step="5"] h3', 'Operate <span>Continuous care</span>'],
+    ['.step[data-step="5"] .phase-items', '<li>Post-go-live support</li><li>Close the books in the system</li><li>Ongoing improvements</li>'],
     ['.service-highlight-copy h3', 'Full ERP and Localization<br>in a single project'],
     ['.service-highlight-copy > p:not(.section-kicker)', 'One partner who understands both process and technology — closing the gap between accounting, users, and developers.'],
     ['.mini-checks li:nth-child(1)', 'Designed around how your business actually works'],
