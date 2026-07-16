@@ -1075,6 +1075,36 @@
   .stat-row .stat:nth-child(2) b { color: #9E5FA9; }
   .stat-row .stat:nth-child(3) b { color: #9E5FA9; }
 
+  /* Success by Design: compact vertical timeline on mobile */
+  @media (max-width: 720px) {
+    #services { padding-top: 58px; padding-bottom: 64px; }
+    #services > .wrap > .section-kicker { margin-bottom: 4px; }
+    #services > .wrap > h2 { margin-bottom: 8px; font-size: 1.65rem; }
+    #services > .wrap > .sub {
+      margin-bottom: 24px; font-size: .92rem; line-height: 1.65;
+    }
+    #services .steps { gap: 8px; }
+    #services .steps .step {
+      min-height: 0; padding: 13px 14px 13px 54px; overflow: visible;
+      border-top-width: 1px; border-left: 3px solid var(--phase, var(--line)); border-radius: 13px;
+    }
+    #services .steps .step::before {
+      position: absolute; left: 13px; top: 50%; width: 28px; height: 28px; margin: 0;
+      font-size: .74rem; transform: translateY(-50%);
+    }
+    #services .steps .step::after { display: none; }
+    #services .steps .step h3 {
+      margin: 0; font-size: 1.04rem; line-height: 1.35; letter-spacing: 0;
+    }
+    #services .steps .step h3 span {
+      display: inline; margin: 0 0 0 6px; font-size: .8rem; line-height: 1.45;
+    }
+    #services .step:hover, #services .step.is-current { transform: none; }
+    #services .service-highlight { gap: 28px; margin-top: 32px; padding: 30px 24px; }
+    #services .service-highlight h3 { font-size: 1.5rem; }
+    #services .service-highlight .poster a { height: 360px; }
+  }
+
   .step[data-step="1"] { --phase: #4B2244; } .step[data-step="2"] { --phase: #5F2161; }
   .step[data-step="3"] { --phase: #9E5FA9; } .step[data-step="4"] { --phase: #CCA4CD; }
   .step[data-step="5"] { --phase: #E5CCE3; }
@@ -1085,6 +1115,7 @@
   .stat-row .stat:nth-child(1) b { color: #4B2244; }
   .stat-row .stat:nth-child(2) b { color: #5F2161; }
   .stat-row .stat:nth-child(3) b { color: #9E5FA9; }
+
 </style>
 </head>
 <body>
