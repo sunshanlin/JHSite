@@ -729,8 +729,8 @@
   .feature-panel-icon svg { width: 27px; height: 27px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
   .feature-panel-copy { min-width: 0; }
   .feature-count {
-    display: block; margin-bottom: 9px; color: var(--accent); font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .7rem; letter-spacing: .13em;
+    display: block; margin-bottom: 9px; color: var(--accent); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .74rem; font-weight: 700; letter-spacing: .13em;
   }
   .feature-panel h3 { margin-bottom: 13px; color: var(--ink); font-size: clamp(1.45rem, 2.6vw, 2rem); line-height: 1.3; letter-spacing: -.02em; }
   .feature-panel p { color: var(--muted); line-height: 1.82; text-wrap: pretty; }
@@ -1073,6 +1073,36 @@
   .stat-row .stat:nth-child(1) b { color: #0b5e86; }
   .stat-row .stat:nth-child(2) b { color: #0a97be; }
   .stat-row .stat:nth-child(3) b { color: #0fa693; }
+
+  /* Success by Design: compact vertical timeline on mobile */
+  @media (max-width: 720px) {
+    #services { padding-top: 58px; padding-bottom: 64px; }
+    #services > .wrap > .section-kicker { margin-bottom: 4px; }
+    #services > .wrap > h2 { margin-bottom: 8px; font-size: 1.65rem; }
+    #services > .wrap > .sub {
+      margin-bottom: 24px; font-size: .92rem; line-height: 1.65;
+    }
+    #services .steps { gap: 8px; }
+    #services .steps .step {
+      min-height: 0; padding: 13px 14px 13px 54px; overflow: visible;
+      border-top-width: 1px; border-left: 3px solid var(--phase, var(--line)); border-radius: 13px;
+    }
+    #services .steps .step::before {
+      position: absolute; left: 13px; top: 50%; width: 28px; height: 28px; margin: 0;
+      font-size: .74rem; transform: translateY(-50%);
+    }
+    #services .steps .step::after { display: none; }
+    #services .steps .step h3 {
+      margin: 0; font-size: 1.04rem; line-height: 1.35; letter-spacing: 0;
+    }
+    #services .steps .step h3 span {
+      display: inline; margin: 0 0 0 6px; font-size: .8rem; line-height: 1.45;
+    }
+    #services .step:hover, #services .step.is-current { transform: none; }
+    #services .service-highlight { gap: 28px; margin-top: 32px; padding: 30px 24px; }
+    #services .service-highlight h3 { font-size: 1.5rem; }
+    #services .service-highlight .poster a { height: 360px; }
+  }
 </style>
 </head>
 <body>
