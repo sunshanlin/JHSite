@@ -31,7 +31,9 @@
       linear-gradient(125deg, var(--h1) 0%, #0a3e41 48%, var(--h3) 100%);
     display: flex; align-items: center; justify-content: space-between; gap: 20px;
   }
-  .head .kicker { font-size: 9px; font-weight: 700; letter-spacing: .22em; color: #CCA4CD; margin-bottom: 6px; }
+  .head .brand-row { display: flex; align-items: center; gap: 11px; margin-bottom: 9px; }
+  .head .mark { width: 34px; height: 34px; flex-shrink: 0; border-radius: 7px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.3)); }
+  .head .kicker { font-size: 9px; font-weight: 700; letter-spacing: .22em; color: #CCA4CD; }
   .head h1 { font-size: 27px; line-height: 1.2; letter-spacing: -.01em; margin-bottom: 7px; }
   .head p { color: #cfe6e4; font-size: 10.5px; max-width: 132mm; }
   .head svg { width: 58px; height: 58px; flex-shrink: 0; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35)); }
@@ -116,7 +118,18 @@
 
 <div class="head">
   <div>
-    <div class="kicker">J W I C &nbsp; C O N S U L T I N G</div>
+    <div class="brand-row">
+      <svg class="mark" viewBox="0 0 64 64" aria-label="JWIC Consulting">
+        <defs><clipPath id="pLogo"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#pLogo)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <div class="kicker">J W I C &nbsp; C O N S U L T I N G</div>
+    </div>
     <h1>Business Central สำหรับธุรกิจไทย</h1>
     <p>Microsoft Dynamics 365 Business Central สำหรับธุรกิจไทย พร้อมระบบภาษี เอกสาร และบริการดูแลครบวงจร</p>
   </div>

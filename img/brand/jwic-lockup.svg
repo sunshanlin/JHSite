@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="336" height="64" viewBox="0 0 336 64">
+
+<defs><clipPath id="x5"><rect width="64" height="64" rx="4"></rect></clipPath></defs>
+<g clip-path="url(#x5)">
+<rect width="64" height="64" fill="#1c4a3c"></rect>
+<polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"></polygon>
+<polygon points="64,0 42,0 64,22" fill="#c07f8b"></polygon>
+<text x="32" y="43" text-anchor="middle" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+</g>
+<text x="82" y="42" font-size="30" letter-spacing="-0.5"><tspan font-weight="700" fill="#f5f1ea">JWIC </tspan><tspan font-weight="400" fill="rgba(245,241,234,0.72)">Consulting</tspan></text></svg>
