@@ -68,6 +68,18 @@ article ul, article ol { margin: 0 0 20px 22px; }
 article li { margin-bottom: 9px; }
 article strong { color: var(--h1); }
 article a { color: var(--wine-2); }
+.article-figure { margin: 28px 0; }
+.article-figure img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+.article-figure figcaption {
+  margin-top: 9px; color: var(--muted); font-size: .82rem; line-height: 1.55;
+}
+.source-note {
+  margin-top: 24px; color: var(--muted); font-size: .82rem; line-height: 1.6;
+}
 .note {
   display: flex; gap: 13px; align-items: flex-start;
   background: var(--ivory); border-left: 3px solid var(--wine-2);
@@ -120,5 +132,7 @@ footer a { color: var(--teal-4); }
 @media (max-width: 600px) {
   body { font-size: 17px; }
   .article-head { padding: 40px 0 32px; }
+  .note { flex-direction: column; gap: 6px; }
+  .note b { white-space: normal; }
   .article-cta { padding: 26px 22px; }
 }

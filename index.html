@@ -1144,10 +1144,56 @@
     .topnav .links a::after, .slider-dots button { transition: none; }
   }
 
-  /* การ์ดบทความคลิกได้ */
-  .article-link { display: block; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-  .article-link:hover { transform: translateY(-4px); border-color: rgba(166,58,86,.4); box-shadow: var(--shadow); }
-  .article-link .read-more { display: inline-block; margin-top: 12px; color: #8E2C46; font-weight: 700; font-size: .92rem; }
+  /* ── ประสบการณ์: แถวแนวนอนมีเลขกำกับ (ไม่ใช่การ์ด) ให้ต่างจากบทความชัดเจน ── */
+  .expertise-list { list-style: none; margin: 0; counter-reset: exp; display: grid; gap: 0; }
+  .expertise-list li {
+    counter-increment: exp; position: relative;
+    display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start;
+    padding: 26px 0 26px 60px; border-top: 1px solid rgba(31,122,135,.22);
+  }
+  .expertise-list li:last-child { border-bottom: 1px solid rgba(31,122,135,.22); }
+  .expertise-list li::before {
+    content: "0" counter(exp); position: absolute; left: 0; top: 30px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .82rem; font-weight: 500; color: var(--wine-2, #A63A56); letter-spacing: .08em;
+  }
+  .expertise-list .ic {
+    width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+    background: linear-gradient(145deg, #0D5257, #1F7A87);
+  }
+  .expertise-list li:nth-child(2) .ic { background: linear-gradient(145deg, #5C4B72, #8B5697); }
+  .expertise-list li:nth-child(3) .ic { background: linear-gradient(145deg, #7C3960, #A63A56); }
+  .expertise-list .ic svg { width: 24px; height: 24px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .expertise-list h4 { font-size: 1.12rem; color: var(--ink); margin-bottom: 5px; }
+  .expertise-list p { color: var(--muted); font-size: .96rem; line-height: 1.7; }
+  @media (max-width: 700px) {
+    .expertise-list li { grid-template-columns: 1fr; gap: 12px; padding-left: 0; padding-top: 40px; }
+    .expertise-list li::before { top: 14px; }
+  }
+
+  /* ── บทความ: การ์ดแนว editorial มีแถบสีหัวการ์ด ── */
+  #articles .grid { gap: 20px; }
+  .article-link {
+    display: flex; flex-direction: column; text-decoration: none; color: inherit;
+    overflow: hidden; padding-top: 26px; position: relative;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  /* #articles นำหน้าเพื่อชนะกฎ .card::before ที่ตั้ง opacity:0 ไว้สำหรับ hover */
+  #articles .article-link::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: var(--topic); opacity: 1;
+  }
+  #articles .article-link:nth-child(1) { --topic: linear-gradient(90deg, #0D5257, #35AF9E); }
+  #articles .article-link:nth-child(2) { --topic: linear-gradient(90deg, #5C4B72, #8B5697); }
+  #articles .article-link:nth-child(3) { --topic: linear-gradient(90deg, #7C3960, #A63A56); }
+  .article-link:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -24px rgba(13,82,87,.5); }
+  .article-link h3 { font-size: 1.16rem; line-height: 1.45; }
+  .article-link p { flex: 1; }
+  .article-link .read-more {
+    display: inline-block; margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: #8E2C46; font-weight: 700; font-size: .92rem;
+  }
 
   /* แถบสีขอบบน + พื้น tint ไล่ตามสีเฟส — ต้องอยู่ท้ายสุดเพื่อชนะกฎ .step อื่น */
   .steps .step {
@@ -1844,9 +1890,9 @@
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
           <div class="feature-panel-copy">
             <span class="feature-count">03 / 07</span>
-            <h3>ระบบวางบิล–รับชำระเงิน</h3>
-            <p>จัดการรายการวางบิลผ่าน <strong>Worklist และปฏิทินรายเดือน</strong> พร้อมสีเน้นวันวางบิลและรายการที่เลยกำหนด ช่วยให้ติดตาม วางแผน และปรับวันวางบิลได้สะดวกรวดเร็ว จนถึง<strong>ออกใบเสร็จรับเงินหรือใบกำกับภาษีให้ถูกต้องตามสถานะภาษี</strong></p>
-            <ul class="feature-chips"><li>Billing Worklist</li><li>Billing Board</li><li>Receipt</li></ul>
+            <h3>ระบบวางบิล</h3>
+            <p>จัดการรายการวางบิลผ่าน <strong>Worklist และปฏิทินรายเดือน</strong> พร้อมสีเน้นวันวางบิลและรายการที่เลยกำหนด ช่วยให้วางแผน ปรับวัน เชื่อมใบแจ้งหนี้กับใบวางบิล และติดตามสถานะการส่งเอกสารได้ครบถ้วน</p>
+            <ul class="feature-chips"><li>Billing Worklist</li><li>Billing Board</li><li>Billing Status</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
           <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>Billing → Receipt</small><strong>พร้อมรับชำระ</strong><span>ติดตามสถานะครบ</span><i></i><i></i><i></i></div><div class="feature-float-chip">Paid <b>✓</b></div></div>
@@ -1930,23 +1976,29 @@
       <div class="stat"><b class="stat-num" data-count="4">0</b><span>Microsoft Certifications</span></div>
     </div>
     <h3 class="about-title expertise-title">ประสบการณ์และแนวทางการทำงาน</h3>
-    <div class="grid">
-      <div class="card reveal">
+    <ol class="expertise-list">
+      <li class="reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-        <h3>เข้าใจงานบัญชีและกระบวนการธุรกิจ</h3>
-        <p>มีพื้นฐานด้านบัญชีและเคยทำงานกับกระบวนการด้าน<strong>การเงิน การขาย การจัดซื้อ สินค้าคงคลัง คลังสินค้า และการผลิต</strong> จึงช่วยเชื่อมความต้องการของแต่ละฝ่ายให้เป็นภาพเดียวกันได้</p>
-      </div>
-      <div class="card reveal">
+        <div>
+          <h4>เข้าใจงานบัญชีและกระบวนการธุรกิจ</h4>
+          <p>มีพื้นฐานด้านบัญชีและเคยทำงานกับกระบวนการด้าน<strong>การเงิน การขาย การจัดซื้อ สินค้าคงคลัง คลังสินค้า และการผลิต</strong> จึงช่วยเชื่อมความต้องการของแต่ละฝ่ายให้เป็นภาพเดียวกันได้</p>
+        </div>
+      </li>
+      <li class="reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
-        <h3>ประสบการณ์วางระบบ ERP</h3>
-        <p>ทำงานด้านการวางระบบ ERP หลังจบด้านบัญชี โดยมีประสบการณ์กับ Dynamics AX 2012 และ D365 Finance &amp; Operations ปัจจุบันทำงานกับ <strong>Business Central สำหรับธุรกิจโรงงาน ซื้อมาขายไป และบริการ</strong></p>
-      </div>
-      <div class="card reveal">
+        <div>
+          <h4>ประสบการณ์วางระบบ ERP</h4>
+          <p>ทำงานด้านการวางระบบ ERP หลังจบด้านบัญชี โดยมีประสบการณ์กับ Dynamics AX 2012 และ D365 Finance &amp; Operations ปัจจุบันทำงานกับ <strong>Business Central สำหรับธุรกิจโรงงาน ซื้อมาขายไป และบริการ</strong></p>
+        </div>
+      </li>
+      <li class="reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
-        <h3>ดูแลและประสานงานโครงการ</h3>
-        <p>ช่วยดูแล<strong>ขอบเขตงาน แผนงาน และความคืบหน้า</strong> พร้อมประสานงานระหว่างผู้ใช้งานกับทีมพัฒนา เพื่อให้แต่ละฝ่ายเข้าใจงานและเดินโครงการไปในทิศทางเดียวกัน</p>
-      </div>
-    </div>
+        <div>
+          <h4>ดูแลและประสานงานโครงการ</h4>
+          <p>ช่วยดูแล<strong>ขอบเขตงาน แผนงาน และความคืบหน้า</strong> พร้อมประสานงานระหว่างผู้ใช้งานกับทีมพัฒนา เพื่อให้แต่ละฝ่ายเข้าใจงานและเดินโครงการไปในทิศทางเดียวกัน</p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -2025,20 +2077,20 @@
     <div class="grid">
       <a class="card reveal article-link" href="articles/billing-note-billing-day.html">
         <span class="article-tag">Billing</span>
-        <h3>ใบวางบิลและวันวางบิล: เรื่องที่ ERP สากลไม่มีให้</h3>
-        <p>ทำไมวันวางบิลถึงกำหนดกระแสเงินสดมากกว่าวันที่ในใบแจ้งหนี้ และจะให้ระบบคำนวณรอบวางบิลของลูกค้าแต่ละรายได้อย่างไร</p>
+        <h3>ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</h3>
+        <p>เก็บรอบวางบิล คำนวณวัน ป้องกันเอกสารซ้ำ และติดตามสถานะการส่งเอกสารให้ครบทุกใบ</p>
         <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
       </a>
       <a class="card reveal article-link" href="articles/wht-50tawi-rdprep.html">
         <span class="article-tag">WHT</span>
-        <h3>ออก 50 ทวิ และไฟล์ RD Prep จาก BC โดยไม่ต้องคีย์ซ้ำ</h3>
-        <p>ตั้งค่า WHT ให้ระบบสร้างหนังสือรับรอง ภ.ง.ด. และ export text file เข้าโปรแกรมกรมสรรพากรได้ในคลิกเดียว</p>
+        <h3>ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</h3>
+        <p>ใช้ข้อมูลการจ่ายชุดเดียวเพื่อออกหนังสือรับรอง รวบรวมรายการ ภ.ง.ด. และสร้างไฟล์โอนย้ายเข้า RD Prep</p>
         <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
       </a>
       <a class="card reveal article-link" href="articles/bot-exchange-rate-api.html">
         <span class="article-tag">API / Integration</span>
-        <h3>ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า BC อัตโนมัติ</h3>
-        <p>เชื่อม API ธนาคารแห่งประเทศไทย ให้ BC อัปเดตเรตและปฏิทินวันหยุดเองทุกวัน ไม่ต้องกรอกเอง</p>
+        <h3>ดึงอัตราแลกเปลี่ยนและวันหยุด ธปท. เข้า BC อัตโนมัติ</h3>
+        <p>เชื่อม BOT API พร้อมกำหนดชนิดเรต วันที่อ้างอิง กติกาวันหยุด และการแจ้งเตือนเมื่อดึงข้อมูลไม่สำเร็จ</p>
         <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
       </a>
     </div>
@@ -2573,12 +2625,12 @@
     ['.stat-row .stat:nth-child(1) span', 'Ready-to-use Thai document forms'],
     ['.stat-row .stat:nth-child(2) span', 'Core feature groups for Thai business'],
     ['.expertise-title', 'Experience &amp; How I Work'],
-    ['#why-us .grid .card:nth-child(1) h3', 'Accounting &amp; business process insight'],
-    ['#why-us .grid .card:nth-child(1) p', 'An accounting background and hands-on work across <strong>finance, sales, purchasing, inventory, warehousing, and manufacturing</strong> — connecting every team\'s needs into one coherent picture.'],
-    ['#why-us .grid .card:nth-child(2) h3', 'ERP implementation experience'],
-    ['#why-us .grid .card:nth-child(2) p', 'ERP implementation work since graduating in accounting, with Dynamics AX 2012 and D365 Finance &amp; Operations — now focused on <strong>Business Central for manufacturing, trading, and service businesses</strong>.'],
-    ['#why-us .grid .card:nth-child(3) h3', 'Project care &amp; coordination'],
-    ['#why-us .grid .card:nth-child(3) p', 'Looking after <strong>scope, plans, and progress</strong> while coordinating between users and developers, so everyone moves in the same direction.'],
+    ['.expertise-list li:nth-child(1) h4', 'Accounting &amp; business process insight'],
+    ['.expertise-list li:nth-child(1) p', 'An accounting background and hands-on work across <strong>finance, sales, purchasing, inventory, warehousing, and manufacturing</strong> — connecting every team\'s needs into one coherent picture.'],
+    ['.expertise-list li:nth-child(2) h4', 'ERP implementation experience'],
+    ['.expertise-list li:nth-child(2) p', 'ERP implementation work since graduating in accounting, with Dynamics AX 2012 and D365 Finance &amp; Operations — now focused on <strong>Business Central for manufacturing, trading, and service businesses</strong>.'],
+    ['.expertise-list li:nth-child(3) h4', 'Project care &amp; coordination'],
+    ['.expertise-list li:nth-child(3) p', 'Looking after <strong>scope, plans, and progress</strong> while coordinating between users and developers, so everyone moves in the same direction.'],
     ['#reports h2', 'Sample Reports'],
     ['#reports .sub', 'Thai reports and documents built on Business Central — click any image for full size.'],
     ['.slider figure:nth-of-type(1) figcaption', 'Business Central Home with Thai tax and billing menus'],
