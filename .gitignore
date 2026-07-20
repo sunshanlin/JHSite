@@ -1,2 +1,5 @@
 # ต้นฉบับรูปไม่มีลายน้ำ — ห้ามขึ้นโฮสต์
 img/originals/
+
+# Browser automation artifacts
+.playwright-cli/

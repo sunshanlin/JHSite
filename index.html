@@ -14,6 +14,97 @@
 <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <meta name="description" content="ที่ปรึกษาและนักพัฒนาอิสระ รับ Implement Microsoft Dynamics 365 Business Central พร้อม Thai Localization — VAT ภ.พ.30/36, หัก ณ ที่จ่าย 50 ทวิ ภ.ง.ด., ใบวางบิล, ฟอร์มเอกสาร — ดูแลตั้งแต่ต้นจนจบ">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0D5257">
+<link rel="canonical" href="https://jwicconsulting.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="JWIC Consulting">
+<meta property="og:title" content="JWIC Consulting | รับ Implement Business Central + Thai Localization">
+<meta property="og:description" content="ที่ปรึกษาและนักพัฒนาอิสระ รับ Implement Microsoft Dynamics 365 Business Central พร้อม Thai Localization ดูแลตั้งแต่วิเคราะห์ วางระบบ พัฒนา ไปจนถึงหลัง Go-live">
+<meta property="og:url" content="https://jwicconsulting.com/">
+<meta property="og:image" content="https://jwicconsulting.com/img/jh-poster.png">
+<meta property="og:image:alt" content="JWIC Consulting — Business Central Implementation และ Thai Localization">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JWIC Consulting | Business Central + Thai Localization">
+<meta name="twitter:description" content="บริการวางระบบ Microsoft Dynamics 365 Business Central พร้อม Thai Localization สำหรับธุรกิจไทย">
+<meta name="twitter:image" content="https://jwicconsulting.com/img/jh-poster.png">
+<meta name="twitter:image:alt" content="JWIC Consulting — Business Central Implementation และ Thai Localization">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://jwicconsulting.com/#organization",
+      "name": "JWIC Consulting",
+      "alternateName": "JWIC Business Central Consulting",
+      "url": "https://jwicconsulting.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jwicconsulting.com/img/brand/jwic-icon.png"
+      },
+      "image": "https://jwicconsulting.com/img/jh-poster.png",
+      "description": "ที่ปรึกษาและนักพัฒนา Microsoft Dynamics 365 Business Central พร้อม Thai Localization สำหรับธุรกิจไทย",
+      "email": "jirapat.wi@outlook.com",
+      "telephone": "+66841487480",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bang Na",
+        "addressRegion": "Bangkok",
+        "postalCode": "10260",
+        "addressCountry": "TH"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Thailand"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+66841487480",
+        "email": "jirapat.wi@outlook.com",
+        "availableLanguage": ["Thai", "English"]
+      },
+      "founder": {
+        "@id": "https://jwicconsulting.com/#jirapat-wichayapong"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://jwicconsulting.com/#jirapat-wichayapong",
+      "name": "Jirapat Wichayapong",
+      "alternateName": "Sun",
+      "jobTitle": "Microsoft Dynamics 365 Business Central Functional Consultant and AL Developer",
+      "url": "https://jwicconsulting.com/#about",
+      "image": "https://jwicconsulting.com/img/jirapat.jpg",
+      "email": "jirapat.wi@outlook.com",
+      "telephone": "+66841487480",
+      "worksFor": {
+        "@id": "https://jwicconsulting.com/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/jirapat-wichayapong-886003146/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://jwicconsulting.com/#website",
+      "url": "https://jwicconsulting.com/",
+      "name": "JWIC Consulting",
+      "alternateName": "JWIC Business Central Consulting",
+      "description": "Business Central Implementation และ Thai Localization สำหรับธุรกิจไทย",
+      "inLanguage": ["th", "en"],
+      "publisher": {
+        "@id": "https://jwicconsulting.com/#organization"
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root {
     /* palette BC (deep blue → cyan → mint) เวอร์ชัน modern: สดขึ้น คูลขึ้น */
@@ -2007,7 +2098,7 @@
           </li>
         </ul>
       </div>
-      <form class="contact-form" action="https://formsubmit.co/jirapat.wi@outlook.com" method="POST">
+      <form id="contact-form" class="contact-form" action="https://formsubmit.co/jirapat.wi@outlook.com" method="POST">
         <input type="hidden" name="_subject" value="New enquiry from JWIC Consulting site">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
@@ -2370,6 +2461,31 @@
   document.getElementById('cookie-decline').addEventListener('click', () => {
     localStorage.setItem('ga_consent', 'denied');
     cookieBar.hidden = true;
+  });
+
+  // วัดผล Lead หลังได้รับ consent แล้วเท่านั้น
+  function trackSeoEvent(eventName, parameters = {}) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', eventName, parameters);
+  }
+
+  document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      trackSeoEvent('contact_click', { method: 'phone' });
+    });
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      trackSeoEvent('contact_click', { method: 'email' });
+    });
+  });
+  document.querySelectorAll('a[href*="line.me"]').forEach(link => {
+    link.addEventListener('click', () => {
+      trackSeoEvent('contact_click', { method: 'line' });
+    });
+  });
+  document.getElementById('contact-form').addEventListener('submit', () => {
+    trackSeoEvent('generate_lead', { method: 'contact_form' });
   });
 
   // ── Bilingual TH/EN ─────────────────────────────────────────────
