@@ -518,16 +518,19 @@
   /* cookie consent (PDPA) */
   .cookie-bar {
     position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 100;
-    max-width: 560px; margin: 0 auto;
+    max-width: 760px; margin: 0 auto;
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
     box-shadow: var(--shadow); padding: 16px 20px;
-    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center;
     font-size: .92rem;
   }
   .cookie-bar[hidden] { display: none; }
-  .cookie-bar p { flex: 1 1 260px; margin: 0; }
+  .cookie-title { display: block; margin-bottom: 5px; color: var(--ink); font-size: 1rem; }
+  .cookie-bar p { margin: 0; line-height: 1.65; }
+  .cookie-actions { display: flex; flex-wrap: nowrap; gap: 10px; }
   .cookie-bar button {
-    font: inherit; cursor: pointer; border-radius: 9px; padding: 8px 18px;
+    min-height: 42px; padding: 8px 18px; white-space: nowrap;
+    font: inherit; cursor: pointer; border-radius: 9px;
     border: 1px solid var(--line); background: var(--bg-soft); color: var(--text);
   }
   .cookie-bar button.accept {
@@ -984,7 +987,7 @@
   footer span { color: #55898C; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; }
 
   .cookie-bar {
-    left: auto; right: 24px; bottom: 24px; width: calc(100% - 48px); max-width: 500px; margin: 0;
+    left: auto; right: 24px; bottom: 24px; width: calc(100% - 48px); max-width: 760px; margin: 0;
     padding: 18px 20px; border-radius: 16px; box-shadow: 0 24px 60px -28px rgba(4,30,56,.5);
   }
 
@@ -1096,7 +1099,12 @@
     .feature-float-chip { right: 7%; bottom: 12%; }
     .service-highlight .poster a { height: 410px; }
     .slider img { height: 220px; }
-    .cookie-bar { left: 12px; right: 12px; bottom: 12px; width: auto; max-width: none; padding: 16px; }
+    .cookie-bar {
+      left: 12px; right: 12px; bottom: 12px; width: auto; max-width: none; padding: 16px;
+      grid-template-columns: 1fr; gap: 14px;
+    }
+    .cookie-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+    .cookie-bar button { width: 100%; }
   }
 
   /* scrollspy: ขีดเส้นใต้เมนูตาม section ที่กำลังดู */
@@ -2135,10 +2143,15 @@
   </div>
 </footer>
 
-<div class="cookie-bar" id="cookie-bar" hidden role="dialog" aria-label="Cookie usage">
-  <p>This website uses Google Analytics cookies to analyze traffic and improve the site in accordance with Thailand's Personal Data Protection Act.</p>
-  <button type="button" class="accept" id="cookie-accept">Accept</button>
-  <button type="button" id="cookie-decline">Decline</button>
+<div class="cookie-bar" id="cookie-bar" hidden role="dialog" aria-label="Cookie consent">
+  <div class="cookie-copy">
+    <strong class="cookie-title">We value your privacy</strong>
+    <p>We use optional analytics cookies to understand how visitors interact with our website, measure performance, and improve our services. Select “Accept All” to allow Google Analytics cookies, or “Reject All” to continue without analytics tracking.</p>
+  </div>
+  <div class="cookie-actions">
+    <button type="button" class="accept" id="cookie-accept">Accept All</button>
+    <button type="button" id="cookie-decline">Reject All</button>
+  </div>
 </div>
 
 <script>
@@ -2581,9 +2594,10 @@
     ['label[for="cf-contact"]', 'Email or phone'],
     ['label[for="cf-msg"]', 'What would you like to discuss?'],
     ['.contact-form button[type="submit"]', 'Send message'],
-    ['#cookie-bar p', 'This website uses Google Analytics cookies to analyze traffic and improve the site in accordance with Thailand\'s Personal Data Protection Act.', 'เว็บไซต์นี้ใช้คุกกี้ของ Google Analytics เพื่อวิเคราะห์การเข้าชมและปรับปรุงเว็บไซต์ (ตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล)'],
-    ['#cookie-accept', 'Accept', 'ยอมรับ'],
-    ['#cookie-decline', 'Decline', 'ปฏิเสธ'],
+    ['.cookie-title', 'We value your privacy', 'เราให้ความสำคัญกับความเป็นส่วนตัวของคุณ'],
+    ['#cookie-bar p', 'We use optional analytics cookies to understand how visitors interact with our website, measure performance, and improve our services. Select “Accept All” to allow Google Analytics cookies, or “Reject All” to continue without analytics tracking.', 'เราใช้คุกกี้วิเคราะห์ที่ไม่จำเป็นเพื่อทำความเข้าใจการใช้งานเว็บไซต์ วัดประสิทธิภาพ และปรับปรุงบริการ เลือก “ยอมรับทั้งหมด” เพื่ออนุญาต Google Analytics หรือ “ปฏิเสธทั้งหมด” เพื่อใช้งานต่อโดยไม่มีการติดตามเพื่อการวิเคราะห์'],
+    ['#cookie-accept', 'Accept All', 'ยอมรับทั้งหมด'],
+    ['#cookie-decline', 'Reject All', 'ปฏิเสธทั้งหมด'],
   ];
   const I18N_ATTR = [
     ['#cf-name', 'placeholder', 'Contact name'],
