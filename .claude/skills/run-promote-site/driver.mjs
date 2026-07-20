@@ -21,6 +21,7 @@ const evalJs = argAfter("--eval");
 const printJs = argAfter("--print");
 const fullPage = process.argv.includes("--full");
 const vw = Number(argAfter("--width")) || 1400; // e.g. --width 794 for true A4
+const vh = Number(argAfter("--height")) || 1000; // fixed-size export, e.g. --width 1584 --height 396
 
 const MIME = { html: "text/html; charset=utf-8", png: "image/png", jpg: "image/jpeg", svg: "image/svg+xml", css: "text/css", js: "text/javascript", ico: "image/x-icon" };
 const server = http.createServer(async (req, res) => {
@@ -71,7 +72,7 @@ const waitEvent = (method) => new Promise((r) => events.set(method, r));
 await cdp("Page.enable");
 // ponytail: 2x DPR so screenshots look crisp; full-page stays 1x to keep the file size sane
 const dpr = fullPage ? 1 : 2;
-await cdp("Emulation.setDeviceMetricsOverride", { width: vw, height: 1000, deviceScaleFactor: dpr, mobile: false });
+await cdp("Emulation.setDeviceMetricsOverride", { width: vw, height: vh, deviceScaleFactor: dpr, mobile: false });
 const loaded = waitEvent("Page.loadEventFired");
 await cdp("Page.navigate", { url });
 await loaded;
