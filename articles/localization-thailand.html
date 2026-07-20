@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง | JWIC Consulting</title>
+<meta name="description" content="Localization คือชุดฟังก์ชันที่ทำให้ระบบทำงานตามข้อกำหนดของประเทศได้ บทความนี้ใช้การแบ่งหมวดของ Microsoft จำแนกงาน localization ของไทย ทั้ง VAT สาขาภาษี WHT และใบวางบิล">
+<link rel="canonical" href="https://www.jwicconsulting.com/articles/localization-thailand.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/brand/jwic-icon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง">
+<meta property="og:description" content="ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี WHT และใบวางบิล">
+<meta property="og:url" content="https://www.jwicconsulting.com/articles/localization-thailand.html">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/pp30-report.png">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง",
+  "description": "Localization คือชุดฟังก์ชันที่ทำให้ระบบทำงานตามข้อกำหนดของประเทศได้ บทความนี้ใช้การแบ่งหมวดของ Microsoft จำแนกงาน localization ของไทย",
+  "image": "https://www.jwicconsulting.com/img/pp30-report.png",
+  "inLanguage": "th",
+  "mainEntityOfPage": "https://www.jwicconsulting.com/articles/localization-thailand.html",
+  "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "JWIC Consulting",
+    "logo": { "@type": "ImageObject", "url": "https://www.jwicconsulting.com/img/brand/jwic-icon.png" }
+  },
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-21"
+}
+</script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" role="img" aria-label="JWIC Consulting">
+        <defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#lg)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <span class="wordmark">JWIC <i>Consulting</i></span>
+    </a>
+    <a class="back" href="/#articles">← บทความทั้งหมด</a>
+  </div>
+</nav>
+
+<header class="article-head">
+  <div class="wrap">
+    <span class="tag">Localization</span>
+    <h1>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</h1>
+    <p class="lead">Localization คือชุดฟังก์ชันที่ทำให้ระบบทำงานได้ตามข้อกำหนดของประเทศ Microsoft แบ่งฟังก์ชันกลุ่มนี้ออกเป็นสามหมวดตามแหล่งที่มาของข้อบังคับ บทความนี้ใช้การแบ่งหมวดดังกล่าวจำแนกงาน localization ของไทย และอธิบายว่าทำไมบางอย่างที่ธุรกิจไทยทุกรายต้องใช้ ถึงไม่มีอยู่ในระบบมาตรฐาน</p>
+    <p class="meta">โดย Jirapat Wichayapong · ที่ปรึกษาและนักพัฒนา Business Central</p>
+  </div>
+</header>
+
+<div class="wrap">
+<article>
+
+  <div class="note">
+    <b>ขอบเขตของบทความนี้</b>
+    <p>localization ในที่นี้หมายถึงฟังก์ชันของระบบ ไม่ใช่ภาษาที่แสดงบนหน้าจอ ทั้งสองเรื่องเป็นคนละงานกันและมีเงื่อนไขคนละชุด บทความนี้พูดเฉพาะเรื่องแรก</p>
+  </div>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>สถานะของประเทศไทยตามเอกสาร Microsoft</h2>
+  <p>Microsoft เผยแพร่ตารางที่ระบุว่าแต่ละประเทศใช้ base app ตัวไหน และใครเป็นผู้จัดทำ localization แถวของประเทศไทยระบุค่าไว้ดังนี้</p>
+  <table>
+    <tr><th>Country/region</th><th>Localized by</th><th>Base app</th><th>Availability</th><th>Azure geography</th></tr>
+    <tr><td>Thailand</td><td>Partner</td><td>W1</td><td>Available</td><td>Asia Pacific</td></tr>
+  </table>
+  <p>อ่านค่าทีละช่อง <strong>Localized by = Partner</strong> หมายความว่า Microsoft ไม่ได้เป็นผู้จัดทำ localization ให้ประเทศไทย ต่างจากประเทศอย่างสหรัฐอเมริกา เยอรมนี อิตาลี หรือออสเตรเลีย ที่ช่องนี้ระบุว่า Microsoft</p>
+  <p><strong>Base app = W1</strong> หมายความว่าไทยไม่มี base app เฉพาะประเทศ ระบบที่ใช้งานในไทยคือตัว international ส่วน <strong>Availability = Available</strong> คือใช้งานได้จริงแล้ว ไม่ใช่สถานะที่อยู่ระหว่างวางแผน</p>
+  <p>เอกสารอธิบายกลไกนี้ไว้ว่า ในประเทศที่ Microsoft ไม่ได้จัดทำ localization ให้ partner สามารถสร้าง localization app เผยแพร่บน Marketplace ได้ โดยสร้างอยู่บนเวอร์ชัน international (W1) และระบุเพิ่มว่าบางประเทศมี partner มากกว่าหนึ่งราย และ localization ของรายหนึ่งอาจประกอบด้วย app มากกว่าหนึ่งตัว</p>
+
+  <div class="note">
+    <b>ผลที่ตามมา (ส่วนนี้เป็นการตีความ ไม่ได้ระบุไว้ในเอกสาร)</b>
+    <p>เมื่อฟังก์ชันที่ตอบข้อกำหนดของไทยไม่ได้มากับตัวผลิตภัณฑ์ คำถามที่ตามมาจึงไม่ใช่แค่เรื่องเทคนิค แต่คือเมื่อกฎหมายไทยเปลี่ยน ใครคือผู้ที่ต้องแก้ระบบ ในกรณีของไทยคำตอบคือ partner ไม่ใช่ Microsoft ข้อนี้ควรถูกถามตั้งแต่ตอนเลือกผู้ใช้งานร่วม ไม่ใช่ตอนที่ประกาศฉบับใหม่ออกมาแล้ว</p>
+  </div>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="4" width="3" height="14"/></svg></span>Microsoft แบ่ง localization เป็นสามหมวด</h2>
+  <p>ในเอกสารสำหรับผู้พัฒนา localization solution Microsoft ระบุว่า localization app ประกอบด้วยฟังก์ชันที่ตอบข้อกำหนดท้องถิ่นซึ่งจัดอยู่ในหมวดใดหมวดหนึ่งต่อไปนี้ และแนะนำให้แยก app ตามหมวดเหล่านี้เป็นอย่างน้อย</p>
+  <table>
+    <tr><th>หมวด</th><th>นิยามตามเอกสาร</th></tr>
+    <tr><td>Regulatory requirements</td><td>ฟังก์ชันที่ช่วยให้ธุรกิจทำตามข้อกำหนดทางกฎหมาย เช่น การรายงานภาษี local GAAP และข้อกำหนดตามกฎระเบียบอื่น</td></tr>
+    <tr><td>National standards requirements</td><td>ฟังก์ชันที่ตอบมาตรฐานท้องถิ่น เช่น รูปแบบธนาคารและการชำระเงิน รูปแบบที่อยู่ หรือการตีความมาตรฐานสากลในแบบท้องถิ่น</td></tr>
+    <tr><td>Market requirements</td><td>ฟังก์ชันที่เป็น nice-to-have และเป็นความสามารถเชิงแข่งขัน ช่วยให้กระบวนการทำงานมีประสิทธิภาพขึ้น แต่ไม่ได้ถูกบังคับจากมุมของกฎระเบียบ</td></tr>
+  </table>
+  <p>จุดที่ควรสังเกตคือเส้นแบ่งระหว่างหมวดเหล่านี้คือ<strong>แหล่งที่มาของข้อบังคับ</strong> ไม่ใช่ความสำคัญ ความยากในการพัฒนา หรือจำนวนคนที่ต้องใช้ ผลก็คือฟังก์ชันที่ธุรกิจแทบทุกรายในประเทศต้องใช้ ก็ยังอาจไม่ได้อยู่ในหมวด regulatory</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><polyline points="3 6 4 7 6 5"/><polyline points="3 12 4 13 6 11"/><polyline points="3 18 4 19 6 17"/></svg></span>จำแนกงานของไทยลงในสามหมวด</h2>
+  <p>ตารางนี้เป็นการจำแนกของผู้เขียน โดยใช้นิยามของ Microsoft ข้างต้นเป็นเกณฑ์</p>
+  <table>
+    <tr><th>งาน</th><th>หมวด</th><th>เหตุผลที่จัดลงหมวดนี้</th></tr>
+    <tr><td>VAT และโครงสร้างสาขาภาษี</td><td>Regulatory</td><td>มาจากประมวลรัษฎากร เป็นข้อกำหนดทางกฎหมายโดยตรง</td></tr>
+    <tr><td>ใบกำกับภาษี</td><td>Regulatory</td><td>ทั้งหน้าที่ออก รายการที่ต้องมี และจังหวะที่ต้องออก กำหนดไว้ตามกฎหมาย</td></tr>
+    <tr><td>WHT หนังสือรับรอง 50 ทวิ และ ภ.ง.ด.</td><td>Regulatory</td><td>หน้าที่หักภาษีและออกหนังสือรับรองกำหนดไว้ตามกฎหมาย</td></tr>
+    <tr><td>ใบวางบิล</td><td>National standards</td><td>ไม่ใช่ข้อกำหนดทางกฎหมาย แต่เป็นวิธีปฏิบัติทางการค้าที่ใช้กันทั้งประเทศ</td></tr>
+  </table>
+  <p>บทความนี้ยังไม่ครอบคลุมงานในหมวด market requirements ซึ่งเป็นกลุ่มที่ช่วยให้ทำงานสะดวกขึ้นแต่ไม่ได้ถูกบังคับ รวมถึงรายงานที่ธุรกิจไทยใช้กันแต่ไม่ได้เป็นแบบยื่นตามกฎหมาย</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>VAT และสาขาภาษี</h2>
+  <p>ประเด็นที่ทำให้ VAT ของไทยไม่ตรงกับ framework กลางโดยตรง คือธุรกิจที่จดทะเบียนหลายสาขาต้องแยกข้อมูลภาษีตามสาขา ในบริบทนี้สาขาไม่ได้เป็นเพียงที่อยู่สำหรับจัดส่งสินค้า แต่เป็นหน่วยที่ผูกกับการจดทะเบียนและการยื่นแบบ</p>
+  <p>ในระดับภาพรวม ระบบจึงต้องระบุสาขาบนเอกสารที่เกี่ยวกับภาษีได้ แยกลำดับเลขที่เอกสารตามสาขา และรวบรวมข้อมูลเพื่อยื่นแบบโดยแยกตามสาขา</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/></svg></span>ใบกำกับภาษี</h2>
+  <p>ใบกำกับภาษีเป็นงานที่อยู่ในหมวด regulatory เต็มตัว เพราะทั้งหน้าที่ในการออก รายการที่เอกสารต้องมี และจังหวะที่ต้องออก ถูกกำหนดไว้ตามกฎหมาย ไม่ใช่เรื่องที่ตกลงกับคู่ค้าได้เอง</p>
+  <p>สิ่งที่ทำให้เรื่องนี้เป็นงาน localization ไม่ใช่แค่การจัดหน้าเอกสาร คือเอกสารต้องผูกกลับไปยังรายการบัญชีที่เป็นต้นทาง ต้องสอดคล้องกับสาขาที่ออก และต้องอยู่ในลำดับเลขที่ที่ตรวจสอบย้อนหลังได้ เมื่อมีการยกเลิกหรือแก้ไขรายการ ระบบต้องแสดงความสัมพันธ์ระหว่างเอกสารเดิมกับเอกสารที่ออกใหม่ได้ด้วย</p>
+  <p>เนื่องจากรายละเอียดของรายการที่ต้องมี รูปแบบ และเงื่อนไขของแต่ละประเภทเอกสารอ้างอิงกับประมวลรัษฎากรและประกาศที่เกี่ยวข้อง จึงควรให้ผู้รับผิดชอบด้านภาษีตรวจและอนุมัติรูปแบบเอกสารกับตารางตั้งค่าก่อนใช้งานจริง เช่นเดียวกับการตั้งค่า VAT และสาขา</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></span>ภาษีหัก ณ ที่จ่าย</h2>
+  <p>Business Central มาตรฐานไม่ครอบคลุมกระบวนการภาษีหัก ณ ที่จ่ายของไทยทั้งสาย ฟังก์ชันที่ต้องเพิ่มคือการออกหนังสือรับรอง 50 ทวิ จากรายการจ่ายจริง การรวบรวมรายการตามงวดเพื่อจัดทำ ภ.ง.ด. และการเตรียมไฟล์สำหรับโอนย้ายเข้า RD Prep</p>
+  <p>งานกลุ่มนี้อยู่ในหมวด regulatory เต็มตัว เพราะทั้งหน้าที่หักภาษี กำหนดเวลาออกหนังสือรับรอง และรูปแบบข้อมูลที่ยื่น ล้วนกำหนดไว้ตามกฎหมายและประกาศของกรมสรรพากร</p>
+  <p>รายละเอียดของกระบวนการนี้อยู่ในบทความ <a href="/articles/wht-50tawi-rdprep.html">ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก Business Central โดยไม่คีย์ซ้ำ</a></p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="4" x2="8" y2="20"/></svg></span>ใบวางบิล และความหมายของหมวด national standards</h2>
+  <p>ใบวางบิลเป็นตัวอย่างที่ชัดที่สุดของหมวด national standards ในบริบทไทย ไม่มีกฎหมายกำหนดให้ต้องมีเอกสารนี้ แต่ธุรกิจไทยจำนวนมากใช้รอบวางบิลเป็นส่วนหนึ่งของเงื่อนไขการชำระเงิน และคู่ค้าจำนวนไม่น้อยรับชำระเฉพาะเอกสารที่ผ่านรอบวางบิลที่ตกลงกันไว้</p>
+  <p>เมื่อนำนิยามของ Microsoft มาใช้ จะอธิบายได้ทันทีว่าทำไมระบบมาตรฐานถึงไม่มีฟังก์ชันนี้ เพราะมันไม่ใช่ข้อกำหนดสากล และไม่ใช่ข้อกำหนดทางกฎหมายของประเทศใดประเทศหนึ่ง มันคือมาตรฐานทางการค้าที่เกิดจากวิธีทำงานร่วมกันในตลาด</p>
+  <p>ข้อสังเกตที่ตามมาคือ การที่ฟังก์ชันหนึ่งไม่ได้อยู่ในหมวด regulatory ไม่ได้แปลว่าไม่จำเป็น ในทางปฏิบัติงานที่กระทบการรับเงินมักถูกจัดลำดับความสำคัญสูงกว่างานที่กระทบการยื่นแบบด้วยซ้ำ</p>
+  <p>รายละเอียดอยู่ในบทความ <a href="/articles/billing-note-billing-day.html">ใบวางบิลและวันวางบิล: ช่องว่างของ Business Central มาตรฐาน</a></p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></span>คำแนะนำเรื่องการแบ่ง app</h2>
+  <p>นอกจากการแบ่งหมวด เอกสารยังให้คำแนะนำเชิงโครงสร้างไว้อีกหลายข้อ ที่เกี่ยวข้องกับบริบทไทยโดยตรงคือ</p>
+  <ul>
+    <li>ให้พิจารณาแยก localization app ตาม<strong>ความถี่ของการเปลี่ยนแปลง</strong> หากฟีเจอร์หนึ่งมีส่วนที่นิ่งและส่วนที่เปลี่ยนบ่อยตามกฎระเบียบ ให้เก็บส่วนที่นิ่งไว้เป็น app หนึ่งและแยกส่วนที่เปลี่ยนบ่อยออกไป เหตุผลที่ระบุไว้คือได้ test coverage ที่ดีกว่า ตอบสนองต่อการเปลี่ยนแปลงได้เร็วกว่า และมีปัญหาตอน upgrade น้อยกว่า</li>
+    <li>ให้ใช้ framework ที่มีอยู่แล้วในเวอร์ชัน international เช่น VAT reports รูปแบบธนาคาร และ data exchange แทนการเขียนขึ้นใหม่ เพราะฟังก์ชันส่วนใหญ่เป็นของกลาง มีเพียงกฎท้องถิ่นที่เป็นส่วนขยายของกรอบเหล่านั้น</li>
+    <li>localization app ที่มี field ซึ่งตั้งค่า <code>DataClassification</code> เป็น <code>ToBeClassified</code> จะไม่ผ่านการตรวจสอบ</li>
+  </ul>
+  <p>เมื่อนำคำแนะนำข้อแรกมาใช้กับไทย จะเห็นเส้นแบ่งที่ชัดพอสมควร โครงสร้างสาขาภาษีและวิธีคิด VAT ค่อนข้างนิ่ง ในขณะที่รูปแบบไฟล์สำหรับยื่นและรายละเอียดของแบบมีการปรับตามประกาศบ่อยกว่า ตามหลักข้างต้นสองส่วนนี้จึงไม่ควรอยู่ใน app เดียวกัน</p>
+  <p>ข้อนี้เป็นการตีความ ไม่ได้ระบุเจาะจงถึงประเทศไทยไว้ในเอกสาร แต่เป็นการนำเกณฑ์ที่เอกสารให้มาใช้กับสิ่งที่สังเกตได้จากความถี่ของการเปลี่ยนแปลงในทางปฏิบัติ</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>สรุป</h2>
+  <p>Localization ไม่ใช่คำกว้าง ๆ ที่ตีความได้ตามใจ Microsoft ให้เกณฑ์แบ่งไว้สามหมวดตามแหล่งที่มาของข้อบังคับ และให้คำแนะนำเรื่องการแยก app ตามหมวดและตามความถี่ของการเปลี่ยนแปลง</p>
+  <p>สำหรับประเทศไทย เอกสารระบุสถานะไว้ชัดเจนว่าเป็น Partner บน base app W1 ซึ่งหมายความว่าฟังก์ชันที่ตอบข้อกำหนดของไทยทั้งหมดอยู่ในรูปของ app ที่ต้องมีผู้ดูแลต่อเนื่อง</p>
+  <p>ประโยชน์ในทางปฏิบัติของการรู้เกณฑ์นี้ คือมันเปลี่ยนคำถามตอนคุยขอบเขตโปรเจกต์ จากคำถามว่าฟังก์ชันนี้จำเป็นหรือไม่ ซึ่งตอบยากและขึ้นกับความเห็น ไปเป็นคำถามว่าฟังก์ชันนี้อยู่หมวดไหน ซึ่งตอบได้จากการดูว่าข้อบังคับมาจากที่ใด และคำตอบนั้นบอกต่อได้ด้วยว่าใครควรเป็นผู้ตัดสินใจ</p>
+
+  <p class="source-note">อ้างอิง: <a href="https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/readiness/readiness-develop-localization">Microsoft Learn: Development of a Localization Solution</a> (14 เมษายน 2025) และ <a href="https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/compliance/apptest-countries-and-translations">Microsoft Learn: Country/Regional Availability</a> (12 กุมภาพันธ์ 2026)</p>
+
+  <div class="article-cta">
+    <h2>กำลังประเมินว่าต้องทำ localization แค่ไหน?</h2>
+    <p>นัดคุยเพื่อไล่ดูงานที่ธุรกิจของคุณต้องใช้ และแยกว่าอันไหนเป็นข้อกำหนดตามกฎหมาย อันไหนเป็นมาตรฐานทางการค้า</p>
+    <a href="/#contact">ปรึกษาเรื่องขอบเขตงาน →</a>
+  </div>
+
+  <div class="more">
+    <h2>บทความอื่น</h2>
+    <ul>
+      <li><a href="/articles/wht-50tawi-rdprep.html">ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</a></li>
+      <li><a href="/articles/billing-note-billing-day.html">ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</a></li>
+      <li><a href="/articles/bot-exchange-rate-api.html">รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</a></li>
+      <li><a href="/articles/success-by-design.html">Success by Design: กรอบที่ Microsoft กลั่นจากโปรเจกต์ Dynamics 365 เป็นพัน</a></li>
+    </ul>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
+    <div><a href="/">jwicconsulting.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

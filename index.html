@@ -1212,9 +1212,13 @@
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
     background: var(--topic); opacity: 1;
   }
-  #articles .article-link:nth-child(1) { --topic: linear-gradient(90deg, #0D5257, #35AF9E); }
-  #articles .article-link:nth-child(2) { --topic: linear-gradient(90deg, #5C4B72, #8B5697); }
-  #articles .article-link:nth-child(3) { --topic: linear-gradient(90deg, #7C3960, #A63A56); }
+  /* สีแถบผูกกับตัวบทความ ไม่ใช่ตำแหน่ง จะได้สลับลำดับการ์ดได้โดยสีไม่เพี้ยน
+     เพิ่มบทความใหม่ = เพิ่มบรรทัดใหม่ตรงนี้ 1 บรรทัด */
+  #articles .article-link[href*="billing-note"]        { --topic: linear-gradient(90deg, #0D5257, #35AF9E); }
+  #articles .article-link[href*="wht-50tawi"]          { --topic: linear-gradient(90deg, #5C4B72, #8B5697); }
+  #articles .article-link[href*="bot-exchange"]        { --topic: linear-gradient(90deg, #7C3960, #A63A56); }
+  #articles .article-link[href*="success-by-design"]   { --topic: linear-gradient(90deg, #1c4a3c, #4E8F6E); }
+  #articles .article-link[href*="localization"]        { --topic: linear-gradient(90deg, #6B4423, #A6763F); }
   .article-link:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -24px rgba(13,82,87,.5); }
   .article-link h3 { font-size: 1.16rem; line-height: 1.45; }
   .article-link p { flex: 1; }
@@ -2104,6 +2108,12 @@
     <h2>บทความ</h2>
     <p class="sub">เกร็ดการตั้งค่าและแนวทางทำ Thai Localization บน Business Central จากงานจริง</p>
     <div class="grid">
+      <a class="card reveal article-link" href="articles/localization-thailand.html">
+        <span class="article-tag">Localization</span>
+        <h3>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</h3>
+        <p>ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี ใบกำกับภาษี WHT และใบวางบิล</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
       <a class="card reveal article-link" href="articles/billing-note-billing-day.html">
         <span class="article-tag">Billing</span>
         <h3>ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</h3>
@@ -2118,8 +2128,14 @@
       </a>
       <a class="card reveal article-link" href="articles/bot-exchange-rate-api.html">
         <span class="article-tag">API / Integration</span>
-        <h3>อัตราแลกเปลี่ยนและวันหยุด ธปท. ช่วย BC อย่างไร</h3>
-        <p>ดูว่าอัตราแลกเปลี่ยนช่วยให้งานบัญชีสม่ำเสมอ และปฏิทินวันหยุดช่วยวางแผนการจัดส่ง การวางบิล และกระแสเงินสดได้อย่างไร</p>
+        <h3>รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</h3>
+        <p>รู้จัก BOT API สองชุดข้อมูล แต่ละบริการมีข้อมูลอะไร ต้องระวังเรื่องใด และนำไปต่อยอดกับ Business Central ได้อย่างไร</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/success-by-design.html">
+        <span class="article-tag">Success by Design</span>
+        <h3>Success by Design: กรอบที่ Microsoft กลั่นจากโปรเจกต์ Dynamics 365 เป็นพัน</h3>
+        <p>5 ช่วงของโปรเจกต์ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</p>
         <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
       </a>
     </div>
