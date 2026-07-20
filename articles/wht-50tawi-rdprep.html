@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ออก 50 ทวิ และไฟล์ RD Prep จาก Business Central โดยไม่ต้องคีย์ซ้ำ | JWIC Consulting</title>
+<meta name="description" content="แนวทางจัดการภาษีหัก ณ ที่จ่ายบน Business Central ให้ออกหนังสือรับรอง 50 ทวิ จัดทำ ภ.ง.ด.3/53 และ export ไฟล์เข้าโปรแกรม RD Prep ได้จากข้อมูลชุดเดียว ไม่ต้องคีย์ซ้ำใน Excel">
+<link rel="canonical" href="https://www.jwicconsulting.com/articles/wht-50tawi-rdprep.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/brand/jwic-icon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ออก 50 ทวิ และไฟล์ RD Prep จาก Business Central โดยไม่ต้องคีย์ซ้ำ">
+<meta property="og:description" content="แนวทางจัดการภาษีหัก ณ ที่จ่ายบน Business Central ให้ออก 50 ทวิ ภ.ง.ด. และไฟล์ RD Prep จากข้อมูลชุดเดียว">
+<meta property="og:url" content="https://www.jwicconsulting.com/articles/wht-50tawi-rdprep.html">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/jh-poster.png">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ออก 50 ทวิ และไฟล์ RD Prep จาก Business Central โดยไม่ต้องคีย์ซ้ำ",
+  "description": "แนวทางจัดการภาษีหัก ณ ที่จ่ายบน Business Central ให้ออก 50 ทวิ ภ.ง.ด. และไฟล์ RD Prep จากข้อมูลชุดเดียว",
+  "inLanguage": "th",
+  "mainEntityOfPage": "https://www.jwicconsulting.com/articles/wht-50tawi-rdprep.html",
+  "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "JWIC Consulting",
+    "logo": { "@type": "ImageObject", "url": "https://www.jwicconsulting.com/img/brand/jwic-icon.png" }
+  },
+  "datePublished": "2026-07-20"
+}
+</script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" role="img" aria-label="JWIC Consulting">
+        <defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#lg)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <span class="wordmark">JWIC <i>Consulting</i></span>
+    </a>
+    <a class="back" href="/#articles">← บทความทั้งหมด</a>
+  </div>
+</nav>
+
+<header class="article-head">
+  <div class="wrap">
+    <span class="tag">WHT</span>
+    <h1>ออก 50 ทวิ และไฟล์ RD Prep จาก BC โดยไม่ต้องคีย์ซ้ำ</h1>
+    <p class="lead">งานหัก ณ ที่จ่ายเป็นงานที่ข้อมูลชุดเดียวถูกคีย์ซ้ำ 3 รอบ — ครั้งแรกตอนจ่ายเงิน ครั้งที่สองตอนพิมพ์หนังสือรับรอง และครั้งที่สามตอนกรอกเข้าโปรแกรมของกรมสรรพากร ทั้งที่ทั้งสามอย่างมาจากรายการจ่ายเงินเดียวกัน</p>
+    <p class="meta">โดย Jirapat Wichayapong · ที่ปรึกษาและนักพัฒนา Business Central</p>
+  </div>
+</header>
+
+<div class="wrap">
+<article>
+
+  <h2>ทำไมงานนี้ถึงกินเวลาผิดสัดส่วน</h2>
+  <p>ระบบ ERP มาตรฐานสากลไม่ได้ออกแบบมาให้รองรับภาษีหัก ณ ที่จ่ายแบบไทย เพราะประเทศส่วนใหญ่ไม่มีข้อกำหนดเรื่อง<strong>หนังสือรับรองที่ผู้จ่ายต้องออกให้ผู้รับทันทีที่จ่ายเงิน</strong> ผลคือทีมบัญชีต้องหาทางออกเอง ซึ่งมักจบลงที่ Excel</p>
+  <p>ปัญหาที่ตามมาคือข้อมูลสามชุดแยกกันอยู่คนละที่ พอมีการแก้ไขรายการจ่ายย้อนหลัง หนังสือรับรองที่ออกไปแล้วกับไฟล์ที่เตรียมยื่นก็ไม่ถูกอัปเดตตาม กลายเป็นความเสี่ยงตอนถูกตรวจสอบ</p>
+
+  <h2>จุดตั้งต้นที่ถูกต้อง: หักตอนจ่ายเงิน</h2>
+  <p>หลักการทางภาษีคือ <strong>ความรับผิดในการหักภาษีเกิดเมื่อ "จ่ายเงิน" ไม่ใช่ตอนรับใบแจ้งหนี้</strong> ระบบจึงควรคำนวณและบันทึกภาษีหัก ณ ที่จ่าย ณ จังหวะที่บันทึกการจ่ายเงินจริง ไม่ใช่ตอนตั้งหนี้</p>
+  <p>ข้อดีของการยึดหลักนี้คือ</p>
+  <ul>
+    <li>ยอดภาษีที่ต้องนำส่งตรงกับเงินที่จ่ายออกไปจริงเสมอ</li>
+    <li>กรณีจ่ายบางส่วน ภาษีถูกหักตามสัดส่วนที่จ่าย ไม่ใช่ทั้งก้อน</li>
+    <li>ยอดเจ้าหนี้คงเหลือกับภาษีค้างนำส่งกระทบยอดกันได้</li>
+  </ul>
+
+  <div class="note">
+    <b>ข้อควรระวัง</b>
+    <p>ถ้าตั้งระบบให้หักภาษีตอนตั้งหนี้ เดือนที่ตั้งหนี้เยอะแต่ยังไม่จ่าย จะมียอดภาษีค้างนำส่งเกินความเป็นจริง และยอดในแบบ ภ.ง.ด. จะไม่ตรงกับเงินที่จ่ายออกจริง</p>
+  </div>
+
+  <h2>ตั้งค่าให้ครอบคลุมประเภทเงินได้</h2>
+  <p>สิ่งที่ต้องเตรียมคือผังประเภทเงินได้และอัตราภาษี ผูกกับคู่ค้าและประเภทค่าใช้จ่าย เพื่อให้ระบบเลือกอัตราให้เองโดยที่คนจ่ายเงินไม่ต้องจำ</p>
+  <table>
+    <tr><th>แบบยื่น</th><th>ใช้กับ</th></tr>
+    <tr><td>ภ.ง.ด.3</td><td>จ่ายให้บุคคลธรรมดา</td></tr>
+    <tr><td>ภ.ง.ด.53</td><td>จ่ายให้นิติบุคคล</td></tr>
+    <tr><td>ภ.ง.ด.2</td><td>เงินได้ประเภทลงทุน เช่น ดอกเบี้ย เงินปันผล</td></tr>
+    <tr><td>ภ.ง.ด.54</td><td>จ่ายไปต่างประเทศ</td></tr>
+  </table>
+  <p>จุดที่มักตั้งค่าไม่ครบคือ<strong>การแยกแบบยื่นตามสถานะของผู้รับเงิน</strong> ถ้าระบบไม่รู้ว่าคู่ค้ารายนี้เป็นบุคคลธรรมดาหรือนิติบุคคล สุดท้ายก็ต้องมาแยกด้วยมือตอนสิ้นเดือนอยู่ดี</p>
+
+  <h3>หนังสือรับรองหนึ่งใบ ต่อหนึ่งการจ่ายเงิน</h3>
+  <p>การจ่ายเงินหนึ่งครั้งอาจมีเงินได้หลายประเภทรวมอยู่ เช่น จ่ายค่าบริการพร้อมค่าขนส่งในใบเดียว หนังสือรับรอง 50 ทวิ ที่ถูกต้องต้อง<strong>แสดงเงินได้ทุกประเภทไว้ในใบเดียวกัน</strong> พร้อมยอดรวมภาษีที่หัก ไม่ใช่แยกออกเป็นหลายใบ ซึ่งจะทำให้ผู้รับเงินนำไปใช้เครดิตภาษียาก</p>
+
+  <div class="steps-box">
+    <h3>ลำดับงานที่ควรเป็น</h3>
+    <ol>
+      <li>บันทึกจ่ายเงิน → ระบบคำนวณภาษีหัก ณ ที่จ่ายตามประเภทเงินได้ที่ตั้งไว้</li>
+      <li>พิมพ์หนังสือรับรอง 50 ทวิ จากรายการจ่ายนั้นทันที (ข้อมูลชุดเดิม ไม่คีย์ใหม่)</li>
+      <li>สิ้นเดือน ดึงรายการทั้งงวดออกมาเป็นแบบ ภ.ง.ด. ตามประเภทผู้รับ</li>
+      <li>Export เป็น text file เข้าโปรแกรมของกรมสรรพากรเพื่อยื่นออนไลน์</li>
+    </ol>
+  </div>
+
+  <h2>ส่วนที่ประหยัดเวลาได้มากที่สุด: ไฟล์ยื่นออนไลน์</h2>
+  <p>กรมสรรพากรรับข้อมูลยื่นออนไลน์ผ่านไฟล์ที่มีรูปแบบเฉพาะ ถ้าระบบสร้างไฟล์นี้ให้ได้โดยตรง ขั้นตอนคีย์ข้อมูลเข้าโปรแกรมเตรียมยื่นจะหายไปทั้งขั้น</p>
+  <p>สิ่งที่ต้องระวังคือรูปแบบไฟล์มีข้อกำหนดเรื่องความยาวและลำดับของแต่ละช่องข้อมูล รวมถึงเลขประจำตัวผู้เสียภาษีที่ต้องครบถ้วนถูกต้องทุกราย — ข้อมูลคู่ค้าที่ไม่สมบูรณ์คือสาเหตุอันดับหนึ่งที่ไฟล์ถูกปฏิเสธ ดังนั้นการทำความสะอาดข้อมูลคู่ค้าตั้งแต่ต้นจึงสำคัญกว่าที่คิด</p>
+
+  <h2>JWIC Localization ช่วยตรงไหน</h2>
+  <p>ส่วนเสริมที่เราพัฒนาครอบคลุมงานหัก ณ ที่จ่ายทั้งสาย ตั้งแต่</p>
+  <ul>
+    <li>ออก<strong>หนังสือรับรอง 50 ทวิ ที่รวมเงินได้หลายประเภทไว้ในใบเดียว</strong></li>
+    <li>จัดทำแบบ <strong>ภ.ง.ด.2, 3, 53 และ 54</strong> ตามรายการจ่ายจริงในงวด</li>
+    <li>สร้าง <strong>text file สำหรับนำเข้าโปรแกรมของกรมสรรพากร</strong> เพื่อยื่นออนไลน์</li>
+  </ul>
+  <p>ทั้งหมดอ้างอิงจากรายการจ่ายเงินชุดเดียวกันที่อยู่ในระบบบัญชี จึงตรวจย้อนกลับได้ว่าตัวเลขในแบบยื่นมาจากการจ่ายเงินรายการไหน</p>
+
+  <div class="note">
+    <b>สรุป</b>
+    <p>เป้าหมายไม่ใช่ทำให้พิมพ์ 50 ทวิ ได้ แต่คือทำให้ข้อมูลถูกคีย์ครั้งเดียวแล้วใช้ได้ทั้งหนังสือรับรอง แบบยื่น และไฟล์นำส่ง</p>
+  </div>
+
+  <div class="article-cta">
+    <h2>ยังต้องคีย์ 50 ทวิ ใน Excel อยู่ไหม?</h2>
+    <p>นัดคุยเพื่อดูขั้นตอนงานปัจจุบันของทีมบัญชี และดู Demo ระบบเบื้องต้นได้โดยไม่มีค่าใช้จ่าย</p>
+    <a href="/#contact">ปรึกษาเรื่องระบบภาษี →</a>
+  </div>
+
+  <div class="more">
+    <h2>บทความอื่น</h2>
+    <ul>
+      <li><a href="/articles/billing-note-billing-day.html">ใบวางบิลและวันวางบิล: เรื่องที่ ERP สากลไม่มีให้</a></li>
+      <li><a href="/articles/bot-exchange-rate-api.html">ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า BC อัตโนมัติ</a></li>
+    </ul>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
+    <div><a href="/">jwicconsulting.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

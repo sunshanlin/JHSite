@@ -1144,6 +1144,11 @@
     .topnav .links a::after, .slider-dots button { transition: none; }
   }
 
+  /* การ์ดบทความคลิกได้ */
+  .article-link { display: block; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .article-link:hover { transform: translateY(-4px); border-color: rgba(166,58,86,.4); box-shadow: var(--shadow); }
+  .article-link .read-more { display: inline-block; margin-top: 12px; color: #8E2C46; font-weight: 700; font-size: .92rem; }
+
   /* แถบสีขอบบน + พื้น tint ไล่ตามสีเฟส — ต้องอยู่ท้ายสุดเพื่อชนะกฎ .step อื่น */
   .steps .step {
     border-top-width: 3px; border-top-color: var(--phase, var(--line));
@@ -2018,21 +2023,24 @@
     <h2>บทความ</h2>
     <p class="sub">เกร็ดการตั้งค่าและแนวทางทำ Thai Localization บน Business Central จากงานจริง</p>
     <div class="grid">
-      <article class="card reveal">
-        <span class="article-tag">VAT</span>
-        <h3>ตั้งค่า Unrealized VAT ให้ยอด ภ.พ.30 ตรงสมุดบัญชี</h3>
-        <p>ภาษีซื้อ/ขายที่ยังไม่ถึงกำหนด ต้องแยกพักบัญชียังไงให้กระทบยอดกับ GL ได้โดยไม่ต้องปรับมือทุกงวด</p>
-      </article>
-      <article class="card reveal">
+      <a class="card reveal article-link" href="articles/billing-note-billing-day.html">
+        <span class="article-tag">Billing</span>
+        <h3>ใบวางบิลและวันวางบิล: เรื่องที่ ERP สากลไม่มีให้</h3>
+        <p>ทำไมวันวางบิลถึงกำหนดกระแสเงินสดมากกว่าวันที่ในใบแจ้งหนี้ และจะให้ระบบคำนวณรอบวางบิลของลูกค้าแต่ละรายได้อย่างไร</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/wht-50tawi-rdprep.html">
         <span class="article-tag">WHT</span>
         <h3>ออก 50 ทวิ และไฟล์ RD Prep จาก BC โดยไม่ต้องคีย์ซ้ำ</h3>
         <p>ตั้งค่า WHT ให้ระบบสร้างหนังสือรับรอง ภ.ง.ด. และ export text file เข้าโปรแกรมกรมสรรพากรได้ในคลิกเดียว</p>
-      </article>
-      <article class="card reveal">
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/bot-exchange-rate-api.html">
         <span class="article-tag">API / Integration</span>
         <h3>ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า BC อัตโนมัติ</h3>
         <p>เชื่อม API ธนาคารแห่งประเทศไทย ให้ BC อัปเดตเรตและปฏิทินวันหยุดเองทุกวัน ไม่ต้องกรอกเอง</p>
-      </article>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
     </div>
   </div>
 </section>

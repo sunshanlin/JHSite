@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า Business Central อัตโนมัติ | JWIC Consulting</title>
+<meta name="description" content="แนวทางเชื่อม API ธนาคารแห่งประเทศไทย ให้ Business Central อัปเดตอัตราแลกเปลี่ยนอ้างอิงและปฏิทินวันหยุดธนาคารเองทุกวัน ลดงานคีย์เรตและความคลาดเคลื่อนตอนปิดงวด">
+<link rel="canonical" href="https://www.jwicconsulting.com/articles/bot-exchange-rate-api.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/brand/jwic-icon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า Business Central อัตโนมัติ">
+<meta property="og:description" content="เชื่อม API ธนาคารแห่งประเทศไทย ให้ BC อัปเดตเรตและปฏิทินวันหยุดเองทุกวัน">
+<meta property="og:url" content="https://www.jwicconsulting.com/articles/bot-exchange-rate-api.html">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/jh-poster.png">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า Business Central อัตโนมัติ",
+  "description": "แนวทางเชื่อม API ธนาคารแห่งประเทศไทยให้ BC อัปเดตเรตและปฏิทินวันหยุดเองทุกวัน",
+  "inLanguage": "th",
+  "mainEntityOfPage": "https://www.jwicconsulting.com/articles/bot-exchange-rate-api.html",
+  "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "JWIC Consulting",
+    "logo": { "@type": "ImageObject", "url": "https://www.jwicconsulting.com/img/brand/jwic-icon.png" }
+  },
+  "datePublished": "2026-07-20"
+}
+</script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" role="img" aria-label="JWIC Consulting">
+        <defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#lg)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <span class="wordmark">JWIC <i>Consulting</i></span>
+    </a>
+    <a class="back" href="/#articles">← บทความทั้งหมด</a>
+  </div>
+</nav>
+
+<header class="article-head">
+  <div class="wrap">
+    <span class="tag">API / Integration</span>
+    <h1>ดึงอัตราแลกเปลี่ยน–วันหยุดธนาคาร ธปท. เข้า BC อัตโนมัติ</h1>
+    <p class="lead">การคีย์อัตราแลกเปลี่ยนเข้าระบบทุกเช้าเป็นงานที่ใช้เวลาไม่นาน แต่พลาดแล้วแก้ยาก เพราะเอกสารที่ออกไปด้วยเรตผิดจะกระทบทั้งยอดลูกหนี้ ต้นทุน และกำไรขาดทุนจากอัตราแลกเปลี่ยนตอนปิดงวด</p>
+    <p class="meta">โดย Jirapat Wichayapong · ที่ปรึกษาและนักพัฒนา Business Central</p>
+  </div>
+</header>
+
+<div class="wrap">
+<article>
+
+  <h2>ทำไมเรตถึงสำคัญกว่าที่คิด</h2>
+  <p>ในธุรกิจที่มีรายการเป็นเงินตราต่างประเทศ อัตราแลกเปลี่ยนถูกใช้อย่างน้อย 3 จุด และแต่ละจุดใช้คนละวัน</p>
+  <ul>
+    <li><strong>วันที่เกิดรายการ</strong> — ตอนบันทึกซื้อหรือขาย ใช้แปลงมูลค่าเข้าสมุดบัญชี</li>
+    <li><strong>วันที่ชำระเงิน</strong> — ผลต่างกับวันที่เกิดรายการคือกำไร/ขาดทุนจากอัตราแลกเปลี่ยนที่เกิดขึ้นจริง</li>
+    <li><strong>วันสิ้นงวด</strong> — ใช้ตีราคายอดคงเหลือของลูกหนี้/เจ้าหนี้สกุลต่างประเทศใหม่</li>
+  </ul>
+  <p>ถ้าเรตของวันใดวันหนึ่งหายไปหรือคีย์ผิด ระบบจะไปหยิบเรตของวันก่อนหน้ามาใช้แทนโดยไม่แจ้งเตือน ซึ่งเป็นความคลาดเคลื่อนที่มักถูกพบตอนผู้สอบบัญชีขอกระดาษทำการ ไม่ใช่ตอนที่มันเกิด</p>
+
+  <div class="note">
+    <b>จุดเสี่ยง</b>
+    <p>ระบบส่วนใหญ่ไม่เตือนเมื่อไม่มีเรตของวันนั้น แต่จะเงียบ ๆ ใช้เรตล่าสุดที่มีอยู่ ทำให้ความผิดพลาดถูกกลบไปกับรายการปกติ</p>
+  </div>
+
+  <h2>ใช้เรตอ้างอิงจากแหล่งเดียว</h2>
+  <p>ธนาคารแห่งประเทศไทยเผยแพร่อัตราแลกเปลี่ยนอ้างอิงรายวันในรูปแบบที่ระบบดึงไปใช้ได้โดยตรง ข้อดีของการยึดแหล่งนี้คือ</p>
+  <ul>
+    <li><strong>ตรวจสอบย้อนหลังได้</strong> — เรตที่ใช้เป็นตัวเลขสาธารณะ ไม่ใช่ตัวเลขที่ใครคนใดคนหนึ่งคีย์เข้ามา</li>
+    <li><strong>สม่ำเสมอทั้งองค์กร</strong> — ทุกฝ่ายใช้ชุดเดียวกัน ไม่มีปัญหาจัดซื้อใช้เรตหนึ่ง บัญชีใช้อีกเรตหนึ่ง</li>
+    <li><strong>ลดข้อโต้แย้งตอนตรวจสอบ</strong> — อธิบายที่มาของตัวเลขได้ทันที</li>
+  </ul>
+  <p>สิ่งที่ต้องตกลงให้ชัดตั้งแต่ต้นคือ<strong>จะใช้เรตประเภทไหนกับธุรกรรมประเภทใด</strong> เพราะเรตซื้อ เรตขาย และเรตถัวเฉลี่ยให้ผลต่างกัน และควรสอดคล้องกับแนวปฏิบัติทางบัญชีและภาษีที่กิจการใช้อยู่</p>
+
+  <h2>วันหยุดธนาคาร: ตัวแปรที่มักถูกลืม</h2>
+  <p>ปฏิทินวันหยุดธนาคารไม่ได้มีผลแค่กับเรต แต่มีผลกับ<strong>การคำนวณวันครบกำหนดชำระและรอบวางบิล</strong>ด้วย</p>
+  <ul>
+    <li>วันครบกำหนดที่ตรงกับวันหยุด ต้องเลื่อนเป็นวันทำการถัดไป</li>
+    <li>รอบวางบิลของลูกค้าที่กำหนดเป็น "ทุกวันที่ 25" ถ้าตรงวันหยุดยาว ต้องรู้ล่วงหน้าว่าจะวางบิลวันไหนแทน</li>
+    <li>การวางแผนกระแสเงินสดคลาดเคลื่อน ถ้าระบบนับวันหยุดยาวเป็นวันทำการ</li>
+  </ul>
+  <p>วันหยุดธนาคารไทยมีทั้งวันหยุดที่กำหนดล่วงหน้าทั้งปีและวันหยุดพิเศษที่ประกาศระหว่างปี การอัปเดตด้วยมือปีละครั้งจึงไม่พอ</p>
+
+  <div class="steps-box">
+    <h3>สิ่งที่ควรตั้งให้ระบบทำเอง</h3>
+    <ol>
+      <li>ดึงอัตราแลกเปลี่ยนอ้างอิงเข้าระบบทุกวันทำการ โดยไม่ต้องมีคนกด</li>
+      <li>บันทึกวันที่ของเรตให้ตรงกับวันที่ประกาศ เพื่อให้ย้อนดูได้ว่าวันนั้นใช้เรตเท่าไร</li>
+      <li>อัปเดตปฏิทินวันหยุดธนาคาร และให้การคำนวณวันครบกำหนดอ้างอิงปฏิทินนั้น</li>
+      <li>แจ้งเตือนเมื่อดึงข้อมูลไม่สำเร็จ — เงียบแล้วใช้เรตเก่าคือสิ่งที่ต้องหลีกเลี่ยง</li>
+    </ol>
+  </div>
+
+  <h2>ข้อควรพิจารณาก่อนเชื่อมต่อ</h2>
+  <p>การเชื่อมต่อข้อมูลภายนอกเข้าระบบบัญชีมีเรื่องที่ควรคิดล่วงหน้า</p>
+  <ul>
+    <li><strong>ทำอย่างไรเมื่อดึงไม่สำเร็จ</strong> — ต้องมีทั้งการแจ้งเตือนและวิธีดึงย้อนหลังเมื่อระบบกลับมาปกติ</li>
+    <li><strong>ไม่ทับข้อมูลที่แก้ไขด้วยมือ</strong> — บางกรณีบัญชีจำเป็นต้องระบุเรตเฉพาะรายการ ระบบไม่ควรเขียนทับ</li>
+    <li><strong>เก็บประวัติ</strong> — ควรรู้ว่าเรตแต่ละวันถูกดึงเข้ามาเมื่อไร เพื่อใช้อธิบายตอนตรวจสอบ</li>
+  </ul>
+
+  <h2>JWIC Localization ช่วยตรงไหน</h2>
+  <p>ส่วนเสริมที่เราพัฒนารองรับการ<strong>ดึงอัตราแลกเปลี่ยนและวันหยุดธนาคารจากธนาคารแห่งประเทศไทยเข้าระบบอัตโนมัติ</strong> โดยข้อมูลถูกบันทึกพร้อมวันที่อ้างอิง ตรวจย้อนกลับได้ว่าเอกสารแต่ละใบใช้เรตของวันไหน</p>
+  <p>นอกจากนี้ยังเชื่อมต่อระบบภายนอกอื่น ๆ ตามความต้องการขององค์กรได้ เช่น ดึงข้อมูลจากระบบที่ใช้อยู่เดิม หรือส่งข้อมูลออกไปยังระบบปลายทาง</p>
+
+  <div class="note">
+    <b>สรุป</b>
+    <p>งานคีย์เรตรายวันเป็นงานเล็กที่กินเวลาสะสม และเป็นจุดที่ความผิดพลาดถูกค้นพบช้าที่สุด — เป็นงานที่คุ้มค่าที่จะให้ระบบทำแทนตั้งแต่แรก</p>
+  </div>
+
+  <div class="article-cta">
+    <h2>มีรายการเงินตราต่างประเทศแล้วยังคีย์เรตเองอยู่ไหม?</h2>
+    <p>นัดคุยเพื่อประเมินว่าระบบปัจจุบันเชื่อมต่ออะไรได้บ้าง และดู Demo ระบบเบื้องต้นได้โดยไม่มีค่าใช้จ่าย</p>
+    <a href="/#contact">ปรึกษาเรื่องการเชื่อมต่อระบบ →</a>
+  </div>
+
+  <div class="more">
+    <h2>บทความอื่น</h2>
+    <ul>
+      <li><a href="/articles/billing-note-billing-day.html">ใบวางบิลและวันวางบิล: เรื่องที่ ERP สากลไม่มีให้</a></li>
+      <li><a href="/articles/wht-50tawi-rdprep.html">ออก 50 ทวิ และไฟล์ RD Prep จาก BC โดยไม่ต้องคีย์ซ้ำ</a></li>
+    </ul>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
+    <div><a href="/">jwicconsulting.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
