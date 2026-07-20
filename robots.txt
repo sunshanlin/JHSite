@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jwicconsulting.com/sitemap.xml
+Sitemap: https://www.jwicconsulting.com/sitemap.xml
