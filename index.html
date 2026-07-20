@@ -1168,8 +1168,36 @@
   .expertise-list h4 { font-size: 1.12rem; color: var(--ink); margin-bottom: 5px; }
   .expertise-list p { color: var(--muted); font-size: .96rem; line-height: 1.7; }
   @media (max-width: 700px) {
-    .expertise-list li { grid-template-columns: 1fr; gap: 12px; padding-left: 0; padding-top: 40px; }
-    .expertise-list li::before { top: 14px; }
+    #why-us .expertise-title {
+      margin-top: 44px; margin-bottom: 14px;
+      font-size: 1.18rem; line-height: 1.45;
+    }
+    .expertise-list li {
+      grid-template-columns: 30px 44px minmax(0, 1fr);
+      gap: 10px; align-items: center;
+      padding: 20px 0;
+    }
+    .expertise-list li::before {
+      position: static; grid-column: 1; grid-row: 1;
+      align-self: center;
+      font-size: 1.05rem; line-height: 1;
+    }
+    .expertise-list .ic {
+      grid-column: 2; grid-row: 1;
+      width: 44px; height: 44px; border-radius: 12px;
+    }
+    .expertise-list .ic svg { width: 21px; height: 21px; }
+    .expertise-list li > div { display: contents; }
+    .expertise-list h4 {
+      grid-column: 3; grid-row: 1;
+      align-self: center; margin: 0;
+      font-size: 1rem; line-height: 1.4;
+    }
+    .expertise-list p {
+      grid-column: 1 / -1; grid-row: 2;
+      margin: 2px 0 0;
+      font-size: .9rem; line-height: 1.65;
+    }
   }
 
   /* ── บทความ: การ์ดแนว editorial มีแถบสีหัวการ์ด ── */
