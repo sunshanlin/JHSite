@@ -6,85 +6,62 @@
 <title>JWIC Consulting — LinkedIn Banner (1584×396)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* LinkedIn banner 1584×396 — โทนเดียวกับเว็บ (teal + ไวน์แดง + plum) */
-  :root {
-    --teal-1: #0D5257; --teal-3: #35AF9E; --teal-4: #7CCBC4;
-    --wine-2: #A63A56; --rose: #E08CA2; --plum: #CCA4CD;
-    --h1: #072d30; --h3: #10535f;
-  }
+  /* LinkedIn banner 1584×396 — minimal: โลโก้ + tagline + เว็บ */
+  :root { --plum: #CCA4CD; --teal-4: #7CCBC4; --h1: #072d30; --h3: #10535f; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1584px; height: 396px; overflow: hidden; }
   body {
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+    font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
     color: #fff; position: relative;
     background:
-      radial-gradient(circle at 76% 18%, rgba(166,58,86,.22), transparent 34%),
-      radial-gradient(circle at 96% 88%, rgba(204,164,205,.18), transparent 40%),
-      radial-gradient(circle at 30% 100%, rgba(53,175,158,.14), transparent 45%),
-      linear-gradient(118deg, #061f22 0%, var(--h1) 34%, #0a3e41 66%, var(--h3) 100%);
+      radial-gradient(circle at 74% 22%, rgba(166,58,86,.16), transparent 38%),
+      radial-gradient(circle at 95% 92%, rgba(204,164,205,.13), transparent 42%),
+      linear-gradient(118deg, #061f22 0%, var(--h1) 38%, #0a3e41 72%, var(--h3) 100%);
   }
   /* ตารางเส้นจาง ๆ แบบ hero ของเว็บ */
   body::before {
     content: ""; position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-    background-size: 58px 58px;
-    -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,.6), transparent 62%);
-    mask-image: linear-gradient(105deg, rgba(0,0,0,.6), transparent 62%);
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,.55), transparent 60%);
+    mask-image: linear-gradient(105deg, rgba(0,0,0,.55), transparent 60%);
   }
-  /* เส้นโค้งตกแต่งขวาสุด */
+  /* วงแหวนบางตกแต่งขวาสุด */
   body::after {
-    content: ""; position: absolute; right: -120px; top: -140px;
-    width: 620px; height: 620px; border-radius: 50%;
-    border: 1px solid rgba(124,203,196,.16);
-    box-shadow: 0 0 0 60px rgba(124,203,196,.045);
+    content: ""; position: absolute; right: -170px; top: -190px;
+    width: 700px; height: 700px; border-radius: 50%;
+    border: 1px solid rgba(124,203,196,.13);
+    box-shadow: 0 0 0 70px rgba(124,203,196,.035);
   }
 
-  .content {
-    position: absolute; z-index: 2; left: 430px; right: 74px; top: 50%;
-    transform: translateY(-50%);
+  .stack {
+    position: absolute; z-index: 2; left: 452px; top: 50%; transform: translateY(-50%);
   }
-  .brand-row { display: flex; align-items: center; gap: 13px; margin-bottom: 20px; }
-  .mark { width: 44px; height: 44px; flex-shrink: 0; filter: drop-shadow(0 8px 16px rgba(0,0,0,.4)); }
-  .brand-name { font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
-  .brand-name i { font-style: normal; font-weight: 600; color: var(--teal-4); }
+  .brand-row { display: flex; align-items: center; gap: 20px; }
+  .mark { width: 78px; height: 78px; flex-shrink: 0; filter: drop-shadow(0 12px 24px rgba(0,0,0,.45)); }
+  .brand-name { font-size: 52px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .brand-name i { font-style: normal; font-weight: 500; color: var(--teal-4); }
 
-  h1 { font-size: 41px; line-height: 1.22; letter-spacing: -.025em; font-weight: 800; }
-  h1 .hl {
-    background: linear-gradient(100deg, var(--rose) 0%, #D97A96 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .sub { margin-top: 13px; font-size: 16.5px; font-weight: 500; color: #cfe6e4; line-height: 1.6; }
-
-  .chips { display: flex; gap: 9px; margin-top: 22px; flex-wrap: wrap; }
-  .chips span {
-    padding: 7px 15px; border-radius: 999px; font-size: 13px; font-weight: 700;
-    background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.17);
-    color: #e6f4f2;
-  }
+  .rule { width: 74px; height: 3px; border-radius: 2px; margin: 26px 0 20px 98px;
+          background: linear-gradient(90deg, #A63A56, #E08CA2); }
 
   .tagline {
-    position: absolute; z-index: 2; left: 430px; bottom: 34px;
-    font-size: 12.5px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase;
-    color: var(--plum);
+    margin-left: 98px; font-size: 21px; font-weight: 600;
+    letter-spacing: .1em; color: var(--plum);
   }
   .site {
-    position: absolute; z-index: 2; right: 74px; bottom: 30px;
-    display: flex; align-items: center; gap: 9px;
-    font-size: 15px; font-weight: 800; color: #fff;
-    padding: 10px 20px; border-radius: 11px;
-    background: linear-gradient(135deg, var(--wine-2), #7D2440);
-    box-shadow: 0 14px 30px -14px rgba(166,58,86,.85);
+    position: absolute; z-index: 2; right: 76px; bottom: 40px;
+    font-size: 16px; font-weight: 700; letter-spacing: .04em; color: #b9d8d5;
   }
-  .site svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
 </style>
 </head>
 <body>
 
-<div class="content">
+<div class="stack">
   <div class="brand-row">
     <svg class="mark" viewBox="0 0 64 64" aria-label="JWIC Consulting">
       <defs><clipPath id="bl"><rect width="64" height="64" rx="10"/></clipPath></defs>
@@ -97,25 +74,11 @@
     </svg>
     <span class="brand-name">JWIC <i>Consulting</i></span>
   </div>
-
-  <h1>Microsoft Dynamics 365 Business Central<br><span class="hl">พร้อม Thai Localization ครบวงจร</span></h1>
-  <p class="sub">วางระบบ ERP สำหรับธุรกิจไทย — ภาษี เอกสาร และงานบัญชีที่ใช้จริงทุกวัน</p>
-
-  <div class="chips">
-    <span>VAT / ภ.พ.30</span>
-    <span>WHT 50 ทวิ</span>
-    <span>ระบบวางบิล</span>
-    <span>เอกสารไทย 20+ แบบ</span>
-    <span>AL Development</span>
-  </div>
+  <div class="rule"></div>
+  <div class="tagline">Honest Advice, Practical Solution</div>
 </div>
 
-<div class="tagline">Honest Advice, Practical Solution</div>
-
-<div class="site">
-  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-  www.jwicconsulting.com
-</div>
+<div class="site">www.jwicconsulting.com</div>
 
 </body>
 </html>
