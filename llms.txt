@@ -18,7 +18,7 @@ Key facts:
 - [ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน](https://www.jwicconsulting.com/articles/billing-note-billing-day.html)
 - [ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก Business Central โดยไม่คีย์ซ้ำ](https://www.jwicconsulting.com/articles/wht-50tawi-rdprep.html)
 - [บริการข้อมูลจากธนาคารแห่งประเทศไทย: อัตราแลกเปลี่ยนและวันหยุดธนาคาร](https://www.jwicconsulting.com/articles/bot-exchange-rate-api.html)
-- [Success by Design: กรอบที่ Microsoft กลั่นจากโปรเจกต์ Dynamics 365](https://www.jwicconsulting.com/articles/success-by-design.html)
+- [Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365](https://www.jwicconsulting.com/articles/success-by-design.html)
 
 ## Contact
 
