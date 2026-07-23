@@ -615,9 +615,9 @@
   .skip-link:focus { transform: translateY(0); }
 
   .topnav {
-    background: rgba(7,45,48, .92); border-bottom: 1px solid rgba(255,255,255,.08);
+    /* ponytail: no backdrop-filter — เครื่อง GPU อ่อน blur ทุกเฟรมตอน scroll แลกกับพื้นทึบขึ้นนิดเดียว */
+    background: rgba(7,45,48, .97); border-bottom: 1px solid rgba(255,255,255,.08);
     box-shadow: 0 10px 30px -22px rgba(0,0,0,.85);
-    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
   }
   .topnav .wrap { min-height: 68px; padding-top: 8px; padding-bottom: 8px; gap: 14px; }
   .topnav .brand { flex-shrink: 0; }
@@ -976,8 +976,7 @@
   #about .sub { max-width: 850px; }
   #about .profile-panel {
     grid-template-columns: 210px minmax(0, 1fr); gap: 42px; padding: 40px;
-    border-radius: 24px; background: rgba(255,255,255,.065);
-    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-radius: 24px; background: rgba(255,255,255,.09);
   }
   #about .profile-photo-frame { width: 210px; height: 210px; }
   #about .profile-photo { transform: scale(1.42); }
