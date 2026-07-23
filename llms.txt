@@ -1,0 +1,28 @@
+# JWIC Consulting
+
+> Independent consultant and AL developer implementing Microsoft Dynamics 365 Business Central with Thai Localization for businesses in Thailand. End-to-end delivery: business process analysis, system setup, AL development, data migration, user training, and post-go-live support. Site: https://www.jwicconsulting.com/ (Thai/English).
+
+Key facts:
+- JWIC Localization is an extension package for Business Central covering Thai tax and documents: purchase–sales VAT reports and PP30 (ภ.พ.30) with head office / branch support including separate branch filing, withholding tax with 50 Bis (50 ทวิ) certificates, PND (ภ.ง.ด.) 2/3/53/54 filings, RD Prep import files, billing notes (ใบวางบิล) with billing-day calendar, Thai-format fixed asset register, stock cards, and a complete set of Thai-language document forms (quotations, tax invoices, receipts, credit–debit notes).
+- Automatic exchange rates and bank holidays from the Bank of Thailand (BOT) API.
+- Delivery follows Microsoft's Success by Design framework (Discover, Initiate, Implement, Prepare, Operate).
+- Consultant: Jirapat Wichayapong (Sun) — Business Central Functional Consultant and AL Developer, accounting degree, Microsoft-certified (Business Central, Finance, Supply Chain Management).
+
+## Pages
+
+- [Home](https://www.jwicconsulting.com/): services, JWIC Localization features, sample Thai reports and documents, FAQ, contact
+
+## Articles (Thai)
+
+- [Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง](https://www.jwicconsulting.com/articles/localization-thailand.html)
+- [ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน](https://www.jwicconsulting.com/articles/billing-note-billing-day.html)
+- [ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก Business Central โดยไม่คีย์ซ้ำ](https://www.jwicconsulting.com/articles/wht-50tawi-rdprep.html)
+- [บริการข้อมูลจากธนาคารแห่งประเทศไทย: อัตราแลกเปลี่ยนและวันหยุดธนาคาร](https://www.jwicconsulting.com/articles/bot-exchange-rate-api.html)
+- [Success by Design: กรอบที่ Microsoft กลั่นจากโปรเจกต์ Dynamics 365](https://www.jwicconsulting.com/articles/success-by-design.html)
+
+## Contact
+
+- Email: jirapat.wi@outlook.com
+- Phone / LINE: +66 84-148-7480
+- Location: Bangna, Bangkok 10260, Thailand
+- Free initial consultation and demo.

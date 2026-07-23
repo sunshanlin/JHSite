@@ -101,6 +101,52 @@
       "publisher": {
         "@id": "https://www.jwicconsulting.com/#organization"
       }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.jwicconsulting.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Business Central รองรับภาษีและเอกสารไทยหรือไม่?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Business Central มาตรฐานยังไม่มีส่วนภาษีไทยโดยตรง เราจึงพัฒนา JWIC Localization เสริมให้ครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 (รองรับสำนักงานใหญ่และสาขา แยกยื่นรายสาขาได้) ภาษีหัก ณ ที่จ่ายพร้อมหนังสือรับรอง 50 ทวิ ไฟล์นำเข้า RD Prep ใบวางบิล และฟอร์มเอกสารภาษาไทยครบชุด"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "วางระบบ Business Central ใช้เวลานานแค่ไหน?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ขึ้นอยู่กับขอบเขตงานและความพร้อมของข้อมูล เราใช้แนวทาง Best Practice และ Fast Implementation เพื่อให้เริ่มใช้งานได้เร็ว นัดพูดคุยเพื่อประเมินขอบเขตและระยะเวลาได้โดยไม่มีค่าใช้จ่าย"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ค่าใช้จ่ายในการวางระบบประมาณเท่าไร?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "เสนอราคาตามขอบเขตงานจริงในงบที่เหมาะกับ SME ประเมินความต้องการและดู Demo ระบบเบื้องต้นได้ฟรีก่อนตัดสินใจ"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ย้ายข้อมูลจากระบบเดิมได้หรือไม่?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ได้ บริการครอบคลุมการย้ายข้อมูลจากระบบเดิม ทั้งข้อมูลหลัก เช่น ลูกค้า ผู้ขาย สินค้า ผังบัญชี และยอดยกมา พร้อมตรวจกระทบยอดก่อนเริ่มใช้งานจริง"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "หลัง Go-live มีบริการดูแลต่อหรือไม่?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "มี ช่วง Operate เราดูแลต่อเนื่องหลัง Go-live ทั้งตอบปัญหาการใช้งาน ปรับปรุงระบบเพิ่มเติม และรองรับการอัปเดตเวอร์ชันใหม่ของ Microsoft"
+          }
+        }
+      ]
     }
   ]
 }
@@ -1685,6 +1731,16 @@
     #services .step-icon svg { width: 17px; height: 17px; stroke-width: 1.9; }
   }
 
+  .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq-list details {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 2px 22px; box-shadow: var(--shadow);
+  }
+  .faq-list summary { cursor: pointer; font-weight: 700; color: var(--accent-dark); padding: 15px 0; }
+  .faq-list summary:hover { color: var(--brand-burgundy-dark); }
+  .faq-list details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .faq-list details > p { color: var(--muted); line-height: 1.8; padding-bottom: 16px; text-wrap: pretty; }
+
 </style>
 </head>
 <body>
@@ -2236,6 +2292,36 @@
     </div>
   </div>
 </section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="section-kicker">Frequently asked questions</p>
+    <h2>คำถามที่พบบ่อย</h2>
+    <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
+        <p>Business Central มาตรฐานยังไม่มีส่วนภาษีไทยโดยตรง เราจึงพัฒนา JWIC Localization เสริมให้ครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 (รองรับสำนักงานใหญ่และสาขา แยกยื่นรายสาขาได้) ภาษีหัก ณ ที่จ่ายพร้อมหนังสือรับรอง 50 ทวิ ไฟล์นำเข้า RD Prep ใบวางบิล และฟอร์มเอกสารภาษาไทยครบชุด</p>
+      </details>
+      <details class="reveal">
+        <summary>วางระบบ Business Central ใช้เวลานานแค่ไหน?</summary>
+        <p>ขึ้นอยู่กับขอบเขตงานและความพร้อมของข้อมูล เราใช้แนวทาง Best Practice และ Fast Implementation เพื่อให้เริ่มใช้งานได้เร็ว นัดพูดคุยเพื่อประเมินขอบเขตและระยะเวลาได้โดยไม่มีค่าใช้จ่าย</p>
+      </details>
+      <details class="reveal">
+        <summary>ค่าใช้จ่ายในการวางระบบประมาณเท่าไร?</summary>
+        <p>เสนอราคาตามขอบเขตงานจริงในงบที่เหมาะกับ SME ประเมินความต้องการและดู Demo ระบบเบื้องต้นได้ฟรีก่อนตัดสินใจ</p>
+      </details>
+      <details class="reveal">
+        <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
+        <p>ได้ บริการครอบคลุมการย้ายข้อมูลจากระบบเดิม ทั้งข้อมูลหลัก เช่น ลูกค้า ผู้ขาย สินค้า ผังบัญชี และยอดยกมา พร้อมตรวจกระทบยอดก่อนเริ่มใช้งานจริง</p>
+      </details>
+      <details class="reveal">
+        <summary>หลัง Go-live มีบริการดูแลต่อหรือไม่?</summary>
+        <p>มี ช่วง Operate เราดูแลต่อเนื่องหลัง Go-live ทั้งตอบปัญหาการใช้งาน ปรับปรุงระบบเพิ่มเติม และรองรับการอัปเดตเวอร์ชันใหม่ของ Microsoft</p>
+      </details>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -2699,6 +2785,18 @@
     ['label[for="cf-contact"]', 'Email or phone'],
     ['label[for="cf-msg"]', 'What would you like to discuss?'],
     ['.contact-form button[type="submit"]', 'Send message'],
+    ['#faq h2', 'Frequently Asked Questions'],
+    ['#faq > .wrap > .sub', 'Short answers to the questions clients ask us most.'],
+    ['#faq details:nth-of-type(1) summary', 'Does Business Central support Thai tax and documents?'],
+    ['#faq details:nth-of-type(1) > p', 'Standard Business Central does not cover Thai tax directly, so we built JWIC Localization to fill the gap — purchase–sales VAT reports and PP30 (head office and branches, including separate branch filing), withholding tax with 50 Bis certificates, RD Prep import files, billing notes, and a complete set of Thai document forms.'],
+    ['#faq details:nth-of-type(2) summary', 'How long does a Business Central implementation take?'],
+    ['#faq details:nth-of-type(2) > p', 'It depends on scope and data readiness. We follow Best Practice and Fast Implementation methods to go live quickly — book a free session to assess your scope and timeline.'],
+    ['#faq details:nth-of-type(3) summary', 'How much does an implementation cost?'],
+    ['#faq details:nth-of-type(3) > p', 'Quotes are based on the actual scope of work, at SME-friendly budgets. Requirement assessment and an initial demo are free, before you decide.'],
+    ['#faq details:nth-of-type(4) summary', 'Can you migrate data from our current system?'],
+    ['#faq details:nth-of-type(4) > p', 'Yes — the service covers migration from legacy systems: master data such as customers, vendors, items, and chart of accounts, plus opening balances, reconciled before go-live.'],
+    ['#faq details:nth-of-type(5) summary', 'Is there support after go-live?'],
+    ['#faq details:nth-of-type(5) > p', 'Yes — in the Operate phase we provide continuous care after go-live: user support, further improvements, and keeping up with new Microsoft releases.'],
     ['.cookie-title', 'We value your privacy', 'เราให้ความสำคัญกับความเป็นส่วนตัวของคุณ'],
     ['#cookie-bar p', 'We use optional analytics cookies to understand how visitors interact with our website, measure performance, and improve our services. Select “Accept All” to allow Google Analytics cookies, or “Reject All” to continue without analytics tracking.', 'เราใช้คุกกี้วิเคราะห์ที่ไม่จำเป็นเพื่อทำความเข้าใจการใช้งานเว็บไซต์ วัดประสิทธิภาพ และปรับปรุงบริการ เลือก “ยอมรับทั้งหมด” เพื่ออนุญาต Google Analytics หรือ “ปฏิเสธทั้งหมด” เพื่อใช้งานต่อโดยไม่มีการติดตามเพื่อการวิเคราะห์'],
     ['#cookie-accept', 'Accept All', 'ยอมรับทั้งหมด'],
