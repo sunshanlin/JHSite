@@ -1048,7 +1048,7 @@
   }
   .credential-card-body {
     display: grid; grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: "top top" "title link" "role link" "date link";
+    grid-template-areas: "top top" "title link" "role link";
     min-width: 0; padding: 12px 14px; align-content: center; column-gap: 12px;
   }
   .credential-card-top {
@@ -1065,7 +1065,6 @@
   .credential-status { color: #597574; font-size: .6rem; font-weight: 700; text-align: right; }
   .credential-card h4 { grid-area: title; margin: 0 0 2px; color: var(--ink); font-size: .86rem; line-height: 1.3; }
   .credential-role { grid-area: role; margin: 0 0 3px; color: var(--brand-teal); font-size: .7rem; font-weight: 700; line-height: 1.35; }
-  .credential-date { grid-area: date; margin: 0; color: #597574; font-size: .63rem; line-height: 1.4; }
   .credential-card-link {
     grid-area: link; display: inline-flex; align-items: center; align-self: center; gap: 4px;
     color: var(--brand-teal); font-size: .65rem; font-weight: 800; white-space: nowrap;
@@ -1223,7 +1222,6 @@
     .credential-preview { border-right: 1px solid #dbe7e6; border-bottom: 0; }
     .credential-card-body { padding: 10px 11px; column-gap: 7px; }
     .credential-status { font-size: .56rem; }
-    .credential-date { display: none; }
     .doc-card { width: 100%; padding: 22px 18px 18px; }
     .doc-mini { width: 170px; padding: 10px 12px; }
     .doc-mini.vat { left: -8px; }
@@ -2348,6 +2346,10 @@
             <img src="img/credentials/microsoft-certified-associate.svg" alt="Microsoft Certified Associate badge" width="300" height="300">
             <figcaption>Associate</figcaption>
           </figure>
+          <figure class="credential-badge">
+            <img src="img/credentials/ai-business-professional.svg" alt="Microsoft Certified AI Business Professional badge" width="150" height="150">
+            <figcaption>AI Business Professional</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -2367,11 +2369,9 @@
           <div class="credential-card-body">
             <div class="credential-card-top">
               <span class="credential-level credential-level--expert">Expert</span>
-              <span class="credential-status">Valid until Apr 29, 2027</span>
             </div>
             <h4>Dynamics 365 Supply Chain Management</h4>
             <p class="credential-role">Functional Consultant Expert</p>
-            <p class="credential-date">Earned April 28, 2026</p>
             <span class="credential-card-link">PDF <span aria-hidden="true">↗</span></span>
           </div>
         </a>
@@ -2382,11 +2382,9 @@
           <div class="credential-card-body">
             <div class="credential-card-top">
               <span class="credential-level">Associate</span>
-              <span class="credential-status">Valid until May 4, 2027</span>
             </div>
             <h4>Dynamics 365 Business Central</h4>
             <p class="credential-role">Functional Consultant Associate</p>
-            <p class="credential-date">Earned May 3, 2026</p>
             <span class="credential-card-link">PDF <span aria-hidden="true">↗</span></span>
           </div>
         </a>
@@ -2397,11 +2395,9 @@
           <div class="credential-card-body">
             <div class="credential-card-top">
               <span class="credential-level">Associate</span>
-              <span class="credential-status">Valid until Jun 21, 2027</span>
             </div>
             <h4>Dynamics 365 Finance</h4>
             <p class="credential-role">Functional Consultant Associate</p>
-            <p class="credential-date">Earned June 20, 2022</p>
             <span class="credential-card-link">PDF <span aria-hidden="true">↗</span></span>
           </div>
         </a>
@@ -2412,11 +2408,9 @@
           <div class="credential-card-body">
             <div class="credential-card-top">
               <span class="credential-level">Associate</span>
-              <span class="credential-status">Valid until Apr 29, 2027</span>
             </div>
             <h4>Dynamics 365 Supply Chain Management</h4>
             <p class="credential-role">Functional Consultant Associate</p>
-            <p class="credential-date">Earned April 28, 2026</p>
             <span class="credential-card-link">PDF <span aria-hidden="true">↗</span></span>
           </div>
         </a>
@@ -2430,7 +2424,6 @@
               <span class="credential-status">Microsoft Certified</span>
             </div>
             <h4>AI Business Professional</h4>
-            <p class="credential-date">Earned April 27, 2026</p>
             <span class="credential-card-link">PDF <span aria-hidden="true">↗</span></span>
           </div>
         </a>
