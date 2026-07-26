@@ -1018,7 +1018,10 @@
   .credential-gallery-head > p {
     margin: 0; color: #cfe7e8; font-size: .76rem; line-height: 1.45; text-align: right;
   }
-  .credential-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .credential-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr; gap: 10px;
+  }
   .credential-card {
     display: grid; grid-template-columns: 124px minmax(0, 1fr);
     min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.34); border-radius: 12px;
@@ -1031,8 +1034,9 @@
     box-shadow: 0 24px 44px -28px rgba(0,0,0,.78);
   }
   .credential-card:focus-visible { outline: 3px solid var(--brand-mint); outline-offset: 3px; }
-  .credential-card--featured {
-    grid-column: 1 / -1; grid-template-columns: 164px minmax(0, 1fr);
+  .credential-card--featured { grid-template-columns: 124px minmax(0, 1fr); }
+  .credential-card:last-child {
+    grid-column: 1 / -1; width: calc(50% - 5px); justify-self: center;
   }
   .credential-preview {
     display: flex; min-height: 0; padding: 6px; align-items: center;
@@ -1047,7 +1051,6 @@
     grid-template-areas: "top top" "title link" "role link" "date link";
     min-width: 0; padding: 12px 14px; align-content: center; column-gap: 12px;
   }
-  .credential-card--featured .credential-card-body { padding: 12px 14px; }
   .credential-card-top {
     grid-area: top; display: flex; width: 100%; align-items: center;
     justify-content: space-between; gap: 8px; margin-bottom: 6px;
@@ -1167,7 +1170,8 @@
     .service-highlight .poster { justify-self: start; }
     .about-details { grid-template-columns: 1fr; }
     .credential-grid { grid-template-columns: 1fr; }
-    .credential-card--featured { grid-column: auto; grid-template-columns: 150px minmax(0, 1fr); }
+    .credential-card--featured { grid-template-columns: 124px minmax(0, 1fr); }
+    .credential-card:last-child { grid-column: auto; width: auto; justify-self: stretch; }
   }
 
   @media (max-width: 720px) {
@@ -1217,7 +1221,7 @@
     .credential-gallery { padding: 14px; }
     .credential-card, .credential-card--featured { grid-template-columns: 92px minmax(0, 1fr); }
     .credential-preview { border-right: 1px solid #dbe7e6; border-bottom: 0; }
-    .credential-card-body, .credential-card--featured .credential-card-body { padding: 10px 11px; column-gap: 7px; }
+    .credential-card-body { padding: 10px 11px; column-gap: 7px; }
     .credential-status { font-size: .56rem; }
     .credential-date { display: none; }
     .doc-card { width: 100%; padding: 22px 18px 18px; }
