@@ -982,7 +982,22 @@
   .profile-bio { max-width: 770px; line-height: 1.82; }
   .about-details { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; }
   .about-block { padding: 28px 30px; border: 1px solid rgba(255,255,255,.15); border-radius: 18px; background: rgba(255,255,255,.055); }
-  .about-block .education-title, .about-block .cert-title { margin-top: 0; margin-bottom: 18px; }
+  .about-block .education-title, .about-block .cert-title {
+    margin-top: 0; margin-bottom: 18px; font-size: 1.35rem; line-height: 1.25;
+  }
+  .heading-with-icon { display: flex; align-items: center; gap: 10px; }
+  .heading-icon {
+    display: inline-flex; width: 34px; height: 34px; flex: 0 0 34px;
+    align-items: center; justify-content: center; border: 1px solid rgba(124,203,196,.36);
+    border-radius: 10px; color: var(--mint); background: rgba(124,203,196,.1);
+  }
+  .heading-icon svg {
+    width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .education-list { gap: 14px; }
+  .education-list strong { margin-bottom: 2px; font-size: 1rem; }
+  .education-list span { font-size: .96rem; line-height: 1.55; }
   .credentials-overview {
     display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 18px;
   }
@@ -992,10 +1007,10 @@
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .67rem;
     font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
   }
-  .credential-overview-copy { max-width: 420px; margin-bottom: 9px; color: #dce8e5; font-size: .82rem; line-height: 1.5; }
+  .credential-overview-copy { max-width: 420px; margin-bottom: 9px; color: #dce8e5; font-size: .9rem; line-height: 1.55; }
   .credential-overview-link {
     display: inline-flex; align-items: center; gap: 6px; color: #fff;
-    font-size: .75rem; font-weight: 700; text-decoration: none;
+    font-size: .82rem; font-weight: 700; text-decoration: none;
   }
   .credential-overview-link:hover { color: var(--brand-mint); }
   .credential-badges { display: flex; align-items: center; gap: 6px; }
@@ -1007,23 +1022,25 @@
   .credential-badge:first-child img { width: 66px; height: 66px; }
   .credential-badge figcaption { display: none; }
   .credential-gallery {
-    scroll-margin-top: 100px; margin-top: 14px; padding: 22px;
+    scroll-margin-top: 100px; margin-top: 12px; padding: 18px;
     border: 1px solid rgba(255,255,255,.15); border-radius: 18px;
     background: rgba(0,0,0,.1);
   }
   .credential-gallery-head {
-    display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 14px;
+    display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 10px;
   }
-  .credential-gallery-title { margin: 0; color: #fff; font-size: 1.16rem; }
+  .credential-gallery-title { margin: 0; color: #fff; font-size: 1.3rem; line-height: 1.25; }
+  .credential-gallery-title .heading-icon { width: 32px; height: 32px; flex-basis: 32px; border-radius: 9px; }
+  .credential-gallery-title .heading-icon svg { width: 17px; height: 17px; }
   .credential-gallery-head > p {
-    margin: 0; color: #cfe7e8; font-size: .76rem; line-height: 1.45; text-align: right;
+    margin: 0; color: #cfe7e8; font-size: .8rem; line-height: 1.45; text-align: right;
   }
   .credential-grid {
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 1fr; gap: 10px;
+    grid-auto-rows: 1fr; gap: 8px;
   }
   .credential-card {
-    display: grid; grid-template-columns: 124px minmax(0, 1fr);
+    display: grid; grid-template-columns: 108px minmax(0, 1fr);
     min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.34); border-radius: 12px;
     color: var(--ink); background: #fff; text-decoration: none;
     box-shadow: 0 14px 28px -24px rgba(0,0,0,.72);
@@ -1034,12 +1051,12 @@
     box-shadow: 0 24px 44px -28px rgba(0,0,0,.78);
   }
   .credential-card:focus-visible { outline: 3px solid var(--brand-mint); outline-offset: 3px; }
-  .credential-card--featured { grid-template-columns: 124px minmax(0, 1fr); }
+  .credential-card--featured { grid-template-columns: 108px minmax(0, 1fr); }
   .credential-card:last-child {
-    grid-column: 1 / -1; width: calc(50% - 5px); justify-self: center;
+    grid-column: 1 / -1; width: calc(50% - 4px); justify-self: center;
   }
   .credential-preview {
-    display: flex; min-height: 0; padding: 6px; align-items: center;
+    display: flex; min-height: 0; padding: 5px; align-items: center;
     border-right: 1px solid #dbe7e6; background: #eef4f3;
   }
   .credential-preview img {
@@ -1048,25 +1065,25 @@
   }
   .credential-card-body {
     display: grid; grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: "top top" "title link" "role link";
-    min-width: 0; padding: 12px 14px; align-content: center; column-gap: 12px;
+    grid-template-areas: "top link" "title title" "role role";
+    min-width: 0; padding: 9px 11px; align-content: center; column-gap: 8px;
   }
   .credential-card-top {
     grid-area: top; display: flex; width: 100%; align-items: center;
-    justify-content: space-between; gap: 8px; margin-bottom: 6px;
+    gap: 8px; margin-bottom: 4px;
   }
   .credential-level {
-    display: inline-flex; padding: 3px 7px; border-radius: 999px;
+    display: inline-flex; padding: 2px 7px; border-radius: 999px;
     color: #174d4b; background: #dff2ef; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: .57rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
   }
   .credential-level--expert { color: #fff; background: #082d5b; }
   .credential-level--ai { color: #fff; background: var(--brand-plum); }
-  .credential-card h4 { grid-area: title; margin: 0 0 2px; color: var(--ink); font-size: .86rem; line-height: 1.3; }
-  .credential-role { grid-area: role; margin: 0 0 3px; color: var(--brand-teal); font-size: .7rem; font-weight: 700; line-height: 1.35; }
+  .credential-card h4 { grid-area: title; margin: 0 0 1px; color: var(--ink); font-size: .9rem; line-height: 1.28; }
+  .credential-role { grid-area: role; margin: 0; color: var(--brand-teal); font-size: .72rem; font-weight: 700; line-height: 1.3; }
   .credential-card-link {
-    grid-area: link; display: inline-flex; align-items: center; align-self: center; gap: 4px;
-    color: var(--brand-teal); font-size: .65rem; font-weight: 800; white-space: nowrap;
+    grid-area: link; display: inline-flex; align-items: center; align-self: start; gap: 4px;
+    color: var(--brand-teal); font-size: .68rem; font-weight: 800; white-space: nowrap;
   }
 
   #contact {
@@ -1168,7 +1185,7 @@
     .service-highlight .poster { justify-self: start; }
     .about-details { grid-template-columns: 1fr; }
     .credential-grid { grid-template-columns: 1fr; }
-    .credential-card--featured { grid-template-columns: 124px minmax(0, 1fr); }
+    .credential-card--featured { grid-template-columns: 108px minmax(0, 1fr); }
     .credential-card:last-child { grid-column: auto; width: auto; justify-self: stretch; }
   }
 
@@ -1189,7 +1206,7 @@
     .snav { display: none; }
     #about .profile-panel { grid-template-columns: 1fr; gap: 26px; padding: 28px; }
     #about .profile-photo-frame { width: 160px; height: 160px; }
-    .credential-gallery { padding: 18px; }
+    .credential-gallery { padding: 16px; }
     .credential-gallery-head { align-items: flex-start; flex-direction: column; gap: 8px; }
     .credential-gallery-head > p { display: none; }
     .contact-grid { grid-template-columns: 1fr; }
@@ -1211,15 +1228,15 @@
     .hero-actions .cta { width: 100%; }
     .hero-proof { display: grid; gap: 8px; }
     .hero-doc { width: calc(100% - 8px); padding: 20px 0; }
-    .credentials-overview { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; }
+    .credentials-overview { grid-template-columns: 1fr; gap: 14px; }
     .credential-overview-copy { display: none; }
-    .credential-badges { justify-content: flex-end; }
+    .credential-badges { justify-content: flex-start; }
     .credential-badge img { width: 48px; height: 48px; }
     .credential-badge:first-child img { width: 54px; height: 54px; }
-    .credential-gallery { padding: 14px; }
-    .credential-card, .credential-card--featured { grid-template-columns: 92px minmax(0, 1fr); }
-    .credential-preview { border-right: 1px solid #dbe7e6; border-bottom: 0; }
-    .credential-card-body { padding: 10px 11px; column-gap: 7px; }
+    .credential-gallery { padding: 12px; }
+    .credential-card, .credential-card--featured { grid-template-columns: 1fr; }
+    .credential-preview { display: none; }
+    .credential-card-body { padding: 9px 11px; column-gap: 7px; }
     .doc-card { width: 100%; padding: 22px 18px 18px; }
     .doc-mini { width: 170px; padding: 10px 12px; }
     .doc-mini.vat { left: -8px; }
@@ -2322,7 +2339,12 @@
     </div>
     <div class="about-details">
       <div class="about-block">
-        <h3 class="about-title education-title">Education</h3>
+        <h3 class="about-title education-title heading-with-icon">
+          <span class="heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11a2 2 0 0 1 2 2v16a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v18a2 2 0 0 1 2-2h2.5a2.5 2.5 0 0 1 2.5 2.5z"/></svg>
+          </span>
+          <span>Education</span>
+        </h3>
         <ul class="education-list">
           <li><strong>Thammasat University</strong><span>Master of Business Administration, Business Innovation</span></li>
           <li><strong>Thammasat Business School</strong><span>Bachelor of Accounting</span></li>
@@ -2331,7 +2353,12 @@
       <div class="about-block credentials-overview">
         <div>
           <span class="credential-kicker">Verified credentials</span>
-          <h3 class="cert-title">Microsoft Credentials</h3>
+          <h3 class="cert-title heading-with-icon">
+            <span class="heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9"/></svg>
+            </span>
+            <span>Microsoft Credentials</span>
+          </h3>
           <p class="credential-overview-copy">Five Microsoft credentials across ERP, supply chain, finance, and AI.</p>
           <a class="credential-overview-link" href="#credentials">Explore certificates <span aria-hidden="true">↓</span></a>
         </div>
@@ -2355,7 +2382,12 @@
       <div class="credential-gallery-head">
         <div>
           <span class="credential-kicker">Proof of expertise</span>
-          <h3 class="credential-gallery-title">Credentials &amp; certificates</h3>
+          <h3 class="credential-gallery-title heading-with-icon">
+            <span class="heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.4 2.8 8.4 7 10 4.2-1.6 7-5.6 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            </span>
+            <span>Credentials &amp; certificates</span>
+          </h3>
         </div>
         <p>Official Microsoft Learn credential verification.</p>
       </div>
