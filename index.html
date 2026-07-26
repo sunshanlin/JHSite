@@ -389,7 +389,7 @@
   }
   #about .linkedin-link:hover { background: rgba(255,255,255,.13); border-color: #59bdb1; }
   #about .education-list li::before, #about ul.checks li::before { color: var(--mint); }
-  #about .education-list strong, #about .certs strong { color: #fff; }
+  #about .education-list strong { color: #fff; }
 
   .tip {
     display: flex; gap: 12px; align-items: baseline;
@@ -435,8 +435,6 @@
   ul.checks li { padding-left: 28px; position: relative; margin-bottom: 10px; }
   ul.checks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
   .cert-title { margin-top: 32px; margin-bottom: 12px; color: var(--ink); font-size: 1.15rem; }
-  ul.checks.certs { margin-top: 0; }
-
   .slider-wrap { position: relative; }
   .slider {
     position: relative;
@@ -985,7 +983,91 @@
   .about-details { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; }
   .about-block { padding: 28px 30px; border: 1px solid rgba(255,255,255,.15); border-radius: 18px; background: rgba(255,255,255,.055); }
   .about-block .education-title, .about-block .cert-title { margin-top: 0; margin-bottom: 18px; }
-  #about .certs li { color: #cfe7e8; }
+  .credentials-overview {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 28px;
+  }
+  .credentials-overview .cert-title { margin-bottom: 9px; }
+  .credential-kicker {
+    display: block; margin-bottom: 7px; color: var(--brand-mist);
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .67rem;
+    font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+  }
+  .credential-overview-copy { max-width: 480px; margin-bottom: 14px; color: #dce8e5; font-size: .92rem; line-height: 1.65; }
+  .credential-overview-link {
+    display: inline-flex; align-items: center; gap: 7px; color: #fff;
+    font-size: .82rem; font-weight: 700; text-decoration: none;
+  }
+  .credential-overview-link:hover { color: var(--brand-mint); }
+  .credential-badges { display: flex; align-items: flex-end; gap: 12px; }
+  .credential-badge { margin: 0; text-align: center; }
+  .credential-badge img {
+    display: block; width: 82px; height: 82px; object-fit: contain;
+    filter: drop-shadow(0 14px 16px rgba(0,0,0,.22));
+  }
+  .credential-badge:first-child img { width: 94px; height: 94px; }
+  .credential-badge figcaption {
+    margin-top: 5px; color: #cfe7e8; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .credential-gallery {
+    scroll-margin-top: 100px; margin-top: 20px; padding: 30px;
+    border: 1px solid rgba(255,255,255,.15); border-radius: 22px;
+    background: rgba(0,0,0,.1);
+  }
+  .credential-gallery-head {
+    display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 20px;
+  }
+  .credential-gallery-title { margin: 0; color: #fff; font-size: 1.35rem; }
+  .credential-gallery-head > p {
+    max-width: 510px; margin: 0; color: #cfe7e8; font-size: .88rem; line-height: 1.6; text-align: right;
+  }
+  .credential-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .credential-card {
+    display: grid; grid-template-columns: minmax(175px, .86fr) minmax(0, 1.14fr);
+    min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.34); border-radius: 16px;
+    color: var(--ink); background: #fff; text-decoration: none;
+    box-shadow: 0 18px 38px -28px rgba(0,0,0,.72);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .credential-card:hover {
+    transform: translateY(-3px); border-color: var(--brand-mint);
+    box-shadow: 0 24px 44px -28px rgba(0,0,0,.78);
+  }
+  .credential-card:focus-visible { outline: 3px solid var(--brand-mint); outline-offset: 3px; }
+  .credential-card--featured {
+    grid-column: 1 / -1; grid-template-columns: minmax(0, 1.28fr) minmax(290px, .72fr);
+  }
+  .credential-preview {
+    min-height: 180px; padding: 10px; border-right: 1px solid #dbe7e6; background: #eef4f3;
+  }
+  .credential-card--featured .credential-preview { min-height: 260px; }
+  .credential-preview img {
+    display: block; width: 100%; height: 100%; aspect-ratio: 1104 / 585;
+    border-radius: 8px; object-fit: contain; background: #fff;
+  }
+  .credential-card-body { display: flex; min-width: 0; padding: 20px; flex-direction: column; align-items: flex-start; }
+  .credential-card--featured .credential-card-body { justify-content: center; padding: 28px; }
+  .credential-card-top { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .credential-level {
+    display: inline-flex; padding: 5px 9px; border-radius: 999px;
+    color: #174d4b; background: #dff2ef; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .64rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .credential-level--expert { color: #fff; background: #082d5b; }
+  .credential-level--ai { color: #fff; background: var(--brand-plum); }
+  .credential-status { color: #597574; font-size: .68rem; font-weight: 700; text-align: right; }
+  .credential-card h4 { margin: 0 0 5px; color: var(--ink); font-size: 1rem; line-height: 1.38; }
+  .credential-role { margin: 0 0 12px; color: var(--brand-teal); font-size: .82rem; font-weight: 700; line-height: 1.45; }
+  .credential-date { margin: 0 0 13px; color: #597574; font-size: .74rem; line-height: 1.5; }
+  .credential-retirement {
+    margin: 0 0 14px; padding: 9px 11px; border-left: 3px solid #d99b36;
+    border-radius: 0 7px 7px 0; color: #6b4d19; background: #fff7e8;
+    font-size: .72rem; line-height: 1.45;
+  }
+  .credential-card-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: auto;
+    color: var(--brand-teal); font-size: .75rem; font-weight: 800;
+  }
 
   #contact {
     color: #d4e4ed;
@@ -1043,7 +1125,7 @@
     .feature-panel.is-active .feature-panel-copy,
     .feature-panel.is-active .feature-demo-card,
     .feature-panel.is-active .feature-float-chip { animation: none; }
-    .feature-panel, .feature-tab, .steps-progress span, .step { transition: none; }
+    .feature-panel, .feature-tab, .steps-progress span, .step, .credential-card { transition: none; }
   }
 
   @media (max-width: 1100px) {
@@ -1085,6 +1167,10 @@
     .service-highlight { grid-template-columns: 1fr; padding: 44px; }
     .service-highlight .poster { justify-self: start; }
     .about-details { grid-template-columns: 1fr; }
+    .credential-grid { grid-template-columns: 1fr; }
+    .credential-card--featured {
+      grid-column: auto; grid-template-columns: minmax(210px, .9fr) minmax(0, 1.1fr);
+    }
   }
 
   @media (max-width: 720px) {
@@ -1104,6 +1190,9 @@
     .snav { display: none; }
     #about .profile-panel { grid-template-columns: 1fr; gap: 26px; padding: 28px; }
     #about .profile-photo-frame { width: 160px; height: 160px; }
+    .credential-gallery { padding: 22px; }
+    .credential-gallery-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .credential-gallery-head > p { text-align: left; }
     .contact-grid { grid-template-columns: 1fr; }
     .contact-info, .contact-form { padding: 34px 28px; }
     .contact-info { display: block; min-height: 0; padding-bottom: 34px; border-bottom: 1px solid var(--line); }
@@ -1123,6 +1212,12 @@
     .hero-actions .cta { width: 100%; }
     .hero-proof { display: grid; gap: 8px; }
     .hero-doc { width: calc(100% - 8px); padding: 20px 0; }
+    .credentials-overview { grid-template-columns: 1fr; }
+    .credential-badges { justify-content: flex-start; }
+    .credential-card, .credential-card--featured { grid-template-columns: 1fr; }
+    .credential-card--featured .credential-preview { min-height: 0; }
+    .credential-preview { min-height: 0; border-right: 0; border-bottom: 1px solid #dbe7e6; }
+    .credential-card-body, .credential-card--featured .credential-card-body { padding: 20px; }
     .doc-card { width: 100%; padding: 22px 18px 18px; }
     .doc-mini { width: 170px; padding: 10px 12px; }
     .doc-mini.vat { left: -8px; }
@@ -2231,14 +2326,110 @@
           <li><strong>Thammasat Business School</strong><span>Bachelor of Accounting</span></li>
         </ul>
       </div>
-      <div class="about-block">
-        <h3 class="cert-title">Microsoft Certified</h3>
-        <ul class="checks certs">
-          <li>Dynamics 365 Business Central Functional Consultant Associate</li>
-          <li>Dynamics 365 Finance Functional Consultant Associate</li>
-          <li>Dynamics 365 Supply Chain Management Functional Consultant Associate</li>
-          <li>AI Business Professional</li>
-        </ul>
+      <div class="about-block credentials-overview">
+        <div>
+          <span class="credential-kicker">Verified credentials</span>
+          <h3 class="cert-title">Microsoft Credentials</h3>
+          <p class="credential-overview-copy">Five credentials spanning Business Central, Finance, Supply Chain Management, and practical AI capability.</p>
+          <a class="credential-overview-link" href="#credentials">Explore certificates <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="credential-badges" aria-label="Microsoft Certified badges earned">
+          <figure class="credential-badge">
+            <img src="img/credentials/microsoft-certified-expert.svg" alt="Microsoft Certified Expert badge" width="300" height="300">
+            <figcaption>Expert</figcaption>
+          </figure>
+          <figure class="credential-badge">
+            <img src="img/credentials/microsoft-certified-associate.svg" alt="Microsoft Certified Associate badge" width="300" height="300">
+            <figcaption>Associate</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="credential-gallery" id="credentials">
+      <div class="credential-gallery-head">
+        <div>
+          <span class="credential-kicker">Proof of expertise</span>
+          <h3 class="credential-gallery-title">Credentials &amp; certificates</h3>
+        </div>
+        <p>Select any credential to open the original Microsoft certificate PDF in a new tab.</p>
+      </div>
+      <div class="credential-grid">
+        <a class="credential-card credential-card--featured" href="credentials/supply-chain-expert.pdf" target="_blank" rel="noopener" aria-label="View Dynamics 365 Supply Chain Management Functional Consultant Expert certificate PDF">
+          <div class="credential-preview">
+            <img src="img/credentials/supply-chain-expert.webp" alt="Microsoft certificate for Dynamics 365 Supply Chain Management Functional Consultant Expert" width="1104" height="585" loading="lazy" decoding="async">
+          </div>
+          <div class="credential-card-body">
+            <div class="credential-card-top">
+              <span class="credential-level credential-level--expert">Expert</span>
+              <span class="credential-status">Valid until Apr 29, 2027</span>
+            </div>
+            <h4>Dynamics 365 Supply Chain Management</h4>
+            <p class="credential-role">Functional Consultant Expert</p>
+            <p class="credential-date">Earned April 28, 2026</p>
+            <p class="credential-retirement">Earned before the certification retired on June 30, 2026. The credential remains active until its expiration date.</p>
+            <span class="credential-card-link">View certificate PDF <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+        <a class="credential-card" href="credentials/business-central-associate.pdf" target="_blank" rel="noopener" aria-label="View Dynamics 365 Business Central Functional Consultant Associate certificate PDF">
+          <div class="credential-preview">
+            <img src="img/credentials/business-central-associate.webp" alt="Microsoft certificate for Dynamics 365 Business Central Functional Consultant Associate" width="1104" height="585" loading="lazy" decoding="async">
+          </div>
+          <div class="credential-card-body">
+            <div class="credential-card-top">
+              <span class="credential-level">Associate</span>
+              <span class="credential-status">Valid until May 4, 2027</span>
+            </div>
+            <h4>Dynamics 365 Business Central</h4>
+            <p class="credential-role">Functional Consultant Associate</p>
+            <p class="credential-date">Earned May 3, 2026</p>
+            <span class="credential-card-link">View certificate PDF <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+        <a class="credential-card" href="credentials/finance-associate.pdf" target="_blank" rel="noopener" aria-label="View Dynamics 365 Finance Functional Consultant Associate certificate PDF">
+          <div class="credential-preview">
+            <img src="img/credentials/finance-associate.webp" alt="Microsoft certificate for Dynamics 365 Finance Functional Consultant Associate" width="1104" height="585" loading="lazy" decoding="async">
+          </div>
+          <div class="credential-card-body">
+            <div class="credential-card-top">
+              <span class="credential-level">Associate</span>
+              <span class="credential-status">Valid until Jun 21, 2027</span>
+            </div>
+            <h4>Dynamics 365 Finance</h4>
+            <p class="credential-role">Functional Consultant Associate</p>
+            <p class="credential-date">Earned June 20, 2022</p>
+            <span class="credential-card-link">View certificate PDF <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+        <a class="credential-card" href="credentials/supply-chain-associate.pdf" target="_blank" rel="noopener" aria-label="View Dynamics 365 Supply Chain Management Functional Consultant Associate certificate PDF">
+          <div class="credential-preview">
+            <img src="img/credentials/supply-chain-associate.webp" alt="Microsoft certificate for Dynamics 365 Supply Chain Management Functional Consultant Associate" width="1104" height="585" loading="lazy" decoding="async">
+          </div>
+          <div class="credential-card-body">
+            <div class="credential-card-top">
+              <span class="credential-level">Associate</span>
+              <span class="credential-status">Valid until Apr 29, 2027</span>
+            </div>
+            <h4>Dynamics 365 Supply Chain Management</h4>
+            <p class="credential-role">Functional Consultant Associate</p>
+            <p class="credential-date">Earned April 28, 2026</p>
+            <span class="credential-card-link">View certificate PDF <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+        <a class="credential-card" href="credentials/ai-business-professional.pdf" target="_blank" rel="noopener" aria-label="View Microsoft Certified AI Business Professional certificate PDF">
+          <div class="credential-preview">
+            <img src="img/credentials/ai-business-professional.webp" alt="Microsoft Certified AI Business Professional certificate" width="1104" height="585" loading="lazy" decoding="async">
+          </div>
+          <div class="credential-card-body">
+            <div class="credential-card-top">
+              <span class="credential-level credential-level--ai">AI Professional</span>
+              <span class="credential-status">Microsoft Certified</span>
+            </div>
+            <h4>AI Business Professional</h4>
+            <p class="credential-role">Microsoft Certified</p>
+            <p class="credential-date">Earned April 27, 2026</p>
+            <span class="credential-card-link">View certificate PDF <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
       </div>
     </div>
   </div>
