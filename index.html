@@ -1075,6 +1075,22 @@
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: .57rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
   }
+  /* สีล้อกับ badge จริงของ Microsoft: โล่ #002050 + ริบบิ้น #0064b5, ส่วน AI ใช้แดง-ส้ม #F4364C/#FF5C39 จาก badge ตัวเอง */
+  .credential-level.is-expert {
+    border-color: rgba(0,100,181,.60);
+    background: linear-gradient(180deg, rgba(0,100,181,.32), rgba(0,32,80,.52));
+    color: #9AC9F0;
+  }
+  .credential-level.is-associate {
+    border-color: rgba(0,100,181,.34);
+    background: rgba(0,100,181,.14);
+    color: #86B4DE;
+  }
+  .credential-level.is-ai {
+    border-color: rgba(244,54,76,.48);
+    background: linear-gradient(180deg, rgba(255,92,57,.22), rgba(244,54,76,.20));
+    color: #FFA48C;
+  }
   .credential-card h4 { margin: 0; color: #fff; font-size: .94rem; line-height: 1.35; }
   .credential-card-link {
     display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center;
@@ -2399,7 +2415,7 @@
           <div class="credential-card-body">
             <h4>Microsoft Certified: Dynamics 365 Supply Chain Management Functional Consultant Expert</h4>
           </div>
-          <span class="credential-level">Expert</span>
+          <span class="credential-level is-expert">Expert</span>
           <span class="credential-card-link" aria-hidden="true">↗</span>
         </a>
         <a class="credential-card" href="https://learn.microsoft.com/api/credentials/share/en-us/JirapatWichayapong-6733/F5D0CFA4888CC386?sharingId=74F62BDC82F80686" target="_blank" rel="noopener" aria-label="Verify Dynamics 365 Business Central Functional Consultant Associate credential on Microsoft Learn">
@@ -2407,7 +2423,7 @@
           <div class="credential-card-body">
             <h4>Microsoft Certified: Dynamics 365 Business Central Functional Consultant Associate</h4>
           </div>
-          <span class="credential-level">Associate</span>
+          <span class="credential-level is-associate">Associate</span>
           <span class="credential-card-link" aria-hidden="true">↗</span>
         </a>
         <a class="credential-card" href="https://learn.microsoft.com/api/credentials/share/en-us/JirapatWichayapong-6733/E43361CA566D9719?sharingId=74F62BDC82F80686" target="_blank" rel="noopener" aria-label="Verify Dynamics 365 Finance Functional Consultant Associate credential on Microsoft Learn">
@@ -2415,7 +2431,7 @@
           <div class="credential-card-body">
             <h4>Microsoft Certified: Dynamics 365 Finance Functional Consultant Associate</h4>
           </div>
-          <span class="credential-level">Associate</span>
+          <span class="credential-level is-associate">Associate</span>
           <span class="credential-card-link" aria-hidden="true">↗</span>
         </a>
         <a class="credential-card" href="https://learn.microsoft.com/api/credentials/share/en-us/JirapatWichayapong-6733/8C3E8B3ED7093FCF?sharingId=74F62BDC82F80686" target="_blank" rel="noopener" aria-label="Verify Dynamics 365 Supply Chain Management Functional Consultant Associate credential on Microsoft Learn">
@@ -2423,7 +2439,7 @@
           <div class="credential-card-body">
             <h4>Microsoft Certified: Dynamics 365 Supply Chain Management Functional Consultant Associate</h4>
           </div>
-          <span class="credential-level">Associate</span>
+          <span class="credential-level is-associate">Associate</span>
           <span class="credential-card-link" aria-hidden="true">↗</span>
         </a>
         <a class="credential-card" href="https://learn.microsoft.com/api/credentials/share/en-us/JirapatWichayapong-6733/162D6519ED56AB08?sharingId=74F62BDC82F80686" target="_blank" rel="noopener" aria-label="Verify Microsoft Certified AI Business Professional credential on Microsoft Learn">
@@ -2431,7 +2447,7 @@
           <div class="credential-card-body">
             <h4>Microsoft Certified: AI Business Professional</h4>
           </div>
-          <span class="credential-level">AI</span>
+          <span class="credential-level is-ai">AI</span>
           <span class="credential-card-link" aria-hidden="true">↗</span>
         </a>
       </div>
