@@ -688,6 +688,14 @@
     box-shadow: none;
   }
   .cta.secondary:hover { background: rgba(255,255,255,.12); box-shadow: none; }
+  .hero-learn-link {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
+    color: #b8d8d7; font-size: .9rem; font-weight: 500;
+    text-decoration: underline; text-decoration-color: rgba(184,216,215,.55); text-underline-offset: 4px;
+    transition: color .2s ease, text-decoration-color .2s ease;
+  }
+  .hero-learn-link::after { content: "↗"; font-size: .92em; text-decoration: none; }
+  .hero-learn-link:hover { color: #fff; text-decoration-color: currentColor; }
   .hero-proof {
     display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 24px; list-style: none;
     color: #93bcc0; font-size: .83rem;
@@ -1943,6 +1951,7 @@
       <a class="cta" href="#contact">นัดปรึกษา พร้อม Demo ระบบฟรี</a>
       <a class="cta secondary" href="#reports">ดูตัวอย่างระบบ</a>
     </div>
+    <a class="hero-learn-link" href="https://www.microsoft.com/en-us/dynamics-365/products/business-central" target="_blank" rel="noopener noreferrer" aria-label="ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central บนเว็บไซต์ Microsoft (เปิดในแท็บใหม่)">ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central</a>
     <ul class="hero-proof" aria-label="จุดเด่นของบริการ">
       <li>ผู้เชี่ยวชาญทั้ง Functional และ AL Development</li>
       <li>พื้นฐานบัญชี เข้าใจกระบวนการธุรกิจจริง</li>
@@ -2186,7 +2195,7 @@
     </div>
     <div class="stat-row reveal">
       <div class="stat"><b class="stat-num" data-count="20" data-suffix="+">0</b><span>ฟอร์มเอกสารภาษาไทยพร้อมใช้</span></div>
-      <div class="stat"><b class="stat-num" data-count="7">0</b><span>ขอบเขตงาน ตั้งแต่ภาษีถึงการเชื่อมต่อระบบ</span></div>
+      <div class="stat"><b class="stat-num" data-count="10" data-suffix="+">0</b><span>ฟังก์ชันเสริมที่จำเป็นสำหรับธุรกิจไทย</span></div>
     </div>
     <h3 class="about-title expertise-title">ประสบการณ์และแนวทางการทำงาน</h3>
     <ol class="expertise-list">
@@ -2927,6 +2936,7 @@
     ['header .lead', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
     ['.hero-actions .cta:not(.secondary)', 'Book a free consultation &amp; demo'],
     ['.hero-actions .cta.secondary', 'View sample reports'],
+    ['header .hero-learn-link', 'Learn more about Business Central'],
     ['.hero-proof li:nth-child(1)', 'Both functional consulting and AL development expertise'],
     ['.hero-proof li:nth-child(2)', 'Accounting background with real business-process understanding'],
     ['.hero-proof li:nth-child(3)', 'Work directly with the developer throughout the project'],
@@ -2971,7 +2981,7 @@
     ['.why-list li:nth-child(5)', '<strong>Direct line to the developer</strong><span>Fast decisions and fixes, by a developer from a finance background</span>'],
     ['.why-list li:nth-child(6)', '<strong>Clear budget</strong><span>SME-friendly costs, quoted from the actual scope of work</span>'],
     ['.stat-row .stat:nth-child(1) span', 'Ready-to-use Thai document forms'],
-    ['.stat-row .stat:nth-child(2) span', 'Areas covered, from Thai tax to system integration'],
+    ['.stat-row .stat:nth-child(2) span', 'Add-on features designed for Thai businesses'],
     ['.expertise-title', 'Experience &amp; How I Work'],
     ['.expertise-list li:nth-child(1) h4', 'Accounting &amp; business process insight'],
     ['.expertise-list li:nth-child(1) p', 'An accounting background and hands-on work across <strong>finance, sales, purchasing, inventory, warehousing, and manufacturing</strong> — connecting every team\'s needs into one coherent picture.'],
@@ -3023,6 +3033,7 @@
     ['#cf-name', 'placeholder', 'Contact name'],
     ['#cf-contact', 'placeholder', 'Best way to reach you'],
     ['#cf-msg', 'placeholder', 'Business type, current system, and what you want to improve'],
+    ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'Independent consultant & developer for Microsoft Dynamics 365 Business Central with Thai Localization — VAT PP30/36, withholding tax certificates (50 Bis), billing, Thai document forms — end-to-end delivery.'],
   ];
   const EN_TITLE = 'Business Central Implementation + Thai Localization | JWIC Consulting';
