@@ -1877,107 +1877,169 @@
   #pricing > .wrap > h2 { max-width: 760px; }
   #pricing > .wrap > .sub { max-width: 780px; }
   .pricing-card {
-    display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-    max-width: 1120px; margin: 30px auto 0; overflow: hidden;
-    border: 1px solid rgba(1,74,65,.14); border-radius: 28px;
-    background: #fff; box-shadow: 0 34px 80px -42px rgba(1,47,42,.5);
+    display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+    gap: 14px; max-width: 1180px; margin: 34px auto 0; padding: 14px;
+    border: 1px solid rgba(1,74,65,.12); border-radius: 32px;
+    background: rgba(255,255,255,.58);
+    box-shadow: 0 34px 80px -42px rgba(1,47,42,.48);
+    backdrop-filter: blur(12px);
   }
+  /* Chrome breaks Thai mid-word (no dictionary), and word-break: keep-all has no effect on Thai.
+     nowrap + <wbr> is the only lever that holds: breaks land only where the markup allows.
+     Thai only — English text has no <wbr> and must keep wrapping at spaces. */
+  html[lang="th"] #pricing, html[lang="th"] #pricing * { white-space: nowrap; }
   .pricing-offer {
-    position: relative; isolation: isolate; display: flex; flex-direction: column;
-    align-items: flex-start; padding: 38px 40px;
-    color: #fff;
-    background:
-      radial-gradient(circle at 90% 8%, rgba(224,140,162,.2), transparent 34%),
-      linear-gradient(145deg, var(--hero-deep) 0%, var(--brand-teal) 100%);
+    position: relative; isolation: isolate; min-height: 600px; overflow: hidden;
+    border: 1px solid rgba(1,74,65,.12); border-radius: 22px;
+    background: linear-gradient(160deg, #dfeee9 0%, #eef4ef 100%);
+    box-shadow: 0 18px 42px -32px rgba(1,47,42,.65);
   }
   .pricing-offer::after {
-    content: ""; position: absolute; right: -80px; bottom: -100px; z-index: -1;
-    width: 260px; height: 260px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%;
+    content: ""; position: absolute; right: -70px; bottom: -90px; z-index: -1;
+    width: 240px; height: 240px; border: 1px solid rgba(1,74,65,.1); border-radius: 50%;
+  }
+  .pricing-visual {
+    position: absolute; inset: 0; isolation: isolate; overflow: hidden;
+  }
+  .pricing-visual::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(14,16,16,.88) 0%, rgba(14,16,16,.68) 56%, rgba(14,16,16,.18) 100%),
+      linear-gradient(0deg, rgba(14,16,16,.6), transparent 52%);
+  }
+  .pricing-visual-copy {
+    display: flex; flex-direction: column; align-items: flex-start;
+    height: 100%; padding: 28px 30px 205px;
   }
   .pricing-label {
     display: inline-flex; padding: 7px 11px; border: 1px solid rgba(255,255,255,.2);
-    border-radius: 999px; background: rgba(255,255,255,.07);
-    color: #cfe7e8; font-size: .76rem; font-weight: 700; letter-spacing: .06em;
+    border-radius: 999px; background: rgba(255,255,255,.12);
+    color: #e3f2ef; font-size: .74rem; font-weight: 700; letter-spacing: .06em;
     text-transform: uppercase;
   }
   .pricing-offer h3 {
-    margin: 16px 0 8px; color: #fff; font-size: clamp(1.5rem, 2vw, 2rem);
-    line-height: 1.3; text-wrap: balance;
+    max-width: 470px; margin: auto 0 8px; color: #fff;
+    font-size: clamp(1.5rem, 2vw, 2rem); line-height: 1.3; text-wrap: balance;
+    text-shadow: 0 3px 18px rgba(0,0,0,.24);
   }
-  .pricing-offer-copy { max-width: 470px; color: #cfe7e8; font-size: .94rem; line-height: 1.6; }
+  .pricing-offer h3 span { display: block; }
+  .pricing-offer-copy {
+    max-width: 430px; color: #e0eeeb; font-size: .9rem; line-height: 1.6;
+    text-shadow: 0 2px 12px rgba(0,0,0,.22);
+  }
   .pricing-photo {
-    position: relative; flex: 0 0 180px; width: 100%; min-height: 180px;
-    max-height: 180px; margin: 18px 0 0; overflow: hidden;
-    border: 1px solid rgba(255,255,255,.16); border-radius: 18px;
-    background: rgba(255,255,255,.08); box-shadow: 0 20px 34px -24px rgba(0,0,0,.6);
+    position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; margin: 0;
+    background: #14181a;
   }
-  .pricing-photo::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, transparent 58%, rgba(1,47,42,.3));
+  .pricing-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 48%; }
+  .pricing-offer-bottom {
+    position: absolute; right: 0; bottom: 0; left: 0; z-index: 2; display: grid;
+    grid-template-columns: 1fr; align-items: center; gap: 10px;
+    margin: 0 22px 22px; padding: 17px 16px;
+    border: 1px solid rgba(1,74,65,.12); border-radius: 18px;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 22px 42px -26px rgba(1,47,42,.6);
   }
-  .pricing-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; }
-  .pricing-price { margin: 18px 0; }
-  .pricing-price-prefix { display: block; margin-bottom: 2px; color: var(--brand-mint); font-size: .9rem; font-weight: 700; }
-  .pricing-price-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .pricing-price { min-width: 0; margin: 0; }
+  .pricing-price-prefix { display: block; margin-bottom: 2px; color: var(--brand-teal); font-size: .8rem; font-weight: 700; }
+  .pricing-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 7px; white-space: nowrap; }
   .pricing-price strong {
-    color: #fff; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: clamp(3rem, 4.4vw, 4rem); font-weight: 700; line-height: 1;
+    color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: clamp(2.4rem, 3.2vw, 3.1rem); font-weight: 700; line-height: 1;
     letter-spacing: -.055em; font-variant-numeric: tabular-nums;
   }
   .pricing-price strong sup {
-    margin-left: .08em; color: var(--brand-mint); font-size: .34em;
+    margin-left: .08em; color: var(--brand-burgundy); font-size: .34em;
     line-height: 1; letter-spacing: 0; vertical-align: top;
   }
-  .pricing-currency { color: #cfe7e8; font-size: 1rem; font-weight: 600; }
+  .pricing-currency { color: var(--muted); font-size: .88rem; font-weight: 600; }
   .pricing-cta {
-    display: inline-flex; align-items: center; justify-content: center; min-height: 50px;
-    margin-top: auto; padding: 10px 20px; border-radius: 12px; color: #fff; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+    width: 100%; margin: 0; padding: 10px 16px; border-radius: 12px; color: #fff;
+    font-size: .86rem; font-weight: 700; white-space: nowrap;
     background: linear-gradient(135deg, var(--brand-burgundy), var(--brand-burgundy-dark));
     box-shadow: 0 18px 36px -18px rgba(166,58,86,.7);
     transition: transform .2s ease, box-shadow .2s ease;
   }
   .pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 22px 38px -16px rgba(166,58,86,.78); }
-  .pricing-detail { padding: 38px 40px; }
-  .pricing-detail h3 { margin-bottom: 18px; color: var(--brand-deep); font-size: 1.25rem; }
+  .pricing-detail {
+    padding: 28px 30px; border: 1px solid rgba(1,74,65,.1); border-radius: 22px;
+    background:
+      radial-gradient(circle at 100% 0, rgba(53,175,158,.08), transparent 34%),
+      linear-gradient(145deg, #fff 0%, #f9fbf8 100%);
+  }
+  .pricing-detail h3 { margin-bottom: 16px; color: var(--brand-deep); font-size: 1.2rem; }
   .pricing-inclusions {
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 24px; row-gap: 12px; margin: 0; padding: 0; list-style: none;
+    gap: 9px; margin: 0; padding: 0; list-style: none;
   }
   .pricing-inclusions li {
-    position: relative; padding-left: 26px; color: var(--muted);
-    font-size: .9rem; line-height: 1.45;
+    position: relative; display: flex; align-items: center; min-height: 48px;
+    padding: 10px 11px 10px 38px; border: 1px solid rgba(1,74,65,.07);
+    border-radius: 12px; color: var(--muted); background: rgba(53,175,158,.065);
+    font-size: .83rem; line-height: 1.4;
+  }
+  .pricing-inclusions li:nth-child(even) {
+    border-color: rgba(166,58,86,.08); background: rgba(166,58,86,.045);
   }
   .pricing-inclusions li::before {
-    content: "✓"; position: absolute; left: 0; top: .05em; display: grid; place-items: center;
+    content: "✓"; position: absolute; left: 12px; top: 50%; display: grid; place-items: center;
     width: 18px; height: 18px; border-radius: 50%; color: var(--brand-teal);
-    background: rgba(53,175,158,.12); font-size: .75rem; font-weight: 800;
+    background: #fff; box-shadow: 0 4px 12px rgba(1,74,65,.08);
+    font-size: .72rem; font-weight: 800; transform: translateY(-50%);
   }
   .pricing-assurance {
-    margin-top: 20px; padding: 14px 16px; border-left: 3px solid var(--brand-burgundy);
-    border-radius: 0 12px 12px 0; background: rgba(166,58,86,.06);
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(180px, .75fr);
+    column-gap: 18px; margin-top: 14px; padding: 13px 15px;
+    border: 1px solid rgba(166,58,86,.12); border-radius: 14px;
+    background: linear-gradient(105deg, rgba(166,58,86,.075), rgba(255,255,255,.86));
   }
-  .pricing-assurance strong { display: block; margin-bottom: 4px; color: var(--brand-burgundy-dark); }
-  .pricing-assurance p { color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .pricing-assurance > strong { grid-column: 1; grid-row: 1; }
+  .pricing-assurance > p { grid-column: 1; grid-row: 2; }
+  .pricing-assurance strong { display: block; margin-bottom: 3px; color: var(--brand-burgundy-dark); }
+  .pricing-assurance p { color: var(--muted); font-size: .78rem; line-height: 1.5; }
   .pricing-payment {
-    margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(166,58,86,.16);
+    grid-column: 2; grid-row: 1 / span 2; align-self: stretch;
+    display: flex; flex-direction: column; justify-content: center;
+    margin: 0; padding-left: 16px; border-left: 1px solid rgba(166,58,86,.16);
   }
-  .pricing-payment strong { margin-bottom: 2px; color: var(--brand-deep); }
-  .pricing-payment span { color: var(--muted); font-size: .8rem; line-height: 1.5; }
-  .pricing-excludes { margin-top: 14px; color: var(--muted); font-size: .76rem; line-height: 1.6; }
+  .pricing-payment strong { margin-bottom: 2px; color: var(--brand-deep); font-size: .85rem; }
+  .pricing-payment span { color: var(--muted); font-size: .74rem; line-height: 1.45; }
+  .pricing-excludes {
+    margin-top: 10px; padding: 9px 11px; border: 1px dashed rgba(1,74,65,.14);
+    border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.56);
+    font-size: .72rem; line-height: 1.55;
+  }
   .pricing-excludes strong { display: block; margin-bottom: 4px; color: var(--ink); }
+  @media (max-width: 1240px) {
+    .pricing-visual-copy { padding-bottom: 205px; }
+  }
   @media (max-width: 860px) {
-    .pricing-card { grid-template-columns: 1fr; max-width: 660px; }
-    .pricing-offer, .pricing-detail { padding: 40px 34px; }
+    .pricing-card { grid-template-columns: 1fr; max-width: 720px; padding: 10px; }
+    .pricing-offer { min-height: 470px; }
+    .pricing-visual-copy { padding-bottom: 205px; }
   }
   @media (max-width: 620px) {
     .pricing-inclusions { grid-template-columns: 1fr; }
+    .pricing-assurance { grid-template-columns: 1fr; }
+    .pricing-assurance > strong, .pricing-assurance > p { grid-column: 1; }
+    .pricing-payment {
+      grid-column: 1; grid-row: auto; margin-top: 10px; padding: 10px 0 0;
+      border-top: 1px solid rgba(166,58,86,.16); border-left: 0;
+    }
+    .pricing-offer { min-height: 470px; }
+    .pricing-visual-copy { padding-bottom: 205px; }
   }
   @media (max-width: 520px) {
-    .pricing-card { margin-top: 30px; border-radius: 20px; }
-    .pricing-offer, .pricing-detail { padding: 32px 24px; }
-    .pricing-photo { flex: 0 0 150px; min-height: 150px; }
-    .pricing-price strong { font-size: clamp(2.8rem, 16vw, 3.8rem); }
-    .pricing-cta { width: 100%; }
+    #pricing { padding: 60px 0; }
+    .pricing-card { margin-top: 28px; padding: 7px; border-radius: 24px; }
+    .pricing-offer, .pricing-detail { border-radius: 17px; }
+    .pricing-offer { min-height: 480px; }
+    .pricing-visual-copy { padding: 22px 21px 210px; }
+    .pricing-offer h3 { font-size: 1.55rem; }
+    .pricing-offer-bottom { margin: 0 12px 12px; padding: 15px; }
+    .pricing-price strong { font-size: clamp(2.8rem, 15vw, 3.35rem); }
+    .pricing-detail { padding: 22px 20px; }
   }
 
   .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
@@ -2581,49 +2643,54 @@
 
 <section id="pricing">
   <div class="wrap">
-    <p class="section-kicker">Transparent Pricing</p>
-    <h2>เริ่มวางแผนงบประมาณได้ตั้งแต่วันนี้</h2>
-    <p class="sub">มีราคาเริ่มต้นที่ชัดเจน พร้อมประเมินขอบเขตและยืนยันราคาก่อนเริ่มโครงการ เพื่อให้คุณตัดสินใจได้อย่างมั่นใจ</p>
+    <p class="section-kicker">Transparent <wbr>Pricing</p>
+    <h2>เริ่ม<wbr>วางแผน<wbr>งบประมาณ<wbr>ได้<wbr>ตั้งแต่<wbr>วันนี้</h2>
+    <p class="sub">มี<wbr>ราคา<wbr>เริ่มต้น<wbr>ที่<wbr>ชัดเจน <wbr>พร้อม<wbr>ประเมิน<wbr>ขอบเขต<wbr>และ<wbr>ยืนยัน<wbr>ราคา<wbr>ก่อน<wbr>เริ่ม<wbr>โครงการ <wbr>เพื่อ<wbr>ให้<wbr>คุณ<wbr>ตัดสินใจ<wbr>ได้<wbr>อย่าง<wbr>มั่นใจ</p>
     <div class="pricing-card reveal">
       <div class="pricing-offer">
-        <span class="pricing-label">Business Central + Thai Localization</span>
-        <h3>วางระบบครบทุกขั้นตอน ตั้งแต่วิเคราะห์ถึง Go-live</h3>
-        <p class="pricing-offer-copy">ดูแลตั้งแต่การวิเคราะห์กระบวนการ ตั้งค่าระบบ ย้ายข้อมูล อบรมผู้ใช้ ไปจนถึงดูแลช่วงเริ่มใช้งานจริง</p>
-        <!-- Photo: Thirdman / Pexels, photo 7652178 -->
-        <figure class="pricing-photo">
-          <img src="img/pricing-consultation.jpg" width="1260" height="750" loading="lazy" decoding="async" alt="ทีมงานกำลังร่วมกันวางแผนโครงการวางระบบ">
-        </figure>
-        <div class="pricing-price">
-          <span class="pricing-price-prefix">ราคาเริ่มต้น</span>
-          <div class="pricing-price-line">
-            <strong>300,000<sup aria-hidden="true">*</sup></strong>
-            <span class="pricing-currency">บาท</span>
+        <div class="pricing-visual">
+          <!-- Photo: Thirdman / Pexels, photo 7652178 -->
+          <figure class="pricing-photo">
+            <img src="img/pricing-consultation.jpg" width="1260" height="750" loading="lazy" decoding="async" alt="ทีมงานกำลังร่วมกันวางแผนโครงการวางระบบ">
+          </figure>
+          <div class="pricing-visual-copy">
+            <span class="pricing-label">Business <wbr>Central <wbr>+ <wbr>Thai <wbr>Localization</span>
+            <h3><span>วางระบบครบทุกขั้นตอน</span><span>ตั้งแต่วิเคราะห์ถึง Go-live</span></h3>
+            <p class="pricing-offer-copy">ดูแล<wbr>ตั้งแต่<wbr>การ<wbr>วิเคราะห์<wbr>กระบวนการ <wbr>ตั้งค่า<wbr>ระบบ <wbr>ย้าย<wbr>ข้อมูล <wbr>อบรม<wbr>ผู้ใช้ <wbr>ไป<wbr>จนถึง<wbr>ดูแล<wbr>ช่วง<wbr>เริ่ม<wbr>ใช้งานจริง</p>
           </div>
         </div>
-        <a class="pricing-cta" href="#contact">ปรึกษาขอบเขตโครงการ</a>
+        <div class="pricing-offer-bottom">
+          <div class="pricing-price">
+            <span class="pricing-price-prefix">ราคา<wbr>เริ่มต้น</span>
+            <div class="pricing-price-line">
+              <strong>300,000<sup aria-hidden="true">*</sup></strong>
+              <span class="pricing-currency">บาท</span>
+            </div>
+          </div>
+          <a class="pricing-cta" href="#contact">ปรึกษา<wbr>ขอบเขต<wbr>โครงการ <wbr>ฟรี</a>
+        </div>
       </div>
       <div class="pricing-detail">
-        <h3>สิ่งที่รวมในราคาเริ่มต้น</h3>
+        <h3>สิ่งที่<wbr>รวม<wbr>ใน<wbr>ราคา<wbr>เริ่มต้น</h3>
         <ul class="pricing-inclusions">
-          <li>รองรับ 1 บริษัท</li>
-          <li>เก็บความต้องการ วิเคราะห์ Fit-Gap และออกแบบระบบ</li>
-          <li>ตั้งค่าระบบบัญชี การขาย การจัดซื้อ และสินค้าคงคลัง</li>
-          <li>ย้าย Master Data และยอดยกมาเข้าระบบ</li>
-          <li>มาพร้อม JWIC Thai Localization รวมในแพ็คเกจ</li>
-          <li>จัดทำคู่มือ อบรมผู้ใช้ และดูแลการทดสอบระบบ (UAT)</li>
-          <li>ดูแลการขึ้นระบบจริง พร้อม Hypercare 2 สัปดาห์</li>
-          <li>สนับสนุนการปิดบัญชี 1 เดือนหลังจากขึ้นระบบ</li>
-          <li>ปรับรายละเอียดให้เหมาะกับขอบเขตของแต่ละโครงการ</li>
+          <li>เก็บ<wbr>ความ<wbr>ต้องการ <wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>และ<wbr>ออกแบบ<wbr>ระบบ</li>
+          <li>ตั้งค่า<wbr>ระบบ<wbr>บัญชี <wbr>การขาย <wbr>การจัดซื้อ <wbr>และ<wbr>สินค้า<wbr>คงคลัง</li>
+          <li>รวม <wbr>JWIC <wbr>Thai <wbr>Localization <wbr>ใน<wbr>แพ็กเกจ</li>
+          <li>ย้าย <wbr>Master <wbr>Data <wbr>และ<wbr>ยอด<wbr>ยกมา<wbr>เข้า<wbr>ระบบ</li>
+          <li>จัดทำ<wbr>คู่มือ <wbr>อบรม<wbr>ผู้ใช้ <wbr>และ<wbr>ดูแล<wbr>การ<wbr>ทดสอบ<wbr>ระบบ <wbr>(UAT)</li>
+          <li>ดูแล<wbr>การ<wbr>ขึ้น<wbr>ระบบจริง <wbr>พร้อม <wbr>Hypercare <wbr>2 <wbr>สัปดาห์</li>
+          <li>สนับสนุน<wbr>การ<wbr>ปิด<wbr>บัญชี <wbr>1 <wbr>เดือน<wbr>หลังจาก<wbr>ขึ้น<wbr>ระบบ</li>
+          <li>ครอบคลุม<wbr>ทุก<wbr>โมดูล<wbr>หลัก<wbr>สำหรับ <wbr>1 <wbr>บริษัท</li>
         </ul>
         <div class="pricing-assurance">
-          <strong>ยืนยันขอบเขตและราคาก่อนเริ่มงาน</strong>
-          <p>หลังจากเก็บความต้องการและวิเคราะห์ Fit-Gap เราจะสรุปแนวทางออกแบบระบบ ขอบเขตงาน และราคาให้ยืนยันก่อนเริ่มพัฒนา หากมีงานเพิ่มเติมจะแจ้งผลกระทบและเสนอราคาให้อนุมัติก่อนดำเนินการ</p>
+          <strong>ยืนยัน<wbr>ขอบเขต<wbr>และ<wbr>ราคา<wbr>ก่อน<wbr>เริ่มงาน</strong>
+          <p>หลัง<wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>เรา<wbr>จะ<wbr>สรุป<wbr>ขอบเขต<wbr>งาน<wbr>และ<wbr>ราคา<wbr>ให้<wbr>ยืนยัน <wbr>งาน<wbr>เพิ่มเติม<wbr>จะ<wbr>แจ้ง<wbr>ผลกระทบ<wbr>และ<wbr>ขอ<wbr>อนุมัติ<wbr>ก่อน<wbr>ดำเนินการ</p>
           <div class="pricing-payment">
-            <strong>ชำระค่าบริการเมื่อเสร็จสิ้นแต่ละเฟส</strong>
-            <span>ตามแผนงานและขอบเขต</span>
+            <strong>ชำระ<wbr>ค่าบริการ<wbr>เมื่อ<wbr>เสร็จสิ้น<wbr>แต่ละ<wbr>เฟส</strong>
+            <span>ตาม<wbr>แผนงาน<wbr>และ<wbr>ขอบเขต</span>
           </div>
         </div>
-        <p class="pricing-excludes"><strong>อธิบายเพิ่มเติม</strong>*ราคาค่าบริการวางระบบนี้ไม่รวมถึง VAT 7%, ค่า Microsoft License, การเชื่อมต่อระบบภายนอก และ Customization เพิ่มเติม</p>
+        <p class="pricing-excludes"><strong>อธิบาย<wbr>เพิ่มเติม</strong>*ราคา<wbr>ค่าบริการ<wbr>วาง<wbr>ระบบ<wbr>นี้<wbr>ไม่<wbr>รวมถึง <wbr>VAT <wbr>7%, <wbr>ค่า <wbr>Microsoft <wbr>License, <wbr>การ<wbr>เชื่อมต่อ<wbr>ระบบ<wbr>ภายนอก <wbr>และ <wbr>Customization <wbr>เพิ่มเติม</p>
       </div>
     </div>
   </div>
@@ -3172,23 +3239,22 @@
     ['.slider-hint', '← Scroll for more examples →'],
     ['#pricing h2', 'A starting budget you can plan around'],
     ['#pricing > .wrap > .sub', 'A clear starting point, with the scope and final price confirmed before the project begins — so you can decide with confidence.'],
-    ['.pricing-offer h3', 'End-to-end implementation, from discovery to go-live'],
+    ['.pricing-offer h3', '<span>End-to-end implementation</span><span>from discovery to go-live</span>'],
     ['.pricing-offer-copy', 'We look after process analysis, system setup, data migration, user training, and support through the start of live operation.'],
     ['.pricing-price-prefix', 'Starting from'],
     ['.pricing-currency', 'THB'],
-    ['.pricing-cta', 'Discuss your project'],
+    ['.pricing-cta', 'Discuss your project — free'],
     ['.pricing-detail > h3', 'Included in the starting price'],
-    ['.pricing-inclusions li:nth-child(1)', 'One company'],
-    ['.pricing-inclusions li:nth-child(2)', 'Requirement workshop, fit-gap analysis, and solution design'],
-    ['.pricing-inclusions li:nth-child(3)', 'Standard Finance, Sales, Purchasing, and Inventory'],
+    ['.pricing-inclusions li:nth-child(1)', 'Requirement workshop, fit-gap analysis, and solution design'],
+    ['.pricing-inclusions li:nth-child(2)', 'Standard Finance, Sales, Purchasing, and Inventory'],
+    ['.pricing-inclusions li:nth-child(3)', 'JWIC Thai Localization included in the package'],
     ['.pricing-inclusions li:nth-child(4)', 'Migrate master data and opening balances into the system'],
-    ['.pricing-inclusions li:nth-child(5)', 'JWIC Thai Localization included in the package'],
-    ['.pricing-inclusions li:nth-child(6)', 'User manual, training, and UAT support'],
-    ['.pricing-inclusions li:nth-child(7)', 'Go-live with two weeks of hypercare'],
-    ['.pricing-inclusions li:nth-child(8)', 'Month-end closing support for one month after go-live'],
-    ['.pricing-inclusions li:nth-child(9)', 'Details tailored to each project’s agreed scope'],
+    ['.pricing-inclusions li:nth-child(5)', 'User manual, training, and UAT support'],
+    ['.pricing-inclusions li:nth-child(6)', 'Go-live with two weeks of hypercare'],
+    ['.pricing-inclusions li:nth-child(7)', 'Month-end closing support for one month after go-live'],
+    ['.pricing-inclusions li:nth-child(8)', 'Covers all core modules for one company'],
     ['.pricing-assurance strong', 'Scope and price confirmed before work begins'],
-    ['.pricing-assurance p', 'We prepare a Solution Blueprint after the requirement workshop and fit-gap analysis for your approval before implementation. Out-of-scope work is assessed and quoted separately before we proceed.'],
+    ['.pricing-assurance p', 'After the fit-gap analysis, we confirm the scope and price with you. Any additional work requires approval before we proceed.'],
     ['.pricing-payment strong', 'Payment is due upon completion of each phase'],
     ['.pricing-payment span', 'Based on the project plan and scope'],
     ['.pricing-excludes', '<strong>Additional information</strong>*This implementation service fee does not include 7% VAT, Microsoft licences, third-party integrations, or additional customisation.'],
