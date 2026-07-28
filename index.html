@@ -479,6 +479,7 @@
   .contact-form { display: grid; gap: 16px; }
   .contact-form .field { display: grid; gap: 6px; }
   .contact-form label { font-size: .85rem; font-weight: 600; color: var(--ink); }
+  .contact-form label .opt { font-weight: 500; opacity: .6; }
   .contact-form input, .contact-form textarea {
     width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px;
     background: var(--card); color: var(--text); font: inherit; font-size: .95rem;
@@ -2738,8 +2739,13 @@
           <input id="cf-name" type="text" name="name" autocomplete="name" placeholder="ชื่อผู้ติดต่อ" required>
         </div>
         <div class="field">
-          <label for="cf-contact">อีเมลหรือเบอร์โทรศัพท์</label>
-          <input id="cf-contact" type="text" name="email" autocomplete="email" placeholder="ช่องทางที่สะดวกให้ติดต่อกลับ" required>
+          <!-- ต้องเป็นอีเมลเท่านั้น: FormSubmit ใช้ค่าในช่อง email เป็น reply-to ถ้าใส่เบอร์โทรจะส่งไม่ผ่าน -->
+          <label for="cf-contact">อีเมล</label>
+          <input id="cf-contact" type="email" name="email" autocomplete="email" placeholder="อีเมลสำหรับติดต่อกลับ" required>
+        </div>
+        <div class="field">
+          <label for="cf-phone">เบอร์โทรศัพท์ <span class="opt">(ไม่บังคับ)</span></label>
+          <input id="cf-phone" type="tel" name="phone" autocomplete="tel" placeholder="เผื่อสะดวกให้โทรกลับ" inputmode="tel">
         </div>
         <div class="field">
           <label for="cf-msg">รายละเอียดที่ต้องการปรึกษา</label>
