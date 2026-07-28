@@ -71,7 +71,7 @@ const waitEvent = (method) => new Promise((r) => events.set(method, r));
 
 await cdp("Page.enable");
 // ponytail: 2x DPR so screenshots look crisp; full-page stays 1x to keep the file size sane
-const dpr = fullPage ? 1 : 2;
+const dpr = Number(argAfter("--dpr")) || (fullPage ? 1 : 2); // --dpr 1.65 = ส่งออก A4 ที่ 1310px กว้าง
 await cdp("Emulation.setDeviceMetricsOverride", { width: vw, height: vh, deviceScaleFactor: dpr, mobile: false });
 const loaded = waitEvent("Page.loadEventFired");
 await cdp("Page.navigate", { url });
@@ -88,7 +88,8 @@ if (fullPage) {
   await cdp("Emulation.setDeviceMetricsOverride", { width: vw, height: result.value, deviceScaleFactor: dpr, mobile: false });
   await new Promise((r) => setTimeout(r, 300));
 }
-const shot = await cdp("Page.captureScreenshot", { format: "png" });
+const fmt = argAfter("--format") ?? (out.endsWith(".webp") ? "webp" : out.endsWith(".jpg") ? "jpeg" : "png");
+const shot = await cdp("Page.captureScreenshot", { format: fmt, ...(fmt !== "png" && { quality: 88 }) });
 await writeFile(out, Buffer.from(shot.data, "base64"));
 console.log("screenshot:", path.resolve(out));
 
