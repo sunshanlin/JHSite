@@ -3,3 +3,6 @@ img/originals/
 
 # Browser automation artifacts
 .playwright-cli/
+
+# Automation screenshots
+output/

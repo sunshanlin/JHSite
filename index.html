@@ -426,6 +426,123 @@
     border: 1px solid var(--line); box-shadow: var(--shadow);
   }
   .poster figcaption { margin-top: 10px; font-size: .88rem; color: var(--muted); }
+  /* Business Central overview — one desktop viewport with animated, readable tiles */
+  #business-central {
+    display: grid; align-items: center; min-height: calc(100svh - 69px);
+    padding: clamp(24px, 3.8svh, 42px) 0;
+  }
+  #business-central > .wrap { width: 100%; }
+  #business-central .section-kicker { margin-bottom: 4px; }
+  #business-central h2 { max-width: none; margin-bottom: 6px; font-size: clamp(1.7rem, 2.6vw, 2.3rem); text-wrap: nowrap; }
+  @media (max-width: 1080px) { #business-central h2 { text-wrap: balance; } }
+  #business-central > .wrap > .sub {
+    max-width: 1040px; margin-bottom: clamp(14px, 2svh, 22px);
+    font-size: clamp(1.05rem, 1.45vw, 1.18rem); line-height: 1.65;
+  }
+  .bento { display: grid; gap: 12px; margin-top: 0; }
+  .bento-shot, .bento-item { border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+  .bento-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .bento-shot {
+    position: relative; display: grid; grid-column: 1 / -1; padding: 18px 18px 14px; overflow: hidden;
+    border-color: transparent;
+    background:
+      radial-gradient(120% 160% at 85% -20%, rgba(53,175,158,.28), transparent 55%),
+      radial-gradient(90% 130% at 8% 110%, rgba(194,84,112,.16), transparent 55%),
+      linear-gradient(150deg, var(--brand-teal), var(--brand-deep));
+  }
+  .bento-shot::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+    background-image:
+      linear-gradient(rgba(166,192,189,.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(166,192,189,.09) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
+            mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
+  }
+  .bento-shot figure {
+    grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center;
+    margin: 0; opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translate3d(22px, 0, 0) scale(.988);
+    transition: opacity .24s ease, transform .5s cubic-bezier(.2,.75,.2,1), visibility 0s linear .5s;
+  }
+  .bento-shot figure.is-active {
+    z-index: 1; opacity: 1; visibility: visible; pointer-events: auto; transform: none;
+    transition: opacity .32s ease .06s, transform .5s cubic-bezier(.2,.75,.2,1), visibility 0s;
+  }
+  .bento-shot a {
+    position: relative; display: block; max-width: 100%; border-radius: 14px;
+    box-shadow: 0 18px 44px -20px rgba(0,10,9,.65);
+    transition: transform .35s cubic-bezier(.2,.75,.2,1), box-shadow .35s ease;
+  }
+  .bento-shot a::after {
+    content: "ดูขนาดเต็ม ↗"; position: absolute; right: 10px; bottom: 10px; padding: 5px 11px;
+    font-size: .76rem; letter-spacing: .02em; color: #fff; white-space: nowrap;
+    background: rgba(1,47,42,.82); border-radius: 999px;
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    opacity: 0; transform: translateY(4px); transition: opacity .25s ease, transform .25s ease;
+  }
+  html[lang="en"] .bento-shot a::after { content: "View full size ↗"; }
+  .bento-shot a:hover, .bento-shot a:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 26px 54px -22px rgba(0,10,9,.75);
+  }
+  .bento-shot a:hover::after, .bento-shot a:focus-visible::after { opacity: 1; transform: none; }
+  .bento-shot img {
+    display: block; width: auto; max-width: 100%; height: clamp(230px, 31svh, 320px);
+    object-fit: contain; border-radius: 14px; background: #fff;
+  }
+  .bento-shot figcaption {
+    max-width: 72ch; margin-top: 12px; padding: 0 6px 2px; text-align: center;
+    font-size: .98rem; line-height: 1.55; color: var(--brand-mist);
+  }
+  .bento-item {
+    position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 6px;
+    width: 100%; padding: clamp(14px, 1.4vw, 18px); overflow: hidden;
+    font: inherit; text-align: left; cursor: pointer;
+    transition: border-color .28s ease, box-shadow .38s ease, transform .38s cubic-bezier(.2,.75,.2,1);
+  }
+  .bento-item::before {
+    content: ""; position: absolute; z-index: -1; inset: 0; opacity: 0;
+    background: linear-gradient(150deg, var(--brand-teal), var(--brand-deep));
+    transition: opacity .32s ease;
+  }
+  .bento-item > * { position: relative; z-index: 1; }
+  .bento-item:hover { border-color: rgba(53,175,158,.5); transform: translateY(-3px); }
+  .bento-num {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-weight: 800;
+    font-size: 1.5rem; line-height: 1; letter-spacing: .02em;
+    font-variant-numeric: tabular-nums; color: var(--brand-plum);
+    opacity: .38; transition: color .28s ease, opacity .28s ease;
+  }
+  .bento-item:hover .bento-num, .bento-item[aria-pressed="true"] .bento-num { opacity: 1; }
+  .bento-item h3 { font-size: 1.16rem; line-height: 1.45; color: var(--ink); transition: color .28s ease; }
+  .bento-item p { font-size: 1rem; line-height: 1.58; color: var(--muted); transition: color .28s ease; }
+  .bento-item[aria-pressed="true"] {
+    border-color: transparent; color: #fff; transform: translateY(-4px);
+    box-shadow: 0 18px 38px -24px rgba(1,47,42,.78);
+  }
+  .bento-item[aria-pressed="true"]::before { opacity: 1; }
+  .bento-item[aria-pressed="true"] h3 { color: #fff; }
+  .bento-item[aria-pressed="true"] p { color: var(--brand-mist); }
+  .bento-item[aria-pressed="true"] .bento-num { color: var(--brand-plum-light); }
+  @media (max-width: 1080px) {
+    #business-central { display: block; min-height: 0; }
+    .bento-tiles {
+      grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(220px, 38vw);
+      overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory;
+      padding: 4px 2px 16px; scrollbar-width: thin; scrollbar-color: var(--brand-mint) transparent;
+    }
+    .bento-item { scroll-snap-align: start; }
+  }
+  @media (max-width: 860px) {
+    .bento-shot img { width: 100%; height: auto; max-height: 320px; }
+  }
+  @media (max-width: 560px) {
+    #business-central { padding: 16px 0; }
+    #business-central > .wrap > .sub { margin-bottom: 10px; line-height: 1.55; }
+    .bento-shot img { height: 160px; }
+    .bento-tiles { grid-auto-columns: min(78vw, 270px); }
+  }
 
   .article-tag {
     display: block; margin-bottom: 10px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
@@ -534,6 +651,8 @@
     html { scroll-behavior: auto; }
     .topnav .links { transition: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
+    .bento-shot figure, .bento-shot figure.is-active, .bento-shot a, .bento-shot a::after,
+    .bento-item, .bento-item::before, .bento-item h3, .bento-item p, .bento-num { transition: none; }
   }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -2241,6 +2360,75 @@
   </div>
 </section>
 
+<section id="business-central">
+  <div class="wrap">
+    <p class="section-kicker">Overview</p>
+    <h2>Microsoft Dynamics 365 Business Central คืออะไร</h2>
+    <p class="sub">ระบบ ERP บนคลาวด์ของ Microsoft ที่รวมการเงิน การขาย การจัดซื้อ คลังสินค้า และงานโครงการไว้บนฐานข้อมูลเดียว — ได้รับการจัดอันดับเป็น Best ERP System of 2024 โดย Forbes Advisor</p>
+    <div class="bento reveal">
+      <div class="bento-shot">
+        <figure class="is-active" id="bc-shot-1">
+          <a href="img/bc-power-automate.webp" target="_blank" rel="noopener">
+            <img src="img/bc-power-automate.webp" alt="Power Automate flow ที่ส่งคำขออนุมัติอัตโนมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989">
+          </a>
+          <figcaption>ตั้ง Workflow อนุมัติ — เอกสารใหม่วิ่งเข้าผู้อนุมัติเองโดยไม่ต้องเดินกระดาษ</figcaption>
+        </figure>
+        <figure id="bc-shot-2" aria-hidden="true" inert>
+          <a href="img/bc-excel-pivot.webp" target="_blank" rel="noopener">
+            <img src="img/bc-excel-pivot.webp" alt="รายงานลูกหนี้แยกตามอายุหนี้ เปิดต่อใน Excel เป็น PivotTable พร้อม Slicer กรองตามแผนกและกลุ่มลูกค้า" loading="lazy" width="1600" height="931">
+          </a>
+          <figcaption>เปิดข้อมูลจากระบบต่อใน Excel ได้ทันที สรุปยอดด้วย PivotTable และกรองดูมุมที่ต้องการได้เอง</figcaption>
+        </figure>
+        <figure id="bc-shot-3" aria-hidden="true" inert>
+          <a href="img/bc-home.png" target="_blank" rel="noopener">
+            <img src="img/bc-home.png" alt="หน้าจอเริ่มต้นของ Business Central บนคลาวด์ แสดงชื่อบริษัทและเมนูงานตามสิทธิ์ของผู้ใช้" loading="lazy" width="1911" height="793">
+          </a>
+          <figcaption>ทำงานบนคลาวด์ผ่านเบราว์เซอร์ — เข้าใช้ด้วยบัญชี Microsoft 365 และเห็นเฉพาะเมนูที่ได้รับสิทธิ์</figcaption>
+        </figure>
+        <figure id="bc-shot-4" aria-hidden="true" inert>
+          <a href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener">
+            <img src="img/bc-powerbi-overview.webp" alt="Dashboard Power BI สรุปรายได้ กำไรสุทธิ ROA และอันดับลูกค้ารายใหญ่จากข้อมูล Business Central" loading="lazy" width="1600" height="906">
+          </a>
+          <figcaption>Dashboard สรุปรายได้ กำไร และ DSO จากข้อมูลจริงในระบบ ไม่ต้องรอปิดงบ</figcaption>
+        </figure>
+        <figure id="bc-shot-5" aria-hidden="true" inert>
+          <a href="img/bc-dashboard.png" target="_blank" rel="noopener">
+            <img src="img/bc-dashboard.png" alt="หน้าวิเคราะห์ธุรกิจใน Business Central แสดงลูกค้าที่ทำยอดขายสูงสุดและงบทดลอง" loading="lazy" width="1649" height="869">
+          </a>
+          <figcaption>ภาพรวมการขาย — เห็นลูกค้าที่ทำรายได้สูงสุดและยอดค้างรับ พร้อมเจาะดูรายละเอียดได้ทันที</figcaption>
+        </figure>
+      </div>
+      <div class="bento-tiles">
+      <button type="button" class="bento-item a-p1" aria-pressed="true" aria-controls="bc-shot-1">
+        <span class="bento-num">01</span>
+        <h3>ลดงานซ้ำด้วยระบบอัตโนมัติ</h3>
+        <p>เชื่อมงานขายถึงบัญชีให้ข้อมูลไหลต่อเนื่อง โดยไม่ต้องคีย์ซ้ำ</p>
+      </button>
+      <button type="button" class="bento-item a-p2" aria-pressed="false" aria-controls="bc-shot-2">
+        <span class="bento-num">02</span>
+        <h3>ใช้งานร่วมกับ Microsoft 365</h3>
+        <p>ทำงานต่อใน Excel, Outlook และ Teams ได้โดยตรง ไม่ต้องสลับหลายระบบ</p>
+      </button>
+      <button type="button" class="bento-item a-p3" aria-pressed="false" aria-controls="bc-shot-3">
+        <span class="bento-num">03</span>
+        <h3>ความปลอดภัยระดับองค์กร</h3>
+        <p>สำรองข้อมูลอัตโนมัติ กำหนดสิทธิ์รายผู้ใช้ และตรวจสอบย้อนหลังได้</p>
+      </button>
+      <button type="button" class="bento-item a-p4" aria-pressed="false" aria-controls="bc-shot-4">
+        <span class="bento-num">04</span>
+        <h3>ตัดสินใจจากตัวเลขจริง</h3>
+        <p>ดูยอดขาย กระแสเงินสด และสต็อกจากฐานข้อมูลเดียวกันได้ทันที</p>
+      </button>
+      <button type="button" class="bento-item a-p5" aria-pressed="false" aria-controls="bc-shot-5">
+        <span class="bento-num">05</span>
+        <h3>เพิ่มยอดขายและงานบริการ</h3>
+        <p>ติดตามงานขายตั้งแต่ใบเสนอราคาจนถึงบริการหลังการขาย และรู้ว่าลูกค้ารายใดทำรายได้หลักให้ธุรกิจ</p>
+      </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="features">
   <div class="wrap">
     <div class="tip reveal">
@@ -2951,6 +3139,22 @@
     });
   });
 
+  // Business Central overview: กดการ์ดแล้ว crossfade รูปตัวอย่างในกรอบด้านบน
+  const bentoTiles = Array.from(document.querySelectorAll('.bento-item'));
+  const bentoPanels = Array.from(document.querySelectorAll('.bento-shot figure'));
+  bentoTiles.forEach(tile => tile.addEventListener('click', () => {
+    bentoTiles.forEach(other => {
+      const on = other === tile;
+      other.setAttribute('aria-pressed', String(on));
+    });
+    bentoPanels.forEach(panel => {
+      const on = panel.id === tile.getAttribute('aria-controls');
+      panel.classList.toggle('is-active', on);
+      panel.setAttribute('aria-hidden', String(!on));
+      panel.inert = !on;
+    });
+  }));
+
   // Service timeline: run once when the section enters the viewport
   const stepsTimeline = document.querySelector('.steps');
   const serviceSteps = stepsTimeline ? Array.from(stepsTimeline.querySelectorAll('.step')) : [];
@@ -3191,7 +3395,24 @@
     ['.mini-checks li:nth-child(2)', 'Thai accounting, tax, and documents covered'],
     ['.mini-checks li:nth-child(3)', 'Continuous care from kickoff to go-live'],
     ['.service-highlight-copy .text-link', 'Ask us about your project <span aria-hidden="true">→</span>'],
-    ['.poster figcaption', 'Click to view the full service overview'],
+    ['#services .poster figcaption', 'Click to view the full service overview'],
+    ['#business-central h2', 'What is Microsoft Dynamics 365 Business Central?'],
+    ['#business-central > .wrap > .sub', 'Microsoft\'s cloud ERP — finance, sales, purchasing, inventory, and projects on a single database. Named the best ERP system of 2024 by Forbes Advisor.'],
+    ['#bc-shot-1 figcaption', 'Approval workflows run themselves — a new document reaches the approver without paper changing hands'],
+    ['#bc-shot-2 figcaption', 'Open live data in Excel — summarize with PivotTables and filter it any way you need'],
+    ['#bc-shot-3 figcaption', 'Cloud access through the browser — sign in with a Microsoft 365 account and see only the menus you are entitled to'],
+    ['#bc-shot-4 figcaption', 'Revenue, profit, and DSO from live data — no waiting for the books to close'],
+    ['#bc-shot-5 figcaption', 'Sales overview — top customers by value and outstanding receivables, drillable on the spot'],
+    ['.a-p1 h3', 'Automate the repetitive work'],
+    ['.a-p1 p', 'Keep sales and accounting data flowing end to end — without re-keying.'],
+    ['.a-p2 h3', 'Works with Microsoft 365'],
+    ['.a-p2 p', 'Work directly with Excel, Outlook, and Teams — without switching systems.'],
+    ['.a-p3 h3', 'Enterprise-grade security'],
+    ['.a-p3 p', 'Automatic backups, per-user access, and a complete audit trail.'],
+    ['.a-p4 h3', 'Decide on real numbers'],
+    ['.a-p4 p', 'See sales, cash flow, and stock instantly from one shared database.'],
+    ['.a-p5 h3', 'Boost sales and service'],
+    ['.a-p5 p', 'Follow every sale from quote to after-sales service, and know which customers drive your revenue.'],
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
     ['#features > .wrap > h2', 'JWIC Localization — Features for Thai Business'],
