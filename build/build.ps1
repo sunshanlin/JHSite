@@ -105,19 +105,34 @@ try {
 
   # --- keep only the wanted FY27 slides, in the wanted order ---------------
   # Tag first, then delete by tag, so original slide numbers stay meaningful.
+  # The tag carries the ORIGINAL FY27 page number, so config can say "fy27:22"
+  # and still find the slide after everything has been reordered around it.
   for ($i = 0; $i -lt $cfg.keepFy27.Count; $i++) {
-    $pres.Slides.Item($cfg.keepFy27[$i]).Name = 'KEEP{0:D3}' -f $i
+    $pres.Slides.Item($cfg.keepFy27[$i]).Name = 'FY27_{0}' -f $cfg.keepFy27[$i]
   }
   for ($i = $pres.Slides.Count; $i -ge 1; $i--) {
-    if ($pres.Slides.Item($i).Name -notlike 'KEEP*') { $pres.Slides.Item($i).Delete() }
+    if ($pres.Slides.Item($i).Name -notlike 'FY27_*') { $pres.Slides.Item($i).Delete() }
   }
   for ($i = 0; $i -lt $cfg.keepFy27.Count; $i++) {
-    $want = 'KEEP{0:D3}' -f $i
+    $want = 'FY27_{0}' -f $cfg.keepFy27[$i]
     for ($j = 1; $j -le $pres.Slides.Count; $j++) {
       if ($pres.Slides.Item($j).Name -eq $want) { $pres.Slides.Item($j).MoveTo($i + 1); break }
     }
   }
   Write-Host "  kept $($pres.Slides.Count) Microsoft slides"
+
+  # "fy27:22" / "new:pricing" -> current slide index. Everything in the config
+  # points at slides this way so reordering the deck cannot silently move the
+  # speaker notes and logos onto the wrong pages.
+  function Resolve-SlideRef($ref) {
+    $name = if ($ref -like 'fy27:*') { 'FY27_' + $ref.Substring(5) }
+            elseif ($ref -like 'new:*') { 'JWIC_' + $ref.Substring(4) }
+            else { throw "bad slide ref: $ref" }
+    for ($i = 1; $i -le $pres.Slides.Count; $i++) {
+      if ($pres.Slides.Item($i).Name -eq $name) { return $i }
+    }
+    throw "slide ref not found: $ref (looked for shape name '$name')"
+  }
 
   # --- Microsoft's own confidentiality / copyright / restriction wording ---
   # "Classified as Microsoft Confidential" and the copyright line live on slide
@@ -372,7 +387,7 @@ try {
   # much it actually gave back, then move the border boxes, the row icons and
   # the footnote row by that amount. Anything else leaves the borders drawn in
   # the wrong place with the last row hanging outside them.
-  $recap = $pres.Slides.Item($cfg.recap.pos)
+  $recap = $pres.Slides.Item((Resolve-SlideRef $cfg.recap.slide))
   $tblShape = $null
   for ($s = 1; $s -le $recap.Shapes.Count; $s++) {
     if ($recap.Shapes.Item($s).Type -eq 19) { $tblShape = $recap.Shapes.Item($s); break }
@@ -458,12 +473,24 @@ try {
   $contact.TextFrame.TextRange.Font.Size = 10
 
   # --- appendix: pull ranges out of the other Microsoft decks --------------
-  $at = $pres.Slides.Count
-  foreach ($a in $cfg.appendix) {
+  # Detail slides sit next to the section they belong to, not in an appendix at
+  # the back. They are all hidden, so the running order is unaffected - but when
+  # a question comes up mid-section the answer is the next slide along, not
+  # thirty pages away.
+  $inserted = @()   # ranges of slide indexes to hide, recorded as they land
+  foreach ($a in $cfg.inserts) {
     $src = $cfg.sources.($a.source)
+    $props = $a.PSObject.Properties.Name
+    $at = if ($props -contains 'after') { Resolve-SlideRef $a.after } else { $pres.Slides.Count }
     $n = $pres.Slides.InsertFromFile($src, $at, $a.from, $a.to)
-    Write-Host ("  appendix +{0,2} from {1} s{2}-{3}" -f $n, $a.source, $a.from, $a.to)
-    $at += $n
+    # parens required: PowerShell's comma binds tighter than +, so
+    # @($at + 1, $at + $n) would parse as $at + (1, $at) + $n
+    $inserted += ,@(($at + 1), ($at + $n))
+    Write-Host ("  +{0,2} from {1,-14} s{2}-{3}  -> slides {4}-{5}" -f $n, $a.source, $a.from, $a.to, ($at + 1), ($at + $n))
+    # an earlier insert shifts the ranges recorded before it, if it landed above
+    for ($k = 0; $k -lt $inserted.Count - 1; $k++) {
+      if ($inserted[$k][0] -gt $at) { $inserted[$k][0] += $n; $inserted[$k][1] += $n }
+    }
   }
   Write-Host "  deck is now $($pres.Slides.Count) slides"
 
@@ -486,12 +513,11 @@ try {
 
   # --- hide the detail slides ----------------------------------------------
   $hiddenIds = @($cfg.newSlides | Where-Object { $_.PSObject.Properties.Name -contains 'hidden' -and $_.hidden } | ForEach-Object { 'JWIC_' + $_.id })
-  $appendixStart = ($cfg.newSlides | Where-Object { $_.id -eq 'appendix-divider' }).pos
   for ($i = 1; $i -le $pres.Slides.Count; $i++) {
     $slide = $pres.Slides.Item($i)
-    if ($i -ge $appendixStart -or $hiddenIds -contains $slide.Name) {
-      $slide.SlideShowTransition.Hidden = $msoTrue
-    }
+    $hide = $hiddenIds -contains $slide.Name
+    foreach ($r in $inserted) { if ($i -ge $r[0] -and $i -le $r[1]) { $hide = $true } }
+    if ($hide) { $slide.SlideShowTransition.Hidden = $msoTrue }
   }
   $shown = 0
   for ($i = 1; $i -le $pres.Slides.Count; $i++) {
@@ -501,8 +527,8 @@ try {
 
   # --- JWIC logo on the slides that are ours -------------------------------
   $logoPath = Join-Path $cfg.imgRoot $cfg.logo.file
-  foreach ($i in $cfg.logo.onSlides) {
-    $slide = $pres.Slides.Item($i)
+  foreach ($ref in $cfg.logo.onSlides) {
+    $slide = $pres.Slides.Item((Resolve-SlideRef $ref))
     $pic = $slide.Shapes.AddPicture($logoPath, $msoFalse, $msoTrue,
              $cfg.logo.left, $cfg.logo.top, $cfg.logo.size, $cfg.logo.size)
     $pic.Name = 'JWICLogo'
@@ -512,8 +538,7 @@ try {
   # --- Thai speaker notes ---------------------------------------------------
   $notesWritten = 0
   foreach ($key in $cfg.notesTh.PSObject.Properties.Name) {
-    $idx = [int]$key
-    if ($idx -lt 1 -or $idx -gt $pres.Slides.Count) { Write-Warning "notes for slide $idx out of range"; continue }
+    $idx = Resolve-SlideRef $key
     $np = $pres.Slides.Item($idx).NotesPage
     $target = $null
     for ($s = 1; $s -le $np.Shapes.Count; $s++) {

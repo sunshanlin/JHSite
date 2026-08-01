@@ -71,25 +71,43 @@ try {
   Check 'no customer stories' `
     (($allText -notmatch 'Situation:') -and ($allText -notmatch 'Total Economic Impact')) 'a customer success slide survived'
 
-  # 3. structure
+  # 3. structure. Positions are derived from content, not hard-coded, so this
+  #    keeps working when the running order is rearranged.
   $visible = $slides.Count - $hiddenCount
-  $appendixStart = ($cfg.newSlides | Where-Object { $_.id -eq 'appendix-divider' }).pos
-  $expectedVisible = $appendixStart - 1 - @($cfg.newSlides | Where-Object { $_.PSObject.Properties.Name -contains 'hidden' -and $_.hidden -and $_.pos -lt $appendixStart }).Count
+  $hiddenNew = @($cfg.newSlides | Where-Object { $_.PSObject.Properties.Name -contains 'hidden' -and $_.hidden }).Count
+  $expectedVisible = $cfg.keepFy27.Count + $cfg.newSlides.Count - $hiddenNew
   Check "visible slides = $expectedVisible" ($visible -eq $expectedVisible) "got $visible"
-  Check 'deck has an appendix' ($slides.Count -gt $appendixStart) "only $($slides.Count) slides"
+
+  function Find-Slide($pattern) {
+    for ($i = 1; $i -le $slides.Count; $i++) { if ($slideText[$i] -match $pattern) { return $i } }
+    return 0
+  }
+  $recapAt   = Find-Slide 'Business Central Capabilities'
+  $financeAt = Find-Slide 'Increase financial\s*visibility'
 
   # 4. the closing slide is the capability recap, not an empty Thank you
-  Check 'last slide is a real closing slide' `
-    ($slideText[$appendixStart - 1] -match 'Capabilities') 'slide before the appendix is not the capability recap'
+  Check 'closing slide is the capability recap' ($recapAt -gt 0) 'no capability grid in the deck'
   Check 'JWIC banner on the closing slide' `
-    ($slideText[$appendixStart - 1] -match 'JWIC Thai Localization') 'the JWIC banner is missing'
+    ($recapAt -gt 0 -and $slideText[$recapAt] -match 'JWIC Thai Localization') 'the JWIC banner is missing'
 
   # The quote is for Essentials. Service management and Manufacturing are
   # Premium-only, so the closing slide must keep the footnote that says so -
   # otherwise the deck shows capabilities the quoted licence does not include.
   Check 'Premium footnote kept on the closing slide' `
-    ($slideText[$appendixStart - 1] -match 'Available in .{0,40}Premium') `
+    ($recapAt -gt 0 -and $slideText[$recapAt] -match 'Available in .{0,40}Premium') `
     'the Premium licensing footnote was stripped - the price page quotes Essentials'
+
+  # 4b. running order: finance detail follows the finance overview, JWIC
+  #     Localization follows that, manufacturing is last.
+  Check 'finance detail follows the finance overview' `
+    ($financeAt -gt 0 -and $slideText[$financeAt + 1] -match 'Financial capabilities') `
+    'the Finance deck slides are not directly after the finance overview'
+  Check 'JWIC Localization follows the finance detail' `
+    ((Find-Slide 'does not cover for Thailand') -gt $financeAt) `
+    'the localization section does not come after the finance block'
+  Check 'manufacturing is last' `
+    ($slideText[$slides.Count] -match 'Production Order|Manufacturing') `
+    "last slide is: $($slideText[$slides.Count])"
 
   # 5. Thai notes landed
   Check "Thai notes >= $($cfg.notesTh.PSObject.Properties.Name.Count)" `
@@ -99,7 +117,7 @@ try {
   $media = @($zip.Entries | Where-Object { $_.FullName -like 'ppt/media/*' }).Count
   Check 'media present' ($media -gt 0) 'no media at all'
   Check 'contact details on the closing slide' `
-    ($slideText[$appendixStart - 1] -match [regex]::Escape($cfg.brand.email)) 'contact line missing'
+    ($recapAt -gt 0 -and $slideText[$recapAt] -match [regex]::Escape($cfg.brand.email)) 'contact line missing'
 
   # 7. the partner placeholder was actually filled in
   Check 'partner slide names JWIC' `
