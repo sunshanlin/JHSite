@@ -1,0 +1,283 @@
+{
+  "sources": {
+    "fy27": "C:\\Users\\Admin\\OneDrive\\Other\\My Knowledge\\Slide\\FY27-D365-Business-Central-pitch-deck.pptx",
+    "finance": "C:\\Users\\Admin\\OneDrive\\Other\\My Knowledge\\Slide\\BC-for-Finance-pitch-deck.pptx",
+    "manufacturing": "C:\\Users\\Admin\\OneDrive\\Other\\My Knowledge\\Slide\\BC-For-Manufacturing-pitch-deck.pptx",
+    "reporting": "C:\\Users\\Admin\\OneDrive\\Other\\My Knowledge\\Slide\\Reporting-and-analytics-in-BC-pitch-deck-BCQX0126.pptx",
+    "pricingWorkbook": "C:\\Users\\Admin\\OneDrive\\Desktop\\JWIC-Proposal_3.xlsx"
+  },
+  "out": "D:\\JHPresales\\decks\\JWIC-BC-Core.pptx",
+  "imgRoot": "D:\\Web\\promote-site\\img",
+
+  "brand": {
+    "green": "#1c4a3c",
+    "accent": "#c07f8b",
+    "cream": "#f5f1ea",
+    "company": "JWIC Consulting",
+    "person": "Jirapat Wichayapong (Sun)",
+    "email": "jirapat.wi@outlook.co.th",
+    "phone": "+66 84-148-7480",
+    "web": "www.jwicconsulting.com"
+  },
+
+  "logo": {
+    "file": "brand\\jwic-icon.png",
+    "left": 890, "top": 470, "size": 44,
+    "onSlides": [1, 2, 13, 14, 22, 23, 25, 26]
+  },
+
+  "layout": {
+    "bodyLeft": 60, "bodyTop": 150, "bodyWidth": 420, "bodyHeight": 330,
+    "imgLeft": 515, "imgTop": 150, "imgWidth": 385, "imgHeight": 330
+  },
+
+  "keepFy27": [3, 4, 6, 7, 8, 10, 11, 13, 18, 22, 26, 32, 37, 33, 36],
+
+  "newSlides": [
+    {
+      "pos": 2,
+      "id": "jwic-intro",
+      "layout": "text",
+      "title": "JWIC Consulting",
+      "bullets": [
+        "Jirapat Wichayapong (Sun) : Business Central Functional Consultant and AL Developer",
+        "Accounting degree. Microsoft Certified : Business Central, Finance, Supply Chain Management",
+        "Independent consultant, end-to-end delivery : process analysis, setup, AL development, data migration, training, post go-live support",
+        "Delivery follows Microsoft Success by Design",
+        "JWIC Localization : a Thai tax and document extension built and maintained in-house"
+      ],
+      "image": "jirapat.jpg"
+    },
+    {
+      "pos": 13,
+      "id": "loc-divider",
+      "layout": "titleOnly",
+      "title": "What standard Business Central does not cover for Thailand",
+      "subtitle": "JWIC Localization : seven modules, one extension"
+    },
+    {
+      "pos": 14,
+      "id": "loc-overview",
+      "layout": "text",
+      "title": "JWIC Localization",
+      "bullets": [
+        "01  Value Added Tax : PP30, unrealized VAT, branch VAT",
+        "02  Withholding Tax : 50 Bis certificates, PND 2 / 3 / 53 / 54, RD Prep files",
+        "03  Billing Note : billing-day calendar, worklist, board",
+        "04  Stock and Fixed Asset Reporting : Thai-format register, stock card",
+        "05  Thai Document Forms : 20+ forms, ready to print",
+        "06  External Data via API : Bank of Thailand rates and bank holidays",
+        "07  Business Process Customization : workflow, approval, dashboards"
+      ]
+    },
+    {
+      "pos": 15, "id": "loc-01", "layout": "text", "hidden": true,
+      "title": "01  Value Added Tax",
+      "bullets": [
+        "Purchase and sales VAT reports in Thai statutory format",
+        "PP30 with head office and branch support, including separate branch filing",
+        "Unrealized VAT handled through the normal posting flow",
+        "VAT reconciliation against the general ledger before filing"
+      ],
+      "image": "pp30-report.png"
+    },
+    {
+      "pos": 16, "id": "loc-02", "layout": "text", "hidden": true,
+      "title": "02  Withholding Tax",
+      "bullets": [
+        "50 Bis certificates generated straight from Business Central",
+        "PND 2 / 3 / 53 / 54 filings",
+        "RD Prep import files : no re-keying into the Revenue Department program",
+        "WHT accrued at payment or at invoice, per company policy"
+      ],
+      "image": "rdprep-transfer.png"
+    },
+    {
+      "pos": 17, "id": "loc-03", "layout": "text", "hidden": true,
+      "title": "03  Billing Note",
+      "bullets": [
+        "Billing note documents with a billing-day calendar per customer",
+        "Billing worklist : what is due to be billed, by billing day",
+        "Billing board : status of every billing note in one screen",
+        "Billing status carried back onto the sales invoice"
+      ],
+      "image": "billing-board.png"
+    },
+    {
+      "pos": 18, "id": "loc-04", "layout": "text", "hidden": true,
+      "title": "04  Stock and Fixed Asset Reporting",
+      "bullets": [
+        "Fixed asset register in Thai statutory format",
+        "Stock card per item and location",
+        "Depreciation schedules that reconcile to the general ledger"
+      ],
+      "image": "fixed-asset-register.png"
+    },
+    {
+      "pos": 19, "id": "loc-05", "layout": "text", "hidden": true,
+      "title": "05  Thai Document Forms",
+      "bullets": [
+        "Quotation, tax invoice, receipt, credit note, debit note : 20+ forms",
+        "Thai language layout with Thai amount-in-words",
+        "Ready to print at go-live : no report development left on the critical path"
+      ],
+      "image": "credit-note.png"
+    },
+    {
+      "pos": 20, "id": "loc-06", "layout": "text", "hidden": true,
+      "title": "06  External Data via API",
+      "bullets": [
+        "Daily exchange rates pulled from the Bank of Thailand API",
+        "Bank holiday calendar from the Bank of Thailand, applied to payment and billing dates",
+        "Same integration pattern reused for other external systems"
+      ]
+    },
+    {
+      "pos": 21, "id": "loc-07", "layout": "text", "hidden": true,
+      "title": "07  Business Process Customization",
+      "bullets": [
+        "Approval workflows matched to the customer authority matrix",
+        "Role centre dashboards per function",
+        "Extensions developed in AL : upgrade-safe, no base-code modification"
+      ],
+      "image": "bc-dashboard.png"
+    },
+    {
+      "pos": 22,
+      "id": "migration",
+      "layout": "text",
+      "title": "Moving from your current accounting software",
+      "bullets": [
+        "Migrate balances, not transaction history : opening balances as at the cut-over date",
+        "Keep the old system read-only for historical lookups",
+        "Master data (customers, vendors, items, chart of accounts) migrated and validated before UAT",
+        "Cut-over planned around a month-end so the first VAT filing runs clean",
+        "Two migration passes : one test run, one final"
+      ]
+    },
+    {
+      "pos": 23,
+      "id": "sbd",
+      "layout": "text",
+      "title": "Delivery follows Microsoft Success by Design",
+      "bullets": [
+        "Discover : business process review, high-level fit-gap",
+        "Initiate : requirement workshop, solution design (BRD / EDD / SDD), scope lock",
+        "Implement : core setup, customization per SDD, test data migration, user manual",
+        "Prepare : key-user training, UAT, cut-over planning, go-live readiness review",
+        "Operate : go-live, hypercare, month-end and statutory closing walkthrough, handover to maintenance"
+      ]
+    },
+    {
+      "pos": 26,
+      "id": "pricing",
+      "layout": "titleOnly",
+      "title": "Estimated Investment",
+      "table": "pricing"
+    },
+    {
+      "pos": 27,
+      "id": "payment",
+      "layout": "titleOnly",
+      "title": "Payment Schedule",
+      "table": "payment"
+    },
+    {
+      "pos": 30,
+      "id": "appendix-divider",
+      "layout": "titleOnly",
+      "hidden": true,
+      "title": "Appendix",
+      "subtitle": "Detail slides : Finance, Manufacturing, Reporting and Analytics"
+    }
+  ],
+
+  "recap": {
+    "pos": 29,
+    "tableFontDelta": 3,
+    "rowScale": 0.75,
+    "titleTop": 12,
+    "titleHeight": 36,
+    "gridLift": 14,
+    "banner": {
+      "left": 55, "width": 850, "height": 48,
+      "line1": "JWIC Thai Localization",
+      "line2": "VAT + PP30 (head office / branch)  |  WHT 50 Bis  |  PND 2 / 3 / 53 / 54  |  RD Prep  |  Billing note + billing day  |  Thai fixed asset register  |  Stock card  |  20+ Thai document forms  |  Bank of Thailand rate and holiday API"
+    }
+  },
+
+  "appendix": [
+    { "source": "finance",       "from": 6,  "to": 20 },
+    { "source": "manufacturing", "from": 10, "to": 19 },
+    { "source": "reporting",     "from": 6,  "to": 8  },
+    { "source": "reporting",     "from": 11, "to": 21 },
+    { "source": "reporting",     "from": 25, "to": 25 },
+    { "source": "reporting",     "from": 30, "to": 31 },
+    { "source": "reporting",     "from": 33, "to": 33 },
+    { "source": "reporting",     "from": 40, "to": 40 },
+    { "source": "reporting",     "from": 63, "to": 63 },
+    { "source": "reporting",     "from": 71, "to": 71 }
+  ],
+
+  "notesTh": {
+    "1": "เปิดด้วยการขอบคุณที่ให้เวลา แนะนำตัวสั้น ๆ แล้วบอกว่าวันนี้จะพาดูสามเรื่อง หนึ่ง ปัญหาที่ธุรกิจขนาดกลางเจอตอนระบบเดิมเริ่มไม่พอ สอง Business Central แก้ให้ยังไง สาม ส่วนที่เป็นของไทยโดยเฉพาะ ที่ผมทำเองและดูแลเอง บอกด้วยว่าถ้าอยากแทรกถามระหว่างทางได้เลย ไม่ต้องรอท้าย",
+
+    "2": "แนะนำตัวเอง ผมชื่อจิรพัฒน์ ชื่อเล่นซัน เรียนจบบัญชีมา แล้วมาทำสาย Business Central ทั้งฝั่ง consultant และเขียน AL เอง สอบใบรับรองของ Microsoft ไว้สามตัว Business Central, Finance, Supply Chain ทำงานแบบรับผิดชอบตั้งแต่ต้นจนจบ ไม่ได้ส่งต่อให้ทีมอื่น ตัว JWIC Localization ที่จะเล่าให้ฟังทีหลัง ผมเขียนเองและดูแลเอง เวลามีปัญหาจึงไม่ต้องรอ vendor ต่างประเทศ",
+
+    "3": "หน้านี้คือแรงกดดันที่ธุรกิจเจอ ทรัพยากรจำกัดแต่ความคาดหวังสูงขึ้น ต้องตัดสินใจเร็วขึ้นในสภาพที่คาดเดายาก และธุรกิจโตเร็วกว่าระบบที่ใช้อยู่ ให้ถามลูกค้าตรงนี้เลยว่าข้อไหนตรงกับที่เจอที่สุด คำตอบจะเป็นตัวกำหนดว่าครึ่งหลังจะเน้นเรื่องไหน",
+
+    "4": "หน้านี้เล่าวันทำงานจริง อีเมลจากซัพพลายเออร์แจ้งของเลื่อน แล้วต้องมานั่งไล่ว่าตอนนี้มีของเท่าไหร่ ต้องถามคนนั้นคนนี้ เอกสารอยู่ในเมลใครก็ไม่รู้ ให้เล่าช้า ๆ เพราะลูกค้าจะพยักหน้าตามเอง นี่คือหน้าที่ทำให้เขารู้สึกว่าเราเข้าใจงานเขา ไม่ใช่มาขายซอฟต์แวร์",
+
+    "5": "หน้านี้เว้นไว้กรอกของลูกค้าโดยเฉพาะ ถ้าคุยรอบแรกมาแล้วให้ใส่ปัญหากับสิ่งที่เขาให้ความสำคัญลงไปก่อนเข้าห้อง ถ้ายังไม่เคยคุยให้ข้ามหน้านี้ไป อย่าใส่ข้อความทั่วไปลงไปแล้วอ่านให้ฟัง เพราะจะเสียน้ำหนักทั้งหน้า",
+
+    "6": "พอเห็นปัญหาแล้ว หน้านี้คือภาพว่าถ้าระบบถูกตัวจะเป็นยังไง ตัดสินใจจากข้อมูลชุดเดียวกัน งานมือหายไปเพราะ workflow ต่อกัน และเห็นตัวเลขทั้งบริษัทแบบ real-time ยังไม่ต้องพูดถึงชื่อผลิตภัณฑ์ในหน้านี้",
+
+    "7": "ตรงนี้เพิ่งเริ่มพูดชื่อ Business Central ให้เน้นสามชั้น ชั้นแรกคือ ERP มาตรฐานที่ Microsoft ดูแล ชั้นสองคือส่วนขยายจาก partner ทั่วโลกกว่าเจ็ดพันตัว ชั้นสามคือการปรับให้เข้ากับกระบวนการของลูกค้าเอง ซึ่งชั้นสองกับสามคือที่ที่ JWIC อยู่ ปูไว้ก่อนเพื่อไปเชื่อมกับส่วน localization ทีหลัง",
+
+    "8": "ไล่ให้ดูว่า AI ไปอยู่ตรงไหนบ้าง บัญชี งานขาย และงานคลัง ยังไม่ต้องลงรายละเอียด หน้าถัดไปจะเจาะทีละตัว ถ้าลูกค้าทำโรงงานให้เน้นบรรทัด operations ถ้าเป็นเทรดดิ้งให้เน้น sales และ orders",
+
+    "9": "Copilot รวมมาในสิทธิ์การใช้งานอยู่แล้ว ไม่ได้คิดเงินเพิ่ม ให้ยกตัวอย่างที่จับต้องได้ที่สุดคือการกระทบยอดธนาคาร ซึ่งเป็นงานที่บัญชีทุกที่ต้องทำทุกเดือน จากงานที่นั่งไล่ทีละบรรทัดกลายเป็นงานตรวจทานสิ่งที่ระบบจับคู่มาให้ ระวังอย่าสัญญาว่าแม่นร้อยเปอร์เซ็นต์ ให้บอกว่าเป็นตัวช่วยจับคู่ คนยังต้องตรวจ",
+
+    "10": "Agent ต่างจาก Copilot ตรงที่ทำงานเป็นชุดต่อเนื่องเองได้ ไม่ใช่ตอบทีละคำถาม ตัวที่ใช้ได้แล้วคือ Sales order agent กับ Payables agent ให้บอกตรง ๆ ว่าบางตัวยังเป็น public preview และคิดเงินตามการใช้งาน ไม่ได้รวมมาในค่า license ปกติ อย่าเล่าเหมือนได้ฟรีทั้งหมด",
+
+    "11": "หน้าการเงิน ประเด็นที่ควรเน้นคือปิดงบเร็วขึ้นและเห็นตัวเลขระหว่างเดือนได้ ไม่ต้องรอสิ้นงวด ถ้าลูกค้าเป็นเจ้าของกิจการจะสนใจข้อหลังมากกว่า ถ้าเป็นสมุห์บัญชีจะสนใจข้อแรกมากกว่า ดูหน้าคนฟังแล้วเลือกน้ำหนัก",
+
+    "12": "จุดขายที่ partner เจ้าอื่นไม่มีทางเถียง คือลูกค้าใช้ Excel Outlook Teams อยู่แล้ว Business Central อยู่ในบ้านหลังเดียวกัน ข้อมูลเดียวกัน ล็อกอินเดียวกัน สิทธิ์เดียวกัน ไม่ต้องมาทำ SSO เพิ่มทีหลัง",
+
+    "13": "หน้านี้คือรอยต่อ ให้พูดตรง ๆ ว่า ทุกอย่างที่เล่ามาเมื่อกี้คือของที่ Microsoft ทำมาให้เหมือนกันทุกประเทศ แต่มีอีกชุดหนึ่งที่ Microsoft ไม่ได้ทำให้ประเทศไทย และเป็นชุดที่ทำให้ระบบใช้งานจริงได้หรือไม่ได้ นั่นคือส่วนที่ผมทำเอง จังหวะนี้คือจังหวะที่ลูกค้าจะเริ่มฟังจริง เพราะเป็นปัญหาที่เขาเจอเองทุกเดือน",
+
+    "14": "ไล่ทั้งเจ็ดโมดูลแบบผ่าน ๆ ก่อน ใช้เวลาไม่เกินหนึ่งนาที แล้วถามว่าอยากดูตัวไหนลึก แล้วค่อยกดไปหน้านั้น หน้า 15 ถึง 21 ซ่อนไว้ไม่ได้ฉายอัตโนมัติ กด go-to-slide เอาตอนถูกถาม อย่าไล่ทั้งเจ็ดหน้าให้ฟังถ้าเขาไม่ได้ถาม เพราะจะกลายเป็นสาธิตฟีเจอร์แทนที่จะเป็นการคุยงาน",
+
+    "15": "ภาพนี้คือรายงาน ภ.พ.30 จากระบบจริง จุดที่ต้องเน้นคือ BC มาตรฐานไม่มีรายงานนี้ ต้องมีคนทำเพิ่มเสมอ และเรื่องสำนักงานใหญ่กับสาขาที่ยื่นแยกกัน เป็นจุดที่ระบบต่างประเทศมักตกไป",
+
+    "16": "ภาพนี้คือการโอนข้อมูลเข้าไฟล์ RD Prep จุดที่ลูกค้าฟังแล้วเข้าใจทันทีคือ ไม่ต้องคีย์ซ้ำ ปกติบัญชีจะออกหนังสือรับรองจากระบบหนึ่ง แล้วมานั่งคีย์เข้าโปรแกรมกรมสรรพากรอีกรอบ ตรงนี้ตัดทิ้งได้ทั้งขั้นตอน",
+
+    "17": "ใบวางบิลกับวันวางบิลเป็นเรื่องที่ไม่มีใน BC มาตรฐานเลย ทั้งที่ธุรกิจไทยเกือบทุกรายใช้ ถ้าลูกค้าขายแบบ B2B เขาจะเข้าใจทันที และมักจะเป็นจุดที่ทำให้เขาเชื่อว่าเราเข้าใจงานไทยจริง ไม่ใช่แค่แปลเมนู",
+
+    "18": "ทะเบียนทรัพย์สินรูปแบบไทยกับ stock card เป็นสองอย่างที่ผู้สอบบัญชีขอทุกปี ถ้าระบบออกให้ไม่ได้ก็ต้องทำมือใน Excel ทุกปีเช่นกัน",
+
+    "19": "ฟอร์มเอกสารครบชุดตั้งแต่ใบเสนอราคาถึงใบลดหนี้ ประเด็นที่ควรพูดคือเรื่องเวลา ปกติงานทำฟอร์มจะไปกองอยู่ช่วงท้ายโครงการพอดีกับตอนที่ทุกคนยุ่งที่สุด พอมีชุดสำเร็จอยู่แล้วก็เอาออกจากเส้นทางวิกฤตได้",
+
+    "20": "ดึงอัตราแลกเปลี่ยนกับวันหยุดธนาคารจาก API ของแบงก์ชาติ ไม่ต้องมีคนมาคีย์เรตทุกเช้า และวันหยุดธนาคารมีผลกับวันนัดชำระกับวันวางบิลโดยตรง หน้านี้ไม่มีภาพประกอบ ถ้าลูกค้าสนใจให้เปิดบทความบนเว็บให้ดูแทน",
+
+    "21": "ปิดส่วน localization ด้วยเรื่องการปรับให้เข้ากับกระบวนการของเขาเอง ย้ำว่าพัฒนาเป็น extension ด้วย AL ไม่ได้ไปแก้โค้ดฐาน เพราะฉะนั้นตอน Microsoft อัปเดตปีละสองครั้ง ของที่ทำเพิ่มไม่พัง",
+
+    "22": "หน้านี้ตอบคำถามที่ลูกค้าถามเกือบทุกรายว่าข้อมูลเดิมจะเอาไปยังไง คำตอบคือย้ายยอด ไม่ย้ายประวัติ ยอดยกมา ณ วันตัดระบบ ส่วนประวัติเก่าให้เปิดระบบเดิมค้างไว้อ่านอย่างเดียว วิธีนี้ทำให้โครงการไม่บานปลาย และตัดคัตโอเวอร์ให้ตรงสิ้นเดือน เพื่อให้การยื่นภาษีเดือนแรกออกมาสะอาด",
+
+    "23": "อธิบายว่าเราไม่ได้ทำตามใจ แต่ทำตามกรอบที่ Microsoft ถอดบทเรียนจากโครงการจริงมา ห้าเฟส แต่ละเฟสมีจุดที่ลูกค้าต้องเซ็นรับ ซึ่งจะไปตรงกับตารางการจ่ายเงินในอีกสองหน้าถัดไปพอดี ให้เชื่อมสองหน้านี้เข้าด้วยกันตอนพูด เพราะมันคือเหตุผลว่าทำไมงวดจ่ายถึงแบ่งแบบนั้น",
+
+    "24": "หน้าสรุปว่า BC ตอบครบทุกข้อ ใช้เป็นหน้าเช็กลิสต์ อ่านเร็ว ๆ ไม่ต้องลงลึก เพราะรายละเอียดอยู่ในหน้าที่ผ่านมาแล้วทั้งหมด",
+
+    "25": "หน้านี้คือหน้าที่ตอบว่าทำไมต้องเป็นเรา ให้พูดสามข้อ หนึ่ง คนที่คุยกับคุณวันนี้คือคนที่จะลงมือทำจริง ไม่ได้ส่งต่อ สอง ตัว localization ผมเขียนเองและดูแลเอง แก้ได้ทันทีไม่ต้องรอใคร สาม จบบัญชีมา เพราะฉะนั้นเวลาคุยเรื่องปิดงบหรือภาษีจะคุยภาษาเดียวกันกับทีมบัญชีของคุณ",
+
+    "26": "เข้าเรื่องเงิน ให้แยกสองก้อนให้ชัดตั้งแต่ประโยคแรก ก้อนแรกคือค่า license ของ Microsoft ซึ่งเป็นรายปีและจ่ายตามจำนวนผู้ใช้ ก้อนที่สองคือค่าวางระบบซึ่งจ่ายครั้งเดียว แล้วชี้ให้ดูว่าชุด Thai Localization รวมมาแล้วไม่คิดเพิ่ม รวมถึงการดูแลปิดงวดแรกและยื่นภาษีรอบแรกด้วย ส่วนค่าดูแลรายปีเป็นคนละก้อน อย่ารวมเข้าไปในยอดครั้งเดียว",
+
+    "27": "ตารางนี้คือเหตุผลว่าทำไมลูกค้าถึงควรสบายใจ เพราะเงินแต่ละงวดผูกกับงานที่เซ็นรับแล้วเท่านั้น ไม่ได้จ่ายตามเวลาที่ผ่านไป ถ้างานยังไม่ผ่านการเซ็นรับก็ยังไม่ถึงงวดจ่าย ให้ชี้กลับไปที่หน้า Success by Design เมื่อกี้ว่าชื่อเฟสตรงกันทุกบรรทัด",
+
+    "28": "ขั้นต่อไป ปกติผมจะเสนอสองทางเลือก ทางแรกคือเปิด trial ให้ลองเล่นเองก่อน ทางที่สองคือนัดคุยเก็บความต้องการแบบเจาะ ถ้าคุยแล้วเขายังไม่พร้อมตัดสินใจ ให้เลือกทางแรก อย่าดันไปที่ทางที่สอง",
+
+    "29": "หน้าปิด ตรงนี้ไล่ความสามารถทั้งหมดรวดเดียว ไล่จากบล็อกซ้ายบนไปขวาล่างแบบไม่หยุด เพื่อให้เห็นว่าที่คุยกันมาทั้งชั่วโมงเป็นแค่ส่วนหนึ่งของสิ่งที่ระบบทำได้\n\nเริ่มที่ Finance and Accounting แยกบัญชี งบประมาณ มิติไม่จำกัด หลายสกุลเงิน หลายบริษัท รวมงบ กระทบยอดธนาคาร ทรัพย์สินถาวร บัญชีต้นทุน รายการรอตัดบัญชี และการคาดการณ์กระแสเงินสด\n\nต่อด้วย Sales and marketing งานลูกค้าสัมพันธ์ โอกาสการขาย บันทึกการติดต่อ และแคมเปญ ต่อที่ Fulfillment and delivery ใบแจ้งหนี้ ใบสั่งขาย ส่วนลดตามบรรทัดและตามใบ การรับคืนและเปลี่ยนสินค้า\n\nฝั่งซื้อ Purchasing and payables ใบแจ้งหนี้ซื้อ ใบสั่งซื้อ ใบสั่งคืน ที่อยู่จัดส่งทางเลือก ต่อที่ Inventory ควบคุมสต็อก หมวดและคุณลักษณะสินค้า ติดตามล็อตและซีเรียล หลายคลัง โอนย้ายระหว่างคลัง\n\nSupply planning and availability วางแผนอุปทาน พยากรณ์ความต้องการ ยืนยันวันส่งของ ปฏิทินการทำงาน ต่อที่ Project management ทรัพยากร ความสามารถ ต้นทุนหลายแบบ ใบบันทึกเวลา\n\nอีกสามกลุ่มอยู่ในรุ่น Premium คือ Service management งานบริการและสัญญาบริการ Warehouse management บิน การจัดเก็บและหยิบ ใบรับและใบส่งของคลัง และ Manufacturing ประกอบสินค้า สูตรการผลิต วางแผนกำลังการผลิต ศูนย์เครื่องจักร งานจ้างผลิตภายนอก\n\nแล้วปิดที่แถบล่าง ซึ่งเป็นส่วนที่ไม่ได้มาจาก Microsoft แต่มาจากผม ภาษีมูลค่าเพิ่มและ ภ.พ.30 ทั้งสำนักงานใหญ่และสาขา หนังสือรับรองหัก ณ ที่จ่าย 50 ทวิ ภ.ง.ด. 2 3 53 54 ไฟล์ RD Prep ใบวางบิลพร้อมวันวางบิล ทะเบียนทรัพย์สินรูปแบบไทย stock card ฟอร์มเอกสารภาษาไทยกว่ายี่สิบแบบ และการดึงอัตราแลกเปลี่ยนกับวันหยุดธนาคารจากแบงก์ชาติ\n\nประโยคปิด ที่ไล่มาทั้งหมดนี้ แถบบนคือของที่ Microsoft ทำและดูแล ส่วนแถบล่างคือของที่ผมทำและดูแลเอง สองส่วนนี้รวมกันคือระบบที่ใช้งานได้จริงในประเทศไทย ถ้ามีตรงไหนที่อยากดูละเอียด บอกได้เลยครับ ผมมีสไลด์รายละเอียดของทุกหัวข้อในไฟล์นี้อยู่แล้ว",
+
+    "30": "หน้าตั้งแต่นี้ไปคือสไลด์รายละเอียด ซ่อนไว้ทั้งหมด ไม่ได้ฉายตามลำดับ ระหว่าง present ถ้าโดนถามให้กดหมายเลขหน้าแล้ว Enter เพื่อกระโดดไปหน้านั้นได้ทันที"
+  }
+}
