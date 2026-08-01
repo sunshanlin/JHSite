@@ -60,9 +60,15 @@
       "MICROSOFT MAKES NO WARRANTIES",
       "© Microsoft Corporation"
     ],
+    "_swapsWhy": "The five boxes on fy27:37 are Microsoft's placeholder pitch - every partner using this deck shows the same five. Microsoft's own seller note says to replace them with your value adds.",
     "textSwaps": {
       "work with us as your partner": "work with JWIC Consulting as your partner",
-      "<insert company name>": "JWIC Consulting"
+      "<insert company name>": "JWIC Consulting",
+      "Expertise in your industry": "One consultant end-to-end : who you meet is who delivers",
+      "Dedicated local support": "Thai localization built and maintained in-house",
+      "Business process expertise": "Accounting degree : same language as your finance team",
+      "Regulatory expertise": "Thai VAT, WHT and filings straight from the system",
+      "Direct support on your AI journey": "Microsoft certified : BC, Finance, Supply Chain"
     }
   },
 
@@ -299,7 +305,7 @@
 
     "fy27:32": "หน้าสรุปว่า BC ตอบครบทุกข้อ ใช้เป็นหน้าเช็กลิสต์ อ่านเร็ว ๆ ไม่ต้องลงลึก เพราะรายละเอียดอยู่ในหน้าที่ผ่านมาแล้วทั้งหมด",
 
-    "fy27:37": "หน้านี้คือหน้าที่ตอบว่าทำไมต้องเป็นเรา ให้พูดสามข้อ หนึ่ง คนที่คุยกับคุณวันนี้คือคนที่จะลงมือทำจริง ไม่ได้ส่งต่อ สอง ตัว localization ผมเขียนเองและดูแลเอง แก้ได้ทันทีไม่ต้องรอใคร สาม จบบัญชีมา เพราะฉะนั้นเวลาคุยเรื่องปิดงบหรือภาษีจะคุยภาษาเดียวกันกับทีมบัญชีของคุณ",
+    "fy27:37": "หน้านี้คือหน้าที่ตอบว่าทำไมต้องเป็นเรา ไล่ตามกล่องทั้งห้า หนึ่ง คนที่คุยกับคุณวันนี้คือคนที่จะลงมือทำจริง ไม่ได้ขายแล้วส่งต่อให้ทีมอื่น สอง ตัว localization ผมเขียนเองและดูแลเอง แก้ได้ทันทีไม่ต้องรอ vendor สาม จบบัญชีมา เวลาคุยเรื่องปิดงบหรือภาษีจะคุยภาษาเดียวกันกับทีมบัญชีของคุณ สี่ ภาษีไทยออกจากระบบตรง ๆ ไม่ต้องไปทำต่อใน Excel ห้า ใบรับรองของ Microsoft สามตัวยืนยันว่าไม่ได้รู้แค่ฝั่งบัญชี น้ำหนักให้ลงที่สามข้อแรก สองข้อหลังพูดผ่านได้",
 
     "new:pricing": "เข้าเรื่องเงิน ให้แยกสองก้อนให้ชัดตั้งแต่ประโยคแรก ก้อนแรกคือค่า license ของ Microsoft ซึ่งเป็นรายปีและจ่ายตามจำนวนผู้ใช้ ก้อนที่สองคือค่าวางระบบซึ่งจ่ายครั้งเดียว แล้วชี้ให้ดูว่าชุด Thai Localization รวมมาแล้วไม่คิดเพิ่ม รวมถึงการดูแลปิดงวดแรกและยื่นภาษีรอบแรกด้วย ส่วนค่าดูแลรายปีเป็นคนละก้อน อย่ารวมเข้าไปในยอดครั้งเดียว",
 

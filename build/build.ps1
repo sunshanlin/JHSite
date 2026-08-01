@@ -511,6 +511,14 @@ try {
   }
   Write-Host "  stripped $stripped confidentiality / copyright / restriction shapes"
 
+  # The five value boxes on the partner slide were sized for Microsoft's
+  # two-word placeholders; the JWIC text is longer and spills out the bottom.
+  $why = $pres.Slides.Item((Resolve-SlideRef 'fy27:37'))
+  for ($s = 1; $s -le $why.Shapes.Count; $s++) {
+    $sh = $why.Shapes.Item($s)
+    if ($sh.Name -eq 'Text Placeholder 2') { $sh.Height = [float]($sh.Height + 70) }
+  }
+
   # --- hide the detail slides ----------------------------------------------
   $hiddenIds = @($cfg.newSlides | Where-Object { $_.PSObject.Properties.Name -contains 'hidden' -and $_.hidden } | ForEach-Object { 'JWIC_' + $_.id })
   for ($i = 1; $i -le $pres.Slides.Count; $i++) {

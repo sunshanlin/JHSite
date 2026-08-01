@@ -119,9 +119,13 @@ try {
   Check 'contact details on the closing slide' `
     ($recapAt -gt 0 -and $slideText[$recapAt] -match [regex]::Escape($cfg.brand.email)) 'contact line missing'
 
-  # 7. the partner placeholder was actually filled in
+  # 7. the partner placeholder was actually filled in - title AND the five
+  #    value boxes, which are Microsoft's generic pitch until replaced
   Check 'partner slide names JWIC' `
     ($allText -match [regex]::Escape($cfg.brand.company)) 'JWIC Consulting appears nowhere in the deck'
+  Check 'partner slide carries JWIC value adds, not the placeholder five' `
+    (($allText -notmatch 'Expertise in your industry') -and ($allText -match 'built and maintained in-house')) `
+    "Microsoft's placeholder value boxes are still on the partner slide"
 }
 finally { $zip.Dispose() }
 
