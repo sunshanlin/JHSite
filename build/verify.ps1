@@ -55,7 +55,7 @@ try {
     ($allText -notmatch 'Note to (Sellers|Partners)') 'presenter-only annotation still on a slide'
 
   # 1b. Microsoft's confidentiality / copyright / warranty / restriction wording
-  $restrictPat = 'Classified as|Microsoft Confidential|All rights reserved|Copyright Microsoft|MAKES NO WARRANTIES|Available in .{0,40}Premium|management\*|Manufacturing\*'
+  $restrictPat = 'Classified as|Microsoft Confidential|All rights reserved|Copyright Microsoft|MAKES NO WARRANTIES'
   $restricted = @()
   foreach ($e in $zip.Entries) {
     if ($e.FullName -notmatch '^ppt/(slides|slideLayouts|slideMasters|notesSlides)/.*\.xml$') { continue }
@@ -83,6 +83,13 @@ try {
     ($slideText[$appendixStart - 1] -match 'Capabilities') 'slide before the appendix is not the capability recap'
   Check 'JWIC banner on the closing slide' `
     ($slideText[$appendixStart - 1] -match 'JWIC Thai Localization') 'the JWIC banner is missing'
+
+  # The quote is for Essentials. Service management and Manufacturing are
+  # Premium-only, so the closing slide must keep the footnote that says so -
+  # otherwise the deck shows capabilities the quoted licence does not include.
+  Check 'Premium footnote kept on the closing slide' `
+    ($slideText[$appendixStart - 1] -match 'Available in .{0,40}Premium') `
+    'the Premium licensing footnote was stripped - the price page quotes Essentials'
 
   # 5. Thai notes landed
   Check "Thai notes >= $($cfg.notesTh.PSObject.Properties.Name.Count)" `
