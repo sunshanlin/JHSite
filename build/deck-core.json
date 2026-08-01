@@ -33,6 +33,27 @@
 
   "keepFy27": [3, 4, 6, 7, 8, 10, 11, 13, 18, 22, 26, 32, 37, 33, 36],
 
+  "strip": {
+    "_why": "Microsoft's own confidentiality, copyright, warranty and licence-restriction wording. Applied to slides, layouts and masters after the appendix is pulled in.",
+    "shapes": [
+      "Classified as|Microsoft Confidential",
+      "^\\s*Note to (Sellers|Partners)",
+      "Copyright Microsoft Corporation|All rights reserved",
+      "\\*\\s*Available in .*Premium"
+    ],
+    "notesShapes": [
+      "MICROSOFT MAKES NO WARRANTIES",
+      "© Microsoft Corporation"
+    ],
+    "textSwaps": {
+      "work with us as your partner": "work with JWIC Consulting as your partner",
+      "<insert company name>": "JWIC Consulting",
+      "Service management*": "Service management",
+      "Manufacturing*": "Manufacturing"
+    }
+  },
+
+
   "newSlides": [
     {
       "pos": 2,

@@ -119,57 +119,53 @@ try {
   }
   Write-Host "  kept $($pres.Slides.Count) Microsoft slides"
 
-  # --- strip presenter-only annotations ------------------------------------
-  # "Note to Sellers/Partners" boxes are internal guidance printed on the
-  # slide itself. They must never reach a customer.
-  $stripped = 0
-  for ($i = 1; $i -le $pres.Slides.Count; $i++) {
-    $slide = $pres.Slides.Item($i)
-    $kill = @()
-    for ($s = 1; $s -le $slide.Shapes.Count; $s++) {
-      $sh = $slide.Shapes.Item($s)
-      if ($sh.HasTextFrame -ne $msoTrue) { continue }
-      if ($sh.TextFrame.HasText -ne $msoTrue) { continue }
-      if ($sh.TextFrame.TextRange.Text -match '^\s*Note to (Sellers|Partners)') { $kill += $s }
-    }
-    foreach ($s in ($kill | Sort-Object -Descending)) { $slide.Shapes.Item($s).Delete(); $stripped++ }
-  }
-  Write-Host "  stripped $stripped presenter-only note boxes"
-
-  # --- drop Microsoft's internal classification footer ---------------------
-  # "Classified as Microsoft Confidential" lives on a slide master and prints
-  # on every slide, including the pricing page. It must not reach a customer.
-  function Remove-ClassificationBanner($shapes) {
+  # --- Microsoft's own confidentiality / copyright / restriction wording ---
+  # "Classified as Microsoft Confidential" and the copyright line live on slide
+  # masters and print on every slide, including the pricing page.
+  # Patterns come from deck-core.json so what gets cut is visible in one place.
+  function Remove-MatchingShapes($shapes, $patterns) {
     $kill = @()
     for ($s = 1; $s -le $shapes.Count; $s++) {
       $sh = $shapes.Item($s)
       if ($sh.HasTextFrame -ne $msoTrue) { continue }
       if ($sh.TextFrame.HasText -ne $msoTrue) { continue }
-      if ($sh.TextFrame.TextRange.Text -match 'Classified as|Microsoft Confidential') { $kill += $s }
+      $t = $sh.TextFrame.TextRange.Text
+      foreach ($p in $patterns) { if ($t -match $p) { $kill += $s; break } }
     }
     foreach ($s in ($kill | Sort-Object -Descending)) { $shapes.Item($s).Delete() }
     return $kill.Count
   }
-  # (invoked after the appendix is pulled in - InsertFromFile brings in more
-  #  slide masters, each carrying its own copy of the banner)
 
-  # --- rewrite Microsoft's partner placeholders ----------------------------
-  $swaps = @{
-    'work with us as your partner'      = "work with $($cfg.brand.company) as your partner"
-    '<insert company name>'             = $cfg.brand.company
-  }
-  for ($i = 1; $i -le $pres.Slides.Count; $i++) {
-    $slide = $pres.Slides.Item($i)
-    for ($s = 1; $s -le $slide.Shapes.Count; $s++) {
-      $sh = $slide.Shapes.Item($s)
-      if ($sh.HasTextFrame -ne $msoTrue) { continue }
-      if ($sh.TextFrame.HasText -ne $msoTrue) { continue }
-      $t = $sh.TextFrame.TextRange.Text
-      $new = $t
-      foreach ($k in $swaps.Keys) { $new = $new.Replace($k, $swaps[$k]) }
-      if ($new -ne $t) { $sh.TextFrame.TextRange.Text = $new }
+  # Replace() edits in place and keeps the run formatting. Assigning to
+  # TextRange.Text would flatten a heading back to body style.
+  function Update-TextRange($range, $swaps) {
+    foreach ($k in $swaps.PSObject.Properties.Name) {
+      $guard = 0
+      while ($null -ne $range.Replace($k, $swaps.$k) -and $guard -lt 20) { $guard++ }
     }
   }
+  function Update-ShapeText($shapes, $swaps) {
+    for ($s = 1; $s -le $shapes.Count; $s++) {
+      $sh = $shapes.Item($s)
+      # a table shape has no TextFrame of its own - the text is in the cells,
+      # which is where the capability headings on the closing slide live
+      if ($sh.Type -eq 19) {
+        $t = $sh.Table
+        for ($r = 1; $r -le $t.Rows.Count; $r++) {
+          for ($c = 1; $c -le $t.Columns.Count; $c++) {
+            $tf = $t.Cell($r, $c).Shape.TextFrame
+            if ($tf.HasText -eq $msoTrue) { Update-TextRange $tf.TextRange $swaps }
+          }
+        }
+        continue
+      }
+      if ($sh.HasTextFrame -ne $msoTrue) { continue }
+      if ($sh.TextFrame.HasText -ne $msoTrue) { continue }
+      Update-TextRange $sh.TextFrame.TextRange $swaps
+    }
+  }
+  # (both invoked after the appendix is pulled in - InsertFromFile brings in
+  #  more slide masters, each carrying its own copy of this wording)
 
   # --- insert the new JWIC slides, ascending by final position -------------
   function Set-BodyText($slide, $bullets) {
@@ -379,18 +375,22 @@ try {
   }
   Write-Host "  deck is now $($pres.Slides.Count) slides"
 
-  $classRemoved = 0
+  $pat = $cfg.strip.shapes
+  $stripped = 0
   for ($d = 1; $d -le $pres.Designs.Count; $d++) {
     $master = $pres.Designs.Item($d).SlideMaster
-    $classRemoved += Remove-ClassificationBanner $master.Shapes
+    $stripped += Remove-MatchingShapes $master.Shapes $pat
+    Update-ShapeText $master.Shapes $cfg.strip.textSwaps
     for ($l = 1; $l -le $master.CustomLayouts.Count; $l++) {
-      $classRemoved += Remove-ClassificationBanner $master.CustomLayouts.Item($l).Shapes
+      $stripped += Remove-MatchingShapes $master.CustomLayouts.Item($l).Shapes $pat
+      Update-ShapeText $master.CustomLayouts.Item($l).Shapes $cfg.strip.textSwaps
     }
   }
   for ($i = 1; $i -le $pres.Slides.Count; $i++) {
-    $classRemoved += Remove-ClassificationBanner $pres.Slides.Item($i).Shapes
+    $stripped += Remove-MatchingShapes $pres.Slides.Item($i).Shapes $pat
+    Update-ShapeText $pres.Slides.Item($i).Shapes $cfg.strip.textSwaps
   }
-  Write-Host "  removed $classRemoved 'Microsoft Confidential' banners"
+  Write-Host "  stripped $stripped confidentiality / copyright / restriction shapes"
 
   # --- hide the detail slides ----------------------------------------------
   $hiddenIds = @($cfg.newSlides | Where-Object { $_.PSObject.Properties.Name -contains 'hidden' -and $_.hidden } | ForEach-Object { 'JWIC_' + $_.id })
@@ -435,6 +435,15 @@ try {
     $notesWritten++
   }
   Write-Host "  wrote $notesWritten Thai speaker notes"
+
+  # Microsoft's warranty boilerplate sits in its own box on the notes page and
+  # would print under the talk track on every handout. Do this after the Thai
+  # notes are written, or the shape indexes shift underneath them.
+  $notesStripped = 0
+  for ($i = 1; $i -le $pres.Slides.Count; $i++) {
+    $notesStripped += Remove-MatchingShapes $pres.Slides.Item($i).NotesPage.Shapes $cfg.strip.notesShapes
+  }
+  Write-Host "  stripped $notesStripped legal boxes from notes pages"
 
   $pres.Save()
   Write-Host "DONE: $($cfg.out)  ($($pres.Slides.Count) slides)"

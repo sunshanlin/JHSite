@@ -54,15 +54,18 @@ try {
   Check 'no "Note to Sellers/Partners" boxes' `
     ($allText -notmatch 'Note to (Sellers|Partners)') 'presenter-only annotation still on a slide'
 
-  # 1b. Microsoft's internal classification footer is gone from every part
-  $classified = @()
+  # 1b. Microsoft's confidentiality / copyright / warranty / restriction wording
+  $restrictPat = 'Classified as|Microsoft Confidential|All rights reserved|Copyright Microsoft|MAKES NO WARRANTIES|Available in .{0,40}Premium|management\*|Manufacturing\*'
+  $restricted = @()
   foreach ($e in $zip.Entries) {
-    if ($e.FullName -notmatch '^ppt/(slides|slideLayouts|slideMasters)/.*\.xml$') { continue }
+    if ($e.FullName -notmatch '^ppt/(slides|slideLayouts|slideMasters|notesSlides)/.*\.xml$') { continue }
     $sr = New-Object IO.StreamReader($e.Open())
     try { $xml = $sr.ReadToEnd() } finally { $sr.Close() }
-    if ($xml -match 'Classified as|Microsoft Confidential') { $classified += $e.FullName }
+    $flat = ([regex]::Matches($xml, '<a:t>(.*?)</a:t>') | ForEach-Object { $_.Groups[1].Value }) -join ' '
+    if ($flat -match $restrictPat) { $restricted += ($e.FullName -replace '^ppt/', '') }
   }
-  Check 'no "Microsoft Confidential" footer' ($classified.Count -eq 0) ($classified -join ', ')
+  Check 'no Microsoft confidentiality / copyright / restriction wording' `
+    ($restricted.Count -eq 0) ($restricted -join ', ')
 
   # 2. customer success is gone
   Check 'no customer stories' `
