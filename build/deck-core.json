@@ -23,12 +23,24 @@
   "logo": {
     "file": "brand\\jwic-icon.png",
     "left": 890, "top": 470, "size": 44,
-    "onSlides": [1, 2, 13, 14, 22, 23, 25, 26]
+    "_note": "divider slides carry a cream wordmark instead - the green logo would vanish into the green background",
+    "onSlides": [1, 2, 14, 22, 23, 25, 26]
   },
 
   "layout": {
-    "bodyLeft": 60, "bodyTop": 150, "bodyWidth": 420, "bodyHeight": 330,
-    "imgLeft": 515, "imgTop": 150, "imgWidth": 385, "imgHeight": 330
+    "titleLeft": 60, "titleTop": 42, "titleWidth": 840, "titleHeight": 56, "titleSize": 32,
+    "badgeSize": 52,
+    "ruleTop": 110, "ruleWidth": 88, "ruleHeight": 3,
+
+    "bodyLeft": 60, "bodyTop": 146, "bodyWidth": 400, "bodyHeight": 330,
+    "bodyWideWidth": 840,
+    "imgLeft": 500, "imgTop": 146, "imgWidth": 400, "imgHeight": 330,
+
+    "dividerRuleTop": 246, "dividerTitleTop": 264, "dividerTitleSize": 40,
+    "dividerSubTop": 384, "dividerSubSize": 20, "dividerMarkTop": 468,
+
+    "gridLeft": 60, "gridTop": 160, "gridColWidth": 400, "gridColGap": 40,
+    "gridRowHeight": 88, "gridBadge": 34
   },
 
   "keepFy27": [3, 4, 6, 7, 8, 10, 11, 13, 18, 22, 26, 32, 37, 33, 36],
@@ -72,23 +84,23 @@
     {
       "pos": 13,
       "id": "loc-divider",
-      "layout": "titleOnly",
+      "layout": "divider",
       "title": "What standard Business Central does not cover for Thailand",
       "subtitle": "JWIC Localization : seven modules, one extension"
     },
     {
       "pos": 14,
       "id": "loc-overview",
-      "layout": "text",
+      "layout": "grid",
       "title": "JWIC Localization",
-      "bullets": [
-        "01  Value Added Tax : PP30, unrealized VAT, branch VAT",
-        "02  Withholding Tax : 50 Bis certificates, PND 2 / 3 / 53 / 54, RD Prep files",
-        "03  Billing Note : billing-day calendar, worklist, board",
-        "04  Stock and Fixed Asset Reporting : Thai-format register, stock card",
-        "05  Thai Document Forms : 20+ forms, ready to print",
-        "06  External Data via API : Bank of Thailand rates and bank holidays",
-        "07  Business Process Customization : workflow, approval, dashboards"
+      "grid": [
+        { "n": "01", "name": "Value Added Tax",              "detail": "PP30, unrealized VAT, branch VAT" },
+        { "n": "02", "name": "Withholding Tax",              "detail": "50 Bis certificates, PND 2 / 3 / 53 / 54, RD Prep files" },
+        { "n": "03", "name": "Billing Note",                 "detail": "billing-day calendar, worklist, board" },
+        { "n": "04", "name": "Stock and Fixed Asset Reports", "detail": "Thai-format register, stock card, depreciation" },
+        { "n": "05", "name": "Thai Document Forms",           "detail": "20+ forms, ready to print at go-live" },
+        { "n": "06", "name": "External Data via API",         "detail": "Bank of Thailand rates and bank holidays" },
+        { "n": "07", "name": "Business Process Customization","detail": "workflow, approval, role centre dashboards" }
       ]
     },
     {
@@ -206,7 +218,7 @@
     {
       "pos": 30,
       "id": "appendix-divider",
-      "layout": "titleOnly",
+      "layout": "divider",
       "hidden": true,
       "title": "Appendix",
       "subtitle": "Detail slides : Finance, Manufacturing, Reporting and Analytics"

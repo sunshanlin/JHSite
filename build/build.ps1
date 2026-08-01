@@ -168,25 +168,29 @@ try {
   #  more slide masters, each carrying its own copy of this wording)
 
   # --- insert the new JWIC slides, ascending by final position -------------
-  function Set-BodyText($slide, $bullets) {
+  function Set-BodyText($slide, $bullets, $wide) {
     $body = $null
     for ($s = 1; $s -le $slide.Shapes.Count; $s++) {
       $sh = $slide.Shapes.Item($s)
       if ($sh.HasTextFrame -eq $msoTrue -and $sh.Name -notlike 'Title*') { $body = $sh; break }
     }
     if ($null -eq $body) { return }
-    $body.Left   = $cfg.layout.bodyLeft
-    $body.Top    = $cfg.layout.bodyTop
-    $body.Width  = $cfg.layout.bodyWidth
-    $body.Height = $cfg.layout.bodyHeight
+    $w = if ($wide) { $cfg.layout.bodyWideWidth } else { $cfg.layout.bodyWidth }
+    $body.Left   = [float]$cfg.layout.bodyLeft
+    $body.Top    = [float]$cfg.layout.bodyTop
+    $body.Width  = [float]$w
+    $body.Height = [float]$cfg.layout.bodyHeight
     $body.TextFrame.TextRange.Text = ($bullets -join "`r")
     $body.TextFrame2.WordWrap = $msoTrue
-    # Size the type to the amount of text. PowerPoint's own shrink-on-overflow
-    # does not apply until the shape is rendered, so it is no use to a headless
-    # build - the slide exports with the text still hanging off the bottom.
+    # Size the type to the amount of text and the width it has to run in.
+    # PowerPoint's own shrink-on-overflow does not apply until the shape is
+    # rendered, so it is no use to a headless build - the slide exports with
+    # the text still hanging off the bottom.
     $chars = ($bullets -join ' ').Length
-    $size = [Math]::Sqrt(110000 / [Math]::Max($chars, 1))
-    $body.TextFrame.TextRange.Font.Size = [float][Math]::Round([Math]::Min([Math]::Max($size, 12), 20))
+    $cap = if ($wide) { 24 } else { 20 }
+    $size = [Math]::Sqrt(110000 * ($w / 400) / [Math]::Max($chars, 1))
+    $body.TextFrame.TextRange.Font.Size = [float][Math]::Round([Math]::Min([Math]::Max($size, 13), $cap))
+    $body.TextFrame.VerticalAnchor = 3   # middle - a short list should not hug the top of a tall box
   }
 
   function Add-SlideImage($slide, $file) {
@@ -212,8 +216,8 @@ try {
         $cell = $tbl.Cell($r, $c)
         $cell.Shape.TextFrame.TextRange.Text = $txt
         $cell.Shape.TextFrame.TextRange.Font.Size = 13
-        # right-align money and percentages, leave labels alone
-        if ($txt -match '^\(?[\d,]+' -or $txt -match '%$' -or $txt -match 'THB') {
+        # right-align money and percentages, never the label column
+        if ($c -gt 1 -and ($txt -match '^\(?[\d,]+' -or $txt -match '%$' -or $txt -match 'THB')) {
           $cell.Shape.TextFrame.TextRange.ParagraphFormat.Alignment = 3
         }
         if ($headerRow -and $r -eq 1) { $cell.Shape.TextFrame.TextRange.Font.Bold = $msoTrue }
@@ -222,27 +226,115 @@ try {
     return $shape
   }
 
+  # --- shared JWIC slide furniture -----------------------------------------
+  $L = $cfg.layout
+  $green  = ConvertTo-OleColor $cfg.brand.green
+  $accent = ConvertTo-OleColor $cfg.brand.accent
+  $cream  = ConvertTo-OleColor $cfg.brand.cream
+
+  function Add-Rule($slide, $top, $width, $height, $colour) {
+    $r = $slide.Shapes.AddShape(1, $L.titleLeft, $top, $width, $height)
+    $r.Fill.ForeColor.RGB = $colour
+    $r.Line.Visible = $msoFalse
+    return $r
+  }
+  function Add-TextBox($slide, $l, $t, $w, $h, $text, $size, $colour, $bold) {
+    $tb = $slide.Shapes.AddTextbox(1, $l, $t, $w, $h)
+    $tb.TextFrame.WordWrap = $msoTrue
+    $tb.TextFrame.MarginLeft = 0; $tb.TextFrame.MarginTop = 0; $tb.TextFrame.MarginBottom = 0
+    $tb.TextFrame.TextRange.Text = $text
+    $tb.TextFrame.TextRange.Font.Size = [float]$size
+    $tb.TextFrame.TextRange.Font.Color.RGB = $colour
+    if ($bold) { $tb.TextFrame.TextRange.Font.Bold = $msoTrue }
+    return $tb
+  }
+  # the "01".."07" module marker: a brand square with the number in it
+  function Add-Badge($slide, $l, $t, $size, $num, $fontSize) {
+    $sq = $slide.Shapes.AddShape(5, $l, $t, $size, $size)   # msoShapeRoundedRectangle
+    $sq.Fill.ForeColor.RGB = $green
+    $sq.Line.Visible = $msoFalse
+    # default margins eat most of a small square, and "06" then wraps to "0"/"6"
+    $sq.TextFrame.MarginLeft = 0; $sq.TextFrame.MarginRight = 0
+    $sq.TextFrame.MarginTop = 0;  $sq.TextFrame.MarginBottom = 0
+    $sq.TextFrame.WordWrap = $msoFalse
+    $sq.TextFrame.VerticalAnchor = 3        # msoAnchorMiddle
+    $sq.TextFrame.TextRange.Text = $num
+    $sq.TextFrame.TextRange.Font.Size = [float]$fontSize
+    $sq.TextFrame.TextRange.Font.Bold = $msoTrue
+    $sq.TextFrame.TextRange.Font.Color.RGB = $cream
+    return $sq
+  }
+
   foreach ($n in ($cfg.newSlides | Sort-Object pos)) {
-    $layoutId = if ($n.layout -eq 'titleOnly') { $ppLayoutTitleOnly } else { $ppLayoutText }
+    $props = $n.PSObject.Properties.Name
+    $layoutId = if ($n.layout -eq 'text') { $ppLayoutText } else { $ppLayoutTitleOnly }
     $slide = $pres.Slides.Add($n.pos, $layoutId)
     $slide.Name = 'JWIC_' + $n.id
-    $slide.Shapes.Item(1).TextFrame.TextRange.Text = $n.title
 
-    $props = $n.PSObject.Properties.Name
+    # ---- full-bleed brand section break
+    if ($n.layout -eq 'divider') {
+      $slide.FollowMasterBackground = $msoFalse
+      $slide.Background.Fill.Solid()
+      $slide.Background.Fill.ForeColor.RGB = $green
+      $slide.Shapes.Item(1).Delete()          # the placeholder title, replaced below
+      Add-Rule $slide $L.dividerRuleTop 88 4 $accent | Out-Null
+      Add-TextBox $slide $L.titleLeft $L.dividerTitleTop 820 110 $n.title $L.dividerTitleSize $cream $true | Out-Null
+      if ($props -contains 'subtitle') {
+        Add-TextBox $slide $L.titleLeft $L.dividerSubTop 820 40 $n.subtitle $L.dividerSubSize $cream $false | Out-Null
+      }
+      Add-TextBox $slide $L.titleLeft $L.dividerMarkTop 400 20 $cfg.brand.company 13 $cream $true | Out-Null
+      continue
+    }
 
-    if ($props -contains 'bullets') { Set-BodyText $slide $n.bullets }
+    # ---- everything else: title, optional number badge, accent rule
+    $title = $n.title
+    $titleLeft = $L.titleLeft
+    if ($title -match '^(\d\d)\s+(.*)$') {
+      Add-Badge $slide $L.titleLeft $L.titleTop $L.badgeSize $Matches[1] 20 | Out-Null
+      $title = $Matches[2]
+      $titleLeft = $L.titleLeft + $L.badgeSize + 18
+    }
+    $t = $slide.Shapes.Item(1)
+    $t.Left = [float]$titleLeft; $t.Top = [float]$L.titleTop
+    $t.Width = [float]($L.titleWidth - ($titleLeft - $L.titleLeft)); $t.Height = [float]$L.titleHeight
+    $t.TextFrame.TextRange.Text = $title
+    $t.TextFrame.TextRange.Font.Size = [float]$L.titleSize
+    Add-Rule $slide $L.ruleTop $L.ruleWidth $L.ruleHeight $accent | Out-Null
 
-    if ($props -contains 'subtitle') {
-      $tb = $slide.Shapes.AddTextbox(1, 60, 300, 840, 60)
-      $tb.TextFrame.TextRange.Text = $n.subtitle
-      $tb.TextFrame.TextRange.Font.Size = 20
-      $tb.TextFrame.TextRange.Font.Color.RGB = (ConvertTo-OleColor $cfg.brand.green)
+    # ---- 7-module overview: badge + name + detail, two columns
+    if ($props -contains 'grid') {
+      $rows = [Math]::Ceiling($n.grid.Count / 2)
+      for ($g = 0; $g -lt $n.grid.Count; $g++) {
+        $item = $n.grid[$g]
+        $col = [Math]::Floor($g / $rows); $row = $g % $rows
+        $x = $L.gridLeft + $col * ($L.gridColWidth + $L.gridColGap)
+        $y = $L.gridTop + $row * $L.gridRowHeight
+        Add-Badge $slide $x $y $L.gridBadge $item.n 13 | Out-Null
+        $tx = $x + $L.gridBadge + 12
+        $tw = $L.gridColWidth - $L.gridBadge - 12
+        Add-TextBox $slide $tx ($y - 1)  $tw 20 $item.name   15 $green $true  | Out-Null
+        Add-TextBox $slide $tx ($y + 20) $tw 34 $item.detail 12 0x595959 $false | Out-Null
+      }
+    }
+
+    if ($props -contains 'bullets') {
+      # no picture means no reason to sit in the left half of the slide
+      $wide = -not ($props -contains 'image')
+      Set-BodyText $slide $n.bullets $wide
     }
 
     if ($props -contains 'image') { Add-SlideImage $slide $n.image }
 
     if ($props -contains 'table' -and $n.table -eq 'pricing') {
-      Add-DeckTable $slide $pricingRows.Count 2 55 140 560 300 $pricingRows $false | Out-Null
+      $pt = Add-DeckTable $slide $pricingRows.Count 2 55 146 560 300 $pricingRows $false
+      for ($r = 1; $r -le $pricingRows.Count; $r++) {
+        if ($pricingRows[$r - 1][0] -notmatch '^(Total|Grand)') { continue }
+        for ($c = 1; $c -le 2; $c++) {
+          $cell = $pt.Table.Cell($r, $c).Shape.TextFrame.TextRange
+          $cell.Font.Bold = $msoTrue
+          $cell.Font.Color.RGB = $green
+        }
+      }
       $tb = $slide.Shapes.AddTextbox(1, 640, 140, 265, 220)
       $tb.TextFrame.WordWrap = $msoTrue
       $tb.TextFrame.TextRange.Text = "Included at no extra charge`r" +
