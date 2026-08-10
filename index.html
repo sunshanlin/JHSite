@@ -2468,7 +2468,7 @@
       <div class="feature-tab-scroll">
         <div class="feature-tablist" role="tablist" aria-label="ฟังก์ชัน JWIC Localization">
           <button class="feature-tab" id="feature-tab-vat" type="button" role="tab" aria-selected="true" aria-controls="feature-panel-vat">VAT</button>
-          <button class="feature-tab" id="feature-tab-wht" type="button" role="tab" aria-selected="false" aria-controls="feature-panel-wht" tabindex="-1">WHT</button>
+          <button class="feature-tab" id="feature-tab-wht" type="button" role="tab" aria-selected="false" aria-controls="feature-panel-wht" tabindex="-1">ภ.ง.ด.</button>
           <button class="feature-tab" id="feature-tab-billing" type="button" role="tab" aria-selected="false" aria-controls="feature-panel-billing" tabindex="-1">Billing</button>
           <button class="feature-tab" id="feature-tab-assets" type="button" role="tab" aria-selected="false" aria-controls="feature-panel-assets" tabindex="-1">Stock &amp; Assets</button>
           <button class="feature-tab" id="feature-tab-docs" type="button" role="tab" aria-selected="false" aria-controls="feature-panel-docs" tabindex="-1">Thai Documents</button>
@@ -2482,8 +2482,8 @@
           <div class="feature-panel-copy">
             <span class="feature-count">01 / 07</span>
             <h3>ภาษีมูลค่าเพิ่ม</h3>
-            <p>จัดทำรายงานภาษีซื้อ–ขาย <strong>รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</strong> พร้อม <strong>กรอกข้อมูลลงแบบ ภ.พ.30 ของกรมสรรพากรให้อัตโนมัติ</strong> รองรับภาษีไม่ถึงกำหนดและใบแทนใบกำกับภาษี</p>
-            <ul class="feature-chips"><li>ภ.พ.30</li><li>Unrealized VAT</li><li>Branch VAT</li></ul>
+            <p>จัดทำรายงานภาษีซื้อ–ขาย <strong>รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</strong> พร้อม <strong>กรอกข้อมูลลงแบบ ภ.พ.30 ของกรมสรรพากรให้อัตโนมัติ</strong> รองรับภาษีไม่ถึงกำหนดและใบแทนใบกำกับภาษี และ <strong>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร</strong> ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</p>
+            <ul class="feature-chips"><li>ภ.พ.30</li><li>Unrealized VAT</li><li>Branch VAT</li><li>VAT Service</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
           <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>JWIC Localization</small><strong>ภ.พ.30</strong><span>พร้อมยื่นภาษี</span><i></i><i></i><i></i></div><div class="feature-float-chip">VAT 7% <b>✓</b></div></div>
@@ -2630,6 +2630,10 @@
       <figure class="reveal">
         <a href="img/bc-dashboard.png"><img src="img/bc-dashboard.png" alt="Dashboard วิเคราะห์ธุรกิจใน Business Central" loading="lazy"></a>
         <figcaption>Dashboard วิเคราะห์ยอดขาย งบทดลอง แบบ Real-time</figcaption>
+      </figure>
+      <figure class="reveal">
+        <a href="img/vat-service.png"><img src="img/vat-service.png" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" loading="lazy"></a>
+        <figcaption>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร — ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</figcaption>
       </figure>
       <figure class="reveal">
         <a href="img/sales-vat-report.png"><img src="img/sales-vat-report.png" alt="รายงานภาษีขาย" loading="lazy"></a>
@@ -3460,7 +3464,7 @@
     ['#features > .wrap > h2', 'JWIC Localization — Features for Thai Business'],
     ['#features > .wrap > .sub', 'A package built specifically for Thai business — covering the tax, documents, and accounting work you use every day.'],
     ['#feature-panel-vat h3', 'Value Added Tax (VAT)'],
-    ['#feature-panel-vat .feature-panel-copy > p', 'Purchase–sales VAT reports <strong>supporting head office and branches, including separate branch filing</strong>, with <strong>the official PP30 form filled in automatically</strong>. Unrealized VAT and substitute tax invoices covered.'],
+    ['#feature-panel-vat .feature-panel-copy > p', 'Purchase–sales VAT reports <strong>supporting head office and branches, including separate branch filing</strong>, with <strong>the official PP30 form filled in automatically</strong>. Unrealized VAT and substitute tax invoices covered, plus <strong>tax ID and branch number lookup via the Revenue Department VAT Service</strong> — name and address filled in for you.'],
     ['#feature-panel-wht h3', 'Withholding Tax'],
     ['#feature-panel-wht .feature-panel-copy > p', '<strong>WHT calculated automatically when payments are posted</strong>, multi-income-type certificates (50 Bis) on a single form, plus PND 2/3/53/54 filings and RD Prep import files.'],
     ['#feature-panel-billing h3', 'Billing &amp; Receipt'],
