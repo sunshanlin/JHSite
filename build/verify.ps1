@@ -1,5 +1,7 @@
-# Assert the built deck is safe to put in front of a customer.
+# Assert the deck is safe to put in front of a customer.
 # Reads the .pptx as a zip - no PowerPoint, no Excel.
+# Defaults to the master deck. Pass -Path to check a rebuild instead.
+param([string]$Path)
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
@@ -12,9 +14,10 @@ function Check($name, $ok, $detail) {
   else { Write-Host "  FAIL  $name : $detail" -ForegroundColor Red; $script:fails += $name }
 }
 
-if (-not (Test-Path $cfg.out)) { Write-Host "FAIL: $($cfg.out) not built"; exit 1 }
+$target = if ($Path) { $Path } else { $cfg.master }
+if (-not (Test-Path $target)) { Write-Host "FAIL: $target not found"; exit 1 }
 
-$zip = [IO.Compression.ZipFile]::OpenRead($cfg.out)
+$zip = [IO.Compression.ZipFile]::OpenRead($target)
 try {
   $slides = @($zip.Entries | Where-Object { $_.FullName -match '^ppt/slides/slide[0-9]+\.xml$' } |
               Sort-Object { [int]([regex]::Match($_.FullName, '[0-9]+').Value) })
@@ -45,7 +48,7 @@ try {
     if (@($t.ToCharArray() | Where-Object { [int]$_ -ge 0x0E00 -and [int]$_ -le 0x0E7F }).Count -gt 0) { $thaiNotes++ }
   }
 
-  Write-Host "Verifying $($cfg.out)"
+  Write-Host "Verifying $target"
 
   # 1. nothing internal-only survived
   Check 'no PARTNER & SELLER GUIDANCE ONLY' `

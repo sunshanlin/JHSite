@@ -3,13 +3,13 @@
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $cfg  = Get-Content (Join-Path $root 'deck-core.json') -Encoding UTF8 -Raw | ConvertFrom-Json
-$outDir = Join-Path (Split-Path -Parent $cfg.out) 'shots'
+$outDir = Join-Path (Split-Path -Parent $cfg.master) 'shots'
 if (-not (Test-Path $outDir)) { New-Item -ItemType Directory -Force $outDir | Out-Null }
 
 $pp = New-Object -ComObject PowerPoint.Application
 $pres = $null
 try {
-  $pres = $pp.Presentations.Open($cfg.out, -1, 0, -1)
+  $pres = $pp.Presentations.Open($cfg.master, -1, 0, -1)
   foreach ($n in $args) {
     $i = [int]$n
     $path = Join-Path $outDir ('slide{0:D2}.png' -f $i)

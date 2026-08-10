@@ -2,30 +2,33 @@
 
 Workspace สำหรับทำ PowerPoint presales และเตรียม present
 
-เด็คประกอบขึ้นจาก pitch deck ของ Microsoft ด้วยสคริปต์ ไม่ได้แก้มือ
-เพราะ Microsoft ออกเด็คใหม่ทุก release wave พอมีของใหม่ก็ rerun ทับได้เลย
+**ต้นแบบคือ `decks\JWIC-BC-Core.pptx`** แก้ในไฟล์นี้ด้วยมือได้เลย ตัวเดียวกับ `C:\Users\Admin\OneDrive\JWIC-BC-Core.pptx`
+เดิมประกอบขึ้นจาก pitch deck ของ Microsoft ด้วย `build.ps1` ตอนนี้ build เป็นแค่ทางออกฉุกเฉิน
+ไว้ตั้งต้นใหม่ตอน Microsoft ออกเด็คใหม่ทุก release wave แล้วค่อยยกงานมือตามมา
 
 ## Build
 
 ```
-powershell -File build\build.ps1              # ประกอบเด็ค
-powershell -File build\verify.ps1             # ตรวจว่าไม่มีอะไรที่ห้ามโชว์ลูกค้าหลุดออกไป
-powershell -File build\shots.ps1 1 2 26 29    # export หน้าที่ระบุเป็น PNG ไว้ดูด้วยตา
+powershell -File build\verify.ps1             # ตรวจต้นแบบว่าไม่มีอะไรที่ห้ามโชว์ลูกค้าหลุดออกไป
+powershell -File build\shots.ps1 1 2 26 29    # export หน้าที่ระบุจากต้นแบบเป็น PNG ไว้ดูด้วยตา
+powershell -File build\build.ps1              # ประกอบใหม่จาก JSON -> decks\JWIC-BC-Core-rebuild.pptx
+powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 ```
 
-ได้ `decks\JWIC-BC-Core.pptx` : 76 หน้า ฉายจริง 22 หน้า ที่เหลือซ่อนไว้ กด go-to-slide เอาตอน Q&A
+ต้นแบบ : 76 หน้า ฉายจริง 22 หน้า ที่เหลือซ่อนไว้ กด go-to-slide เอาตอน Q&A
 
 ## โครงสร้าง
 
 | ที่ | อะไร |
 |---|---|
-| `build\deck-core.json` | เนื้อหาทั้งหมด : หน้าไหนเอา หน้าไหนสร้างใหม่ speaker notes ไทย ภาพ โลโก้ |
+| `decks\JWIC-BC-Core.pptx` | **ต้นแบบ** ไม่เข้า git (90 MB) สำรองอยู่บน OneDrive |
+| `build\deck-core.json` | เนื้อหาตอนประกอบครั้งแรก : หน้าไหนเอา หน้าไหนสร้างใหม่ speaker notes ไทย ภาพ โลโก้ |
 | `build\build.ps1` | ขับ PowerPoint COM ประกอบไฟล์ ตัวสคริปต์เป็น ASCII ล้วน |
-| `build\verify.ps1` | assert หลัง build ล้มแล้ว exit 1 |
-| `decks\` | ผลลัพธ์ ไม่เข้า git |
+| `build\verify.ps1` | assert ก่อนไปเจอลูกค้า ล้มแล้ว exit 1 |
 | `outline\` | ร่าง / สคริปต์พูด |
 
-**แก้เนื้อหาให้แก้ที่ `deck-core.json` แล้ว rerun** อย่าแก้ .pptx มือ เพราะ build รอบหน้าทับหมด
+**แก้เนื้อหาให้แก้ที่ต้นแบบโดยตรง แล้วรัน `verify.ps1`** — `build.ps1` เขียนลง `-rebuild.pptx` ทับต้นแบบไม่ได้
+งานมือที่ทำหลังจากนี้ไม่มีใน `deck-core.json` ถ้า rebuild ต้องยกตามเอง
 
 ## แหล่งข้อมูล
 
