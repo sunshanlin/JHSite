@@ -828,11 +828,11 @@
     background: linear-gradient(135deg, #35AF9E, #1F7A87);
     box-shadow: 0 18px 36px -18px rgba(53,175,158,.72);
   }
-  .cta.secondary {
+  .cta.secondary, .cta.ghost {
     color: #f0f8f7; border-color: rgba(255,255,255,.23); background: rgba(255,255,255,.06);
     box-shadow: none;
   }
-  .cta.secondary:hover { background: rgba(255,255,255,.12); box-shadow: none; }
+  .cta.secondary:hover, .cta.ghost:hover { background: rgba(255,255,255,.12); box-shadow: none; }
   .hero-learn-link {
     display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
     color: #b8d8d7; font-size: .9rem; font-weight: 500;
@@ -1674,11 +1674,11 @@
   }
 
   /* Burgundy สงวนไว้ให้ action สำคัญ */
-  .hero-actions .cta:not(.secondary), .contact-form button[type="submit"] {
+  .hero-actions .cta:not(.secondary, .ghost), .contact-form button[type="submit"] {
     background: linear-gradient(135deg, var(--brand-burgundy), var(--brand-burgundy-dark));
     box-shadow: 0 18px 36px -18px rgba(166,58,86,.65);
   }
-  .hero-actions .cta:not(.secondary):hover,
+  .hero-actions .cta:not(.secondary, .ghost):hover,
   .service-highlight .text-link:hover,
   .contact-form button[type="submit"]:hover {
     transform: translateY(-2px);
@@ -2192,6 +2192,7 @@
       <a href="#features">ฟังก์ชัน</a>
       <a href="#reports">ตัวอย่างรายงาน</a>
       <a href="#articles">บทความ</a>
+      <a href="#pricing">ราคา</a>
       <a href="#about">เกี่ยวกับเรา</a>
       <a href="#contact">ติดต่อเรา</a>
     </div>
@@ -2242,6 +2243,7 @@
     <div class="hero-actions">
       <a class="cta" href="#contact">นัดปรึกษา พร้อม Demo ระบบฟรี</a>
       <a class="cta secondary" href="#reports">ดูตัวอย่างระบบ</a>
+      <a class="cta ghost" href="#pricing">ดูราคาแพ็กเกจ</a>
     </div>
     <a class="hero-learn-link" href="https://www.microsoft.com/en-us/dynamics-365/products/business-central" target="_blank" rel="noopener noreferrer" aria-label="ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central บนเว็บไซต์ Microsoft (เปิดในแท็บใหม่)">ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central</a>
     <ul class="hero-proof" aria-label="จุดเด่นของบริการ">
@@ -3389,12 +3391,14 @@
     ['.topnav .links a[href="#features"]', 'Features'],
     ['.topnav .links a[href="#reports"]', 'Reports'],
     ['.topnav .links a[href="#articles"]', 'Articles'],
+    ['.topnav .links a[href="#pricing"]', 'Pricing'],
+    ['.hero-actions .cta.ghost', 'See package pricing'],
     ['.topnav .links a[href="#about"]', 'About'],
     ['.topnav .links a[href="#contact"]', 'Contact'],
     ['#chat-fab .tip-text', 'Chat with us'],
     ['header h1', 'Business Central implementation<br>with complete <span class="hero-accent">Thai Localization</span>'],
     ['header .lead', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
-    ['.hero-actions .cta:not(.secondary)', 'Book a free consultation &amp; demo'],
+    ['.hero-actions .cta:not(.secondary, .ghost)', 'Book a free consultation &amp; demo'],
     ['.hero-actions .cta.secondary', 'View sample reports'],
     ['header .hero-learn-link', 'Learn more about Business Central'],
     ['.hero-proof li:nth-child(1)', 'Both functional consulting and AL development expertise'],
