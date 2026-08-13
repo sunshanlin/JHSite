@@ -1975,7 +1975,6 @@
     .why-visual:hover img { transform: scale(1.01); }
   }
 
-
   /* Original Success by Design icon system. */
   .step-heading { display: block; }
   .steps .step::before { content: none; display: none; }
@@ -2203,9 +2202,9 @@
       <a href="#services">บริการ</a>
       <a href="#features">ฟังก์ชัน</a>
       <a href="#reports">ตัวอย่างรายงาน</a>
-      <a href="#articles">บทความ</a>
-      <a href="#pricing">ราคา</a>
       <a href="#about">เกี่ยวกับเรา</a>
+      <a href="#pricing">ราคา</a>
+      <a href="#articles">บทความ</a>
       <a href="#contact">ติดต่อเรา</a>
     </div>
     <div class="social">
@@ -2661,52 +2660,6 @@
   </div>
 </section>
 
-<section id="articles" class="alt" lang="th">
-  <div class="wrap">
-    <p class="section-kicker">Knowledge from real projects</p>
-    <h2>บทความ</h2>
-    <p class="sub">เกร็ดการตั้งค่าและแนวทางทำ Thai Localization บน Business Central จากงานจริง</p>
-    <div class="grid">
-      <a class="card reveal article-link" href="articles/localization-thailand.html">
-        <span class="article-tag">Localization</span>
-        <h3>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</h3>
-        <p>ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี ใบกำกับภาษี WHT และใบวางบิล</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/billing-note-billing-day.html">
-        <span class="article-tag">Billing</span>
-        <h3>ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</h3>
-        <p>เก็บรอบวางบิล คำนวณวัน ป้องกันเอกสารซ้ำ และติดตามสถานะการส่งเอกสารให้ครบทุกใบ</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/wht-50tawi-rdprep.html">
-        <span class="article-tag">WHT</span>
-        <h3>ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</h3>
-        <p>ใช้ข้อมูลการจ่ายชุดเดียวเพื่อออกหนังสือรับรอง รวบรวมรายการ ภ.ง.ด. และสร้างไฟล์โอนย้ายเข้า RD Prep</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/bot-exchange-rate-api.html">
-        <span class="article-tag">API / Integration</span>
-        <h3>รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</h3>
-        <p>รู้จัก BOT API สองชุดข้อมูล แต่ละบริการมีข้อมูลอะไร ต้องระวังเรื่องใด และนำไปต่อยอดกับ Business Central ได้อย่างไร</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/success-by-design.html">
-        <span class="article-tag">Success by Design</span>
-        <h3>Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365 เป็นพัน</h3>
-        <p>5 ช่วงของโครงการ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/accounting-to-erp.html">
-        <span class="article-tag">ERP</span>
-        <h3>ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง</h3>
-        <p>สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
 <section id="about" lang="en">
   <div class="wrap">
     <p class="section-kicker">Your implementation partner</p>
@@ -2904,6 +2857,37 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <p class="section-kicker">Frequently asked questions</p>
+    <h2>คำถามที่พบบ่อย</h2>
+    <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
+        <p>Business Central สามารถใช้งานร่วมกับ JWIC Localization เพื่อรองรับข้อกำหนดด้านภาษีอากรและเอกสารสำหรับธุรกิจในประเทศไทยได้อย่างครบถ้วน โดยครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</p>
+        <p>นอกจากนี้ ยังรองรับภาษีหัก ณ ที่จ่าย หนังสือรับรอง 50 ทวิ ไฟล์สำหรับนำเข้า RD Prep ระบบใบวางบิล และฟอร์มเอกสารที่จำเป็นต่อการดำเนินงาน</p>
+      </details>
+      <details class="reveal">
+        <summary>วางระบบ Business Central ใช้เวลานานแค่ไหน?</summary>
+        <p>ด้วยแนวทาง Best Practice และ Fast Implementation เราวางแผนโครงการและกำหนดระยะเวลาอย่างชัดเจนตั้งแต่เริ่มต้น เพื่อให้การติดตั้งดำเนินไปอย่างเป็นระบบและพร้อมเริ่มใช้งานได้อย่างรวดเร็ว</p>
+      </details>
+      <details class="reveal">
+        <summary>ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?</summary>
+        <p>บริการวางระบบ Business Central ครบทุกขั้นตอนพร้อม Thai Localization เริ่มต้น 350,000 บาท สำหรับ 1 บริษัท ราคาสุดท้ายขึ้นอยู่กับขอบเขตโครงการ ส่วนกิจการที่ใช้ Business Central อยู่แล้ว ติดตั้ง JWIC Thai Localization พร้อมตั้งค่าและอบรม เป็นแพ็กเกจราคาคงที่ 240,000 บาท ชำระครั้งเดียว ทั้งสองราคาไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
+      </details>
+      <details class="reveal">
+        <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
+        <p>ได้ บริการครอบคลุมการย้ายข้อมูลจากระบบเดิม ทั้งข้อมูลหลัก เช่น ลูกค้า ผู้ขาย สินค้า ผังบัญชี และยอดยกมา พร้อมตรวจกระทบยอดก่อนเริ่มใช้งานจริง</p>
+      </details>
+      <details class="reveal">
+        <summary>หลัง Go-live มีบริการดูแลต่อหรือไม่?</summary>
+        <p>แน่นอน เราดูแลต่อเนื่องหลัง Go-live ทั้งตอบปัญหาการใช้งาน แก้ไขข้อผิดพลาด และรองรับการอัปเดตเวอร์ชันใหม่ของ Microsoft</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="alt">
   <div class="wrap">
     <p class="section-kicker">Let's find the right approach together</p>
@@ -2964,36 +2948,52 @@
   </div>
 </section>
 
-<section id="faq">
+<section id="articles" lang="th">
   <div class="wrap">
-    <p class="section-kicker">Frequently asked questions</p>
-    <h2>คำถามที่พบบ่อย</h2>
-    <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
-    <div class="faq-list">
-      <details class="reveal">
-        <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
-        <p>Business Central สามารถใช้งานร่วมกับ JWIC Localization เพื่อรองรับข้อกำหนดด้านภาษีอากรและเอกสารสำหรับธุรกิจในประเทศไทยได้อย่างครบถ้วน โดยครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</p>
-        <p>นอกจากนี้ ยังรองรับภาษีหัก ณ ที่จ่าย หนังสือรับรอง 50 ทวิ ไฟล์สำหรับนำเข้า RD Prep ระบบใบวางบิล และฟอร์มเอกสารที่จำเป็นต่อการดำเนินงาน</p>
-      </details>
-      <details class="reveal">
-        <summary>วางระบบ Business Central ใช้เวลานานแค่ไหน?</summary>
-        <p>ด้วยแนวทาง Best Practice และ Fast Implementation เราวางแผนโครงการและกำหนดระยะเวลาอย่างชัดเจนตั้งแต่เริ่มต้น เพื่อให้การติดตั้งดำเนินไปอย่างเป็นระบบและพร้อมเริ่มใช้งานได้อย่างรวดเร็ว</p>
-      </details>
-      <details class="reveal">
-        <summary>ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?</summary>
-        <p>บริการวางระบบ Business Central ครบทุกขั้นตอนพร้อม Thai Localization เริ่มต้น 350,000 บาท สำหรับ 1 บริษัท ราคาสุดท้ายขึ้นอยู่กับขอบเขตโครงการ ส่วนกิจการที่ใช้ Business Central อยู่แล้ว ติดตั้ง JWIC Thai Localization พร้อมตั้งค่าและอบรม เป็นแพ็กเกจราคาคงที่ 240,000 บาท ชำระครั้งเดียว ทั้งสองราคาไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
-      </details>
-      <details class="reveal">
-        <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
-        <p>ได้ บริการครอบคลุมการย้ายข้อมูลจากระบบเดิม ทั้งข้อมูลหลัก เช่น ลูกค้า ผู้ขาย สินค้า ผังบัญชี และยอดยกมา พร้อมตรวจกระทบยอดก่อนเริ่มใช้งานจริง</p>
-      </details>
-      <details class="reveal">
-        <summary>หลัง Go-live มีบริการดูแลต่อหรือไม่?</summary>
-        <p>แน่นอน เราดูแลต่อเนื่องหลัง Go-live ทั้งตอบปัญหาการใช้งาน แก้ไขข้อผิดพลาด และรองรับการอัปเดตเวอร์ชันใหม่ของ Microsoft</p>
-      </details>
+    <p class="section-kicker">Knowledge from real projects</p>
+    <h2>บทความ</h2>
+    <p class="sub">เกร็ดการตั้งค่าและแนวทางทำ Thai Localization บน Business Central จากงานจริง</p>
+    <div class="grid">
+      <a class="card reveal article-link" href="articles/localization-thailand.html">
+        <span class="article-tag">Localization</span>
+        <h3>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</h3>
+        <p>ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี ใบกำกับภาษี WHT และใบวางบิล</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/billing-note-billing-day.html">
+        <span class="article-tag">Billing</span>
+        <h3>ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</h3>
+        <p>เก็บรอบวางบิล คำนวณวัน ป้องกันเอกสารซ้ำ และติดตามสถานะการส่งเอกสารให้ครบทุกใบ</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/wht-50tawi-rdprep.html">
+        <span class="article-tag">WHT</span>
+        <h3>ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</h3>
+        <p>ใช้ข้อมูลการจ่ายชุดเดียวเพื่อออกหนังสือรับรอง รวบรวมรายการ ภ.ง.ด. และสร้างไฟล์โอนย้ายเข้า RD Prep</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/bot-exchange-rate-api.html">
+        <span class="article-tag">API / Integration</span>
+        <h3>รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</h3>
+        <p>รู้จัก BOT API สองชุดข้อมูล แต่ละบริการมีข้อมูลอะไร ต้องระวังเรื่องใด และนำไปต่อยอดกับ Business Central ได้อย่างไร</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/success-by-design.html">
+        <span class="article-tag">Success by Design</span>
+        <h3>Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365 เป็นพัน</h3>
+        <p>5 ช่วงของโครงการ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="card reveal article-link" href="articles/accounting-to-erp.html">
+        <span class="article-tag">ERP</span>
+        <h3>ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง</h3>
+        <p>สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
     </div>
   </div>
 </section>
+
 </main>
 
 <footer>
