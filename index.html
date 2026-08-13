@@ -2042,6 +2042,20 @@
     font-size: .85rem; font-weight: 700; letter-spacing: .02em;
   }
   .plan-body { display: flex; flex-direction: column; flex: 1; padding: 28px 30px 32px; }
+  .plan-icon {
+    display: grid; place-items: center; width: 50px; height: 50px; margin-bottom: 14px;
+    border: 1px solid rgba(1,74,65,.12); border-radius: 15px;
+    background: linear-gradient(145deg, rgba(53,175,158,.18), rgba(53,175,158,.06));
+  }
+  .plan-icon svg {
+    width: 26px; height: 26px; fill: none; stroke: var(--brand-teal);
+    stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .plan-full .plan-icon {
+    border-color: rgba(255,255,255,.16);
+    background: linear-gradient(145deg, rgba(53,175,158,.3), rgba(255,255,255,.06));
+  }
+  .plan-full .plan-icon svg { stroke: #8fded0; }
   .plan-name { margin: 0 0 10px; color: var(--brand-deep); font-size: 1.6rem; letter-spacing: -.015em; }
   .plan-desc { margin: 0 0 20px; min-height: 96px; color: var(--muted); font-size: .95rem; line-height: 1.65; }
   .plan-price-prefix { display: block; margin-bottom: 3px; color: var(--brand-teal); font-size: .88rem; font-weight: 700; }
@@ -2802,6 +2816,7 @@
       <article class="plan-card plan-loc reveal">
         <p class="plan-banner">สำหรับ<wbr>ผู้ใช้ <wbr>Business <wbr>Central <wbr>อยู่แล้ว</p>
         <div class="plan-body">
+          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h9a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9"/><path d="M14 8H9M14 12H9M14 16h-3"/><path d="M6 8H3.5a1.5 1.5 0 0 0 0 3H6M6 13H3.5a1.5 1.5 0 0 0 0 3H6"/><path d="M6 5.5v13"/></svg></span>
           <h3 class="plan-name">JWIC Thai Localization</h3>
           <p class="plan-desc">ทำให้ <wbr>Business <wbr>Central <wbr>ที่<wbr>ใช้<wbr>อยู่<wbr>รองรับ<wbr>ภาษี<wbr>และ<wbr>เอกสาร<wbr>ไทย<wbr>ครบ<wbr>ชุด <wbr>ทั้ง<wbr>ติดตั้ง <wbr>ตั้งค่า <wbr>และ<wbr>อบรม<wbr>ให้<wbr>ทีม<wbr>ใช้งาน<wbr>ได้<wbr>จริง</p>
           <div class="plan-price">
@@ -2829,6 +2844,7 @@
       <article class="plan-card plan-full reveal">
         <p class="plan-banner">สำหรับ<wbr>เริ่ม<wbr>วาง<wbr>ระบบ<wbr>ใหม่<wbr>ครบ<wbr>ทุก<wbr>ขั้นตอน</p>
         <div class="plan-body">
+          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span>
           <h3 class="plan-name">Full Implementation</h3>
           <p class="plan-desc">ดูแล<wbr>ตั้งแต่<wbr>การ<wbr>วิเคราะห์<wbr>กระบวนการ <wbr>ตั้งค่า<wbr>ระบบ <wbr>ย้าย<wbr>ข้อมูล <wbr>อบรม<wbr>ผู้ใช้ <wbr>ไป<wbr>จนถึง<wbr>ดูแล<wbr>ช่วง<wbr>เริ่ม<wbr>ใช้งานจริง</p>
           <div class="plan-price">
