@@ -2037,7 +2037,7 @@
     box-shadow: 0 28px 60px -42px rgba(1,47,42,.5);
   }
   .plan-banner {
-    margin: 0; padding: 13px 16px; text-align: center;
+    margin: 0; padding: 13px 30px; text-align: left;
     color: var(--brand-teal); background: rgba(53,175,158,.14);
     font-size: .85rem; font-weight: 700; letter-spacing: .02em;
   }
@@ -2059,6 +2059,14 @@
   .plan-name { margin: 0 0 10px; color: var(--brand-deep); font-size: 1.6rem; letter-spacing: -.015em; }
   .plan-desc { margin: 0 0 20px; min-height: 96px; color: var(--muted); font-size: .95rem; line-height: 1.65; }
   .plan-price-prefix { display: block; margin-bottom: 3px; color: var(--brand-teal); font-size: .88rem; font-weight: 700; }
+  .plan-price-was {
+    display: block; margin-bottom: 2px; color: var(--brand-mint);
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: -.04em;
+    font-variant-numeric: tabular-nums; text-decoration-thickness: 2px;
+  }
+  /* ใบขวาไม่มีราคาก่อนลด — กันที่ว่างเท่ากันไว้ ตัวเลขสองใบจะได้อยู่ระดับเดียวกัน */
+  .plan-full .plan-price::before { content: "280,000"; display: block; visibility: hidden; font-size: 1.5rem; margin-bottom: 2px; }
   .plan-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 8px; white-space: nowrap; min-width: 0; }
   .plan-price-line strong {
     color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
@@ -2821,6 +2829,7 @@
           <p class="plan-desc">ทำให้ <wbr>Business <wbr>Central <wbr>ที่<wbr>ใช้<wbr>อยู่<wbr>รองรับ<wbr>ภาษี<wbr>และ<wbr>เอกสาร<wbr>ไทย<wbr>ครบ<wbr>ชุด <wbr>ทั้ง<wbr>ติดตั้ง <wbr>ตั้งค่า <wbr>และ<wbr>อบรม<wbr>ให้<wbr>ทีม<wbr>ใช้งาน<wbr>ได้<wbr>จริง</p>
           <div class="plan-price">
             <span class="plan-price-prefix">ราคา<wbr>แพ็กเกจ</span>
+            <s class="plan-price-was">280,000 <wbr>บาท</s>
             <div class="plan-price-line">
               <strong>250,000<sup aria-hidden="true">*</sup></strong>
               <span class="plan-currency">บาท</span>
@@ -3472,6 +3481,7 @@
     ['.plan-loc .plan-banner', 'For teams already using Business Central'],
     ['.plan-loc .plan-desc', 'Give your existing Business Central full Thai tax and document support — installed, configured, and with training so your team can run it for real.'],
     ['.plan-loc .plan-price-prefix', 'Package price'],
+    ['.plan-price-was', 'THB 280,000'],
     ['.plan-loc .plan-note', 'Per company — one-time payment'],
     ['.plan-loc .pricing-cta', 'Discuss installation — free'],
     ['.plan-loc .plan-list-head', 'What\'s included:'],
