@@ -2023,7 +2023,8 @@
   #pricing > .wrap > .sub { max-width: 780px; }
   .pricing-plans {
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px; max-width: 1000px; margin: 34px auto 0;
+    align-items: start;
+    gap: 24px; max-width: 1060px; margin: 34px auto 0;
   }
   /* Chrome breaks Thai mid-word (no dictionary), and word-break: keep-all has no effect on Thai.
      nowrap + <wbr> is the only lever that holds: breaks land only where the markup allows.
@@ -2031,52 +2032,79 @@
   html[lang="th"] #pricing, html[lang="th"] #pricing * { white-space: nowrap; }
   .plan-card {
     display: flex; flex-direction: column; overflow: hidden;
-    border: 1px solid rgba(1,74,65,.14); border-radius: 22px;
-    background: linear-gradient(160deg, #fff 0%, #f9fbf8 100%);
+    border: 1px solid rgba(1,74,65,.14); border-radius: 24px;
+    background: linear-gradient(160deg, #fff 0%, #f4faf7 100%);
     box-shadow: 0 28px 60px -42px rgba(1,47,42,.5);
   }
-  .plan-full { border-color: rgba(1,74,65,.3); }
   .plan-banner {
-    margin: 0; padding: 11px 16px; text-align: center;
-    color: var(--brand-deep); background: rgba(53,175,158,.12);
-    font-size: .78rem; font-weight: 700; letter-spacing: .02em;
+    margin: 0; padding: 13px 16px; text-align: center;
+    color: var(--brand-teal); background: rgba(53,175,158,.14);
+    font-size: .85rem; font-weight: 700; letter-spacing: .02em;
   }
-  .plan-full .plan-banner { color: #e8f4f1; background: var(--brand-deep); }
-  .plan-body { display: flex; flex-direction: column; flex: 1; padding: 24px 26px 28px; }
-  .plan-name { margin: 0 0 8px; color: var(--brand-deep); font-size: 1.35rem; }
-  .plan-desc { margin: 0 0 18px; min-height: 84px; color: var(--muted); font-size: .88rem; line-height: 1.6; }
-  .plan-price-prefix { display: block; margin-bottom: 2px; color: var(--brand-teal); font-size: .8rem; font-weight: 700; }
-  .plan-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 7px; white-space: nowrap; }
+  .plan-body { display: flex; flex-direction: column; flex: 1; padding: 28px 30px 32px; }
+  .plan-name { margin: 0 0 10px; color: var(--brand-deep); font-size: 1.6rem; letter-spacing: -.015em; }
+  .plan-desc { margin: 0 0 20px; min-height: 96px; color: var(--muted); font-size: .95rem; line-height: 1.65; }
+  .plan-price-prefix { display: block; margin-bottom: 3px; color: var(--brand-teal); font-size: .88rem; font-weight: 700; }
+  .plan-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 8px; white-space: nowrap; min-width: 0; }
   .plan-price-line strong {
     color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: clamp(2.3rem, 3vw, 2.9rem); font-weight: 700; line-height: 1;
+    font-size: clamp(2.7rem, 3.6vw, 3.4rem); font-weight: 700; line-height: 1;
     letter-spacing: -.055em; font-variant-numeric: tabular-nums;
   }
   .plan-price-line strong sup {
     margin-left: .08em; color: var(--brand-burgundy); font-size: .34em;
     line-height: 1; letter-spacing: 0; vertical-align: top;
   }
-  .plan-currency { color: var(--muted); font-size: .88rem; font-weight: 600; }
-  .plan-note { margin: 8px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.5; }
-  .plan-card .pricing-cta { margin-top: 18px; }
+  .plan-currency { color: var(--muted); font-size: .95rem; font-weight: 600; }
+  .plan-note { margin: 9px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+  .plan-card .pricing-cta { margin-top: 20px; min-height: 52px; font-size: .92rem; }
   .plan-list-head {
-    margin: 22px 0 12px; padding-top: 20px;
+    margin: 24px 0 14px; padding-top: 22px;
     border-top: 1px solid rgba(1,74,65,.1);
-    color: var(--brand-deep); font-size: .92rem;
+    color: var(--brand-deep); font-size: 1.05rem;
   }
-  .plan-features { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
-  .plan-features li { position: relative; padding-left: 26px; color: var(--muted); font-size: .84rem; line-height: 1.5; }
+  .plan-features { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
+  .plan-features li { position: relative; padding-left: 28px; color: var(--muted); font-size: .93rem; line-height: 1.55; }
   .plan-features li::before {
-    content: "✓"; position: absolute; left: 0; top: 0;
-    color: var(--brand-teal); font-size: .8rem; font-weight: 800;
+    content: "✓"; position: absolute; left: 0; top: 1px;
+    color: var(--brand-teal); font-size: .88rem; font-weight: 800;
   }
   .plan-assurance {
-    margin-top: 16px; padding: 12px 14px;
+    margin-top: 18px; padding: 14px 16px;
     border: 1px solid rgba(166,58,86,.12); border-radius: 12px;
     background: rgba(166,58,86,.05);
-    color: var(--muted); font-size: .78rem; line-height: 1.55;
+    color: var(--muted); font-size: .85rem; line-height: 1.55;
   }
-  .plan-assurance strong { display: block; margin-bottom: 3px; color: var(--brand-burgundy-dark); }
+  .plan-assurance strong { display: block; margin-bottom: 4px; color: var(--brand-burgundy-dark); }
+  /* ใบขวา (Full) = การ์ดเด่นพื้นเข้มเต็มใบ ตัดกับใบซ้ายพื้นสว่างให้เห็นต่างชัดใน 1 วินาที */
+  .plan-full {
+    border-color: rgba(255,255,255,.08);
+    background:
+      radial-gradient(circle at 88% 4%, rgba(53,175,158,.22), transparent 42%),
+      linear-gradient(165deg, #024138 0%, var(--brand-deep) 58%, #001d19 100%);
+    box-shadow: 0 36px 70px -40px rgba(1,47,42,.8);
+  }
+  .plan-full .plan-banner {
+    color: #fff;
+    background: linear-gradient(135deg, var(--brand-burgundy), var(--brand-burgundy-dark));
+    letter-spacing: .03em;
+  }
+  .plan-full .plan-name { color: #fff; }
+  .plan-full .plan-desc { color: var(--brand-mist); }
+  .plan-full .plan-price-prefix { color: var(--brand-pink); }
+  .plan-full .plan-price-line strong { color: #fff; }
+  .plan-full .plan-price-line strong sup { color: var(--brand-pink); }
+  .plan-full .plan-currency, .plan-full .plan-note { color: var(--brand-mist); }
+  .plan-full .plan-list-head { color: var(--brand-pale); border-top-color: rgba(255,255,255,.14); }
+  .plan-full .plan-features li { color: var(--brand-pale); }
+  .plan-full .plan-features li::before { color: var(--accent); }
+  .plan-full .plan-assurance {
+    border-color: rgba(224,140,162,.32); background: rgba(166,58,86,.2);
+    color: var(--brand-mist);
+  }
+  .plan-full .plan-assurance strong { color: var(--brand-pink); }
+  /* ชื่อแพ็กเกจเป็นอังกฤษ ให้ตัดที่ช่องว่างได้แม้อยู่ใต้ rule nowrap ของหน้า TH */
+  html[lang="th"] #pricing .plan-name { white-space: normal; }
   .pricing-cta {
     display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
     width: 100%; margin: 0; padding: 10px 16px; border-radius: 12px; color: #fff;
@@ -2788,10 +2816,12 @@
           <h4 class="plan-list-head">สิ่งที่<wbr>รวม<wbr>ใน<wbr>แพ็กเกจ:</h4>
           <ul class="plan-features">
             <li>ติดตั้ง <wbr>JWIC <wbr>Thai <wbr>Localization <wbr>บน<wbr>ระบบ<wbr>ที่<wbr>ใช้งาน<wbr>อยู่</li>
-            <li>ตั้งค่า<wbr>รายงาน<wbr>ภาษี<wbr>ซื้อ–ขาย <wbr>และ <wbr>ภ.พ.30 <wbr>ทั้ง<wbr>สำนักงานใหญ่<wbr>และ<wbr>สาขา</li>
+            <li>รายงาน<wbr>ภาษี<wbr>ซื้อ<wbr>ขาย <wbr>ภ.พ.30 <wbr>และ<wbr>ใบแนบ <wbr>รองรับ<wbr>สำนักงานใหญ่<wbr>และ<wbr>สาขา</li>
             <li>ภาษี<wbr>หัก <wbr>ณ <wbr>ที่จ่าย <wbr>หนังสือ<wbr>รับรอง <wbr>50 <wbr>ทวิ <wbr>และ<wbr>ไฟล์ <wbr>RD <wbr>Prep</li>
-            <li>ใบ<wbr>วางบิล<wbr>และ<wbr>ฟอร์ม<wbr>เอกสาร<wbr>ไทย<wbr>ครบ<wbr>ชุด</li>
-            <li>อบรม<wbr>การ<wbr>ใช้งาน<wbr>และ<wbr>ทดสอบ<wbr>เอกสาร<wbr>จริง</li>
+            <li>ภ.ง.ด.2, <wbr>3, <wbr>53, <wbr>54 <wbr>พร้อม<wbr>ใบแนบ <wbr>ภ.ง.ด. <wbr>และ <wbr>Text <wbr>File</li>
+            <li>ระบบ<wbr>วางบิล<wbr>และ<wbr>พิมพ์<wbr>ใบเสร็จ<wbr>รับเงิน</li>
+            <li>ฟอร์ม<wbr>เอกสาร<wbr>ไทย<wbr>กว่า <wbr>20 <wbr>ชุด</li>
+            <li>อบรม<wbr>การ<wbr>ใช้งาน <wbr>ทดสอบ <wbr>และ<wbr>คู่มือ<wbr>การ<wbr>ใช้งาน</li>
           </ul>
         </div>
       </article>
@@ -3431,10 +3461,12 @@
     ['.plan-loc .pricing-cta', 'Discuss installation — free'],
     ['.plan-loc .plan-list-head', 'What\'s included:'],
     ['.plan-loc .plan-features li:nth-child(1)', 'Install JWIC Thai Localization on your environment'],
-    ['.plan-loc .plan-features li:nth-child(2)', 'Purchase–sales VAT reports and PP30, head office and branches'],
+    ['.plan-loc .plan-features li:nth-child(2)', 'Purchase–sales VAT reports, PP30 with attachments, head office and branches'],
     ['.plan-loc .plan-features li:nth-child(3)', 'Withholding tax, 50 Bis certificates, and RD Prep files'],
-    ['.plan-loc .plan-features li:nth-child(4)', 'Billing notes and a complete set of Thai document forms'],
-    ['.plan-loc .plan-features li:nth-child(5)', 'User training and real-document testing'],
+    ['.plan-loc .plan-features li:nth-child(4)', 'PND 2, 3, 53, 54 with attachments and e-filing text files'],
+    ['.plan-loc .plan-features li:nth-child(5)', 'Billing note system and receipt printing'],
+    ['.plan-loc .plan-features li:nth-child(6)', 'Over 20 Thai document forms'],
+    ['.plan-loc .plan-features li:nth-child(7)', 'User training, testing, and a user manual'],
     ['.plan-full .plan-banner', 'For a new end-to-end implementation'],
     ['.plan-full .plan-desc', 'We look after process analysis, system setup, data migration, user training, and support through the start of live operation.'],
     ['.plan-full .plan-price-prefix', 'Starting from'],
