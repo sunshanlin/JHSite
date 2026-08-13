@@ -8,3 +8,17 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 - ติดต่อ: jirapat.wi@outlook.com, โทร/LINE 084-148-7480 (Jirapat Wichayapong — Sun)
 - สไตล์: แก้ CSS variables ใน `:root` ก่อนถ้าจะเปลี่ยนโทนสี
 - Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ
+
+## โครงไฟล์ — ไฟล์ใหม่เข้าโฟลเดอร์ไหน
+
+ทุกไฟล์ที่ commit จะถูกเสิร์ฟเป็น URL จริงบน jwicconsulting.com — **ห้ามย้าย/เปลี่ยนชื่อไฟล์ที่มีอยู่** ไม่งั้นลิงก์ที่แชร์ไปแล้วพัง
+
+| ไฟล์แบบไหน | ไปไหน |
+|---|---|
+| บทความหน้าใหม่ | `articles/` |
+| รูปที่ขึ้นหน้าเว็บ | `img/` (โลโก้/แบรนด์ → `img/brand/`, badge-ใบเซอร์ → `img/credentials/`) |
+| รูปแม่ไม่มีลายน้ำ | `img/originals/` — gitignore แล้ว ห้าม commit ขึ้นโฮสต์ |
+| PDF ใบเซอร์ตัวจริง | `credentials/` |
+| CSS ที่ใช้ร่วมหลายหน้า | `css/` |
+| หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
+| ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
