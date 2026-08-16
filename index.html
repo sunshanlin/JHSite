@@ -127,7 +127,7 @@
           "name": "ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "บริการวางระบบ Business Central ครบทุกขั้นตอนพร้อม Thai Localization เริ่มต้น 350,000 บาท สำหรับ 1 บริษัท ราคาสุดท้ายขึ้นอยู่กับขอบเขตโครงการ ส่วนกิจการที่ใช้ Business Central อยู่แล้ว ติดตั้ง JWIC Thai Localization พร้อมตั้งค่าและอบรม เป็นแพ็กเกจราคาคงที่ 240,000 บาท ชำระครั้งเดียว ทั้งสองราคาไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม"
+            "text": "JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ ราคาและค่าบริการไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม"
           }
         },
         {
@@ -2063,8 +2063,6 @@
     font-size: 1.5rem; font-weight: 600; letter-spacing: -.04em;
     font-variant-numeric: tabular-nums; text-decoration-thickness: 2px;
   }
-  /* ใบขวาไม่มีราคาก่อนลด — กันที่ว่างเท่ากันไว้ ตัวเลขสองใบจะได้อยู่ระดับเดียวกัน */
-  .plan-full .plan-price::before { content: "280,000"; display: block; visibility: hidden; font-size: 1.5rem; margin-bottom: 2px; }
   .plan-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 8px; white-space: nowrap; min-width: 0; }
   .plan-price-line strong {
     color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
@@ -2116,10 +2114,16 @@
   }
   .plan-full .plan-name { color: #fff; }
   .plan-full .plan-desc { color: var(--brand-mist); }
-  .plan-full .plan-price-prefix { color: var(--brand-pink); }
+  /* min-height = ความสูงราคา+note ของใบซ้าย กันปุ่ม CTA สองใบเลื่อนหลุดระดับกัน */
+  .plan-full .plan-price { display: flex; align-items: center; min-height: 9.5rem; }
+  .plan-full .plan-price-quote {
+    display: block; color: #fff; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: clamp(1.3rem, 1.9vw, 1.6rem); font-weight: 700; line-height: 1.3;
+    letter-spacing: -.02em;
+  }
+  .plan-full .plan-price-quote sup { margin-left: .12em; color: var(--brand-pink); font-size: .55em; vertical-align: top; }
   .plan-full .plan-price-line strong { color: #fff; }
   .plan-full .plan-price-line strong sup { color: var(--brand-pink); }
-  .plan-full .plan-currency, .plan-full .plan-note { color: var(--brand-mist); }
   .plan-full .plan-list-head { color: var(--brand-pale); border-top-color: rgba(255,255,255,.14); }
   .plan-full .plan-features li { color: var(--brand-pale); }
   .plan-full .plan-features li::before { color: var(--accent); }
@@ -2162,7 +2166,6 @@
     /* จอ 320px: บรรทัดราคาพอดีขอบเป๊ะถ้าไม่ลด — ลดลงให้เหลือที่หายใจ */
     .plan-price-line strong { font-size: clamp(2rem, 10vw, 2.6rem); }
     .plan-price-was { font-size: 1.2rem; }
-    .plan-full .plan-price::before { font-size: 1.2rem; }
     .plan-features li { font-size: .88rem; }
     .plan-list-head { font-size: .98rem; }
   }
@@ -2802,13 +2805,13 @@
           <p class="plan-desc">ยกระดับ <wbr>Microsoft <wbr>Dynamics <wbr>365 <wbr>Business <wbr>Central <wbr>ให้<wbr>รองรับ<wbr>การ<wbr>ดำเนินงาน<wbr>และ<wbr>ข้อกำหนด<wbr>ด้าน<wbr>ภาษี<wbr>ของ<wbr>ประเทศไทย<wbr>อย่าง<wbr>ครบถ้วน</p>
           <div class="plan-price">
             <span class="plan-price-prefix">ราคา<wbr>แพ็กเกจ</span>
-            <s class="plan-price-was">280,000 <wbr>บาท</s>
+            <s class="plan-price-was">300,000 <wbr>บาท</s>
             <div class="plan-price-line">
-              <strong>240,000<sup aria-hidden="true">*</sup></strong>
+              <strong>280,000<sup aria-hidden="true">*</sup></strong>
               <span class="plan-currency">บาท</span>
             </div>
           </div>
-          <p class="plan-note">ต่อ <wbr>1 <wbr>บริษัท <wbr>ชำระ<wbr>ครั้ง<wbr>เดียว</p>
+          <p class="plan-note">ต่อ <wbr>1 <wbr>บริษัท <wbr>ชำระ<wbr>ครั้ง<wbr>เดียว <wbr>ใช้<wbr>งาน<wbr>ได้<wbr>ตลอดไป</p>
           <a class="pricing-cta" href="#contact">ปรึกษา<wbr>การ<wbr>ติดตั้ง <wbr>ฟรี</a>
           <h4 class="plan-list-head">สิ่งที่<wbr>รวม<wbr>ใน<wbr>แพ็กเกจ:</h4>
           <ul class="plan-features">
@@ -2832,15 +2835,10 @@
           <h3 class="plan-name">Full Implementation</h3>
           <p class="plan-desc">ดูแล<wbr>ครบ<wbr>ตั้งแต่<wbr>วิเคราะห์<wbr>กระบวนการ <wbr>ตั้งค่า<wbr>ระบบ <wbr>ย้าย<wbr>ข้อมูล <wbr>อบรม<wbr>ผู้ใช้งาน <wbr>จนถึง<wbr>การ<wbr>สนับสนุน<wbr>ใน<wbr>ช่วง<wbr>เริ่ม<wbr>ใช้งาน<wbr>จริง</p>
           <div class="plan-price">
-            <span class="plan-price-prefix">ราคา<wbr>เริ่มต้น</span>
-            <div class="plan-price-line">
-              <strong>350,000<sup aria-hidden="true">*</sup></strong>
-              <span class="plan-currency">บาท</span>
-            </div>
+            <strong class="plan-price-quote">ราคา<wbr>ตาม<wbr>ขอบเขต<wbr>งาน<sup aria-hidden="true">*</sup></strong>
           </div>
-          <p class="plan-note">ต่อ <wbr>1 <wbr>บริษัท <wbr>ชำระ<wbr>ค่าบริการ<wbr>เมื่อ<wbr>เสร็จสิ้น<wbr>แต่ละ<wbr>เฟส <wbr>• <wbr>ไม่<wbr>รวม<wbr>ค่า <wbr>Microsoft <wbr>License</p>
           <a class="pricing-cta" href="#contact">ปรึกษา<wbr>ขอบเขต<wbr>โครงการ <wbr>ฟรี</a>
-          <h4 class="plan-list-head">สิ่งที่<wbr>รวม<wbr>ใน<wbr>ราคา<wbr>เริ่มต้น:</h4>
+          <h4 class="plan-list-head">ขอบเขต<wbr>งาน<wbr>ที่<wbr>ดูแล:</h4>
           <ul class="plan-features">
             <li>รวม <wbr>JWIC <wbr>Thai <wbr>Localization <wbr>ใน<wbr>แพ็กเกจ</li>
             <li>เก็บ<wbr>ความ<wbr>ต้องการ <wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>และ<wbr>ออกแบบ<wbr>ระบบ</li>
@@ -2853,7 +2851,7 @@
         </div>
       </article>
     </div>
-    <p class="pricing-excludes"><strong>อธิบาย<wbr>เพิ่มเติม</strong>*ราคา<wbr>ค่าบริการ<wbr>ทั้ง<wbr>สอง<wbr>แพ็กเกจ<wbr>ไม่<wbr>รวมถึง <wbr>VAT <wbr>7%, <wbr>ค่า <wbr>Microsoft <wbr>License, <wbr>ค่าบริการ<wbr>ดูแล<wbr>รายปี <wbr>และ <wbr>Customization <wbr>เพิ่มเติม</p>
+    <p class="pricing-excludes"><strong>อธิบาย<wbr>เพิ่มเติม</strong>*ราคา<wbr>และ<wbr>ค่าบริการ<wbr>ไม่<wbr>รวม <wbr>VAT <wbr>7%, <wbr>ค่า <wbr>Microsoft <wbr>License, <wbr>ค่าบริการ<wbr>ดูแล<wbr>รายปี <wbr>และ <wbr>Customization <wbr>เพิ่มเติม</p>
   </div>
 </section>
 
@@ -2874,7 +2872,7 @@
       </details>
       <details class="reveal">
         <summary>ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?</summary>
-        <p>บริการวางระบบ Business Central ครบทุกขั้นตอนพร้อม Thai Localization เริ่มต้น 350,000 บาท สำหรับ 1 บริษัท ราคาสุดท้ายขึ้นอยู่กับขอบเขตโครงการ ส่วนกิจการที่ใช้ Business Central อยู่แล้ว ติดตั้ง JWIC Thai Localization พร้อมตั้งค่าและอบรม เป็นแพ็กเกจราคาคงที่ 240,000 บาท ชำระครั้งเดียว ทั้งสองราคาไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
+        <p>JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ ราคาและค่าบริการไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
       </details>
       <details class="reveal">
         <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
@@ -3505,8 +3503,8 @@
     ['.plan-loc .plan-banner-text', 'For teams already using Business Central'],
     ['.plan-loc .plan-desc', 'Bring your Microsoft Dynamics 365 Business Central up to full compliance with Thai operating practice and tax requirements.'],
     ['.plan-loc .plan-price-prefix', 'Package price'],
-    ['.plan-price-was', 'THB 280,000'],
-    ['.plan-loc .plan-note', 'Per company — one-time payment'],
+    ['.plan-price-was', 'THB 300,000'],
+    ['.plan-loc .plan-note', 'Per company — one-time payment, use it forever'],
     ['.plan-loc .pricing-cta', 'Discuss installation — free'],
     ['.plan-loc .plan-list-head', 'What\'s included:'],
     ['.plan-loc .plan-features li:nth-child(1)', 'Purchase–sales VAT reports, PP30 with attachments, head office and branches'],
@@ -3519,10 +3517,9 @@
     ['.plan-loc .plan-features li:nth-child(8)', 'Create customer and vendor records from Revenue Department taxpayer ID lookup (VAT Service)'],
     ['.plan-full .plan-banner-text', 'For a new end-to-end implementation'],
     ['.plan-full .plan-desc', 'End-to-end care: process analysis, system setup, data migration, user training, and support through the start of live operation.'],
-    ['.plan-full .plan-price-prefix', 'Starting from'],
-    ['.plan-full .plan-note', 'Per company — payment due upon completion of each phase • Microsoft licences not included'],
+    ['.plan-full .plan-price-quote', 'Talk to us for a tailored quote<sup aria-hidden="true">*</sup>'],
     ['.plan-full .pricing-cta', 'Discuss your project — free'],
-    ['.plan-full .plan-list-head', 'Included in the starting price:'],
+    ['.plan-full .plan-list-head', 'What we cover:'],
     ['.plan-full .plan-features li:nth-child(1)', 'JWIC Thai Localization included in the package'],
     ['.plan-full .plan-features li:nth-child(2)', 'Requirement workshop, fit-gap analysis, and solution design'],
     ['.plan-full .plan-features li:nth-child(3)', 'Migrate master data and opening balances into the system'],
@@ -3531,7 +3528,7 @@
     ['.plan-full .plan-features li:nth-child(6)', 'Month-end closing support for one month after go-live'],
     ['.plan-full .plan-assurance', '<strong>Scope and price confirmed before work begins</strong>After the fit-gap analysis, we confirm the scope and price with you. Any additional work requires approval before we proceed.'],
     ['.plan-currency', 'THB'],
-    ['.pricing-excludes', '<strong>Additional information</strong>*Both package prices exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
+    ['.pricing-excludes', '<strong>Additional information</strong>*Prices and service fees exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
     ['#contact h2', 'Let\'s talk about your system'],
     ['#contact > .wrap > .sub', 'Book a free session to assess your requirements and scope, and see an initial demo — no cost, no obligation.'],
     ['.contact-note', 'Tell us a little about your business and what you’d like to improve — we’ll help suggest an approach that fits you.'],
@@ -3547,7 +3544,7 @@
     ['#faq details:nth-of-type(2) summary', 'How long does a Business Central implementation take?'],
     ['#faq details:nth-of-type(2) > p', 'Using Best Practice and Fast Implementation, we define a clear project plan and timeline from the outset, keeping implementation structured and enabling a faster go-live.'],
     ['#faq details:nth-of-type(3) summary', 'How much does an implementation cost?'],
-    ['#faq details:nth-of-type(3) > p', 'End-to-end Business Central implementation with Thai Localization starts from THB 350,000 for one company; the final price depends on project scope. For teams already using Business Central, JWIC Thai Localization — installed, configured, and with training — is a fixed THB 240,000 package, paid once. Both prices exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
+    ['#faq details:nth-of-type(3) > p', 'For teams already using Business Central, JWIC Thai Localization — installed, configured, and with training — is discounted from THB 300,000 to THB 280,000 for one company, paid once for perpetual use. For Full Implementation, talk to us for a scope-based estimate. Prices and service fees exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
     ['#faq details:nth-of-type(4) summary', 'Can you migrate data from our current system?'],
     ['#faq details:nth-of-type(4) > p', 'Yes — the service covers migration from legacy systems: master data such as customers, vendors, items, and chart of accounts, plus opening balances, reconciled before go-live.'],
     ['#faq details:nth-of-type(5) summary', 'Is there support after go-live?'],
