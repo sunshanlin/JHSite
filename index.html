@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -606,12 +606,30 @@
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
   }
   .contact-form textarea { min-height: 130px; resize: vertical; }
-  .contact-form button {
-    justify-self: start; border: none; cursor: pointer; color: #fff; font: inherit; font-weight: 600;
-    padding: 13px 32px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    box-shadow: 0 12px 26px -12px var(--accent); transition: transform .15s, box-shadow .15s;
+  .contact-form .cf-note { color: var(--ink); margin: 6px 0 22px; }
+  /* ปุ่มจอง Cal.com: อ่านเป็น "เลือกระดับการคุย" ไม่ใช่ปุ่มเท่ากันสองปุ่ม — ไอคอนนำ ชื่อการกระทำ แล้วบอกความยาว/ใช้ตอนไหน */
+  .contact-form .cal-actions { display: grid; gap: 16px; margin-top: 10px; }
+  .contact-form .cal-actions .cta { justify-content: flex-start; gap: 18px; padding: 20px 24px; text-align: left; }
+  /* ไอคอนใส่กรอบสี่เหลี่ยมมน + ลูกศรท้ายปุ่ม ให้อ่านเป็น "การ์ดให้เลือก" ไม่ใช่ปุ่มฟอร์ม */
+  .contact-form .cal-actions .cta svg {
+    width: 20px; height: 20px; box-sizing: content-box;
+    padding: 11px; border-radius: 12px; background: rgba(255,255,255,.15);
   }
-  .contact-form button:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -12px var(--accent); }
+  .contact-form .cal-actions .cta::after {
+    content: "→"; margin-left: auto; font-size: 1.2rem; opacity: .5;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .contact-form .cal-actions .cta:hover::after { transform: translateX(4px); opacity: 1; }
+  .cal-copy { display: grid; gap: 2px; line-height: 1.35; }
+  .cal-copy strong { font-weight: 600; font-size: 1.06rem; }
+  .cal-copy > span { font-size: .84rem; font-weight: 500; opacity: .75; }
+  .contact-form .cta.ghost {
+    color: var(--brand-teal); border-color: var(--brand-mist); background: var(--bg-soft);
+    box-shadow: 0 12px 26px -18px rgba(1,74,65,.55);
+  }
+  .contact-form .cta.ghost svg { stroke: var(--brand-teal); background: rgba(1,74,65,.09); }
+  .contact-form .cta.ghost .cal-copy > span { color: var(--brand-ocean); opacity: 1; }
+  .contact-form .cta.ghost:hover { background: var(--brand-pale); border-color: var(--accent); transform: translateY(-2px); }
   .contact-form .hp { display: none; }
   @media (max-width: 720px) {
     .contact-grid { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
@@ -823,11 +841,12 @@
   header p.lead { max-width: 640px; color: #cfe7e8; font-size: 1.08rem; line-height: 1.85; text-wrap: pretty; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
   .cta {
-    display: inline-flex; align-items: center; justify-content: center; margin-top: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 0;
     min-height: 50px; padding: 12px 24px; border: 1px solid transparent; border-radius: 12px;
     background: linear-gradient(135deg, #35AF9E, #1F7A87);
     box-shadow: 0 18px 36px -18px rgba(53,175,158,.72);
   }
+  .cta svg { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
   .cta.secondary, .cta.ghost {
     color: #f0f8f7; border-color: rgba(255,255,255,.23); background: rgba(255,255,255,.06);
     box-shadow: none;
@@ -1288,7 +1307,6 @@
   .form-heading h3 { margin-bottom: 4px; color: var(--ink); font-size: 1.35rem; }
   .contact-form input, .contact-form textarea { padding: 13px 15px; border-color: #BEE3DF; background: #f8fbfc; }
   .contact-form input::placeholder, .contact-form textarea::placeholder { color: #93bcc0; }
-  .contact-form button { justify-self: stretch; width: 100%; min-height: 52px; border-radius: 12px; }
 
   footer { padding: 30px 0; background: #04172c; }
   footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
@@ -1674,13 +1692,13 @@
   }
 
   /* Burgundy สงวนไว้ให้ action สำคัญ */
-  .hero-actions .cta:not(.secondary, .ghost), .contact-form button[type="submit"] {
+  .hero-actions .cta:not(.secondary, .ghost), .cal-actions .cta:not(.ghost) {
     background: linear-gradient(135deg, var(--brand-burgundy), var(--brand-burgundy-dark));
     box-shadow: 0 18px 36px -18px rgba(166,58,86,.65);
   }
   .hero-actions .cta:not(.secondary, .ghost):hover,
-  .service-highlight .text-link:hover,
-  .contact-form button[type="submit"]:hover {
+  .cal-actions .cta:not(.ghost):hover,
+  .service-highlight .text-link:hover {
     transform: translateY(-2px);
     box-shadow: 0 20px 38px -16px rgba(125,36,64,.72);
   }
@@ -2915,33 +2933,22 @@
           </li>
         </ul>
       </div>
-      <form id="contact-form" class="contact-form" action="https://formsubmit.co/jirapat.wi@outlook.co.th" method="POST">
-        <input type="hidden" name="_subject" value="New enquiry from JWIC Consulting site">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="text" name="_honey" class="hp" autocomplete="off" tabindex="-1">
+      <div class="contact-form">
         <div class="form-heading">
-          <h3>เล่าโจทย์ของคุณให้เราฟัง</h3>
+          <h3>เลือกเวลาที่สะดวกเพื่อสอบถามได้ทันที</h3>
         </div>
-        <div class="field">
-          <label for="cf-name">ชื่อ</label>
-          <input id="cf-name" type="text" name="name" autocomplete="name" placeholder="ชื่อผู้ติดต่อ" required>
+        <p class="cf-note">เลือกรูปแบบการพูดคุย ดูวันและเวลาที่ว่างจริง แล้วยืนยันนัดหมายได้ทันที</p>
+        <div class="cal-actions">
+          <button type="button" class="cta ghost" data-cal-namespace="15min" data-cal-link="jwicconsulting/15min" data-cal-config='{"layout":"month_view"}'>
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="cal-copy"><strong>Phone Call</strong><span>15 min · quick questions</span></span>
+          </button>
+          <button type="button" class="cta" data-cal-namespace="1hour" data-cal-link="jwicconsulting/1hour" data-cal-config='{"layout":"month_view"}'>
+            <svg viewBox="0 0 24 24"><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/><path d="M23 7l-7 5 7 5V7z"/></svg>
+            <span class="cal-copy"><strong>Book a Meeting (Zoom)</strong><span>1 hour · demo and scope</span></span>
+          </button>
         </div>
-        <div class="field">
-          <!-- ต้องเป็นอีเมลเท่านั้น: FormSubmit ใช้ค่าในช่อง email เป็น reply-to ถ้าใส่เบอร์โทรจะส่งไม่ผ่าน -->
-          <label for="cf-contact">อีเมล</label>
-          <input id="cf-contact" type="email" name="email" autocomplete="email" placeholder="อีเมลสำหรับติดต่อกลับ" required>
-        </div>
-        <div class="field">
-          <label for="cf-phone">เบอร์โทรศัพท์</label>
-          <input id="cf-phone" type="tel" name="phone" autocomplete="tel" placeholder="สำหรับติดต่อโดยตรง" inputmode="tel">
-        </div>
-        <div class="field">
-          <label for="cf-msg">รายละเอียดที่ต้องการปรึกษา</label>
-          <textarea id="cf-msg" name="message" placeholder="ประเภทธุรกิจ ระบบที่ใช้อยู่ และสิ่งที่ต้องการปรับปรุง" required></textarea>
-        </div>
-        <button type="submit">ส่งข้อความเพื่อรับคำปรึกษา</button>
-      </form>
+      </div>
     </div>
   </div>
 </section>
@@ -3026,6 +3033,13 @@
 </div>
 
 <script>
+  // ปุ่มจองคิว Cal.com ใน #contact — official embed snippet จาก cal.com/docs
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "15min", { origin: "https://cal.com" });
+  Cal("init", "1hour", { origin: "https://cal.com" });
+  Cal.ns["15min"]("ui", { styles: { branding: { brandColor: "#35AF9E" } }, hideEventTypeDetails: false, layout: "month_view" });
+  Cal.ns["1hour"]("ui", { styles: { branding: { brandColor: "#35AF9E" } }, hideEventTypeDetails: false, layout: "month_view" });
+
   // เมนูมือถือ
   const menuToggle = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('#primary-nav');
@@ -3384,9 +3398,9 @@
       trackSeoEvent('contact_click', { method: 'line' });
     });
   });
-  document.getElementById('contact-form').addEventListener('submit', () => {
-    trackSeoEvent('generate_lead', { method: 'contact_form' });
-  });
+  Cal("on", { action: "bookingSuccessful", callback: () => {
+    trackSeoEvent('generate_lead', { method: 'cal_booking' });
+  } });
 
   // chat FAB: ปุ่ม ✕ ซ่อน tooltip (โผล่ใหม่เมื่อโหลดหน้าใหม่)
   document.querySelector('#chat-fab .tip-close').addEventListener('click', () => {
@@ -3532,11 +3546,8 @@
     ['#contact h2', 'Let\'s talk about your system'],
     ['#contact > .wrap > .sub', 'Book a free session to assess your requirements and scope, and see an initial demo — no cost, no obligation.'],
     ['.contact-note', 'Tell us a little about your business and what you’d like to improve — we’ll help suggest an approach that fits you.'],
-    ['.form-heading h3', 'Tell us your challenge'],
-    ['label[for="cf-name"]', 'Name'],
-    ['label[for="cf-contact"]', 'Email or phone'],
-    ['label[for="cf-msg"]', 'What would you like to discuss?'],
-    ['.contact-form button[type="submit"]', 'Send message'],
+    ['.contact-form .form-heading h3', 'Pick a time that works — book instantly'],
+    ['.contact-form .cf-note', 'Choose how you\'d like to talk, see real open times, and confirm your booking right away.'],
     ['#faq h2', 'Frequently Asked Questions'],
     ['#faq > .wrap > .sub', 'Short answers to the questions clients ask us most.'],
     ['#faq details:nth-of-type(1) summary', 'Does Business Central support Thai tax and documents?'],
@@ -3555,9 +3566,6 @@
     ['#cookie-decline', 'Reject All', 'ปฏิเสธทั้งหมด'],
   ];
   const I18N_ATTR = [
-    ['#cf-name', 'placeholder', 'Contact name'],
-    ['#cf-contact', 'placeholder', 'Best way to reach you'],
-    ['#cf-msg', 'placeholder', 'Business type, current system, and what you want to improve'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'Independent consultant & developer for Microsoft Dynamics 365 Business Central with Thai Localization — VAT PP30/36, withholding tax certificates (50 Bis), billing, Thai document forms — end-to-end delivery.'],
   ];
