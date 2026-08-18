@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Niramit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <meta name="description" content="บริการวางระบบ Microsoft Dynamics 365 Business Central พร้อม Thai Localization โดยที่ปรึกษาผู้มีประสบการณ์ — VAT ภ.พ.30/36, หัก ณ ที่จ่าย 50 ทวิ ภ.ง.ด., ใบวางบิล, ฟอร์มเอกสาร — ดูแลตั้งแต่ต้นจนจบ">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -127,7 +127,7 @@
           "name": "ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ ราคาและค่าบริการไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม"
+            "text": "JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ หากต้องการเรียกใช้เป็นงาน ๆ ไม่ผูกเป็นโครงการ มีอัตรา On-Demand 8,000 บาทต่อ Manday โดยประเมินจำนวนวันตามเนื้องานจริงและสรุปให้ยืนยันก่อนเริ่ม ราคาและค่าบริการไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม"
           }
         },
         {
@@ -170,8 +170,9 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    /* ตัวอังกฤษใช้ Plus Jakarta Sans, ตัวไทย fallback ไป Anuphan */
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
+    /* เนื้อความ: ไทยใช้ Niramit (มีหัว ทรงโมเดิร์น อ่านยาวสบายตา), อังกฤษ Plus Jakarta Sans
+       หัวข้อใช้ Anuphan (ไม่มีหัว) — ดูกฎถัดไป */
+    font-family: "Plus Jakarta Sans", "Niramit", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
     color: var(--text);
     background: var(--bg);
     line-height: 1.7;
@@ -179,7 +180,8 @@
     font-size: 18px;
     font-weight: 500;
   }
-  h1, h2, .card h3, .brand .wordmark {
+  /* หัวข้อทุกระดับ = Anuphan (ไทยไม่มีหัว) ตัดกับเนื้อความที่มีหัว */
+  h1, h2, h3, h4, h5, h6, summary, .brand .wordmark {
     font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
   }
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
@@ -191,7 +193,7 @@
   .topnav .brand svg { width: 30px; height: 30px; }
   .topnav .brand .wordmark { font-size: 1.1rem; color: #fff; }
   .topnav .links { margin-left: auto; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .topnav .links a { color: #cfe7e8; text-decoration: none; font-size: .9rem; font-weight: 500; }
+  .topnav .links a { color: #cfe7e8; text-decoration: none; font-size: .9rem; font-weight: 500; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
   .topnav .links a:hover { color: #fff; }
   .topnav .social { display: flex; gap: 8px; }
   .topnav .social a {
@@ -364,7 +366,6 @@
   .linkedin-link:hover { background: var(--bg-soft); border-color: var(--accent); transform: translateY(-1px); }
   .linkedin-link svg { width: 18px; height: 18px; fill: currentColor; }
   .about-title { margin-bottom: 14px; color: var(--ink); font-size: 1.15rem; }
-  .expertise-title { margin-top: 32px; }
   .education-title { margin-top: 32px; }
   .education-list { display: grid; gap: 12px; list-style: none; }
   .education-list li { position: relative; padding-left: 24px; color: var(--text); }
@@ -1122,7 +1123,6 @@
   }
   .why-list strong { display: block; margin-bottom: 5px; color: var(--ink); }
   .why-list span { display: block; color: var(--muted); font-size: .9rem; line-height: 1.65; }
-  #why-us .expertise-title { margin-top: 64px; margin-bottom: 20px; font-size: 1.35rem; }
 
   .slider { gap: 24px; padding: 4px 4px 22px; }
   .slider figure { flex-basis: min(72%, 650px); border-radius: 20px; box-shadow: var(--shadow); }
@@ -1461,18 +1461,28 @@
 
   /* slider: ปุ่มหยุดเล่นอัตโนมัติ + จุดบอกตำแหน่ง */
   .slider-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
+  .slider-controls .slider-thumbs { flex: 1 1 auto; min-width: 0; }
   .slider-play {
     width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line);
     background: var(--card); color: var(--accent-dark); cursor: pointer;
     font-size: .72rem; line-height: 1; display: grid; place-items: center;
   }
   .slider-play:hover { background: var(--bg-soft); }
-  .slider-dots { display: flex; gap: 8px; }
-  .slider-dots button {
-    width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0;
-    background: var(--line); cursor: pointer; transition: background .25s ease, transform .25s ease;
+  /* แถบ thumbnail แทนจุดกลม — คลิกกระโดดไปสไลด์นั้น ตัวที่ active ยกขอบเน้น */
+  .slider-thumbs {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    max-width: 100%; padding: 2px;
   }
-  .slider-dots button.on { background: var(--accent); transform: scale(1.3); }
+  .slider-thumbs::-webkit-scrollbar { display: none; }
+  .slider-thumbs button {
+    flex: 0 0 auto; width: 64px; height: 40px; padding: 0; border-radius: 8px;
+    border: 2px solid transparent; overflow: hidden; cursor: pointer;
+    background: var(--bg-soft); opacity: .55;
+    transition: opacity .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .slider-thumbs button:hover { opacity: .85; }
+  .slider-thumbs button.on { opacity: 1; border-color: var(--accent); transform: scale(1.08); }
+  .slider-thumbs img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .slider-hint { margin-top: 8px; }
 
   /* ตัวเลขสถิติใน why-us */
@@ -1482,64 +1492,9 @@
   @media (max-width: 600px) { .stat-row { grid-template-columns: 1fr; gap: 16px; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .topnav .links a::after, .slider-dots button { transition: none; }
+    .topnav .links a::after, .slider-thumbs button { transition: none; }
   }
 
-  /* ── ประสบการณ์: แถวแนวนอนมีเลขกำกับ (ไม่ใช่การ์ด) ให้ต่างจากบทความชัดเจน ── */
-  .expertise-list { list-style: none; margin: 0; counter-reset: exp; display: grid; gap: 0; }
-  .expertise-list li {
-    counter-increment: exp; position: relative;
-    display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start;
-    padding: 26px 0 26px 60px; border-top: 1px solid rgba(31,122,135,.22);
-  }
-  .expertise-list li:last-child { border-bottom: 1px solid rgba(31,122,135,.22); }
-  .expertise-list li::before {
-    content: "0" counter(exp); position: absolute; left: 0; top: 24px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 1.45rem; font-weight: 800; color: #A63A56; letter-spacing: -.02em;
-    opacity: .55;
-  }
-  .expertise-list .ic {
-    width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
-    background: linear-gradient(145deg, #0D5257, #1F7A87);
-  }
-  .expertise-list li:nth-child(2) .ic { background: linear-gradient(145deg, #5C4B72, #8B5697); }
-  .expertise-list li:nth-child(3) .ic { background: linear-gradient(145deg, #7C3960, #A63A56); }
-  .expertise-list .ic svg { width: 24px; height: 24px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .expertise-list h4 { font-size: 1.12rem; color: var(--ink); margin-bottom: 5px; }
-  .expertise-list p { color: var(--muted); font-size: .96rem; line-height: 1.7; }
-  @media (max-width: 700px) {
-    #why-us .expertise-title {
-      margin-top: 44px; margin-bottom: 14px;
-      font-size: 1.18rem; line-height: 1.45;
-    }
-    .expertise-list li {
-      grid-template-columns: 30px 44px minmax(0, 1fr);
-      gap: 10px; align-items: center;
-      padding: 20px 0;
-    }
-    .expertise-list li::before {
-      position: static; grid-column: 1; grid-row: 1;
-      align-self: center;
-      font-size: 1.05rem; line-height: 1;
-    }
-    .expertise-list .ic {
-      grid-column: 2; grid-row: 1;
-      width: 44px; height: 44px; border-radius: 12px;
-    }
-    .expertise-list .ic svg { width: 21px; height: 21px; }
-    .expertise-list li > div { display: contents; }
-    .expertise-list h4 {
-      grid-column: 3; grid-row: 1;
-      align-self: center; margin: 0;
-      font-size: 1rem; line-height: 1.4;
-    }
-    .expertise-list p {
-      grid-column: 1 / -1; grid-row: 2;
-      margin: 2px 0 0;
-      font-size: .9rem; line-height: 1.65;
-    }
-  }
 
   /* ── บทความ: การ์ดแนว editorial มีแถบสีหัวการ์ด ── */
   #articles .grid { gap: 20px; }
@@ -2039,9 +1994,9 @@
   #pricing > .wrap > h2 { max-width: 760px; }
   #pricing > .wrap > .sub { max-width: 780px; }
   .pricing-plans {
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: start;
-    gap: 24px; max-width: 1060px; margin: 34px auto 0;
+    gap: 20px; max-width: 1124px; margin: 34px auto 0;
   }
   /* Chrome breaks Thai mid-word (no dictionary), and word-break: keep-all has no effect on Thai.
      nowrap + <wbr> is the only lever that holds: breaks land only where the markup allows.
@@ -2056,12 +2011,12 @@
   /* แต่ละใบมีสีประจำตัว: ซ้ายเขียว ขวาเบอร์กันดี แบนเนอร์กับปุ่มใช้สีเดียวกัน */
   .plan-banner {
     display: flex; align-items: center; gap: 13px;
-    margin: 0; padding: 12px 30px;
+    margin: 0; padding: 12px 22px;
     color: #fff; background: linear-gradient(135deg, var(--accent), var(--brand-teal));
-    font-size: .85rem; font-weight: 700; letter-spacing: .02em;
+    font-size: .82rem; font-weight: 700; letter-spacing: .02em;
   }
   .plan-banner-text { margin: 0; }
-  .plan-body { display: flex; flex-direction: column; flex: 1; padding: 28px 30px 32px; }
+  .plan-body { display: flex; flex-direction: column; flex: 1; padding: 26px 24px 28px; }
   .plan-icon {
     display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px;
     border: 1px solid rgba(255,255,255,.24); border-radius: 10px;
@@ -2071,9 +2026,9 @@
     width: 20px; height: 20px; fill: none; stroke: #fff;
     stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
   }
-  .plan-name { margin: 0 0 10px; color: var(--brand-deep); font-size: 1.6rem; letter-spacing: -.015em; }
-  /* min-height = 3 บรรทัดพอดี กันราคาสองใบเลื่อนหลุดระดับกันเวลาคำบรรยายยาวไม่เท่ากัน */
-  .plan-desc { margin: 0 0 14px; min-height: 76px; color: var(--muted); font-size: .95rem; line-height: 1.65; }
+  .plan-name { margin: 0 0 10px; color: var(--brand-deep); font-size: 1.42rem; letter-spacing: -.015em; }
+  /* min-height = 4 บรรทัดพอดี กันราคาสามใบเลื่อนหลุดระดับกันเวลาคำบรรยายยาวไม่เท่ากัน */
+  .plan-desc { margin: 0 0 14px; min-height: 100px; color: var(--muted); font-size: .92rem; line-height: 1.65; }
   .plan-price-prefix { display: block; margin-bottom: 3px; color: var(--brand-teal); font-size: .88rem; font-weight: 700; }
   .plan-price-was {
     display: block; margin-bottom: 2px; color: var(--brand-mint);
@@ -2084,7 +2039,7 @@
   .plan-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 8px; white-space: nowrap; min-width: 0; }
   .plan-price-line strong {
     color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: clamp(2.7rem, 3.6vw, 3.4rem); font-weight: 700; line-height: 1;
+    font-size: clamp(2.1rem, 2.7vw, 2.8rem); font-weight: 700; line-height: 1;
     letter-spacing: -.055em; font-variant-numeric: tabular-nums;
   }
   .plan-price-line strong sup {
@@ -2104,6 +2059,39 @@
     border-top: 1px solid rgba(1,74,65,.1);
     color: var(--brand-deep); font-size: 1.05rem;
   }
+  /* ponytail: <details> ล้วน ไม่มี JS — accordion ที่ accessible อยู่แล้วในตัวเบราว์เซอร์ */
+  .plan-more > summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    cursor: pointer; list-style: none;
+  }
+  .plan-more > summary::-webkit-details-marker { display: none; }
+  .plan-more > summary::after {
+    content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin-bottom: 3px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(45deg); transition: transform .2s ease;
+  }
+  .plan-more[open] > summary::after { transform: rotate(-135deg); margin-bottom: -3px; }
+  /* เนื้อในเลื่อนขึ้นจาง ๆ ตอนเปิด — ใช้ได้ทุกเบราว์เซอร์ */
+  .plan-more[open] > .plan-features, .plan-more[open] > .plan-assurance {
+    animation: planReveal .3s ease both;
+  }
+  @keyframes planReveal { from { opacity: 0; transform: translateY(-8px); } }
+  /* ถ้าเบราว์เซอร์รองรับ ::details-content ก็ไถความสูงให้ด้วย (Chrome/Edge/Firefox รุ่นใหม่) */
+  @supports selector(::details-content) {
+    .plan-more { interpolate-size: allow-keywords; }
+    .plan-more::details-content {
+      block-size: 0; overflow: clip;
+      transition: block-size .32s ease, content-visibility .32s allow-discrete;
+    }
+    .plan-more[open]::details-content { block-size: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plan-more > summary::after,
+    .plan-more[open] > .plan-features, .plan-more[open] > .plan-assurance { animation: none; transition: none; }
+    .plan-more::details-content { transition: none; }
+  }
+  .plan-more > summary:hover { color: var(--brand-burgundy-dark); }
+  .plan-full .plan-more > summary:hover { color: var(--brand-pink); }
   .plan-features { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
   .plan-features li { position: relative; padding-left: 28px; color: var(--muted); font-size: .93rem; line-height: 1.55; }
   .plan-features li::before {
@@ -2132,8 +2120,9 @@
   }
   .plan-full .plan-name { color: #fff; }
   .plan-full .plan-desc { color: var(--brand-mist); }
-  /* min-height = ความสูงราคา+note ของใบซ้าย กันปุ่ม CTA สองใบเลื่อนหลุดระดับกัน */
-  .plan-full .plan-price { display: flex; align-items: center; min-height: 9.5rem; }
+  /* ponytail: min-height = ความสูงราคา+note ของใบพื้นสว่าง (วัดจากเบราว์เซอร์) กันปุ่ม CTA สามใบหลุดระดับกัน
+     — ถ้าเปลี่ยนฟอนต์/ขนาดราคา ต้องวัดใหม่ */
+  .plan-full .plan-price { display: flex; align-items: center; min-height: 181px; }
   .plan-full .plan-price-quote {
     display: block; color: #fff; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: clamp(1.3rem, 1.9vw, 1.6rem); font-weight: 700; line-height: 1.3;
@@ -2150,6 +2139,14 @@
     color: var(--brand-mist);
   }
   .plan-full .plan-assurance strong { color: var(--brand-pink); }
+  /* ใบขวา (On-demand) = พื้นสว่างเหมือนใบซ้าย แต่แบนเนอร์เขียวเข้มกว่า แยกออกจาก Localization */
+  .plan-ondemand .plan-banner { background: linear-gradient(135deg, var(--brand-ocean), var(--brand-deep)); }
+  .plan-ondemand .plan-price-unit { color: var(--muted); font-size: .95rem; font-weight: 600; }
+  /* สองใบพื้นสว่างสูงไม่เท่ากัน (ใบซ้ายมีราคาขีดฆ่า) — ล็อกความสูงบล็อกราคาให้ CTA อยู่ระดับเดียวกัน */
+  .plan-loc .plan-price, .plan-ondemand .plan-price {
+    display: flex; flex-direction: column; justify-content: flex-end; min-height: 7rem;
+  }
+  .plan-loc .plan-note, .plan-ondemand .plan-note { min-height: 3.8rem; }
   /* ชื่อแพ็กเกจเป็นอังกฤษ ให้ตัดที่ช่องว่างได้แม้อยู่ใต้ rule nowrap ของหน้า TH */
   html[lang="th"] #pricing .plan-name { white-space: normal; }
   .pricing-cta {
@@ -2168,9 +2165,13 @@
     font-size: .72rem; line-height: 1.55;
   }
   .pricing-excludes strong { display: block; margin-bottom: 4px; color: var(--ink); }
-  @media (max-width: 860px) {
+  /* 3 คอลัมน์แคบเกินอ่านไม่รู้เรื่องต่ำกว่า ~1080px — stack เลย ไม่แวะ 2 คอลัมน์ */
+  @media (max-width: 1080px) {
     .pricing-plans { grid-template-columns: 1fr; max-width: 560px; }
     .plan-desc { min-height: 0; }
+    .plan-loc .plan-price, .plan-ondemand .plan-price { min-height: 0; }
+    .plan-loc .plan-note, .plan-ondemand .plan-note { min-height: 0; }
+    .plan-full .plan-price { min-height: 0; }
     .pricing-excludes { max-width: 560px; }
   }
   @media (max-width: 520px) {
@@ -2223,8 +2224,8 @@
       <a href="#services">บริการ</a>
       <a href="#features">ฟังก์ชัน</a>
       <a href="#reports">ตัวอย่างรายงาน</a>
+      <a href="#pricing">แพ็คเกจ</a>
       <a href="#about">เกี่ยวกับเรา</a>
-      <a href="#pricing">ราคา</a>
       <a href="#articles">บทความ</a>
       <a href="#contact">ติดต่อเรา</a>
     </div>
@@ -2579,30 +2580,6 @@
       <div class="stat"><b class="stat-num" data-count="20" data-suffix="+">0</b><span>ฟอร์มเอกสารภาษาไทยพร้อมใช้</span></div>
       <div class="stat"><b class="stat-num" data-count="10" data-suffix="+">0</b><span>ฟังก์ชันเสริมที่จำเป็นสำหรับธุรกิจไทย</span></div>
     </div>
-    <h3 class="about-title expertise-title">ประสบการณ์และแนวทางการทำงาน</h3>
-    <ol class="expertise-list">
-      <li class="reveal">
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-        <div>
-          <h4>เข้าใจงานบัญชีและกระบวนการธุรกิจ</h4>
-          <p>มีพื้นฐานด้านบัญชีและเคยทำงานกับกระบวนการด้าน<strong>การเงิน การขาย การจัดซื้อ สินค้าคงคลัง คลังสินค้า และการผลิต</strong> จึงช่วยเชื่อมความต้องการของแต่ละฝ่ายให้เป็นภาพเดียวกันได้</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
-        <div>
-          <h4>ประสบการณ์วางระบบ ERP</h4>
-          <p>ทำงานด้านการวางระบบ ERP หลังจบด้านบัญชี โดยมีประสบการณ์กับ Dynamics AX 2012 และ D365 Finance &amp; Operations ปัจจุบันทำงานกับ <strong>Business Central สำหรับธุรกิจโรงงาน ซื้อมาขายไป และบริการ</strong></p>
-        </div>
-      </li>
-      <li class="reveal">
-        <span class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
-        <div>
-          <h4>ดูแลและประสานงานโครงการ</h4>
-          <p>ช่วยดูแล<strong>ขอบเขตงาน แผนงาน และความคืบหน้า</strong> พร้อมประสานงานระหว่างผู้ใช้งานกับทีมพัฒนา เพื่อให้แต่ละฝ่ายเข้าใจงานและเดินโครงการไปในทิศทางเดียวกัน</p>
-        </div>
-      </li>
-    </ol>
   </div>
 </section>
 
@@ -2675,9 +2652,111 @@
     </div>
     <div class="slider-controls">
       <button class="slider-play" type="button" aria-pressed="false" aria-label="หยุดสไลด์อัตโนมัติ">❚❚</button>
-      <div class="slider-dots"></div>
+      <div class="slider-thumbs"></div>
     </div>
     <p class="slider-hint">← เลื่อนเพื่อดูตัวอย่างเพิ่มเติม →</p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <p class="section-kicker">Transparent <wbr>Pricing</p>
+    <h2>เริ่ม<wbr>วางแผน<wbr>งบประมาณ<wbr>ได้<wbr>ตั้งแต่<wbr>วันนี้</h2>
+    <p class="sub">มี<wbr>ราคา<wbr>เริ่มต้น<wbr>ที่<wbr>ชัดเจน <wbr>พร้อม<wbr>ประเมิน<wbr>ขอบเขต<wbr>และ<wbr>ยืนยัน<wbr>ราคา<wbr>ก่อน<wbr>เริ่ม<wbr>โครงการ <wbr>เพื่อ<wbr>ให้<wbr>คุณ<wbr>ตัดสินใจ<wbr>ได้<wbr>อย่าง<wbr>มั่นใจ</p>
+    <div class="pricing-plans">
+      <article class="plan-card plan-loc reveal">
+        <div class="plan-banner">
+          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h9a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9"/><path d="M14 8H9M14 12H9M14 16h-3"/><path d="M6 8H3.5a1.5 1.5 0 0 0 0 3H6M6 13H3.5a1.5 1.5 0 0 0 0 3H6"/><path d="M6 5.5v13"/></svg></span>
+          <p class="plan-banner-text">ผู้ใช้ <wbr>Business <wbr>Central <wbr>อยู่แล้ว</p>
+        </div>
+        <div class="plan-body">
+          <h3 class="plan-name">JWIC Thai Localization</h3>
+          <p class="plan-desc">ยกระดับ <wbr>Microsoft <wbr>Dynamics <wbr>365 <wbr>Business <wbr>Central <wbr>ให้<wbr>รองรับ<wbr>การ<wbr>ดำเนินงาน<wbr>และ<wbr>ข้อกำหนด<wbr>ด้าน<wbr>ภาษี<wbr>ของ<wbr>ประเทศไทย<wbr>อย่าง<wbr>ครบถ้วน</p>
+          <div class="plan-price">
+            <span class="plan-price-prefix">ราคา<wbr>แพ็กเกจ</span>
+            <s class="plan-price-was">300,000 <wbr>บาท</s>
+            <div class="plan-price-line">
+              <strong>280,000<sup aria-hidden="true">*</sup></strong>
+              <span class="plan-currency">บาท</span>
+            </div>
+          </div>
+          <p class="plan-note">ต่อ <wbr>1 <wbr>Tenant <wbr>ชำระ<wbr>ครั้ง<wbr>เดียว <wbr>ใช้<wbr>งาน<wbr>ได้<wbr>ตลอดไป</p>
+          <a class="pricing-cta" href="#contact">ปรึกษา<wbr>การ<wbr>ติดตั้ง <wbr>ฟรี</a>
+          <details class="plan-more">
+            <summary class="plan-list-head">สิ่งที่<wbr>รวม<wbr>ใน<wbr>แพ็กเกจ</summary>
+          <ul class="plan-features">
+            <li>รายงาน<wbr>ภาษี<wbr>ซื้อ<wbr>ขาย <wbr>ภ.พ.30 <wbr>และ<wbr>ใบแนบ <wbr>รองรับ<wbr>สำนักงานใหญ่<wbr>และ<wbr>สาขา</li>
+            <li>ภาษี<wbr>หัก <wbr>ณ <wbr>ที่จ่าย <wbr>หนังสือ<wbr>รับรอง <wbr>50 <wbr>ทวิ <wbr>และ <wbr>ภ.ง.ด.2, <wbr>3, <wbr>53, <wbr>54 <wbr>พร้อม<wbr>ใบแนบ <wbr>ภ.ง.ด. <wbr>และ <wbr>Text <wbr>File</li>
+            <li>ระบบ<wbr>วางบิล<wbr>และ<wbr>พิมพ์<wbr>ใบเสร็จ<wbr>รับเงิน</li>
+            <li>ฟอร์ม<wbr>เอกสาร<wbr>ไทย<wbr>กว่า <wbr>20 <wbr>ชุด</li>
+            <li>อบรม<wbr>การ<wbr>ใช้งาน <wbr>ทดสอบ <wbr>และ<wbr>คู่มือ<wbr>การ<wbr>ใช้งาน</li>
+            <li>รายงาน<wbr>ทะเบียน<wbr>ทรัพย์สิน<wbr>และ <wbr>Stock <wbr>Card</li>
+            <li>สร้าง<wbr>ข้อมูล<wbr>ลูกค้า<wbr>และ<wbr>ผู้ขาย <wbr>ด้วย<wbr>ระบบ<wbr>ค้นหา<wbr>ข้อมูล<wbr>เลข<wbr>ประจำตัว<wbr>ผู้เสียภาษี<wbr>จาก<wbr>กรมสรรพากร <wbr>(VAT <wbr>Service)</li>
+            <li>และ<wbr>ฟังก์ชัน<wbr>น่าสนใจ<wbr>อื่น ๆ</li>
+          </ul>
+          </details>
+        </div>
+      </article>
+      <article class="plan-card plan-full reveal">
+        <div class="plan-banner">
+          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span>
+          <p class="plan-banner-text">เริ่ม<wbr>วาง<wbr>ระบบ<wbr>ใหม่<wbr>ครบ<wbr>ทุก<wbr>ขั้นตอน</p>
+        </div>
+        <div class="plan-body">
+          <h3 class="plan-name">Full Implementation</h3>
+          <p class="plan-desc">ดูแล<wbr>ครบ<wbr>ตั้งแต่<wbr>วิเคราะห์<wbr>กระบวนการ <wbr>ตั้งค่า<wbr>ระบบ <wbr>ย้าย<wbr>ข้อมูล <wbr>อบรม<wbr>ผู้ใช้งาน <wbr>จนถึง<wbr>การ<wbr>สนับสนุน<wbr>ใน<wbr>ช่วง<wbr>เริ่ม<wbr>ใช้งาน<wbr>จริง</p>
+          <div class="plan-price">
+            <strong class="plan-price-quote">ราคา<wbr>ตาม<wbr>ขอบเขต<wbr>งาน<sup aria-hidden="true">*</sup></strong>
+          </div>
+          <a class="pricing-cta" href="#contact">ปรึกษา<wbr>ขอบเขต<wbr>โครงการ <wbr>ฟรี</a>
+          <details class="plan-more">
+            <summary class="plan-list-head">ขอบเขต<wbr>งาน<wbr>ที่<wbr>ดูแล</summary>
+          <ul class="plan-features">
+            <li>รวม <wbr>JWIC <wbr>Thai <wbr>Localization <wbr>ใน<wbr>แพ็กเกจ</li>
+            <li>เก็บ<wbr>ความ<wbr>ต้องการ <wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>และ<wbr>ออกแบบ<wbr>ระบบ</li>
+            <li>ย้าย <wbr>Master <wbr>Data <wbr>และ<wbr>ยอด<wbr>ยกมา<wbr>เข้า<wbr>ระบบ</li>
+            <li>จัดทำ<wbr>คู่มือ <wbr>อบรม<wbr>ผู้ใช้ <wbr>และ<wbr>ดูแล<wbr>การ<wbr>ทดสอบ<wbr>ระบบ <wbr>(UAT)</li>
+            <li>ดูแล<wbr>การ<wbr>ขึ้น<wbr>ระบบจริง <wbr>พร้อม <wbr>Hypercare</li>
+            <li>สนับสนุน<wbr>การ<wbr>ปิด<wbr>บัญชี<wbr>หลังจาก<wbr>ขึ้น<wbr>ระบบ</li>
+          </ul>
+          <div class="plan-assurance"><strong>ยืนยัน<wbr>ขอบเขต<wbr>และ<wbr>ราคา<wbr>ก่อน<wbr>เริ่มงาน</strong>หลัง<wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>เรา<wbr>จะ<wbr>สรุป<wbr>ขอบเขต<wbr>งาน<wbr>และ<wbr>ราคา<wbr>ให้<wbr>ยืนยัน <wbr>งาน<wbr>เพิ่มเติม<wbr>จะ<wbr>แจ้ง<wbr>ผลกระทบ<wbr>และ<wbr>ขอ<wbr>อนุมัติ<wbr>ก่อน<wbr>ดำเนินการ</div>
+          </details>
+        </div>
+      </article>
+      <article class="plan-card plan-ondemand reveal">
+        <div class="plan-banner">
+          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="M12 7.6V12l3.3 2"/></svg></span>
+          <p class="plan-banner-text">งาน<wbr>เฉพาะกิจ <wbr>คิด<wbr>ตาม<wbr>วัน<wbr>ทำงาน</p>
+        </div>
+        <div class="plan-body">
+          <h3 class="plan-name">On-Demand Consulting</h3>
+          <p class="plan-desc">จ้าง<wbr>ที่ปรึกษา<wbr>ส่งมอบ<wbr>งาน<wbr>ตาม<wbr>ความ<wbr>ต้องการ</p>
+          <div class="plan-price">
+            <span class="plan-price-prefix">ราคา</span>
+            <div class="plan-price-line">
+              <strong>8,000<sup aria-hidden="true">*</sup></strong>
+              <span class="plan-currency">บาท</span>
+              <span class="plan-price-unit">/ Manday</span>
+            </div>
+          </div>
+          <p class="plan-note">ประเมิน<wbr>จำนวน <wbr>Manday <wbr>ตาม<wbr>เนื้องาน<wbr>จริง <wbr>สรุป<wbr>ให้<wbr>ยืนยัน<wbr>ก่อน<wbr>เริ่ม<wbr>ทุก<wbr>ครั้ง</p>
+          <a class="pricing-cta" href="#contact">รับ<wbr>การ<wbr>ประเมิน <wbr>Manday <wbr>ฟรี</a>
+          <details class="plan-more">
+            <summary class="plan-list-head">บริการ</summary>
+          <ul class="plan-features">
+            <li>งาน <wbr>Presales <wbr>สาธิต<wbr>ระบบ <wbr>ตอบ<wbr>คำถาม<wbr>เชิง<wbr>เทคนิค <wbr>และ<wbr>ประเมิน<wbr>ความ<wbr>เหมาะสม</li>
+            <li>เก็บ <wbr>Requirement <wbr>และ<wbr>วิเคราะห์ <wbr>Fit-Gap</li>
+            <li>ออกแบบ<wbr>ระบบ <wbr>และ<wbr>จัดทำ<wbr>เอกสาร <wbr>Functional <wbr>Design</li>
+            <li>งาน <wbr>Develop <wbr>และ <wbr>Customization <wbr>(AL <wbr>Extension)</li>
+            <li>ปรับ<wbr>รายงาน<wbr>และ<wbr>ฟอร์ม<wbr>เอกสาร<wbr>ตาม<wbr>ที่<wbr>ต้องการ</li>
+            <li>สื่อสาร<wbr>ภาษา<wbr>อังกฤษ<wbr>ได้</li>
+          </ul>
+          <div class="plan-assurance"><strong>ประเมิน <wbr>Manday <wbr>อย่าง<wbr>เหมาะสม</strong>สรุป<wbr>จำนวน<wbr>วัน<wbr>และ<wbr>สิ่งที่<wbr>จะ<wbr>ได้<wbr>ให้<wbr>ยืนยัน<wbr>ก่อน<wbr>เริ่ม<wbr>งาน <wbr>ถ้า<wbr>มี<wbr>งาน<wbr>เพิ่ม<wbr>จะ<wbr>แจ้ง<wbr>และ<wbr>ขอ<wbr>อนุมัติ<wbr>ก่อน<wbr>ทุก<wbr>ครั้ง</div>
+          </details>
+        </div>
+      </article>
+    </div>
+    <p class="pricing-excludes"><strong>อธิบาย<wbr>เพิ่มเติม</strong>*ราคา<wbr>และ<wbr>ค่าบริการ<wbr>ไม่<wbr>รวม <wbr>VAT <wbr>7%, <wbr>ค่า <wbr>Microsoft <wbr>License, <wbr>ค่าบริการ<wbr>ดูแล<wbr>รายปี <wbr>และ <wbr>Customization <wbr>เพิ่มเติม</p>
   </div>
 </section>
 
@@ -2807,71 +2886,7 @@
   </div>
 </section>
 
-<section id="pricing">
-  <div class="wrap">
-    <p class="section-kicker">Transparent <wbr>Pricing</p>
-    <h2>เริ่ม<wbr>วางแผน<wbr>งบประมาณ<wbr>ได้<wbr>ตั้งแต่<wbr>วันนี้</h2>
-    <p class="sub">มี<wbr>ราคา<wbr>เริ่มต้น<wbr>ที่<wbr>ชัดเจน <wbr>พร้อม<wbr>ประเมิน<wbr>ขอบเขต<wbr>และ<wbr>ยืนยัน<wbr>ราคา<wbr>ก่อน<wbr>เริ่ม<wbr>โครงการ <wbr>เพื่อ<wbr>ให้<wbr>คุณ<wbr>ตัดสินใจ<wbr>ได้<wbr>อย่าง<wbr>มั่นใจ</p>
-    <div class="pricing-plans">
-      <article class="plan-card plan-loc reveal">
-        <div class="plan-banner">
-          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h9a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9"/><path d="M14 8H9M14 12H9M14 16h-3"/><path d="M6 8H3.5a1.5 1.5 0 0 0 0 3H6M6 13H3.5a1.5 1.5 0 0 0 0 3H6"/><path d="M6 5.5v13"/></svg></span>
-          <p class="plan-banner-text">สำหรับ<wbr>ผู้ใช้ <wbr>Business <wbr>Central <wbr>อยู่แล้ว</p>
-        </div>
-        <div class="plan-body">
-          <h3 class="plan-name">JWIC Thai Localization</h3>
-          <p class="plan-desc">ยกระดับ <wbr>Microsoft <wbr>Dynamics <wbr>365 <wbr>Business <wbr>Central <wbr>ให้<wbr>รองรับ<wbr>การ<wbr>ดำเนินงาน<wbr>และ<wbr>ข้อกำหนด<wbr>ด้าน<wbr>ภาษี<wbr>ของ<wbr>ประเทศไทย<wbr>อย่าง<wbr>ครบถ้วน</p>
-          <div class="plan-price">
-            <span class="plan-price-prefix">ราคา<wbr>แพ็กเกจ</span>
-            <s class="plan-price-was">300,000 <wbr>บาท</s>
-            <div class="plan-price-line">
-              <strong>280,000<sup aria-hidden="true">*</sup></strong>
-              <span class="plan-currency">บาท</span>
-            </div>
-          </div>
-          <p class="plan-note">ต่อ <wbr>1 <wbr>บริษัท <wbr>ชำระ<wbr>ครั้ง<wbr>เดียว <wbr>ใช้<wbr>งาน<wbr>ได้<wbr>ตลอดไป</p>
-          <a class="pricing-cta" href="#contact">ปรึกษา<wbr>การ<wbr>ติดตั้ง <wbr>ฟรี</a>
-          <h4 class="plan-list-head">สิ่งที่<wbr>รวม<wbr>ใน<wbr>แพ็กเกจ:</h4>
-          <ul class="plan-features">
-            <li>รายงาน<wbr>ภาษี<wbr>ซื้อ<wbr>ขาย <wbr>ภ.พ.30 <wbr>และ<wbr>ใบแนบ <wbr>รองรับ<wbr>สำนักงานใหญ่<wbr>และ<wbr>สาขา</li>
-            <li>ภาษี<wbr>หัก <wbr>ณ <wbr>ที่จ่าย <wbr>และ<wbr>หนังสือ<wbr>รับรอง <wbr>50 <wbr>ทวิ</li>
-            <li>ภ.ง.ด.2, <wbr>3, <wbr>53, <wbr>54 <wbr>พร้อม<wbr>ใบแนบ <wbr>ภ.ง.ด. <wbr>และ <wbr>Text <wbr>File</li>
-            <li>ระบบ<wbr>วางบิล<wbr>และ<wbr>พิมพ์<wbr>ใบเสร็จ<wbr>รับเงิน</li>
-            <li>ฟอร์ม<wbr>เอกสาร<wbr>ไทย<wbr>กว่า <wbr>20 <wbr>ชุด</li>
-            <li>อบรม<wbr>การ<wbr>ใช้งาน <wbr>ทดสอบ <wbr>และ<wbr>คู่มือ<wbr>การ<wbr>ใช้งาน</li>
-            <li>รายงาน<wbr>ทะเบียน<wbr>ทรัพย์สิน<wbr>และ <wbr>Stock <wbr>Card</li>
-            <li>สร้าง<wbr>ข้อมูล<wbr>ลูกค้า<wbr>และ<wbr>ผู้ขาย <wbr>ด้วย<wbr>ระบบ<wbr>ค้นหา<wbr>ข้อมูล<wbr>เลข<wbr>ประจำตัว<wbr>ผู้เสียภาษี<wbr>จาก<wbr>กรมสรรพากร <wbr>(VAT <wbr>Service)</li>
-          </ul>
-        </div>
-      </article>
-      <article class="plan-card plan-full reveal">
-        <div class="plan-banner">
-          <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span>
-          <p class="plan-banner-text">สำหรับ<wbr>เริ่ม<wbr>วาง<wbr>ระบบ<wbr>ใหม่<wbr>ครบ<wbr>ทุก<wbr>ขั้นตอน</p>
-        </div>
-        <div class="plan-body">
-          <h3 class="plan-name">Full Implementation</h3>
-          <p class="plan-desc">ดูแล<wbr>ครบ<wbr>ตั้งแต่<wbr>วิเคราะห์<wbr>กระบวนการ <wbr>ตั้งค่า<wbr>ระบบ <wbr>ย้าย<wbr>ข้อมูล <wbr>อบรม<wbr>ผู้ใช้งาน <wbr>จนถึง<wbr>การ<wbr>สนับสนุน<wbr>ใน<wbr>ช่วง<wbr>เริ่ม<wbr>ใช้งาน<wbr>จริง</p>
-          <div class="plan-price">
-            <strong class="plan-price-quote">ราคา<wbr>ตาม<wbr>ขอบเขต<wbr>งาน<sup aria-hidden="true">*</sup></strong>
-          </div>
-          <a class="pricing-cta" href="#contact">ปรึกษา<wbr>ขอบเขต<wbr>โครงการ <wbr>ฟรี</a>
-          <h4 class="plan-list-head">ขอบเขต<wbr>งาน<wbr>ที่<wbr>ดูแล:</h4>
-          <ul class="plan-features">
-            <li>รวม <wbr>JWIC <wbr>Thai <wbr>Localization <wbr>ใน<wbr>แพ็กเกจ</li>
-            <li>เก็บ<wbr>ความ<wbr>ต้องการ <wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>และ<wbr>ออกแบบ<wbr>ระบบ</li>
-            <li>ย้าย <wbr>Master <wbr>Data <wbr>และ<wbr>ยอด<wbr>ยกมา<wbr>เข้า<wbr>ระบบ</li>
-            <li>จัดทำ<wbr>คู่มือ <wbr>อบรม<wbr>ผู้ใช้ <wbr>และ<wbr>ดูแล<wbr>การ<wbr>ทดสอบ<wbr>ระบบ <wbr>(UAT)</li>
-            <li>ดูแล<wbr>การ<wbr>ขึ้น<wbr>ระบบจริง <wbr>พร้อม <wbr>Hypercare <wbr>2 <wbr>สัปดาห์</li>
-            <li>สนับสนุน<wbr>การ<wbr>ปิด<wbr>บัญชี <wbr>1 <wbr>เดือน<wbr>หลังจาก<wbr>ขึ้น<wbr>ระบบ</li>
-          </ul>
-          <div class="plan-assurance"><strong>ยืนยัน<wbr>ขอบเขต<wbr>และ<wbr>ราคา<wbr>ก่อน<wbr>เริ่มงาน</strong>หลัง<wbr>วิเคราะห์ <wbr>Fit-Gap <wbr>เรา<wbr>จะ<wbr>สรุป<wbr>ขอบเขต<wbr>งาน<wbr>และ<wbr>ราคา<wbr>ให้<wbr>ยืนยัน <wbr>งาน<wbr>เพิ่มเติม<wbr>จะ<wbr>แจ้ง<wbr>ผลกระทบ<wbr>และ<wbr>ขอ<wbr>อนุมัติ<wbr>ก่อน<wbr>ดำเนินการ</div>
-        </div>
-      </article>
-    </div>
-    <p class="pricing-excludes"><strong>อธิบาย<wbr>เพิ่มเติม</strong>*ราคา<wbr>และ<wbr>ค่าบริการ<wbr>ไม่<wbr>รวม <wbr>VAT <wbr>7%, <wbr>ค่า <wbr>Microsoft <wbr>License, <wbr>ค่าบริการ<wbr>ดูแล<wbr>รายปี <wbr>และ <wbr>Customization <wbr>เพิ่มเติม</p>
-  </div>
-</section>
+
 
 <section id="faq">
   <div class="wrap">
@@ -2890,7 +2905,7 @@
       </details>
       <details class="reveal">
         <summary>ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?</summary>
-        <p>JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ ราคาและค่าบริการไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
+        <p>JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ หากต้องการเรียกใช้เป็นงาน ๆ ไม่ผูกเป็นโครงการ มีอัตรา On-Demand 8,000 บาทต่อ Manday โดยประเมินจำนวนวันตามเนื้องานจริงและสรุปให้ยืนยันก่อนเริ่ม ราคาและค่าบริการไม่รวม VAT 7%, ค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
       </details>
       <details class="reveal">
         <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
@@ -2907,13 +2922,11 @@
 <section id="contact" class="alt">
   <div class="wrap">
     <p class="section-kicker">Let's find the right approach together</p>
-    <h2>ปรึกษาแนวทางระบบที่เหมาะกับธุรกิจของคุณ</h2>
-    <p class="sub">ยินดีให้คำปรึกษาและพูดคุยเพื่อทำความเข้าใจความต้องการ ขอบเขตงาน และแนวทางที่เหมาะสม พร้อมนำเสนอ Demo ระบบเบื้องต้น โดยไม่มีค่าใช้จ่าย</p>
+    <h2>ปรึกษาแนวทางการวางระบบที่เหมาะกับธุรกิจของคุณ</h2>
     <div class="contact-grid">
       <div class="contact-info">
         <p class="ci-name">Jirapat Wichayapong (Sun)</p>
         <p class="ci-role">ERP Consultant</p>
-        <p class="contact-note">คุณสามารถเล่าให้เราทราบโดยสังเขปเกี่ยวกับธุรกิจและสิ่งที่ต้องการปรับปรุง เพื่อให้เราช่วยแนะนำแนวทางที่เหมาะสมกับความต้องการของคุณได้</p>
         <ul class="ci-list">
           <li>
             <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -3264,17 +3277,21 @@
     document.querySelector('.snav.prev').addEventListener('click', () => advance(-1));
     document.querySelector('.snav.next').addEventListener('click', () => advance(1));
 
-    // จุดบอกตำแหน่ง + ปุ่มหยุดเล่นอัตโนมัติ (WCAG 2.2.2)
-    const dotsWrap = document.querySelector('.slider-dots');
-    const dots = figs.map((f, i) => {
+    // แถบ thumbnail บอกตำแหน่ง + ปุ่มหยุดเล่นอัตโนมัติ (WCAG 2.2.2)
+    const thumbsWrap = document.querySelector('.slider-thumbs');
+    const thumbs = figs.map((f, i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.setAttribute('aria-label', `ไปที่ตัวอย่างที่ ${i + 1}`);
+      const img = document.createElement('img');
+      img.src = f.querySelector('img').src;
+      img.alt = ''; img.loading = 'lazy';
+      b.appendChild(img);
       b.addEventListener('click', () => {
         idx = i;
         glide(Math.max(0, f.offsetLeft - (slider.clientWidth - f.offsetWidth) / 2));
       });
-      dotsWrap.appendChild(b);
+      thumbsWrap.appendChild(b);
       return b;
     });
     let dotFrame = 0;
@@ -3285,7 +3302,8 @@
         const d = Math.abs(f.offsetLeft + f.offsetWidth / 2 - center);
         if (d < best) { best = d; cur = i; }
       });
-      dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+      thumbs.forEach((t, i) => t.classList.toggle('on', i === cur));
+      thumbs[cur]?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     }
     syncDots();
     slider.addEventListener('scroll', () => {
@@ -3489,13 +3507,6 @@
     ['.why-list li:nth-child(6)', '<strong>Clear budget</strong><span>SME-friendly costs, quoted from the actual scope of work</span>'],
     ['.stat-row .stat:nth-child(1) span', 'Ready-to-use Thai document forms'],
     ['.stat-row .stat:nth-child(2) span', 'Add-on features designed for Thai businesses'],
-    ['.expertise-title', 'Experience &amp; How I Work'],
-    ['.expertise-list li:nth-child(1) h4', 'Accounting &amp; business process insight'],
-    ['.expertise-list li:nth-child(1) p', 'An accounting background and hands-on work across <strong>finance, sales, purchasing, inventory, warehousing, and manufacturing</strong> — connecting every team\'s needs into one coherent picture.'],
-    ['.expertise-list li:nth-child(2) h4', 'ERP implementation experience'],
-    ['.expertise-list li:nth-child(2) p', 'ERP implementation work since graduating in accounting, with Dynamics AX 2012 and D365 Finance &amp; Operations — now focused on <strong>Business Central for manufacturing, trading, and service businesses</strong>.'],
-    ['.expertise-list li:nth-child(3) h4', 'Project care &amp; coordination'],
-    ['.expertise-list li:nth-child(3) p', 'Looking after <strong>scope, plans, and progress</strong> while coordinating between users and developers, so everyone moves in the same direction.'],
     ['#reports h2', 'Sample Reports'],
     ['#reports .sub', 'Thai reports and documents built on Business Central — click any image for full size.'],
     ['.slider figure:nth-of-type(1) figcaption', 'Business Central Home with Thai tax and billing menus'],
@@ -3514,37 +3525,50 @@
     ['.slider-hint', '← Scroll for more examples →'],
     ['#pricing h2', 'A starting budget you can plan around'],
     ['#pricing > .wrap > .sub', 'A clear starting point, with the scope and final price confirmed before the project begins — so you can decide with confidence.'],
-    ['.plan-loc .plan-banner-text', 'For teams already using Business Central'],
+    ['.plan-loc .plan-banner-text', 'Teams already using Business Central'],
     ['.plan-loc .plan-desc', 'Bring your Microsoft Dynamics 365 Business Central up to full compliance with Thai operating practice and tax requirements.'],
     ['.plan-loc .plan-price-prefix', 'Package price'],
     ['.plan-price-was', 'THB 300,000'],
-    ['.plan-loc .plan-note', 'Per company — one-time payment, use it forever'],
+    ['.plan-loc .plan-note', 'Per tenant — one-time payment, use it forever'],
     ['.plan-loc .pricing-cta', 'Discuss installation — free'],
-    ['.plan-loc .plan-list-head', 'What\'s included:'],
+    ['.plan-loc .plan-list-head', 'What\'s included'],
     ['.plan-loc .plan-features li:nth-child(1)', 'Purchase–sales VAT reports, PP30 with attachments, head office and branches'],
-    ['.plan-loc .plan-features li:nth-child(2)', 'Withholding tax and 50 Bis certificates'],
-    ['.plan-loc .plan-features li:nth-child(3)', 'PND 2, 3, 53, 54 with attachments and e-filing text files'],
-    ['.plan-loc .plan-features li:nth-child(4)', 'Billing note system and receipt printing'],
-    ['.plan-loc .plan-features li:nth-child(5)', 'Over 20 Thai document forms'],
-    ['.plan-loc .plan-features li:nth-child(6)', 'User training, testing, and a user manual'],
-    ['.plan-loc .plan-features li:nth-child(7)', 'Fixed asset register and stock card reports'],
-    ['.plan-loc .plan-features li:nth-child(8)', 'Create customer and vendor records from Revenue Department taxpayer ID lookup (VAT Service)'],
-    ['.plan-full .plan-banner-text', 'For a new end-to-end implementation'],
+    ['.plan-loc .plan-features li:nth-child(2)', 'Withholding tax, 50 Bis certificates, and PND 2, 3, 53, 54 with attachments and e-filing text files'],
+    ['.plan-loc .plan-features li:nth-child(3)', 'Billing note system and receipt printing'],
+    ['.plan-loc .plan-features li:nth-child(4)', 'Over 20 Thai document forms'],
+    ['.plan-loc .plan-features li:nth-child(5)', 'User training, testing, and a user manual'],
+    ['.plan-loc .plan-features li:nth-child(6)', 'Fixed asset register and stock card reports'],
+    ['.plan-loc .plan-features li:nth-child(7)', 'Create customer and vendor records from Revenue Department taxpayer ID lookup (VAT Service)'],
+    ['.plan-loc .plan-features li:nth-child(8)', 'And other useful functions'],
+    ['.plan-full .plan-banner-text', 'A new end-to-end implementation'],
     ['.plan-full .plan-desc', 'End-to-end care: process analysis, system setup, data migration, user training, and support through the start of live operation.'],
     ['.plan-full .plan-price-quote', 'Talk to us for a tailored quote<sup aria-hidden="true">*</sup>'],
     ['.plan-full .pricing-cta', 'Discuss your project — free'],
-    ['.plan-full .plan-list-head', 'What we cover:'],
+    ['.plan-full .plan-list-head', 'What we cover'],
     ['.plan-full .plan-features li:nth-child(1)', 'JWIC Thai Localization included in the package'],
     ['.plan-full .plan-features li:nth-child(2)', 'Requirement workshop, fit-gap analysis, and solution design'],
     ['.plan-full .plan-features li:nth-child(3)', 'Migrate master data and opening balances into the system'],
     ['.plan-full .plan-features li:nth-child(4)', 'User manual, training, and UAT support'],
-    ['.plan-full .plan-features li:nth-child(5)', 'Go-live with two weeks of hypercare'],
-    ['.plan-full .plan-features li:nth-child(6)', 'Month-end closing support for one month after go-live'],
+    ['.plan-full .plan-features li:nth-child(5)', 'Go-live with hypercare support'],
+    ['.plan-full .plan-features li:nth-child(6)', 'Month-end closing support after go-live'],
     ['.plan-full .plan-assurance', '<strong>Scope and price confirmed before work begins</strong>After the fit-gap analysis, we confirm the scope and price with you. Any additional work requires approval before we proceed.'],
+    ['.plan-ondemand .plan-banner-text', 'One-off work, billed by the day'],
+    ['.plan-ondemand .plan-desc', 'Hire a consultant to deliver exactly the work you need.'],
+    ['.plan-ondemand .plan-price-prefix', 'Price'],
+    ['.plan-ondemand .plan-price-unit', '/ manday'],
+    ['.plan-ondemand .plan-note', 'We size the mandays against the real workload and confirm them with you before we start.'],
+    ['.plan-ondemand .pricing-cta', 'Get a manday estimate — free'],
+    ['.plan-ondemand .plan-list-head', 'Services'],
+    ['.plan-ondemand .plan-features li:nth-child(1)', 'Presales — system demos, technical answers, and a fit assessment'],
+    ['.plan-ondemand .plan-features li:nth-child(2)', 'Requirement gathering and fit-gap analysis'],
+    ['.plan-ondemand .plan-features li:nth-child(3)', 'Solution design and functional design documentation'],
+    ['.plan-ondemand .plan-features li:nth-child(4)', 'Development and customisation (AL extensions)'],
+    ['.plan-ondemand .plan-features li:nth-child(5)', 'Reports and document forms adjusted to your needs'],
+    ['.plan-ondemand .plan-features li:nth-child(6)', 'Can work and communicate in English'],
+    ['.plan-ondemand .plan-assurance', '<strong>Mandays sized honestly</strong>We confirm the number of days and the deliverables with you before starting. Any extra work is raised and approved first.'],
     ['.plan-currency', 'THB'],
     ['.pricing-excludes', '<strong>Additional information</strong>*Prices and service fees exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
-    ['#contact h2', 'Let\'s talk about your system'],
-    ['#contact > .wrap > .sub', 'Book a free session to assess your requirements and scope, and see an initial demo — no cost, no obligation.'],
+    ['#contact h2', 'Let\'s talk about the right system for your business'],
     ['.contact-note', 'Tell us a little about your business and what you’d like to improve — we’ll help suggest an approach that fits you.'],
     ['.contact-form .form-heading h3', 'Pick a time that works — book instantly'],
     ['.contact-form .cf-note', 'Choose how you\'d like to talk, see real open times, and confirm your booking right away.'],
@@ -3555,7 +3579,7 @@
     ['#faq details:nth-of-type(2) summary', 'How long does a Business Central implementation take?'],
     ['#faq details:nth-of-type(2) > p', 'Using Best Practice and Fast Implementation, we define a clear project plan and timeline from the outset, keeping implementation structured and enabling a faster go-live.'],
     ['#faq details:nth-of-type(3) summary', 'How much does an implementation cost?'],
-    ['#faq details:nth-of-type(3) > p', 'For teams already using Business Central, JWIC Thai Localization — installed, configured, and with training — is discounted from THB 300,000 to THB 280,000 for one company, paid once for perpetual use. For Full Implementation, talk to us for a scope-based estimate. Prices and service fees exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
+    ['#faq details:nth-of-type(3) > p', 'For teams already using Business Central, JWIC Thai Localization — installed, configured, and with training — is discounted from THB 300,000 to THB 280,000 for one company, paid once for perpetual use. For Full Implementation, talk to us for a scope-based estimate. For one-off work with no project commitment, our on-demand rate is THB 8,000 per manday, sized against the real workload and confirmed before we start. Prices and service fees exclude 7% VAT, Microsoft licences, annual support fees, and additional customisation.'],
     ['#faq details:nth-of-type(4) summary', 'Can you migrate data from our current system?'],
     ['#faq details:nth-of-type(4) > p', 'Yes — the service covers migration from legacy systems: master data such as customers, vendors, items, and chart of accounts, plus opening balances, reconciled before go-live.'],
     ['#faq details:nth-of-type(5) summary', 'Is there support after go-live?'],
