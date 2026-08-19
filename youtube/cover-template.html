@@ -1,0 +1,440 @@
+<title>BC Localization Cover</title>
+<style>
+  :root {
+    --page-bg: #f5f1ea;
+    --page-text: #1c2b25;
+    --page-muted: #6b7a72;
+    --card-bg: #ffffff;
+    --card-border: #e4ded2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page-bg: #0d1512;
+      --page-text: #e8e3d8;
+      --page-muted: #8fa198;
+      --card-bg: #131f1a;
+      --card-border: #22322b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page-bg: #0d1512;
+    --page-text: #e8e3d8;
+    --page-muted: #8fa198;
+    --card-bg: #131f1a;
+    --card-border: #22322b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--page-bg);
+    color: var(--page-text);
+    margin: 0;
+    min-height: 100vh;
+    padding: 48px 20px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    font-family: 'Noto Sans Thai', 'Leelawadee UI', Tahoma, sans-serif;
+  }
+
+  .page-head {
+    text-align: center;
+    max-width: 640px;
+  }
+  .page-head .eyebrow {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--page-muted);
+    margin: 0 0 8px;
+  }
+  .page-head h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  .page-head p {
+    font-size: 14px;
+    color: var(--page-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ---- the poster: fixed brand world, painted explicitly, not theme-dependent ---- */
+  .stage {
+    width: 100%;
+    max-width: 1120px;
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    padding: 20px;
+    box-shadow: 0 20px 60px -30px rgba(0,0,0,0.35);
+  }
+
+  .poster {
+    /* episode accent — bright shades on the dark green ground; default = JWIC burgundy */
+    --ep: #8E2C46;
+    --ep-soft: color-mix(in srgb, var(--ep) 55%, transparent);
+
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 900px 700px at 50% 0%, #2f6b56 0%, transparent 55%),
+      linear-gradient(180deg, #1c4a3c 0%, #14342a 55%, #0d1f19 100%);
+    /* ponytail: Aptos is a local Windows/Office face — CSP blocks font CDNs, Segoe UI is the fallback */
+    font-family: Aptos, 'Aptos Display', 'Segoe UI', system-ui, sans-serif;
+    isolation: isolate;
+  }
+
+  .poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(245,241,234,0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* pattern layer — full-canvas SVG, 1280×720 coordinate space, one unique shape per episode */
+  .pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .pattern path, .pattern circle { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .pattern .main { stroke: var(--ep); }
+  .pattern .echo { stroke: var(--ep-soft); }
+  .pattern .dot  { fill: var(--ep); stroke: none; }
+  .pattern .shade { fill: rgba(8, 18, 14, 0.55); stroke: none; }
+
+  /* brand row, top-left */
+  .brand {
+    position: absolute;
+    top: 6.5%;
+    left: 5.5%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+  }
+  .brand .mark {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: block;
+  }
+  .brand .word {
+    font-weight: 600;
+    font-size: 18px;
+    color: #f5f1ea;
+    letter-spacing: 0.01em;
+  }
+
+  /* title block, upper-left like the reference */
+  .titleblock {
+    position: absolute;
+    left: 5.5%;
+    top: 26%;
+    z-index: 2;
+    max-width: 68%;
+  }
+  .titleblock h1 {
+    margin: 0 0 14px;
+    color: #f5f1ea;
+    font-size: clamp(34px, 6vw, 68px);
+    font-weight: 700;
+    line-height: 1.1;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  .titleblock p {
+    margin: 0;
+    color: #cfd9d3;
+    font-size: clamp(16px, 2.3vw, 28px);
+    font-weight: 400;
+    line-height: 1.45;
+  }
+  .titleblock [contenteditable] { outline: none; cursor: text; }
+  .titleblock [contenteditable]:focus {
+    outline: 1px dashed rgba(245, 241, 234, 0.4);
+    outline-offset: 6px;
+  }
+
+  /* episode color override */
+  .swatches {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatches span { font-size: 13px; color: var(--page-muted); margin-right: 4px; }
+  .swatches button {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+  }
+  .swatches button.active { border-color: var(--page-text); }
+  .swatches button:focus-visible { outline: 2px solid var(--page-text); outline-offset: 2px; }
+  .swatches button.shape-btn {
+    /* mini 16:9 tile showing the actual shape */
+    --ep: #f5f1ea;
+    --ep-soft: rgba(245, 241, 234, 0.45);
+    position: relative; /* anchors the absolutely-positioned .pattern svg inside the tile */
+    width: 60px;
+    height: 34px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1c4a3c 0%, #12291f 100%);
+    border-color: var(--card-border);
+  }
+  .swatches button.shape-btn svg { width: 100%; height: 100%; display: block; }
+  .swatches.patterns { max-width: 800px; }
+
+  /* 20-episode plan grid */
+  .plan {
+    width: 100%;
+    max-width: 1120px;
+  }
+  .plan h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .plan .sub {
+    font-size: 13px;
+    color: var(--page-muted);
+    margin: 0 0 14px;
+  }
+  .plan .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .mini {
+    position: relative;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--card-border);
+    background:
+      radial-gradient(ellipse 300px 220px at 50% 0%, #2f6b56 0%, transparent 55%),
+      linear-gradient(180deg, #1c4a3c 0%, #14342a 55%, #0d1f19 100%);
+  }
+  .mini .ep-label {
+    position: absolute;
+    top: 8%;
+    left: 7%;
+    z-index: 2;
+    color: #f5f1ea;
+    font-family: Aptos, 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .mini.selected { border-color: var(--page-text); }
+  .mini:focus-visible { outline: 2px solid var(--page-text); outline-offset: 2px; }
+
+  .note {
+    max-width: 640px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--page-muted);
+    line-height: 1.7;
+  }
+  .note code {
+    background: var(--card-border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+</style>
+
+<div class="page-head">
+  <p class="eyebrow">JHPresales · YouTube cover</p>
+  <h1>ปกคลิปแนะนำภาพรวม JWIC BC Localization</h1>
+  <p>พื้นเขียวคงที่ทุกตอน — แต่ละ Episode มีลวดลายของตัวเอง 20 ลายไม่ซ้ำกัน จับคู่สีเข้ม 5 เฉด คลิกการ์ดในแผนด้านล่างเพื่อลองบนปกใหญ่</p>
+</div>
+
+<div class="stage">
+  <div class="poster" id="poster">
+    <svg class="pattern" id="patternSvg" viewBox="0 0 1280 720" aria-hidden="true"></svg>
+
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" aria-label="JW logo">
+        <!-- ponytail: SVG redraw of the JW logo (rounded square + folded corner) — swap for the real PNG as a data URI if pixel-perfect matters -->
+        <rect x="0" y="0" width="64" height="64" rx="13" fill="#1e4a3d"/>
+        <path d="M 41 0 L 64 23 L 41 23 Z" fill="#173c31"/>
+        <path d="M 41 0 L 55 0 Q 64 0 64 9 L 64 23 Z" fill="#c07f8b"/>
+        <text x="32" y="47" text-anchor="middle" font-family="Aptos, 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="30" fill="#f5f1ea">JW</text>
+      </svg>
+      <div class="word">JWIC Consulting</div>
+    </div>
+
+    <div class="titleblock">
+      <h1 contenteditable="true" spellcheck="false">Business Central<br>Thai Localization Overview</h1>
+      <p contenteditable="true" spellcheck="false">Thai Tax &amp; Compliance for Business Central</p>
+    </div>
+  </div>
+</div>
+
+<div class="swatches patterns" aria-label="Pattern" id="patternRow">
+  <span>Pattern:</span>
+</div>
+
+<div class="swatches" aria-label="Episode accent color">
+  <span>Accent:</span>
+  <button type="button" class="active" style="background:#8E2C46" data-c="#8E2C46" aria-label="JWIC burgundy"></button>
+  <button type="button" style="background:#4fd8e0" data-c="#4fd8e0" aria-label="Cyan"></button>
+  <button type="button" style="background:#e8622d" data-c="#e8622d" aria-label="Saed orange"></button>
+  <button type="button" style="background:#c99be0" data-c="#c99be0" aria-label="Lavender"></button>
+  <button type="button" style="background:#a3e05a" data-c="#a3e05a" aria-label="Lime"></button>
+  <button type="button" style="background:#e896a6" data-c="#e896a6" aria-label="Pink"></button>
+  <button type="button" style="background:#f2c94c" data-c="#f2c94c" aria-label="Yellow"></button>
+  <button type="button" style="background:#7ab8f5" data-c="#7ab8f5" aria-label="Sky blue"></button>
+  <button type="button" style="background:#d0342c" data-c="#d0342c" aria-label="Saed red"></button>
+  <button type="button" style="background:#8fe0c0" data-c="#8fe0c0" aria-label="Mint"></button>
+  <button type="button" style="background:#f57ad0" data-c="#f57ad0" aria-label="Magenta"></button>
+  <button type="button" style="background:#f0a05a" data-c="#f0a05a" aria-label="Soft orange"></button>
+  <button type="button" style="background:#9d7df0" data-c="#9d7df0" aria-label="Violet"></button>
+</div>
+
+<div class="plan">
+  <h2>แผนปก 20 Episode — 20 ลายไม่ซ้ำ</h2>
+  <p class="sub">EP ละหนึ่งลาย สีเข้มวน 5 เฉด — คลิกการ์ดเพื่อลองบนปกใหญ่</p>
+  <div class="grid" id="planGrid"></div>
+</div>
+
+<p class="note">
+  <strong>คลิกที่หัวเรื่อง/ซับไตเติลบนปกเพื่อพิมพ์แก้เองได้เลย</strong> (Enter = ขึ้นบรรทัดใหม่) — screenshot กรอบ 16:9 เป็นปกจริง (ครบ <code>1280×720px</code>) ข้อความที่แก้อยู่แค่ในหน้าจอ รีเฟรชแล้วกลับเป็นค่าเดิม
+</p>
+
+<script>
+  // 20 unique episode patterns — thick round-cap strokes in 1280×720 canvas space,
+  // hugging the right/bottom edges clear of the title block.
+  const PATTERNS = [
+    /* EP01 folded corner — the JW logo's dog-ear, top-right, flush to the corner */
+    '<path class="shade" d="M 1040 0 L 1280 240 L 1040 240 Z"/><path class="dot" d="M 1040 0 L 1280 0 L 1280 240 Z"/>',
+    /* EP02 hook up-right */
+    '<path class="echo" d="M 1105 780 L 1105 560 Q 1105 490 1175 490 L 1340 490" stroke-width="32"/><path class="main" d="M 980 780 L 980 460 Q 980 360 1080 360 L 1340 360" stroke-width="52"/>',
+    /* EP03 V from top + dot */
+    '<path class="main" d="M 890 -60 L 1010 260 Q 1030 305 1050 260 L 1170 -60" stroke-width="54"/><circle class="dot" cx="1230" cy="200" r="28"/>',
+    /* EP04 chevron right */
+    '<path class="main" d="M 1080 -60 L 1240 360 L 1080 780" stroke-width="62"/>',
+    /* EP05 inverted hook from top */
+    '<path class="echo" d="M 1120 -60 L 1120 120 Q 1120 190 1190 190 L 1340 190" stroke-width="30"/><path class="main" d="M 1000 -60 L 1000 190 Q 1000 290 1100 290 L 1340 290" stroke-width="50"/>',
+    /* EP06 big ring half off-canvas */
+    '<circle class="main" cx="1290" cy="360" r="200" stroke-width="56"/>',
+    /* EP07 double diagonal */
+    '<path class="echo" d="M 1120 780 L 1340 360" stroke-width="34"/><path class="main" d="M 950 780 L 1210 290" stroke-width="54"/>',
+    /* EP08 S-curve */
+    '<path class="main" d="M 1340 140 C 1090 140 1090 360 1210 400 C 1330 440 1300 640 1080 660" stroke-width="48"/>',
+    /* EP09 L along bottom, up and off the top */
+    '<path class="main" d="M 830 640 L 1090 640 Q 1175 640 1175 555 L 1175 -60" stroke-width="50"/>',
+    /* EP10 zigzag */
+    '<path class="main" d="M 1340 120 L 1090 300 L 1310 480 L 1060 660" stroke-width="46"/>',
+    /* EP11 U hanging from top */
+    '<path class="main" d="M 965 -60 L 965 240 Q 965 345 1065 345 Q 1165 345 1165 240 L 1165 -60" stroke-width="50"/>',
+    /* EP12 sweeping arc into bottom-right */
+    '<path class="echo" d="M 1340 430 Q 1090 450 1100 780" stroke-width="34"/><path class="main" d="M 1340 300 Q 950 320 965 780" stroke-width="56"/>',
+    /* EP13 double chevron */
+    '<path class="echo" d="M 870 220 L 995 400 L 870 580" stroke-width="30"/><path class="main" d="M 1015 140 L 1185 400 L 1015 660" stroke-width="44"/>',
+    /* EP14 horizontal bar + dot */
+    '<path class="main" d="M 1340 400 L 1010 400" stroke-width="52"/><circle class="dot" cx="920" cy="400" r="34"/>',
+    /* EP15 staircase */
+    '<path class="main" d="M 945 780 L 945 560 L 1120 560 L 1120 340 L 1340 340" stroke-width="46"/>',
+    /* EP16 ring + dot */
+    '<circle class="main" cx="1180" cy="480" r="130" stroke-width="44"/><circle class="dot" cx="1180" cy="270" r="26"/>',
+    /* EP17 W from top */
+    '<path class="main" d="M 870 -60 L 965 240 L 1065 20 L 1165 240 L 1260 -60" stroke-width="44"/>',
+    /* EP18 hook bending left from bottom */
+    '<path class="main" d="M 1200 780 L 1200 590 Q 1200 500 1110 500 L 900 500" stroke-width="50"/>',
+    /* EP19 long diagonal */
+    '<path class="main" d="M 1340 60 L 985 720" stroke-width="58"/>',
+    /* EP20 bracket */
+    '<path class="main" d="M 1340 180 L 1145 180 L 1145 560 L 1340 560" stroke-width="46"/>',
+    /* EP21 loop with tail */
+    '<path class="main" d="M 1340 500 L 1180 500 A 150 150 0 1 1 1330 350" stroke-width="46"/>'
+  ];
+  // all-bright palette, hues interleaved so consecutive episodes contrast
+  // first slot = JWIC burgundy (#8E2C46, from jwicconsulting.com) — brand color leads the cycle
+  const COLORS = [
+    '#8E2C46', '#4fd8e0', '#e8622d', '#c99be0', '#a3e05a', '#e896a6',
+    '#f2c94c', '#7ab8f5', '#d0342c', '#8fe0c0', '#f57ad0', '#f0a05a', '#9d7df0'
+  ];
+
+  const poster = document.getElementById('poster');
+  const patternSvg = document.getElementById('patternSvg');
+
+  function setPattern(n) {
+    patternSvg.innerHTML = PATTERNS[n - 1];
+    document.querySelectorAll('button[data-n]').forEach(x => x.classList.toggle('active', +x.dataset.n === n));
+  }
+
+  function applyEpisode(n) {
+    setPattern(n);
+    const c = COLORS[(n - 1) % COLORS.length];
+    poster.style.setProperty('--ep', c);
+    document.querySelectorAll('button[data-c]').forEach(x => x.classList.toggle('active', x.dataset.c === c));
+    document.querySelectorAll('.mini').forEach((m, i) => m.classList.toggle('selected', i === n - 1));
+  }
+
+  // pattern picker: one tile per shape — mix freely with any accent color
+  const patternRow = document.getElementById('patternRow');
+  for (let n = 1; n <= PATTERNS.length; n++) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'shape-btn';
+    b.dataset.n = n;
+    b.title = `Pattern ${n}`;
+    b.setAttribute('aria-label', `Pattern ${n}`);
+    b.innerHTML = `<svg class="pattern" viewBox="0 0 1280 720" aria-hidden="true">${PATTERNS[n - 1]}</svg>`;
+    b.addEventListener('click', () => setPattern(n));
+    patternRow.appendChild(b);
+  }
+
+  // color override
+  document.querySelectorAll('button[data-c]').forEach(b => {
+    b.addEventListener('click', () => {
+      poster.style.setProperty('--ep', b.dataset.c);
+      document.querySelectorAll('button[data-c]').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+
+  // plan grid
+  const grid = document.getElementById('planGrid');
+  for (let n = 1; n <= 20; n++) {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'mini';
+    card.style.setProperty('--ep', COLORS[(n - 1) % COLORS.length]);
+    card.title = `EP${String(n).padStart(2, '0')}`;
+    card.innerHTML =
+      `<svg class="pattern" viewBox="0 0 1280 720" aria-hidden="true">${PATTERNS[n - 1]}</svg>` +
+      `<span class="ep-label">EP${String(n).padStart(2, '0')}</span>`;
+    card.addEventListener('click', () => {
+      applyEpisode(n);
+      poster.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    grid.appendChild(card);
+  }
+
+  applyEpisode(1);
+</script>
