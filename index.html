@@ -1984,10 +1984,19 @@
   #pricing > .wrap > h2 { max-width: 760px; }
   #pricing > .wrap > .sub { max-width: 780px; }
   .pricing-plans {
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     align-items: start;
     gap: 20px; max-width: 1124px; margin: 34px auto 0;
   }
+  /* สองใบซ้าย = งานวางระบบ BC เหมือนกัน จัดอยู่ในกรอบเดียว แยกจาก On-Demand */
+  .plan-group {
+    padding: 14px;
+    border: 1px solid rgba(1,74,65,.16); border-radius: 28px;
+    background: rgba(255,255,255,.5);
+  }
+  /* ดันใบ On-Demand ลงเท่าขอบกรอบ ทั้งสามใบจะเริ่มระดับเดียวกัน */
+  .plan-ondemand { margin-top: 18px; }
+  .plan-group-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   /* Chrome breaks Thai mid-word (no dictionary), and word-break: keep-all has no effect on Thai.
      nowrap + <wbr> is the only lever that holds: breaks land only where the markup allows.
      Thai only — English text has no <wbr> and must keep wrapping at spaces. */
@@ -2016,9 +2025,21 @@
     width: 20px; height: 20px; fill: none; stroke: #fff;
     stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
   }
-  .plan-name { margin: 0 0 10px; color: var(--brand-deep); font-size: 1.42rem; letter-spacing: -.015em; }
+  /* ponytail: จองที่ชื่อไว้ 2 บรรทัด (ชื่อ D365 BC Implementation ยาวสุด) — ชื่อสั้นก็กินที่เท่ากัน CTA เลยเสมอกัน */
+  .plan-name { margin: 0 0 10px; min-height: 77px; color: var(--brand-deep); font-size: 1.42rem; letter-spacing: -.015em; }
   /* min-height = 4 บรรทัดพอดี กันราคาสามใบเลื่อนหลุดระดับกันเวลาคำบรรยายยาวไม่เท่ากัน */
   .plan-desc { margin: 0 0 14px; min-height: 100px; color: var(--muted); font-size: .92rem; line-height: 1.65; }
+  /* บล็อกราคา = จุดขายของหน้าแพ็กเกจ — กล่องเน้นรัดรอบราคาให้สะดุดตาตั้งแต่กวาดสายตา
+     (.plan-price ข้างนอกยังเป็น spacer คุมระดับ CTA เหมือนเดิม) */
+  .plan-price-box {
+    width: 100%; padding: 16px 18px;
+    border: 1px solid rgba(1,74,65,.12); border-radius: 14px;
+    background: rgba(1,74,65,.045);
+  }
+  .plan-dark .plan-price-box {
+    border-color: rgba(53,175,158,.35);
+    background: linear-gradient(135deg, rgba(53,175,158,.18), rgba(255,255,255,.04) 70%);
+  }
   .plan-price-prefix { display: block; margin-bottom: 3px; color: var(--brand-teal); font-size: .88rem; font-weight: 700; }
   .plan-price-was {
     display: block; margin-bottom: 2px; color: var(--brand-mint);
@@ -2029,7 +2050,8 @@
   .plan-price-line { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 8px; white-space: nowrap; min-width: 0; }
   .plan-price-line strong {
     color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: clamp(2.1rem, 2.7vw, 2.8rem); font-weight: 700; line-height: 1;
+    /* ขนาดตายตัว ไม่ใช้ vw — การ์ดกว้างคงที่บนเดสก์ท็อป และความสูงบล็อกราคาต้องนิ่งให้ CTA เสมอกันทุกความกว้างจอ */
+    font-size: 3.1rem; font-weight: 800; line-height: 1;
     letter-spacing: -.055em; font-variant-numeric: tabular-nums;
   }
   .plan-price-line strong sup {
@@ -2039,11 +2061,6 @@
   .plan-currency { color: var(--muted); font-size: .95rem; font-weight: 600; }
   .plan-note { margin: 9px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.5; }
   .plan-card .pricing-cta { margin-top: 20px; min-height: 52px; font-size: .92rem; }
-  .plan-loc .pricing-cta {
-    background: linear-gradient(135deg, var(--accent), var(--brand-teal));
-    box-shadow: 0 18px 36px -18px rgba(53,175,158,.72);
-  }
-  .plan-loc .pricing-cta:hover { box-shadow: 0 22px 38px -16px rgba(53,175,158,.8); }
   .plan-list-head {
     margin: 24px 0 14px; padding-top: 22px;
     border-top: 1px solid rgba(1,74,65,.1);
@@ -2081,7 +2098,7 @@
     .plan-more::details-content { transition: none; }
   }
   .plan-more > summary:hover { color: var(--brand-burgundy-dark); }
-  .plan-full .plan-more > summary:hover { color: var(--brand-pink); }
+  .plan-dark .plan-more > summary:hover { color: var(--brand-pink); }
   .plan-features { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
   .plan-features li { position: relative; padding-left: 28px; color: var(--muted); font-size: .93rem; line-height: 1.55; }
   .plan-features li::before {
@@ -2095,41 +2112,44 @@
     color: var(--muted); font-size: .85rem; line-height: 1.55;
   }
   .plan-assurance strong { display: block; margin-bottom: 4px; color: var(--brand-burgundy-dark); }
-  /* ใบขวา (Full) = การ์ดเด่นพื้นเข้มเต็มใบ ตัดกับใบซ้ายพื้นสว่างให้เห็นต่างชัดใน 1 วินาที */
-  .plan-full {
+  /* สองใบในกรอบ = การ์ดพื้นเข้มเต็มใบสีเดียวกัน ตัดกับ On-Demand พื้นสว่าง */
+  .plan-dark {
     border-color: rgba(255,255,255,.08);
     background:
       radial-gradient(circle at 88% 4%, rgba(53,175,158,.22), transparent 42%),
       linear-gradient(165deg, #024138 0%, var(--brand-deep) 58%, #001d19 100%);
     box-shadow: 0 36px 70px -40px rgba(1,47,42,.8);
   }
-  .plan-full .plan-banner {
+  .plan-dark .plan-banner {
     color: #fff;
     background: linear-gradient(135deg, var(--brand-burgundy), var(--brand-burgundy-dark));
     letter-spacing: .03em;
   }
-  .plan-full .plan-name { color: #fff; }
-  .plan-full .plan-desc { color: var(--brand-mist); }
+  .plan-dark .plan-name { color: #fff; }
+  .plan-dark .plan-desc { color: var(--brand-mist); }
+  .plan-dark .plan-price-prefix { color: var(--brand-pale); }
+  .plan-dark .plan-price-was { color: var(--brand-mist); opacity: .75; }
+  .plan-dark .plan-currency, .plan-dark .plan-note { color: var(--brand-mist); }
   /* ponytail: min-height = ความสูงราคา+note ของใบพื้นสว่าง (วัดจากเบราว์เซอร์) กันปุ่ม CTA สามใบหลุดระดับกัน
      align-items/justify-content: flex-start ทั้งสามใบ — ราคาเริ่มชิดบนเท่ากัน ที่ว่างเกินตกไปด้านล่างแทน
      — ถ้าเปลี่ยนฟอนต์/ขนาดราคา ต้องวัดใหม่ */
-  .plan-full .plan-price { display: flex; align-items: flex-start; min-height: 181px; }
+  .plan-full .plan-price { display: flex; align-items: flex-start; min-height: 225px; }
   .plan-full .plan-price-quote {
     display: block; color: #fff; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: clamp(1.3rem, 1.9vw, 1.6rem); font-weight: 700; line-height: 1.3;
+    font-size: 1.75rem; font-weight: 800; line-height: 1.35;
     letter-spacing: -.02em;
   }
   .plan-full .plan-price-quote sup { margin-left: .12em; color: var(--brand-pink); font-size: .55em; vertical-align: top; }
-  .plan-full .plan-price-line strong { color: #fff; }
-  .plan-full .plan-price-line strong sup { color: var(--brand-pink); }
-  .plan-full .plan-list-head { color: var(--brand-pale); border-top-color: rgba(255,255,255,.14); }
-  .plan-full .plan-features li { color: var(--brand-pale); }
-  .plan-full .plan-features li::before { color: var(--accent); }
-  .plan-full .plan-assurance {
+  .plan-dark .plan-price-line strong { color: #fff; }
+  .plan-dark .plan-price-line strong sup { color: var(--brand-pink); }
+  .plan-dark .plan-list-head { color: var(--brand-pale); border-top-color: rgba(255,255,255,.14); }
+  .plan-dark .plan-features li { color: var(--brand-pale); }
+  .plan-dark .plan-features li::before { color: var(--accent); }
+  .plan-dark .plan-assurance {
     border-color: rgba(224,140,162,.32); background: rgba(166,58,86,.2);
     color: var(--brand-mist);
   }
-  .plan-full .plan-assurance strong { color: var(--brand-pink); }
+  .plan-dark .plan-assurance strong { color: var(--brand-pink); }
   /* ใบขวา (On-demand) = พื้นสว่างเหมือนใบซ้าย แต่แบนเนอร์เขียวเข้มกว่า แยกออกจาก Localization */
   .plan-ondemand .plan-banner { background: linear-gradient(135deg, var(--brand-ocean), var(--brand-deep)); }
   .plan-ondemand .plan-price-unit { color: var(--muted); font-size: .95rem; font-weight: 600; }
@@ -2139,7 +2159,7 @@
   }
   .plan-loc .plan-note { min-height: 3.8rem; }
   .plan-ondemand .plan-price {
-    display: flex; flex-direction: column; justify-content: flex-start; min-height: 11.4rem;
+    display: flex; flex-direction: column; justify-content: flex-start; min-height: 225px;
   }
   /* ชื่อแพ็กเกจเป็นอังกฤษ ให้ตัดที่ช่องว่างได้แม้อยู่ใต้ rule nowrap ของหน้า TH */
   html[lang="th"] #pricing .plan-name { white-space: normal; }
@@ -2162,6 +2182,9 @@
   /* 3 คอลัมน์แคบเกินอ่านไม่รู้เรื่องต่ำกว่า ~1080px — stack เลย ไม่แวะ 2 คอลัมน์ */
   @media (max-width: 1080px) {
     .pricing-plans { grid-template-columns: 1fr; max-width: 560px; }
+    .plan-group-cards { grid-template-columns: 1fr; }
+    .plan-ondemand { margin-top: 0; }
+    .plan-name { min-height: 0; }
     .plan-desc { min-height: 0; }
     .plan-loc .plan-price, .plan-ondemand .plan-price { min-height: 0; }
     .plan-loc .plan-note { min-height: 0; }
@@ -2172,6 +2195,7 @@
     #pricing { padding: 60px 0; }
     .pricing-plans { margin-top: 28px; gap: 18px; }
     .plan-card { border-radius: 18px; }
+    .plan-group { padding: 12px; border-radius: 22px; }
     .plan-banner { padding: 11px 18px; gap: 10px; font-size: .8rem; }
     .plan-body { padding: 20px 18px 24px; }
     .plan-name { font-size: 1.3rem; }
@@ -2657,9 +2681,10 @@
   <div class="wrap">
     <p class="section-kicker">Transparent <wbr>Pricing</p>
     <h2>เริ่ม<wbr>วางแผน<wbr>งบประมาณ<wbr>ได้<wbr>ตั้งแต่<wbr>วันนี้</h2>
-    <p class="sub">มี<wbr>ราคา<wbr>เริ่มต้น<wbr>ที่<wbr>ชัดเจน <wbr>พร้อม<wbr>ประเมิน<wbr>ขอบเขต<wbr>และ<wbr>ยืนยัน<wbr>ราคา<wbr>ก่อน<wbr>เริ่ม<wbr>โครงการ <wbr>เพื่อ<wbr>ให้<wbr>คุณ<wbr>ตัดสินใจ<wbr>ได้<wbr>อย่าง<wbr>มั่นใจ</p>
     <div class="pricing-plans">
-      <article class="plan-card plan-loc reveal">
+      <div class="plan-group reveal">
+        <div class="plan-group-cards">
+      <article class="plan-card plan-dark plan-loc reveal">
         <div class="plan-banner">
           <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h9a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9"/><path d="M14 8H9M14 12H9M14 16h-3"/><path d="M6 8H3.5a1.5 1.5 0 0 0 0 3H6M6 13H3.5a1.5 1.5 0 0 0 0 3H6"/><path d="M6 5.5v13"/></svg></span>
           <p class="plan-banner-text">ผู้ใช้ <wbr>Business <wbr>Central <wbr>อยู่แล้ว</p>
@@ -2668,11 +2693,13 @@
           <h3 class="plan-name">JWIC Thai Localization</h3>
           <p class="plan-desc">ยกระดับ <wbr>Microsoft <wbr>Dynamics <wbr>365 <wbr>Business <wbr>Central <wbr>ให้<wbr>รองรับ<wbr>การ<wbr>ดำเนินงาน<wbr>และ<wbr>ข้อกำหนด<wbr>ด้าน<wbr>ภาษี<wbr>ของ<wbr>ประเทศไทย<wbr>อย่าง<wbr>ครบถ้วน</p>
           <div class="plan-price">
-            <span class="plan-price-prefix">ราคา<wbr>แพ็กเกจ</span>
-            <s class="plan-price-was">300,000 <wbr>บาท</s>
-            <div class="plan-price-line">
-              <strong>280,000<sup aria-hidden="true">*</sup></strong>
-              <span class="plan-currency">บาท</span>
+            <div class="plan-price-box">
+              <span class="plan-price-prefix">ราคา<wbr>แพ็กเกจ</span>
+              <s class="plan-price-was">300,000 บาท</s>
+              <div class="plan-price-line">
+                <strong>280,000<sup aria-hidden="true">*</sup></strong>
+                <span class="plan-currency">บาท</span>
+              </div>
             </div>
           </div>
           <p class="plan-note">ต่อ <wbr>1 <wbr>Tenant <wbr>ชำระ<wbr>ครั้ง<wbr>เดียว <wbr>ใช้<wbr>งาน<wbr>ได้<wbr>ตลอดไป</p>
@@ -2692,16 +2719,19 @@
           </details>
         </div>
       </article>
-      <article class="plan-card plan-full reveal">
+      <article class="plan-card plan-dark plan-full reveal">
         <div class="plan-banner">
           <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span>
           <p class="plan-banner-text">เริ่ม<wbr>วาง<wbr>ระบบ<wbr>ใหม่<wbr>ครบ<wbr>ทุก<wbr>ขั้นตอน</p>
         </div>
         <div class="plan-body">
-          <h3 class="plan-name">Full Implementation</h3>
+          <h3 class="plan-name">Dynamics 365 Business Central Implementation</h3>
           <p class="plan-desc">ดูแล<wbr>ครบ<wbr>ตั้งแต่<wbr>วิเคราะห์<wbr>กระบวนการ <wbr>ตั้งค่า<wbr>ระบบ <wbr>ย้าย<wbr>ข้อมูล <wbr>อบรม<wbr>ผู้ใช้งาน <wbr>จนถึง<wbr>การ<wbr>สนับสนุน<wbr>ใน<wbr>ช่วง<wbr>เริ่ม<wbr>ใช้งาน<wbr>จริง</p>
           <div class="plan-price">
-            <strong class="plan-price-quote">ราคา<wbr>ตาม<wbr>ขอบเขต<wbr>งาน<sup aria-hidden="true">*</sup></strong>
+            <div class="plan-price-box">
+              <span class="plan-price-prefix">ราคา</span>
+              <strong class="plan-price-quote">ตาม<wbr>ขอบเขต<wbr>งาน<sup aria-hidden="true">*</sup></strong>
+            </div>
           </div>
           <a class="pricing-cta" href="#contact">ปรึกษา<wbr>ขอบเขต<wbr>โครงการ <wbr>ฟรี</a>
           <details class="plan-more">
@@ -2718,6 +2748,8 @@
           </details>
         </div>
       </article>
+        </div>
+      </div>
       <article class="plan-card plan-ondemand reveal">
         <div class="plan-banner">
           <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="M12 7.6V12l3.3 2"/></svg></span>
@@ -2727,11 +2759,13 @@
           <h3 class="plan-name">On-Demand Consulting</h3>
           <p class="plan-desc">จ้าง<wbr>ที่ปรึกษา<wbr>ส่งมอบ<wbr>งาน<wbr>ตาม<wbr>ความ<wbr>ต้องการ</p>
           <div class="plan-price">
-            <span class="plan-price-prefix">ราคา</span>
-            <div class="plan-price-line">
-              <strong>8,000<sup aria-hidden="true">*</sup></strong>
-              <span class="plan-currency">บาท</span>
-              <span class="plan-price-unit">/ Manday</span>
+            <div class="plan-price-box">
+              <span class="plan-price-prefix">ราคา</span>
+              <div class="plan-price-line">
+                <strong>8,000<sup aria-hidden="true">*</sup></strong>
+                <span class="plan-currency">บาท</span>
+                <span class="plan-price-unit">/ Manday</span>
+              </div>
             </div>
           </div>
           <a class="pricing-cta" href="#contact">รับ<wbr>การ<wbr>ประเมิน <wbr>Manday <wbr>ฟรี</a>
@@ -3517,7 +3551,6 @@
     ['.slider figure:nth-of-type(13) figcaption', 'Credit Note'],
     ['.slider-hint', '← Scroll for more examples →'],
     ['#pricing h2', 'A starting budget you can plan around'],
-    ['#pricing > .wrap > .sub', 'A clear starting point, with the scope and final price confirmed before the project begins — so you can decide with confidence.'],
     ['.plan-loc .plan-banner-text', 'Teams already using Business Central'],
     ['.plan-loc .plan-desc', 'Bring your Microsoft Dynamics 365 Business Central up to full compliance with Thai operating practice and tax requirements.'],
     ['.plan-loc .plan-price-prefix', 'Package price'],
@@ -3535,7 +3568,8 @@
     ['.plan-loc .plan-features li:nth-child(8)', 'And other useful functions'],
     ['.plan-full .plan-banner-text', 'A new end-to-end implementation'],
     ['.plan-full .plan-desc', 'End-to-end care: process analysis, system setup, data migration, user training, and support through the start of live operation.'],
-    ['.plan-full .plan-price-quote', 'Talk to us for a tailored quote<sup aria-hidden="true">*</sup>'],
+    ['.plan-full .plan-price-prefix', 'Price'],
+    ['.plan-full .plan-price-quote', 'Based on project scope<sup aria-hidden="true">*</sup>'],
     ['.plan-full .pricing-cta', 'Discuss your project — free'],
     ['.plan-full .plan-list-head', 'What we cover'],
     ['.plan-full .plan-features li:nth-child(1)', 'JWIC Thai Localization included in the package'],
