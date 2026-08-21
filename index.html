@@ -3330,7 +3330,12 @@
         if (d < best) { best = d; cur = i; }
       });
       thumbs.forEach((t, i) => t.classList.toggle('on', i === cur));
-      thumbs[cur]?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      // ponytail: เลื่อนเฉพาะแถบ thumbnail — scrollIntoView ลากทั้งหน้าลงมาตอนโหลด
+      const t = thumbs[cur];
+      if (t) thumbsWrap.scrollTo({
+        left: t.offsetLeft - (thumbsWrap.clientWidth - t.offsetWidth) / 2,
+        behavior: reducedMotion.matches ? 'auto' : 'smooth'
+      });
     }
     syncDots();
     slider.addEventListener('scroll', () => {
