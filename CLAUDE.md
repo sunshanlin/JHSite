@@ -35,6 +35,8 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | `feat-wht.webp` | Pexels 8111853 |
 | `feat-stock.webp` | Pexels 4483941 |
 | `feat-docs.webp` | Unsplash `7b_9cHdKgFg` |
+| `feat-messenger.webp` | ผู้ใช้จัดหามาเอง (ยืนยันมีสิทธิ์ใช้แล้ว) |
+| `why-person.webp` | ผู้ใช้จัดหามาเอง (ยืนยันมีสิทธิ์ใช้แล้ว) |
 | `feat-api.webp` | Pexels 36706460 |
 | `consult-meeting.webp` | Pexels 7643897 |
 | `pricing-consultation.webp` | (ของเดิมในโปรเจกต์) |
