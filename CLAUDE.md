@@ -25,16 +25,18 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 
 ## เครดิตรูปถ่าย
 
-รูปถ่ายคนใน `#features` และ `#contact` มาจาก [Pexels](https://www.pexels.com/license/) — ใช้ฟรีเชิงพาณิชย์ ไม่ต้องให้เครดิต แต่ไล่ที่มาไว้กันลืม:
+รูปถ่ายคนใน `#features` และ `#contact` มาจาก [Pexels](https://www.pexels.com/license/) และ [Unsplash](https://unsplash.com/license) — ทั้งคู่ใช้ฟรีเชิงพาณิชย์ ไม่ต้องให้เครดิต แต่ไล่ที่มาไว้กันลืม
 
-| ไฟล์ | Pexels ID |
+หมายเหตุ: รูป Unsplash ที่เป็น Unsplash+ (Getty) จะโหลดไม่ได้ (403) — ถือเป็นตัวกรองลิขสิทธิ์ในตัว:
+
+| ไฟล์ | ที่มา |
 |---|---|
-| `feat-vat.webp` | 259139 |
-| `feat-wht.webp` | 8111853 |
-| `feat-stock.webp` | 4483941 |
-| `feat-docs.webp` | 8190808 |
-| `feat-api.webp` | 36706460 |
-| `consult-meeting.webp` | 7643897 |
+| `feat-vat.webp` | Pexels 259139 |
+| `feat-wht.webp` | Pexels 8111853 |
+| `feat-stock.webp` | Pexels 4483941 |
+| `feat-docs.webp` | Unsplash `7b_9cHdKgFg` |
+| `feat-api.webp` | Pexels 36706460 |
+| `consult-meeting.webp` | Pexels 7643897 |
 | `pricing-consultation.webp` | (ของเดิมในโปรเจกต์) |
 
 ทุกไฟล์ผ่าน `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` ให้สว่าง/สดขึ้นก่อนแปลงเป็น WebP
