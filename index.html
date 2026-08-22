@@ -2218,6 +2218,132 @@
   .faq-list details[open] summary { border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 12px; }
   .faq-list details > p { color: #aeb4b7; line-height: 1.8; padding-bottom: 16px; text-wrap: pretty; }
 
+  /* ============================================================
+     เลเยอร์ Fluent — โครง/จังหวะแบบหน้า Dynamics 365 สีของ JWIC ล้วน
+     ค่าตัวเลข (44px/500, kicker 12px/600/.08em, radius 3px, 125ms)
+     วัดมาจาก microsoft.com/dynamics-365/products/business-central
+     ฟอนต์ยังเป็นของเดิม (Plus Jakarta Sans + Anuphan) เปลี่ยนแค่น้ำหนัก
+     ============================================================ */
+  :root {
+    --ui-ink: #10241F;        /* ตัวหนังสือหลัก — ดำอมเขียว ไม่ใช่ดำสนิท */
+    --ui-muted: #5C736E;      /* kicker / คำอธิบาย */
+    --ui-page: #f6f8f7;
+    --ui-line: #E2E8E6;
+    --ui-primary: #012F2A;
+    --ui-primary-hover: #014A41;
+    --ui-radius-btn: 3px;
+    --ui-radius-card: 8px;
+    --ui-shadow: 0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14);
+  }
+
+  .nb { white-space: nowrap; }   /* กันเบราว์เซอร์ตัดกลางคำไทย เช่น ครบ|วงจร */
+
+  h1, h2, h3, .feature-panel h3, .step-heading {
+    font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
+  }
+  h2 { font-size: clamp(1.9rem, 2.6vw, 2.5rem); line-height: 1.2; }
+  body { background: var(--ui-page); color: var(--ui-ink); }
+
+  .section-kicker,
+  #services > .wrap > .section-kicker,
+  #business-central .section-kicker {
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--ui-muted);
+  }
+
+  #services > .wrap > .section-kicker, #services > .wrap > h2, #services > .wrap > .sub,
+  #features > .wrap > .section-kicker, #features > .wrap > h2, #features > .wrap > .sub,
+  #reports > .wrap > .section-kicker, #reports > .wrap > h2, #reports > .wrap > .sub,
+  #pricing > .wrap > .section-kicker, #pricing > .wrap > h2, #pricing > .wrap > .sub {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+
+  /* !important จำเป็น: มีสีเฉพาะจุดของแต่ละ section (.hero-actions .cta:not(...), .cal-actions .cta)
+     ที่ specificity สูงกว่า .cta เปล่าๆ อยู่ก่อนแล้ว — Burgundy สงวนไว้ให้ action สำคัญ ตามของเดิม
+     เปลี่ยนแค่ทรง (เหลี่ยม 3px, ไม่มี gradient/เงาฟุ้ง) ไม่เปลี่ยนสี */
+  .cta, .cta.secondary, .cta.ghost {
+    border-radius: var(--ui-radius-btn) !important; background: var(--brand-burgundy) !important; background-image: none !important;
+    box-shadow: none !important; font-weight: 500 !important; min-height: 44px; padding: 10px 22px;
+    transition: background .125s ease, border-color .125s ease;
+    cursor: pointer; /* .cta ที่เป็น <button> (cal-actions) ไม่ได้ pointer มาโดย default */
+  }
+  .cta:hover { background: var(--brand-burgundy-dark) !important; transform: none !important; box-shadow: none !important; }
+  .cta.secondary, .cta.ghost {
+    background: transparent !important; color: var(--ui-ink) !important; border: 1px solid var(--ui-ink) !important;
+  }
+  .cta.secondary:hover, .cta.ghost:hover { background: rgba(1,47,42,.06) !important; }
+  .cta:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+
+  /* #contact พื้นเขียวเข้ม — ปุ่ม ghost (Phone Call) ต้องใช้โทนสว่างแทน ไม่งั้นจมกับพื้นหลัง */
+  #contact .cta.ghost {
+    color: #f0f8f7 !important; border-color: rgba(255,255,255,.32) !important; background: rgba(255,255,255,.06) !important;
+  }
+  #contact .cta.ghost:hover { background: rgba(255,255,255,.12) !important; }
+  #contact .cta.ghost svg { stroke: #f0f8f7; }
+
+  /* ---- topnav บนพื้นสว่าง ---- */
+  .topnav { background: rgba(255,255,255,.94); border-bottom: 1px solid var(--ui-line); }
+  /* specificity ต้องสู้ rule เดิมที่ตั้งเป็น #fff ไว้สำหรับ nav พื้นเข้ม */
+  .topnav .links a, .topnav .brand .wordmark, .topnav .links a.is-active { color: var(--ui-ink); }
+  .topnav .links a:hover { color: var(--ui-primary); background: rgba(1,47,42,.06); }
+  .topnav .links a[href="#contact"] {
+    background: var(--brand-burgundy); color: #fff;
+    border-radius: var(--ui-radius-btn); font-weight: 500;
+  }
+  .topnav .links a[href="#contact"]:hover { background: var(--brand-burgundy-dark); }
+  .topnav .lang button {
+    color: var(--ui-muted); background: transparent;
+    border: 1px solid var(--ui-line); border-radius: var(--ui-radius-btn);
+  }
+  .topnav .lang button.on { color: #fff; background: var(--ui-primary); border-color: var(--ui-primary); }
+  .topnav .social a { background: var(--ui-page); border: 1px solid var(--ui-line); }
+  .topnav .social a:hover { background: rgba(1,47,42,.06); }
+  .topnav .social svg { stroke: var(--ui-muted); }
+
+  /* ---- hero: พื้นสว่าง + บล็อกสีชนขอบขวา ---- */
+  header, header::before, header::after { background: none; }
+  header {
+    color: var(--ui-ink); background: #EFEFE9;
+    min-height: 640px; padding: 120px 0 72px;
+  }
+  header h1 { color: var(--ui-ink); font-size: clamp(2.2rem, 3.4vw, 2.75rem); }
+  header h1 .hero-accent { color: var(--brand-burgundy); -webkit-text-fill-color: currentColor; }
+  header p.lead, .hero-proof, .hero-learn-link, header .tagline { color: var(--ui-muted); }
+  header .tagline { letter-spacing: .08em; }
+  header .badge { background: #fff; color: var(--ui-ink); border: 1px solid var(--ui-line); }
+  .hero-proof li::before { background: var(--brand-jade); }
+  .hero-decor::before, .hero-decor::after { display: none; }
+  /* ทุกก้อนชนขอบกล่อง/ชนกันเอง ไม่มีก้อนลอยเดี่ยว ไม่งั้นดูเหมือนวางพลาด */
+  .hero-grid::after {
+    content: ""; position: absolute; z-index: 0; pointer-events: none;
+    top: -120px; bottom: -72px; right: calc(50% - 50vw); width: min(40vw, 560px);
+    background:
+      linear-gradient(#A63A56 0 0)  0    100% / 34% 24% no-repeat,
+      linear-gradient(#E08CA2 0 0)  34%  100% / 20% 24% no-repeat,
+      linear-gradient(#739B97 0 0)  0    0    / 46% 76% no-repeat,
+      linear-gradient(#417771 0 0)  0    0    / 100% 100% no-repeat;
+  }
+  .hero-grid::before {
+    content: ""; position: absolute; z-index: 0; pointer-events: none;
+    right: calc(50% - 50vw); top: -120px; width: min(22vw, 300px); height: 184px;
+    background: var(--brand-deep); border-bottom-left-radius: 200px;
+  }
+  .hero-doc { position: relative; z-index: 2; }
+  .hero-doc .doc-mini { box-shadow: 0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28); }
+
+  .card, figure, .feature-panel, .feature-demo-card, .price-card {
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
+  }
+
+  /* ---- #contact/#faq: จาก charcoal กลางๆ มาเป็นเขียวแบรนด์ให้เข้าธีม ---- */
+  #contact, #faq {
+    color: #CBDCD8;
+    background: linear-gradient(165deg, #01211D 0%, var(--brand-deep) 55%, var(--brand-teal) 100%);
+  }
+  #contact .section-kicker, #faq .section-kicker { color: var(--brand-mist); }
+  #faq .sub { color: #B4C9C5; }
+  #contact h2, #faq h2 { color: #fff; }
+  .faq-list details > p { color: #B4C9C5; }
+
 </style>
 </head>
 <body>
@@ -2289,7 +2415,7 @@
       </svg>
       Microsoft Dynamics 365 Business Central Specialist
     </span>
-    <h1>Dynamics 365 Business Central<br>พร้อม <span class="hero-accent">Thai Localization</span> ครบวงจร</h1>
+    <h1>Dynamics 365 Business Central<br>พร้อม <span class="hero-accent">Thai Localization</span> <span class="nb">ครบวงจร</span></h1>
     <p class="tagline">Honest Advice, Practical Solution</p>
     <p class="lead">รับวางระบบ ERP สำหรับธุรกิจไทย ดูแลครบตั้งแต่วิเคราะห์กระบวนการ ตั้งค่าระบบ พัฒนาเพิ่มเติม และย้ายข้อมูล ไปจนถึงอบรมผู้ใช้และดูแลหลังเริ่มใช้งาน พร้อมรองรับงานบัญชีและภาษีไทย</p>
     <div class="hero-actions">
@@ -2298,11 +2424,6 @@
       <a class="cta ghost" href="#pricing">ดูราคาแพ็กเกจ</a>
     </div>
     <a class="hero-learn-link" href="https://www.microsoft.com/en-us/dynamics-365/products/business-central" target="_blank" rel="noopener noreferrer" aria-label="ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central บนเว็บไซต์ Microsoft (เปิดในแท็บใหม่)">ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central</a>
-    <ul class="hero-proof" aria-label="จุดเด่นของบริการ">
-      <li>ผู้เชี่ยวชาญทั้ง Functional และ AL Development</li>
-      <li>พื้นฐานบัญชี เข้าใจกระบวนการธุรกิจจริง</li>
-      <li>คุยตรงกับผู้พัฒนาตลอดโครงการ</li>
-    </ul>
     </div>
     <div class="hero-doc" aria-hidden="true">
       <div class="doc-mini vat">
@@ -2400,7 +2521,7 @@
         <a class="text-link" href="#contact">ปรึกษารายละเอียดโครงการ <span aria-hidden="true">→</span></a>
       </div>
       <figure class="poster">
-        <a href="img/jh-poster.png" target="_blank" rel="noopener">
+        <a href="img/jh-poster.webp" target="_blank" rel="noopener">
           <img src="img/jh-poster.webp" alt="โปสเตอร์สรุปบริการ — Business Central สำหรับธุรกิจไทย พร้อมระบบภาษี เอกสาร และบริการดูแลครบวงจร" loading="lazy" width="1310" height="1853">
         </a>
         <figcaption>คลิกเพื่อดูรายละเอียดบริการฉบับเต็ม</figcaption>
@@ -2429,8 +2550,8 @@
           <figcaption>เปิดข้อมูลจากระบบต่อใน Excel ได้ทันที สรุปยอดด้วย PivotTable และกรองดูมุมที่ต้องการได้เอง</figcaption>
         </figure>
         <figure id="bc-shot-3" aria-hidden="true" inert>
-          <a href="img/bc-home.png" target="_blank" rel="noopener">
-            <img src="img/bc-home.png" alt="หน้าจอเริ่มต้นของ Business Central บนคลาวด์ แสดงชื่อบริษัทและเมนูงานตามสิทธิ์ของผู้ใช้" loading="lazy" width="1911" height="793">
+          <a href="img/bc-home.webp" target="_blank" rel="noopener">
+            <img src="img/bc-home.webp" alt="หน้าจอเริ่มต้นของ Business Central บนคลาวด์ แสดงชื่อบริษัทและเมนูงานตามสิทธิ์ของผู้ใช้" loading="lazy" width="1911" height="793">
           </a>
           <figcaption>ทำงานบนคลาวด์ผ่านเบราว์เซอร์ — เข้าใช้ด้วยบัญชี Microsoft 365 และเห็นเฉพาะเมนูที่ได้รับสิทธิ์</figcaption>
         </figure>
@@ -2441,8 +2562,8 @@
           <figcaption>Dashboard สรุปรายได้ กำไร และ DSO จากข้อมูลจริงในระบบ ไม่ต้องรอปิดงบ</figcaption>
         </figure>
         <figure id="bc-shot-5" aria-hidden="true" inert>
-          <a href="img/bc-dashboard.png" target="_blank" rel="noopener">
-            <img src="img/bc-dashboard.png" alt="หน้าวิเคราะห์ธุรกิจใน Business Central แสดงลูกค้าที่ทำยอดขายสูงสุดและงบทดลอง" loading="lazy" width="1649" height="869">
+          <a href="img/bc-dashboard.webp" target="_blank" rel="noopener">
+            <img src="img/bc-dashboard.webp" alt="หน้าวิเคราะห์ธุรกิจใน Business Central แสดงลูกค้าที่ทำยอดขายสูงสุดและงบทดลอง" loading="lazy" width="1649" height="869">
           </a>
           <figcaption>ภาพรวมการขาย — เห็นลูกค้าที่ทำรายได้สูงสุดและยอดค้างรับ พร้อมเจาะดูรายละเอียดได้ทันที</figcaption>
         </figure>
@@ -2451,27 +2572,22 @@
       <button type="button" class="bento-item a-p1" aria-pressed="true" aria-controls="bc-shot-1">
         <span class="bento-num">01</span>
         <h3>ลดงานซ้ำด้วยระบบอัตโนมัติ</h3>
-        <p>เชื่อมงานขายถึงบัญชีให้ข้อมูลไหลต่อเนื่อง โดยไม่ต้องคีย์ซ้ำ</p>
       </button>
       <button type="button" class="bento-item a-p2" aria-pressed="false" aria-controls="bc-shot-2">
         <span class="bento-num">02</span>
         <h3>ใช้งานร่วมกับ Microsoft 365</h3>
-        <p>ทำงานต่อใน Excel, Outlook และ Teams ได้โดยตรง ไม่ต้องสลับหลายระบบ</p>
       </button>
       <button type="button" class="bento-item a-p3" aria-pressed="false" aria-controls="bc-shot-3">
         <span class="bento-num">03</span>
         <h3>ความปลอดภัยระดับองค์กร</h3>
-        <p>สำรองข้อมูลอัตโนมัติ กำหนดสิทธิ์รายผู้ใช้ และตรวจสอบย้อนหลังได้</p>
       </button>
       <button type="button" class="bento-item a-p4" aria-pressed="false" aria-controls="bc-shot-4">
         <span class="bento-num">04</span>
         <h3>ตัดสินใจจากตัวเลขจริง</h3>
-        <p>ดูยอดขาย กระแสเงินสด และสต็อกจากฐานข้อมูลเดียวกันได้ทันที</p>
       </button>
       <button type="button" class="bento-item a-p5" aria-pressed="false" aria-controls="bc-shot-5">
         <span class="bento-num">05</span>
         <h3>เพิ่มยอดขายและงานบริการ</h3>
-        <p>ติดตามงานขายตั้งแต่ใบเสนอราคาจนถึงบริการหลังการขาย และรู้ว่าลูกค้ารายใดทำรายได้หลักให้ธุรกิจ</p>
       </button>
       </div>
     </div>
@@ -2583,7 +2699,7 @@
         <h2>ระบบที่ดี ต้องเข้ากับทั้งงานและคนใช้</h2>
         <!-- Photo: Kampus Production / Pexels (free to use) -->
         <figure class="why-visual reveal">
-          <img src="img/why-business-analysis.jpg" alt="ผู้ใช้งานกำลังวิเคราะห์ข้อมูลและกราฟธุรกิจบนแล็ปท็อป" loading="lazy" width="1400" height="934">
+          <img src="img/why-business-analysis.webp" alt="ผู้ใช้งานกำลังวิเคราะห์ข้อมูลและกราฟธุรกิจบนแล็ปท็อป" loading="lazy" width="1400" height="934">
         </figure>
       </div>
       <ul class="checks why-list">
@@ -2610,59 +2726,59 @@
     <div class="slider-wrap">
     <div class="slider">
       <figure class="reveal">
-        <a href="img/bc-home.png"><img src="img/bc-home.png" alt="หน้า Home ของ Business Central พร้อมเมนู Thai Localization" loading="lazy"></a>
+        <a href="img/bc-home.webp"><img src="img/bc-home.webp" alt="หน้า Home ของ Business Central พร้อมเมนู Thai Localization" loading="lazy"></a>
         <figcaption>หน้า Home ของ Business Central พร้อมเมนูงานภาษีและวางบิลภาษาไทย</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/bc-dashboard.png"><img src="img/bc-dashboard.png" alt="Dashboard วิเคราะห์ธุรกิจใน Business Central" loading="lazy"></a>
+        <a href="img/bc-dashboard.webp"><img src="img/bc-dashboard.webp" alt="Dashboard วิเคราะห์ธุรกิจใน Business Central" loading="lazy"></a>
         <figcaption>Dashboard วิเคราะห์ยอดขาย งบทดลอง แบบ Real-time</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/vat-service.png"><img src="img/vat-service.png" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" loading="lazy"></a>
+        <a href="img/vat-service.webp"><img src="img/vat-service.webp" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" loading="lazy"></a>
         <figcaption>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร — ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/sales-vat-report.png"><img src="img/sales-vat-report.png" alt="รายงานภาษีขาย" loading="lazy"></a>
+        <a href="img/sales-vat-report.webp"><img src="img/sales-vat-report.webp" alt="รายงานภาษีขาย" loading="lazy"></a>
         <figcaption>รายงานภาษีขาย พร้อมเลขสาขา</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/pp30-form.png"><img src="img/pp30-form.png" alt="หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 ใน Business Central" loading="lazy"></a>
+        <a href="img/pp30-form.webp"><img src="img/pp30-form.webp" alt="หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 ใน Business Central" loading="lazy"></a>
         <figcaption>หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 พร้อม Download แบบฟอร์ม</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/pp30-report.png"><img src="img/pp30-report.png" alt="แบบ ภ.พ.30 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
+        <a href="img/pp30-report.webp"><img src="img/pp30-report.webp" alt="แบบ ภ.พ.30 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
         <figcaption>แบบฟอร์ม ภ.พ.30 ของกรมสรรพากร — ระบบกรอกตัวเลขให้อัตโนมัติ พร้อมยื่น</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/billing-worklist.png"><img src="img/billing-worklist.png" alt="Billing Worklist — รายการรอวางบิลตามรอบของลูกค้าแต่ละราย" loading="lazy"></a>
+        <a href="img/billing-worklist.webp"><img src="img/billing-worklist.webp" alt="Billing Worklist — รายการรอวางบิลตามรอบของลูกค้าแต่ละราย" loading="lazy"></a>
         <figcaption>รายการรอวางบิล คำนวณวันวางบิลตามเงื่อนไขของลูกค้าแต่ละราย</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/billing-board.png"><img src="img/billing-board.png" alt="Billing Board — ปฏิทินรายเดือนแสดงรายการวางบิลแยกตามวันและลูกค้า" loading="lazy"></a>
+        <a href="img/billing-board.webp"><img src="img/billing-board.webp" alt="Billing Board — ปฏิทินรายเดือนแสดงรายการวางบิลแยกตามวันและลูกค้า" loading="lazy"></a>
         <figcaption>Billing Board ปฏิทินรายเดือน ใช้สีแยกวันวางบิลและรายการที่เลยกำหนด</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/receivable-receipt.png"><img src="img/receivable-receipt.png" alt="ใบเสร็จรับเงิน / ใบกำกับภาษี (Tax Receipt)" loading="lazy"></a>
+        <a href="img/receivable-receipt.webp"><img src="img/receivable-receipt.webp" alt="ใบเสร็จรับเงิน / ใบกำกับภาษี (Tax Receipt)" loading="lazy"></a>
         <figcaption>ใบเสร็จรับเงิน / ใบกำกับภาษี ออกจากการรับชำระตามใบวางบิล</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/fixed-asset-register.png"><img src="img/fixed-asset-register.png" alt="ทะเบียนทรัพย์สิน (Fixed Asset Register)" loading="lazy"></a>
+        <a href="img/fixed-asset-register.webp"><img src="img/fixed-asset-register.webp" alt="ทะเบียนทรัพย์สิน (Fixed Asset Register)" loading="lazy"></a>
         <figcaption>ทะเบียนทรัพย์สิน (Fixed Asset Register)</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/stock-card.png"><img src="img/stock-card.png" alt="รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card)" loading="lazy"></a>
+        <a href="img/stock-card.webp"><img src="img/stock-card.webp" alt="รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card)" loading="lazy"></a>
         <figcaption>รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card) แสดงรับ–จ่าย ยอดคงเหลือ และมูลค่าต้นทุนรายสินค้า</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/sales-invoice.png"><img src="img/sales-invoice.png" alt="ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)" loading="lazy"></a>
+        <a href="img/sales-invoice.webp"><img src="img/sales-invoice.webp" alt="ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)" loading="lazy"></a>
         <figcaption>ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/po.png"><img src="img/po.png" alt="ใบสั่งซื้อ (Purchase Order)" loading="lazy"></a>
+        <a href="img/po.webp"><img src="img/po.webp" alt="ใบสั่งซื้อ (Purchase Order)" loading="lazy"></a>
         <figcaption>ใบสั่งซื้อ (Purchase Order)</figcaption>
       </figure>
       <figure class="reveal">
-        <a href="img/credit-note.png"><img src="img/credit-note.png" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
+        <a href="img/credit-note.webp"><img src="img/credit-note.webp" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
         <figcaption>ใบลดหนี้ (Credit Note)</figcaption>
       </figure>
     </div>
@@ -2795,7 +2911,7 @@
     <p class="sub">Business Central consulting built on accounting knowledge, end-to-end process understanding, and hands-on ERP implementation experience.</p>
     <div class="profile-panel reveal">
       <div class="profile-photo-frame">
-        <img class="profile-photo" src="img/jirapat.jpg" alt="Jirapat Wichayapong (Sun)" width="800" height="800">
+        <img class="profile-photo" src="img/jirapat.webp" alt="Jirapat Wichayapong (Sun)" width="800" height="800">
       </div>
       <div>
         <h3 class="profile-name">Jirapat Wichayapong (Sun)</h3>
@@ -3479,9 +3595,6 @@
     ['.hero-actions .cta:not(.secondary, .ghost)', 'Book a free consultation &amp; demo'],
     ['.hero-actions .cta.secondary', 'View sample reports'],
     ['header .hero-learn-link', 'Learn more about Business Central'],
-    ['.hero-proof li:nth-child(1)', 'Both functional consulting and AL development expertise'],
-    ['.hero-proof li:nth-child(2)', 'Accounting background with real business-process understanding'],
-    ['.hero-proof li:nth-child(3)', 'Work directly with the developer throughout the project'],
     ['#services h2', 'End-to-End Implementation Service'],
     ['#services > .wrap > .sub', 'Delivery follows Microsoft\'s Success by Design — five phases from understanding your business to caring for the live system, with the same person throughout.'],
     ['.step[data-step="1"] h3', 'Discover <span>Understand the business</span>'],
@@ -3504,15 +3617,10 @@
     ['#bc-shot-4 figcaption', 'Revenue, profit, and DSO from live data — no waiting for the books to close'],
     ['#bc-shot-5 figcaption', 'Sales overview — top customers by value and outstanding receivables, drillable on the spot'],
     ['.a-p1 h3', 'Automate the repetitive work'],
-    ['.a-p1 p', 'Keep sales and accounting data flowing without re-keying.'],
     ['.a-p2 h3', 'Works with Microsoft 365'],
-    ['.a-p2 p', 'Work in Excel, Outlook, and Teams without switching systems.'],
     ['.a-p3 h3', 'Enterprise-grade security'],
-    ['.a-p3 p', 'Automatic backups, per-user access, and a full audit trail.'],
     ['.a-p4 h3', 'Decide on real numbers'],
-    ['.a-p4 p', 'See sales, cash flow, and stock instantly in one database.'],
     ['.a-p5 h3', 'Boost sales and service'],
-    ['.a-p5 p', 'Track sales, key customers, and after-sales service in one place.'],
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
     ['#features > .wrap > h2', 'JWIC Localization — Features for Thai Business'],

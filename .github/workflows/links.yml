@@ -1,0 +1,14 @@
+name: links
+on: [push, pull_request]
+
+# ponytail: offline only — เช็คว่าลิงก์/รูปภายในไม่ 404 พอ
+# ถ้าอยากเช็คลิงก์นอก (docs.microsoft ฯลฯ) เอา --offline ออก แล้วรับความ flaky
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --include-fragments "*.html" "articles/*.html"
+          fail: true
