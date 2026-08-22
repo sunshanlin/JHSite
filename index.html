@@ -2329,6 +2329,8 @@
   .topnav .social a { background: var(--ui-page); border: 1px solid var(--ui-line); }
   .topnav .social a:hover { background: rgba(1,47,42,.06); }
   .topnav .social svg { stroke: var(--ui-muted); }
+  /* .menu-toggle เดิมเป็นขาวบนขาวโปร่งใส ออกแบบไว้สำหรับ topnav พื้นเข้ม กลืนกับพื้นขาวด้านบนนี้ */
+  .menu-toggle { background: var(--ui-page); border-color: var(--ui-line); color: var(--ui-ink); }
 
   /* ---- hero: พื้นสว่าง + บล็อกสีชนขอบขวา ---- */
   header, header::before, header::after { background: none; }
@@ -2360,6 +2362,10 @@
   }
   .hero-doc { position: relative; z-index: 2; }
   .hero-doc .doc-mini { box-shadow: 0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28); }
+  /* ก้อนสีนี้ออกแบบไว้ชนขอบขวาตอน hero เป็น 2 คอลัมน์ — พอ stack เป็นคอลัมน์เดียวบนมือถือ มันทับข้อความหัวเรื่องแทน ซ่อนทิ้ง */
+  @media (max-width: 900px) {
+    .hero-grid::after, .hero-grid::before { display: none; }
+  }
 
   .card, figure, .feature-panel, .price-card {
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
