@@ -14,6 +14,6 @@ jobs:
           # lychee resolve "/" เป็นโฟลเดอร์ ไม่ใช่ index.html เลยหา fragment ไม่เจอ (false positive)
           args: >-
             --offline --no-progress --include-fragments --root-dir "$GITHUB_WORKSPACE"
-            --exclude "^/#(contact|articles)$"
+            --exclude "#(contact|articles)$"
             "*.html" "articles/*.html"
           fail: true
