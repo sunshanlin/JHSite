@@ -356,7 +356,6 @@
   .profile-photo { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.55); transform-origin: 50% 46%; }
   .profile-name { margin-bottom: 2px; color: var(--ink); font-size: 1.35rem; line-height: 1.35; }
   .profile-role { margin-bottom: 14px; color: var(--accent-dark); font-weight: 600; }
-  .profile-bio { margin-bottom: 10px; color: var(--muted); text-wrap: pretty; }
   .linkedin-link {
     display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 9px 14px;
     border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line)); border-radius: 9px;
@@ -365,6 +364,22 @@
   }
   .linkedin-link:hover { background: var(--bg-soft); border-color: var(--accent); transform: translateY(-1px); }
   .linkedin-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* คำพูดต่อจากย่อหน้า bio ในการ์ดเดียวกัน — เครื่องหมายคำพูดใหญ่ตัดกับกรอบซ้ายสีเน้น */
+  .profile-quote {
+    position: relative; margin: 18px 0 16px; padding: 6px 0 6px 28px;
+    border-left: 3px solid var(--accent);
+  }
+  .profile-quote::before {
+    content: "“"; position: absolute; left: -6px; top: -18px;
+    font-family: Georgia, "Times New Roman", serif; font-size: 3.4rem; line-height: 1;
+    color: var(--accent); opacity: .5;
+  }
+  .profile-quote p {
+    margin: 0 0 14px; color: var(--muted); font-size: 1.06rem; line-height: 1.85; text-wrap: pretty;
+  }
+  .profile-quote p:last-of-type { margin-bottom: 0; }
+
   .about-title { margin-bottom: 14px; color: var(--ink); font-size: 1.15rem; }
   .education-title { margin-top: 32px; }
   .education-list { display: grid; gap: 12px; list-style: none; }
@@ -378,7 +393,7 @@
     background: linear-gradient(145deg, #072d30 0%, #0a3e41 58%, #1a6873 100%);
   }
   #about h2, #about .about-title, #about .cert-title, #about .profile-name { color: #fff; }
-  #about .sub, #about .profile-bio, #about .education-list span { color: #cfe7e8; }
+  #about .sub, #about .education-list span, #about .profile-quote p { color: #cfe7e8; }
   #about .profile-role { color: #59bdb1; }
   #about .profile-panel {
     background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18);
@@ -1130,7 +1145,7 @@
   #about .profile-photo-frame { width: 210px; height: 210px; }
   #about .profile-photo { transform: scale(1.42); }
   .profile-name { font-size: 1.6rem; }
-  .profile-bio { max-width: 770px; line-height: 1.82; }
+  .profile-quote p { max-width: 770px; }
   .about-details { display: grid; grid-template-columns: .72fr 1.28fr; gap: 20px; }
   .about-block { padding: 28px 30px; border: 1px solid rgba(255,255,255,.15); border-radius: 18px; background: rgba(255,255,255,.055); }
   .about-block .education-title, .about-block .cert-title {
@@ -1781,7 +1796,6 @@
   .why-list span { font-size: .96rem; }
   .stat span { font-size: .98rem; }
   .hero-proof { font-size: .9rem; }
-  #about .profile-bio { font-size: 1.04em; }
   #about .education-list span { font-size: 1rem; }
 
   .hero-actions .cta.secondary { display: none; }
@@ -2959,7 +2973,10 @@
       <div>
         <h3 class="profile-name">Jirapat Wichayapong (Sun)</h3>
         <p class="profile-role">Microsoft Dynamics 365 Business Central Functional Consultant &amp; AL Developer</p>
-        <p class="profile-bio">I have worked in ERP implementation since graduating with a degree in accounting, building hands-on experience with Dynamics AX 2012 and Dynamics 365 Finance &amp; Operations. Today, I focus on Business Central, combining functional consulting with AL development and applying my end-to-end understanding of finance, sales, purchasing, inventory, and warehouse processes to design solutions that fit the way each business works.</p>
+        <blockquote class="profile-quote" lang="th">
+          <p>ผมเชื่อว่าการวางระบบ ERP ได้พัฒนามาถึงจุดที่ธุรกิจสามารถเปลี่ยนผ่านสู่ระบบใหม่ได้อย่างรวดเร็ว โดยไม่จำเป็นต้องใช้เวลานานหรือมีความซับซ้อนเหมือนในอดีต และยังคงความถูกต้องไว้อย่างครบถ้วน</p>
+          <p>ด้วยประสบการณ์ด้านการให้คำปรึกษาและวางระบบ ERP ผมมุ่งมั่นที่จะส่งมอบโซลูชันที่ตอบโจทย์ธุรกิจ วัดผลลัพธ์ได้จริง ภายใต้งบประมาณที่คุ้มค่าและเหมาะสมครับ</p>
+        </blockquote>
         <a class="linkedin-link" href="https://www.linkedin.com/in/jirapat-wichayapong-886003146/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13Zm1.78 13.04H3.54V8.98H7.1v11.47Z"/></svg>
           View my LinkedIn profile
