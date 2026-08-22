@@ -1040,10 +1040,6 @@
   }
   .feature-panel-icon svg { width: 27px; height: 27px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
   .feature-panel-copy { min-width: 0; }
-  .feature-count {
-    display: block; margin-bottom: 9px; color: var(--accent); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .74rem; font-weight: 700; letter-spacing: .13em;
-  }
   .feature-panel h3 { margin-bottom: 13px; color: var(--ink); font-size: clamp(1.45rem, 2.6vw, 2rem); line-height: 1.3; letter-spacing: -.02em; }
   .feature-panel p { color: var(--muted); line-height: 1.82; text-wrap: pretty; }
   .feature-panel p strong { color: var(--text); }
@@ -1067,24 +1063,10 @@
     position: absolute; inset: 0; z-index: 1;
     width: 100%; max-width: none; height: 100%; object-fit: cover;
   }
-  /* ไล่เงาบางๆ ที่มุมล่างขวา ให้ chip ลอยอยู่บนรูปได้ทุกใบโดยไม่จม */
-  .feature-visual::after {
-    content: ""; position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(to top left, rgba(1,33,29,.42), transparent 42%);
-  }
-  .feature-float-chip {
-    position: absolute; z-index: 2; right: 8%; bottom: 15%; padding: 9px 12px;
-    border: 1px solid rgba(255,255,255,.5); border-radius: 11px; color: var(--ink); background: rgba(255,255,255,.94);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-    box-shadow: 0 16px 30px -20px rgba(6,54,84,.5); font-size: .74rem; font-weight: 700;
-  }
-  .feature-float-chip b { margin-left: 4px; color: #35AF9E; }
   .feature-panel.is-active .feature-panel-copy { animation: panelCopyIn .55s cubic-bezier(.2,.75,.2,1) .08s both; }
   .feature-panel.is-active .feature-photo { animation: photoIn .72s cubic-bezier(.2,.8,.2,1) both; }
-  .feature-panel.is-active .feature-float-chip { animation: chipIn .55s cubic-bezier(.2,.85,.25,1.2) .3s both; }
   @keyframes panelCopyIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   @keyframes photoIn { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
-  @keyframes chipIn { from { opacity: 0; transform: translateY(12px) scale(.88); } to { opacity: 1; transform: none; } }
   .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .card {
     position: relative; overflow: hidden; padding: 28px; border-color: rgba(199,219,228,.78); border-radius: 18px;
@@ -1312,8 +1294,7 @@
     .doc-card { transform: rotate(1.6deg); animation: none; }
     .doc-mini, .doc-stamp, .step.is-current::before,
     .feature-panel.is-active .feature-panel-copy,
-    .feature-panel.is-active .feature-photo,
-    .feature-panel.is-active .feature-float-chip { animation: none; }
+    .feature-panel.is-active .feature-photo { animation: none; }
     .feature-panel, .feature-tab, .steps-progress span, .step, .credential-card { transition: none; }
   }
 
@@ -1422,7 +1403,6 @@
     .feature-panel { grid-template-columns: 1fr; gap: 18px; min-height: 0; padding: 24px; border-radius: 20px; }
     .feature-panel-icon { width: 52px; height: 52px; border-radius: 15px; }
     .feature-visual { min-height: 220px; margin: 4px -24px -24px; }
-    .feature-float-chip { right: 7%; bottom: 12%; }
     .service-highlight .poster a { height: 410px; }
     .slider img { height: 220px; }
     .cookie-bar {
@@ -1668,7 +1648,6 @@
   .section-kicker { color: var(--brand-plum); }
   .service-highlight .section-kicker, #about .section-kicker, #contact .section-kicker { color: var(--brand-plum-light); }
   header .tagline { color: var(--brand-plum-light); }
-  .feature-count { color: var(--brand-plum); }
   section.alt { background: linear-gradient(180deg, var(--brand-ivory) 0%, var(--brand-ivory-deep) 100%); }
 
   /* Section heading stays on Pantone; only the five stage labels use Microsoft hues. */
@@ -1860,8 +1839,6 @@
     border-color: rgba(1,74,65,.2); color: var(--brand-teal); background: rgba(65,119,113,.08);
   }
   .feature-visual { border-left-color: rgba(1,74,65,.14); }
-  .feature-float-chip { border-color: rgba(1,74,65,.18); }
-  .feature-float-chip b { color: var(--brand-jade); }
   #about .profile-role, footer a { color: var(--brand-mist); }
   #about .linkedin-link:hover { border-color: var(--brand-mint); }
   footer { color: var(--brand-mist); }
@@ -2635,7 +2612,7 @@
     </div>
     <p class="section-kicker">Built for Thai business</p>
     <h2>JWIC Localization</h2>
-    <p class="sub">Package สำหรับ Business Central ที่พัฒนาเพื่อธุรกิจไทยโดยเฉพาะ ครอบคลุมภาษี เอกสาร และงานบัญชีที่ใช้จริงทุกวัน</p>
+    <p class="sub">Extension สำหรับ Business Central ที่พัฒนาเพื่อธุรกิจไทยโดยเฉพาะ ครอบคลุมภาษี เอกสาร และงานบัญชีที่ใช้จริงทุกวัน</p>
     <div class="feature-tabs reveal">
       <div class="feature-tab-scroll">
         <div class="feature-tablist" role="tablist" aria-label="ฟังก์ชัน JWIC Localization">
@@ -2651,73 +2628,67 @@
         <article class="feature-panel is-active" id="feature-panel-vat" role="tabpanel" aria-labelledby="feature-tab-vat" tabindex="0">
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
           <div class="feature-panel-copy">
-            <span class="feature-count">01 / 06</span>
             <h3>ภาษีมูลค่าเพิ่ม</h3>
             <p>จัดทำรายงานภาษีซื้อ–ขาย <strong>รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</strong> พร้อม <strong>กรอกข้อมูลลงแบบ ภ.พ.30 ของกรมสรรพากรให้อัตโนมัติ</strong> รองรับภาษีไม่ถึงกำหนดและใบแทนใบกำกับภาษี และ <strong>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร</strong> ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</p>
             <ul class="feature-chips"><li>ภ.พ.30</li><li>Unrealized VAT</li><li>Branch VAT</li><li>VAT Service</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-vat.webp" alt="แบบแสดงรายการภาษีและเครื่องคิดเลขบนโต๊ะทำงาน" loading="lazy" decoding="async"><div class="feature-float-chip">VAT 7% <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-vat.webp" alt="แบบแสดงรายการภาษีและเครื่องคิดเลขบนโต๊ะทำงาน" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-wht" role="tabpanel" aria-labelledby="feature-tab-wht" tabindex="0" aria-hidden="true" inert>
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="15" x2="9" y2="15"/></svg></div>
           <div class="feature-panel-copy">
-            <span class="feature-count">02 / 06</span>
             <h3>ภาษีหัก ณ ที่จ่าย</h3>
             <p><strong>คำนวณภาษีหัก ณ ที่จ่ายอัตโนมัติเมื่อบันทึกการจ่ายเงินจริง</strong> ออกหนังสือรับรอง 50 ทวิที่รวมเงินได้หลายประเภทไว้ในใบเดียว พร้อมจัดทำแบบ ภ.ง.ด.2/3/53/54 และไฟล์สำหรับ RD Prep</p>
             <ul class="feature-chips"><li>50 ทวิ</li><li>ภ.ง.ด.3/53</li><li>RD Prep</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-wht.webp" alt="มือกำลังเซ็นเอกสารหนังสือรับรองหักภาษี ณ ที่จ่าย" loading="lazy" decoding="async"><div class="feature-float-chip">RD Prep <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-wht.webp" alt="พนักงานบัญชีกำลังตรวจเอกสารหักภาษี ณ ที่จ่ายที่โต๊ะทำงาน" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-billing" role="tabpanel" aria-labelledby="feature-tab-billing" tabindex="0" aria-hidden="true" inert>
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
           <div class="feature-panel-copy">
-            <span class="feature-count">03 / 06</span>
             <h3>ระบบวางบิล</h3>
             <p>จัดการรายการวางบิลผ่าน <strong>Worklist และปฏิทินรายเดือน</strong> พร้อมสีเน้นวันวางบิลและรายการที่เลยกำหนด ช่วยให้วางแผน ปรับวัน เชื่อมใบแจ้งหนี้กับใบวางบิล และติดตามสถานะการส่งเอกสารได้ครบถ้วน</p>
             <ul class="feature-chips"><li>Billing Worklist</li><li>Billing Board</li><li>Billing Status</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/pricing-consultation.webp" alt="ทีมงานกำลังปรึกษาแนวทางวางระบบร่วมกันรอบโต๊ะประชุม" loading="lazy" decoding="async"><div class="feature-float-chip">Paid <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/pricing-consultation.webp" alt="ทีมงานกำลังปรึกษาแนวทางวางระบบร่วมกันรอบโต๊ะประชุม" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-assets" role="tabpanel" aria-labelledby="feature-tab-assets" tabindex="0" aria-hidden="true" inert>
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></div>
           <div class="feature-panel-copy">
-            <span class="feature-count">04 / 06</span>
             <h3>รายงานสต็อกและทรัพย์สิน</h3>
             <p>จัดทำทะเบียนทรัพย์สินรูปแบบไทยพร้อมค่าเสื่อมสะสม และ Stock Card สำหรับดูความเคลื่อนไหวของสินค้าแต่ละรายการอย่างเป็นระบบ</p>
             <ul class="feature-chips"><li>Fixed Asset</li><li>Stock Card</li><li>Depreciation</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-stock.webp" alt="พนักงานคลังสินค้าตรวจนับสต็อกด้วยแท็บเล็ต" loading="lazy" decoding="async"><div class="feature-float-chip">Stock <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-stock.webp" alt="พนักงานคลังสินค้าตรวจนับสต็อกด้วยแท็บเล็ต" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-docs" role="tabpanel" aria-labelledby="feature-tab-docs" tabindex="0" aria-hidden="true" inert>
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
           <div class="feature-panel-copy">
-            <span class="feature-count">05 / 06</span>
             <h3>ฟอร์มเอกสารภาษาไทยครบชุด</h3>
             <p>มีทั้งใบเสนอราคา ใบสั่งซื้อ/ขาย ใบกำกับภาษี/ใบแจ้งหนี้ ใบเสร็จรับเงิน ใบลดหนี้–เพิ่มหนี้ และใบวางบิล จัดวางในรูปแบบภาษาไทยพร้อมพิมพ์ใช้งาน</p>
             <ul class="feature-chips"><li>20+ Forms</li><li>Tax Invoice</li><li>Credit Note</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-docs.webp" alt="มือกำลังเซ็นเอกสารบนแผ่นรองเขียน" loading="lazy" decoding="async"><div class="feature-float-chip">Original <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-docs.webp" alt="พนักงานกำลังกรอกและเซ็นเอกสารภาษาไทยที่โต๊ะทำงาน" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-api" role="tabpanel" aria-labelledby="feature-tab-api" tabindex="0" aria-hidden="true" inert>
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
           <div class="feature-panel-copy">
-            <span class="feature-count">06 / 06</span>
             <h3>เชื่อมต่อข้อมูลภายนอกผ่าน API</h3>
             <p>ดึงอัตราแลกเปลี่ยนและวันหยุดจากธนาคารแห่งประเทศไทยเข้าระบบอัตโนมัติ ลดงานคีย์ และใช้ร่วมกับปฏิทินของคลัง ผู้ขนส่ง และลูกค้า เพื่อวางแผนการจัดส่ง การวางบิล และการรับ–จ่ายเงิน</p>
             <ul class="feature-chips"><li>BOT API</li><li>Exchange Rate</li><li>Integration</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-api.webp" alt="นักพัฒนากำลังเขียนโปรแกรมบนจอคู่ในออฟฟิศ" loading="lazy" decoding="async"><div class="feature-float-chip">Live <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-api.webp" alt="นักพัฒนากำลังเขียนโปรแกรมเชื่อมต่อ API ในออฟฟิศ" loading="lazy" decoding="async"></div>
         </article>
       </div>
     </div>
@@ -3661,7 +3632,7 @@
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
     ['#features > .wrap > h2', 'JWIC Localization — Features for Thai Business'],
-    ['#features > .wrap > .sub', 'A package built specifically for Thai business — covering the tax, documents, and accounting work you use every day.'],
+    ['#features > .wrap > .sub', 'An extension built specifically for Thai business — covering the tax, documents, and accounting work you use every day.'],
     ['#feature-panel-vat h3', 'Value Added Tax (VAT)'],
     ['#feature-panel-vat .feature-panel-copy > p', 'Purchase–sales VAT reports <strong>supporting head office and branches, including separate branch filing</strong>, with <strong>the official PP30 form filled in automatically</strong>. Unrealized VAT and substitute tax invoices covered, plus <strong>tax ID and branch number lookup via the Revenue Department VAT Service</strong> — name and address filled in for you.'],
     ['#feature-panel-wht h3', 'Withholding Tax'],

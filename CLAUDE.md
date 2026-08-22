@@ -30,10 +30,10 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | ไฟล์ | Pexels ID |
 |---|---|
 | `feat-vat.webp` | 259139 |
-| `feat-wht.webp` | 7054505 |
+| `feat-wht.webp` | 8111853 |
 | `feat-stock.webp` | 4483941 |
-| `feat-docs.webp` | 8470836 |
-| `feat-api.webp` | 12899189 |
+| `feat-docs.webp` | 8190808 |
+| `feat-api.webp` | 36706460 |
 | `consult-meeting.webp` | 7643897 |
 | `pricing-consultation.webp` | (ของเดิมในโปรเจกต์) |
 
