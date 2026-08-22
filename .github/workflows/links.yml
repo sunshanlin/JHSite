@@ -10,5 +10,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lycheeverse/lychee-action@v2
         with:
-          args: --offline --no-progress --include-fragments --root-dir "$GITHUB_WORKSPACE" "*.html" "articles/*.html"
+          # --exclude '^/#...' : ลิงก์ข้ามหน้ากลับ index.html#section (เช่น /#contact) —
+          # lychee resolve "/" เป็นโฟลเดอร์ ไม่ใช่ index.html เลยหา fragment ไม่เจอ (false positive)
+          args: >-
+            --offline --no-progress --include-fragments --root-dir "$GITHUB_WORKSPACE"
+            --exclude "^/#(contact|articles)$"
+            "*.html" "articles/*.html"
           fail: true
