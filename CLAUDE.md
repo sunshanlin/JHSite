@@ -22,3 +22,19 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | CSS ที่ใช้ร่วมหลายหน้า | `css/` |
 | หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
 | ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
+
+## เครดิตรูปถ่าย
+
+รูปถ่ายคนใน `#features` และ `#contact` มาจาก [Pexels](https://www.pexels.com/license/) — ใช้ฟรีเชิงพาณิชย์ ไม่ต้องให้เครดิต แต่ไล่ที่มาไว้กันลืม:
+
+| ไฟล์ | Pexels ID |
+|---|---|
+| `feat-vat.webp` | 259139 |
+| `feat-wht.webp` | 7054505 |
+| `feat-stock.webp` | 4483941 |
+| `feat-docs.webp` | 8470836 |
+| `feat-api.webp` | 12899189 |
+| `consult-meeting.webp` | 7643897 |
+| `pricing-consultation.webp` | (ของเดิมในโปรเจกต์) |
+
+ทุกไฟล์ผ่าน `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` ให้สว่าง/สดขึ้นก่อนแปลงเป็น WebP

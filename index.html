@@ -1062,32 +1062,28 @@
       radial-gradient(circle at 70% 25%, rgba(124,203,196,.32), transparent 32%),
       linear-gradient(145deg, #edf8fa 0%, #dff3f5 100%);
   }
-  .visual-orbit {
-    position: absolute; width: 310px; height: 310px; border: 1px solid rgba(53,175,158,.16); border-radius: 50%;
-    box-shadow: 0 0 0 42px rgba(255,255,255,.22), 0 0 0 82px rgba(255,255,255,.14);
+  /* รูปถ่ายจริงเต็มช่องภาพ แทน mock card เดิม — max-width:none สู้ `img { max-width:100% }` */
+  .feature-photo {
+    position: absolute; inset: 0; z-index: 1;
+    width: 100%; max-width: none; height: 100%; object-fit: cover;
   }
-  .feature-demo-card {
-    position: relative; z-index: 1; display: flex; flex-direction: column; width: min(76%, 270px); min-height: 210px;
-    padding: 24px; border: 1px solid rgba(255,255,255,.9); border-radius: 18px; background: rgba(255,255,255,.94);
-    box-shadow: 0 28px 56px -30px rgba(6,54,84,.48); transform: rotate(-2deg);
+  /* ไล่เงาบางๆ ที่มุมล่างขวา ให้ chip ลอยอยู่บนรูปได้ทุกใบโดยไม่จม */
+  .feature-visual::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top left, rgba(1,33,29,.42), transparent 42%);
   }
-  .feature-demo-card small { color: var(--accent-dark); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; }
-  .feature-demo-card strong { margin-top: 14px; color: var(--ink); font-size: 1.65rem; line-height: 1.2; }
-  .feature-demo-card > span { margin-bottom: 18px; color: var(--muted); font-size: .84rem; }
-  .feature-demo-card i { display: block; width: 100%; height: 8px; margin-top: 9px; border-radius: 999px; background: #dfebf0; }
-  .feature-demo-card i:nth-of-type(2) { width: 72%; }
-  .feature-demo-card i:nth-of-type(3) { width: 86%; background: linear-gradient(90deg, rgba(53,175,158,.2), rgba(124,203,196,.3)); }
   .feature-float-chip {
     position: absolute; z-index: 2; right: 8%; bottom: 15%; padding: 9px 12px;
-    border: 1px solid rgba(53,175,158,.16); border-radius: 11px; color: var(--ink); background: rgba(255,255,255,.96);
+    border: 1px solid rgba(255,255,255,.5); border-radius: 11px; color: var(--ink); background: rgba(255,255,255,.94);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
     box-shadow: 0 16px 30px -20px rgba(6,54,84,.5); font-size: .74rem; font-weight: 700;
   }
   .feature-float-chip b { margin-left: 4px; color: #35AF9E; }
   .feature-panel.is-active .feature-panel-copy { animation: panelCopyIn .55s cubic-bezier(.2,.75,.2,1) .08s both; }
-  .feature-panel.is-active .feature-demo-card { animation: demoCardIn .72s cubic-bezier(.2,.8,.2,1) .08s both; }
+  .feature-panel.is-active .feature-photo { animation: photoIn .72s cubic-bezier(.2,.8,.2,1) both; }
   .feature-panel.is-active .feature-float-chip { animation: chipIn .55s cubic-bezier(.2,.85,.25,1.2) .3s both; }
   @keyframes panelCopyIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-  @keyframes demoCardIn { from { opacity: 0; transform: translateY(22px) rotate(-5deg) scale(.96); } to { opacity: 1; transform: rotate(-2deg) scale(1); } }
+  @keyframes photoIn { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
   @keyframes chipIn { from { opacity: 0; transform: translateY(12px) scale(.88); } to { opacity: 1; transform: none; } }
   .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .card {
@@ -1316,7 +1312,7 @@
     .doc-card { transform: rotate(1.6deg); animation: none; }
     .doc-mini, .doc-stamp, .step.is-current::before,
     .feature-panel.is-active .feature-panel-copy,
-    .feature-panel.is-active .feature-demo-card,
+    .feature-panel.is-active .feature-photo,
     .feature-panel.is-active .feature-float-chip { animation: none; }
     .feature-panel, .feature-tab, .steps-progress span, .step, .credential-card { transition: none; }
   }
@@ -1353,8 +1349,6 @@
       grid-column: 1 / -1; min-height: 230px; margin: 8px -30px -30px;
       border-top: 1px solid rgba(53,175,158,.12); border-left: 0;
     }
-    .feature-demo-card { min-height: 170px; padding: 20px; }
-    .feature-demo-card strong { font-size: 1.4rem; }
     .why-grid { grid-template-columns: 1fr; gap: 36px; }
     .why-copy { position: static; }
     .service-highlight { grid-template-columns: 1fr; padding: 44px; }
@@ -1428,7 +1422,6 @@
     .feature-panel { grid-template-columns: 1fr; gap: 18px; min-height: 0; padding: 24px; border-radius: 20px; }
     .feature-panel-icon { width: 52px; height: 52px; border-radius: 15px; }
     .feature-visual { min-height: 220px; margin: 4px -24px -24px; }
-    .feature-demo-card { width: min(74%, 245px); }
     .feature-float-chip { right: 7%; bottom: 12%; }
     .service-highlight .poster a { height: 410px; }
     .slider img { height: 220px; }
@@ -1749,8 +1742,6 @@
       radial-gradient(circle at 18% 84%, rgba(115,155,151,.24), transparent 34%),
       linear-gradient(145deg, var(--brand-ivory) 0%, #EAF2F0 100%);
   }
-  .visual-orbit { border-color: rgba(139,86,151,.18); }
-  .feature-demo-card i { background: #ece6e1; }
 
   /* Why us และ content cards ใช้ลำดับสีเดียวกันอย่างมีจังหวะ */
   .why-list li:nth-child(1) { --phase: var(--brand-deep); } .why-list li:nth-child(2) { --phase: var(--brand-teal); }
@@ -1869,10 +1860,6 @@
     border-color: rgba(1,74,65,.2); color: var(--brand-teal); background: rgba(65,119,113,.08);
   }
   .feature-visual { border-left-color: rgba(1,74,65,.14); }
-  .visual-orbit { border-color: rgba(1,74,65,.17); }
-  .feature-demo-card i:nth-of-type(3) {
-    background: linear-gradient(90deg, rgba(65,119,113,.2), rgba(166,192,189,.34));
-  }
   .feature-float-chip { border-color: rgba(1,74,65,.18); }
   .feature-float-chip b { color: var(--brand-jade); }
   #about .profile-role, footer a { color: var(--brand-mist); }
@@ -2376,7 +2363,7 @@
   .hero-doc { position: relative; z-index: 2; }
   .hero-doc .doc-mini { box-shadow: 0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28); }
 
-  .card, figure, .feature-panel, .feature-demo-card, .price-card {
+  .card, figure, .feature-panel, .price-card {
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
   }
 
@@ -2670,7 +2657,7 @@
             <ul class="feature-chips"><li>ภ.พ.30</li><li>Unrealized VAT</li><li>Branch VAT</li><li>VAT Service</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>JWIC Localization</small><strong>ภ.พ.30</strong><span>พร้อมยื่นภาษี</span><i></i><i></i><i></i></div><div class="feature-float-chip">VAT 7% <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-vat.webp" alt="แบบแสดงรายการภาษีและเครื่องคิดเลขบนโต๊ะทำงาน" loading="lazy" decoding="async"><div class="feature-float-chip">VAT 7% <b>✓</b></div></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-wht" role="tabpanel" aria-labelledby="feature-tab-wht" tabindex="0" aria-hidden="true" inert>
@@ -2682,7 +2669,7 @@
             <ul class="feature-chips"><li>50 ทวิ</li><li>ภ.ง.ด.3/53</li><li>RD Prep</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>Withholding Tax</small><strong>50 ทวิ</strong><span>สร้างอัตโนมัติ</span><i></i><i></i><i></i></div><div class="feature-float-chip">RD Prep <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-wht.webp" alt="มือกำลังเซ็นเอกสารหนังสือรับรองหักภาษี ณ ที่จ่าย" loading="lazy" decoding="async"><div class="feature-float-chip">RD Prep <b>✓</b></div></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-billing" role="tabpanel" aria-labelledby="feature-tab-billing" tabindex="0" aria-hidden="true" inert>
@@ -2694,7 +2681,7 @@
             <ul class="feature-chips"><li>Billing Worklist</li><li>Billing Board</li><li>Billing Status</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>Billing → Receipt</small><strong>พร้อมรับชำระ</strong><span>ติดตามสถานะครบ</span><i></i><i></i><i></i></div><div class="feature-float-chip">Paid <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/pricing-consultation.webp" alt="ทีมงานกำลังปรึกษาแนวทางวางระบบร่วมกันรอบโต๊ะประชุม" loading="lazy" decoding="async"><div class="feature-float-chip">Paid <b>✓</b></div></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-assets" role="tabpanel" aria-labelledby="feature-tab-assets" tabindex="0" aria-hidden="true" inert>
@@ -2706,7 +2693,7 @@
             <ul class="feature-chips"><li>Fixed Asset</li><li>Stock Card</li><li>Depreciation</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>Asset Register</small><strong>Real-time</strong><span>มูลค่าและค่าเสื่อม</span><i></i><i></i><i></i></div><div class="feature-float-chip">Stock <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-stock.webp" alt="พนักงานคลังสินค้าตรวจนับสต็อกด้วยแท็บเล็ต" loading="lazy" decoding="async"><div class="feature-float-chip">Stock <b>✓</b></div></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-docs" role="tabpanel" aria-labelledby="feature-tab-docs" tabindex="0" aria-hidden="true" inert>
@@ -2718,7 +2705,7 @@
             <ul class="feature-chips"><li>20+ Forms</li><li>Tax Invoice</li><li>Credit Note</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>Thai Documents</small><strong>20+ แบบ</strong><span>พร้อมพิมพ์ใช้งาน</span><i></i><i></i><i></i></div><div class="feature-float-chip">Original <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-docs.webp" alt="มือกำลังเซ็นเอกสารบนแผ่นรองเขียน" loading="lazy" decoding="async"><div class="feature-float-chip">Original <b>✓</b></div></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-api" role="tabpanel" aria-labelledby="feature-tab-api" tabindex="0" aria-hidden="true" inert>
@@ -2730,7 +2717,7 @@
             <ul class="feature-chips"><li>BOT API</li><li>Exchange Rate</li><li>Integration</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><span class="visual-orbit"></span><div class="feature-demo-card"><small>Connected Data</small><strong>BOT API</strong><span>อัปเดตอัตโนมัติ</span><i></i><i></i><i></i></div><div class="feature-float-chip">Live <b>✓</b></div></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-api.webp" alt="นักพัฒนากำลังเขียนโปรแกรมบนจอคู่ในออฟฟิศ" loading="lazy" decoding="async"><div class="feature-float-chip">Live <b>✓</b></div></div>
         </article>
       </div>
     </div>
@@ -3112,7 +3099,7 @@
         </div>
       </div>
       <div class="contact-form">
-        <img class="ci-photo" src="img/pricing-consultation.webp" alt="ทีมงานกำลังปรึกษาแนวทางวางระบบร่วมกันรอบโต๊ะประชุม" width="1125" height="750" loading="lazy" decoding="async">
+        <img class="ci-photo" src="img/consult-meeting.webp" alt="ที่ปรึกษากำลังอธิบายงานให้ลูกค้ารอบโต๊ะประชุม" width="1400" height="1050" loading="lazy" decoding="async">
         <div class="cal-actions">
           <button type="button" class="cta ghost" data-cal-namespace="15min" data-cal-link="jwicconsulting/15min" data-cal-config='{"layout":"month_view"}'>
             <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
