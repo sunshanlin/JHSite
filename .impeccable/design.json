@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-24T00:00:00Z",
+  "title": "Design System: JWIC Consulting",
+  "extensions": {
+    "colorMeta": {
+      "brand-burgundy":      { "role": "primary",   "displayName": "Burgundy Seal",    "canonical": "#A63A56", "tonalRamp": ["#2B0E17", "#4A1926", "#6A2537", "#8A3148", "#A63A56", "#C06B80", "#D9A3AF", "#F1DCE1"] },
+      "brand-burgundy-dark": { "role": "primary",   "displayName": "Deep Burgundy",    "canonical": "#7D2440", "tonalRamp": ["#210A11", "#3B121F", "#55192C", "#6E1F38", "#7D2440", "#A55A70", "#CE9AA8", "#EFD9DF"] },
+      "brand-deep":          { "role": "secondary", "displayName": "Deep Teal",        "canonical": "#012F2A", "tonalRamp": ["#000E0C", "#011B18", "#012722", "#012F2A", "#0A4A42", "#2E7A70", "#7BB1A8", "#DDEDEA"] },
+      "brand-teal":          { "role": "secondary", "displayName": "Signing Teal",     "canonical": "#014A41", "tonalRamp": ["#001411", "#01251F", "#01382F", "#014A41", "#1A6B5F", "#4B9387", "#94C0B7", "#E2F0ED"] },
+      "brand-ocean":         { "role": "secondary", "displayName": "Ocean Teal",       "canonical": "#1A5B54", "tonalRamp": ["#04150F", "#0A2C25", "#12433B", "#1A5B54", "#3B7C73", "#6BA49B", "#A6C9C2", "#E5F1EF"] },
+      "brand-jade":          { "role": "secondary", "displayName": "Jade",             "canonical": "#417771", "tonalRamp": ["#0C1D1B", "#1A3733", "#2A554F", "#417771", "#639A93", "#8CBAB4", "#B8D6D1", "#E7F2F0"] },
+      "brand-mint":          { "role": "secondary", "displayName": "Sage",             "canonical": "#739B97", "tonalRamp": ["#16241F", "#26403A", "#3B5F58", "#537D76", "#739B97", "#96B6B2", "#BCD1CE", "#E6EFEE"] },
+      "brand-mist":          { "role": "secondary", "displayName": "Mist",             "canonical": "#A6C0BD", "tonalRamp": ["#1D2A28", "#334744", "#4C6663", "#688582", "#87A5A1", "#A6C0BD", "#C8DAD8", "#EDF4F3"] },
+      "brand-pink":          { "role": "tertiary",  "displayName": "Editorial Pink",   "canonical": "#E08CA2", "tonalRamp": ["#33141C", "#552330", "#783345", "#9C4459", "#C25470", "#E08CA2", "#EFB9C7", "#FBE9EE"] },
+      "brand-pink-deep":     { "role": "tertiary",  "displayName": "Deep Rose",        "canonical": "#C25470", "tonalRamp": ["#2C0F17", "#4B1B27", "#6B2739", "#8C344C", "#AC4360", "#C25470", "#DE95A8", "#F6DDE4"] },
+      "hero-canvas":         { "role": "neutral",   "displayName": "Paper Ivory",      "canonical": "#EFEFE9", "tonalRamp": ["#26261F", "#3D3D34", "#57574B", "#757567", "#969686", "#B9B9AB", "#D8D8CE", "#EFEFE9"] },
+      "brand-ivory":         { "role": "neutral",   "displayName": "Warm Ivory",       "canonical": "#fbf8f1", "tonalRamp": ["#2A2519", "#433C29", "#5E553B", "#7C7250", "#9E9370", "#C3B99C", "#E3DCC8", "#FBF8F1"] },
+      "brand-ivory-deep":    { "role": "neutral",   "displayName": "Deep Ivory",       "canonical": "#f6f1e5", "tonalRamp": ["#282318", "#403927", "#5A5137", "#786D4B", "#9A8F6C", "#C0B698", "#E1D9C4", "#F6F1E5"] },
+      "ui-page":             { "role": "neutral",   "displayName": "Cool Page",        "canonical": "#f6f8f7", "tonalRamp": ["#1B211F", "#2F3835", "#46524E", "#616F6A", "#828E8A", "#A8B2AE", "#D0D7D4", "#F6F8F7"] },
+      "ui-ink":              { "role": "neutral",   "displayName": "Ink Green-Black",  "canonical": "#10241F", "tonalRamp": ["#050C0A", "#0A1613", "#10241F", "#1C3B33", "#2E5A4F", "#4E8073", "#8DB3A9", "#DCE9E5"] },
+      "ui-muted":            { "role": "neutral",   "displayName": "Slate Sage",       "canonical": "#5C736E", "tonalRamp": ["#141A19", "#232D2B", "#35433F", "#485A56", "#5C736E", "#849792", "#B2C1BD", "#E4EAE9"] },
+      "ui-line":             { "role": "neutral",   "displayName": "Hairline",         "canonical": "#E2E8E6", "tonalRamp": ["#242927", "#39403E", "#515A57", "#6D7873", "#8E9995", "#B4BDBA", "#D0D7D5", "#E2E8E6"] },
+      "brand-pale":          { "role": "neutral",   "displayName": "Pale Edge",        "canonical": "#D9E4E3", "tonalRamp": ["#1F2726", "#333F3D", "#4B5A58", "#687875", "#8B9B98", "#B2C0BE", "#D9E4E3", "#EFF5F4"] },
+      "ms-navy":             { "role": "tertiary",  "displayName": "Microsoft Navy",   "canonical": "#153A73" },
+      "ms-blue":             { "role": "tertiary",  "displayName": "Microsoft Blue",   "canonical": "#0078D4" },
+      "ms-green":            { "role": "tertiary",  "displayName": "Microsoft Green",  "canonical": "#498205" },
+      "ms-teal":             { "role": "tertiary",  "displayName": "Microsoft Teal",   "canonical": "#008272" },
+      "ms-cyan":             { "role": "tertiary",  "displayName": "Microsoft Cyan",   "canonical": "#0078A8" },
+      "ms-gold":             { "role": "tertiary",  "displayName": "Microsoft Gold",   "canonical": "#9A6700" }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "The single hero h1. Anuphan for Thai (loopless), Plus Jakarta Sans for Latin." },
+      "headline": { "displayName": "Headline", "purpose": "Every section h2. Four sections center theirs at max-width 720px." },
+      "title":    { "displayName": "Title",    "purpose": "Card and feature-panel h3. #why-us labels are the one exception at 600/1.02rem." },
+      "body":     { "displayName": "Body",     "purpose": "All running copy, Thai and English. Niramit for Thai (looped). Never below 18px/500." },
+      "label":    { "displayName": "Label",    "purpose": ".section-kicker above every h2. Slate Sage on light grounds, Mist or Editorial Pink on dark." }
+    },
+    "shadows": [
+      { "name": "hairline",       "value": "0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14)",      "purpose": "The default for every card, figure, feature panel, and price card below the hero. Reads as a printed edge, not a lifted object." },
+      { "name": "document-lift",  "value": "0 34px 64px -26px rgba(7,45,48,.6)",                       "purpose": "The hero's primary .doc-card tax invoice. Representational — paper lying on a desk." },
+      { "name": "document-float", "value": "0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28)", "purpose": "The five .doc-mini slips scattered around the hero card." },
+      { "name": "legacy-soft",    "value": "0 22px 60px -34px rgba(1,74,65,.32)",                      "purpose": "DEPRECATED. The --shadow token from an earlier pass, still on .profile-panel and card hover. Replace with hairline outside the hero." }
+    ],
+    "motion": [
+      { "name": "ease-reveal",    "value": "cubic-bezier(.2,.75,.2,1)",     "purpose": "The system curve. Nine entrance and reveal animations use it." },
+      { "name": "ease-overshoot", "value": "cubic-bezier(.2,.9,.25,1.35)",  "purpose": "The hero .doc-stamp landing at 1.25s. The only overshoot in the system." },
+      { "name": "state-fast",     "value": "125ms ease",                    "purpose": "Button background change. Buttons never transform or gain shadow." },
+      { "name": "state-standard", "value": "220ms ease",                    "purpose": "Card hover, nav menu open, border and outline shifts." },
+      { "name": "float-loop",     "value": "7.6s ease-in-out infinite",     "purpose": "docCardFloat on the hero invoice; docMiniFloat runs 6.8s. Both disabled under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "wide",    "value": "1100px" },
+      { "name": "desktop", "value": "1080px" },
+      { "name": "stack",   "value": "900px" },
+      { "name": "nav",     "value": "760px" },
+      { "name": "tablet",  "value": "720px" },
+      { "name": "phone",   "value": "600px" },
+      { "name": "small",   "value": "560px" },
+      { "name": "tiny",    "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The only element a visitor is invited to press. Flat burgundy, near-square, no gradient, no lift.",
+      "html": "<a class=\"ds-cta\" href=\"#contact\">ปรึกษาฟรี</a>",
+      "css": ".ds-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 22px; border: 0; border-radius: 3px; background: #A63A56; color: #fff; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: 1rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: background .125s ease; } .ds-cta:hover { background: #7D2440; } .ds-cta:focus-visible { outline: 2px solid #A63A56; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined companion to the primary. Ink border on transparent, washes on hover.",
+      "html": "<a class=\"ds-cta-secondary\" href=\"#pricing\">ดูราคา</a>",
+      "css": ".ds-cta-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 22px; border: 1px solid #10241F; border-radius: 3px; background: transparent; color: #10241F; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: 1rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: background .125s ease, border-color .125s ease; } .ds-cta-secondary:hover { background: rgba(1,47,42,.06); } .ds-cta-secondary:focus-visible { outline: 2px solid #A63A56; outline-offset: 2px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "White surface on ivory or cool-page ground. Hairline shadow at rest; a 3px accent bar fades in along the top edge on hover.",
+      "html": "<article class=\"ds-card\"><h3>รายงานภาษีซื้อ–ขาย</h3><p>ภ.พ.30 พร้อมใบแนบ รองรับ<strong>สำนักงานใหญ่และสาขา</strong> รวมถึงการแยกยื่นรายสาขา</p></article>",
+      "css": ".ds-card { position: relative; overflow: hidden; padding: 28px; border: 1px solid #D9E4E3; border-radius: 8px; background: #fff; box-shadow: 0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; } .ds-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #417771, #739B97); opacity: 0; transition: opacity .22s ease; } .ds-card:hover { transform: translateY(-5px); border-color: rgba(65,119,113,.32); } .ds-card:hover::before { opacity: 1; } .ds-card h3 { margin: 0 0 10px; color: #10241F; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: 1.08rem; font-weight: 500; letter-spacing: -.025em; text-wrap: balance; } .ds-card p { margin: 0; color: #5C736E; font-family: 'Plus Jakarta Sans','Niramit',sans-serif; font-size: .95rem; font-weight: 500; line-height: 1.7; text-wrap: pretty; } .ds-card p strong { color: #10241F; font-weight: 700; }"
+    },
+    {
+      "name": "Section Kicker",
+      "kind": "chip",
+      "refersTo": "kicker",
+      "description": "The small tracked label that sits above every section h2. Slate Sage on light grounds; Editorial Pink on dark.",
+      "html": "<p class=\"ds-kicker\">Transparent Pricing</p>",
+      "css": ".ds-kicker { margin: 0 0 8px; color: #5C736E; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .08em; }"
+    },
+    {
+      "name": "Nav Contact CTA",
+      "kind": "nav",
+      "refersTo": "nav-cta",
+      "description": "The last link in the sticky nav and the only colored item in the bar. Everything else is ink on translucent white.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#services\">บริการ</a><a href=\"#pricing\">ราคา</a><a class=\"ds-nav-cta\" href=\"#contact\">ติดต่อ</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 18px; padding: 10px 18px; background: rgba(255,255,255,.94); border-bottom: 1px solid #E2E8E6; } .ds-nav a { padding: 6px 10px; border-radius: 3px; color: #10241F; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: .9rem; font-weight: 500; text-decoration: none; transition: background .125s ease, color .125s ease; } .ds-nav a:hover { color: #012F2A; background: rgba(1,47,42,.06); } .ds-nav .ds-nav-cta { background: #A63A56; color: #fff; } .ds-nav .ds-nav-cta:hover { background: #7D2440; color: #fff; }"
+    },
+    {
+      "name": "Language Toggle",
+      "kind": "chip",
+      "refersTo": "lang-toggle-on",
+      "description": "Two small outlined buttons in the nav. The active one fills Deep Teal — never burgundy, because switching language is not the action being sold.",
+      "html": "<div class=\"ds-lang\"><button class=\"on\">TH</button><button>EN</button></div>",
+      "css": ".ds-lang { display: flex; gap: 2px; align-items: center; } .ds-lang button { padding: 4px 9px; border: 1px solid #E2E8E6; border-radius: 3px; background: transparent; color: #5C736E; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: .85rem; font-weight: 600; cursor: pointer; transition: color .18s ease, background .18s ease; } .ds-lang button:hover { background: rgba(1,47,42,.06); } .ds-lang button.on { color: #fff; background: #012F2A; border-color: #012F2A; } .ds-lang button:focus-visible { outline: 2px solid #A63A56; outline-offset: 2px; }"
+    },
+    {
+      "name": "Feature Tab",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "One of six tabs in #features that swap the localization proof panels. The page's main interactive proof surface.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button class=\"is-on\" role=\"tab\" aria-selected=\"true\">VAT / ภ.พ.30</button><button role=\"tab\" aria-selected=\"false\">50 ทวิ</button><button role=\"tab\" aria-selected=\"false\">ใบวางบิล</button></div>",
+      "css": ".ds-tabs { display: flex; flex-wrap: wrap; gap: 8px; } .ds-tabs button { min-height: 44px; padding: 10px 18px; border: 1px solid #E2E8E6; border-radius: 3px; background: #fff; color: #5C736E; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: .95rem; font-weight: 500; cursor: pointer; transition: background .125s ease, border-color .125s ease, color .125s ease; } .ds-tabs button:hover { color: #10241F; background: rgba(1,47,42,.06); } .ds-tabs button.is-on { color: #fff; background: #012F2A; border-color: #012F2A; } .ds-tabs button:focus-visible { outline: 2px solid #A63A56; outline-offset: 2px; }"
+    },
+    {
+      "name": "Document Stamp",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The dashed burgundy stamp on the hero's CSS-drawn Thai tax invoice. Lands at 1.25s on the system's only overshoot curve.",
+      "html": "<span class=\"ds-stamp\">ภ.พ.30 พร้อมยื่น</span>",
+      "css": ".ds-stamp { display: inline-block; transform: rotate(-4deg); padding: 6px 12px; border: 2px dashed #A63A56; border-radius: 8px; background: rgba(255,255,255,.96); color: #7D2440; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: .72rem; font-weight: 700; box-shadow: 0 6px 16px -8px rgba(7,45,48,.4); animation: ds-stampPop .7s cubic-bezier(.2,.9,.25,1.35) both; } @keyframes ds-stampPop { from { opacity: 0; transform: rotate(-4deg) scale(.7); } to { opacity: 1; transform: rotate(-4deg) scale(1); } } @media (prefers-reduced-motion: reduce) { .ds-stamp { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Fluent Ledger",
+    "overview": "This is a Business Central screen that grew up and became a website. The visitor is an accountant or a finance lead who spends their working day inside Microsoft's ERP, and the page borrows that room's manners on purpose: square corners, hairline separators, a single saturated action color, and headings set at weight 500 rather than the heavy 700 that marketing pages default to. When someone who already runs BC lands here, the surface should feel like the same building — not like a startup selling to them.\n\nThe restraint is a credibility argument, not a stylistic preference. The practice sells one thing above all — a Thai localization package that already exists and already works — and the design's job is to make that claim look inspectable rather than promoted. Flat surfaces read as fact. Gradients, glows, and lifted cards read as sales. Everywhere the page has a choice, it takes the version that looks like documentation.\n\nWarmth comes from two places only. The ivory paper tones (#EFEFE9, #fbf8f1) that carry the hero and every alternate section give the page the color of real accounting stock instead of the blue-white of a dashboard. And burgundy — a color no ERP vendor uses — is spent exclusively on the things a visitor is meant to touch. The deep teal family does the institutional work; burgundy does the asking.",
+    "keyCharacteristics": [
+      "Square-cornered and flat: 3px buttons, 8px cards, hairline shadows",
+      "Ivory paper ground rather than blue-white dashboard ground",
+      "One action color (burgundy) against one institutional family (deep teal)",
+      "Headings at weight 500, tight tracking (-0.025em) — Fluent, not marketing",
+      "Thai body copy set at 18px/500 for sustained reading, never smaller",
+      "Microsoft's own brand hues appear only where Microsoft's own framework is being cited"
+    ],
+    "rules": [
+      { "name": "The Burgundy Toll Rule", "body": "Burgundy is the price of asking for something. If an element does not want a click, it does not get burgundy — not as a border, not as an icon tint, not as a hover. The nav has exactly one burgundy item; the hero has exactly one; a section has at most one.", "section": "colors" },
+      { "name": "The Quotation Rule", "body": "The --ms-* hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for --ms-blue, it has misunderstood what that token is for.", "section": "colors" },
+      { "name": "The Paper Rule", "body": "Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen.", "section": "colors" },
+      { "name": "The Thai Weight Floor Rule", "body": "Thai body text never goes below 18px/500. Thai glyphs at weight 400 read thin and tiring at the sizes Latin tolerates; the whole page was raised to 18/500 for this reason. A redesign that cleans up the type by dropping to 16px/400 has made the page worse for its actual readers.", "section": "typography" },
+      { "name": "The Loop Contrast Rule", "body": "Headings are loopless (Anuphan), body is looped (Niramit). Never set a Thai heading in Niramit or Thai body copy in Anuphan — the hierarchy is carried by loop, not by size.", "section": "typography" },
+      { "name": "The No-Break Rule", "body": "Thai has no inter-word spaces, so browsers break compound words mid-term. Wrap any term that must not split in .nb.", "section": "typography" },
+      { "name": "The Right-Edge Bleed Rule", "body": "The hero's color blocks are positioned with right: calc(50% - 50vw) so they run past the container to the viewport edge. They are hidden below 900px, where a single column would put them under the headline instead of beside it.", "section": "layout" },
+      { "name": "The Hero-Only Lift Rule", "body": "Soft wide shadows exist to say 'this is paper on a desk.' They belong to the hero document scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.", "section": "elevation" },
+      { "name": "The No Hover Lift Rule", "body": ".cta explicitly kills transform and box-shadow on hover and changes background only, in 125ms. Buttons do not rise. Cards still lift 5px, which is a live inconsistency the system has not yet resolved.", "section": "elevation" },
+      { "name": "The Two Radii Rule", "body": "New components use var(--ui-radius-btn) (3px) or var(--ui-radius-card) (8px). Do not introduce a third value. A literal border-radius: 14px in new code is a bug, not a choice.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do put new tokens in the last :root in the file — the --ui-* block (currently around line 2171). Being last is what makes it the one that wins; find it by searching --ui-radius-btn, not by line number.",
+      "Do use var(--ui-radius-btn) (3px) or var(--ui-radius-card) (8px) for every new corner.",
+      "Do give every new surface the Hairline shadow, and reach for a soft shadow only inside the hero document scene.",
+      "Do keep Thai body copy at 18px/500 and Thai headings in Anuphan.",
+      "Do wrap unbreakable Thai compounds in .nb.",
+      "Do update the I18N dictionary at the end of <script> whenever page text moves — especially nth-child selectors, which silently mistranslate when a sibling is inserted.",
+      "Do add a prefers-reduced-motion: reduce rule alongside any new animation.",
+      "Do keep the burgundy CTA the single loudest thing in any viewport."
+    ],
+    "donts": [
+      "Don't add a fifth :root block. There are already four (currently around lines 155, 762, 1577, 2171) and three of them are mostly dead. New work consolidates; it does not stack.",
+      "Don't trust a color you read in the first :root. --navy: #0D5257 and --muted: #0f4a52 there are overridden and never render. The live values come from the --brand-* block and the --ui-* block that follow it — read both before quoting any value.",
+      "Don't put a gradient on a button. .cta strips background-image with !important precisely because earlier layers added them.",
+      "Don't let a button lift or glow on hover. Background change only, 125ms.",
+      "Don't spend burgundy on anything that isn't asking for a click.",
+      "Don't use the --ms-* hues outside the five Success by Design stage labels.",
+      "Don't introduce a new radius value. The long tail of 9/12/14/16/18/20/22/24/28px is debt, not vocabulary.",
+      "Don't put a gradient back on header. The hero ground is flat Paper Ivory (#EFEFE9). A multi-stop teal gradient and its --hero-deep / --hero-mid / --hero-end tokens lived here for a while, overridden and never rendering; they have been deleted.",
+      "Don't add a new !important. The existing ones are documented specificity fights; each new one makes the next change harder.",
+      "Don't move or rename a file. Every committed path is a live URL that may already have been shared."
+    ]
+  }
+}
