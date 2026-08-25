@@ -23,7 +23,7 @@ const fullPage = process.argv.includes("--full");
 const vw = Number(argAfter("--width")) || 1400; // e.g. --width 794 for true A4
 const vh = Number(argAfter("--height")) || 1000; // fixed-size export, e.g. --width 1584 --height 396
 
-const MIME = { html: "text/html; charset=utf-8", png: "image/png", jpg: "image/jpeg", svg: "image/svg+xml", css: "text/css", js: "text/javascript", ico: "image/x-icon" };
+const MIME = { html: "text/html; charset=utf-8", png: "image/png", jpg: "image/jpeg", webp: "image/webp", svg: "image/svg+xml", css: "text/css", js: "text/javascript", ico: "image/x-icon" };
 const server = http.createServer(async (req, res) => {
   const p = path.join(SITE, req.url === "/" ? "index.html" : decodeURIComponent(req.url.split("?")[0]));
   try {
@@ -87,6 +87,15 @@ if (fullPage) {
   const { result } = await run("Math.ceil(document.documentElement.scrollHeight)");
   await cdp("Emulation.setDeviceMetricsOverride", { width: vw, height: result.value, deviceScaleFactor: dpr, mobile: false });
   await new Promise((r) => setTimeout(r, 300));
+}
+if (out.endsWith(".pdf")) { // ponytail: A4 เท่านั้น ขนาดอื่นค่อยเพิ่ม flag ตอนที่มีหน้าขนาดอื่นจริง
+  const pdf = await cdp("Page.printToPDF", { printBackground: true, paperWidth: 8.27, paperHeight: 11.69,
+    marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, preferCSSPageSize: true });
+  await writeFile(out, Buffer.from(pdf.data, "base64"));
+  console.log("pdf:", path.resolve(out));
+  ws.close(); chrome.kill(); server.close();
+  await rm(profile, { recursive: true, force: true }).catch(() => {});
+  process.exit(0);
 }
 const fmt = argAfter("--format") ?? (out.endsWith(".webp") ? "webp" : out.endsWith(".jpg") ? "jpeg" : "png");
 const shot = await cdp("Page.captureScreenshot", { format: fmt, ...(fmt !== "png" && { quality: 88 }) });
