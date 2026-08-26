@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>JWIC Consulting — ใบปลิวแนบใบเสนอราคา Full Implementation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ใบปลิว A4 แนบใบเสนอราคา Full Implementation — โทนเดียวกับ poster.html */
+  @page { size: A4; margin: 0; }
+  :root {
+    --teal-1: #0D5257; --teal-2: #1F7A87; --teal-3: #35AF9E;
+    --wine: #7D2440; --wine-2: #A63A56; --plum: #8B5697;
+    --ink: #122e33; --muted: #0f4a52; --ivory: #fbf6ea; --line: #d8e6e2;
+    --h1: #072d30; --h3: #10535f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 210mm; height: 297mm; }
+  body {
+    font-family: "Kanit", "Segoe UI", sans-serif;
+    color: var(--ink); background: #fff; font-size: 10.5px; line-height: 1.55;
+    display: flex; flex-direction: column;
+  }
+  /* header */
+  .head {
+    padding: 12px 34px 11px; color: #fff;
+    background:
+      radial-gradient(circle at 88% 20%, rgba(166,58,86,.16), transparent 32%),
+      linear-gradient(125deg, var(--h1) 0%, #0a3e41 48%, var(--h3) 100%);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .head .brand-row { display: flex; align-items: center; gap: 11px; margin-bottom: 8px; }
+  .head .mark { width: 32px; height: 32px; flex-shrink: 0; border-radius: 7px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.3)); }
+  .head .kicker { font-size: 8.5px; font-weight: 700; letter-spacing: .22em; color: #CCA4CD; }
+  .head h1 { font-size: 24px; line-height: 1.2; letter-spacing: -.01em; margin-bottom: 6px; }
+  .head p { color: #cfe6e4; font-size: 10.5px; max-width: 128mm; }
+  .head svg.bc { width: 54px; height: 54px; flex-shrink: 0; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35)); }
+  .stats { display: flex; gap: 22px; margin-top: 8px; }
+  .stat { display: flex; align-items: center; gap: 7px; }
+  .stat + .stat { padding-left: 22px; border-left: 1px solid rgba(255,255,255,.18); }
+  .stat b { font-size: 21px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+  .stat span { font-size: 8px; line-height: 1.35; color: #cfe6e4; font-weight: 600; }
+  .stamp {
+    display: inline-block; margin-bottom: 9px; padding: 4px 11px; border-radius: 999px;
+    background: rgba(204,164,205,.18); border: 1px solid rgba(204,164,205,.4);
+    color: #E7C9E8; font-size: 8.5px; font-weight: 700; letter-spacing: .12em;
+  }
+  h2.sec { font-size: 14.5px; color: var(--h1); margin-bottom: 8px; }
+  /* ไอคอน: นิยามเป็น <symbol> ครั้งเดียวท้ายไฟล์ แล้ว <use> ซ้ำ — สีมาจาก currentColor */
+  .ic { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  /* phases */
+  .phases { margin: 9px 34px 0; }
+  .phase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .phase {
+    border: 1px solid var(--line); border-radius: 12px; padding: 8px 11px 9px;
+    background: linear-gradient(180deg, #fbfdfd, #fff 60%);
+  }
+  .phase .head-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .phase .n {
+    width: 20px; height: 20px; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 10.5px; font-weight: 800;
+  }
+  .phase .head-row .ic { width: 17px; height: 17px; color: #9dbdbd; }
+  .phase:nth-child(1) .n { background: #0D5257; }
+  .phase:nth-child(2) .n { background: #35566E; }
+  .phase:nth-child(3) .n { background: #5C4B72; }
+  .phase:nth-child(4) .n { background: #7C3960; }
+  .phase:nth-child(5) .n { background: #7D2440; }
+  .phase b { display: block; font-size: 11.5px; color: var(--ink); line-height: 1.25; }
+  .phase .th { display: block; font-size: 9.5px; font-weight: 700; color: var(--teal-2); margin-bottom: 3px; }
+  .phase:nth-child(4) .th, .phase:nth-child(5) .th { color: var(--wine-2); }
+  .phase p { color: var(--muted); font-size: 9.5px; line-height: 1.45; }
+  /* two columns */
+  .cols { display: grid; grid-template-columns: 1.05fr 1fr; gap: 12px; margin: 9px 34px 0; flex: 1; }
+  .col { border: 1px solid var(--line); border-radius: 14px; padding: 13px 16px; background: #fff; display: flex; flex-direction: column; }
+  .col.scope { border-top: 3px solid var(--teal-2); }
+  .col.loc { border-top: 3px solid var(--wine-2); background: linear-gradient(170deg, #fdf7f8, #fff 45%); }
+  .col h2 { font-size: 15px; margin-bottom: 5px; color: var(--h1); }
+  .col.loc h2 { color: var(--wine); }
+  .col .lead { color: var(--muted); font-size: 10.5px; margin-bottom: 11px; }
+  /* gap ยืดเองไม่ได้ (grid ตัดขอบล่างไม่เท่ากัน) — ตั้งค่าคงที่แล้ววัดความสูงทุกครั้งที่แก้เนื้อหา */
+  .col ul { list-style: none; display: flex; flex-direction: column; gap: 6.5px; flex: 1; }
+  .col li { display: flex; gap: 10px; align-items: flex-start; font-size: 11.5px; color: var(--ink); line-height: 1.45; }
+  .col li > .ic { flex-shrink: 0; width: 15px; height: 15px; margin-top: 1px; color: var(--teal-2); }
+  .col.loc li > .ic { color: var(--wine-2); }
+  .badge {
+    align-self: flex-start; margin-bottom: 8px; padding: 3px 9px; border-radius: 6px;
+    background: var(--wine); color: #fff; font-size: 8.5px; font-weight: 700; letter-spacing: .1em;
+  }
+  /* assurance */
+  .assure {
+    margin: 9px 34px 0; padding: 9px 16px; background: var(--ivory);
+    border-left: 3px solid var(--wine-2); border-radius: 0 10px 10px 0;
+  }
+  .assure b { color: var(--wine); font-size: 12px; display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
+  .assure .ic { flex-shrink: 0; width: 15px; height: 15px; }
+  .assure p { color: var(--muted); font-size: 10.5px; }
+  /* credentials */
+  .creds { margin: 9px 34px 0; }
+  .cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cred { border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; }
+  .cred:nth-child(1) { border-top: 3px solid var(--teal-2); }
+  .cred:nth-child(2) { border-top: 3px solid var(--plum); }
+  .cred:nth-child(3) { border-top: 3px solid var(--wine-2); }
+  .cred b { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink); margin-bottom: 3px; }
+  .cred .ic { flex-shrink: 0; width: 16px; height: 16px; }
+  .cred:nth-child(1) .ic { color: var(--teal-2); }
+  .cred:nth-child(2) .ic { color: var(--plum); }
+  .cred:nth-child(3) .ic { color: var(--wine-2); }
+  .cred p { color: var(--muted); font-size: 10px; line-height: 1.45; }
+  .strip {
+    margin: 8px 34px 0; padding: 8px 14px; border-radius: 9px;
+    background: var(--ivory); color: var(--muted); font-size: 9.5px; line-height: 1.5;
+  }
+  .strip b { color: var(--wine); }
+  /* footer */
+  .foot {
+    margin-top: 9px; padding: 11px 34px 9px; color: #fff;
+    background: linear-gradient(115deg, var(--h1) 0%, #0a3e41 55%, var(--h3) 100%);
+  }
+  .foot-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .foot h2 { font-size: 14.5px; line-height: 1.35; }
+  .foot .who { color: #cfe6e4; font-size: 10px; margin-top: 3px; }
+  .cta {
+    flex-shrink: 0; padding: 10px 20px; border-radius: 11px; color: #fff; font-weight: 800; font-size: 11.5px;
+    background: linear-gradient(135deg, var(--wine-2), var(--wine));
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,.5);
+    text-decoration: none;
+  }
+  .qr { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .qr .box { width: 52px; height: 52px; background: #fff; border-radius: 8px; padding: 4px; }
+  .qr .box svg { width: 100%; height: 100%; display: block; }
+  .qr span { font-size: 7.5px; font-weight: 700; color: #cfe6e4; letter-spacing: .04em; }
+  .contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 9px; }
+  .contact a {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    padding: 8px 13px; border-radius: 12px;
+    background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.16);
+  }
+  .contact .ic {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
+    display: grid; place-items: center; background: rgba(204,164,205,.22);
+  }
+  .contact .ic svg { width: 16px; height: 16px; stroke: #E7C9E8; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .contact .lbl { display: block; color: #CCA4CD; font-size: 8px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+  .contact .val { display: block; color: #fff; font-size: 12px; font-weight: 800; }
+  .legal { margin-top: 7px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.16); color: #9fc5c2; font-size: 8.5px; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="15" x2="9" y2="15"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-archive" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+  <symbol id="i-confirm" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/><path d="M22 12v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+</defs></svg>
+
+<div class="head">
+  <div>
+    <div class="brand-row">
+      <svg class="mark" viewBox="0 0 64 64" aria-label="JWIC Consulting">
+        <defs><clipPath id="pLogo"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#pLogo)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Kanit', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <div class="kicker">J W I C &nbsp; C O N S U L T I N G</div>
+    </div>
+    <span class="stamp">เอกสารแนบใบเสนอราคา</span>
+    <h1>Business Central พร้อมใช้จริง — ภาษีไทยครบตั้งแต่วันแรก</h1>
+    <p>Business Central มาตรฐานไม่มี ภ.พ.30 หนังสือรับรอง 50 ทวิ หรือใบวางบิล แพ็กเกจนี้รวม JWIC Thai Localization ปิดช่องว่างนั้นให้ครบ พร้อมดูแลตั้งแต่วิเคราะห์กระบวนการจนปิดบัญชีงวดแรก</p>
+    <div class="stats">
+      <div class="stat"><b>20+</b><span>ฟอร์มเอกสารไทย<br>พร้อมติดตั้ง</span></div>
+      <div class="stat"><b>5</b><span>Microsoft Certifications<br>ตรวจสอบได้บน Microsoft Learn</span></div>
+      <div class="stat"><b>1</b><span>ที่ปรึกษาดูแลตรง<br>ตลอดทั้งโครงการ</span></div>
+    </div>
+  </div>
+  <svg class="bc" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Business Central">
+    <path d="M34 33.9998C41.732 41.7317 54.268 41.7318 62 33.9999C69.732 26.2679 69.732 13.7318 62 5.99986C54.268 -1.73209 41.732 -1.73214 34 5.99979C26.268 13.7318 26.2681 26.2678 34 33.9998Z" fill="url(#bc0)"/>
+    <path d="M62 62.0002C54.268 54.2683 41.732 54.2682 34 62.0001C26.268 69.7321 26.268 82.2682 34 90.0001C41.732 97.7321 54.268 97.7321 62 90.0002C69.732 82.2682 69.7319 69.7322 62 62.0002Z" fill="url(#bc3)"/>
+    <path d="M34 62C41.732 69.732 54.268 69.732 62 62C69.732 54.268 69.732 41.732 62 34C54.268 26.268 41.732 26.268 34 34C26.268 41.732 26.268 54.268 34 62Z" fill="url(#bc6)"/>
+    <path d="M6.00002 34L34 5.99998C26.2681 13.732 26.268 26.2681 34 34.0001C41.732 41.7321 41.732 54.2681 34 62.0001C26.268 69.732 13.732 69.732 6.00004 62C-1.73195 54.268 -1.73198 41.732 6.00002 34Z" fill="url(#bc9)"/>
+    <path d="M90 62L62 90C69.7319 82.268 69.732 69.7319 62 61.9999C54.268 54.2679 54.268 41.7319 62 33.9999C69.732 26.268 82.268 26.268 90 34C97.732 41.732 97.732 54.268 90 62Z" fill="url(#bc11)"/>
+    <defs>
+      <linearGradient id="bc0" x1="30" y1="9.5" x2="67" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#0C74A1"/><stop offset=".468" stop-color="#1384B1"/><stop offset="1" stop-color="#16BBDA"/></linearGradient>
+      <linearGradient id="bc3" x1="68.5" y1="79.5" x2="29" y2="71" gradientUnits="userSpaceOnUse"><stop stop-color="#06517B"/><stop offset=".508" stop-color="#09638E"/><stop offset="1" stop-color="#0C74A1"/></linearGradient>
+      <linearGradient id="bc6" x1="44.5" y1="29.5" x2="45" y2="68.5" gradientUnits="userSpaceOnUse"><stop stop-color="#43E5CA"/><stop offset=".371" stop-color="#26CFE8"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
+      <linearGradient id="bc9" x1="14.5" y1="26" x2="43.5" y2="55" gradientUnits="userSpaceOnUse"><stop stop-color="#B6F6C7"/><stop offset=".277" stop-color="#43E5CA"/><stop offset="1" stop-color="#26CFE8"/></linearGradient>
+      <linearGradient id="bc11" x1="63" y1="30" x2="92.5" y2="59.5" gradientUnits="userSpaceOnUse"><stop stop-color="#9FF2E4"/><stop offset=".266" stop-color="#2BDABE"/><stop offset=".620" stop-color="#16BBDA"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
+    </defs>
+  </svg>
+</div>
+
+<div class="phases">
+  <h2 class="sec">ขั้นตอนการวางระบบ — ตามกรอบ Success by Design ของ Microsoft</h2>
+  <div class="phase-grid">
+    <div class="phase"><div class="head-row"><span class="n">1</span><svg class="ic"><use href="#i-search"/></svg></div><b>Discover</b><span class="th">เก็บความต้องการ</span><p>เก็บความต้องการจากผู้ใช้งานจริง วิเคราะห์ Fit-Gap และวางแนวทางโซลูชันระดับภาพรวม</p></div>
+    <div class="phase"><div class="head-row"><span class="n">2</span><svg class="ic"><use href="#i-layers"/></svg></div><b>Initiate</b><span class="th">ตั้งต้นโครงการ</span><p>สรุป Solution Blueprint กำหนดขอบเขตงานแต่ละส่วนและแผนงานโครงการ</p></div>
+    <div class="phase"><div class="head-row"><span class="n">3</span><svg class="ic"><use href="#i-sliders"/></svg></div><b>Implement</b><span class="th">สร้างและตั้งค่าระบบ</span><p>ตั้งค่า Business Central ติดตั้ง Thai Localization ทำ Customization และย้ายข้อมูลตั้งต้น</p></div>
+    <div class="phase"><div class="head-row"><span class="n">4</span><svg class="ic"><use href="#i-users"/></svg></div><b>Prepare</b><span class="th">เตรียมขึ้นระบบ</span><p>อบรมผู้ใช้งาน ทดสอบระบบ (UAT) วางแผน Cutover และตรวจความพร้อมก่อน Go-live (ขึ้นระบบจริง)</p></div>
+    <div class="phase"><div class="head-row"><span class="n">5</span><svg class="ic"><use href="#i-shield"/></svg></div><b>Operate</b><span class="th">ใช้งานจริงและดูแลต่อ</span><p>ดูแล Hypercare หลัง Go-live สนับสนุนการปิดบัญชีงวดแรก และปรับปรุงระบบต่อเนื่อง</p></div>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="col scope">
+    <h2>ขอบเขตงานที่ดูแล</h2>
+    <p class="lead">งานที่รวมอยู่ในใบเสนอราคาฉบับนี้</p>
+    <ul>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>เก็บความต้องการ วิเคราะห์ Fit-Gap และออกแบบระบบ</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>ติดตั้งและตั้งค่า Business Central แบบ On-cloud ใช้งานได้ทุกที่ พร้อม Mobile Application</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>ติดตั้ง JWIC Thai Localization ครบทุกฟังก์ชันในแพ็กเกจ</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>ย้าย Master Data และยอดยกมาเข้าระบบ</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>จัดทำคู่มือ อบรมผู้ใช้งาน และดูแลการทดสอบระบบ (UAT)</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>ดูแลช่วง Go-live และ Hypercare</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>สนับสนุนการปิดบัญชีงวดแรก</span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>คุยตรงกับที่ปรึกษาที่ Develop เองได้</span></li>
+    </ul>
+  </div>
+  <div class="col loc">
+    <span class="badge">รวมในแพ็กเกจแล้ว</span>
+    <h2>JWIC Thai Localization</h2>
+    <p class="lead">พัฒนาเสร็จแล้ว พร้อมติดตั้ง ไม่ใช่งานที่รอพัฒนา</p>
+    <ul>
+      <li><svg class="ic"><use href="#i-percent"/></svg><span>รายงานภาษีซื้อ–ขาย ภ.พ.30 และใบแนบ รองรับสำนักงานใหญ่และสาขา</span></li>
+      <li><svg class="ic"><use href="#i-file"/></svg><span>หนังสือรับรอง 50 ทวิ และ ภ.ง.ด.2, 3, 53, 54 พร้อมใบแนบและ Text File สำหรับ RD Prep</span></li>
+      <li><svg class="ic"><use href="#i-receipt"/></svg><span>ระบบใบวางบิล กำหนดวันวางบิล และใบเสร็จรับเงิน</span></li>
+      <li><svg class="ic"><use href="#i-copy"/></svg><span>ฟอร์มเอกสารไทยกว่า 20 ชุด</span></li>
+      <li><svg class="ic"><use href="#i-archive"/></svg><span>ทะเบียนทรัพย์สินรูปแบบไทย และ Stock Card</span></li>
+      <li><svg class="ic"><use href="#i-search"/></svg><span>ค้นเลขประจำตัวผู้เสียภาษีจาก VAT Service กรมสรรพากร</span></li>
+      <li><svg class="ic"><use href="#i-refresh"/></svg><span>อัตราแลกเปลี่ยนและวันหยุดธนาคารอัตโนมัติจาก BOT API</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="assure">
+  <b><svg class="ic"><use href="#i-confirm"/></svg>ยืนยันขอบเขตและราคาก่อนเริ่มงาน</b>
+  <p>หลังวิเคราะห์ Fit-Gap เราจะสรุปขอบเขตงานและราคาให้ยืนยันอีกครั้ง งานเพิ่มเติมนอกขอบเขตจะแจ้งผลกระทบต่อเวลาและค่าใช้จ่าย พร้อมขออนุมัติก่อนดำเนินการทุกครั้ง</p>
+</div>
+
+<div class="creds">
+  <div class="cred-grid">
+    <div class="cred"><b><svg class="ic"><use href="#i-award"/></svg>Certified by Microsoft</b><p>ตรวจสอบได้บน Microsoft Learn — Supply Chain Management Expert, Business Central, Finance, Supply Chain Associate, AI Business Professional</p></div>
+    <div class="cred"><b><svg class="ic"><use href="#i-cap"/></svg>พื้นฐานบัญชีการเงินจริง</b><p>บัญชีบัณฑิต และ MBA (Business Innovation) — ที่ปรึกษาที่ Develop เองได้</p></div>
+    <div class="cred"><b><svg class="ic"><use href="#i-layers"/></svg>ทำงานตามกรอบ Microsoft</b><p>ดำเนินโครงการตามแนวทาง Success by Design และ Fast Implementation กำหนดแผนและเวลาชัดเจนตั้งแต่ต้น</p></div>
+  </div>
+</div>
+
+<div class="strip">
+  <b>หมายเหตุ</b> — ราคาและค่าบริการตามใบเสนอราคา ไม่รวมค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติมนอกขอบเขตที่ตกลงกัน · กรณีใช้ Business Central อยู่แล้ว มีแพ็กเกจ JWIC Thai Localization แยกต่างหาก และงานเฉพาะกิจคิดแบบ On-Demand ต่อ Manday
+</div>
+
+<div class="foot">
+  <div class="foot-row">
+    <div>
+      <h2>มีคำถามเกี่ยวกับขอบเขตงานหรือใบเสนอราคา ติดต่อได้โดยตรง</h2>
+      <p class="who">จิรภัทร วิชญพงศ์ (ซัน) · Business Central Functional Consultant &amp; AL Developer</p>
+    </div>
+    <div class="qr">
+      <span class="box"><svg viewBox="3 3 35 35" shape-rendering="crispEdges" aria-label="QR LINE 0841487480"><path fill="#ffffff" d="M0 0h41v41H0z"/><path stroke="#000000" d="M4 4.5h7m1 0h1m1 0h1m1 0h1m1 0h1m2 0h3m1 0h1m1 0h2m1 0h7M4 5.5h1m5 0h1m1 0h1m1 0h1m3 0h2m1 0h6m1 0h1m1 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h1m2 0h3m3 0h2m1 0h5m1 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m5 0h1m2 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m6 0h8m3 0h1m1 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m4 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h2m2 0h3m1 0h2m3 0h1m2 0h1M6 12.5h3m1 0h1m1 0h2m1 0h3m1 0h1m2 0h5m1 0h4m2 0h3M4 13.5h1m1 0h2m4 0h1m1 0h1m1 0h2m1 0h6m1 0h5m5 0h1M5 14.5h3m1 0h2m3 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h2m1 0h1m1 0h3M4 15.5h1m1 0h4m3 0h1m1 0h1m1 0h1m5 0h1m4 0h2m4 0h1M6 16.5h1m1 0h7m4 0h1m1 0h6m1 0h1m2 0h1m3 0h2M5 17.5h1m1 0h2m5 0h1m1 0h9m2 0h1m2 0h1m1 0h2m2 0h1M4 18.5h1m3 0h3m2 0h1m2 0h1m2 0h1m1 0h1m1 0h2m1 0h1m2 0h4m2 0h1M4 19.5h3m1 0h2m2 0h1m1 0h1m3 0h1m1 0h1m2 0h4m2 0h2m1 0h2m2 0h1M4 20.5h3m1 0h1m1 0h1m3 0h5m1 0h2m1 0h2m2 0h1m1 0h1m1 0h2m1 0h2M7 21.5h1m1 0h1m3 0h1m1 0h1m2 0h6m3 0h5m4 0h1M4 22.5h1m5 0h2m3 0h3m1 0h1m2 0h1m1 0h1m1 0h1m4 0h1m2 0h1M5 23.5h4m3 0h3m2 0h3m2 0h8m1 0h1m1 0h3M4 24.5h4m2 0h1m1 0h2m1 0h3m1 0h2m1 0h3m1 0h1m1 0h1m2 0h3m1 0h1M4 25.5h1m1 0h2m3 0h2m1 0h4m1 0h1m1 0h2m1 0h3m2 0h1m6 0h1M4 26.5h1m1 0h1m1 0h4m1 0h3m1 0h2m5 0h5m2 0h5M4 27.5h1m2 0h2m3 0h1m2 0h2m3 0h2m1 0h1m1 0h1m1 0h1m4 0h3M4 28.5h1m1 0h2m1 0h2m1 0h2m1 0h1m2 0h1m2 0h1m5 0h6m2 0h1M12 29.5h1m1 0h1m1 0h1m5 0h1m1 0h2m1 0h2m3 0h2m2 0h1M4 30.5h7m2 0h3m1 0h1m1 0h3m2 0h2m2 0h1m1 0h1m1 0h2m1 0h1M4 31.5h1m5 0h1m6 0h6m2 0h2m1 0h1m3 0h5M4 32.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m1 0h3m1 0h2m2 0h6m1 0h2M4 33.5h1m1 0h3m1 0h1m1 0h1m3 0h1m8 0h2m2 0h1m2 0h1m1 0h2M4 34.5h1m1 0h3m1 0h1m1 0h1m1 0h3m2 0h5m1 0h3m1 0h2m3 0h1M4 35.5h1m5 0h1m2 0h1m3 0h1m2 0h2m4 0h1m2 0h3m2 0h1M4 36.5h7m3 0h2m1 0h4m1 0h2m1 0h1m1 0h2m1 0h1m3 0h2"/></svg></span>
+      <span>สแกนแอด LINE</span>
+    </div>
+    <a class="cta" href="tel:0841487480">นัดคุยขอบเขตโครงการ ฟรี</a>
+  </div>
+  <div class="contact">
+    <a href="tel:0841487480">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+      <span><span class="lbl">โทร / Phone</span><span class="val">084-148-7480</span></span>
+    </a>
+    <a href="https://line.me/ti/p/~0841487480">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+      <span><span class="lbl">LINE ID</span><span class="val">0841487480</span></span>
+    </a>
+    <a href="mailto:jirapat.wi@outlook.co.th">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+      <span><span class="lbl">Email</span><span class="val">jirapat.wi@outlook.co.th</span></span>
+    </a>
+  </div>
+  <div class="legal">JWIC Consulting — Microsoft Dynamics 365 Business Central · Thai Localization Specialist · jwicconsulting.com</div>
+</div>
+
+</body>
+</html>

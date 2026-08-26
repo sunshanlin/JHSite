@@ -1,0 +1,170 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:17:45.332Z",
+        "reason": "หน้า print A4 สำหรับ PDF ไม่ใช่ UI บนจอ — ใช้ระบบดีไซน์เดียวกับ poster.html ที่ใช้งานจริงอยู่แล้ว (accent border/kicker/smallprint) และ px ที่นี่คือหน่วยกระดาษ (10.5px = ~8pt) ตัวสแกนอ่าน gradient ใต้ตัวอักษรขาวไม่ออก"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:17:45.418Z",
+        "reason": "หน้า print A4 สำหรับ PDF ไม่ใช่ UI บนจอ — ใช้ระบบดีไซน์เดียวกับ poster.html ที่ใช้งานจริงอยู่แล้ว (accent border/kicker/smallprint) และ px ที่นี่คือหน่วยกระดาษ (10.5px = ~8pt) ตัวสแกนอ่าน gradient ใต้ตัวอักษรขาวไม่ออก"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:17:45.481Z",
+        "reason": "หน้า print A4 สำหรับ PDF ไม่ใช่ UI บนจอ — ใช้ระบบดีไซน์เดียวกับ poster.html ที่ใช้งานจริงอยู่แล้ว (accent border/kicker/smallprint) และ px ที่นี่คือหน่วยกระดาษ (10.5px = ~8pt) ตัวสแกนอ่าน gradient ใต้ตัวอักษรขาวไม่ออก"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:17:45.572Z",
+        "reason": "หน้า print A4 สำหรับ PDF ไม่ใช่ UI บนจอ — ใช้ระบบดีไซน์เดียวกับ poster.html ที่ใช้งานจริงอยู่แล้ว (accent border/kicker/smallprint) และ px ที่นี่คือหน่วยกระดาษ (10.5px = ~8pt) ตัวสแกนอ่าน gradient ใต้ตัวอักษรขาวไม่ออก"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:17:45.632Z",
+        "reason": "หน้า print A4 สำหรับ PDF ไม่ใช่ UI บนจอ — ใช้ระบบดีไซน์เดียวกับ poster.html ที่ใช้งานจริงอยู่แล้ว (accent border/kicker/smallprint) และ px ที่นี่คือหน่วยกระดาษ (10.5px = ~8pt) ตัวสแกนอ่าน gradient ใต้ตัวอักษรขาวไม่ออก"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:17:45.713Z",
+        "reason": "หน้า print A4 สำหรับ PDF ไม่ใช่ UI บนจอ — ใช้ระบบดีไซน์เดียวกับ poster.html ที่ใช้งานจริงอยู่แล้ว (accent border/kicker/smallprint) และ px ที่นี่คือหน่วยกระดาษ (10.5px = ~8pt) ตัวสแกนอ่าน gradient ใต้ตัวอักษรขาวไม่ออก"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:47:12.396Z",
+        "reason": "ใบปลิว print ใช้ระบบของ poster.html ไม่ใช่ระบบเว็บใน DESIGN.md — ramp เขียว→ไวน์ 6 สเต็ปคือเวอร์ชันขยายจาก ramp 5 สเต็ปของ poster.html และ radius 12/14px ก็มาจากไฟล์นั้น"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:47:12.457Z",
+        "reason": "ใบปลิว print ใช้ระบบของ poster.html ไม่ใช่ระบบเว็บใน DESIGN.md — ramp เขียว→ไวน์ 6 สเต็ปคือเวอร์ชันขยายจาก ramp 5 สเต็ปของ poster.html และ radius 12/14px ก็มาจากไฟล์นั้น"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "flyer-implementation.html"
+        ],
+        "createdAt": "2026-08-24T09:54:57.639Z",
+        "reason": "ใบปลิว print: px คือหน่วยกระดาษ (9.5px ~ 7pt) ไม่ใช่ type ramp ของหน้าเว็บใน DESIGN.md — ขนาดถูกไล่ให้พอดี A4 หน้าเดียวโดยวัดความสูงจริงทุกครั้ง"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "kanit",
+        "createdAt": "2026-08-25T08:06:50.476Z",
+        "reason": "user requested modern font for flyer; Kanit chosen this session"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "flyer-overview.html"
+        ],
+        "createdAt": "2026-08-25T08:51:31.434Z",
+        "reason": "print-only A4 flyer (@page A4, noindex, output=PDF): no tap targets/viewport scaling. 8-9.5px maps to ~6-7pt on paper; same type scale as the shipped flyer-implementation.html. Legibility verified in the rendered PDF."
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "flyer-overview.html"
+        ],
+        "createdAt": "2026-08-25T08:51:39.005Z",
+        "reason": "the flagged tracking is on short uppercase micro-labels only (.kicker 'J W I C CONSULTING' .22em, .contact .lbl 'LINE ID' .14em) - the case the rule itself sanctions. Body copy stays at default tracking."
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "d:\\Web\\promote-site\\flyer-overview.html"
+        ],
+        "createdAt": "2026-08-25T08:53:23.990Z",
+        "reason": "brand palette on dark gradient bg, same as approved flyer-implementation; detector assumes white bg"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          "d:\\Web\\promote-site\\flyer-overview.html"
+        ],
+        "createdAt": "2026-08-25T08:54:48.700Z",
+        "reason": "print flyer file, matches existing flyer-implementation suite; web DESIGN.md rules don't apply to A4 print collateral"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "11px",
+        "createdAt": "2026-08-25T08:54:48.756Z",
+        "reason": "print flyer file, matches existing flyer-implementation suite; web DESIGN.md rules don't apply to A4 print collateral"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "13px",
+        "createdAt": "2026-08-25T08:54:48.813Z",
+        "reason": "print flyer file, matches existing flyer-implementation suite; web DESIGN.md rules don't apply to A4 print collateral"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "9px",
+        "createdAt": "2026-08-25T08:54:48.869Z",
+        "reason": "print flyer file, matches existing flyer-implementation suite; web DESIGN.md rules don't apply to A4 print collateral"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(157, 198, 196)",
+        "createdAt": "2026-08-25T08:54:48.925Z",
+        "reason": "print flyer file, matches existing flyer-implementation suite; web DESIGN.md rules don't apply to A4 print collateral"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#0a3e41",
+        "createdAt": "2026-08-25T08:54:48.990Z",
+        "reason": "print flyer file, matches existing flyer-implementation suite; web DESIGN.md rules don't apply to A4 print collateral"
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "d:\\Web\\promote-site\\flyer-overview.html"
+        ],
+        "createdAt": "2026-08-25T08:56:46.926Z",
+        "reason": "top-accent on rounded cards is the established style across the flyer suite (same as flyer-implementation.html the user reviewed and approved in renders)"
+      }
+    ]
+  }
+}

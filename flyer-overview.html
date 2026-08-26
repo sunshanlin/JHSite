@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* ใบปลิว A4 แบบกลางๆ เน้นรูปหน้าจอจริง — คู่กับ flyer-implementation.html ที่เน้นขอบเขตงาน/ใบเสนอราคา
-     ต่างกันที่เลย์เอาต์: ตัวนั้น header สีทึบ + ลิสต์ตัวหนังสือ, ตัวนี้ hero รูปเต็มขอบ + แกลเลอรีรูป 6 ช่อง */
+  /* ใบปลิว A4 แนะนำระบบ (ไม่มีรูปหน้าจอ) — คู่กับ flyer-implementation.html ที่เน้นขอบเขตงาน/ใบเสนอราคา
+     ตัวนี้ตอบ "ระบบทำอะไรได้" ด้วยการ์ดไอคอน + เช็คลิสต์ภาษีไทย */
   @page { size: A4; margin: 0; }
   :root {
     --teal-1: #0D5257; --teal-2: #1F7A87; --teal-3: #35AF9E;
@@ -26,81 +26,89 @@
   }
   .ic { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ---------- HERO: รูปเต็มขอบ + ฟิล์มมืดทับ ---------- */
-  .hero { position: relative; height: 64mm; flex-shrink: 0; overflow: hidden; color: #fff; }
-  .hero > img {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: 0% 0%;
-    /* เบลอไว้ในไฟล์ img/flyer/hero-bc.webp แล้ว (ffmpeg boxblur) ให้รูปเป็น "พื้นผิว" ไม่ใช่ตารางที่คนพยายามอ่าน
-       ห้ามใช้ CSS filter: blur() ตรงนี้ — Page.printToPDF ค้างตอน rasterize */
-    filter: saturate(1.15);
-  }
-  /* ฟิล์มสองชั้น: ไล่จากซ้ายเพื่อให้ตัวหนังสืออ่านออก + ย้อมโทนแบรนด์ทับรูปทั้งใบ */
-  .hero .scrim {
-    position: absolute; inset: 0;
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 18px 34px 17px; color: #fff;
     background:
-      linear-gradient(100deg, rgba(7,45,48,.985) 0%, rgba(7,45,48,.965) 42%, rgba(10,62,65,.90) 68%, rgba(16,83,95,.80) 100%),
-      linear-gradient(180deg, rgba(7,45,48,.45), rgba(125,36,64,.34));
+      radial-gradient(circle at 88% 20%, rgba(166,58,86,.16), transparent 32%),
+      linear-gradient(125deg, var(--h1) 0%, #0a3e41 48%, var(--h3) 100%);
+    position: relative;
   }
-  .hero .inner { position: relative; height: 100%; padding: 15px 34px 14px; display: flex; flex-direction: column; }
-  .brand-row { display: flex; align-items: center; gap: 11px; }
+  .brand-row { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; }
   .mark { width: 32px; height: 32px; flex-shrink: 0; border-radius: 7px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.35)); }
   .kicker { font-size: 8.5px; font-weight: 700; letter-spacing: .22em; color: #CCA4CD; }
-  .hero .bc { position: absolute; top: 13px; right: 34px; width: 50px; height: 50px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
-  .hero h1 { font-size: 27px; line-height: 1.16; letter-spacing: -.015em; margin-top: auto; max-width: 132mm; }
+  .hero .bc { position: absolute; top: 15px; right: 34px; width: 50px; height: 50px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
+  .hero h1 { font-size: 27px; line-height: 1.16; letter-spacing: -.015em; max-width: 140mm; }
   .hero h1 em { font-style: normal; color: #7FE3D0; }
-  .hero .sub { color: #d5eae8; font-size: 11px; margin-top: 8px; max-width: 122mm; }
-  .stats { display: flex; gap: 20px; margin-top: 13px; }
+  .hero .sub { color: #d5eae8; font-size: 11px; margin-top: 8px; max-width: 128mm; }
+  .stats { display: flex; gap: 20px; margin-top: 15px; }
   .stat { display: flex; align-items: center; gap: 7px; }
   .stat + .stat { padding-left: 20px; border-left: 1px solid rgba(255,255,255,.2); }
   .stat b { font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
   .stat span { font-size: 8px; line-height: 1.35; color: #cfe6e4; font-weight: 600; }
-  .hero .tag {
-    position: absolute; right: 34px; bottom: 14px;
-    padding: 5px 12px; border-radius: 999px; font-size: 9px; font-weight: 700;
-    /* ห้ามใส่ backdrop-filter — Page.printToPDF ค้างตอน rasterize (เจอมาแล้ว) */
-    background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.3); color: #eaf6f4;
-  }
 
-  /* ---------- GALLERY: 6 ช่อง รูปจริงจากระบบ ---------- */
-  .gal { padding: 12px 34px 0; flex: 1; display: flex; flex-direction: column; }
-  .gal-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 9px; }
-  .gal-head h2 { font-size: 15px; color: var(--h1); }
-  .gal-head span { font-size: 9.5px; color: var(--muted); }
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; flex: 1; }
-  .shot {
-    border: 1px solid var(--line); border-radius: 11px; overflow: hidden;
-    background: #fff; display: flex; flex-direction: column;
-    box-shadow: 0 6px 14px -10px rgba(7,45,48,.55);
-  }
-  .shot .pic { position: relative; flex: 1; overflow: hidden; background: #eef5f4; min-height: 0; }
-  /* --z/--ox/--oy ตั้งรายช่อง: ซูมเข้าไปที่ตัวเอกสาร ตัดขอบเทาและแถบเครื่องมือ PDF viewer ออก */
-  .shot .pic img {
-    width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; display: block;
-    transform: scale(var(--z, 1)); transform-origin: var(--ox, 50%) var(--oy, 0%);
-  }
-  .shot .cap { padding: 6px 10px 7px; border-top: 1px solid var(--line); }
-  .shot .cap b { display: flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink); line-height: 1.3; }
-  .shot .cap .ic { flex-shrink: 0; width: 13px; height: 13px; }
-  .shot .cap p { font-size: 9px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
-  .shot:nth-child(1) .cap .ic, .shot:nth-child(4) .cap .ic { color: var(--teal-2); }
-  .shot:nth-child(2) .cap .ic, .shot:nth-child(5) .cap .ic { color: var(--plum); }
-  .shot:nth-child(3) .cap .ic, .shot:nth-child(6) .cap .ic { color: var(--wine-2); }
+  h2.sec { font-size: 15px; color: var(--h1); }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 9px; }
+  .sec-head span { font-size: 9.5px; color: var(--muted); }
 
-  /* ---------- CAPABILITY STRIP ---------- */
-  .caps { margin: 11px 34px 0; padding: 10px 16px; border-radius: 12px; background: var(--ivory); }
-  .caps-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-  .cap-item { display: flex; align-items: center; gap: 8px; }
-  .cap-item + .cap-item { padding-left: 10px; border-left: 1px solid #e7dcc4; }
-  .cap-item .ic { flex-shrink: 0; width: 17px; height: 17px; color: var(--teal-2); }
-  .cap-item:nth-child(4) .ic { color: var(--plum); }
-  .cap-item:nth-child(5) .ic { color: var(--wine-2); }
-  .cap-item b { display: block; font-size: 10.5px; color: var(--ink); line-height: 1.25; }
-  .cap-item span { display: block; font-size: 8.5px; color: var(--muted); line-height: 1.3; }
+  /* ---------- MODULE CARDS ---------- */
+  .mods { padding: 16px 34px 0; }
+  .mod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
+  .mod {
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px;
+    background: linear-gradient(180deg, #fbfdfd, #fff 60%);
+  }
+  .mod .ic { width: 19px; height: 19px; margin-bottom: 6px; color: var(--teal-2); }
+  .mod:nth-child(2) .ic, .mod:nth-child(5) .ic { color: var(--plum); }
+  .mod:nth-child(3) .ic, .mod:nth-child(6) .ic { color: var(--wine-2); }
+  .mod b { display: block; font-size: 12px; color: var(--ink); line-height: 1.3; margin-bottom: 2px; }
+  .mod p { font-size: 9.5px; color: var(--muted); line-height: 1.45; }
+
+  /* ---------- THAI LOCALIZATION CHECKLIST ---------- */
+  .loc { margin: 15px 34px 0; padding: 16px 18px 17px; border-radius: 14px; background: var(--ivory); border-top: 3px solid var(--wine-2); }
+  .loc .badge {
+    display: inline-block; margin-bottom: 6px; padding: 3px 9px; border-radius: 6px;
+    background: var(--wine); color: #fff; font-size: 8.5px; font-weight: 700; letter-spacing: .1em;
+  }
+  .loc h2 { font-size: 15px; color: var(--wine); margin-bottom: 2px; }
+  .loc .lead { font-size: 10px; color: var(--muted); margin-bottom: 9px; }
+  .loc ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 9px 22px; }
+  .loc li { display: flex; gap: 9px; align-items: flex-start; font-size: 10.5px; color: var(--ink); line-height: 1.45; }
+  .loc li .ic { flex-shrink: 0; width: 14px; height: 14px; margin-top: 2px; color: var(--wine-2); }
+
+  /* ---------- STEPS ---------- */
+  .steps { margin: 15px 34px 0; flex: 1; }
+  .steps h2 { font-size: 13px; color: var(--h1); margin-bottom: 9px; }
+  .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
+  .step { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; }
+  .step .n {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 8px; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 11.5px; font-weight: 800;
+  }
+  .step:nth-child(1) .n { background: var(--teal-2); }
+  .step:nth-child(2) .n { background: var(--plum); }
+  .step:nth-child(3) .n { background: var(--wine-2); }
+  .step b { display: block; font-size: 11px; color: var(--ink); line-height: 1.3; }
+  .step p { font-size: 9px; color: var(--muted); line-height: 1.4; }
+
+  /* ---------- CREDENTIALS ---------- */
+  .creds { margin: 15px 34px 0; }
+  .cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cred { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; }
+  .cred:nth-child(1) { border-top: 3px solid var(--teal-2); }
+  .cred:nth-child(2) { border-top: 3px solid var(--plum); }
+  .cred:nth-child(3) { border-top: 3px solid var(--wine-2); }
+  .cred b { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--ink); margin-bottom: 2px; }
+  .cred .ic { flex-shrink: 0; width: 15px; height: 15px; }
+  .cred:nth-child(1) .ic { color: var(--teal-2); }
+  .cred:nth-child(2) .ic { color: var(--plum); }
+  .cred:nth-child(3) .ic { color: var(--wine-2); }
+  .cred p { color: var(--muted); font-size: 9.5px; line-height: 1.45; }
 
   /* ---------- FOOTER ---------- */
   .foot {
-    margin-top: 11px; padding: 12px 34px 10px; color: #fff;
+    margin-top: 15px; padding: 14px 34px 11px; color: #fff;
     background: linear-gradient(115deg, var(--h1) 0%, #0a3e41 55%, var(--h3) 100%);
   }
   .foot-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -140,12 +148,16 @@
   <symbol id="i-package" viewBox="0 0 24 24"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
   <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
   <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
 </defs></svg>
 
 <!-- ===== HERO ===== -->
 <div class="hero">
-  <img src="img/flyer/hero-bc.webp" alt="หน้าจอ Business Central พร้อมเมนู Thai Localization">
-  <div class="scrim"></div>
   <svg class="bc" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Business Central">
     <path d="M34 33.9998C41.732 41.7317 54.268 41.7318 62 33.9999C69.732 26.2679 69.732 13.7318 62 5.99986C54.268 -1.73209 41.732 -1.73214 34 5.99979C26.268 13.7318 26.2681 26.2678 34 33.9998Z" fill="url(#bc0)"/>
     <path d="M62 62.0002C54.268 54.2683 41.732 54.2682 34 62.0001C26.268 69.7321 26.268 82.2682 34 90.0001C41.732 97.7321 54.268 97.7321 62 90.0002C69.732 82.2682 69.7319 69.7322 62 62.0002Z" fill="url(#bc3)"/>
@@ -160,72 +172,75 @@
       <linearGradient id="bc11" x1="63" y1="30" x2="92.5" y2="59.5" gradientUnits="userSpaceOnUse"><stop stop-color="#9FF2E4"/><stop offset=".266" stop-color="#2BDABE"/><stop offset=".620" stop-color="#16BBDA"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
     </defs>
   </svg>
-  <div class="inner">
-    <div class="brand-row">
-      <svg class="mark" viewBox="0 0 64 64" aria-label="JWIC Consulting">
-        <defs><clipPath id="pLogo"><rect width="64" height="64" rx="10"/></clipPath></defs>
-        <g clip-path="url(#pLogo)">
-          <rect width="64" height="64" fill="#1c4a3c"/>
-          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
-          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
-          <text x="32" y="43" text-anchor="middle" font-family="'Kanit', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
-        </g>
-      </svg>
-      <div class="kicker">J W I C &nbsp; C O N S U L T I N G</div>
-    </div>
-    <h1>ระบบเดียวจบ ตั้งแต่จัดซื้อ<br>จนถึง<em>ยื่นภาษีไทย</em></h1>
-    <p class="sub">Microsoft Dynamics 365 Business Central พร้อม JWIC Thai Localization — จัดซื้อ นำเข้า สต๊อก ขาย บัญชี และงานภาษีไทย อยู่บนฐานข้อมูลเดียว ไม่ต้องทำงานซ้ำนอกระบบ</p>
-    <div class="stats">
-      <div class="stat"><b>20+</b><span>ฟอร์มเอกสารไทย<br>พร้อมติดตั้ง</span></div>
-      <div class="stat"><b>5</b><span>Microsoft Certifications<br>ตรวจสอบได้บน Microsoft Learn</span></div>
-      <div class="stat"><b>1</b><span>ที่ปรึกษาดูแลตรง<br>ตลอดทั้งโครงการ</span></div>
-    </div>
+  <div class="brand-row">
+    <svg class="mark" viewBox="0 0 64 64" aria-label="JWIC Consulting">
+      <defs><clipPath id="pLogo"><rect width="64" height="64" rx="10"/></clipPath></defs>
+      <g clip-path="url(#pLogo)">
+        <rect width="64" height="64" fill="#1c4a3c"/>
+        <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+        <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+        <text x="32" y="43" text-anchor="middle" font-family="'Kanit', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+      </g>
+    </svg>
+    <div class="kicker">J W I C &nbsp; C O N S U L T I N G</div>
   </div>
-  <span class="tag">ภาพหน้าจอจากระบบจริง</span>
-</div>
-
-<!-- ===== GALLERY ===== -->
-<div class="gal">
-  <div class="gal-head">
-    <h2>งานภาษีและเอกสารไทย ออกจากระบบได้เลย</h2>
-    <span>ไม่ต้องพิมพ์ซ้ำใน Excel ทุกรอบปิดงวด</span>
-  </div>
-  <div class="grid">
-    <div class="shot">
-      <div class="pic"><img src="img/flyer/pp30-report.webp" alt="แบบ ภ.พ.30 ที่ออกจาก Business Central"></div>
-      <div class="cap"><b><svg class="ic"><use href="#i-percent"/></svg>ภ.พ.30 และใบแนบ</b><p>รายงานภาษีซื้อ–ขาย รองรับสำนักงานใหญ่และสาขา</p></div>
-    </div>
-    <div class="shot">
-      <div class="pic"><img src="img/flyer/fixed-asset-register.webp" alt="ทะเบียนทรัพย์สินรูปแบบไทย" style="--z:1.45;--ox:50%;--oy:26%"></div>
-      <div class="cap"><b><svg class="ic"><use href="#i-archive"/></svg>ทะเบียนทรัพย์สิน</b><p>รูปแบบไทย พร้อม Stock Card คุมของครบ</p></div>
-    </div>
-    <div class="shot">
-      <div class="pic"><img src="img/flyer/billing-worklist.webp" alt="ใบวางบิลตามรอบวางบิลลูกค้า" style="--z:1.3;--ox:62%;--oy:34%"></div>
-      <div class="cap"><b><svg class="ic"><use href="#i-receipt"/></svg>ใบวางบิล / ใบเสร็จ</b><p>กำหนดวันวางบิลรายลูกค้า ติดตามยอดค้างรับ</p></div>
-    </div>
-    <div class="shot">
-      <div class="pic"><img src="img/flyer/credit-note.webp" alt="ใบลดหนี้ภาษาไทย" style="--z:2;--ox:52%;--oy:32%"></div>
-      <div class="cap"><b><svg class="ic"><use href="#i-file"/></svg>เอกสารไทยกว่า 20 แบบ</b><p>ใบกำกับภาษี ใบลดหนี้ ใบเสนอราคา ใบแจ้งหนี้</p></div>
-    </div>
-    <div class="shot">
-      <div class="pic"><img src="img/flyer/po.webp" alt="ใบสั่งซื้อและงานจัดซื้อนำเข้า" style="--z:2;--ox:52%;--oy:32%"></div>
-      <div class="cap"><b><svg class="ic"><use href="#i-cart"/></svg>จัดซื้อและนำเข้า</b><p>ผูกต้นทุนนำเข้า ค่าขนส่ง ภาษี เข้าต้นทุนสินค้า</p></div>
-    </div>
-    <div class="shot">
-      <div class="pic"><img src="img/flyer/bc-excel-pivot.webp" alt="ดึงข้อมูลออก Excel และ Power BI"></div>
-      <div class="cap"><b><svg class="ic"><use href="#i-trend"/></svg>ต่อ Excel และ Power BI</b><p>ดึงข้อมูลวิเคราะห์เองได้ ไม่ต้องรอรายงาน</p></div>
-    </div>
+  <h1>ระบบเดียวจบ ตั้งแต่จัดซื้อ จนถึง<em>ยื่นภาษีไทย</em></h1>
+  <p class="sub">Microsoft Dynamics 365 Business Central พร้อม JWIC Thai Localization — จัดซื้อ นำเข้า สต๊อก ขาย บัญชี และงานภาษีไทย อยู่บนฐานข้อมูลเดียว ไม่ต้องทำงานซ้ำนอกระบบ</p>
+  <div class="stats">
+    <div class="stat"><b>20+</b><span>ฟอร์มเอกสารไทย<br>พร้อมติดตั้ง</span></div>
+    <div class="stat"><b>5</b><span>Microsoft Certifications<br>ตรวจสอบได้บน Microsoft Learn</span></div>
+    <div class="stat"><b>1</b><span>ที่ปรึกษาดูแลตรง<br>ตลอดทั้งโครงการ</span></div>
   </div>
 </div>
 
-<!-- ===== CAPABILITY STRIP ===== -->
-<div class="caps">
-  <div class="caps-row">
-    <div class="cap-item"><svg class="ic"><use href="#i-cart"/></svg><span><b>จัดซื้อ</b><span>PO · นำเข้า · ต้นทุน</span></span></div>
-    <div class="cap-item"><svg class="ic"><use href="#i-package"/></svg><span><b>สินค้าคงคลัง</b><span>Lot · Serial · หลายคลัง</span></span></div>
-    <div class="cap-item"><svg class="ic"><use href="#i-grid"/></svg><span><b>ขาย</b><span>ใบเสนอราคา · เครดิตเทอม</span></span></div>
-    <div class="cap-item"><svg class="ic"><use href="#i-wallet"/></svg><span><b>บัญชี–การเงิน</b><span>ปิดงวด · งบการเงิน</span></span></div>
-    <div class="cap-item"><svg class="ic"><use href="#i-percent"/></svg><span><b>ภาษีไทย</b><span>ภ.พ.30 · 50 ทวิ · RD Prep</span></span></div>
+<!-- ===== MODULES ===== -->
+<div class="mods">
+  <div class="sec-head">
+    <h2 class="sec">ครอบคลุมงานหลักทั้งบริษัท บนฐานข้อมูลเดียว</h2>
+    <span>ข้อมูลไหลถึงกันทุกแผนก ไม่ต้องคีย์ซ้ำ</span>
+  </div>
+  <div class="mod-grid">
+    <div class="mod"><svg class="ic"><use href="#i-cart"/></svg><b>จัดซื้อและนำเข้า</b><p>ใบสั่งซื้อ อนุมัติ ผูกต้นทุนนำเข้า ค่าขนส่ง ภาษี เข้าต้นทุนสินค้า</p></div>
+    <div class="mod"><svg class="ic"><use href="#i-package"/></svg><b>สินค้าคงคลัง</b><p>คุม Lot / Serial หลายคลัง หลาย Location พร้อม Stock Card</p></div>
+    <div class="mod"><svg class="ic"><use href="#i-grid"/></svg><b>ขายและลูกหนี้</b><p>ใบเสนอราคา เครดิตเทอม ติดตามยอดค้างรับตามรอบวางบิล</p></div>
+    <div class="mod"><svg class="ic"><use href="#i-wallet"/></svg><b>บัญชี–การเงิน</b><p>ผังบัญชี ปิดงวด งบการเงิน กระทบยอดธนาคาร</p></div>
+    <div class="mod"><svg class="ic"><use href="#i-percent"/></svg><b>ภาษีไทย</b><p>ภ.พ.30 หัก ณ ที่จ่าย ภ.ง.ด. ครบวงจร ออกจากระบบได้เลย</p></div>
+    <div class="mod"><svg class="ic"><use href="#i-trend"/></svg><b>รายงานและวิเคราะห์</b><p>ต่อ Excel และ Power BI ดึงข้อมูลวิเคราะห์เองได้ ไม่ต้องรอรายงาน</p></div>
+  </div>
+</div>
+
+<!-- ===== THAI LOCALIZATION ===== -->
+<div class="loc">
+  <span class="badge">พัฒนาเสร็จแล้ว พร้อมติดตั้ง</span>
+  <h2>JWIC Thai Localization</h2>
+  <p class="lead">งานภาษีและเอกสารไทยที่ Business Central มาตรฐานไม่มี — ชุดนี้เติมให้ครบ</p>
+  <ul>
+    <li><svg class="ic"><use href="#i-percent"/></svg><span>รายงานภาษีซื้อ–ขาย ภ.พ.30 และใบแนบ รองรับสำนักงานใหญ่และสาขา</span></li>
+    <li><svg class="ic"><use href="#i-file"/></svg><span>หนังสือรับรอง 50 ทวิ และ ภ.ง.ด.2, 3, 53, 54 พร้อม Text File สำหรับ RD Prep</span></li>
+    <li><svg class="ic"><use href="#i-receipt"/></svg><span>ระบบใบวางบิล กำหนดวันวางบิล และใบเสร็จรับเงิน</span></li>
+    <li><svg class="ic"><use href="#i-check"/></svg><span>ฟอร์มเอกสารไทยกว่า 20 ชุด — ใบกำกับภาษี ใบลดหนี้ ใบแจ้งหนี้</span></li>
+    <li><svg class="ic"><use href="#i-archive"/></svg><span>ทะเบียนทรัพย์สินรูปแบบไทย และ Stock Card</span></li>
+    <li><svg class="ic"><use href="#i-search"/></svg><span>ค้นเลขประจำตัวผู้เสียภาษีจาก VAT Service กรมสรรพากร</span></li>
+    <li><svg class="ic"><use href="#i-refresh"/></svg><span>อัตราแลกเปลี่ยนและวันหยุดธนาคารอัตโนมัติจาก BOT API</span></li>
+  </ul>
+</div>
+
+<!-- ===== STEPS ===== -->
+<div class="steps">
+  <h2>เริ่มต้นยังไง — 3 ขั้น ไม่ผูกมัด</h2>
+  <div class="step-grid">
+    <div class="step"><span class="n">1</span><span><b>นัดคุยฟรี</b><p>เล่ากระบวนการทำงานปัจจุบัน และปัญหาที่อยากแก้</p></span></div>
+    <div class="step"><span class="n">2</span><span><b>ดู Demo กับงานจริงของบริษัท</b><p>เห็นระบบทำงานกับเอกสารและกระบวนการแบบเดียวกับที่ใช้อยู่</p></span></div>
+    <div class="step"><span class="n">3</span><span><b>รับขอบเขตงานและราคา</b><p>สรุปเป็นใบเสนอราคา ตัดสินใจได้จากข้อมูลครบ</p></span></div>
+  </div>
+</div>
+
+<!-- ===== CREDENTIALS ===== -->
+<div class="creds">
+  <div class="cred-grid">
+    <div class="cred"><b><svg class="ic"><use href="#i-award"/></svg>Certified by Microsoft</b><p>Supply Chain Management Expert, Business Central, Finance, Supply Chain Associate, AI Business Professional</p></div>
+    <div class="cred"><b><svg class="ic"><use href="#i-cap"/></svg>พื้นฐานบัญชีการเงินจริง</b><p>บัญชีบัณฑิต และ MBA (Business Innovation) — ที่ปรึกษาที่ Develop เองได้</p></div>
+    <div class="cred"><b><svg class="ic"><use href="#i-layers"/></svg>ทำงานตามกรอบ Microsoft</b><p>Success by Design และ Fast Implementation กำหนดแผนและเวลาชัดเจนตั้งแต่ต้น</p></div>
   </div>
 </div>
 
