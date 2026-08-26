@@ -132,7 +132,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 ### Secondary
 - **Deep Teal** (`#012F2A`): the institution. Section grounds for `#contact` and `#faq`, the language-toggle active state, the hero's quarter-round block, and the darkest stop of every teal gradient. This is the color of the practice itself.
 - **Signing Teal** (`#014A41`): one step up from Deep Teal, used for the `#services` heading and for hover states on dark surfaces.
-- **Jade** (`#417771`): the mid-tone workhorse — `#why-us` icon strokes and the 3px rules beside their labels, hero proof-list bullets, the fourth Success-by-Design phase.
+- **Jade** (`#417771`): the mid-tone workhorse — the `#why-us` comparison-table group icons and their `01`–`05` counters, hero proof-list bullets, the fourth Success-by-Design phase.
 - **Sage** (`#739B97`) and **Mist** (`#A6C0BD`): the pale end of the teal ramp. Sage closes the progress gradient and fills the fifth phase; Mist carries kickers on dark grounds.
 
 ### Tertiary
@@ -166,7 +166,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 ### Hierarchy
 - **Display** (500, `clamp(2.2rem, 3.4vw, 2.75rem)`, 1.22, -0.025em): the single `h1` in the hero.
 - **Headline** (500, `clamp(1.9rem, 2.6vw, 2.5rem)`, 1.2, -0.025em): every section `h2`. Four sections (`#services`, `#features`, `#reports`, `#pricing`) center their heading block at `max-width: 720px`; the rest are left-aligned.
-- **Title** (500, 1.08rem, -0.025em): card and feature-panel `h3`. The `#why-us` labels are the one exception at 600/1.02rem, because they carry a 3px jade rule and need the extra weight to hold it.
+- **Title** (500, 1.08rem, -0.025em): card and feature-panel `h3`. The `#why-us` comparison table is the one exception: group bands run 700/0.95rem in Signing Teal, row labels 600 in Ink, because both must hold their own against the dark Business Central column beside them.
 - **Body** (500, 18px, 1.7): all running copy, Thai and English. Descriptions inside cards drop to 0.95rem but keep weight 500.
 - **Label** (600, 12px, 0.08em): `.section-kicker` above every `h2`, in Slate Sage on light grounds, Mist or Editorial Pink on dark.
 
