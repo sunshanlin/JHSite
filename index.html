@@ -514,7 +514,7 @@
   }
   /* แต่ละข้อ = แถวใน accordion: ไม่มีกรอบการ์ด มีแค่เส้นคั่นบน + แถบเน้นซ้ายตอนเปิด */
   .bento-item {
-    position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 8px;
+    position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 0;
     width: 100%; padding: 20px 4px 20px 22px; border: 0; border-top: 1px solid var(--ui-line);
     border-radius: 0; background: none; box-shadow: none;
     font: inherit; text-align: left; cursor: pointer;
@@ -537,7 +537,7 @@
   .bento-item:hover .bento-num, .bento-item[aria-pressed="true"] .bento-num { opacity: 1; }
   /* chevron ท้ายหัวข้อ — ใช้สำนวนเดียวกับ .plan-more > summary::after */
   .bento-item h3 {
-    display: flex; align-items: center; gap: 14px;
+    display: flex; align-items: center; gap: 14px; margin-top: 8px;
     font-size: 1.1rem; line-height: 1.45; color: var(--ui-ink); transition: color .22s ease;
   }
   .bento-item h3::after {
@@ -547,8 +547,14 @@
   }
   .bento-item[aria-pressed="true"] h3::after { transform: rotate(-135deg); margin-bottom: -3px; opacity: 1; }
   /* เนื้อความกางเฉพาะข้อที่เปิด */
-  .bento-body { display: none; padding-right: 18px; color: var(--ui-muted); font-size: .96rem; line-height: 1.62; }
-  .bento-item[aria-pressed="true"] .bento-body { display: block; animation: panelCopyIn .38s cubic-bezier(.2,.75,.2,1) both; }
+  /* ponytail: ไถความสูง 0↔auto ด้วย interpolate-size — เบราว์เซอร์ที่ไม่รองรับได้แค่ fade (เท่าของเดิม) */
+  .bento-tiles { interpolate-size: allow-keywords; }
+  .bento-body {
+    display: block; height: 0; margin-top: 0; overflow: hidden; opacity: 0;
+    padding-right: 18px; color: var(--ui-muted); font-size: .96rem; line-height: 1.62;
+    transition: height .34s cubic-bezier(.2,.75,.2,1), margin-top .34s cubic-bezier(.2,.75,.2,1), opacity .22s ease;
+  }
+  .bento-item[aria-pressed="true"] .bento-body { height: auto; margin-top: 8px; opacity: 1; }
   /* จอกว้าง: accordion อยู่ซ้าย รูปอยู่ขวา (DOM ยังเป็น shot ก่อน tiles — สลับด้วย grid-column) */
   @media (min-width: 1081px) {
     .bento { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: start; gap: 44px; }
@@ -681,7 +687,7 @@
     .reveal { opacity: 1; transform: none; transition: none; }
     .bento-shot figure, .bento-shot figure.is-active, .bento-shot a, .bento-shot a::after,
     .bento-item, .bento-item::after, .bento-item h3, .bento-item h3::after, .bento-num { transition: none; }
-    .bento-item[aria-pressed="true"] .bento-body { animation: none; }
+    .bento-body { transition: none; }
   }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -2748,61 +2754,61 @@
     <p class="section-kicker">See it in action</p>
     <h2>ตัวอย่างรายงาน</h2>
     <p class="sub">ตัวอย่างรายงานและเอกสารภาษาไทยที่พัฒนาบน Business Central คลิกที่ภาพเพื่อดูขนาดเต็ม</p>
-    <div class="slider-wrap">
+    <div class="slider-wrap reveal">
     <div class="slider">
-      <figure class="reveal">
+      <figure>
         <a href="img/bc-home.webp"><img src="img/bc-home.webp" alt="หน้า Home ของ Business Central พร้อมเมนู Thai Localization" loading="lazy"></a>
         <figcaption>หน้า Home ของ Business Central พร้อมเมนูงานภาษีและวางบิลภาษาไทย</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/bc-dashboard.webp"><img src="img/bc-dashboard.webp" alt="Dashboard วิเคราะห์ธุรกิจใน Business Central" loading="lazy"></a>
         <figcaption>Dashboard วิเคราะห์ยอดขาย งบทดลอง แบบ Real-time</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/vat-service.webp"><img src="img/vat-service.webp" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" loading="lazy"></a>
         <figcaption>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร — ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/sales-vat-report.webp"><img src="img/sales-vat-report.webp" alt="รายงานภาษีขาย" loading="lazy"></a>
         <figcaption>รายงานภาษีขาย พร้อมเลขสาขา</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/pp30-form.webp"><img src="img/pp30-form.webp" alt="หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 ใน Business Central" loading="lazy"></a>
         <figcaption>หน้าจอคำนวณแบบแสดงรายการภาษีมูลค่าเพิ่ม ภ.พ.30 พร้อม Download แบบฟอร์ม</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/pp30-report.webp"><img src="img/pp30-report.webp" alt="แบบ ภ.พ.30 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
         <figcaption>แบบฟอร์ม ภ.พ.30 ของกรมสรรพากร — ระบบกรอกตัวเลขให้อัตโนมัติ พร้อมยื่น</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/billing-worklist.webp"><img src="img/billing-worklist.webp" alt="Billing Worklist — รายการรอวางบิลตามรอบของลูกค้าแต่ละราย" loading="lazy"></a>
         <figcaption>รายการรอวางบิล คำนวณวันวางบิลตามเงื่อนไขของลูกค้าแต่ละราย</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/billing-board.webp"><img src="img/billing-board.webp" alt="Billing Board — ปฏิทินรายเดือนแสดงรายการวางบิลแยกตามวันและลูกค้า" loading="lazy"></a>
         <figcaption>Billing Board ปฏิทินรายเดือน ใช้สีแยกวันวางบิลและรายการที่เลยกำหนด</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/receivable-receipt.webp"><img src="img/receivable-receipt.webp" alt="ใบเสร็จรับเงิน / ใบกำกับภาษี (Tax Receipt)" loading="lazy"></a>
         <figcaption>ใบเสร็จรับเงิน / ใบกำกับภาษี ออกจากการรับชำระตามใบวางบิล</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/fixed-asset-register.webp"><img src="img/fixed-asset-register.webp" alt="ทะเบียนทรัพย์สิน (Fixed Asset Register)" loading="lazy"></a>
         <figcaption>ทะเบียนทรัพย์สิน (Fixed Asset Register)</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/stock-card.webp"><img src="img/stock-card.webp" alt="รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card)" loading="lazy"></a>
         <figcaption>รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card) แสดงรับ–จ่าย ยอดคงเหลือ และมูลค่าต้นทุนรายสินค้า</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/sales-invoice.webp"><img src="img/sales-invoice.webp" alt="ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)" loading="lazy"></a>
         <figcaption>ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/po.webp"><img src="img/po.webp" alt="ใบสั่งซื้อ (Purchase Order)" loading="lazy"></a>
         <figcaption>ใบสั่งซื้อ (Purchase Order)</figcaption>
       </figure>
-      <figure class="reveal">
+      <figure>
         <a href="img/credit-note.webp"><img src="img/credit-note.webp" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
         <figcaption>ใบลดหนี้ (Credit Note)</figcaption>
       </figure>
