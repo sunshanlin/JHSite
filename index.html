@@ -2080,16 +2080,82 @@
     .plan-list-head { font-size: .98rem; }
   }
 
-  /* กระจก charcoal เดียวกับ #contact — FAQ อยู่กลุ่มเดียวกัน */
+  /* กระจก charcoal เดียวกับ #contact — FAQ อยู่กลุ่มเดียวกัน · ป้าย Q/A + ไถเปิดแบบ .plan-more */
   .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
   .faq-list details {
+    position: relative; overflow: hidden;
     background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
     padding: 2px 22px; box-shadow: none;
+    transition: background-color .24s ease, border-color .24s ease;
   }
-  .faq-list summary { cursor: pointer; font-weight: 700; color: #bfe9e0; padding: 15px 0; }
+  /* แถบเน้นซ้าย โผล่ตอนเปิด — สำนวนเดียวกับ .bento-item */
+  .faq-list details::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(var(--brand-pink), var(--brand-pink-deep));
+    opacity: 0; transition: opacity .24s ease;
+  }
+  .faq-list details:hover { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.2); }
+  .faq-list details[open] { background: rgba(255,255,255,.06); border-color: rgba(191,233,224,.26); }
+  .faq-list details[open]::before { opacity: 1; }
+  .faq-list summary {
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; font-weight: 700; color: #bfe9e0; padding: 15px 0;
+    list-style: none; transition: color .2s ease;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  /* ป้าย Q */
+  .faq-list summary::before {
+    content: "Q"; flex: 0 0 auto;
+    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .82rem; line-height: 1;
+    color: var(--brand-pink); background: rgba(224,140,162,.14);
+    border: 1px solid rgba(224,140,162,.35);
+    transition: background-color .24s ease, color .24s ease, transform .24s ease;
+  }
+  .faq-list details[open] summary::before { color: #fff; background: var(--brand-pink-deep); border-color: transparent; }
+  /* chevron ท้ายคำถาม — สำนวนเดียวกับ .plan-more > summary::after */
+  .faq-list summary::after {
+    content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin: 0 2px 3px auto;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(45deg); opacity: .5; transition: transform .24s ease, opacity .24s ease;
+  }
+  .faq-list details[open] summary::after { transform: rotate(-135deg); margin-bottom: -3px; opacity: 1; }
   .faq-list summary:hover { color: var(--brand-pink); }
+  .faq-list summary:hover::before { transform: translateY(-1px); }
+  .faq-list summary:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 4px; border-radius: 8px; }
   .faq-list details[open] summary { border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 12px; }
-  .faq-list details > p { color: #aeb4b7; line-height: 1.8; padding-bottom: 16px; text-wrap: pretty; }
+  .faq-list details > p {
+    position: relative; padding-left: 38px; color: #aeb4b7; line-height: 1.8;
+    padding-bottom: 16px; text-wrap: pretty;
+  }
+  /* ป้าย A ตรงคำตอบย่อหน้าแรก ให้ตรงคอลัมน์กับ Q */
+  .faq-list details > p:first-of-type::before {
+    content: "A"; position: absolute; left: 0; top: 1px;
+    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .82rem; font-weight: 700; line-height: 1;
+    color: var(--brand-mist); background: rgba(166,192,189,.12); border: 1px solid rgba(166,192,189,.28);
+  }
+  .faq-list details[open] > p { animation: planReveal .32s ease both; }
+  /* ไถความสูงตอนเปิดถ้าเบราว์เซอร์รองรับ — ชุดเดียวกับแพ็คเกจ */
+  @supports selector(::details-content) {
+    .faq-list details { interpolate-size: allow-keywords; }
+    .faq-list details::details-content {
+      block-size: 0; overflow: clip;
+      transition: block-size .32s ease, content-visibility .32s allow-discrete;
+    }
+    .faq-list details[open]::details-content { block-size: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-list details, .faq-list details::before, .faq-list summary,
+    .faq-list summary::before, .faq-list summary::after { transition: none; }
+    .faq-list details[open] > p { animation: none; }
+    .faq-list details::details-content { transition: none; }
+  }
+  @media (max-width: 560px) {
+    .faq-list details { padding: 2px 16px; }
+    .faq-list summary { gap: 10px; }
+    .faq-list details > p { padding-left: 36px; }
+  }
 
   /* ============================================================
      เลเยอร์ Fluent — โครง/จังหวะแบบหน้า Dynamics 365 สีของ JWIC ล้วน
@@ -3769,7 +3835,8 @@
     ['#faq h2', 'Frequently Asked Questions'],
     ['#faq > .wrap > .sub', 'Short answers to the questions clients ask us most.'],
     ['#faq details:nth-of-type(1) summary', 'Does Business Central support Thai tax and documents?'],
-    ['#faq details:nth-of-type(1) > p', 'Standard Business Central does not cover Thai tax directly, so we built JWIC Localization to fill the gap — purchase–sales VAT reports and PP30 (head office and branches, including separate branch filing), withholding tax with 50 Bis certificates, RD Prep import files, billing notes, and a complete set of Thai document forms.'],
+    ['#faq details:nth-of-type(1) > p:nth-of-type(1)', 'Standard Business Central does not cover Thai tax directly, so we built JWIC Localization to fill the gap — purchase–sales VAT reports and PP30, for head office and branches, including separate branch filing.'],
+    ['#faq details:nth-of-type(1) > p:nth-of-type(2)', 'It also covers withholding tax with 50 Bis certificates, RD Prep import files, billing notes, and a complete set of Thai document forms.'],
     ['#faq details:nth-of-type(2) summary', 'How long does a Business Central implementation take?'],
     ['#faq details:nth-of-type(2) > p', 'Using Best Practice and Fast Implementation, we define a clear project plan and timeline from the outset, keeping implementation structured and enabling a faster go-live.'],
     ['#faq details:nth-of-type(3) summary', 'How much does an implementation cost?'],
