@@ -2607,10 +2607,9 @@
   }
   .footer-col a:hover, .footer-col a:focus-visible { color: #fff; text-decoration: underline; }
   .footer-bottom {
-    grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+    justify-items: start; align-items: center; gap: 16px;
     padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12);
   }
-  .footer-bottom p { margin: 0; }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
     border: 1px solid rgba(255,255,255,.28); border-radius: var(--ui-radius-btn);
@@ -2622,7 +2621,6 @@
   #cookie-manage:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 2px; }
   @media (max-width: 760px) {
     .footer-main { grid-template-columns: 1fr; gap: 26px; }
-    .footer-bottom { grid-template-columns: 1fr; justify-items: start; }
   }
 
   /* ==========================================================================
@@ -3581,7 +3579,6 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Business Central Consulting &amp; Thai Localization</p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
   </div>
