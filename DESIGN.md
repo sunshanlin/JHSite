@@ -253,6 +253,12 @@ Three `.plan-card` surfaces in `#pricing`, identical by design: white ground, 1p
 
 Above 1081px the three cards are direct children of one grid (`.plan-group` and `.plan-group-cards` go `display: contents`) and each card subgrids the parent's seven rows — banner, name, description, price, note, CTA, details. Rows therefore align from real content. **Do not reintroduce `min-height` to line the cards up**: six hand-measured values used to do this job and had to be re-measured every time the copy or the font changed.
 
+### Footer
+
+Deep Teal ground (`#01211D`), Mist and `#CBDCD8` text, one hairline rule. Three columns above 760px — brand, menu, contact — collapsing to one below. Column headings are `<p class="footer-head">` styled as Labels rather than real headings, so the footer does not add anything to the document outline; the menu is a `<nav>` with its own `aria-label`. Link labels are the same strings the top nav and `#contact` already use, so the footer costs the `I18N` dictionary only the two column headings.
+
+The right-hand end of the bottom row carries the ghost **Cookie settings** button (`#cookie-manage`), which reopens the consent bar and focuses Accept. It is the only route back to the choice once it has been made. Withdrawing consent after it was granted reloads the page — GA's script stays resident otherwise, and a consent control that leaves the tracker running is worse than not offering one.
+
 ### Feature Tabs (signature)
 Six tabs (`#feature-tab-vat` … `#feature-tab-api`) switching six panels in `#features`. Panel copy enters with `panelCopyIn` — 550ms on `cubic-bezier(.2,.75,.2,1)`, 80ms delay. This is the page's main interactive proof surface: it is where the localization package stops being a list and starts being a thing.
 

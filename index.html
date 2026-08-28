@@ -2582,6 +2582,49 @@
     .chat-fab-btn { width: 50px; height: 50px; }
   }
 
+  /* ---- 10. footer ----
+     เดิมมีแค่โลโก้กับบรรทัด copyright — ไม่มีทางไปต่อ ไม่มีช่องทางติดต่อ และไม่มีทาง
+     กลับมาแก้การตั้งค่าคุกกี้หลังกดเลือกไปแล้ว ทั้งที่หน้ามี cookie banner + GA
+     ป้ายเมนู/ช่องทางติดต่อใช้ข้อความชุดเดียวกับ topnav และ #contact ที่มีอยู่แล้ว */
+  footer { padding: 46px 0 30px; }
+  footer .wrap { display: block; }
+  .footer-main {
+    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 32px; padding-bottom: 26px;
+  }
+  footer .wrap > .footer-main, footer .wrap > .footer-bottom { display: grid; }
+  .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+  .footer-col { display: grid; justify-items: start; align-content: start; gap: 2px; }
+  .footer-head {
+    margin: 0 0 6px; color: var(--brand-mist);
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  }
+  /* min-height 32px = เป้าหมายกดขั้นต่ำ ลิงก์ท้ายหน้าบนมือถืออยู่ชิดกันมาก */
+  .footer-col a {
+    display: inline-flex; align-items: center; min-height: 32px;
+    color: #CBDCD8; font-size: .92rem;
+  }
+  .footer-col a:hover, .footer-col a:focus-visible { color: #fff; text-decoration: underline; }
+  .footer-bottom {
+    grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+    padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .footer-bottom p { margin: 0; }
+  #cookie-manage {
+    min-height: 36px; padding: 7px 16px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,.28); border-radius: var(--ui-radius-btn);
+    color: var(--brand-mist); background: transparent;
+    font: inherit; font-size: .85rem; font-weight: 500;
+    transition: background .125s ease, color .125s ease, border-color .125s ease;
+  }
+  #cookie-manage:hover { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.08); }
+  #cookie-manage:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 2px; }
+  @media (max-width: 760px) {
+    .footer-main { grid-template-columns: 1fr; gap: 26px; }
+    .footer-bottom { grid-template-columns: 1fr; justify-items: start; }
+  }
+
   /* ==========================================================================
      9. #pricing — ยกเครื่อง
      ปัญหาเดิม
@@ -3515,11 +3558,32 @@
 
 <footer>
   <div class="wrap">
-    <div>
-      <strong>JWIC Consulting</strong>
-      <span>Honest Advice, Practical Solution</span>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <strong>JWIC Consulting</strong>
+        <span>Honest Advice, Practical Solution</span>
+      </div>
+      <nav class="footer-col footer-menu" aria-label="เมนูท้ายหน้า">
+        <p class="footer-head">เมนู</p>
+        <a href="#services">บริการ</a>
+        <a href="#features">ฟังก์ชัน</a>
+        <a href="#reports">ตัวอย่างรายงาน</a>
+        <a href="#pricing">แพ็กเกจ</a>
+        <a href="#about">เกี่ยวกับเรา</a>
+        <a href="#articles">บทความ</a>
+      </nav>
+      <div class="footer-col footer-reach">
+        <p class="footer-head">ติดต่อ</p>
+        <a href="tel:0841487480">084-148-7480</a>
+        <a href="https://line.me/ti/p/~0841487480" target="_blank" rel="noopener">LINE 0841487480</a>
+        <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a>
+        <a href="#contact">ติดต่อเรา</a>
+      </div>
     </div>
-    <p>© 2026 Business Central Consulting &amp; Thai Localization</p>
+    <div class="footer-bottom">
+      <p>© 2026 Business Central Consulting &amp; Thai Localization</p>
+      <button type="button" id="cookie-manage">จัดการคุกกี้</button>
+    </div>
   </div>
 </footer>
 
@@ -3895,8 +3959,16 @@
     loadGA();
   });
   document.getElementById('cookie-decline').addEventListener('click', () => {
+    const hadConsent = localStorage.getItem('ga_consent') === 'granted';
     localStorage.setItem('ga_consent', 'denied');
     cookieBar.hidden = true;
+    // ถอนความยินยอมหลังจาก GA โหลดไปแล้ว — สคริปต์ยังอยู่ในหน้า ต้องรีโหลดถึงจะหยุดเก็บจริง
+    if (hadConsent) location.reload();
+  });
+  // ปุ่ม "จัดการคุกกี้" ท้ายหน้า — เดิมกดยอมรับ/ปฏิเสธไปแล้วกลับมาแก้ไม่ได้เลย
+  document.getElementById('cookie-manage').addEventListener('click', () => {
+    cookieBar.hidden = false;
+    document.getElementById('cookie-accept').focus();
   });
 
   // วัดผล Lead หลังได้รับ consent แล้วเท่านั้น
@@ -4100,10 +4172,21 @@
     ['#cookie-bar p', 'We use optional analytics cookies (Google Analytics) to measure performance and improve this site — choose “Reject All” to continue without tracking.', 'เราใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อวัดประสิทธิภาพและปรับปรุงเว็บไซต์ — เลือก “ปฏิเสธทั้งหมด” เพื่อใช้งานต่อโดยไม่มีการติดตาม'],
     ['#cookie-accept', 'Accept All', 'ยอมรับทั้งหมด'],
     ['#cookie-decline', 'Reject All', 'ปฏิเสธทั้งหมด'],
+    ['#cookie-manage', 'Cookie settings', 'จัดการคุกกี้'],
+    ['.footer-menu .footer-head', 'Menu', 'เมนู'],
+    ['.footer-menu a[href="#services"]', 'Services', 'บริการ'],
+    ['.footer-menu a[href="#features"]', 'Features', 'ฟังก์ชัน'],
+    ['.footer-menu a[href="#reports"]', 'Reports', 'ตัวอย่างรายงาน'],
+    ['.footer-menu a[href="#pricing"]', 'Pricing', 'แพ็กเกจ'],
+    ['.footer-menu a[href="#about"]', 'About', 'เกี่ยวกับเรา'],
+    ['.footer-menu a[href="#articles"]', 'Articles', 'บทความ'],
+    ['.footer-reach .footer-head', 'Contact', 'ติดต่อ'],
+    ['.footer-reach a[href="#contact"]', 'Contact us', 'ติดต่อเรา'],
   ];
   const I18N_ATTR = [
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
     ['.profile-quote', 'lang', 'en'],
+    ['.footer-menu', 'aria-label', 'Footer menu'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
   ];
