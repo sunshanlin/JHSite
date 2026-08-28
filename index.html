@@ -2434,6 +2434,256 @@
     .cmp td:last-child::before { color: var(--brand-mist); }
   }
 
+
+  /* ==========================================================================
+     UX/UI pass — เก็บงานให้กลับมาตรงกับ DESIGN.md ("The Fluent Ledger")
+     วางไว้ท้ายสุดของชั้น --ui-* เพราะชั้นนี้คือชั้นที่ชนะ (ดู DESIGN.md → Do's)
+     ========================================================================== */
+
+  /* ---- 1. เก็บ border-radius ที่หลุดระบบ ----
+     ก่อนแก้หน้ามี radius 17 ค่า (6/9/10/11/12/14/16/17/18/20/22/24/28px …)
+     ระบบมีแค่ 3px = ปุ่ม, 8px = การ์ด (50% avatar / 999px badge ยังใช้ได้) */
+  .tip,
+  .step,
+  .service-highlight,
+  .service-highlight .poster a,
+  .feature-tablist,
+  .feature-panel,
+  .feature-panel-icon,
+  .slider figure,
+  .cmp-wrap,
+  .faq-list details,
+  .plan-card,
+  .plan-price-box,
+  .plan-assurance,
+  .pricing-excludes { border-radius: var(--ui-radius-card); }
+
+  .feature-tab,
+  .plan-icon,
+  .chat-fab-tip,
+  .pricing-cta,
+  .faq-list summary::before { border-radius: var(--ui-radius-btn); }
+
+  /* รอบสอง: ที่เหลือจากการไล่ครั้งแรก (#about, #contact, cookie bar, hero doc, slider) */
+  .doc-card, .doc-mini,
+  .bento-shot,
+  .slider figure > a, .slider figure img,
+  .profile-panel, .about-block, .credential-gallery,
+  .contact-grid,
+  .cookie-bar { border-radius: var(--ui-radius-card); }
+
+  /* รอบสาม: ตัวที่ specificity สูงกว่าจึงยังไม่ถูกทับ */
+  .bento-shot a, .bento-shot img,
+  #about .profile-panel,
+  .service-highlight .poster img { border-radius: var(--ui-radius-card); }
+  .service-highlight .text-link,
+  .credential-gallery-title .heading-icon { border-radius: var(--ui-radius-btn); }
+  /* เงาฟุ้งนอก hero — DESIGN.md สงวนเงานุ่มกว้างไว้ให้ฉากเอกสารใน hero เท่านั้น */
+  .bento-shot a { box-shadow: var(--ui-shadow); }
+
+  .skip-link, .menu-toggle, .step-icon, .heading-icon,
+  .text-link, .linkedin-link, .credential-sample,
+  .cookie-bar button { border-radius: var(--ui-radius-btn); }
+
+  /* ---- 2. ผิวที่ควรแบน — เลิก gradient / เงาฟุ้ง / ยกตัวตอน hover ---- */
+
+  /* .tip: ขอบซ้ายเดิมเป็น --cyan ซึ่งอยู่นอกจานสีแบรนด์ → Editorial Pink ตามระบบ */
+  .tip {
+    border: 1px solid var(--ui-line); border-left: 3px solid var(--brand-pink-deep);
+    background: var(--brand-ivory); background-image: none;
+  }
+
+  /* แท็บฟังก์ชัน: เดิมเป็นแคปซูล 999px + gradient ฟ้า–เขียว + ยกตัว
+     → segmented control แบบ Fluent เหลี่ยม แบน สีสถาบันสีเดียว */
+  .feature-tablist { padding: 4px; border-color: var(--ui-line); background: #fff; }
+  .feature-tab { font-weight: 500; transition: color .125s ease, background .125s ease; }
+  .feature-tab:hover { color: var(--ui-ink); background: rgba(1,47,42,.06); }
+  .feature-tab[aria-selected="true"] {
+    color: #fff; background: var(--brand-deep); background-image: none;
+    box-shadow: none; transform: none;
+  }
+  .feature-tab[aria-selected="true"]::after { display: none; }
+  .feature-tab:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+
+  .feature-panel { border-color: var(--ui-line); box-shadow: var(--ui-shadow); }
+  .feature-panel-icon { background: var(--brand-teal); background-image: none; box-shadow: none; }
+  /* เดิมสูง 16px — ต่ำกว่าเป้าหมายกดขั้นต่ำ 24px (WCAG 2.5.8 Target Size) */
+  .feature-link { display: inline-flex; align-items: center; min-height: 32px; }
+
+  /* ---- 3. #services: ลำดับความสำคัญของ 5 เฟสกลับด้าน ----
+     เดิมชื่อเฟสอังกฤษ 1.06rem เด่นกว่าคำอธิบายไทย .85rem ทั้งที่คนอ่านเป็นคนไทย
+     สลับให้ อังกฤษ = label ตัวเล็ก (คงสี --ms-* ตาม Quotation Rule), ไทย = หัวข้อจริง */
+  #services .steps .step h3 {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--stage-text);
+  }
+  #services .steps .step h3 span {
+    margin-top: 9px; color: var(--ui-ink);
+    font-size: 1.05rem; font-weight: 500; letter-spacing: -.025em;
+  }
+  /* เฟสที่ยังไม่ถึงถูกหรี่ opacity .82 — อ่านเป็น "ใช้ไม่ได้" ทั้งที่ทั้ง 5 เฟสคือของที่ขาย */
+  .step, .step.is-current, .step.is-complete { opacity: 1; }
+  /* .steps .step (บรรทัด 1485) specificity สูงกว่า .step เปล่า — ต้องเขียนคู่กันถึงจะทับพื้นไล่สีได้ */
+  .steps .step { background: #fff; background-image: none; }
+  .step {
+    background: #fff; background-image: none; box-shadow: var(--ui-shadow);
+    border-color: var(--ui-line);
+    /* border-top สีเฟสที่ตั้งไว้บรรทัด 434 ถูก border-color บรรทัด 944 ทับตายไป — คืนกลับมา */
+    border-top: 3px solid var(--phase);
+  }
+  .step::after { display: none; }                       /* มุมขวาบนไล่สี — decorative ล้วน */
+  .step:hover { transform: none; box-shadow: var(--ui-shadow); border-color: var(--ui-line); border-top-color: var(--phase); }
+  .step.is-current { transform: none; box-shadow: var(--ui-shadow); border-color: var(--brand-jade); border-top-color: var(--phase); }
+  .steps-progress { background: var(--brand-pale); }
+  .steps-progress span { background: var(--brand-jade); background-image: none; box-shadow: none; }
+
+  /* ---- 4. #reports: ปุ่มเลื่อนทับเนื้อสไลด์ และสไลด์ถูกตัดขอบซ้าย–ขวา ---- */
+  .slider { padding: 0 40px 14px; scroll-padding-inline: 40px; }
+  .snav {
+    color: var(--brand-teal); background: #fff; border-color: var(--ui-line);
+    box-shadow: var(--ui-shadow); transition: background .125s ease;
+  }
+  .snav:hover { transform: translateY(-50%); background: rgba(1,47,42,.06); box-shadow: var(--ui-shadow); }
+  .snav:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+  .slider figure { border-color: var(--ui-line); box-shadow: var(--ui-shadow); }
+  .slider figcaption { color: var(--ui-ink); }
+  /* object-fit: cover + object-position: top ตัดภาพทั้งซ้ายและขวา — ชื่อบริษัท/เมนูซ้ายหายไป
+     ยึดมุมซ้ายบนแทน ส่วนที่อ่านแล้วได้ความหมายจะอยู่ครบเสมอ */
+  .slider img { object-position: left top; }
+
+  /* ---- 5. #faq: หัวข้อชิดซ้าย แต่บล็อกคำถามจัดกึ่งกลาง → ขอบสองข้างไม่ตรงกัน ---- */
+  .faq-list { max-width: none; margin: 0; }
+  .faq-list details > p { max-width: 80ch; }
+
+  /* ---- 6. #articles: 6 บทความบนกริด 4 คอลัมน์ → แถวท้ายเหลือ 2 ใบ ว่างครึ่งแถว ---- */
+  @media (min-width: 981px) {
+    #articles .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  /* ---- 7. hero บนมือถือ ----
+     ชั้น --ui-* นี้ตั้ง header{min-height:640px;padding:120px 0 72px} ไว้แบบไม่มี media query
+     จึงไปทับกฎมือถือที่บรรทัด 1316/1359 (มาก่อนในไฟล์) — เกิดที่ว่างเปล่า ~230px เหนือหัวเรื่อง */
+  @media (max-width: 900px) { header { min-height: 0; padding: 56px 0 72px; } }
+  @media (max-width: 560px) { header { padding: 40px 0 56px; } }
+
+  /* ---- 8. ปุ่มแชทลอย ----
+     บนมือถือ ป้าย "สอบถาม คลิก" ทับปุ่ม "ดูราคาแพ็กเกจ" ใน hero พอดี — เหลือแค่ปุ่มกลม */
+  .chat-fab-btn {
+    background: var(--brand-deep); background-image: none;
+    box-shadow: var(--ui-shadow); transition: background .125s ease;
+  }
+  .chat-fab-btn:hover { transform: none; background: var(--brand-teal); }
+  .chat-fab-btn:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+  .chat-fab-tip { background: var(--brand-deep); box-shadow: var(--ui-shadow); }
+  .chat-fab-tip::after { border-top-color: var(--brand-deep); }
+  @media (max-width: 760px) {
+    .chat-fab { right: 14px; bottom: 14px; }
+    .chat-fab-tip { display: none; }
+    .chat-fab-btn { width: 50px; height: 50px; }
+  }
+
+  /* ==========================================================================
+     9. #pricing — ยกเครื่อง
+     ปัญหาเดิม
+       (ก) .pricing-cta รับ text-decoration: underline มาจากกฎ a ทั่วไป + เป็น gradient
+           + ยกตัว 2px ตอน hover — ผิด "Don't put a gradient on a button" และ No Hover Lift
+       (ข) แบนเนอร์หัวการ์ดเป็นเบอร์กันดี ทั้งที่กดไม่ได้ — ผิด Burgundy Toll Rule และ
+           แย่งสายตากับปุ่มเบอร์กันดีในการ์ดใบเดียวกัน
+       (ค) 2 ใบพื้นเข้ม + 1 ใบพื้นสว่าง + กรอบครอบ 2 ใบซ้ายที่ไม่มีป้ายกำกับ → เทียบราคายาก
+           และใบที่ต่างจากพวก (On-Demand) กลับเด่นที่สุดทั้งที่เป็นแพ็กเกจเล็กสุด
+       (ง) ใช้ min-height ฮาร์ดโค้ด 6 จุด (77px/100px/225px/7rem/3.8rem) ดันให้ราคา–ปุ่ม
+           ตรงระดับกัน — ต้องวัดใหม่ทุกครั้งที่แก้ข้อความหรือฟอนต์
+     ทางแก้: ผิวเดียวกันทั้ง 3 ใบ + subgrid ให้แต่ละแถวจัดตัวเองจากเนื้อหาจริง
+     ========================================================================== */
+
+  /* พื้น #pricing เดิมมี radial เบอร์กันดี+เขียวจาง ๆ ซ้อนอยู่ — ผิด The Paper Rule
+     (พื้นต้องเป็นงาช้าง/ขาว/cool page เท่านั้น ไม่ใช่ tint ของสีเน้น) */
+  #pricing { background: linear-gradient(180deg, #fbfaf6 0%, var(--brand-ivory-deep) 100%); }
+
+  /* กรอบครอบ 2 ใบซ้ายไม่มีป้ายบอกว่าคืออะไร — ยุบทิ้ง ให้ทั้งสามใบอยู่บนกริดเดียว เทียบตรง ๆ */
+  .plan-group, .plan-group-cards { display: contents; }
+  .plan-ondemand { margin-top: 0; }
+  /* 3 คอลัมน์เฉพาะจอกว้าง — ต่ำกว่า 1081px ยังคง stack ใบเดียวต่อแถวตามกฎเดิมบรรทัด 2056 */
+  @media (min-width: 1081px) {
+    .pricing-plans { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; max-width: none; }
+  }
+
+  /* ผิวเดียวกันทั้งสามใบ: กระดาษขาว ขอบเส้นผม เงาเส้นผม มุม 8px */
+  .plan-card {
+    border: 1px solid var(--brand-pale);
+    background: #fff; background-image: none;
+    box-shadow: var(--ui-shadow);
+  }
+  /* ใบที่มีส่วนลด = ใบเด่น — ขอบ deep teal รอบใบ (เส้นบนมองไม่เห็นเพราะแบนเนอร์ทับ)
+     ไม่ใช้เบอร์กันดีทำเครื่องหมาย เพราะเบอร์กันดีสงวนไว้ให้ปุ่มอย่างเดียว */
+  .plan-loc { border-color: var(--brand-deep); }
+
+  /* แบนเนอร์: เดิม gradient เบอร์กันดี/เขียว → แถบ deep teal ทึบ สีเดียวกันทั้งสามใบ */
+  .plan-banner, .plan-dark .plan-banner, .plan-ondemand .plan-banner {
+    color: #fff; background: var(--brand-deep); background-image: none;
+    font-weight: 600; letter-spacing: .02em;
+  }
+  .plan-icon { border-color: rgba(255,255,255,.26); background: rgba(255,255,255,.12); }
+
+  /* คืนสีตัวหนังสือให้พื้นขาว — กฎ .plan-dark ชุดเดิมตั้งไว้สำหรับพื้นเข้ม */
+  .plan-dark .plan-name { color: var(--brand-deep); }
+  .plan-dark .plan-desc { color: var(--ui-muted); }
+  .plan-dark .plan-price-prefix { color: var(--brand-teal); }
+  .plan-dark .plan-price-was { color: var(--ui-muted); opacity: 1; }
+  .plan-dark .plan-price-line strong,
+  .plan-full .plan-price-quote { color: var(--brand-deep); }
+  .plan-dark .plan-price-line strong sup,
+  .plan-full .plan-price-quote sup { color: var(--brand-burgundy); }
+  .plan-dark .plan-currency, .plan-dark .plan-note { color: var(--ui-muted); }
+  .plan-dark .plan-list-head { color: var(--brand-deep); border-top-color: var(--ui-line); }
+  .plan-dark .plan-features li { color: var(--ui-muted); }
+  .plan-dark .plan-features li::before { color: var(--brand-jade); }
+  .plan-dark .plan-more > summary:hover { color: var(--brand-burgundy-dark); }
+  .plan-dark .plan-assurance {
+    border-color: var(--ui-line); background: var(--brand-ivory); color: var(--ui-muted);
+  }
+  .plan-dark .plan-assurance strong { color: var(--brand-burgundy-dark); }
+  .plan-list-head, .plan-more > summary { min-height: 32px; }
+  .plan-more > summary:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 3px; }
+
+  /* หมายเหตุท้าย section ให้กว้างเท่ากริดการ์ด ไม่ใช่แคบกว่าแบบลอย ๆ */
+  @media (min-width: 1081px) { .pricing-excludes { max-width: none; margin-top: 22px; } }
+
+  /* บล็อกราคา: กล่องกระดาษงาช้าง ขอบเส้นผม ไม่ใช้ tint สีเน้น */
+  .plan-price-box, .plan-dark .plan-price-box {
+    border: 1px solid var(--brand-pale);
+    background: var(--brand-ivory); background-image: none;
+  }
+
+  /* ปุ่ม: เหลี่ยม 3px เบอร์กันดีทึบ ไม่มีขีดเส้นใต้ ไม่มี gradient เปลี่ยนแค่พื้นตอน hover */
+  .pricing-cta {
+    text-decoration: none; font-weight: 500;
+    color: #fff; background: var(--brand-burgundy); background-image: none;
+    box-shadow: none; transition: background .125s ease;
+  }
+  .pricing-cta:hover { transform: none; box-shadow: none; background: var(--brand-burgundy-dark); }
+  .pricing-cta:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+
+  /* แถวจัดตัวเองด้วย subgrid — แบนเนอร์ / ชื่อ / คำอธิบาย / ราคา / หมายเหตุ / ปุ่ม
+     ตรงระดับกันจากเนื้อหาจริง ไม่ต้องพึ่ง min-height ที่วัดด้วยมือ */
+  @supports (grid-template-rows: subgrid) {
+    @media (min-width: 1081px) {
+      .pricing-plans { grid-template-rows: repeat(7, auto); align-items: stretch; }
+      .plan-card { display: grid; grid-row: span 7; grid-template-rows: subgrid; }
+      .plan-banner { grid-row: 1; }
+      .plan-body { display: grid; grid-row: 2 / span 6; grid-template-rows: subgrid; }
+      .plan-name  { grid-row: 1; }
+      .plan-desc  { grid-row: 2; }
+      .plan-price { grid-row: 3; display: flex; flex-direction: column; }
+      .plan-price-box { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+      .plan-note  { grid-row: 4; }
+      .plan-card .pricing-cta { grid-row: 5; }
+      .plan-more  { grid-row: 6; align-self: start; }
+      /* min-height ฮาร์ดโค้ดทั้งชุดไม่ต้องใช้แล้ว */
+      .plan-name, .plan-desc, .plan-loc .plan-note,
+      .plan-loc .plan-price, .plan-full .plan-price, .plan-ondemand .plan-price { min-height: 0; }
+    }
+  }
 </style>
 </head>
 <body>
@@ -2688,13 +2938,14 @@
 
 <section id="features">
   <div class="wrap">
+    <p class="section-kicker">Built for Thai business</p>
+    <h2>JWIC Thai Localization for Business Central</h2>
+    <p class="sub">Extension สำหรับ Business Central ที่พัฒนาเพื่อธุรกิจไทยโดยเฉพาะ ครอบคลุมภาษี เอกสาร และงานบัญชีที่ใช้จริงทุกวัน</p>
+    <!-- คำนิยาม Localization ย้ายมาไว้ใต้หัวข้อ — เดิมลอยอยู่เหนือ kicker ผู้อ่านยังไม่รู้ว่ากำลังอยู่ section ไหน -->
     <div class="tip reveal">
       <b>💡 Localization คืออะไร?</b>
       <p>การปรับระบบการทำงานมาตรฐานให้รองรับกฎหมาย ภาษา เอกสาร และวิธีการทำงาน ซึ่งแตกต่างกันไปในแต่ละประเทศ</p>
     </div>
-    <p class="section-kicker">Built for Thai business</p>
-    <h2>JWIC Thai Localization for Business Central</h2>
-    <p class="sub">Extension สำหรับ Business Central ที่พัฒนาเพื่อธุรกิจไทยโดยเฉพาะ ครอบคลุมภาษี เอกสาร และงานบัญชีที่ใช้จริงทุกวัน</p>
     <div class="feature-tabs reveal">
       <div class="feature-tab-scroll">
         <div class="feature-tablist" role="tablist" aria-label="ฟังก์ชัน JWIC Localization">
@@ -3189,7 +3440,7 @@
     <h2>คำถามที่พบบ่อย</h2>
     <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
     <div class="faq-list">
-      <details class="reveal">
+      <details class="reveal" open>
         <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
         <p>Business Central สามารถใช้งานร่วมกับ JWIC Localization เพื่อรองรับข้อกำหนดด้านภาษีอากรและเอกสารสำหรับธุรกิจในประเทศไทยได้อย่างครบถ้วน โดยครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</p>
         <p>นอกจากนี้ ยังรองรับภาษีหัก ณ ที่จ่าย หนังสือรับรอง 50 ทวิ ไฟล์สำหรับนำเข้า RD Prep ระบบใบวางบิล และฟอร์มเอกสารที่จำเป็นต่อการดำเนินงาน</p>

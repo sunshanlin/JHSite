@@ -182,7 +182,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 
 A single 1180px container (`.wrap`) with 28px gutters, holding a 13-section vertical scroll under a sticky nav. Sections are 72px tall in padding with `scroll-margin-top: 58px` and `scroll-padding-top: 76px` so anchored jumps clear the sticky bar.
 
-Content grids are `repeat(auto-fit, minmax(260px, 1fr))` at 22px gaps — the column count is a consequence of width, not a fixed number. The hero is the one bespoke grid: `1.15fr .85fr` at 56px, collapsing to a single column at 900px.
+Content grids are `repeat(auto-fit, minmax(260px, 1fr))` at 22px gaps — the column count is a consequence of width, not a fixed number. `#articles` is the exception: it is pinned to 3 columns above 981px, because auto-fit gave 4 columns to 6 cards and left a half-empty last row. The hero is the one bespoke grid: `1.15fr .85fr` at 56px, collapsing to a single column at 900px.
 
 Alternating ground is the primary rhythm device: `section.alt` takes the warm ivory gradient, everything else sits on cool page. Two sections break out entirely — `#contact` and `#faq` share a deep-teal gradient ground, and `#about` runs on its own dark gradient in English.
 
@@ -208,11 +208,11 @@ The soft, wide, low-opacity shadows are reserved for the hero's floating documen
 
 **The Hero-Only Lift Rule.** Soft wide shadows exist to say "this is paper on a desk." They belong to the hero document scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.
 
-**The No Hover Lift Rule.** `.cta` explicitly kills `transform` and `box-shadow` on hover and changes background only, in 125ms. Buttons do not rise. Cards still lift 5px, which is a live inconsistency the system has not yet resolved.
+**The No Hover Lift Rule.** `.cta` explicitly kills `transform` and `box-shadow` on hover and changes background only, in 125ms. Buttons do not rise. `.pricing-cta`, `.snav`, `.chat-fab-btn` and the `#services` phase cards have been brought in line. `.card` still lifts 5px, which is the one remaining inconsistency.
 
 ## Shapes
 
-Sharp by default. Buttons are 3px — barely rounded, deliberately close to square, matching Fluent's button geometry. Cards and panels are 8px. These two values are the system; the file contains a long tail of legacy radii (9, 10, 12, 14, 16, 18, 20, 22, 24, 28px) from earlier passes that the `--ui-radius-*` layer has only partly reclaimed.
+Sharp by default. Buttons are 3px — barely rounded, deliberately close to square, matching Fluent's button geometry. Cards and panels are 8px. These two values are the system, and the reclaim block at the end of the `--ui-*` layer now maps the whole legacy tail (6, 9, 10, 11, 12, 14, 16, 17, 18, 20, 22, 24, 28px) onto them. What is left off-system is deliberate and decorative: the 4px `.doc-line` bars inside the hero document mock, and two inline SVG frames.
 
 Full rounds survive in two justified places: `50%` for avatars, social buttons, and icon dots, and `999px` for badges and pills.
 
@@ -247,6 +247,12 @@ The hero contributes the system's one piece of geometry: a `200px` bottom-left r
 - **Language toggle:** two small outlined buttons; the active one fills Deep Teal
 - **Mobile (≤760px):** collapses to a bordered hamburger; the link list animates open via `max-height` + opacity in 220ms
 
+### Price Cards (signature)
+
+Three `.plan-card` surfaces in `#pricing`, identical by design: white ground, 1px Pale Edge, 8px, Hairline. A flat Deep Teal banner runs across the top of each — the banner is a label, not a control, so it never takes burgundy; the only burgundy in the section is the one `.pricing-cta` per card. The discounted plan is marked by a Deep Teal border on the card, nothing louder.
+
+Above 1081px the three cards are direct children of one grid (`.plan-group` and `.plan-group-cards` go `display: contents`) and each card subgrids the parent's seven rows — banner, name, description, price, note, CTA, details. Rows therefore align from real content. **Do not reintroduce `min-height` to line the cards up**: six hand-measured values used to do this job and had to be re-measured every time the copy or the font changed.
+
 ### Feature Tabs (signature)
 Six tabs (`#feature-tab-vat` … `#feature-tab-api`) switching six panels in `#features`. Panel copy enters with `panelCopyIn` — 550ms on `cubic-bezier(.2,.75,.2,1)`, 80ms delay. This is the page's main interactive proof surface: it is where the localization package stops being a list and starts being a thing.
 
@@ -259,7 +265,7 @@ A rotated `.doc-card` Thai tax invoice built entirely in CSS — no image — su
 This is the single most product-specific element on the site. It is the localization package, drawn. Do not replace it with stock imagery or a generic dashboard screenshot.
 
 ### Success by Design Stepper (signature)
-Five `.step` items in `#services`, each carrying a `--phase` token from the teal ramp and a `--stage-text` token from the Microsoft hues. A `.steps-progress` bar fills across them with a three-stop gradient and a soft glow; the current step pulses on a 1.8s `stepPulse`.
+Five `.step` items in `#services`, each carrying a `--phase` token from the teal ramp and a `--stage-text` token from the Microsoft hues. A `.steps-progress` bar fills across them in flat Jade on a Pale Edge track; the current step pulses on a 1.8s `stepPulse`. The English stage name is set as a Label (12px/600/0.08em) in its Microsoft hue and the Thai line under it is the Title — the Thai reader's sentence carries the hierarchy, not the borrowed English word.
 
 ### Motion
 One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine times for entrances and reveals. State changes are faster and linear-ish (125–250ms `ease`). Six `prefers-reduced-motion: reduce` blocks disable animation, transitions, and the float loops — this coverage is a system commitment, not an optional extra.
