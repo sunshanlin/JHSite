@@ -37,6 +37,7 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 | Microsoft pitch deck | `C:\Users\Admin\OneDrive\Other\My Knowledge\Slide` (เปิดอ่านอย่างเดียว ไม่เคยถูกแก้) |
 | ราคา | `C:\Users\Admin\OneDrive\Desktop\JWIC-Proposal_3.xlsx` sheet `Pricing` |
 | ภาพหน้าจอ BC + โลโก้ | `D:\Web\promote-site\img` |
+| รูปคนบนหน้าปก `JWIC-BC-Core` | ผู้ใช้จัดหามาเอง (29 ส.ค. 2026 · ที่มายังไม่ได้จด) — แทนรูปสต็อกที่มากับ deck ของ Microsoft ห้ามใช้ซ้ำ · ตัวเลือกสำรองที่คัดไว้แล้ว: Pexels 7964413, 7430331 |
 
 **ราคาอ่านจาก Excel ตอน build** ไม่ได้ก๊อปตัวเลขมาแปะ แก้ราคาใน Excel แล้ว rerun สไลด์อัปเดตตาม
 เสนอราคาลูกค้ารายใหม่ = แก้ Excel + rerun ไม่ต้องแตะสไลด์
