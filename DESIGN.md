@@ -12,13 +12,14 @@ colors:
   brand-burgundy: "#A63A56"
   brand-burgundy-dark: "#7D2440"
   brand-pink: "#E08CA2"
+  brand-pink-soft: "#EFA9BB"
   brand-pink-deep: "#C25470"
   brand-ivory: "#fbf8f1"
   brand-ivory-deep: "#f6f1e5"
   hero-canvas: "#EFEFE9"
   ui-page: "#f6f8f7"
   ui-ink: "#10241F"
-  ui-muted: "#5C736E"
+  ui-muted: "#516661"
   ui-line: "#E2E8E6"
   ms-navy: "#153A73"
   ms-blue: "#0078D4"
@@ -136,7 +137,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 - **Sage** (`#739B97`) and **Mist** (`#A6C0BD`): the pale end of the teal ramp. Sage closes the progress gradient and fills the fifth phase; Mist carries kickers on dark grounds.
 
 ### Tertiary
-- **Editorial Pink** (`#E08CA2`) and **Deep Rose** (`#C25470`): burgundy's quieter relatives. Section kickers, the hero tagline, the contact arrow, the `.tip` left rule. They signal "this is an aside" without spending an action color.
+- **Editorial Pink** (`#E08CA2`) and **Deep Rose** (`#C25470`): burgundy's quieter relatives. The hero tagline, the contact arrow, the `.tip` left rule. They signal "this is an aside" without spending an action color. Neither reaches 4.5:1 on the deep-teal grounds, so on dark they hand off to **Soft Pink** (`#EFA9BB`, 5.38:1 on Signing Teal), which carries every kicker in `#about`, `#contact` and the service highlight.
 - **Microsoft Stage Hues** (`#0078D4` blue, `#498205` green, `#008272` teal, `#0078A8` cyan, `#9A6700` gold): the five Success by Design phase labels in `#services`, and nothing else. They are a quotation from Microsoft, so they are used at Microsoft's values.
 
 ### Neutral
@@ -144,12 +145,14 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 - **Warm Ivory** (`#fbf8f1` → `#f6f1e5`): every `section.alt`, as a soft vertical gradient. This is what stops the page from reading as a dashboard.
 - **Cool Page** (`#f6f8f7`): the default `body` ground under the non-alt sections.
 - **Ink Green-Black** (`#10241F`): all headings and body text. Not pure black — a green-cast near-black that sits inside the teal family.
-- **Slate Sage** (`#5C736E`): kickers, hero lead, secondary description text.
+- **Slate Sage** (`#516661`): kickers, hero lead, secondary description text. Darkened from `#5C736E`, which read 4.40:1 on the hero's Paper Ivory — just under the 4.5:1 floor, on the page's opening paragraph. The current value clears every ground it lands on: 5.31 on Paper Ivory, 5.75 on Cool Page, 6.13 on white.
 - **Hairline** (`#E2E8E6`) and **Pale Edge** (`#D9E4E3`): the only two border values. Cards, inputs, nav underline, icon frames.
 
 ### Named Rules
 
 **The Burgundy Toll Rule.** Burgundy is the price of asking for something. If an element does not want a click, it does not get burgundy — not as a border, not as an icon tint, not as a hover. The nav has exactly one burgundy item; the hero has exactly one; a section has at most one.
+
+**The Contrast Floor Rule.** Every text colour on this page clears WCAG 2.2 AA against the *lightest* ground it can land on — 4.5:1 for body, 3:1 at 24px or 18.66px/700. Where a ground is a gradient, the lightest stop is what counts, which is why `.service-highlight` lost its pink and sage radial washes: they lifted one corner to ~#4B6D6C and dropped three text colours below the floor. A new colour is not "close enough" at 4.4:1. Compute it before committing it.
 
 **The Quotation Rule.** The `--ms-*` hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for `--ms-blue`, it has misunderstood what that token is for.
 
@@ -168,7 +171,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 - **Headline** (500, `clamp(1.9rem, 2.6vw, 2.5rem)`, 1.2, -0.025em): every section `h2`. Four sections (`#services`, `#features`, `#reports`, `#pricing`) center their heading block at `max-width: 720px`; the rest are left-aligned.
 - **Title** (500, 1.08rem, -0.025em): card and feature-panel `h3`. The `#why-us` comparison table is the one exception: group bands run 700/0.95rem in Signing Teal, row labels 600 in Ink, because both must hold their own against the dark Business Central column beside them.
 - **Body** (500, 18px, 1.7): all running copy, Thai and English. Descriptions inside cards drop to 0.95rem but keep weight 500.
-- **Label** (600, 12px, 0.08em): `.section-kicker` above every `h2`, in Slate Sage on light grounds, Mist or Editorial Pink on dark.
+- **Label** (600, 12px, 0.08em): `.section-kicker` above every `h2`, in Slate Sage on light grounds, Mist or Soft Pink on dark.
 
 ### Named Rules
 

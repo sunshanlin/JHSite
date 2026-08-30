@@ -2725,6 +2725,73 @@
       .plan-loc .plan-price, .plan-full .plan-price, .plan-ondemand .plan-price { min-height: 0; }
     }
   }
+
+  /* ==========================================================================
+     WCAG 2.2 AA pass
+     ทุกค่าที่ใส่ในบล็อกนี้คำนวณอัตราส่วนความต่างสีไว้แล้วก่อนเขียน ไม่ได้เดา
+     (ตัวเลขในคอมเมนต์ = ค่าที่วัดได้ กับพื้นหลังที่สว่างที่สุดของบริเวณนั้น)
+     ========================================================================== */
+
+  /* ---- 1.4.3 Contrast (Minimum) — ข้อความ AA ต้อง 4.5:1 (ตัวใหญ่ 3:1) ---- */
+
+  /* --ui-muted เดิม #5C736E บนพื้น hero ivory ได้ 4.40 — ต่ำกว่าเกณฑ์อยู่นิดเดียว
+     แต่ครอบ p.lead ซึ่งเป็นย่อหน้านำของทั้งหน้า #516661 ได้ 5.31 (ivory) / 5.75 (cool) / 6.13 (ขาว) */
+  :root { --ui-muted: #516661; }
+
+  /* เลข 01–05 ในแอคคอร์เดียน: Deep Rose ได้ 4.11 — เปลี่ยนเป็น Jade 4.80
+     ตรงกับที่ DESIGN.md กำหนดให้ Jade เป็นสีตัวนับ 01–05 ของ #why-us อยู่แล้ว */
+  .bento-num { color: var(--brand-jade); }
+
+  /* ---- พื้นเข้ม: ตัวหนังสือที่ยังไม่ถึงเกณฑ์ ---- */
+  #contact .ci-list, #contact .ci-list a, #contact .ci-list span { color: #BFD3D0; }   /* 6.05 */
+  #contact .ci-role { color: #BFD3D0; }                                                /* 6.05 (เดิม 2.94) */
+  #about .profile-role { color: #CBDCD8; }                                             /* 5.63 (เดิม 4.14) */
+  .credential-index { color: var(--brand-mist); }                                      /* 5.84 (เดิม 4.49) */
+  footer span { color: var(--brand-mint); }                                            /* 5.55 (เดิม 4.32) */
+
+  /* kicker ชมพูบนพื้นเข้มทุกจุด: #E08CA2 ได้ 4.10–3.16 แล้วแต่จุด → #EFA9BB ได้ 5.38/4.98 */
+  :root { --brand-pink-soft: #EFA9BB; }
+  #about .section-kicker,
+  #contact .section-kicker,
+  .service-highlight .section-kicker { color: var(--brand-pink-soft); }
+
+  /* .service-highlight: เดิมพื้นเป็น linear + radial ชมพู/เขียวซ้อน ทำให้มุมหนึ่งสว่างถึง ~#4B6D6C
+     ตัวหนังสือบางตัวเหลือ 2.27–2.75 — ตัด wash ทิ้งและจบ gradient ที่ --brand-teal
+     พื้นสว่างสุดกลายเป็น #014A41 ที่คำนวณได้แน่นอน (และแบนขึ้นตาม The Paper Rule) */
+  .service-highlight {
+    background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand-teal) 100%);
+  }
+  .service-highlight .poster figcaption { color: #B7D4D6; }                            /* 6.51 (เดิม 2.75) */
+
+  /* ---- 1.4.11 Non-text Contrast — ขอบที่ "บอกว่านี่คือปุ่ม" ต้อง 3:1 ----
+     เฉพาะ control จริง ๆ ไม่รวมเส้นคั่น/ขอบการ์ดซึ่งไม่ได้ทำหน้าที่ระบุ control */
+  .topnav .lang button { border-color: #667E79; }        /* 4.35 บนขาว (เดิม 1.24) */
+  .snav { border-color: #667E79; }                       /* 4.08 บน cool page (เดิม 1.16) */
+  .slider-play { border-color: #667E79; }                /* 4.08 (เดิม 1.22) */
+  #cookie-manage { border-color: rgba(255,255,255,.45); }/* 4.38 บน #01211D (เดิม 2.49) */
+  #contact .cta.ghost { border-color: rgba(255,255,255,.55) !important; }  /* 4.05 (เดิม 2.46) — สู้ !important ของกฎเดิม */
+  /* #about .linkedin-link (specificity 1,1,0) ทับ .linkedin-link เปล่า ๆ ต้องเขียนให้เท่ากัน */
+  #about .linkedin-link { border-color: rgba(92,201,224,.85); } /* 3.4 บน #185A52 (เดิม 2.68) */
+
+  /* ---- 2.5.8 Target Size (Minimum) — ใหม่ใน WCAG 2.2, ต้อง 24x24 CSS px ----
+     ปุ่มปิดป้ายแชทเดิม 20x22 ไม่เข้าข้อยกเว้นข้อใดเลย (ไม่ใช่ลิงก์ในบรรทัดข้อความ
+     ไม่มีทางเลือกอื่นที่ทำสิ่งเดียวกัน และไม่ใช่ตำแหน่งที่กฎหมาย/การนำเสนอบังคับ) */
+  .chat-fab-tip .tip-close {
+    display: grid; place-items: center;
+    top: 2px; right: 2px; width: 24px; height: 24px; padding: 0;
+    border-radius: var(--ui-radius-btn);
+  }
+  .chat-fab-tip { padding-right: 34px; }
+  .chat-fab-tip .tip-close:hover { background: rgba(255,255,255,.16); }
+  .chat-fab-tip .tip-close:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+
+  /* ---- 1.4.12 Text Spacing ----
+     ผู้ใช้ที่ตั้ง line-height 1.5 / letter-spacing .12em / word-spacing .16em ต้องไม่เสียเนื้อหา
+     วัดแล้ว: .plan-card ถูกตัดข้อความหายไป 23px เพราะ overflow:hidden + บรรทัดราคา nowrap
+     overflow:hidden ที่การ์ดมีไว้ตัดมุมแบนเนอร์ให้โค้งเท่านั้น — ย้ายไปโค้งที่แบนเนอร์เองแทน */
+  .plan-card { overflow: visible; }
+  .plan-banner { border-radius: var(--ui-radius-card) var(--ui-radius-card) 0 0; }
+  .plan-more, .plan-body { min-width: 0; }
 </style>
 </head>
 <body>
