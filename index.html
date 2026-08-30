@@ -2822,8 +2822,25 @@
     .cmp td:last-child .cmp-points { gap: 6px; }
     .cmp td:last-child li { padding-left: 24px; font-size: .9rem; line-height: 1.55; }
     .cmp-points li::before { top: 2px; width: 16px; height: 16px; font-size: .55rem; }
-    /* แถบคั่นกลุ่ม 01–05: ออกจากกรอบการ์ด เป็นหัวเรื่องลอยของช่วง */
-    .cmp .cmp-group th { padding: 16px 4px 10px; background: transparent; border: 0; }
+    /* แถบคั่นกลุ่ม 01–05: แถบเขียวสถาบันเข้ม — สำนวนเดียวกับแบนเนอร์การ์ดราคา
+       ให้สแกนแล้วเห็นรอยต่อของช่วงทันที (ต่างจากแผง BC ในการ์ดซึ่งเป็น --brand-teal) */
+    .cmp .cmp-group th {
+      margin: 6px 0 2px; padding: 11px 14px; border: 0;
+      border-radius: var(--ui-radius-card);
+      background: var(--brand-deep); color: #fff;
+    }
+    .cmp .cmp-group th::before { color: var(--brand-mist); }
+    .cmp .cmp-group .cmp-gic { color: var(--brand-mist); }
+    /* ชื่อหัวข้อบนการ์ด: Signing Teal 700 + แท่ง Jade ซ้าย — แยกจากเนื้อความสีหมึกชัด ๆ
+       (โทนเดียวกับ group band ของตารางเดสก์ท็อปที่ใช้ Signing Teal 700 อยู่แล้ว) */
+    .cmp tbody tr:not(.cmp-group) th {
+      position: relative; padding-left: 18px;
+      color: var(--brand-teal); font-weight: 700;
+    }
+    .cmp tbody tr:not(.cmp-group) th::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--brand-jade);
+    }
   }
 </style>
 </head>
