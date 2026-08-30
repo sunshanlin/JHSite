@@ -2869,6 +2869,14 @@
     .cmp .cmp-group th::before { color: var(--brand-mist); }
     .cmp .cmp-group .cmp-gic { color: var(--brand-mist); }
   }
+
+  /* ---- scrollcraft: กันการปัดแนวนอนไหลไปหาหน้าแม่ ----
+     .slider / .feature-tab-scroll / .slider-thumbs เป็น scroller แนวนอนซ้อนในหน้า
+     ค่า overscroll-behavior-x เดิมเป็น auto — พอปัดสไลด์จนสุดแล้วปัดต่อ ท่าทางจะ
+     ไหลต่อไปที่ตัวหน้า ซึ่งบน iOS Safari กับ Android Chrome คือท่าทาง "ปัดกลับ
+     หน้าก่อนหน้า" ผู้ใช้ที่ไล่ดูรูปตัวอย่างรายงานจนใบสุดท้ายแล้วปัดต่อจึงหลุด
+     ออกจากเว็บไปเลย  contain = หยุดการไหลต่อ แต่ยังเลื่อนในกล่องได้ตามปกติ */
+  .slider, .feature-tab-scroll, .slider-thumbs { overscroll-behavior-x: contain; }
 </style>
 </head>
 <body>
