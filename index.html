@@ -1869,10 +1869,17 @@
   /* ดันใบ On-Demand ลงเท่าขอบกรอบ ทั้งสามใบจะเริ่มระดับเดียวกัน */
   .plan-ondemand { margin-top: 18px; }
   .plan-group-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  /* Chrome breaks Thai mid-word (no dictionary), and word-break: keep-all has no effect on Thai.
-     nowrap + <wbr> is the only lever that holds: breaks land only where the markup allows.
-     Thai only — English text has no <wbr> and must keep wrapping at spaces. */
-  html[lang="th"] #pricing, html[lang="th"] #pricing * { white-space: nowrap; }
+  /* กลไกคัดจุดตัดคำไทย: nowrap + <wbr> (Chrome ตัดกลางคำประสมเช่น ครบ|วงจร,
+     word-break: keep-all ไม่มีผลกับไทย — พิสูจน์แล้วในเครื่อง)
+     แต่ WebKit (Safari และทุกเบราว์เซอร์บน iPhone) ไม่ตัดบรรทัดที่ <wbr> เมื่ออยู่ใต้
+     nowrap — ข้อความไทยทั้ง section ยืดเป็นบรรทัดเดียวล้นจอ เลื่อนซ้ายขวาได้ทั้งหน้า
+     ฐานจึงเป็นการตัดบรรทัดปกติ (ห่อได้ทุกเอนจิน ไม่มีทางล้น) แล้วคืนโหมด nowrap
+     เฉพาะเอนจินที่ทำ <wbr> ถูก โดย gate ด้วยฟีเจอร์ที่มีแต่ Blink (CSS Paint API —
+     Safari/Firefox ไม่เคย ship) ราคาบน iPhone: จุดตัดมาจาก dictionary ของเบราว์เซอร์
+     อาจหั่นกลางคำประสมบ้าง แต่เลย์เอาต์ไม่มีทางพัง */
+  @supports (background: paint(wbr-nowrap-guard)) {
+    html[lang="th"] #pricing, html[lang="th"] #pricing * { white-space: nowrap; }
+  }
   .plan-card {
     display: flex; flex-direction: column; overflow: hidden;
     border: 1px solid rgba(1,74,65,.14); border-radius: 24px;
