@@ -2792,6 +2792,39 @@
   .plan-card { overflow: visible; }
   .plan-banner { border-radius: var(--ui-radius-card) var(--ui-radius-card) 0 0; }
   .plan-more, .plan-body { min-width: 0; }
+
+  /* ---- #why-us มือถือ: แยกเป็นการ์ดรายหัวข้อจริง ๆ ----
+     เดิมทุกแถวถูกคลี่เป็นแถบขาว/เขียวสลับกันชิดติดกัน ~4,200px — หัวข้อใหม่โผล่บน
+     พื้นขาวชิดก้นแผงเขียวของข้อก่อนพอดี เลยอ่านไม่ออกว่าอะไรเป็นของหัวข้อไหน
+     จัดใหม่: หนึ่งหัวข้อ = หนึ่งการ์ด (ชื่อหัวข้อ → แถบ "โปรแกรมบัญชีทั่วไป"
+     พื้นงาช้างแบบย่อบรรทัดเดียวต่อเนื่อง → แผง BC เขียวเข้มปิดท้าย)
+     มีช่องไฟคั่นระหว่างการ์ด และบีบระยะภายในให้แน่นขึ้น */
+  @media (max-width: 760px) {
+    .cmp-wrap { overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .cmp tbody tr:not(.cmp-group) {
+      margin: 0 0 12px; overflow: hidden;
+      border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-card);
+      background: #fff; box-shadow: var(--ui-shadow);
+    }
+    .cmp tbody tr:not(.cmp-group) th {
+      padding: 12px 16px 10px; border-top: 0; border-bottom: 1px solid var(--ui-line);
+      font-size: 1rem; line-height: 1.45;
+    }
+    /* ฝั่ง "ของเดิม": ป้ายกับเนื้อความรวมเป็นย่อหน้าเดียว ประหยัดหนึ่งบรรทัดต่อการ์ด */
+    .cmp td:not(:last-child) {
+      padding: 9px 16px 11px; background: var(--brand-ivory);
+      font-size: .88rem; line-height: 1.6;
+    }
+    .cmp td:not(:last-child)::before { display: inline; margin: 0 7px 0 0; content: attr(data-h) " —"; }
+    .cmp tbody tr:hover td:not(:last-child) { background: var(--brand-ivory); }
+    .cmp td:last-child { margin-top: 0; padding: 11px 16px 13px; }
+    .cmp td:last-child::before { margin-bottom: 6px; }
+    .cmp td:last-child .cmp-points { gap: 6px; }
+    .cmp td:last-child li { padding-left: 24px; font-size: .9rem; line-height: 1.55; }
+    .cmp-points li::before { top: 2px; width: 16px; height: 16px; font-size: .55rem; }
+    /* แถบคั่นกลุ่ม 01–05: ออกจากกรอบการ์ด เป็นหัวเรื่องลอยของช่วง */
+    .cmp .cmp-group th { padding: 16px 4px 10px; background: transparent; border: 0; }
+  }
 </style>
 </head>
 <body>
