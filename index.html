@@ -2620,8 +2620,13 @@
   }
   /* ทะเบียนพาณิชย์ — DBD บังคับให้ผู้ประกอบพาณิชยกิจอิเล็กทรอนิกส์แสดงเลขทะเบียนไว้บนหน้าเว็บ
      เครื่องหมาย DBD Registered (รออนุมัติ) จะมาวางซ้ายบรรทัดนี้ในคอลัมน์เดียวกัน */
-  .footer-legal { margin: 0; color: var(--brand-mist); font-size: .82rem; line-height: 1.65; }
-  .footer-legal b { font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+  /* fine print: น้ำหนักเดียว สีเดียวกับ tagline (--brand-mint 5.55:1 ผ่าน AA) บรรทัดเดียวคั่นด้วย ·
+     สองบรรทัดตัวหนา+สีสว่างเท่าเมนูทำให้แถวล่างลายตา — ข้อมูลตามกฎหมายไม่ต้องแย่งสายตา */
+  .footer-legal {
+    margin: 0; max-width: 76ch;
+    color: var(--brand-mint); font-size: .8rem; line-height: 1.75;
+    font-variant-numeric: tabular-nums;
+  }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
     border: 1px solid rgba(255,255,255,.28); border-radius: var(--ui-radius-btn);
@@ -3729,7 +3734,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260<br>ทะเบียนพาณิชย์เลขที่ <b>1101700150933</b></p>
+      <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · ทะเบียนพาณิชย์เลขที่ 1101700150933</p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
   </div>
@@ -4330,7 +4335,7 @@
     ['.footer-menu a[href="#articles"]', 'Articles', 'บทความ'],
     ['.footer-reach .footer-head', 'Contact', 'ติดต่อ'],
     ['.footer-reach a[href="#contact"]', 'Contact us', 'ติดต่อเรา'],
-    ['.footer-legal', '175 Udomsuk 58, Sukhumvit 103 Road, Bang Na, Bangkok 10260<br>Commercial registration no. <b>1101700150933</b>', '175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260<br>ทะเบียนพาณิชย์เลขที่ <b>1101700150933</b>'],
+    ['.footer-legal', '175 Udomsuk 58, Sukhumvit 103 Road, Bang Na, Bangkok 10260 · Commercial registration no. 1101700150933', '175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · ทะเบียนพาณิชย์เลขที่ 1101700150933'],
   ];
   const I18N_ATTR = [
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
