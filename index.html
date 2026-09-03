@@ -2614,9 +2614,13 @@
   }
   .footer-col a:hover, .footer-col a:focus-visible { color: #fff; text-decoration: underline; }
   .footer-bottom {
-    justify-items: start; align-items: center; gap: 16px;
+    grid-template-columns: 1fr auto; justify-items: start; align-items: center; gap: 16px;
     padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12);
   }
+  /* ทะเบียนพาณิชย์ — DBD บังคับให้ผู้ประกอบพาณิชยกิจอิเล็กทรอนิกส์แสดงเลขทะเบียนไว้บนหน้าเว็บ
+     เครื่องหมาย DBD Registered (รออนุมัติ) จะมาวางซ้ายบรรทัดนี้ในคอลัมน์เดียวกัน */
+  .footer-legal { margin: 0; color: var(--brand-mist); font-size: .82rem; line-height: 1.65; }
+  .footer-legal b { font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
     border: 1px solid rgba(255,255,255,.28); border-radius: var(--ui-radius-btn);
@@ -2628,6 +2632,7 @@
   #cookie-manage:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 2px; }
   @media (max-width: 760px) {
     .footer-main { grid-template-columns: 1fr; gap: 26px; }
+    .footer-bottom { grid-template-columns: 1fr; }
   }
 
   /* ==========================================================================
@@ -3723,6 +3728,7 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <p class="footer-legal">ทะเบียนพาณิชย์เลขที่ <b>1101700150933</b></p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
   </div>
@@ -4323,6 +4329,7 @@
     ['.footer-menu a[href="#articles"]', 'Articles', 'บทความ'],
     ['.footer-reach .footer-head', 'Contact', 'ติดต่อ'],
     ['.footer-reach a[href="#contact"]', 'Contact us', 'ติดต่อเรา'],
+    ['.footer-legal', 'Commercial registration no. <b>1101700150933</b>', 'ทะเบียนพาณิชย์เลขที่ <b>1101700150933</b>'],
   ];
   const I18N_ATTR = [
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
