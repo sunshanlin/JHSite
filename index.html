@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -2615,7 +2615,7 @@
   }
   .footer-col a:hover, .footer-col a:focus-visible { color: #fff; text-decoration: underline; }
   .footer-bottom {
-    grid-template-columns: 1fr auto; justify-items: start; align-items: center; gap: 16px;
+    grid-template-columns: auto 1fr auto; justify-items: start; align-items: center; gap: 16px 20px;
     padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12);
   }
   /* ทะเบียนพาณิชย์ — DBD บังคับให้ผู้ประกอบพาณิชยกิจอิเล็กทรอนิกส์แสดงเลขทะเบียนไว้บนหน้าเว็บ
@@ -2627,6 +2627,15 @@
     color: var(--brand-mint); font-size: .8rem; line-height: 1.75;
     font-variant-numeric: tabular-nums;
   }
+  /* โลโก้ DBD พื้นโปร่งใส สีม่วง/น้ำเงินจมหายบนพื้น footer เข้ม จึงรองด้วยแผ่นขาว
+     รองพื้นอย่างเดียว ไม่แตะสีหรือสัดส่วนของเครื่องหมาย · รูปโหลดจากเซิร์ฟเวอร์ DBD
+     ตาม snippet ที่เขาให้มา เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน */
+  .dbd {
+    display: inline-flex; padding: 8px 12px;
+    background: #fff; border-radius: var(--ui-radius-btn);
+  }
+  .dbd img { display: block; width: 104px; height: auto; }
+  .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
     border: 1px solid rgba(255,255,255,.28); border-radius: var(--ui-radius-btn);
@@ -3734,6 +3743,9 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <a class="dbd" href="https://dbdregistered.dbd.go.th/api/public/shopinfo?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" target="_blank" rel="noopener">
+        <img src="https://dbdregistered.dbd.go.th/api/public/banner?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" width="324" height="154" loading="lazy" alt="DBD Registered — เครื่องหมายรับรองการจดทะเบียนพาณิชย์อิเล็กทรอนิกส์ กรมพัฒนาธุรกิจการค้า">
+      </a>
       <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933</p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
@@ -4341,6 +4353,7 @@
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
     ['.profile-quote', 'lang', 'en'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
+    ['.dbd img', 'alt', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
   ];

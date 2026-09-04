@@ -6,3 +6,7 @@ img/originals/
 
 # Automation screenshots
 output/
+
+# ของจาก DBD / ต้นฉบับงาน — ห้ามขึ้นโฮสต์ (ทุกไฟล์ที่ commit = URL สาธารณะ)
+UserManualSourceCode.pdf
+script.txt
