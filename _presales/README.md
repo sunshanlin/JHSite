@@ -30,6 +30,7 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 | `build\verify.ps1` | assert ก่อนไปเจอลูกค้า ล้มแล้ว exit 1 |
 | `build\add-methodology.ps1` | สร้าง 2 หน้า Fast Implement (ไทม์ไลน์ 10 สัปดาห์ + คำอธิบาย) แทรกหลังหน้า Success by Design · รันซ้ำได้ ลบของเดิมที่ตัวเองสร้างก่อน (รู้จักจากชื่อ shape `fim*`) |
 | `build\methodology-notes.json` | speaker notes ไทยของ 2 หน้านั้น (ไทยห้ามอยู่ใน .ps1) |
+| `build\add-dbd.ps1` | วางป้าย DBD Registered ท้ายหน้า About Us (สไลด์ 2) · รันซ้ำได้ ลบ shape `dbd*` ของเดิมก่อน |
 | `outline\` | ร่าง / สคริปต์พูด |
 
 **แก้เนื้อหาให้แก้ที่ต้นแบบโดยตรง แล้วรัน `verify.ps1`** — `build.ps1` เขียนลง `-rebuild.pptx` ทับต้นแบบไม่ได้
@@ -73,3 +74,11 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 
 <!-- ponytail: ยังไม่ทำ deck เจาะ vertical แยก (Finance-only / Manufacturing-only)
      ถ้าจะทำ ใช้ build.ps1 ตัวเดิม เปลี่ยนแค่ JSON -->
+
+## DBD Registered (หน้า About Us)
+
+`powershell -File build\add-dbd.ps1` แล้วดูด้วยตา `build\shots.ps1 2` — วางป้าย + เส้นคั่น + คำบรรยายเป็นแถวที่ 4 ต่อจาก Microsoft Certifications
+รูปป้ายอยู่ที่ `img\credentials\dbd-registered.png` (โหลดเก็บไว้จาก API ของ DBD — เว็บ hotlink ตัวจริง แต่สไลด์ฝังรูปไม่ได้)
+**สคริปต์เองคือข้อสอบ**: หาสไลด์ไม่เจอหรือไม่มีไฟล์รูป = throw ไม่แตะเด็ค · รันซ้ำได้เสมอ ไม่เกิดป้ายซ้อน
+
+<!-- ponytail: ไม่เพิ่มข้อใน verify.ps1 เพราะมันอ่าน .pptx เป็น zip การไล่หา shape ในสไลด์ที่ n ต้องเขียน mapping ใหม่ทั้งชุด — รัน add-dbd.ps1 ซ้ำได้ผลเท่ากัน -->
