@@ -3,8 +3,8 @@
 # shifts with the customer's questions; a printed clock only makes us late.
 #
 # Composition follows the deck it lives in: the brand panel on the left is the
-# About Us slide's panel in the divider slides' green, and the list on the right
-# uses the same hairline-separated rows as the About Us credential block.
+# About Us slide's own panel and palette (navy, cyan rule, hairline rows),
+# so the two pages read as one spread.
 #
 # Re-runnable: the slide it creates is named JWIC_agenda and is deleted first.
 # ASCII only - PowerShell 5.1 reads .ps1 as ANSI (no Thai in this file).
@@ -42,12 +42,13 @@ function Hex2Ole([string]$h) {
   $b = [Convert]::ToInt32($h.Substring(4,2),16)
   return ($b * 65536) + ($g * 256) + $r      # PowerPoint wants BGR
 }
-$green  = Hex2Ole $cfg.brand.green
-$accent = Hex2Ole $cfg.brand.accent
-$cream  = Hex2Ole $cfg.brand.cream
-$ink    = Hex2Ole '#1F1F1F'
-$rule   = Hex2Ole '#D9DEE8'      # same hairline as the About Us credential rows
-$mute   = Hex2Ole '#4A635C'      # readable on a projector, still behind the topic
+# Microsoft deck theme, sampled off the About Us slide so the two pages match
+# exactly: navy panel, the cyan-teal rule under its title, its hairline rows.
+$navy   = Hex2Ole '#0A1B45'      # About Us panel and its section headings
+$cyan   = Hex2Ole '#1392B4'      # the rule under "About Us"
+$teal   = Hex2Ole '#0E7695'      # its credential icons
+$paper  = Hex2Ole '#FFFFFF'
+$rule   = Hex2Ole '#D9D9E3'      # the hairline between credential rows
 
 function Add-Text($slide, $l, $t, $w, $h, $text, $font, $size, $colour, $space) {
   $tb = $slide.Shapes.AddTextbox(1, [float]$l, [float]$t, [float]$w, [float]$h)
@@ -90,15 +91,15 @@ try {
 
   # --- left brand panel ----------------------------------------------------
   $panel = $slide.Shapes.AddShape(1, 0, 0, $PANEL, 540)
-  $panel.Fill.ForeColor.RGB = $green
+  $panel.Fill.ForeColor.RGB = $navy
   $panel.Line.Visible = 0
 
-  Add-Text $slide $PAD 196 200 16 'TODAY' 'Segoe UI Semibold' 12 $cream 1.6 | Out-Null
+  Add-Text $slide $PAD 196 200 16 'TODAY' 'Segoe UI Semibold' 12 $paper 1.6 | Out-Null
   $r = $slide.Shapes.AddShape(1, $PAD, 226, 64, 3)
-  $r.Fill.ForeColor.RGB = $accent
+  $r.Fill.ForeColor.RGB = $cyan
   $r.Line.Visible = 0
-  Add-Text $slide $PAD 246 210 56 'Agenda' 'Segoe UI Light' 40 $cream 0 | Out-Null
-  Add-Text $slide $PAD 468 220 20 $cfg.brand.company 'Segoe UI Semibold' 12 $cream 0.4 | Out-Null
+  Add-Text $slide $PAD 246 210 56 'Agenda' 'Segoe UI Light' 40 $paper 0 | Out-Null
+  Add-Text $slide $PAD 468 220 20 $cfg.brand.company 'Segoe UI Semibold' 12 $paper 0.4 | Out-Null
 
   # --- topic list ----------------------------------------------------------
   for ($n = 0; $n -lt $ITEMS.Count; $n++) {
@@ -108,8 +109,8 @@ try {
       $ln.Line.ForeColor.RGB = $rule
       $ln.Line.Weight = [single]0.75
     }
-    Add-Text $slide $LX ($y + 3) $NUMW 18 ('{0:00}' -f ($n + 1)) 'Segoe UI' 12 $mute 1.2 | Out-Null
-    Add-Text $slide ($LX + $NUMW) $y (900 - $LX - $NUMW) 24 $ITEMS[$n] 'Segoe UI Semibold' 17 $ink 0 | Out-Null
+    Add-Text $slide $LX ($y + 3) $NUMW 18 ('{0:00}' -f ($n + 1)) 'Segoe UI' 12 $teal 1.2 | Out-Null
+    Add-Text $slide ($LX + $NUMW) $y (900 - $LX - $NUMW) 24 $ITEMS[$n] 'Segoe UI Semibold' 17 $navy 0 | Out-Null
   }
 
   $logo = Join-Path $cfg.imgRoot $cfg.logo.file
