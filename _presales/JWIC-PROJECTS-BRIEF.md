@@ -13,7 +13,7 @@ JWIC Consulting — รับพัฒนา/วางระบบ **Microsoft D
 
 ## โปรเจกต์ 4 ตัว
 
-### 1. JHPresales (`d:\JHPresales`) — เด็ค PowerPoint presales
+### 1. Presales (`_presales/` ใน repo promote-site) — เด็ค PowerPoint presales
 - ประกอบเด็คจาก Microsoft pitch deck ด้วยสคริปต์ PowerShell (COM) — ไม่แก้ .pptx มือ แก้ที่ `build\deck-core.json` แล้ว rerun
 - ผลลัพธ์ `decks\JWIC-BC-Core.pptx`: 76 หน้า ฉายจริง 22 หน้า ที่เหลือซ่อนไว้ตอบ Q&A
 - ราคาดึงจาก Excel (`JWIC-Proposal_3.xlsx` sheet Pricing) ตอน build — เสนอราคาลูกค้าใหม่ = แก้ Excel + rerun
@@ -35,4 +35,4 @@ JWIC Consulting — รับพัฒนา/วางระบบ **Microsoft D
 
 ## ภาพรวม funnel
 
-JHMail (cold mail) + JHLinkedin (content) → promote-site (landing) → JHPresales (เด็ค present/demo) → ปิดดีล BC implementation
+JHMail (cold mail) + JHLinkedin (content) → promote-site (landing) → _presales (เด็ค present/demo) → ปิดดีล BC implementation

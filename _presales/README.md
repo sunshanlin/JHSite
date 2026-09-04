@@ -1,6 +1,9 @@
-# JHPresales
+# Presales (เดิมคือ repo JHPresales)
 
-Workspace สำหรับทำ PowerPoint presales และเตรียม present
+Workspace สำหรับทำ PowerPoint presales และเตรียม present — อยู่ใน repo promote-site ที่ `_presales/`
+
+**โฟลเดอร์ขึ้นต้นด้วย `_` เพราะ GitHub Pages (Jekyll) ไม่เสิร์ฟโฟลเดอร์แบบนี้** ของในนี้จึงไม่โผล่บน jwicconsulting.com — อย่าเพิ่มไฟล์ `.nojekyll` ที่ root ไม่งั้นทั้งโฟลเดอร์นี้กลายเป็น URL สาธารณะ
+รันสคริปต์ให้ cd มาที่ `_presales` ก่อน (path ใน `deck-core.json` เป็น absolute ชี้มาที่นี่แล้ว)
 
 **ต้นแบบคือ `decks\JWIC-BC-Core.pptx`** แก้ในไฟล์นี้ด้วยมือได้เลย ตัวเดียวกับ `C:\Users\Admin\OneDrive\JWIC-BC-Core.pptx`
 เดิมประกอบขึ้นจาก pitch deck ของ Microsoft ด้วย `build.ps1` ตอนนี้ build เป็นแค่ทางออกฉุกเฉิน

@@ -9,8 +9,8 @@
     "pricingWorkbook": "C:\\Users\\Admin\\OneDrive\\Desktop\\JWIC-Proposal_3.xlsx"
   },
   "_master": "The hand-edited deck is the source of truth. build.ps1 writes to 'out' (a separate file) so a rerun can never overwrite it.",
-  "master": "D:\\JHPresales\\decks\\JWIC-BC-Core.pptx",
-  "out": "D:\\JHPresales\\decks\\JWIC-BC-Core-rebuild.pptx",
+  "master": "D:\\Web\\promote-site\\_presales\\decks\\JWIC-BC-Core.pptx",
+  "out": "D:\\Web\\promote-site\\_presales\\decks\\JWIC-BC-Core-rebuild.pptx",
   "imgRoot": "D:\\Web\\promote-site\\img",
 
   "brand": {

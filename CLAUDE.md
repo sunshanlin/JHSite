@@ -21,6 +21,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | PDF ใบเซอร์ตัวจริง | `credentials/` |
 | CSS ที่ใช้ร่วมหลายหน้า | `css/` |
 | หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
+| งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | `_presales/` — ไม่ขึ้นเว็บ อ่าน `_presales/README.md` |
 | ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
 
 ## เครดิตรูปถ่าย
@@ -42,3 +43,9 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | `pricing-consultation.webp` | (ของเดิมในโปรเจกต์) |
 
 ทุกไฟล์ผ่าน `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` ให้สว่าง/สดขึ้นก่อนแปลงเป็น WebP
+
+## _presales/ — งาน presales ที่รวมมาจาก repo JHPresales (4 ก.ย. 2026)
+
+โฟลเดอร์ขึ้นต้นด้วย `_` **เพราะ Jekyll ของ GitHub Pages ไม่เสิร์ฟโฟลเดอร์แบบนี้** — สคริปต์/JSON เนื้อหาสไลด์จึงไม่กลายเป็น URL สาธารณะ
+⚠ **ห้ามเพิ่มไฟล์ `.nojekyll` ที่ root** มันปิด Jekyll ทั้งตัว แล้ว `_presales/` ทั้งโฟลเดอร์จะโหลดได้จาก jwicconsulting.com ทันที
+`decks/` (ตัว .pptx 292MB) กับไฟล์เสียง gitignore ไว้ที่ `_presales/.gitignore` เหมือนเดิม · path ต้นแบบอยู่ที่ `_presales/build/deck-core.json` คีย์ `master`/`out`
