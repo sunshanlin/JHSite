@@ -31,6 +31,7 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 | `build\add-methodology.ps1` | สร้าง 2 หน้า Fast Implement (ไทม์ไลน์ 10 สัปดาห์ + คำอธิบาย) แทรกหลังหน้า Success by Design · รันซ้ำได้ ลบของเดิมที่ตัวเองสร้างก่อน (รู้จักจากชื่อ shape `fim*`) |
 | `build\methodology-notes.json` | speaker notes ไทยของ 2 หน้านั้น (ไทยห้ามอยู่ใน .ps1) |
 | `build\add-dbd.ps1` | วางป้าย DBD Registered ท้ายหน้า About Us (สไลด์ 2) · รันซ้ำได้ ลบ shape `dbd*` ของเดิมก่อน |
+| `build\add-agenda.ps1` | สร้างหน้า Agenda (หัวข้อล้วน ไม่กำกับเวลา) แทรกถัดจาก About Us · รันซ้ำได้ ลบสไลด์ `JWIC_agenda` ของเดิมก่อน |
 | `outline\` | ร่าง / สคริปต์พูด |
 
 **แก้เนื้อหาให้แก้ที่ต้นแบบโดยตรง แล้วรัน `verify.ps1`** — `build.ps1` เขียนลง `-rebuild.pptx` ทับต้นแบบไม่ได้
