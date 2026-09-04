@@ -2641,7 +2641,24 @@
   .dbd:hover, .dbd:focus-visible { opacity: 1; }
   .dbd img { display: block; width: 62px; height: auto; }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
-  @media (max-width: 1100px) { .dbd { display: none; } }
+  /* จอแคบ: แถบบนไม่เหลือที่ ย้ายป้ายไปท้ายเมนู ☰ ที่กางออกมา — เครื่องหมายต้องมีให้เห็นทุกขนาดจอ
+     ป้ายมีสองก้อนใน DOM (แถบบน + ในเมนู) ตัวที่ display:none เบราว์เซอร์ก็ยังโหลดรูปอยู่ดี
+     = ยิงไป DBD 2 ครั้งต่อการเปิดหนึ่งหน้า (ก้อนละ ~29KB และเขาส่ง no-store มา แคชไม่ได้)
+     ยอมแลกกับการไม่ต้องมี JS มาย้าย DOM ตอนเปลี่ยนขนาดจอ */
+  .dbd-m { display: none; }
+  @media (max-width: 1100px) {
+    .dbd { display: none; }
+    /* อยู่เหนือปุ่มติดต่อเรา = เครื่องหมายรับรองอยู่ตรงจังหวะก่อนกดพอดี · ต่อท้ายปุ่มไม่ได้
+       กฎ .links a:last-child ที่ทาสีเบอร์กันดีให้ปุ่มจะย้ายมาลงที่ป้ายแทน (โดนมาแล้ว)
+       ล้างสไตล์แถวลิงก์ที่ติดมาจาก .topnav .links a (พื้น + เส้นใต้ตอน hover) */
+    .topnav .links a.dbd-m {
+      display: inline-flex; margin: 14px 0 8px; padding: 0;
+      border-left: 0; background: none; opacity: 1;
+    }
+    .topnav .links a.dbd-m:hover { background: none; }
+    .topnav .links a.dbd-m::after { display: none; }
+    .topnav .links a.dbd-m img { width: 84px; }
+  }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
@@ -2927,6 +2944,9 @@
       <a href="#pricing">แพ็คเกจ</a>
       <a href="#about">เกี่ยวกับเรา</a>
       <a href="#articles">บทความ</a>
+      <a class="dbd dbd-m" href="https://dbdregistered.dbd.go.th/api/public/shopinfo?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" target="_blank" rel="noopener" aria-label="DBD Registered — เครื่องหมายรับรองการจดทะเบียนพาณิชย์อิเล็กทรอนิกส์ กรมพัฒนาธุรกิจการค้า">
+        <img src="https://dbdregistered.dbd.go.th/api/public/banner?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" width="324" height="154" loading="lazy" alt="">
+      </a>
       <a href="#contact">ติดต่อเรา</a>
     </div>
     <div class="social">
@@ -4361,6 +4381,7 @@
     ['.profile-quote', 'lang', 'en'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
     ['.topnav .dbd', 'aria-label', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
+    ['.dbd-m', 'aria-label', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
   ];
