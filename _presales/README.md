@@ -28,7 +28,7 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 | `build\deck-core.json` | เนื้อหาตอนประกอบครั้งแรก : หน้าไหนเอา หน้าไหนสร้างใหม่ speaker notes ไทย ภาพ โลโก้ |
 | `build\build.ps1` | ขับ PowerPoint COM ประกอบไฟล์ ตัวสคริปต์เป็น ASCII ล้วน |
 | `build\verify.ps1` | assert ก่อนไปเจอลูกค้า ล้มแล้ว exit 1 |
-| `build\add-methodology.ps1` | สร้าง 2 หน้า Fast Implement (ไทม์ไลน์ 10 สัปดาห์ + คำอธิบาย) แทรกหลังหน้า Success by Design · รันซ้ำได้ ลบของเดิมที่ตัวเองสร้างก่อน (รู้จักจากชื่อ shape `fim*`) |
+| `build\add-methodology.ps1` | สร้างหน้า Fast Implementation (ลำดับเฟส + Gate 1–5 **ไม่แสดงสัปดาห์**) แทรกหลังหน้า Success by Design · รันซ้ำได้ ลบของเดิมที่ตัวเองสร้างก่อน (รู้จักจากชื่อ shape `fim*`) |
 | `build\methodology-notes.json` | speaker notes ไทยของ 2 หน้านั้น (ไทยห้ามอยู่ใน .ps1) |
 | `build\add-dbd.ps1` | วางป้าย DBD Registered ท้ายหน้า About Us (สไลด์ 2) · รันซ้ำได้ ลบ shape `dbd*` ของเดิมก่อน |
 | `build\add-agenda.ps1` | สร้างหน้า Agenda (หัวข้อล้วน ไม่กำกับเวลา) แทรกถัดจาก About Us · รันซ้ำได้ ลบสไลด์ `JWIC_agenda` ของเดิมก่อน |
@@ -37,12 +37,14 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 **แก้เนื้อหาให้แก้ที่ต้นแบบโดยตรง แล้วรัน `verify.ps1`** — `build.ps1` เขียนลง `-rebuild.pptx` ทับต้นแบบไม่ได้
 งานมือที่ทำหลังจากนี้ไม่มีใน `deck-core.json` ถ้า rebuild ต้องยกตามเอง
 
-## Fast Implement (หน้า 94-95)
+## Fast Implementation (สไลด์ 85 · หน้า Success by Design คือ 84)
 
 เนื้อหามาจาก `D:\BC\Project\JHCore\docs\Methodology\FastImplement-SME.html` — แก้เอกสารแล้วต้องยกมาที่สคริปต์เอง ไม่ได้อ่านอัตโนมัติ
-`powershell -File build\add-methodology.ps1` แล้วดูด้วยตา `build\shots.ps1 94 95`
+`powershell -File build\add-methodology.ps1` แล้วดูด้วยตา `build\shots.ps1 84 85`
 `build\fix-payment.ps1` = เขียนตาราง Payment Schedule (หน้า 97) ใหม่ให้ตรง Gate 1–5 (30/15/20/20/15 · Gate 4+5 รวมงวดเดียว · Hypercare แยกบรรทัด) แก้เปอร์เซ็นต์ที่ `$rows` ในสคริปต์
-แถบเฟสวาดชนกัน (2/3/6/10/14) ทั้งที่แผนจริงคาบเกี่ยวกันสัปดาห์หนึ่งตอนส่งไม้ — แถวกิจกรรมด้านล่างเป็นตัวบอกรายละเอียดจริง
+**สไลด์ไม่ผูกปฏิทินแล้ว** (4 ก.ย. 2026) — ตัดไม้บรรทัด WEEK 1–14 และเลขสัปดาห์ท้ายชื่อ Gate ออก เพราะยังไม่สรุประยะเวลากับลูกค้า
+ความกว้างแถบเหลือเป็นน้ำหนักงานเชิงเปรียบเทียบเท่านั้น · แผนจริงใน `FastImplement-Plan.xlsx` ยังคาบเกี่ยวกันช่วงส่งไม้ แถวกิจกรรมด้านล่างเป็นตัวบอกรายละเอียด
+เนื้อหาสไลด์ 84 อ่านจาก `deck-core.json` (`new:sbd`) — ปรับให้ตรงแผนแล้ว: ไม่มี BRD/EDD/SDD (ยุบเป็น Scope & Fit-Gap Statement + Solution Design Note) และไม่มี end-user manual
 
 ## แหล่งข้อมูล
 

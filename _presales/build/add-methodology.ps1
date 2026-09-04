@@ -114,20 +114,11 @@ try {
   Clear-Generated $A
 
   # ---------------------------------------------------------------- slide A
-  # ponytail: phase bands are drawn back to back (2 / 3 / 6 / 10 / 14).
-  # The written plan overlaps a week at each handover; a bar chart cannot show
-  # that without looking broken, and the activity row carries the real detail.
-  $A.Shapes.Item('Title 1').TextFrame.TextRange.Text = 'Fast Implement: 10 weeks to go-live'
+  # Phase bands are drawn back to back. The bar widths are relative weight
+  # only - the calendar is deliberately not shown, because the schedule is
+  # not committed until scope is signed. $COL stays as the layout grid.
+  $A.Shapes.Item('Title 1').TextFrame.TextRange.Text = 'Fast Implementation'
   $X0 = 0.83; $WD = 11.67; $COL = $WD / 14
-
-  $band = Box $A 1 $X0 1.90 $WD 0.26
-  $band.Fill.ForeColor.RGB = $PAPER
-  $cap = Tbox $A $X0 1.62 2.0 0.24
-  Say $cap 'WEEK' 9 $true $MUTE 1 | Out-Null
-  for ($w = 1; $w -le 14; $w++) {
-    $t = Tbox $A ($X0 + (($w - 1) * $COL)) 1.92 $COL 0.22
-    Say $t "$w" 9.5 $false $MUTE 2 | Out-Null
-  }
 
   $phases = @(
     @{ n='Discover';  a=0;  b=2;  c=$PH.discover },
@@ -157,7 +148,7 @@ try {
     @{ t='Prototype';                     a=5;  b=6;  c=$PH.implement },
     @{ t='Test and UAT';                  a=6;  b=8;  c=$PH.prepare },
     @{ t='Cutover and Go-live';           a=8;  b=10; c=$PH.prepare },
-    @{ t='Hypercare - 10 days'; a=10; b=14; c=$PH.operate }
+    @{ t='Hypercare'; a=10; b=14; c=$PH.operate }
   )
   foreach ($p in $acts) {
     $x = $X0 + ($p.a * $COL); $w = ($p.b - $p.a) * $COL
@@ -168,11 +159,11 @@ try {
   }
 
   $gates = @(
-    @{ n='GATE 1 - week 3';  a=3;  t='Scope and design approved'; d='Scope and Fit-Gap Statement, Solution Blueprint' },
-    @{ n='GATE 2 - week 6';  a=6;  t='Prototype passed, design freeze'; d='Prototype script and results' },
-    @{ n='GATE 3 - week 8';  a=8;  t='UAT passed, no critical or high defects'; d='UAT sign-off per process, issue log' },
-    @{ n='GATE 4 - week 10'; a=10; t='Go / no-go, then go-live'; d='Cutover plan, opening balance reconciliation' },
-    @{ n='GATE 5 - week 14'; a=14; t='First period closed, handover accepted'; d='Project closure and acceptance' }
+    @{ n='GATE 1';  a=3;  t='Scope and design approved'; d='Scope and Fit-Gap Statement, Solution Blueprint' },
+    @{ n='GATE 2';  a=6;  t='Prototype passed, design freeze'; d='Prototype script and results' },
+    @{ n='GATE 3';  a=8;  t='UAT passed, no critical or high defects'; d='UAT sign-off per process, issue log' },
+    @{ n='GATE 4'; a=10; t='Go / no-go, then go-live'; d='Cutover plan, opening balance reconciliation' },
+    @{ n='GATE 5'; a=14; t='First period closed, handover accepted'; d='Project closure and acceptance' }
   )
   $CW = 1.50
   foreach ($g in $gates) {
@@ -194,7 +185,7 @@ try {
     $tr.Paragraphs(2).ParagraphFormat.SpaceBefore = 4
   }
 
-  $l1 = 'Project scope is weeks 1-10 and ends at go-live. Hypercare is 10 days of close support inside the go-live month, closing at Gate 5 once the first period is closed.'
+  $l1 = 'Project scope runs from kick-off to go-live. Hypercare is a short period of close support after go-live, closing at Gate 5 once the first period is closed.'
   $l2 = 'Fixed scope, minimal customisation, master data and opening balances only - historical transactions stay in the old system for lookup.'
   $foot = Tbox $A $X0 5.90 $WD 0.60
   $tr = Say $foot ($l1 + [char]13 + $l2) 11 $false $BODY 1

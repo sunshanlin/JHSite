@@ -205,11 +205,11 @@
       "layout": "text",
       "title": "Delivery follows Microsoft Success by Design",
       "bullets": [
-        "Discover : business process review, high-level fit-gap",
-        "Initiate : requirement workshop, solution design (BRD / EDD / SDD), scope lock",
-        "Implement : core setup, customization per SDD, test data migration, user manual",
-        "Prepare : key-user training, UAT, cut-over planning, go-live readiness review",
-        "Operate : go-live, hypercare, month-end and statutory closing walkthrough, handover to maintenance"
+        "Discover : kick-off, process-owner interviews, fit-gap workshop per module, signed Scope and Fit-Gap Statement",
+        "Initiate : chart of accounts and dimensions, role and permission matrix, Solution Blueprint Review, signed blueprint",
+        "Implement : configuration package setup, approved extensions only, trial data load, end-to-end prototype",
+        "Prepare : key-user training, SIT and UAT, cutover rehearsal, go-live readiness review, opening balances",
+        "Operate : hypercare, first period close with Finance, handover document, project closure"
       ]
     },
     {
@@ -303,7 +303,7 @@
 
     "new:migration": "หน้านี้ตอบคำถามที่ลูกค้าถามเกือบทุกรายว่าข้อมูลเดิมจะเอาไปยังไง คำตอบคือย้ายยอด ไม่ย้ายประวัติ ยอดยกมา ณ วันตัดระบบ ส่วนประวัติเก่าให้เปิดระบบเดิมค้างไว้อ่านอย่างเดียว วิธีนี้ทำให้โครงการไม่บานปลาย และตัดคัตโอเวอร์ให้ตรงสิ้นเดือน เพื่อให้การยื่นภาษีเดือนแรกออกมาสะอาด",
 
-    "new:sbd": "อธิบายว่าเราไม่ได้ทำตามใจ แต่ทำตามกรอบที่ Microsoft ถอดบทเรียนจากโครงการจริงมา ห้าเฟส แต่ละเฟสมีจุดที่ลูกค้าต้องเซ็นรับ ซึ่งจะไปตรงกับตารางการจ่ายเงินในอีกสองหน้าถัดไปพอดี ให้เชื่อมสองหน้านี้เข้าด้วยกันตอนพูด เพราะมันคือเหตุผลว่าทำไมงวดจ่ายถึงแบ่งแบบนั้น",
+    "new:sbd": "วิธีการส่งมอบยึดตามกรอบ Microsoft Success by Design อธิบายทีละเฟส: Discover เปิดโครงการ สัมภาษณ์เจ้าของกระบวนการ ทำ fit-gap รายโมดูล จนได้ Scope & Fit-Gap Statement ที่เซ็นรับ · Initiate ออกแบบผังบัญชี มิติ และสิทธิ์ผู้ใช้ ปิดด้วย Solution Blueprint Review · Implement ตั้งค่าด้วย configuration package พัฒนาเฉพาะ gap ที่อนุมัติ จบด้วย Prototype ครบวงจร · Prepare อบรม Key User ทำ SIT และ UAT ซ้อม cutover และยอดยกมา · Operate ดูแลหลังขึ้นระบบจนปิดงวดบัญชีงวดแรกและส่งมอบ ย้ำว่าทุกเฟสจบด้วยจุดที่ลูกค้าต้องเซ็นรับ ซึ่งไปผูกกับงวดชำระในอีกสองหน้าถัดไป",
 
     "fy27:32": "หน้าสรุปว่า BC ตอบครบทุกข้อ ใช้เป็นหน้าเช็กลิสต์ อ่านเร็ว ๆ ไม่ต้องลงลึก เพราะรายละเอียดอยู่ในหน้าที่ผ่านมาแล้วทั้งหมด",
 
