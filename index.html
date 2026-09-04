@@ -2628,32 +2628,42 @@
     font-variant-numeric: tabular-nums;
   }
   /* ป้าย DBD Registered บนแถบเมนู — รูปโหลดจากเซิร์ฟเวอร์ DBD ตาม snippet ที่เขาให้มา
-     เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบบนพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
-     ย่อลงที่ <=1100px และย้ายไปอยู่ในเมนู ☰ ที่ <=600px (ดูสองบล็อกล่าง) */
-  /* จัดวาง: เครื่องหมายของคนอื่นห้ามสูงเท่าแบรนด์ตัวเอง (โลโก้ JW สูง 34 -> ป้ายสูง ~29)
-     เส้นคั่น + ระยะห่างมากกว่าระยะภายในตัวแบรนด์ (9px) ไม่งั้นสายตาอ่านรวมเป็นโลโก้ก้อนเดียว
+     เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
+
+     จัด "ให้เสมอกัน" กับแบรนด์ ต้องวัดจากหมึกจริง ไม่ใช่ขอบไฟล์:
+       PNG 324x154 มีขอบใสรอบตัว หมึกจริงสูงแค่ 114/154 และไม่ได้อยู่กลางไฟล์
+       (ขอบใสบน 17 ล่าง 23) ปล่อยไว้ = ป้ายลอยสูงกว่าตัวอักษรราว 0.7px -> ดันลงด้วย translateY
+       ความกว้างคิดกลับจากหมึก: อยากให้หมึกสูงเท่าโลโก้ JW (34px) ต้องกว้าง 34 x 324/114 = 97px
+     เส้นคั่นตรึงสูง 28px กลางแนวตั้ง ไม่ให้ยาวกว่าทุกอย่างในแถว (กล่องรูปสูง 46 แต่หมึกสูง 34)
      ม่วง/ส้ม/น้ำเงินของ DBD อิ่มกว่าทุกสีบนแถบ หรี่ไว้ไม่ให้แข่งกับปุ่มติดต่อเรา */
   .dbd {
-    display: inline-flex; margin-left: 8px; padding-left: 20px;
-    border-left: 1px solid var(--ui-line);
+    position: relative; display: inline-flex; margin-left: 10px; padding-left: 22px;
     opacity: .88; transition: opacity .16s ease;
   }
+  .dbd::before {
+    content: ""; position: absolute; left: 0; top: 50%;
+    width: 1px; height: 28px; transform: translateY(-50%); background: var(--ui-line);
+  }
   .dbd:hover, .dbd:focus-visible { opacity: 1; }
-  .dbd img { display: block; width: 80px; height: auto; }
+  .dbd img { display: block; width: 97px; height: auto; transform: translateY(.9px); }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   .lang-m { display: none; }
   /* 601-1100px เมนูพับเป็น ☰ แล้ว แต่ข้างแบรนด์ยังเหลือที่ 212px ขึ้นไป ย่อป้ายลงแล้วอยู่ต่อได้
+     <=1100px แถบพับเป็น ☰ แล้ว เมนูที่หุบอยู่กินบรรทัดที่สองของ flex ไปอีก 15px
+     กล่องรูปจึงห้ามเกิน 37px ไม่งั้นแถบสูงขึ้นจาก 68 -> 77 (76px = พอดีเพดาน)
      <=600px เดิมเหลือช่องว่างข้างแบรนด์แค่ 14px จึงย้าย TH/EN ลงไปในเมนู ☰ (คืนที่มา ~84px)
-     แล้วเอาป้ายขึ้นมาอยู่ข้างแบรนด์แทน — 48px คือเล็กสุดที่ยังอ่านคำว่า Registered ออก */
+     แล้วเอาป้ายขึ้นมาอยู่ข้างแบรนด์แทน — 54px คือใหญ่สุดที่ 360px ยังไม่ตกบรรทัด */
   @media (max-width: 1100px) {
-    .topnav .wrap > .dbd { margin-left: 4px; padding-left: 14px; }
-    .topnav .wrap > .dbd img { width: 68px; }
+    .topnav .wrap > .dbd { margin-left: 6px; padding-left: 16px; }
+    .topnav .wrap > .dbd img { width: 76px; }
+    .dbd::before { height: 24px; }
   }
   @media (max-width: 600px) {
     .topnav .wrap > .lang { display: none; }
     .topnav .links .lang-m { display: flex; align-self: start; margin: 12px 0 6px; }
     .topnav .wrap > .dbd { margin-left: 2px; padding-left: 10px; }
-    .topnav .wrap > .dbd img { width: 56px; }
+    .topnav .wrap > .dbd img { width: 54px; }
+    .dbd::before { height: 20px; }
   }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   #cookie-manage {
