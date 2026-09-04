@@ -2,6 +2,10 @@
 # Topics only, no timings - the session runs 09:30-12:00 and the running order
 # shifts with the customer's questions; a printed clock only makes us late.
 #
+# Composition follows the deck it lives in: the brand panel on the left is the
+# About Us slide's panel in the divider slides' green, and the list on the right
+# uses the same hairline-separated rows as the About Us credential block.
+#
 # Re-runnable: the slide it creates is named JWIC_agenda and is deleted first.
 # ASCII only - PowerShell 5.1 reads .ps1 as ANSI (no Thai in this file).
 param([string]$Path)
@@ -9,7 +13,6 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $cfg  = Get-Content (Join-Path $root 'deck-core.json') -Encoding UTF8 -Raw | ConvertFrom-Json
 $deck = if ($Path) { $Path } else { $cfg.master }
-$L    = $cfg.layout
 $NAME = 'JWIC_agenda'
 
 # follows the deck order: challenges -> product -> modules -> localization -> delivery
@@ -23,8 +26,14 @@ $ITEMS = @(
   'JWIC Thai Localization',
   'Delivery, investment and next steps'
 )
-$ROW = 44.0                      # 8 rows from gridTop lands the last one clear of the logo
-$BADGE = 30.0
+
+# points, 960x540 slide
+$PANEL = 300.0                   # left brand panel, same width as the About Us photo panel
+$PAD   = 48.0                    # panel gutter
+$LX    = 356.0                   # list column starts here
+$NUMW  = 40.0                    # room for "01" before the topic
+$TOP   = 108.0
+$ROW   = 44.0                    # 8 rows end at 460, clear of the logo at 470
 
 function Hex2Ole([string]$h) {
   $h = $h.TrimStart('#')
@@ -36,6 +45,24 @@ function Hex2Ole([string]$h) {
 $green  = Hex2Ole $cfg.brand.green
 $accent = Hex2Ole $cfg.brand.accent
 $cream  = Hex2Ole $cfg.brand.cream
+$ink    = Hex2Ole '#1F1F1F'
+$rule   = Hex2Ole '#D9DEE8'      # same hairline as the About Us credential rows
+$mute   = Hex2Ole '#4A635C'      # readable on a projector, still behind the topic
+
+function Add-Text($slide, $l, $t, $w, $h, $text, $font, $size, $colour, $space) {
+  $tb = $slide.Shapes.AddTextbox(1, [float]$l, [float]$t, [float]$w, [float]$h)
+  $tb.TextFrame.WordWrap = -1
+  $tb.TextFrame.AutoSize = 0
+  $tb.TextFrame.MarginLeft = 0; $tb.TextFrame.MarginRight = 0
+  $tb.TextFrame.MarginTop = 0;  $tb.TextFrame.MarginBottom = 0
+  $tr = $tb.TextFrame.TextRange
+  $tr.Text = $text
+  $tr.Font.Name = $font
+  $tr.Font.Size = [float]$size
+  $tr.Font.Color.RGB = $colour
+  if ($space) { $tb.TextFrame2.TextRange.Font.Spacing = [float]$space }
+  return $tb
+}
 
 $pp = New-Object -ComObject PowerPoint.Application
 $pp.DisplayAlerts = 1
@@ -58,40 +85,31 @@ try {
   }
   if ($after -eq 0) { throw 'slide "About Us" not found' }
 
-  $slide = $pres.Slides.Add($after + 1, 11)   # ppLayoutTitleOnly
+  $slide = $pres.Slides.Add($after + 1, 12)   # ppLayoutBlank - the panel carries the title
   $slide.Name = $NAME
 
-  $t = $slide.Shapes.Item(1)
-  $t.Left = [float]$L.titleLeft; $t.Top = [float]$L.titleTop
-  $t.Width = [float]$L.titleWidth; $t.Height = [float]$L.titleHeight
-  $t.TextFrame.TextRange.Text = 'Agenda'
-  $t.TextFrame.TextRange.Font.Size = [float]$L.titleSize
+  # --- left brand panel ----------------------------------------------------
+  $panel = $slide.Shapes.AddShape(1, 0, 0, $PANEL, 540)
+  $panel.Fill.ForeColor.RGB = $green
+  $panel.Line.Visible = 0
 
-  $rule = $slide.Shapes.AddShape(1, $L.titleLeft, $L.ruleTop, $L.ruleWidth, $L.ruleHeight)
-  $rule.Fill.ForeColor.RGB = $accent
-  $rule.Line.Visible = 0
+  Add-Text $slide $PAD 196 200 16 'TODAY' 'Segoe UI Semibold' 12 $cream 1.6 | Out-Null
+  $r = $slide.Shapes.AddShape(1, $PAD, 226, 64, 3)
+  $r.Fill.ForeColor.RGB = $accent
+  $r.Line.Visible = 0
+  Add-Text $slide $PAD 246 210 56 'Agenda' 'Segoe UI Light' 40 $cream 0 | Out-Null
+  Add-Text $slide $PAD 468 220 20 $cfg.brand.company 'Segoe UI Semibold' 12 $cream 0.4 | Out-Null
 
+  # --- topic list ----------------------------------------------------------
   for ($n = 0; $n -lt $ITEMS.Count; $n++) {
-    $y = $L.gridTop + $n * $ROW
-    $sq = $slide.Shapes.AddShape(5, [float]$L.gridLeft, [float]$y, $BADGE, $BADGE)
-    $sq.Fill.ForeColor.RGB = $green
-    $sq.Line.Visible = 0
-    $sq.TextFrame.MarginLeft = 0; $sq.TextFrame.MarginRight = 0
-    $sq.TextFrame.MarginTop = 0;  $sq.TextFrame.MarginBottom = 0
-    $sq.TextFrame.WordWrap = 0
-    $sq.TextFrame.VerticalAnchor = 3
-    $sq.TextFrame.TextRange.Text = '{0:00}' -f ($n + 1)
-    $sq.TextFrame.TextRange.Font.Size = [float]12
-    $sq.TextFrame.TextRange.Font.Bold = -1
-    $sq.TextFrame.TextRange.Font.Color.RGB = $cream
-
-    $tb = $slide.Shapes.AddTextbox(1, [float]($L.gridLeft + $BADGE + 14), [float]($y + 3), 700, 24)
-    $tb.TextFrame.WordWrap = 0
-    $tb.TextFrame.MarginLeft = 0; $tb.TextFrame.MarginTop = 0; $tb.TextFrame.MarginBottom = 0
-    $tb.TextFrame.TextRange.Text = $ITEMS[$n]
-    $tb.TextFrame.TextRange.Font.Size = [float]18
-    $tb.TextFrame.TextRange.Font.Bold = -1
-    $tb.TextFrame.TextRange.Font.Color.RGB = $green
+    $y = $TOP + $n * $ROW
+    if ($n -gt 0) {
+      $ln = $slide.Shapes.AddLine($LX, $y - 8, 900, $y - 8)
+      $ln.Line.ForeColor.RGB = $rule
+      $ln.Line.Weight = [single]0.75
+    }
+    Add-Text $slide $LX ($y + 3) $NUMW 18 ('{0:00}' -f ($n + 1)) 'Segoe UI' 12 $mute 1.2 | Out-Null
+    Add-Text $slide ($LX + $NUMW) $y (900 - $LX - $NUMW) 24 $ITEMS[$n] 'Segoe UI Semibold' 17 $ink 0 | Out-Null
   }
 
   $logo = Join-Path $cfg.imgRoot $cfg.logo.file
