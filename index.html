@@ -2627,18 +2627,13 @@
     color: var(--brand-mint); font-size: .8rem; line-height: 1.75;
     font-variant-numeric: tabular-nums;
   }
-  /* โลโก้ DBD พื้นโปร่งใส สีม่วง/น้ำเงินจมหายบนพื้น footer เข้ม จึงรองด้วยแผ่นขาว
-     รองพื้นอย่างเดียว ไม่แตะสีหรือสัดส่วนของเครื่องหมาย · รูปโหลดจากเซิร์ฟเวอร์ DBD
-     ตาม snippet ที่เขาให้มา เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน */
-  .dbd {
-    display: inline-flex; margin-top: 12px; padding: 12px 16px;
-    background: #fff; border-radius: var(--ui-radius-btn);
-  }
-  .dbd img { display: block; width: 160px; height: auto; }
-  /* แถบบนพื้นสว่างอยู่แล้ว ไม่ต้องรองขาว · จอแคบซ่อน เมนูไทยเบียดจนไม่เหลือที่ (ท้ายหน้ายังมีป้าย) */
-  .topnav .dbd { margin: 0; padding: 0; background: none; border-radius: 0; }
-  .topnav .dbd img { width: 84px; }
-  @media (max-width: 1100px) { .topnav .dbd { display: none; } }
+  /* ป้าย DBD Registered บนแถบเมนู — รูปโหลดจากเซิร์ฟเวอร์ DBD ตาม snippet ที่เขาให้มา
+     เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบบนพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
+     ซ่อนที่ <=1100px เมนูไทยเบียดจนไม่เหลือที่ */
+  .dbd { display: inline-flex; }
+  .dbd img { display: block; width: 84px; height: auto; }
+  .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
+  @media (max-width: 1100px) { .dbd { display: none; } }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
@@ -3731,9 +3726,6 @@
       <div class="footer-brand">
         <strong>JWIC Consulting</strong>
         <span>Honest Advice, Practical Solution</span>
-        <a class="dbd" href="https://dbdregistered.dbd.go.th/api/public/shopinfo?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" target="_blank" rel="noopener">
-          <img src="https://dbdregistered.dbd.go.th/api/public/banner?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" width="324" height="154" loading="lazy" alt="DBD Registered — เครื่องหมายรับรองการจดทะเบียนพาณิชย์อิเล็กทรอนิกส์ กรมพัฒนาธุรกิจการค้า">
-        </a>
       </div>
       <nav class="footer-col footer-menu" aria-label="เมนูท้ายหน้า">
         <p class="footer-head">เมนู</p>
@@ -4360,7 +4352,6 @@
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
     ['.profile-quote', 'lang', 'en'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
-    ['footer .dbd img', 'alt', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
     ['.topnav .dbd', 'aria-label', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
