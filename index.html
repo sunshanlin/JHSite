@@ -2630,8 +2630,16 @@
   /* ป้าย DBD Registered บนแถบเมนู — รูปโหลดจากเซิร์ฟเวอร์ DBD ตาม snippet ที่เขาให้มา
      เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบบนพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
      ซ่อนที่ <=1100px เมนูไทยเบียดจนไม่เหลือที่ */
-  .dbd { display: inline-flex; }
-  .dbd img { display: block; width: 84px; height: auto; }
+  /* จัดวาง: เครื่องหมายของคนอื่นห้ามสูงเท่าแบรนด์ตัวเอง (โลโก้ JW สูง 34 -> ป้ายสูง ~29)
+     เส้นคั่น + ระยะห่างมากกว่าระยะภายในตัวแบรนด์ (9px) ไม่งั้นสายตาอ่านรวมเป็นโลโก้ก้อนเดียว
+     ม่วง/ส้ม/น้ำเงินของ DBD อิ่มกว่าทุกสีบนแถบ หรี่ไว้ไม่ให้แข่งกับปุ่มติดต่อเรา */
+  .dbd {
+    display: inline-flex; margin-left: 8px; padding-left: 20px;
+    border-left: 1px solid var(--ui-line);
+    opacity: .88; transition: opacity .16s ease;
+  }
+  .dbd:hover, .dbd:focus-visible { opacity: 1; }
+  .dbd img { display: block; width: 62px; height: auto; }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   @media (max-width: 1100px) { .dbd { display: none; } }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
