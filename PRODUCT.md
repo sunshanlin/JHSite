@@ -45,7 +45,7 @@ web
 |---|---|
 | JWIC Thai Localization (สำหรับผู้ใช้ BC อยู่แล้ว) | 300,000 → **280,000 บาท** ต่อ 1 tenant จ่ายครั้งเดียว ใช้ตลอดไป |
 | Business Central Implementation ครบวงจร | ตามขอบเขตงาน (รวม localization ในแพ็กเกจ) |
-| On-Demand Consulting | **8,000 บาท / manday** |
+| On-Demand Consulting | **9,000 บาท / manday** |
 
 ทุกราคา **ไม่รวม** ค่า Microsoft License, ค่าบริการดูแลรายปี และ customization เพิ่มเติม — ข้อความกำกับนี้ต้องปรากฏในส่วน `#pricing` เสมอ ห้ามตัดทิ้งเพื่อความสวยงาม
 
