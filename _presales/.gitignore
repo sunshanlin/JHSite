@@ -1,0 +1,9 @@
+decks/
+*.pptx
+*.png
+*.pdf
+
+# voice/ — เลิกทำ TTS ในเครื่องแล้ว เหลือแค่บทพูด + verify-tts.py
+voice/edge-tts/node_modules/
+*.wav
+*.mp3
