@@ -72,6 +72,18 @@
       },
       "founder": {
         "@id": "https://www.jwicconsulting.com/#jirapat-wichayapong"
+      },
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "TH-DBD-CommercialRegistration",
+        "name": "เลขทะเบียนพาณิชย์อิเล็กทรอนิกส์ กรมพัฒนาธุรกิจการค้า",
+        "value": "1101700150933"
+      },
+      "sameAs": [
+        "https://dbdregistered.dbd.go.th/api/public/shopinfo?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC"
+      ],
+      "hasOfferCatalog": {
+        "@id": "https://www.jwicconsulting.com/#services"
       }
     },
     {
@@ -101,6 +113,87 @@
       "inLanguage": ["th", "en"],
       "publisher": {
         "@id": "https://www.jwicconsulting.com/#organization"
+      }
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://www.jwicconsulting.com/#services",
+      "name": "บริการของ JWIC Consulting",
+      "url": "https://www.jwicconsulting.com/#pricing",
+      "itemListElement": [
+        { "@id": "https://www.jwicconsulting.com/#service-localization" },
+        { "@id": "https://www.jwicconsulting.com/#service-implementation" },
+        { "@id": "https://www.jwicconsulting.com/#service-ondemand" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.jwicconsulting.com/#service-localization",
+      "name": "JWIC Thai Localization",
+      "serviceType": "Thai localization for Microsoft Dynamics 365 Business Central",
+      "description": "ยกระดับ Microsoft Dynamics 365 Business Central ให้รองรับข้อกำหนดด้านภาษีและเอกสารของประเทศไทย ครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 พร้อมใบแนบ ภาษีหัก ณ ที่จ่าย 50 ทวิ และ ภ.ง.ด.2, 3, 53, 54 พร้อม Text File สำหรับ RD Prep ระบบใบวางบิล ฟอร์มเอกสารไทยกว่า 20 ชุด ทะเบียนทรัพย์สินและ Stock Card และค้นเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร",
+      "url": "https://www.jwicconsulting.com/#pricing",
+      "provider": { "@id": "https://www.jwicconsulting.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "Thailand" },
+      "offers": {
+        "@type": "Offer",
+        "price": "280000",
+        "priceCurrency": "THB",
+        "url": "https://www.jwicconsulting.com/#pricing",
+        "availability": "https://schema.org/InStock",
+        "eligibleQuantity": { "@type": "QuantitativeValue", "value": 1, "unitText": "tenant" },
+        "description": "ชำระครั้งเดียวต่อ 1 Tenant ใช้งานได้ตลอดไป ราคาไม่รวมค่า Microsoft License ค่าบริการดูแลรายปี และ Customization เพิ่มเติม",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceType": "https://schema.org/ListPrice",
+          "price": "300000",
+          "priceCurrency": "THB"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.jwicconsulting.com/#service-implementation",
+      "name": "Dynamics 365 Business Central Implementation",
+      "serviceType": "Microsoft Dynamics 365 Business Central implementation",
+      "description": "วางระบบ Business Central ครบวงจร ตั้งแต่เก็บความต้องการ วิเคราะห์ Fit-Gap ออกแบบระบบ ย้าย Master Data และยอดยกมา อบรมผู้ใช้ ดูแล UAT จนถึงขึ้นระบบจริงพร้อม Hypercare และสนับสนุนการปิดบัญชีหลัง Go-live โดยรวม JWIC Thai Localization ไว้ในแพ็กเกจ",
+      "url": "https://www.jwicconsulting.com/#pricing",
+      "provider": { "@id": "https://www.jwicconsulting.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "Thailand" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "THB",
+        "url": "https://www.jwicconsulting.com/#pricing",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "THB",
+          "description": "ราคาตามขอบเขตงาน สรุปขอบเขตและราคาให้ยืนยันหลังวิเคราะห์ Fit-Gap ราคาไม่รวมค่า Microsoft License ค่าบริการดูแลรายปี และ Customization เพิ่มเติม"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.jwicconsulting.com/#service-ondemand",
+      "name": "On-Demand Consulting",
+      "serviceType": "Microsoft Dynamics 365 Business Central consulting and AL development",
+      "description": "จ้างที่ปรึกษาเป็นงาน ๆ คิดตามวันทำงาน ครอบคลุมงาน Presales และสาธิตระบบ เก็บ Requirement วิเคราะห์ Fit-Gap ออกแบบระบบและจัดทำ Functional Design งาน Develop และ Customization ด้วย AL Extension และปรับรายงานหรือฟอร์มเอกสารตามที่ต้องการ สื่อสารภาษาอังกฤษได้",
+      "url": "https://www.jwicconsulting.com/#pricing",
+      "provider": { "@id": "https://www.jwicconsulting.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "Thailand" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "THB",
+        "url": "https://www.jwicconsulting.com/#pricing",
+        "availability": "https://schema.org/InStock",
+        "description": "ประเมินจำนวนวันตามเนื้องานจริงและสรุปให้ยืนยันก่อนเริ่มงาน ราคาไม่รวมค่า Microsoft License ค่าบริการดูแลรายปี และ Customization เพิ่มเติม",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "9000",
+          "priceCurrency": "THB",
+          "unitText": "manday",
+          "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitText": "manday" }
+        }
       }
     },
     {
