@@ -10,11 +10,18 @@
 | `cold-email` | เมลแนะนำตัวหาลูกค้าใหม่ + ซีเควนซ์ตาม | เดียวกัน v2.0.0 | MIT © Corey Haines |
 | `emails` | ซีเควนซ์เมลแบบ nurture / lifecycle (คนที่คุยอยู่แล้ว) | เดียวกัน | MIT © Corey Haines |
 | `negotiation` | เจรจาต่อรอง — tactical empathy, calibrated question, Ackerman (Chris Voss) | [wondelai/skills](https://github.com/wondelai/skills) v1.2.0 | MIT © Wondel.ai |
-| `pricing-negotiation` | ตั้งรับคำขอส่วนลด, ปกป้องราคา, ต่อรองเงื่อนไข | [louisblythe/Sales-Skills](https://github.com/louisblythe/Sales-Skills) | MIT (ประกาศใน README ไม่มีไฟล์ LICENSE) |
-| `written-communication` | เขียนเมล/ข้อเสนอ/ตามงานในบริบทงานขาย | เดียวกัน | MIT (ตามข้างบน) |
-| `presentation-skills` | *นำเสนอ* — เดโม พรีเซนต์ต่อผู้บริหาร (คนละเรื่องกับการทำสไลด์) | เดียวกัน | MIT (ตามข้างบน) |
-| `pitch-deck-mastery` | เด็คระดมทุน 12 สไลด์ (นักลงทุน ไม่ใช่ลูกค้า) | [Stevekaplanai/pitch-deck-mastery-skill](https://github.com/Stevekaplanai/pitch-deck-mastery-skill) | MIT © Steve Kaplan |
+| `pricing-negotiation` | ตั้งรับคำขอส่วนลด, ปกป้องราคา, ต่อรองกับ procurement | [louisblythe/Sales-Skills](https://github.com/louisblythe/Sales-Skills) | MIT (ประกาศใน README ไม่มีไฟล์ LICENSE) |
 | `run-promote-site` | ของเดิมในโปรเจกต์ — รัน/แคปหน้าเว็บ | — | — |
+
+### เคยลงแล้วตัดออก (6 ก.ย. 2026)
+
+ลงไปรอบแรก 8 ตัว แล้วตัดเหลือ 5 — เก็บไว้เตือนความจำว่าทำไมไม่ต้องลงซ้ำ
+
+| ตัดออก | เหตุผล |
+|---|---|
+| `pitch-deck-mastery` | เป็นเด็ค**ระดมทุนจากนักลงทุน** (TAM/SAM/SOM, use of funds, the Ask) JWIC ไม่ได้ระดมทุน · เด็คขายลูกค้าใช้ `sales-enablement` ที่มีโครง 10-12 สไลด์อยู่แล้ว |
+| `written-communication` | เนื้อในเป็น cold email template + follow-up + proposal = ซ้ำกับ `cold-email` (ลึกกว่า มี reference 5 ไฟล์) และหัวข้อ Proposal Templates ใน `sales-enablement` · ทับ trigger กันด้วย |
+| `presentation-skills` | ส่วนใหญ่เป็นทักษะ**คนพูด** (น้ำเสียง ภาษากาย ซ้อมเดโม) ที่ agent ทำแทนไม่ได้ · ส่วน Slide Design ซ้ำกับ `sales-enablement` |
 
 ## หมายเหตุ
 
