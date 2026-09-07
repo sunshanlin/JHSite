@@ -160,7 +160,7 @@ try {
 
   $gates = @(
     @{ n='GATE 1';  a=3;  t='Scope and design approved'; d='Scope and Fit-Gap Statement, Solution Blueprint' },
-    @{ n='GATE 2';  a=6;  t='Prototype passed, design freeze'; d='Prototype script and results' },
+    @{ n='GATE 2';  a=6;  t='Prototype passed, design freeze'; d='Prototype scenario' },
     @{ n='GATE 3';  a=8;  t='UAT passed, no critical or high defects'; d='UAT sign-off per process, issue log' },
     @{ n='GATE 4'; a=10; t='Go / no-go, then go-live'; d='Cutover plan, opening balance reconciliation' },
     @{ n='GATE 5'; a=14; t='First period closed, handover accepted'; d='Project closure and acceptance' }
