@@ -1535,7 +1535,7 @@
   .slider-thumbs img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .slider-hint { margin-top: 8px; }
 
-  /* ตัวเลขสถิติใน why-us */
+  /* ตัวเลขสถิติในแถบ .stat-row */
   .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 40px 0 10px; text-align: center; }
   .stat b { display: block; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 2.6rem; font-weight: 600; color: var(--accent-dark); line-height: 1.15; font-variant-numeric: tabular-nums; }
   .stat span { color: var(--muted); font-size: .92rem; }
@@ -1788,9 +1788,6 @@
   .stat-row .stat:nth-child(1) b { color: var(--brand-teal); }
   .stat-row .stat:nth-child(2) b { color: var(--brand-ocean); }
   .stat-row .stat:nth-child(3) b { color: var(--brand-jade); }
-  #why-us > .wrap > .grid .card:nth-child(1) .ic { background: linear-gradient(135deg, var(--brand-teal), var(--brand-ocean)); }
-  #why-us > .wrap > .grid .card:nth-child(2) .ic { background: linear-gradient(135deg, var(--brand-pink), var(--brand-burgundy)); }
-  #why-us > .wrap > .grid .card:nth-child(3) .ic { background: linear-gradient(135deg, var(--brand-burgundy), var(--brand-burgundy-dark)); }
   .card::before { background: linear-gradient(90deg, var(--brand-teal), var(--brand-plum) 55%, var(--brand-burgundy)); }
   #articles .article-tag { color: var(--brand-burgundy-dark); background: rgba(224,140,162,.13); }
 
@@ -2435,104 +2432,198 @@
   #contact h2, #faq h2 { color: #fff; }
   .faq-list details > p { color: #B4C9C5; }
 
-  /* ---- #why-us: ตารางเทียบแบบสมุดบัญชี — คอลัมน์ BC เป็นแผงเขียวเข้มยกขึ้น ---- */
-  .cmp-wrap {
-    margin-top: 36px; overflow: hidden;
-    border: 1px solid var(--ui-line); border-radius: 20px;
-    background: #fff; box-shadow: var(--shadow-lg);
+  /* ---- #billing-flow: ผังกระบวนการวางบิล + Billing Board ที่ลากได้ ----
+     การ์ดใบเดียวของทั้ง section เหมือน .vs ของ #vat-service — ข้างในแบ่งน้ำหนัก
+     ด้วยพื้นอ่อนกับเส้น 1px ไม่มีการ์ดซ้อนการ์ด
+     ผังวาดบนกระดาษตาม The Paper Rule ไม่ใช่แถบสีเข้ม: กล่องของ JWIC เป็น teal ทึบ
+     กล่องที่เหลือเป็นขาวเส้นบาง — ความต่างอ่านได้โดยไม่ต้องพึ่งพื้นเข้ม */
+  #billing-flow > .wrap > .section-kicker,
+  #billing-flow > .wrap > h2,
+  #billing-flow > .wrap > .sub {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
   }
-  .cmp { width: 100%; border-collapse: collapse; font-size: .95rem; counter-reset: cmpgrp; }
-  .cmp th, .cmp td { padding: 19px 24px; text-align: left; vertical-align: top; }
-  .cmp thead th {
-    padding-top: 20px; padding-bottom: 15px;
-    border-bottom: 1px solid var(--ui-line);
+  .bf-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ผังใช้โทเคนชุดเดิมทั้งหมด ไม่มีค่าสีใหม่ — สีอยู่ใน CSS ไม่ใช่ attribute
+     เพราะ fill="var(--x)" ใน attribute ของ SVG ใช้ไม่ได้ */
+  .bf-lane { fill: none; stroke: var(--ui-line); }
+  .bf-lane-x { fill: var(--bg-soft); stroke: var(--ui-line); }
+  .bf-lane-t { fill: var(--ui-muted); font: 600 18px "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .bf-e { fill: none; stroke: var(--brand-mint); stroke-width: 1.7; }
+  .bf-e-r { fill: none; stroke: var(--brand-mist); stroke-width: 1.6; stroke-dasharray: 7 5; }
+  .bf-nj { fill: var(--brand-teal); }
+  .bf-nm { fill: #fff; stroke: var(--brand-mist); stroke-width: 1.6; stroke-dasharray: 6 4; }
+  .bf-ng { fill: #fff; stroke: var(--brand-mist); stroke-width: 1.6; }
+  .bf-nc { fill: #fff; stroke: var(--ui-ink); stroke-width: 2.4; }
+  .bf-t { font: 600 16px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle; }
+  .bf-tg { font-size: 13.5px; }
+  .bf-tj { fill: #fff; }
+  .bf-ti { fill: var(--ui-ink); }
+  .bf-el { fill: var(--ui-muted); font: 500 13px "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .bf-ca { fill: var(--brand-pink-deep); font: 500 14px "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .bf-ca-b { font-weight: 700; }
+  .bf-cl { fill: none; stroke: var(--brand-pink-deep); stroke-width: 1.2; }
+  .bf-ep { fill: none; stroke: var(--ui-muted); stroke-width: 2; }
+  .bf-ep-e { stroke-width: 4; }
+  .bf-token { fill: var(--brand-jade); }
+  .bf-ar7 { fill: var(--ui-muted); font: 700 11.5px "Plus Jakarta Sans", sans-serif; letter-spacing: 1px; text-anchor: middle; }
+
+  .bf {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+  }
+  .bf-head {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 16px 24px; border-bottom: 1px solid var(--ui-line);
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ui-muted);
   }
-  .cmp tbody tr + tr th, .cmp tbody tr + tr td:not(:last-child) { border-top: 1px solid var(--ui-line); }
-  .cmp tbody th { width: 23%; color: var(--ink); font-weight: 600; line-height: 1.5; }
-  .cmp tbody tr:not(.cmp-group) th { padding-left: 46px; }
-  .cmp td { color: var(--muted); line-height: 1.75; }
-  .cmp tbody tr:hover th, .cmp tbody tr:hover td:not(:last-child) { background: var(--bg-soft); }
-  /* คอลัมน์ BC: แผงเขียวเข้ม ตัวหนังสืองาช้าง เครื่องหมายถูกวงกลมมินต์ */
-  .cmp th:last-child, .cmp td:last-child { width: 40%; background: var(--brand-teal); }
-  .cmp thead th:last-child {
-    background: var(--brand-deep); border-bottom-color: rgba(255,255,255,.16);
-    color: var(--brand-mist); text-transform: none; letter-spacing: .04em; font-size: .86rem;
-  }
-  .cmp td:last-child { color: #E7F0ED; }
-  .cmp tbody tr + tr td:last-child { border-top: 1px solid rgba(255,255,255,.14); }
-  .cmp tbody tr:hover td:last-child { background: color-mix(in srgb, var(--brand-teal) 88%, #fff); }
-  .cmp-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
-  .cmp-points li { position: relative; padding-left: 30px; }
-  .cmp-points li::before {
-    content: "\2713"; position: absolute; left: 0; top: 3px; width: 18px; height: 18px;
-    display: flex; align-items: center; justify-content: center; border-radius: 50%;
-    font-size: .6rem; font-weight: 800; color: var(--brand-deep); background: var(--brand-mint);
-  }
-  .cmp-bc-ic { width: 21px; height: 21px; margin-right: 11px; vertical-align: -5px; }
-  .cmp-gic {
-    width: 17px; height: 17px; margin-right: 9px; vertical-align: -3px;
-    fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
-    color: var(--brand-jade);
-  }
-  /* หัวข้อใหญ่: แถบคั่นกลุ่ม เลข 01–05 */
-  .cmp .cmp-group th {
-    width: auto; padding: 22px 24px 13px; background: var(--brand-ivory-deep);
-    border-top: 1px solid var(--ui-line);
-    color: var(--brand-teal); font-size: .95rem; font-weight: 700; letter-spacing: .04em;
-  }
-  .cmp .cmp-group th::before {
-    counter-increment: cmpgrp; content: counter(cmpgrp, decimal-leading-zero);
-    display: inline-block; margin-right: 13px; vertical-align: 1px;
-    font-family: "Plus Jakarta Sans", sans-serif; font-size: .72rem; font-weight: 800;
-    letter-spacing: .18em; color: var(--brand-jade); font-variant-numeric: tabular-nums;
-  }
-  .cmp .cmp-group + tr th, .cmp .cmp-group + tr td:not(:last-child) { border-top: 0; }
-  .cmp .cmp-group + tr td:last-child { border-top: 0; }
+  .bf-head .bf-ic { width: 15px; height: 15px; color: var(--brand-jade); }
+  .bf-head .bf-count { margin-left: auto; text-transform: none; letter-spacing: normal; }
+  .bf-head .bf-count b { color: var(--brand-teal); font-weight: 700; }
 
-  /* ไล่โผล่ทีละแถวตอน .cmp-wrap เข้าจอ */
-  .cmp-wrap.reveal .cmp tbody tr { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
-  .cmp-wrap.reveal.in .cmp tbody tr { opacity: 1; transform: none; }
-  .cmp tbody tr:nth-child(2) { transition-delay: .04s; }
-  .cmp tbody tr:nth-child(3) { transition-delay: .08s; }
-  .cmp tbody tr:nth-child(4) { transition-delay: .12s; }
-  .cmp tbody tr:nth-child(5) { transition-delay: .16s; }
-  .cmp tbody tr:nth-child(6) { transition-delay: .20s; }
-  .cmp tbody tr:nth-child(7) { transition-delay: .24s; }
-  .cmp tbody tr:nth-child(8) { transition-delay: .28s; }
-  .cmp tbody tr:nth-child(9) { transition-delay: .32s; }
-  .cmp tbody tr:nth-child(10) { transition-delay: .36s; }
-  .cmp tbody tr:nth-child(11) { transition-delay: .40s; }
-  .cmp tbody tr:nth-child(12) { transition-delay: .44s; }
-  .cmp tbody tr:nth-child(13) { transition-delay: .48s; }
-  .cmp tbody tr:nth-child(14) { transition-delay: .52s; }
-  .cmp tbody tr:nth-child(15) { transition-delay: .56s; }
-  .cmp tbody tr:nth-child(16) { transition-delay: .60s; }
-  .cmp tbody tr:nth-child(17) { transition-delay: .64s; }
+  /* ผังกว้างกว่าจอแคบ — เลื่อนในกล่องตัวเอง ไม่ให้หน้าเลื่อนแนวนอน */
+  .bf-scroll { overflow-x: auto; overflow-y: hidden; padding: 8px 0 4px; }
+  .bf-scroll svg { display: block; width: 100%; min-width: 900px; height: auto; }
+
+  .bf-keys {
+    display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center;
+    padding: 14px 24px; border-top: 1px solid var(--ui-line);
+    font-size: .84rem; color: var(--ui-muted);
+  }
+  .bf-keys span { display: flex; align-items: center; gap: 9px; }
+  .bf-keys i { width: 22px; height: 13px; flex: 0 0 auto; border-radius: 2px; }
+  .bf-k-j { background: var(--brand-teal); }
+  .bf-k-m { border: 1px dashed var(--brand-mist); }
+  .bf-k-g { width: 14px; height: 14px; border: 1px solid var(--brand-mist); transform: rotate(45deg); }
+  .bf-k-c { border: 2px solid var(--ui-ink); }
+
+  /* ---- Billing Board ---- */
+  .bf-board { border-top: 1px solid var(--ui-line); background: var(--bg-soft); }
+  .bf-bar {
+    display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap;
+    padding: 15px 24px; border-bottom: 1px solid var(--ui-line);
+  }
+  .bf-app {
+    display: flex; align-items: center; gap: 8px; margin: 0;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ui-muted);
+  }
+  .bf-app .bf-ic { width: 15px; height: 15px; color: var(--brand-jade); }
+  .bf-month { font-size: .88rem; color: var(--ui-ink); font-weight: 600; }
+  .bf-sample {
+    font-size: .74rem; color: var(--ui-muted);
+    border: 1px solid var(--ui-line); border-radius: 999px; padding: 2px 11px;
+  }
+  .bf-reset {
+    margin-left: auto; font: 500 .88rem/1 inherit; cursor: pointer;
+    color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
+    padding: 10px 15px; transition: background .125s ease, border-color .125s ease;
+  }
+  .bf-reset:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
+
+  .bf-cal-scroll { overflow-x: auto; padding: 14px 18px; background: #fff; }
+  .bf-cal { display: grid; grid-template-columns: repeat(7, minmax(112px, 1fr)); gap: 5px; min-width: 812px; }
+  .bf-dow {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ui-muted); text-align: center; padding-bottom: 3px;
+  }
+  .bf-day {
+    display: flex; flex-direction: column; gap: 5px; min-height: 92px; padding: 7px;
+    background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-btn);
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .bf-day.off { background: var(--bg-soft); }
+  .bf-day.blank { background: none; border-color: transparent; }
+  .bf-dn {
+    display: flex; align-items: center; gap: 6px;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .8rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
+  }
+  /* ชื่อวันซ้ำกับหัวคอลัมน์บนจอกว้าง — โผล่เฉพาะตอนปฏิทินยุบเป็นรายการบนมือถือ */
+  .bf-dw { display: none; font-style: normal; font-weight: 500; }
+  .bf-day.today .bf-dn { color: var(--brand-teal); }
+  .bf-day.today .bf-dn span {
+    font-family: inherit; font-size: .68rem; font-weight: 600; letter-spacing: normal;
+    color: var(--brand-teal); background: var(--brand-pale); border-radius: 999px; padding: 1px 8px;
+  }
+  .bf-tot {
+    margin-top: auto; text-align: right; font-variant-numeric: tabular-nums;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .76rem; font-weight: 700; color: var(--ui-ink);
+  }
+  .bf-day.over { background: var(--brand-pale); border-color: var(--brand-jade); }
+  .bf-day.pick { border-style: dashed; border-color: var(--brand-mist); cursor: pointer; }
+  .bf-day.pick:hover { background: var(--bg-soft); border-color: var(--brand-jade); }
+
+  .bf-chip {
+    display: block; width: 100%; text-align: left; font: inherit; cursor: grab;
+    color: var(--ui-ink); background: var(--bg-soft);
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn); padding: 6px 9px;
+    transition: background .125s ease, border-color .125s ease, color .125s ease;
+  }
+  .bf-chip:hover { border-color: var(--brand-jade); }
+  .bf-chip[aria-pressed="true"] { color: #fff; background: var(--brand-teal); border-color: var(--brand-teal); }
+  .bf-chip[aria-pressed="true"] .bf-cm { color: rgba(255,255,255,.82); }
+  .bf-cn { display: block; font-size: .82rem; font-weight: 600; line-height: 1.35; }
+  .bf-cm {
+    display: block; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .72rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
+  }
+
+  .bf-status {
+    margin: 0; padding: 13px 24px; min-height: 48px;
+    border-top: 1px solid var(--ui-line); background: var(--bg-soft);
+    font-size: .92rem; line-height: 1.6; color: var(--ui-muted);
+  }
+  .bf-status b { color: var(--brand-teal); font-weight: 700; }
+  .bf-foot {
+    display: flex; flex-wrap: wrap; gap: 8px 30px;
+    padding: 14px 24px 16px; border-top: 1px solid var(--ui-line); background: var(--bg-soft);
+    font-size: .9rem; color: var(--ui-muted);
+  }
+  .bf-foot b {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-weight: 700; color: var(--ui-ink); font-variant-numeric: tabular-nums;
+  }
+
+  .bf-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .86rem; line-height: 1.65; color: var(--ui-muted);
+  }
+  .bf-note a { color: #8E2C46; font-weight: 600; text-decoration: none; }
+  .bf-note a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* จังหวะเดียวของ section: จุดเดินตามเส้นทางหลักของผังรอบละ 9 วินาที */
   @media (prefers-reduced-motion: reduce) {
-    .cmp-wrap.reveal .cmp tbody tr { opacity: 1; transform: none; transition: none; }
+    .bf-token { display: none; }
+    .bf-day, .bf-chip, .bf-reset { transition: none; }
   }
 
-  /* มือถือ: คลี่เป็นการ์ดรายหัวข้อ — บล็อก BC เป็นแผงเขียวเข้มท้ายการ์ด */
+  @media (max-width: 900px) {
+    .bf-head, .bf-bar, .bf-status, .bf-foot, .bf-keys { padding-left: 18px; padding-right: 18px; }
+    .bf-cal-scroll { padding: 12px; }
+    /* หัวการ์ดตกบรรทัดแล้ว margin-left:auto จะดันไปชิดขวา อ่านเป็นคนละเรื่องกัน */
+    .bf-head .bf-count { margin-left: 0; width: 100%; }
+  }
+
+  /* มือถือ: ปฏิทินเปลี่ยนเป็นรายการวันเรียงลง เหลือเฉพาะวันที่มีกลุ่มวางบิล
+     พอกดกลุ่มถึงคลี่ครบทั้งเดือนให้เลือกวันปลายทาง — ทุกวันยังเป็นเป้าหมายได้เหมือนเดิม
+     ดีกว่าบังคับเลื่อนตาราง 7 คอลัมน์แนวนอนบนจอ 430px ซึ่งมองไม่เห็นภาพรวมทั้งเดือน */
   @media (max-width: 760px) {
-    .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; }
-    .cmp tbody th, .cmp th:last-child, .cmp td:last-child { width: auto; }
-    .cmp thead { display: none; }
-    .cmp tbody tr + tr th { border-top: 1px solid var(--ui-line); }
-    .cmp th, .cmp td { border-top: 0; padding: 10px 20px; }
-    .cmp tbody th { padding-top: 20px; }
-    .cmp tbody tr:not(.cmp-group) th { padding-left: 20px; }
-    .cmp .cmp-group th { padding: 16px 20px 12px; }
-    .cmp td:last-child { padding: 14px 20px 18px; margin-top: 10px; }
-    .cmp tbody tr + tr td:last-child { border-top: 0; }
-    .cmp tbody tr:hover th, .cmp tbody tr:hover td:not(:last-child) { background: none; }
-    .cmp td::before {
-      content: attr(data-h); display: block; margin-bottom: 4px;
-      font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-      font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
-    }
-    .cmp td:last-child::before { color: var(--brand-mist); }
+    .bf-cal { grid-template-columns: 1fr; min-width: 0; gap: 6px; }
+    .bf-dow { display: none; }
+    .bf-dw { display: inline; }
+    .bf-day { min-height: 0; }
+    .bf-day.blank { display: none; }
+    .bf-cal:not(.moving) .bf-day:not(.has) { display: none; }
+    .bf-cal.moving .bf-day:not(.has) { padding: 9px 10px; }
+    .bf-tot { margin-top: 4px; }
   }
 
 
@@ -2552,7 +2643,6 @@
   .feature-panel,
   .feature-panel-icon,
   .slider figure,
-  .cmp-wrap,
   .faq-list details,
   .plan-card,
   .plan-price-box,
@@ -2888,7 +2978,7 @@
   :root { --ui-muted: #516661; }
 
   /* เลข 01–05 ในแอคคอร์เดียน: Deep Rose ได้ 4.11 — เปลี่ยนเป็น Jade 4.80
-     ตรงกับที่ DESIGN.md กำหนดให้ Jade เป็นสีตัวนับ 01–05 ของ #why-us อยู่แล้ว */
+     ตรงกับที่ DESIGN.md กำหนดให้ Jade เป็นสีกลางของระบบอยู่แล้ว */
   .bento-num { color: var(--brand-jade); }
 
   /* ---- พื้นเข้ม: ตัวหนังสือที่ยังไม่ถึงเกณฑ์ ---- */
@@ -2944,72 +3034,193 @@
   .plan-banner { border-radius: var(--ui-radius-card) var(--ui-radius-card) 0 0; }
   .plan-more, .plan-body { min-width: 0; }
 
-  /* ---- #why-us มือถือ: outline เยื้อง ----
-     ก่อนหน้านี้ตารางถูกคลี่เป็นแถบขาว/เขียวสลับกันชิดติดกันสูง ~4,200px
-     หัวข้อถัดไปโผล่บนพื้นขาวชิดก้นแผงเขียวของข้อก่อนพอดี เลยแยกไม่ออกว่า
-     เนื้อความไหนเป็นของหัวข้อไหน
 
-     ใช้ stacked list ตามที่ UX Movement แนะนำสำหรับตารางมือถือ: เลิกซ้ำป้าย
-     คอลัมน์เป็นแถบสีเต็มความกว้างทุกแถว แล้วสื่อลำดับชั้นด้วยการเยื้อง
-     + น้ำหนักตัวอักษรแทน
-       ระดับ 0  ชื่อหัวข้อ ชิดซ้ายสุด ตัวหนา สีหมึก
-       ระดับ 1  สองตัวเลือก เยื้อง 12px มีรางสี 3px คนละสี + ป้ายตัวเล็กกำกับ
+  /* ── #vat-service — เดโมค้นเลขผู้เสียภาษีจากกรมสรรพากร ────────────────
+     การ์ดใบเดียวคุมทั้งส่วน ข้างในไม่มีการ์ดซ้อนการ์ด แบ่งน้ำหนักด้วยพื้นกับเส้น 1px
+     burgundy ใช้เป็นเครื่องหมาย "ผิด" อย่างเดียว ปุ่มในส่วนนี้เป็น Deep Teal ทั้งหมด
+     เพื่อไม่แย่งความดังจาก CTA burgundy ของหน้า */
+  #vat-service > .wrap > .section-kicker,
+  #vat-service > .wrap > h2,
+  #vat-service > .wrap > .sub {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .vs-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-     ที่ไม่ใช้วิธีที่ NN/g แนะนำเป็นอันดับแรก (ตรึงคอลัมน์แรก + เลื่อนแนวนอน)
-     เพราะช่องของเราเป็นความเรียงไทยยาวกับ bullet list ไม่ใช่ค่าสั้น ๆ
-     การเลื่อนแนวนอนอ่านย่อหน้ายาวแย่กว่าการเลื่อนแกนเดียว */
-  @media (max-width: 760px) {
-    .cmp-wrap { overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .vs {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+  }
+  .vs-bar { background: var(--bg-soft); border-bottom: 1px solid var(--ui-line); padding: 18px 24px 20px; }
+  .vs-app {
+    display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ui-muted);
+  }
+  .vs-app .vs-ic { width: 15px; height: 15px; color: var(--brand-jade); }
+  .vs-form { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .vs-field { display: flex; flex-direction: column; gap: 5px; }
+  .vs-field > span { font-size: .8rem; font-weight: 500; color: var(--ui-muted); }
+  .vs-box {
+    display: block; min-width: 232px; padding: 10px 14px;
+    border: 1px solid var(--brand-mist); border-radius: var(--ui-radius-btn); background: #fff;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 1.02rem; font-weight: 700; color: var(--ui-ink);
+    letter-spacing: .12em; font-variant-numeric: tabular-nums;
+  }
+  .vs-box.small { min-width: 104px; letter-spacing: .1em; }
+  .vs-box.dim { color: var(--ui-muted); font-weight: 500; letter-spacing: normal; }
+  .vs-go {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-teal);
+    border: 1px solid var(--brand-teal); border-radius: var(--ui-radius-btn);
+    padding: 0 20px; min-height: 44px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .vs-go:hover { background: var(--brand-deep); border-color: var(--brand-deep); }
 
-    .cmp tbody tr:not(.cmp-group) {
-      margin: 0 0 24px; overflow: visible;
-      border: 0; border-radius: 0; background: transparent; box-shadow: none;
-    }
-    .cmp tbody tr:not(.cmp-group) th {
-      padding: 0 0 12px; border: 0;
-      color: var(--ui-ink); font-size: 1.06rem; font-weight: 700; line-height: 1.4;
-    }
+  .vs-cases {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding: 16px 24px; border-bottom: 1px solid var(--ui-line);
+  }
+  .vs-cases .vs-lbl { font-size: .82rem; color: var(--ui-muted); margin-right: 4px; }
+  .vs-cases button {
+    font-size: .88rem; font-weight: 500; color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
+    padding: 10px 15px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease, color .125s ease;
+  }
+  .vs-cases button:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
+  .vs-cases button[aria-pressed="true"] {
+    color: #fff; background: var(--brand-teal); border-color: var(--brand-teal);
+  }
 
-    /* :not(.cmp-group) จำเป็น — แถบกลุ่มมี th เดียวจึงเข้าเงื่อน :last-child ด้วย
-       ถ้าไม่กันไว้ พื้นเขียวของแถบกลุ่มจะหาย เหลือตัวขาวบนงาช้าง */
-    .cmp td { margin: 0 0 0 12px; padding: 0 0 0 15px; background: transparent; }
-    /* เขียนเจาะจงกว่า .cmp td:last-child เดิมที่ตั้งพื้นเขียวไว้ (0,2,1) จึงต้องชนะมัน
-       margin-top ต้องอยู่ในกฎนี้ด้วย ไม่งั้นถูก shorthand ด้านบนล้างเป็น 0 */
-    .cmp tbody tr:not(.cmp-group) td:last-child {
-      margin: 16px 0 0 12px; padding: 0 0 0 15px; background: transparent;
-    }
-    .cmp td:not(:last-child) {
-      border-left: 3px solid var(--brand-pale);
-      color: var(--ui-muted); font-size: .9rem; line-height: 1.62;
-    }
-    .cmp td:last-child { border-left: 3px solid var(--brand-teal); color: var(--ui-ink); }
-    .cmp tbody tr:hover td:not(:last-child) { background: transparent; }
+  .vs-list { padding: 20px 24px 4px; }
+  .vs-list > p { margin: 0 0 12px; font-size: .9rem; color: var(--ui-muted); }
+  .vs-grid { border-top: 1px solid var(--ui-line); }
+  .vs-row {
+    display: grid; grid-template-columns: 92px 1fr 22px; gap: 14px; align-items: center;
+    width: 100%; padding: 12px 10px; text-align: left; font: inherit; font-size: .95rem;
+    background: transparent; border: 0; border-bottom: 1px solid var(--ui-line);
+    cursor: pointer; transition: background .125s ease;
+  }
+  .vs-row:hover { background: rgba(1,47,42,.035); }
+  .vs-row[aria-pressed="true"] { background: rgba(65,119,113,.09); }
+  .vs-row code {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-weight: 700; font-size: .9rem; letter-spacing: .1em;
+    color: var(--brand-teal); font-variant-numeric: tabular-nums;
+  }
+  .vs-row .vs-ic { width: 17px; height: 17px; color: var(--brand-jade); opacity: 0; }
+  .vs-row[aria-pressed="true"] .vs-ic { opacity: 1; }
 
-    /* ป้ายฝั่ง = label ตัวเล็กเหนือเนื้อความ แทนแถบสีทึบ */
-    .cmp td::before {
-      display: block; margin-bottom: 6px; content: attr(data-h);
-      font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-    }
-    .cmp td:not(:last-child)::before { color: var(--ui-muted); }
-    .cmp td:last-child::before { color: var(--brand-teal); }
+  .vs-msg {
+    display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap;
+    margin: 20px 24px 0; padding: 15px 17px; border-radius: var(--ui-radius-btn);
+    font-size: .95rem; line-height: 1.6;
+  }
+  .vs-msg .vs-ic { margin-top: .25em; }
+  .vs-msg p { margin: 0; flex: 1 1 260px; }
+  .vs-msg.stop { color: var(--brand-burgundy-dark); background: rgba(166,58,86,.07); }
+  .vs-msg.stop .vs-ic { color: var(--brand-burgundy); }
+  .vs-msg.ask { color: var(--ui-ink); background: var(--bg-soft); }
+  .vs-msg.ask .vs-ic { color: var(--brand-jade); }
+  .vs-pick {
+    font-size: .88rem; font-weight: 500; color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-jade); border-radius: var(--ui-radius-btn);
+    padding: 11px 15px; cursor: pointer; white-space: nowrap;
+    transition: background .125s ease, color .125s ease;
+  }
+  .vs-pick:hover { color: #fff; background: var(--brand-teal); }
 
-    /* พื้นไม่ใช่สีเข้มแล้ว — ✓ กลับด้านเป็นวงกลม teal ตัวขาว */
-    .cmp td:last-child .cmp-points { gap: 8px; }
-    .cmp td:last-child li { padding-left: 25px; font-size: .93rem; line-height: 1.55; color: var(--ui-ink); }
-    .cmp-points li::before {
-      top: 2px; width: 17px; height: 17px; font-size: .58rem;
-      color: #fff; background: var(--brand-teal);
-    }
+  /* ฝั่งขวาได้พื้นเขียวจาง + แถบ 3px ขอบซ้าย = ฝั่งที่เชื่อถือได้
+     สำนวนเดียวกับแถบซ้ายของแถวที่เปิดอยู่ใน Claim Accordion ของ #business-central */
+  .vs-cmp { display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .vs-side { padding: 22px 24px 20px; min-width: 0; }
+  .vs-side.rd {
+    background: #EFF5F3; border-left: 1px solid var(--ui-line);
+    box-shadow: inset 3px 0 0 var(--brand-jade);
+  }
+  .vs-side h3 {
+    display: flex; align-items: center; gap: 8px; margin: 0 0 2px;
+    font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em;
+  }
+  .vs-side.man h3 .vs-ic { color: var(--brand-burgundy); }
+  .vs-side.rd h3 { color: var(--brand-teal); }
+  .vs-side.rd h3 .vs-ic { color: var(--brand-jade); }
+  .vs-side > p { margin: 0 0 14px; padding-left: 26px; font-size: .84rem; color: var(--ui-muted); }
+  .vs-mid {
+    position: absolute; left: 50%; top: 50%; z-index: 1;
+    width: 34px; height: 34px; margin: -17px 0 0 -17px;
+    display: grid; place-items: center;
+    background: #fff; border: 1px solid var(--ui-line); border-radius: 50%;
+    color: var(--brand-mint);
+  }
 
-    /* แถบกลุ่ม 01–05: แถบ Deep Teal ทึบ เป็นจุดพักสายตาคั่นช่วง
-       เข้มกว่าราง Signing Teal ของฝั่ง BC หนึ่งขั้น จึงไม่ปนกัน */
-    .cmp .cmp-group th {
-      margin: 6px 0 14px; padding: 11px 14px; border: 0;
-      border-radius: var(--ui-radius-card);
-      background: var(--brand-deep); color: #fff;
-    }
-    .cmp .cmp-group th::before { color: var(--brand-mist); }
-    .cmp .cmp-group .cmp-gic { color: var(--brand-mist); }
+  .vs dl { margin: 0; }
+  .vs-line {
+    display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: baseline;
+    padding: 10px 0; border-top: 1px solid var(--ui-line);
+  }
+  .vs-side.rd .vs-line { border-top-color: color-mix(in srgb, var(--brand-jade) 24%, transparent); }
+  .vs dt { font-size: .82rem; color: var(--ui-muted); }
+  .vs dd { margin: 0; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
+  .vs dd.empty { color: var(--brand-mist); }
+  .vs dd.bad {
+    color: var(--brand-burgundy-dark);
+    text-decoration: underline wavy var(--brand-burgundy) 1.5px;
+    text-underline-offset: 5px; text-decoration-skip-ink: none;
+  }
+  .vs-side.rd dd { color: var(--brand-teal); font-weight: 600; }
+  .vs-side.rd dd.empty { color: var(--brand-mist); font-weight: 500; }
+  /* จังหวะเดียวของทั้ง section: ฝั่งขวาไล่เติมทีละฟิลด์หลังกดค้นหา */
+  .vs-side.rd dd.fill { opacity: 0; animation: vsFill .42s cubic-bezier(.2,.75,.2,1) forwards; }
+  @keyframes vsFill { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+  .vs-none {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 46px 16px; text-align: center; color: var(--ui-muted); font-size: .92rem;
+  }
+  .vs-none .vs-ic { width: 26px; height: 26px; color: var(--brand-mist); }
+
+  .vs-cost {
+    display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline;
+    margin: 0; padding: 17px 24px; background: var(--bg-soft);
+    border-top: 1px solid var(--ui-line); font-size: .95rem; line-height: 1.6;
+  }
+  .vs-cost .vs-lbl {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    color: var(--brand-burgundy); white-space: nowrap;
+  }
+  .vs-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
+  }
+
+  @media (max-width: 900px) {
+    .vs-cmp { grid-template-columns: 1fr; }
+    .vs-side.rd { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
+    .vs-mid { transform: rotate(90deg); }
+    .vs-bar, .vs-cases, .vs-list, .vs-cost { padding-left: 18px; padding-right: 18px; }
+    .vs-msg { margin-left: 18px; margin-right: 18px; }
+    .vs-side { padding: 22px 18px 20px; }
+    /* ช่องเลข 13 หลักยาวเกินกว่าจะยืนคู่กับช่องสาขาบนจอแคบ — ให้กริดคุมแทน flex
+       min-width:0 บน .vs-field คือจุดที่ขาดไม่ได้ ไม่งั้นคอลัมน์หดไม่ลงแล้วดันหน้าจนล้น */
+    .vs-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+    .vs-field { min-width: 0; }
+    .vs-box, .vs-box.small { min-width: 0; width: 100%; }
+    .vs-go { grid-column: 1 / -1; width: 100%; justify-content: center; }
+    .vs-cases button { max-width: 100%; text-align: left; }
+  }
+  @media (max-width: 520px) {
+    .vs-line { grid-template-columns: 1fr; gap: 2px; }
+    .vs-row { grid-template-columns: 76px 1fr 20px; gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vs-side.rd dd.fill { animation: none; opacity: 1; }
+    .vs-go, .vs-cases button, .vs-row, .vs-pick { transition: none; }
   }
 </style>
 </head>
@@ -3362,41 +3573,120 @@
   </div>
 </section>
 
-<section id="why-us" class="alt">
+<section id="vat-service">
   <div class="wrap">
-    <p class="section-kicker">Business Central vs. Accounting Software</p>
-    <h2>Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</h2>
-    <p class="sub">เทียบกันเฉพาะงานที่นักบัญชีต้องทำจริงทุกเดือน — ตั้งแต่ออกใบกำกับภาษี ยื่นภาษี ไปจนถึงปิดบัญชี</p>
-    <div class="cmp-wrap reveal">
-      <table class="cmp">
-        <thead>
-          <tr><th scope="col">หัวข้อ</th><th scope="col">โปรแกรมบัญชีทั่วไป</th><th scope="col"><svg class="cmp-bc-ic" viewBox="0 0 96 96" fill="none" aria-hidden="true"><path d="M34 33.9998C41.732 41.7317 54.268 41.7318 62 33.9999C69.732 26.2679 69.732 13.7318 62 5.99986C54.268 -1.73209 41.732 -1.73214 34 5.99979C26.268 13.7318 26.2681 26.2678 34 33.9998Z" fill="url(#bcT0)"/><path d="M62 62.0002C54.268 54.2683 41.732 54.2682 34 62.0001C26.268 69.7321 26.268 82.2682 34 90.0001C41.732 97.7321 54.268 97.7321 62 90.0002C69.732 82.2682 69.7319 69.7322 62 62.0002Z" fill="url(#bcT3)"/><path d="M34 62C41.732 69.732 54.268 69.732 62 62C69.732 54.268 69.732 41.732 62 34C54.268 26.268 41.732 26.268 34 34C26.268 41.732 26.268 54.268 34 62Z" fill="url(#bcT6)"/><path d="M6.00002 34L34 5.99998C26.2681 13.732 26.268 26.2681 34 34.0001C41.732 41.7321 41.732 54.2681 34 62.0001C26.268 69.732 13.732 69.732 6.00004 62C-1.73195 54.268 -1.73198 41.732 6.00002 34Z" fill="url(#bcT9)"/><path d="M90 62L62 90C69.7319 82.268 69.732 69.7319 62 61.9999C54.268 54.2679 54.268 41.7319 62 33.9999C69.732 26.268 82.268 26.268 90 34C97.732 41.732 97.732 54.268 90 62Z" fill="url(#bcT11)"/><defs><linearGradient id="bcT0" x1="30" y1="9.5" x2="67" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#0C74A1"/><stop offset=".468" stop-color="#1384B1"/><stop offset="1" stop-color="#59bdb1"/></linearGradient><linearGradient id="bcT3" x1="68.5" y1="79.5" x2="29" y2="71" gradientUnits="userSpaceOnUse"><stop stop-color="#06517B"/><stop offset=".508" stop-color="#09638E"/><stop offset="1" stop-color="#0C74A1"/></linearGradient><linearGradient id="bcT6" x1="44.5" y1="29.5" x2="45" y2="68.5" gradientUnits="userSpaceOnUse"><stop stop-color="#7CCBC4"/><stop offset=".371" stop-color="#26CFE8"/><stop offset="1" stop-color="#1384B1"/></linearGradient><linearGradient id="bcT9" x1="14.5" y1="26" x2="43.5" y2="55" gradientUnits="userSpaceOnUse"><stop stop-color="#B6F6C7"/><stop offset=".277" stop-color="#7CCBC4"/><stop offset="1" stop-color="#26CFE8"/></linearGradient><linearGradient id="bcT11" x1="63" y1="30" x2="92.5" y2="59.5" gradientUnits="userSpaceOnUse"><stop stop-color="#9FF2E4"/><stop offset=".266" stop-color="#2BDABE"/><stop offset=".620" stop-color="#59bdb1"/><stop offset="1" stop-color="#1384B1"/></linearGradient></defs></svg><span>Business Central + JWIC Thai Localization</span></th></tr>
-        </thead>
-        <tbody>
-          <tr class="cmp-group"><th colspan="3" scope="colgroup"><svg class="cmp-gic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h6M9 17h4"/></svg><span>ภาษีและเอกสารไทย</span></th></tr>
-          <tr><th scope="row">เอกสารบัญชีภาษาไทย</th><td data-h="โปรแกรมบัญชีทั่วไป">มีฟอร์มมาตรฐานให้ แต่ปรับแบบฟอร์มตามธุรกิจได้จำกัด</td><td data-h="Business Central"><ul class="cmp-points"><li>ฟอร์มไทย 20+ แบบพร้อมพิมพ์ — ใบกำกับภาษี ใบวางบิล ใบเสร็จ ใบลดหนี้</li><li>ปรับแบบฟอร์มตามธุรกิจได้</li></ul></td></tr>
-          <tr><th scope="row">ภาษีและวางบิล–รับชำระ</th><td data-h="โปรแกรมบัญชีทั่วไป">รายงานภาษีและ 50 ทวิได้ระดับพื้นฐาน งานสาขา Unrealized VAT และรอบวางบิลของลูกค้าแต่ละราย ต้องทำมือหรือตามด้วย Excel</td><td data-h="Business Central"><ul class="cmp-points"><li>ภ.พ.30 กรอกให้อัตโนมัติ รองรับสำนักงานใหญ่–สาขา และ Unrealized VAT</li><li>หัก ณ ที่จ่ายคำนวณตอนบันทึกจ่าย — 50 ทวิ ภ.ง.ด.2/3/53/54 พร้อมไฟล์ RD Prep</li><li>ปฏิทินวางบิลตามเงื่อนไขลูกค้า ออกใบเสร็จ/ใบกำกับภาษีตามสถานะ VAT</li></ul></td></tr>
-          <tr class="cmp-group"><th colspan="3" scope="colgroup"><svg class="cmp-gic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-8.5-6"/><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 8.5 6"/><polyline points="20.5 3.5 20.5 9 15 9"/><polyline points="3.5 20.5 3.5 15 9 15"/></svg><span>งานบัญชีประจำวัน</span></th></tr>
-          <tr><th scope="row">ฐานข้อมูลเดียว บัญชี–ขาย–ซื้อ–สต๊อก</th><td data-h="โปรแกรมบัญชีทั่วไป">ใช้หลายระบบแยกกัน ต้องคีย์ข้อมูลซ้ำ ยอดแต่ละระบบไม่ตรงกัน</td><td data-h="Business Central"><ul class="cmp-points"><li>ขาย จัดซื้อ สต๊อก ลงบัญชีให้อัตโนมัติในฐานข้อมูลเดียว</li><li>ไม่ต้องคีย์ซ้ำ ยอดตรงกันทุกรายงาน</li></ul></td></tr>
-          <tr><th scope="row">การอนุมัติเอกสาร</th><td data-h="โปรแกรมบัญชีทั่วไป">อนุมัตินอกระบบผ่านแชตหรืออีเมล ย้อนดูไม่ได้ว่าใครอนุมัติเมื่อไหร่</td><td data-h="Business Central"><ul class="cmp-points"><li>Workflow อนุมัติในตัว — ใบสั่งซื้อ ใบแจ้งหนี้ ส่งถึงผู้อนุมัติอัตโนมัติ</li><li>ประวัติการอนุมัติติดอยู่กับเอกสาร</li></ul></td></tr>
-          <tr><th scope="row">สต๊อกและต้นทุน</th><td data-h="โปรแกรมบัญชีทั่วไป">ตัดสต๊อกได้ แต่ต้นทุนมักไม่ผูกกับบัญชีแยกประเภทแบบเรียลไทม์</td><td data-h="Business Central"><ul class="cmp-points"><li>Stock Card รับ–จ่าย–คงเหลือ รายสินค้า</li><li>ต้นทุนกระทบสมุดบัญชีอัตโนมัติทุกการเคลื่อนไหว</li></ul></td></tr>
-          <tr class="cmp-group"><th colspan="3" scope="colgroup"><svg class="cmp-gic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><polyline points="9 12 11.4 14.4 15.4 10.2"/></svg><span>การควบคุมภายในและปิดบัญชี</span></th></tr>
-          <tr><th scope="row">ปิดบัญชีและตรวจย้อนกลับ</th><td data-h="โปรแกรมบัญชีทั่วไป">แก้หรือลบเอกสารย้อนหลังได้ ยอดรายงานภาษีกับสมุดบัญชีมักไม่ตรงกัน</td><td data-h="Business Central"><ul class="cmp-points"><li>ทุกยอดผูกกับ Ledger Entry คลิกย้อนถึงเอกสารต้นเรื่อง</li><li>ยอดยื่นภาษีกระทบกับบัญชีแยกประเภทได้</li></ul></td></tr>
-          <tr><th scope="row">สิทธิ์ผู้ใช้และการควบคุม</th><td data-h="โปรแกรมบัญชีทั่วไป">กำหนดสิทธิ์ได้ไม่ละเอียด ผู้ใช้ที่เข้าระบบมักเห็นข้อมูลเกือบทั้งหมด</td><td data-h="Business Central"><ul class="cmp-points"><li>กำหนดสิทธิ์ตามบทบาท เห็นเฉพาะเมนูและข้อมูลที่เกี่ยวข้อง</li><li>ทุกการแก้ไขมีบันทึกว่าใครทำเมื่อไหร่</li></ul></td></tr>
-          <tr><th scope="row">รายงานและงบการเงิน</th><td data-h="โปรแกรมบัญชีทั่วไป">รายงานสำเร็จรูปตายตัว อยากเห็นงบต้องรอปิดงวดหรือส่งออกมาทำใน Excel</td><td data-h="Business Central"><ul class="cmp-points"><li>งบทดลอง งบกำไรขาดทุน กดดูได้ทันทีจากข้อมูลจริง</li><li>ต่อ Excel และ Power BI วิเคราะห์เพิ่มได้โดยตรง</li></ul></td></tr>
-          <tr class="cmp-group"><th colspan="3" scope="colgroup"><svg class="cmp-gic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.2"/><path d="M22 20v-2a4 4 0 0 0-3-3.9"/><path d="M16.5 3.6a4 4 0 0 1 0 6.8"/></svg><span>การทำงานร่วมกันและการพัฒนา</span></th></tr>
-          <tr><th scope="row">ทำงานร่วมกับ Excel และ Microsoft 365</th><td data-h="โปรแกรมบัญชีทั่วไป">ส่งออกไฟล์เป็นรอบๆ แล้วส่งต่อกันทางอีเมล ข้อมูลมีหลายเวอร์ชัน</td><td data-h="Business Central"><ul class="cmp-points"><li>เปิดข้อมูลจริงใน Excel แก้แล้วส่งกลับเข้าระบบได้</li><li>เชื่อม Outlook และ Teams ในตัว</li></ul></td></tr>
-          <tr><th scope="row">หลายบริษัท หลายสกุลเงิน</th><td data-h="โปรแกรมบัญชีทั่วไป">แยกฐานข้อมูลรายบริษัท ต้องรวมงบใน Excel</td><td data-h="Business Central"><ul class="cmp-points"><li>หลายบริษัทในระบบเดียว รองรับหลายสกุลเงิน</li><li>อัตราแลกเปลี่ยนจาก ธปท. อัตโนมัติ</li></ul></td></tr>
-          <tr><th scope="row">Copilot และ AI Agent</th><td data-h="โปรแกรมบัญชีทั่วไป">ยังไม่มี AI ในตัว หรือมีเพียงแชตบอตตอบคำถามทั่วไป</td><td data-h="Business Central"><ul class="cmp-points"><li>Copilot ช่วยจับคู่กระทบยอดธนาคารและสรุปข้อมูล</li><li>AI Agent ช่วยสร้างเอกสารขายจากอีเมลลูกค้า ความสามารถเพิ่มทุกรีลีส</li></ul></td></tr>
-          <tr class="cmp-group"><th colspan="3" scope="colgroup"><svg class="cmp-gic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19"/><path d="M17 15h2"/><path d="M6 6V4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V6"/></svg><span>งบประมาณการลงทุน</span></th></tr>
-          <tr><th scope="row">ค่าใช้จ่ายรวมของระบบ</th><td data-h="โปรแกรมบัญชีทั่วไป">เริ่มต้นถูก แต่ค่าปรับแต่ง–ต่อยอดคิดเพิ่มเป็นครั้ง และมักต้องซื้อหลายระบบมาต่อกัน</td><td data-h="Business Central"><ul class="cmp-points"><li>License รายเดือนต่อผู้ใช้ รวมอัปเดตจาก Microsoft ปีละ 2 ครั้ง</li><li>ระบบเดียวครอบคลุม ไม่ต้องลงทุนหลายโปรแกรม</li><li>ค่าวางระบบประเมินตามขอบเขตงานจริง</li></ul></td></tr>
-        </tbody>
-      </table>
+    <p class="section-kicker" data-vs="kicker">Clean master data</p>
+    <h2 data-vs="h2">เปิดลูกค้าใหม่ด้วยเลข 13 หลัก ไม่ใช่ด้วยความจำ</h2>
+    <p class="sub" data-vs="sub">ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง</p>
+
+    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="vsi-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></symbol>
+      <symbol id="vsi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
+      <symbol id="vsi-check" viewBox="0 0 24 24"><path d="M12 3 20 6v6.2c0 4.6-3.2 7.7-8 9.1-4.8-1.4-8-4.5-8-9.1V6z"/><polyline points="8.6 12 11.2 14.6 15.6 10.1"/></symbol>
+      <symbol id="vsi-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
+      <symbol id="vsi-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 4.5h-10a2 2 0 0 0-2 2v10"/></symbol>
+      <symbol id="vsi-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+    </defs></svg>
+
+    <div class="vs reveal">
+      <div class="vs-bar">
+        <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
+        <div class="vs-form">
+          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><output class="vs-box" id="vs-tax">0105558000123</output></label>
+          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><output class="vs-box small" id="vs-branch">00000</output></label>
+          <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
+        </div>
+      </div>
+
+      <div class="vs-cases" id="vs-cases" role="group" aria-label="สถานการณ์ตัวอย่าง">
+        <span class="vs-lbl" data-vs="lblCase">ลองสถานการณ์</span>
+      </div>
+
+      <div id="vs-result"></div>
+
+      <div class="vs-cmp">
+        <div class="vs-side man">
+          <h3><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="hdMan">ที่พนักงานคีย์เอง</span></h3>
+          <p data-vs="hdManSub">พิมพ์จากเอกสารที่ได้มา</p>
+          <dl id="vs-man"></dl>
+        </div>
+        <span class="vs-mid" aria-hidden="true"><svg class="vs-ic"><use href="#vsi-arrow"/></svg></span>
+        <div class="vs-side rd">
+          <h3><svg class="vs-ic"><use href="#vsi-check"/></svg><span data-vs="hdRd">ที่ VAT Service เติมให้</span></h3>
+          <p data-vs="hdRdSub">ตามทะเบียนกรมสรรพากร</p>
+          <dl id="vs-rd"></dl>
+        </div>
+      </div>
+
+      <p class="vs-cost"><span class="vs-lbl" data-vs="lblCost">ราคาที่จ่ายจริง</span><span id="vs-cost"></span></p>
     </div>
-    <div class="stat-row reveal">
-      <div class="stat"><b class="stat-num" data-count="20" data-suffix="+">0</b><span>ฟอร์มเอกสารภาษาไทยพร้อมใช้</span></div>
-      <div class="stat"><b class="stat-num" data-count="10" data-suffix="+">0</b><span>ฟังก์ชันเสริมที่จำเป็นสำหรับธุรกิจไทย</span></div>
+
+    <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
+  </div>
+</section>
+
+<section id="billing-flow" class="alt">
+  <div class="wrap">
+    <p class="section-kicker" data-bf="kicker">Process AR6 · Billing Note</p>
+    <h2 data-bf="h2">ตั้งแต่รอบวางบิล จนถึงวันนัดรับชำระ</h2>
+    <p class="sub" data-bf="sub">12 ขั้นต่อกันเป็นเส้นเดียวบน Business Central — ตั้งรอบวางบิลรายลูกค้า ออกใบพร้อม QR PromptPay วางบิล แล้วระบุวันนัดรับชำระ ส่งต่อเข้างานรับชำระโดยไม่ต้องคีย์ซ้ำ</p>
+
+    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="bfi-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></symbol>
+      <symbol id="bfi-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><line x1="8" y1="3" x2="8" y2="6.5"/><line x1="16" y1="3" x2="16" y2="6.5"/></symbol>
+    </defs></svg>
+
+    <div class="bf reveal">
+      <p class="bf-head">
+        <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
+        <span class="bf-count"><b>8</b> <span data-bf="cntA">ใน 12 ขั้นเป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
+      </p>
+
+      <div class="bf-scroll">
+        <svg viewBox="0 0 1440 700" role="img" aria-labelledby="bfTitle">
+          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล 12 ขั้น แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist</title>
+          <defs>
+            <marker id="bfAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 10 5 0 10z" fill="#739B97"/>
+            </marker>
+            <marker id="bfArD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 10 5 0 10z" fill="#A6C0BD"/>
+            </marker>
+          </defs>
+          <g id="bfFlow"></g>
+        </svg>
+      </div>
+
+      <p class="bf-keys">
+        <span><i class="bf-k-j"></i><span data-bf="keyJ">ฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
+        <span><i class="bf-k-m"></i><span data-bf="keyM">ทำนอกระบบ</span></span>
+        <span><i class="bf-k-g"></i><span data-bf="keyG">ทางแยกตัดสินใจ</span></span>
+        <span><i class="bf-k-c"></i><span data-bf="keyC">ส่งต่อกระบวนการอื่น</span></span>
+        <span data-bf="keyX">* เลนของคู่ค้าภายนอกบริษัท</span>
+      </p>
+
+      <div class="bf-board">
+        <div class="bf-bar">
+          <p class="bf-app"><svg class="bf-ic"><use href="#bfi-cal"/></svg>Business Central · Billing Board</p>
+          <span class="bf-month" data-bf="month">กันยายน 2569</span>
+          <span class="bf-sample" data-bf="sample">ข้อมูลตัวอย่าง</span>
+          <button class="bf-reset" type="button" id="bfReset" data-bf="reset">คืนค่าเดิม</button>
+        </div>
+        <div class="bf-cal-scroll">
+          <div class="bf-cal" id="bfCal"></div>
+        </div>
+        <p class="bf-status" id="bfStatus" role="status"></p>
+        <p class="bf-foot">
+          <span><b>฿2,785,050</b> <span data-bf="footAmt">ยอดที่ต้องวางบิลเดือนนี้</span></span>
+          <span><b>21</b> <span data-bf="footInv">ใบแจ้งหนี้</span></span>
+          <span><b>6</b> <span data-bf="footGrp">กลุ่มลูกค้า</span></span>
+        </p>
+      </div>
     </div>
+
+    <p class="bf-note" data-bf="note">ผังนี้เป็นหนึ่งใน Flow มาตรฐานที่เขียนไว้ครบทั้ง 14 สายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></p>
   </div>
 </section>
 
@@ -3835,6 +4125,12 @@
         <p>5 ช่วงของโครงการ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</p>
         <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
       </a>
+      <a class="card reveal article-link" href="articles/business-central-vs-accounting-software.html">
+        <span class="article-tag">เทียบระบบ</span>
+        <h3>Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</h3>
+        <p>เทียบ 15 หัวข้อที่นักบัญชีต้องทำจริงทุกเดือน ตั้งแต่ออกใบกำกับภาษีและยื่นภาษี ไปจนถึงปิดงบและตรวจย้อนกลับ</p>
+        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
+      </a>
       <a class="card reveal article-link" href="articles/accounting-to-erp.html">
         <span class="article-tag">ERP</span>
         <h3>ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง</h3>
@@ -3858,6 +4154,7 @@
         <p class="footer-head">เมนู</p>
         <a href="#services">บริการ</a>
         <a href="#features">ฟังก์ชัน</a>
+        <a href="#vat-service">VAT Service</a>
         <a href="#reports">ตัวอย่างรายงาน</a>
         <a href="#pricing">แพ็กเกจ</a>
         <a href="#about">เกี่ยวกับเรา</a>
@@ -4292,6 +4589,435 @@
     document.querySelector('.chat-fab-tip').hidden = true;
   });
 
+  // ── #vat-service — เดโมค้นเลขผู้เสียภาษี ─────────────────────────
+  // ข้อมูลทั้งหมดตายตัวในหน้า ไม่มีการเรียกกรมสรรพากรจากเว็บสาธารณะ
+  // (เปิดให้ใครก็ยิงได้ = ช่องขูดข้อมูล + เสี่ยง PDPA + โดน RD บล็อก IP)
+  // คำแปลของส่วนนี้อยู่ในตัวมันเอง ไม่ได้อยู่ใน I18N เพราะ applyLang() เขียนทับ innerHTML
+  // แล้วจะล้างสถานะที่ผู้ใช้กดค้างไว้ — applyLang เรียก window.renderVatService(lang) แทน
+  (() => {
+    const FIELDS = {
+      th: ['ชื่อ', 'ที่อยู่', 'ที่อยู่ (ต่อ)', 'จังหวัด', 'รหัสไปรษณีย์', 'สาขา'],
+      en: ['Name', 'Address', 'Address 2', 'City', 'Post Code', 'Branch']
+    };
+    // ชื่อบริษัทและที่อยู่ไม่แปล — เป็นข้อมูลลูกค้าไทย หลักเดียวกับ #articles ที่คงภาษาไทยไว้
+    const HQ = ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 88/12 อาคารสมชายทาวเวอร์ ชั้น 9',
+                'ถนนพระราม 3 แขวงบางโพงพาง เขตยานนาวา', 'กรุงเทพมหานคร', '10120', 'สำนักงานใหญ่'];
+
+    const CASES = [
+      {
+        tax: '0105558000123', branch: '00000',
+        tab: { th: 'เลขถูก', en: 'Valid ID' },
+        man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
+        bad: [0, 1, 2, 3, 4],
+        rd: HQ,
+        cost: { th: 'ใบกำกับภาษีที่ชื่อหรือที่อยู่ไม่ตรงหนังสือรับรอง ลูกค้าเอาไปใช้เป็นภาษีซื้อไม่ได้ — ตีกลับ ออกใบแทน แล้วเสียรอบวางบิลไปหนึ่งรอบ',
+                en: 'A tax invoice whose name or address misses the company registration is unusable as input VAT for your customer — it comes back, you reissue it, and a billing cycle is gone.' }
+      },
+      {
+        tax: '0105558000123', branch: '',
+        tab: { th: 'เป็นสาขา ไม่ใช่สำนักงานใหญ่', en: 'It is a branch' },
+        man: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 88/12 อาคารสมชายทาวเวอร์ ชั้น 9',
+              'ถนนพระราม 3 แขวงบางโพงพาง เขตยานนาวา', 'กรุงเทพมหานคร', '10120', 'สำนักงานใหญ่'],
+        bad: [1, 2, 3, 4, 5],
+        mode: 'list',
+        list: [
+          { code: '00000', name: 'สำนักงานใหญ่', row: HQ },
+          { code: '00001', name: 'คลังสินค้าสมุทรปราการ',
+            row: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 199 หมู่ 6 ซอยวัดศรีวารีน้อย',
+                  'ตำบลศีรษะจรเข้ใหญ่ อำเภอบางเสาธง', 'สมุทรปราการ', '10570', '00001 คลังสินค้าสมุทรปราการ'] },
+          { code: '00002', name: 'คลังสินค้าบางปะกง',
+            row: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 55 หมู่ 4 ถนนบางนา-ตราด',
+                  'ตำบลบางวัว อำเภอบางปะกง', 'ฉะเชิงเทรา', '24180', '00002 คลังสินค้าบางปะกง'] }
+        ],
+        hint: { th: 'เลขเดียวกันมี 3 สาขาจดทะเบียนไว้ — เลือกสาขาที่ออกเอกสารจริง',
+                en: 'Three branches are registered under this tax ID — pick the one the document is issued from.' },
+        cost: { th: 'ติ๊ก “สำนักงานใหญ่” ทั้งที่ซื้อ–ขายกับสาขา ทำให้ใบแนบ ภ.พ.30 ผิด และแยกยื่นรายสาขาไม่ได้',
+                en: 'Marking a record “head office” when the transaction belongs to a branch breaks the PP30 attachment and makes separate branch filing impossible.' }
+      },
+      {
+        tax: '0105558000132', branch: '00000',
+        tab: { th: 'เลขพิมพ์สลับหลัก', en: 'Digits transposed' },
+        man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
+        bad: [0, 1, 2, 3, 4],
+        mode: 'stop', icon: 'vsi-warn',
+        msg: { th: '<b>ไม่พบเลขประจำตัวผู้เสียภาษีนี้ในทะเบียน</b> — สองหลักท้ายสลับกัน (…123 ไม่ใช่ …132) ระบบไม่เปิดลูกค้าจากเลขที่ค้นไม่เจอ',
+               en: '<b>No taxpayer is registered under this ID.</b> The last two digits are transposed — …123, not …132 — and no record is opened from an ID that cannot be found.' },
+        cost: { th: 'เลขสลับหลักตามปกติจะไปโผล่ตอนยื่นภาษีสิ้นเดือน แล้วต้องไล่แก้ย้อนทั้งงวด — ที่นี่รู้ตั้งแต่วินาทีที่เปิดลูกค้า',
+                en: 'A transposed ID normally surfaces at month-end filing, when the whole period has to be corrected — here it surfaces the second the record is opened.' }
+      },
+      {
+        tax: '0105558000123', branch: '00000',
+        tab: { th: 'มีลูกค้ารายนี้แล้ว', en: 'Already on file' },
+        man: ['Somchai Materials Co., Ltd.', '88/12 Rama 3 Rd.', '', 'Bangkok', '10120', 'สำนักงานใหญ่'],
+        bad: [0, 1, 2, 3],
+        manSub: { th: 'กำลังจะเปิดเป็นรหัส C00871', en: 'About to be opened as C00871' },
+        rdSub: { th: 'ลูกค้าเดิม C00123 หลังอัปเดตตามทะเบียน', en: 'Existing customer C00123, updated from the registry' },
+        mode: 'ask', icon: 'vsi-copy',
+        msg: { th: '<b>เลขนี้เป็นของลูกค้ารหัส C00123 อยู่แล้ว</b> “บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด” — ระบบถามก่อนที่รหัสที่สองจะเกิดขึ้น',
+               en: '<b>This ID already belongs to customer C00123</b> — “บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด”. You are asked before a second code exists.' },
+        pick: { th: 'อัปเดตรายเดิมให้ตรงทะเบียน', en: 'Update the existing record' },
+        rd: HQ,
+        cost: { th: 'ลูกค้ารายเดียวสองรหัส = ยอดลูกหนี้แตกเป็นสองก้อน อายุหนี้ผิด วงเงินเครดิตไม่จริง และส่ง statement ซ้ำให้ลูกค้าคนเดิม',
+                en: 'One customer under two codes splits the receivable in two, breaks the ageing, makes the credit limit fiction, and sends the same customer two statements.' }
+      }
+    ];
+
+    const T = {
+      kicker: { th: 'Clean master data', en: 'Clean master data' },
+      h2: { th: 'เปิดลูกค้าใหม่ด้วยเลข 13 หลัก ไม่ใช่ด้วยความจำ', en: 'Open a customer from the tax ID, not from memory' },
+      sub: { th: 'ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง',
+             en: 'A name that misses the registration, a half-typed address, “head office” on a branch, the same customer opened twice — try each one and see what the Revenue Department’s VAT Service takes off the table.' },
+      lblTax: { th: 'เลขประจำตัวผู้เสียภาษี', en: 'VAT Registration No.' },
+      lblBranch: { th: 'เลขที่สาขา', en: 'Branch No.' },
+      btnGo: { th: 'ค้นหา', en: 'Search' },
+      lblCase: { th: 'ลองสถานการณ์', en: 'Try a case' },
+      hdMan: { th: 'ที่พนักงานคีย์เอง', en: 'Typed by hand' },
+      hdManSub: { th: 'พิมพ์จากเอกสารที่ได้มา', en: 'Copied off whatever document arrived' },
+      hdRd: { th: 'ที่ VAT Service เติมให้', en: 'Filled by VAT Service' },
+      hdRdSub: { th: 'ตามทะเบียนกรมสรรพากร', en: 'Straight from the Revenue Department registry' },
+      lblCost: { th: 'ราคาที่จ่ายจริง', en: 'What it costs' },
+      note: { th: 'ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม',
+              en: 'A simulation on a fictional company — the real system calls the Revenue Department’s VAT Service from inside Business Central, when opening customers and vendors and when updating existing ones.' },
+      wait: { th: 'เลือกสาขาจากรายการ', en: 'Pick a branch from the list' },
+      held: { th: 'หยุดไว้ก่อน รอการตัดสินใจ', en: 'Held, awaiting your decision' },
+      none: { th: 'ไม่มีข้อมูลให้เติม', en: 'Nothing to fill' },
+      anyBranch: { th: 'ทุกสาขา', en: 'all' }
+    };
+
+    const bar = document.getElementById('vs-cases');
+    if (!bar) return;
+    const byId = (id) => document.getElementById(id);
+    const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const ico = (id) => '<svg class="vs-ic"><use href="#' + id + '"/></svg>';
+    const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let vsLang = 'th', cur = CASES[0], picked = 0;
+
+    CASES.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.dataset.i = i;
+      b.setAttribute('aria-pressed', String(i === 0));
+      b.addEventListener('click', () => pickCase(i));
+      b.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        const n = (i + d + CASES.length) % CASES.length;
+        pickCase(n);
+        bar.querySelector('button[data-i="' + n + '"]').focus();
+      });
+      bar.appendChild(b);
+    });
+
+    function pickCase(i) {
+      cur = CASES[i];
+      picked = cur.mode === 'list' || cur.mode === 'ask' ? -1 : 0;
+      bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.i === i)));
+      draw();
+    }
+
+    function rows(vals, bad, animate) {
+      return FIELDS[vsLang].map((name, i) => {
+        const v = vals ? vals[i] : '';
+        const cls = !v ? 'empty' : (bad && bad.includes(i) ? 'bad' : '');
+        const delay = animate ? ' style="animation-delay:' + (i * 70) + 'ms"' : '';
+        return '<div class="vs-line"><dt>' + name + '</dt><dd class="' + cls + (animate ? ' fill' : '') + '"' + delay + '>'
+          + (v ? esc(v) : (vsLang === 'th' ? 'ว่าง' : 'blank')) + '</dd></div>';
+      }).join('');
+    }
+
+    const none = (key) => '<div class="vs-none">' + ico('vsi-search') + '<span>' + T[key][vsLang] + '</span></div>';
+
+    function draw() {
+      document.querySelectorAll('[data-vs]').forEach((el) => { el.innerHTML = T[el.dataset.vs][vsLang]; });
+      bar.querySelectorAll('button').forEach((b) => { b.textContent = CASES[+b.dataset.i].tab[vsLang]; });
+
+      byId('vs-tax').textContent = cur.tax;
+      const br = byId('vs-branch');
+      br.textContent = cur.branch || T.anyBranch[vsLang];
+      br.classList.toggle('dim', !cur.branch);
+
+      byId('vs-man').innerHTML = rows(cur.man, cur.bad, false);
+      document.querySelector('[data-vs="hdManSub"]').textContent = (cur.manSub || T.hdManSub)[vsLang];
+      document.querySelector('[data-vs="hdRdSub"]').textContent =
+        (picked >= 0 && cur.rdSub ? cur.rdSub : T.hdRdSub)[vsLang];
+
+      const res = byId('vs-result');
+      res.innerHTML = '';
+
+      if (cur.mode === 'stop') {
+        res.innerHTML = '<div class="vs-msg stop">' + ico(cur.icon) + '<p>' + cur.msg[vsLang] + '</p></div>';
+        byId('vs-rd').innerHTML = none('none');
+      } else if (cur.mode === 'list') {
+        res.innerHTML = '<div class="vs-list"><p>' + cur.hint[vsLang] + '</p><div class="vs-grid">'
+          + cur.list.map((b, i) => '<button class="vs-row" type="button" data-b="' + i + '" aria-pressed="'
+            + (picked === i) + '"><code>' + b.code + '</code><span>' + esc(b.name) + '</span>' + ico('vsi-tick') + '</button>').join('')
+          + '</div></div>';
+        res.querySelectorAll('.vs-row').forEach((b) =>
+          b.addEventListener('click', () => { picked = +b.dataset.b; draw(); }));
+        byId('vs-rd').innerHTML = picked < 0 ? none('wait') : rows(cur.list[picked].row, null, !slow);
+      } else if (cur.mode === 'ask') {
+        res.innerHTML = '<div class="vs-msg ask">' + ico(cur.icon) + '<p>' + cur.msg[vsLang] + '</p>'
+          + (picked < 0 ? '<button class="vs-pick" type="button">' + cur.pick[vsLang] + '</button>' : '') + '</div>';
+        const go = res.querySelector('.vs-pick');
+        if (go) go.addEventListener('click', () => { picked = 0; draw(); });
+        byId('vs-rd').innerHTML = picked < 0 ? none('held') : rows(cur.rd, null, !slow);
+      } else {
+        byId('vs-rd').innerHTML = rows(cur.rd, null, !slow);
+      }
+      byId('vs-cost').textContent = cur.cost[vsLang];
+    }
+
+    byId('vs-go').addEventListener('click', () => {
+      if (picked < 0 && cur.mode !== 'list' && cur.mode !== 'ask') picked = 0;
+      draw();
+    });
+
+    window.renderVatService = (l) => { vsLang = l; draw(); };
+    draw();
+  })();
+
+  /* ---- #billing-flow ----------------------------------------------------
+     คำแปลอยู่ในตัวมันเองเหมือน #vat-service ไม่ได้อยู่ใน I18N เพราะ applyLang()
+     เขียนทับ innerHTML แล้วกลุ่มที่ผู้ใช้ลากไว้บนปฏิทินจะเด้งกลับที่เดิม
+     applyLang เรียก window.renderBillingFlow(lang) แทน
+
+     พิกัดผังกับคำอ่านอยู่ในตารางเดียวกัน (BF_NODES) เพื่อไม่ให้กล่องกับคำแปลหลุดจากกัน
+     ตัวเลขทุกตัวอ้างอิง docs/BusinessProcess-BC/flows.json กระบวนการ AR6 */
+  (() => {
+    const T = {
+      kicker: { th: 'Process AR6 · Billing Note', en: 'Process AR6 · Billing Note' },
+      h2: { th: 'ตั้งแต่รอบวางบิล จนถึงวันนัดรับชำระ', en: 'From the billing cycle to the collection date' },
+      sub: { th: '12 ขั้นต่อกันเป็นเส้นเดียวบน Business Central — ตั้งรอบวางบิลรายลูกค้า ออกใบพร้อม QR PromptPay วางบิล แล้วระบุวันนัดรับชำระ ส่งต่อเข้างานรับชำระโดยไม่ต้องคีย์ซ้ำ',
+            en: 'Twelve steps on one line inside Business Central — set each customer’s billing cycle, print the note with a PromptPay QR, place it, record the collection date, and hand the work to cash receipts without re-keying anything.' },
+      flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
+      cntA: { th: 'ใน 12 ขั้นเป็นฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'of 12 steps are functions JWIC added' },
+      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล 12 ขั้น แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist',
+                  en: 'Twelve-step billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the totals, release, print with a PromptPay QR, then place the note with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, void the note and loop back to the worklist.' },
+      keyJ: { th: 'ฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'Added by JWIC' },
+      keyM: { th: 'ทำนอกระบบ', en: 'Done outside the system' },
+      keyG: { th: 'ทางแยกตัดสินใจ', en: 'Decision' },
+      keyC: { th: 'ส่งต่อกระบวนการอื่น', en: 'Handover to another process' },
+      keyX: { th: '* เลนของคู่ค้าภายนอกบริษัท', en: '* lane belongs to a party outside the company' },
+      month: { th: 'กันยายน 2569', en: 'September 2026' },
+      sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
+      reset: { th: 'คืนค่าเดิม', en: 'Reset' },
+      footAmt: { th: 'ยอดที่ต้องวางบิลเดือนนี้', en: 'due to be billed this month' },
+      footInv: { th: 'ใบแจ้งหนี้', en: 'invoices' },
+      footGrp: { th: 'กลุ่มลูกค้า', en: 'customer groups' },
+      hint: { th: 'ลากกลุ่มลูกค้าไปวางวันอื่นเพื่อเลื่อนรอบวางบิล — บนจอสัมผัสให้แตะกลุ่มแล้วแตะวันปลายทาง',
+              en: 'Drag a customer group onto another day to move its billing cycle — on a touch screen, tap the group and then tap the day.' },
+      same: { th: 'ยังอยู่วันเดิม', en: 'Still on the same day' },
+      chose: { th: 'เลือกแล้ว — แตะวันที่ต้องการย้ายไป', en: 'Selected — now tap the day to move it to' },
+      cleared: { th: 'ยกเลิกการเลือก', en: 'Selection cleared' },
+      didReset: { th: 'คืนค่ารอบวางบิลกลับเป็นค่าเดิมแล้ว', en: 'Billing cycles restored to their original dates' },
+      moved: { th: (n, a, b, i, m) => 'เลื่อน <b>' + n + '</b> จาก ' + a + ' ก.ย. ไป <b>' + b + ' ก.ย.</b> — ' + i + ' ใบ ' + m,
+               en: (n, a, b, i, m) => 'Moved <b>' + n + '</b> from 10 Sep… '.slice(0, 0) + 'Sep ' + a + ' to <b>Sep ' + b + '</b> — ' + i + ' invoices, ' + m },
+      lane1: { th: 'บัญชีลูกหนี้', en: 'Accounts Receivable' },
+      lane2: { th: 'ลูกค้า *', en: 'Customer *' },
+      eDue: { th: 'ถึงรอบ', en: 'Due' },
+      eNot: { th: 'ยังไม่พร้อม', en: 'Not yet' },
+      eYes: { th: 'รับ', en: 'Accepts' },
+      eNo: { th: 'ไม่รับ', en: 'Rejects' },
+      c1a: { th: 'QR PromptPay อยู่บนใบวางบิลใบเดียวกัน', en: 'The PromptPay QR sits on the billing note itself' },
+      c1b: { th: 'ยอดตรงตามใบ ลูกค้าสแกนจ่ายได้ทันที', en: 'carrying the exact amount, ready to scan and pay' },
+      c2a: { th: 'รอบวางบิลตั้งรายลูกค้า — ทุกวันที่ 25, ทุกศุกร์สุดท้าย, หรือแล้วแต่ตกลง', en: 'Billing cycles are set per customer — the 25th, the last Friday, or whatever was agreed' },
+      c2b: { th: 'เลื่อนได้ทั้งกลุ่ม หรือลากไปวางวันอื่นบน Billing Board', en: 'and a whole group moves at once, or is dragged to another day on the Billing Board' },
+      c3a: { th: 'ลูกค้าไม่รับวางบิล = Void แล้วใบแจ้งหนี้เด้งกลับเข้ารอบถัดไป', en: 'A rejected note is voided and its invoices return to the next cycle' },
+      c3b: { th: 'ใบวางบิลไม่ลงบัญชี ยอดลูกหนี้ยังเดินตามปกติ', en: 'Billing notes never post, so the receivable keeps running untouched' },
+      note: { th: 'ผังนี้เป็นหนึ่งใน Flow มาตรฐานที่เขียนไว้ครบทั้ง 14 สายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a>',
+             en: 'One of the standard process flows written for all 14 areas, every step traceable to the user manual the customer receives · the calendar above runs on a fictional company; the real system pulls each customer’s open invoices on the cycle you set · <a href="articles/business-central-vs-accounting-software.html">How Business Central differs from ordinary accounting software</a>' }
+    };
+
+    /* กล่องสูง 68 ทุกใบ บรรทัดแรกอยู่ y+29 บรรทัดสองอยู่ y+49 */
+    const NODES = [
+      { x: 176, y: 256, w: 190, k: 'j', th: ['เปิด Billing Worklist', 'หรือ Billing Board'], en: ['Open Billing Worklist', 'or Billing Board'] },
+      { x: 176, y: 84, w: 182, k: 'j', th: ['เลื่อนกลุ่ม', 'ไปรอบถัดไป'], en: ['Move the group to', 'the next date'] },
+      { x: 534, y: 256, w: 144, k: 'j', th: ['สร้าง', 'ใบวางบิลร่าง'], en: ['Create draft', 'billing notes'] },
+      { x: 708, y: 256, w: 156, k: 'j', th: ['ตรวจรายการและยอด', 'บนใบร่าง'], en: ['Check lines', 'and totals'] },
+      { x: 894, y: 256, w: 138, k: 'j', th: ['Release', 'ใบวางบิล'], en: ['Release', 'the billing note'] },
+      { x: 1062, y: 256, w: 170, k: 'j', th: ['พิมพ์ใบวางบิล', 'พร้อม PromptPay QR'], en: ['Print with', 'PromptPay QR'] },
+      { x: 1262, y: 256, w: 136, k: 'm', th: ['วางบิล', 'กับลูกค้า'], en: ['Place it with', 'the customer'] },
+      { x: 1010, y: 396, w: 194, k: 'j', th: ['ระบุวันนัดรับชำระ', 'Collection Date'], en: ['Set the', 'collection date'] },
+      { x: 760, y: 396, w: 204, k: 'c', th: ['รับชำระ', 'และออกใบเสร็จ'], en: ['Collect and', 'issue the receipt'] },
+      { x: 176, y: 396, w: 186, k: 'j', th: ['ยกเลิกใบวางบิล', 'ด้วย Void'], en: ['Void the', 'billing note'] }
+    ];
+    const GATES = [
+      { cx: 450, cy: 290, th: ['ถึงรอบ', 'วางบิล?'], en: ['Group', 'due?'] },
+      { cx: 1330, cy: 570, th: ['ลูกค้ารับ', 'วางบิล?'], en: ['Customer', 'accepts?'] }
+    ];
+    const EDGES = ['M155 290H172', 'M366 290H392', 'M504 290H530', 'M678 290H704', 'M864 290H890',
+      'M1032 290H1058', 'M1232 290H1258', 'M1330 324V512', 'M1276 570H1240V430H1208',
+      'M1010 430H964', 'M760 430H730', 'M450 236V118H362'];
+    const RETURNS = ['M222 152V252', 'M1330 624V650H269V468', 'M269 396V330'];
+    const ELABS = [{ x: 511, y: 274, a: 'middle', k: 'eDue' }, { x: 462, y: 196, a: 'start', k: 'eNot' },
+      { x: 1232, y: 500, a: 'end', k: 'eYes' }, { x: 1343, y: 646, a: 'start', k: 'eNo' }];
+    const CALLS = [
+      { l: 'M1147 186V250', x: 1030, y: 140, k: ['c1a', 'c1b'] },
+      { l: 'M478 352 454 344', x: 482, y: 360, k: ['c2a', 'c2b'] },
+      { l: 'M430 534 356 470', x: 436, y: 556, k: ['c3a', 'c3b'] }
+    ];
+
+    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const byId = (id) => document.getElementById(id);
+    let lang = 'th';
+
+    function drawFlow() {
+      const L = (o) => o[lang] || o.th;
+      let s = '';
+      /* เลน — เลนลูกค้าได้พื้นอ่อนเพราะอยู่นอกบริษัท */
+      s += '<rect class="bf-lane" x="96" y="40" width="1344" height="460"/>'
+        + '<rect class="bf-lane-x" x="96" y="500" width="1344" height="168"/>'
+        + '<text class="bf-lane-t" transform="translate(58,270) rotate(-90)" text-anchor="middle">' + esc(L(T.lane1)) + '</text>'
+        + '<text class="bf-lane-t" transform="translate(58,584) rotate(-90)" text-anchor="middle">' + esc(L(T.lane2)) + '</text>';
+      EDGES.forEach((d) => { s += '<path class="bf-e" d="' + d + '" marker-end="url(#bfAr)"/>'; });
+      RETURNS.forEach((d) => { s += '<path class="bf-e-r" d="' + d + '" marker-end="url(#bfArD)"/>'; });
+      s += '<circle class="bf-token" r="5.5"><animateMotion dur="9s" repeatCount="indefinite" path="M140,290 H1330 V570 H1240 V430 H730"/>'
+        + '<animate attributeName="opacity" dur="9s" repeatCount="indefinite" values="0;1;1;1;0" keyTimes="0;.04;.5;.94;1"/></circle>'
+        + '<circle class="bf-ep" cx="140" cy="290" r="15"/><circle class="bf-ep bf-ep-e" cx="710" cy="430" r="16"/>';
+      NODES.forEach((n) => {
+        const cls = n.k === 'j' ? 'bf-nj' : n.k === 'm' ? 'bf-nm' : n.k === 'c' ? 'bf-nc' : 'bf-ng';
+        const ink = n.k === 'j' ? 'bf-tj' : 'bf-ti';
+        const cx = n.x + n.w / 2;
+        s += '<rect class="' + cls + '" x="' + n.x + '" y="' + n.y + '" width="' + n.w + '" height="68" rx="3"/>'
+          + '<text class="bf-t ' + ink + '" x="' + cx + '" y="' + (n.y + 29) + '">' + esc(L(n)[0]) + '</text>'
+          + '<text class="bf-t ' + ink + '" x="' + cx + '" y="' + (n.y + 49) + '">' + esc(L(n)[1]) + '</text>';
+        if (n.k === 'c') s += '<text class="bf-ar7" x="' + cx + '" y="' + (n.y + 66) + '">AR7 →</text>';
+      });
+      GATES.forEach((g) => {
+        s += '<path class="bf-ng" d="M' + g.cx + ' ' + (g.cy - 54) + ' ' + (g.cx + 54) + ' ' + g.cy
+          + ' ' + g.cx + ' ' + (g.cy + 54) + ' ' + (g.cx - 54) + ' ' + g.cy + 'z"/>'
+          + '<text class="bf-t bf-tg bf-ti" x="' + g.cx + '" y="' + (g.cy - 4) + '">' + esc(L(g)[0]) + '</text>'
+          + '<text class="bf-t bf-tg bf-ti" x="' + g.cx + '" y="' + (g.cy + 13) + '">' + esc(L(g)[1]) + '</text>';
+      });
+      ELABS.forEach((e) => {
+        s += '<text class="bf-el" x="' + e.x + '" y="' + e.y + '" text-anchor="' + e.a + '">' + esc(L(T[e.k])) + '</text>';
+      });
+      CALLS.forEach((c) => {
+        s += '<path class="bf-cl" d="' + c.l + '"/>'
+          + '<text class="bf-ca bf-ca-b" x="' + c.x + '" y="' + c.y + '">' + esc(L(T[c.k[0]])) + '</text>'
+          + '<text class="bf-ca" x="' + c.x + '" y="' + (c.y + 20) + '">' + esc(L(T[c.k[1]])) + '</text>';
+      });
+      byId('bfFlow').innerHTML = s;
+    }
+
+    /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ---- */
+    const START = 1, DAYS = 30, TODAY = 8;
+    const SEED = [
+      { id: 'g1', d: 10, n: 'บจก. สยามพลาสติก', inv: 3, amt: 248500 },
+      { id: 'g2', d: 15, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', inv: 2, amt: 86200 },
+      { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม', inv: 5, amt: 1120000 },
+      { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์', inv: 4, amt: 372900 },
+      { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', inv: 1, amt: 54000 },
+      { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค', inv: 6, amt: 903450 }
+    ];
+    const DOW = { th: ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา'], en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] };
+    let groups = SEED.map((g) => ({ ...g }));
+    let picked = null;
+    const baht = (n) => '฿' + n.toLocaleString('en-US');
+    const cal = byId('bfCal'), status = byId('bfStatus');
+
+    function say(html) { status.innerHTML = html; }
+
+    function drawCal() {
+      let s = '';
+      DOW[lang].forEach((d) => { s += '<div class="bf-dow">' + d + '</div>'; });
+      for (let i = 0; i < START; i++) s += '<div class="bf-day blank"></div>';
+      for (let day = 1; day <= DAYS; day++) {
+        const col = (START + day - 1) % 7;
+        const here = groups.filter((g) => g.d === day);
+        const target = picked ? ' pick' : '';
+        s += '<div class="bf-day' + (col > 4 ? ' off' : '') + (day === TODAY ? ' today' : '')
+          + (here.length ? ' has' : '') + target + '"'
+          + ' data-day="' + day + '"' + (picked ? ' tabindex="0" role="button"' : '') + '>'
+          + '<span class="bf-dn">' + day + '<i class="bf-dw">' + DOW[lang][col] + '</i>'
+          + (day === TODAY ? '<span>' + (lang === 'th' ? 'วันนี้' : 'today') + '</span>' : '') + '</span>';
+        here.forEach((g) => {
+          s += '<button class="bf-chip" type="button" draggable="true" data-id="' + g.id + '"'
+            + ' aria-pressed="' + (picked === g.id) + '">'
+            + '<span class="bf-cn">' + esc(g.n) + '</span>'
+            + '<span class="bf-cm">' + g.inv + (lang === 'th' ? ' ใบ · ' : ' inv · ') + baht(g.amt) + '</span></button>';
+        });
+        if (here.length) s += '<span class="bf-tot">' + baht(here.reduce((a, g) => a + g.amt, 0)) + '</span>';
+        s += '</div>';
+      }
+      cal.innerHTML = s;
+      /* บนมือถือปฏิทินยุบเหลือเฉพาะวันที่มีกลุ่ม — คลี่ครบ 30 วันเฉพาะตอนกำลังย้าย
+         ไม่งั้นเดือนทั้งเดือนต้องเลื่อนแนวนอนบนจอ 430px แล้วมองไม่เห็นภาพรวม */
+      cal.classList.toggle('moving', !!picked);
+    }
+
+    function move(id, day) {
+      const g = groups.find((x) => x.id === id);
+      if (!g) return;
+      const from = g.d;
+      picked = null;
+      if (from === day) { drawCal(); say(T.same[lang] + ' — ' + esc(g.n)); return; }
+      g.d = day;
+      drawCal();
+      say(lang === 'th'
+        ? 'เลื่อน <b>' + esc(g.n) + '</b> จาก ' + from + ' ก.ย. ไป <b>' + day + ' ก.ย.</b> — ' + g.inv + ' ใบ ' + baht(g.amt)
+        : 'Moved <b>' + esc(g.n) + '</b> from Sep ' + from + ' to <b>Sep ' + day + '</b> — ' + g.inv + ' invoices, ' + baht(g.amt));
+    }
+
+    cal.addEventListener('dragstart', (e) => {
+      const chip = e.target.closest('.bf-chip');
+      if (!chip) return;
+      e.dataTransfer.setData('text/plain', chip.dataset.id);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    cal.addEventListener('dragover', (e) => {
+      const c = e.target.closest('.bf-day');
+      if (!c || c.classList.contains('blank')) return;
+      e.preventDefault();
+      c.classList.add('over');
+    });
+    cal.addEventListener('dragleave', (e) => {
+      const c = e.target.closest('.bf-day');
+      if (c) c.classList.remove('over');
+    });
+    cal.addEventListener('drop', (e) => {
+      const c = e.target.closest('.bf-day');
+      if (!c || c.classList.contains('blank')) return;
+      e.preventDefault();
+      c.classList.remove('over');
+      move(e.dataTransfer.getData('text/plain'), +c.dataset.day);
+    });
+    cal.addEventListener('click', (e) => {
+      const chip = e.target.closest('.bf-chip');
+      if (chip) {
+        picked = picked === chip.dataset.id ? null : chip.dataset.id;
+        drawCal();
+        say(picked ? T.chose[lang] : T.cleared[lang]);
+        return;
+      }
+      const c = e.target.closest('.bf-day.pick');
+      if (c && picked) move(picked, +c.dataset.day);
+    });
+    cal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const c = e.target.closest('.bf-day.pick');
+      if (c && picked) { e.preventDefault(); move(picked, +c.dataset.day); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && picked) { picked = null; drawCal(); say(T.cleared[lang]); }
+    });
+    byId('bfReset').addEventListener('click', () => {
+      groups = SEED.map((g) => ({ ...g }));
+      picked = null;
+      drawCal();
+      say(T.didReset[lang]);
+    });
+
+    window.renderBillingFlow = (l) => {
+      lang = l;
+      document.querySelectorAll('[data-bf]').forEach((el) => { el.innerHTML = T[el.dataset.bf][lang]; });
+      drawFlow();
+      drawCal();
+      say(T.hint[lang]);
+    };
+    window.renderBillingFlow('th');
+  })();
+
   // ── Bilingual TH/EN ─────────────────────────────────────────────
   // ponytail: selector-keyed dictionary in one place, no markup annotations.
   // ข้อแลกเปลี่ยน: ถ้าย้ายลำดับ element ที่อ้างด้วย nth-child ต้องอัปเดตที่นี่ด้วย
@@ -4357,27 +5083,6 @@
     ['#feature-panel-api h3', 'External Data via API'],
     ['#feature-panel-api .feature-panel-copy > p', 'Pull <strong>exchange rates and bank holidays from the Bank of Thailand</strong> into the system automatically, <strong>cutting manual entry</strong>, and combine them with warehouse, carrier, and customer calendars to plan deliveries, billing, and payments — plus <strong>quotations created automatically from requests customers submit through a Google Form</strong>, with nothing keyed in twice.'],
     ['.feature-link', 'Ask about this feature <span aria-hidden="true">→</span>'],
-    ['#why-us h2', 'How Business Central differs from ordinary accounting software'],
-    ['#why-us > .wrap > .sub', 'Compared on the work accountants actually do every month — from issuing tax invoices and filing taxes to closing the books.'],
-    ['.cmp thead th:nth-child(1)', 'Topic'],
-    ['.cmp thead th:nth-child(2)', 'Ordinary accounting software'],
-    ['.cmp tbody tr:nth-child(1) th span', 'Thai tax &amp; documents'],
-    ['.cmp tbody tr:nth-child(2)', '<th scope="row">Thai accounting documents</th><td data-h="Ordinary accounting software">Standard forms included, but layouts flex only so far</td><td data-h="Business Central"><ul class="cmp-points"><li>20+ print-ready Thai forms — tax invoices, billing notes, receipts, credit notes</li><li>Layouts adaptable to your business</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(3)', '<th scope="row">Tax &amp; billing</th><td data-h="Ordinary accounting software">Basic VAT and WHT reports; branch filing, Unrealized VAT and per-customer billing cycles are chased by hand in Excel</td><td data-h="Business Central"><ul class="cmp-points"><li>PP30 filled in automatically, with head office–branch and Unrealized VAT support</li><li>WHT calculated as payments post — 50 Bis, PND 2/3/53/54, RD Prep files</li><li>Billing calendar per customer terms, issuing receipts by VAT due status</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(4) th span', 'Everyday accounting'],
-    ['.cmp tbody tr:nth-child(5)', '<th scope="row">One shared database</th><td data-h="Ordinary accounting software">Separate systems mean double keying, and figures that never quite agree</td><td data-h="Business Central"><ul class="cmp-points"><li>Sales, purchasing and inventory post to the ledger automatically in one database</li><li>No re-keying — every report agrees</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(6)', '<th scope="row">Document approvals</th><td data-h="Ordinary accounting software">Approvals happen outside the system, over chat or email, leaving no trace on the document</td><td data-h="Business Central"><ul class="cmp-points"><li>Built-in approval workflows — POs and invoices route to approvers automatically</li><li>Approval history kept on the document</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(7)', '<th scope="row">Inventory &amp; costing</th><td data-h="Ordinary accounting software">Stock can be issued, but costs rarely hit the general ledger in real time</td><td data-h="Business Central"><ul class="cmp-points"><li>Stock Cards tracking in–out–balance per item</li><li>Costs posted to the ledger on every movement</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(8) th span', 'Control &amp; closing'],
-    ['.cmp tbody tr:nth-child(9)', '<th scope="row">Closing &amp; audit trail</th><td data-h="Ordinary accounting software">Back-dated edits and deletions allowed; tax reports and the ledger often disagree</td><td data-h="Business Central"><ul class="cmp-points"><li>Every figure ties to a ledger entry — drill back to the source document</li><li>Tax filings reconcile against the general ledger</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(10)', '<th scope="row">Permissions &amp; control</th><td data-h="Ordinary accounting software">Coarse permissions — anyone with a login sees nearly everything</td><td data-h="Business Central"><ul class="cmp-points"><li>Role-based permissions — each user sees only relevant menus and data</li><li>Every change logs who did what, when</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(11)', '<th scope="row">Reports &amp; financial statements</th><td data-h="Ordinary accounting software">Canned reports; seeing the numbers means waiting for period close or rebuilding in Excel</td><td data-h="Business Central"><ul class="cmp-points"><li>Trial balance and P&amp;L on demand, from live data</li><li>Excel and Power BI connect directly for deeper analysis</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(12) th span', 'Collaboration &amp; development'],
-    ['.cmp tbody tr:nth-child(13)', '<th scope="row">Excel &amp; Microsoft 365</th><td data-h="Ordinary accounting software">Periodic file exports passed around by email, with data living in multiple versions</td><td data-h="Business Central"><ul class="cmp-points"><li>Open live data in Excel and push edits back</li><li>Outlook and Teams connected natively</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(14)', '<th scope="row">Multi-company, multi-currency</th><td data-h="Ordinary accounting software">One database per company; consolidation happens in Excel</td><td data-h="Business Central"><ul class="cmp-points"><li>Multiple companies in one system, multi-currency</li><li>Bank of Thailand exchange rates updated automatically</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(15)', '<th scope="row">Copilot &amp; AI agents</th><td data-h="Ordinary accounting software">No built-in AI, or only a general Q&amp;A chatbot</td><td data-h="Business Central"><ul class="cmp-points"><li>Copilot matches bank reconciliations and summarizes data</li><li>AI agents draft sales documents from customer emails, with more every release</li></ul></td>'],
-    ['.cmp tbody tr:nth-child(16) th span', 'Software investment'],
-    ['.cmp tbody tr:nth-child(17)', '<th scope="row">Total cost of ownership</th><td data-h="Ordinary accounting software">Cheap to start, but customizations and add-ons are billed piecemeal — and several systems end up stitched together</td><td data-h="Business Central"><ul class="cmp-points"><li>Monthly per-user license, with two Microsoft updates a year included</li><li>One system covers it all — no stack of separate programs</li><li>Implementation quoted from the actual scope of work</li></ul></td>'],
     ['.stat-row .stat:nth-child(1) span', 'Ready-to-use Thai document forms'],
     ['.stat-row .stat:nth-child(2) span', 'Add-on features designed for Thai businesses'],
     ['#reports h2', 'Sample Reports'],
@@ -4467,6 +5172,7 @@
     ['.footer-menu .footer-head', 'Menu', 'เมนู'],
     ['.footer-menu a[href="#services"]', 'Services', 'บริการ'],
     ['.footer-menu a[href="#features"]', 'Features', 'ฟังก์ชัน'],
+    ['.footer-menu a[href="#vat-service"]', 'VAT Service', 'VAT Service'],
     ['.footer-menu a[href="#reports"]', 'Reports', 'ตัวอย่างรายงาน'],
     ['.footer-menu a[href="#pricing"]', 'Pricing', 'แพ็กเกจ'],
     ['.footer-menu a[href="#about"]', 'About', 'เกี่ยวกับเรา'],
@@ -4502,6 +5208,9 @@
     });
     document.title = lang === 'en' ? EN_TITLE : thTitle;
     document.documentElement.lang = lang;
+    // #vat-service วาดตัวเองใหม่จาก state ไม่ผ่าน I18N — ไม่งั้นสถานะที่ผู้ใช้กดค้างไว้หาย
+    if (window.renderVatService) window.renderVatService(lang);
+    if (window.renderBillingFlow) window.renderBillingFlow(lang);
     document.querySelectorAll('.lang button').forEach(b => {
       const on = b.dataset.lang === lang;
       b.classList.toggle('on', on);

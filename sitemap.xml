@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.jwicconsulting.com/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -33,6 +33,12 @@
   <url>
     <loc>https://www.jwicconsulting.com/articles/localization-thailand.html</loc>
     <lastmod>2026-07-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.jwicconsulting.com/articles/business-central-vs-accounting-software.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>

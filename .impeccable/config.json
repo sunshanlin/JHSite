@@ -164,6 +164,12 @@
         ],
         "createdAt": "2026-08-25T08:56:46.926Z",
         "reason": "top-accent on rounded cards is the established style across the flyer suite (same as flyer-implementation.html the user reviewed and approved in renders)"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(0, 0, 0)",
+        "createdAt": "2026-09-08T11:21:36.712Z",
+        "reason": "เงาบนโลโก้ JWIC ใน nav — markup ชุดเดียวกันกับบทความเดิมทั้ง 6 ไฟล์ ไม่ใช่สีใหม่ที่เพิ่งเพิ่ม"
       }
     ]
   }
