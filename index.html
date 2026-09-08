@@ -3593,8 +3593,8 @@
 
 <section id="billing-flow" class="alt">
   <div class="wrap">
-    <p class="section-kicker" data-bf="kicker">Process AR6 · Billing Note</p>
-    <h2 data-bf="h2">ตั้งแต่รอบวางบิล จนถึงวันนัดรับชำระ</h2>
+    <p class="section-kicker" data-bf="kicker">Highlight Feature</p>
+    <h2 data-bf="h2">ระบบวางบิล</h2>
     <p class="sub" data-bf="sub">12 ขั้นต่อกันเป็นเส้นเดียวบน Business Central — ตั้งรอบวางบิลรายลูกค้า ออกใบพร้อม QR PromptPay วางบิล แล้วระบุวันนัดรับชำระ ส่งต่อเข้างานรับชำระโดยไม่ต้องคีย์ซ้ำ</p>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
@@ -3664,8 +3664,8 @@
 
 <section id="vat-service">
   <div class="wrap">
-    <p class="section-kicker" data-vs="kicker">Clean master data</p>
-    <h2 data-vs="h2">เปิดลูกค้าใหม่ด้วยเลข 13 หลัก ไม่ใช่ด้วยความจำ</h2>
+    <p class="section-kicker" data-vs="kicker">Highlight Feature</p>
+    <h2 data-vs="h2">ระบบ VAT Service</h2>
     <p class="sub" data-vs="sub">ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง</p>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
@@ -4688,8 +4688,8 @@
     ];
 
     const T = {
-      kicker: { th: 'Clean master data', en: 'Clean master data' },
-      h2: { th: 'เปิดลูกค้าใหม่ด้วยเลข 13 หลัก ไม่ใช่ด้วยความจำ', en: 'Open a customer from the tax ID, not from memory' },
+      kicker: { th: 'Highlight Feature', en: 'Highlight Feature' },
+      h2: { th: 'ระบบ VAT Service', en: 'VAT Service' },
       sub: { th: 'ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง',
              en: 'A name that misses the registration, a half-typed address, “head office” on a branch, the same customer opened twice — try each one and see what the Revenue Department’s VAT Service takes off the table.' },
       lblTax: { th: 'เลขประจำตัวผู้เสียภาษี', en: 'VAT Registration No.' },
@@ -4810,8 +4810,8 @@
      ตัวเลขทุกตัวอ้างอิง docs/BusinessProcess-BC/flows.json กระบวนการ AR6 */
   (() => {
     const T = {
-      kicker: { th: 'Process AR6 · Billing Note', en: 'Process AR6 · Billing Note' },
-      h2: { th: 'ตั้งแต่รอบวางบิล จนถึงวันนัดรับชำระ', en: 'From the billing cycle to the collection date' },
+      kicker: { th: 'Highlight Feature', en: 'Highlight Feature' },
+      h2: { th: 'ระบบวางบิล', en: 'Billing &amp; Receipt' },
       sub: { th: '12 ขั้นต่อกันเป็นเส้นเดียวบน Business Central — ตั้งรอบวางบิลรายลูกค้า ออกใบพร้อม QR PromptPay วางบิล แล้วระบุวันนัดรับชำระ ส่งต่อเข้างานรับชำระโดยไม่ต้องคีย์ซ้ำ',
             en: 'Twelve steps on one line inside Business Central — set each customer’s billing cycle, print the note with a PromptPay QR, place it, record the collection date, and hand the work to cash receipts without re-keying anything.' },
       flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
