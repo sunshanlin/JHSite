@@ -2578,10 +2578,29 @@
 
   .bf-status {
     margin: 0; padding: 13px 24px; min-height: 48px;
-    border-top: 1px solid var(--ui-line); background: var(--bg-soft);
+    border-bottom: 1px solid var(--ui-line); background: var(--bg-soft);
     font-size: .92rem; line-height: 1.6; color: var(--ui-muted);
   }
   .bf-status b { color: var(--brand-teal); font-weight: 700; }
+
+  /* สถานะตามวัน — burgundy ทำหน้าที่เป็นเครื่องหมาย "มีปัญหา" สำนวนเดียวกับ .vs-msg.stop
+     ไม่ใช่สีของปุ่ม จึงไม่ขัด Burgundy Toll Rule · ตรงกับที่ #features บอกว่ามี
+     สีเน้นวันวางบิลและรายการที่เลยกำหนด */
+  .bf-chip.late { background: rgba(166,58,86,.07); border-color: rgba(166,58,86,.34); }
+  .bf-chip.late .bf-cn { color: var(--brand-burgundy-dark); }
+  .bf-chip.due { border-color: var(--brand-teal); }
+  .bf-chip[aria-pressed="true"].late .bf-cn { color: #fff; }
+  .bf-day.late .bf-dn { color: var(--brand-burgundy-dark); }
+  .bf-due {
+    display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0;
+    padding: 12px 24px; border-top: 1px solid var(--ui-line); background: #fff;
+    font-size: .84rem; color: var(--ui-muted);
+  }
+  .bf-due span { display: flex; align-items: center; gap: 8px; }
+  .bf-due i { width: 20px; height: 12px; flex: 0 0 auto; border-radius: 2px; }
+  .bf-d-late { background: rgba(166,58,86,.07); border: 1px solid rgba(166,58,86,.34); }
+  .bf-d-due { background: var(--bg-soft); border: 1px solid var(--brand-teal); }
+  .bf-d-next { background: var(--bg-soft); border: 1px solid var(--brand-pale); }
   .bf-foot {
     display: flex; flex-wrap: wrap; gap: 8px 30px;
     padding: 14px 24px 16px; border-top: 1px solid var(--ui-line); background: var(--bg-soft);
@@ -3621,10 +3640,17 @@
           <span class="bf-sample" data-bf="sample">ข้อมูลตัวอย่าง</span>
           <button class="bf-reset" type="button" id="bfReset" data-bf="reset">คืนค่าเดิม</button>
         </div>
+        <!-- วิธีใช้อยู่เหนือปฏิทิน ไม่ใช่ใต้ — ต้องอ่านเจอก่อนลอง ไม่ใช่หลังเลื่อนผ่าน
+             บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
+        <p class="bf-status" id="bfStatus" role="status"></p>
         <div class="bf-cal-scroll">
           <div class="bf-cal" id="bfCal"></div>
         </div>
-        <p class="bf-status" id="bfStatus" role="status"></p>
+        <p class="bf-due">
+          <span><i class="bf-d-late"></i><span data-bf="dueLate">เลยกำหนดวางบิล</span></span>
+          <span><i class="bf-d-due"></i><span data-bf="dueToday">ถึงรอบวันนี้</span></span>
+          <span><i class="bf-d-next"></i><span data-bf="dueNext">รอบถัดไป</span></span>
+        </p>
         <p class="bf-foot">
           <span><b>฿2,785,050</b> <span data-bf="footAmt">ยอดที่ต้องวางบิลเดือนนี้</span></span>
           <span><b>21</b> <span data-bf="footInv">ใบแจ้งหนี้</span></span>
@@ -4906,7 +4932,7 @@
     /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ---- */
     const START = 1, DAYS = 30, TODAY = 8;
     const SEED = [
-      { id: 'g1', d: 10, n: 'บจก. สยามพลาสติก', inv: 3, amt: 248500 },
+      { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก', inv: 3, amt: 248500 },
       { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', inv: 2, amt: 86200 },
       { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม', inv: 5, amt: 1120000 },
       { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์', inv: 4, amt: 372900 },
@@ -4930,12 +4956,14 @@
         const here = groups.filter((g) => g.d === day);
         const target = picked ? ' pick' : '';
         s += '<div class="bf-day' + (col > 4 ? ' off' : '') + (day === TODAY ? ' today' : '')
-          + (here.length ? ' has' : '') + target + '"'
+          + (here.length ? ' has' : '') + (here.length && day < TODAY ? ' late' : '') + target + '"'
           + ' data-day="' + day + '"' + (picked ? ' tabindex="0" role="button"' : '') + '>'
           + '<span class="bf-dn">' + day + '<i class="bf-dw">' + DOW[lang][col] + '</i>'
           + (day === TODAY ? '<span>' + (lang === 'th' ? 'วันนี้' : 'today') + '</span>' : '') + '</span>';
         here.forEach((g) => {
-          s += '<button class="bf-chip" type="button" draggable="true" data-id="' + g.id + '"'
+          /* เลยวันนี้ = เลยกำหนดวางบิล · ตรงวันนี้ = ถึงรอบ · ที่เหลือ = รอบถัดไป */
+          const st = day < TODAY ? ' late' : day === TODAY ? ' due' : '';
+          s += '<button class="bf-chip' + st + '" type="button" draggable="true" data-id="' + g.id + '"'
             + ' aria-pressed="' + (picked === g.id) + '">'
             + '<span class="bf-cn">' + esc(g.n) + '</span>'
             + '<span class="bf-cm">' + g.inv + (lang === 'th' ? ' ใบ · ' : ' inv · ') + baht(g.amt) + '</span></button>';
