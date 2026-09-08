@@ -1,63 +1,414 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T00:00:00Z",
+  "generatedAt": "2026-09-08T13:37:29Z",
   "title": "Design System: JWIC Consulting",
   "extensions": {
     "colorMeta": {
-      "brand-burgundy":      { "role": "primary",   "displayName": "Burgundy Seal",    "canonical": "#A63A56", "tonalRamp": ["#2B0E17", "#4A1926", "#6A2537", "#8A3148", "#A63A56", "#C06B80", "#D9A3AF", "#F1DCE1"] },
-      "brand-burgundy-dark": { "role": "primary",   "displayName": "Deep Burgundy",    "canonical": "#7D2440", "tonalRamp": ["#210A11", "#3B121F", "#55192C", "#6E1F38", "#7D2440", "#A55A70", "#CE9AA8", "#EFD9DF"] },
-      "brand-deep":          { "role": "secondary", "displayName": "Deep Teal",        "canonical": "#012F2A", "tonalRamp": ["#000E0C", "#011B18", "#012722", "#012F2A", "#0A4A42", "#2E7A70", "#7BB1A8", "#DDEDEA"] },
-      "brand-teal":          { "role": "secondary", "displayName": "Signing Teal",     "canonical": "#014A41", "tonalRamp": ["#001411", "#01251F", "#01382F", "#014A41", "#1A6B5F", "#4B9387", "#94C0B7", "#E2F0ED"] },
-      "brand-ocean":         { "role": "secondary", "displayName": "Ocean Teal",       "canonical": "#1A5B54", "tonalRamp": ["#04150F", "#0A2C25", "#12433B", "#1A5B54", "#3B7C73", "#6BA49B", "#A6C9C2", "#E5F1EF"] },
-      "brand-jade":          { "role": "secondary", "displayName": "Jade",             "canonical": "#417771", "tonalRamp": ["#0C1D1B", "#1A3733", "#2A554F", "#417771", "#639A93", "#8CBAB4", "#B8D6D1", "#E7F2F0"] },
-      "brand-mint":          { "role": "secondary", "displayName": "Sage",             "canonical": "#739B97", "tonalRamp": ["#16241F", "#26403A", "#3B5F58", "#537D76", "#739B97", "#96B6B2", "#BCD1CE", "#E6EFEE"] },
-      "brand-mist":          { "role": "secondary", "displayName": "Mist",             "canonical": "#A6C0BD", "tonalRamp": ["#1D2A28", "#334744", "#4C6663", "#688582", "#87A5A1", "#A6C0BD", "#C8DAD8", "#EDF4F3"] },
-      "brand-pink":          { "role": "tertiary",  "displayName": "Editorial Pink",   "canonical": "#E08CA2", "tonalRamp": ["#33141C", "#552330", "#783345", "#9C4459", "#C25470", "#E08CA2", "#EFB9C7", "#FBE9EE"] },
-      "brand-pink-deep":     { "role": "tertiary",  "displayName": "Deep Rose",        "canonical": "#C25470", "tonalRamp": ["#2C0F17", "#4B1B27", "#6B2739", "#8C344C", "#AC4360", "#C25470", "#DE95A8", "#F6DDE4"] },
-      "hero-canvas":         { "role": "neutral",   "displayName": "Paper Ivory",      "canonical": "#EFEFE9", "tonalRamp": ["#26261F", "#3D3D34", "#57574B", "#757567", "#969686", "#B9B9AB", "#D8D8CE", "#EFEFE9"] },
-      "brand-ivory":         { "role": "neutral",   "displayName": "Warm Ivory",       "canonical": "#fbf8f1", "tonalRamp": ["#2A2519", "#433C29", "#5E553B", "#7C7250", "#9E9370", "#C3B99C", "#E3DCC8", "#FBF8F1"] },
-      "brand-ivory-deep":    { "role": "neutral",   "displayName": "Deep Ivory",       "canonical": "#f6f1e5", "tonalRamp": ["#282318", "#403927", "#5A5137", "#786D4B", "#9A8F6C", "#C0B698", "#E1D9C4", "#F6F1E5"] },
-      "ui-page":             { "role": "neutral",   "displayName": "Cool Page",        "canonical": "#f6f8f7", "tonalRamp": ["#1B211F", "#2F3835", "#46524E", "#616F6A", "#828E8A", "#A8B2AE", "#D0D7D4", "#F6F8F7"] },
-      "ui-ink":              { "role": "neutral",   "displayName": "Ink Green-Black",  "canonical": "#10241F", "tonalRamp": ["#050C0A", "#0A1613", "#10241F", "#1C3B33", "#2E5A4F", "#4E8073", "#8DB3A9", "#DCE9E5"] },
-      "ui-muted":            { "role": "neutral",   "displayName": "Slate Sage",       "canonical": "#5C736E", "tonalRamp": ["#141A19", "#232D2B", "#35433F", "#485A56", "#5C736E", "#849792", "#B2C1BD", "#E4EAE9"] },
-      "ui-line":             { "role": "neutral",   "displayName": "Hairline",         "canonical": "#E2E8E6", "tonalRamp": ["#242927", "#39403E", "#515A57", "#6D7873", "#8E9995", "#B4BDBA", "#D0D7D5", "#E2E8E6"] },
-      "brand-pale":          { "role": "neutral",   "displayName": "Pale Edge",        "canonical": "#D9E4E3", "tonalRamp": ["#1F2726", "#333F3D", "#4B5A58", "#687875", "#8B9B98", "#B2C0BE", "#D9E4E3", "#EFF5F4"] },
-      "ms-navy":             { "role": "tertiary",  "displayName": "Microsoft Navy",   "canonical": "#153A73" },
-      "ms-blue":             { "role": "tertiary",  "displayName": "Microsoft Blue",   "canonical": "#0078D4" },
-      "ms-green":            { "role": "tertiary",  "displayName": "Microsoft Green",  "canonical": "#498205" },
-      "ms-teal":             { "role": "tertiary",  "displayName": "Microsoft Teal",   "canonical": "#008272" },
-      "ms-cyan":             { "role": "tertiary",  "displayName": "Microsoft Cyan",   "canonical": "#0078A8" },
-      "ms-gold":             { "role": "tertiary",  "displayName": "Microsoft Gold",   "canonical": "#9A6700" }
+      "brand-burgundy": {
+        "role": "primary",
+        "displayName": "Burgundy Seal",
+        "canonical": "#A63A56",
+        "tonalRamp": [
+          "#2B0E17",
+          "#4A1926",
+          "#6A2537",
+          "#8A3148",
+          "#A63A56",
+          "#C06B80",
+          "#D9A3AF",
+          "#F1DCE1"
+        ]
+      },
+      "brand-burgundy-dark": {
+        "role": "primary",
+        "displayName": "Deep Burgundy",
+        "canonical": "#7D2440",
+        "tonalRamp": [
+          "#210A11",
+          "#3B121F",
+          "#55192C",
+          "#6E1F38",
+          "#7D2440",
+          "#A55A70",
+          "#CE9AA8",
+          "#EFD9DF"
+        ]
+      },
+      "brand-deep": {
+        "role": "secondary",
+        "displayName": "Deep Teal",
+        "canonical": "#012F2A",
+        "tonalRamp": [
+          "#000E0C",
+          "#011B18",
+          "#012722",
+          "#012F2A",
+          "#0A4A42",
+          "#2E7A70",
+          "#7BB1A8",
+          "#DDEDEA"
+        ]
+      },
+      "brand-teal": {
+        "role": "secondary",
+        "displayName": "Signing Teal",
+        "canonical": "#014A41",
+        "tonalRamp": [
+          "#001411",
+          "#01251F",
+          "#01382F",
+          "#014A41",
+          "#1A6B5F",
+          "#4B9387",
+          "#94C0B7",
+          "#E2F0ED"
+        ]
+      },
+      "brand-ocean": {
+        "role": "secondary",
+        "displayName": "Ocean Teal",
+        "canonical": "#1A5B54",
+        "tonalRamp": [
+          "#04150F",
+          "#0A2C25",
+          "#12433B",
+          "#1A5B54",
+          "#3B7C73",
+          "#6BA49B",
+          "#A6C9C2",
+          "#E5F1EF"
+        ]
+      },
+      "brand-jade": {
+        "role": "secondary",
+        "displayName": "Jade",
+        "canonical": "#417771",
+        "tonalRamp": [
+          "#0C1D1B",
+          "#1A3733",
+          "#2A554F",
+          "#417771",
+          "#639A93",
+          "#8CBAB4",
+          "#B8D6D1",
+          "#E7F2F0"
+        ]
+      },
+      "brand-mint": {
+        "role": "secondary",
+        "displayName": "Sage",
+        "canonical": "#739B97",
+        "tonalRamp": [
+          "#16241F",
+          "#26403A",
+          "#3B5F58",
+          "#537D76",
+          "#739B97",
+          "#96B6B2",
+          "#BCD1CE",
+          "#E6EFEE"
+        ]
+      },
+      "brand-mist": {
+        "role": "secondary",
+        "displayName": "Mist",
+        "canonical": "#A6C0BD",
+        "tonalRamp": [
+          "#1D2A28",
+          "#334744",
+          "#4C6663",
+          "#688582",
+          "#87A5A1",
+          "#A6C0BD",
+          "#C8DAD8",
+          "#EDF4F3"
+        ]
+      },
+      "brand-pink": {
+        "role": "tertiary",
+        "displayName": "Editorial Pink",
+        "canonical": "#E08CA2",
+        "tonalRamp": [
+          "#33141C",
+          "#552330",
+          "#783345",
+          "#9C4459",
+          "#C25470",
+          "#E08CA2",
+          "#EFB9C7",
+          "#FBE9EE"
+        ]
+      },
+      "brand-pink-deep": {
+        "role": "tertiary",
+        "displayName": "Deep Rose",
+        "canonical": "#C25470",
+        "tonalRamp": [
+          "#2C0F17",
+          "#4B1B27",
+          "#6B2739",
+          "#8C344C",
+          "#AC4360",
+          "#C25470",
+          "#DE95A8",
+          "#F6DDE4"
+        ]
+      },
+      "hero-canvas": {
+        "role": "neutral",
+        "displayName": "Paper Ivory",
+        "canonical": "#EFEFE9",
+        "tonalRamp": [
+          "#26261F",
+          "#3D3D34",
+          "#57574B",
+          "#757567",
+          "#969686",
+          "#B9B9AB",
+          "#D8D8CE",
+          "#EFEFE9"
+        ]
+      },
+      "brand-ivory": {
+        "role": "neutral",
+        "displayName": "Warm Ivory",
+        "canonical": "#fbf8f1",
+        "tonalRamp": [
+          "#2A2519",
+          "#433C29",
+          "#5E553B",
+          "#7C7250",
+          "#9E9370",
+          "#C3B99C",
+          "#E3DCC8",
+          "#FBF8F1"
+        ]
+      },
+      "brand-ivory-deep": {
+        "role": "neutral",
+        "displayName": "Deep Ivory",
+        "canonical": "#f6f1e5",
+        "tonalRamp": [
+          "#282318",
+          "#403927",
+          "#5A5137",
+          "#786D4B",
+          "#9A8F6C",
+          "#C0B698",
+          "#E1D9C4",
+          "#F6F1E5"
+        ]
+      },
+      "ui-page": {
+        "role": "neutral",
+        "displayName": "Cool Page",
+        "canonical": "#f6f8f7",
+        "tonalRamp": [
+          "#1B211F",
+          "#2F3835",
+          "#46524E",
+          "#616F6A",
+          "#828E8A",
+          "#A8B2AE",
+          "#D0D7D4",
+          "#F6F8F7"
+        ]
+      },
+      "ui-ink": {
+        "role": "neutral",
+        "displayName": "Ink Green-Black",
+        "canonical": "#10241F",
+        "tonalRamp": [
+          "#050C0A",
+          "#0A1613",
+          "#10241F",
+          "#1C3B33",
+          "#2E5A4F",
+          "#4E8073",
+          "#8DB3A9",
+          "#DCE9E5"
+        ]
+      },
+      "ui-muted": {
+        "role": "neutral",
+        "displayName": "Slate Sage",
+        "canonical": "#5C736E",
+        "tonalRamp": [
+          "#141A19",
+          "#232D2B",
+          "#35433F",
+          "#485A56",
+          "#5C736E",
+          "#849792",
+          "#B2C1BD",
+          "#E4EAE9"
+        ]
+      },
+      "ui-line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#E2E8E6",
+        "tonalRamp": [
+          "#242927",
+          "#39403E",
+          "#515A57",
+          "#6D7873",
+          "#8E9995",
+          "#B4BDBA",
+          "#D0D7D5",
+          "#E2E8E6"
+        ]
+      },
+      "brand-pale": {
+        "role": "neutral",
+        "displayName": "Pale Edge",
+        "canonical": "#D9E4E3",
+        "tonalRamp": [
+          "#1F2726",
+          "#333F3D",
+          "#4B5A58",
+          "#687875",
+          "#8B9B98",
+          "#B2C0BE",
+          "#D9E4E3",
+          "#EFF5F4"
+        ]
+      },
+      "ms-navy": {
+        "role": "tertiary",
+        "displayName": "Microsoft Navy",
+        "canonical": "#153A73"
+      },
+      "ms-blue": {
+        "role": "tertiary",
+        "displayName": "Microsoft Blue",
+        "canonical": "#0078D4"
+      },
+      "ms-green": {
+        "role": "tertiary",
+        "displayName": "Microsoft Green",
+        "canonical": "#498205"
+      },
+      "ms-teal": {
+        "role": "tertiary",
+        "displayName": "Microsoft Teal",
+        "canonical": "#008272"
+      },
+      "ms-cyan": {
+        "role": "tertiary",
+        "displayName": "Microsoft Cyan",
+        "canonical": "#0078A8"
+      },
+      "ms-gold": {
+        "role": "tertiary",
+        "displayName": "Microsoft Gold",
+        "canonical": "#9A6700"
+      }
     },
     "typographyMeta": {
-      "display":  { "displayName": "Display",  "purpose": "The single hero h1. Anuphan for Thai (loopless), Plus Jakarta Sans for Latin." },
-      "headline": { "displayName": "Headline", "purpose": "Every section h2. Four sections center theirs at max-width 720px." },
-      "title":    { "displayName": "Title",    "purpose": "Card and feature-panel h3. #why-us labels are the one exception at 600/1.02rem." },
-      "body":     { "displayName": "Body",     "purpose": "All running copy, Thai and English. Niramit for Thai (looped). Never below 18px/500." },
-      "label":    { "displayName": "Label",    "purpose": ".section-kicker above every h2. Slate Sage on light grounds, Mist or Editorial Pink on dark." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "The single hero h1. Anuphan for Thai (loopless), Plus Jakarta Sans for Latin."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Every section h2. Four sections center theirs at max-width 720px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card and feature-panel h3."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running copy, Thai and English. Niramit for Thai (looped). Never below 18px/500."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": ".section-kicker above every h2. Slate Sage on light grounds, Mist or Editorial Pink on dark."
+      }
     },
     "shadows": [
-      { "name": "hairline",       "value": "0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14)",      "purpose": "The default for every card, figure, feature panel, and price card below the hero. Reads as a printed edge, not a lifted object." },
-      { "name": "document-lift",  "value": "0 34px 64px -26px rgba(7,45,48,.6)",                       "purpose": "The hero's primary .doc-card tax invoice. Representational — paper lying on a desk." },
-      { "name": "document-float", "value": "0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28)", "purpose": "The five .doc-mini slips scattered around the hero card." },
-      { "name": "legacy-soft",    "value": "0 22px 60px -34px rgba(1,74,65,.32)",                      "purpose": "DEPRECATED. The --shadow token from an earlier pass, still on .profile-panel and card hover. Replace with hairline outside the hero." }
+      {
+        "name": "hairline",
+        "value": "0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14)",
+        "purpose": "The default for every card, figure, feature panel, and price card below the hero. Reads as a printed edge, not a lifted object."
+      },
+      {
+        "name": "document-lift",
+        "value": "0 34px 64px -26px rgba(7,45,48,.6)",
+        "purpose": "The hero's primary .doc-card tax invoice. Representational — paper lying on a desk."
+      },
+      {
+        "name": "document-float",
+        "value": "0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28)",
+        "purpose": "The five .doc-mini slips scattered around the hero card."
+      },
+      {
+        "name": "legacy-soft",
+        "value": "0 22px 60px -34px rgba(1,74,65,.32)",
+        "purpose": "DEPRECATED. The --shadow token from an earlier pass, still on .profile-panel and card hover. Replace with hairline outside the hero."
+      }
     ],
     "motion": [
-      { "name": "ease-reveal",    "value": "cubic-bezier(.2,.75,.2,1)",     "purpose": "The system curve. Nine entrance and reveal animations use it." },
-      { "name": "ease-overshoot", "value": "cubic-bezier(.2,.9,.25,1.35)",  "purpose": "The hero .doc-stamp landing at 1.25s. The only overshoot in the system." },
-      { "name": "state-fast",     "value": "125ms ease",                    "purpose": "Button background change. Buttons never transform or gain shadow." },
-      { "name": "state-standard", "value": "220ms ease",                    "purpose": "Card hover, nav menu open, border and outline shifts." },
-      { "name": "float-loop",     "value": "7.6s ease-in-out infinite",     "purpose": "docCardFloat on the hero invoice; docMiniFloat runs 6.8s. Both disabled under prefers-reduced-motion." }
+      {
+        "name": "ease-reveal",
+        "value": "cubic-bezier(.2,.75,.2,1)",
+        "purpose": "The system curve. Nine entrance and reveal animations use it."
+      },
+      {
+        "name": "ease-overshoot",
+        "value": "cubic-bezier(.2,.9,.25,1.35)",
+        "purpose": "The hero .doc-stamp landing at 1.25s. The only overshoot in the system."
+      },
+      {
+        "name": "state-fast",
+        "value": "125ms ease",
+        "purpose": "Button background change. Buttons never transform or gain shadow."
+      },
+      {
+        "name": "state-standard",
+        "value": "220ms ease",
+        "purpose": "Card hover, nav menu open, border and outline shifts."
+      },
+      {
+        "name": "float-loop",
+        "value": "7.6s ease-in-out infinite",
+        "purpose": "docCardFloat on the hero invoice; docMiniFloat runs 6.8s. Both disabled under prefers-reduced-motion."
+      }
     ],
     "breakpoints": [
-      { "name": "wide",    "value": "1100px" },
-      { "name": "desktop", "value": "1080px" },
-      { "name": "stack",   "value": "900px" },
-      { "name": "nav",     "value": "760px" },
-      { "name": "tablet",  "value": "720px" },
-      { "name": "phone",   "value": "600px" },
-      { "name": "small",   "value": "560px" },
-      { "name": "tiny",    "value": "520px" }
+      {
+        "name": "wide",
+        "value": "1100px"
+      },
+      {
+        "name": "desktop",
+        "value": "1080px"
+      },
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "nav",
+        "value": "760px"
+      },
+      {
+        "name": "tablet",
+        "value": "720px"
+      },
+      {
+        "name": "phone",
+        "value": "600px"
+      },
+      {
+        "name": "small",
+        "value": "560px"
+      },
+      {
+        "name": "tiny",
+        "value": "520px"
+      }
     ]
   },
   "components": [
@@ -124,6 +475,22 @@
       "description": "The dashed burgundy stamp on the hero's CSS-drawn Thai tax invoice. Lands at 1.25s on the system's only overshoot curve.",
       "html": "<span class=\"ds-stamp\">ภ.พ.30 พร้อมยื่น</span>",
       "css": ".ds-stamp { display: inline-block; transform: rotate(-4deg); padding: 6px 12px; border: 2px dashed #A63A56; border-radius: 8px; background: rgba(255,255,255,.96); color: #7D2440; font-family: 'Plus Jakarta Sans','Anuphan',sans-serif; font-size: .72rem; font-weight: 700; box-shadow: 0 6px 16px -8px rgba(7,45,48,.4); animation: ds-stampPop .7s cubic-bezier(.2,.9,.25,1.35) both; } @keyframes ds-stampPop { from { opacity: 0; transform: rotate(-4deg) scale(.7); } to { opacity: 1; transform: rotate(-4deg) scale(1); } } @media (prefers-reduced-motion: reduce) { .ds-stamp { animation: none; } }"
+    },
+    {
+      "name": "Billing Group Chip",
+      "kind": "chip",
+      "refersTo": "card",
+      "description": "A customer’s invoice group on the Billing Board. Draggable; its border says whether the billing date has passed, is today, or is still ahead.",
+      "html": "<div style=\"display:grid;gap:6px;max-width:230px\"><button class=\"ds-bill-chip\"><span class=\"ds-bill-name\">บจก. อีสเทิร์นฟู้ดส์</span><span class=\"ds-bill-meta\">4 ใบ · ฿372,900</span></button><button class=\"ds-bill-chip ds-bill-due\"><span class=\"ds-bill-name\">บจก. สยามพลาสติก</span><span class=\"ds-bill-meta\">3 ใบ · ฿248,500</span></button><button class=\"ds-bill-chip ds-bill-late\"><span class=\"ds-bill-name\">หจก. ทรัพย์เจริญค้าวัสดุ</span><span class=\"ds-bill-meta\">2 ใบ · ฿86,200</span></button></div>",
+      "css": ".ds-bill-chip { display:block; width:100%; text-align:left; cursor:grab; color:#10241F; background:#F3F7F6; border:1px solid #D9E4E3; border-radius:3px; padding:6px 9px; font:500 16px \"Plus Jakarta Sans\",\"Niramit\",sans-serif; transition:background .125s ease, border-color .125s ease, color .125s ease; } .ds-bill-chip:hover { border-color:#417771; } .ds-bill-chip:focus-visible { outline:2px solid #A63A56; outline-offset:2px; } .ds-bill-name { display:block; font-size:.82rem; font-weight:600; line-height:1.35; } .ds-bill-meta { display:block; font-family:\"Plus Jakarta Sans\",\"Anuphan\",sans-serif; font-size:.72rem; font-weight:600; color:#516661; font-variant-numeric:tabular-nums; } .ds-bill-due { border-color:#014A41; } .ds-bill-late { background:rgba(166,58,86,.07); border-color:rgba(166,58,86,.34); } .ds-bill-late .ds-bill-name { color:#7D2440; }"
+    },
+    {
+      "name": "Process Flow Node",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "The three box kinds in the BPMN process diagram: a filled Signing Teal box for a step JWIC added, a hairline box for a standard step, and a dashed box for work done outside the system.",
+      "html": "<svg viewBox=\"0 0 470 80\" width=\"440\" role=\"img\" aria-label=\"ตัวอย่างกล่องในผังกระบวนการ\"><rect class=\"ds-node-jwic\" x=\"4\" y=\"6\" width=\"140\" height=\"68\" rx=\"3\"/><text class=\"ds-node-t ds-node-on\" x=\"74\" y=\"35\">สร้าง</text><text class=\"ds-node-t ds-node-on\" x=\"74\" y=\"55\">ใบวางบิลร่าง</text><rect class=\"ds-node-std\" x=\"164\" y=\"6\" width=\"140\" height=\"68\" rx=\"3\"/><text class=\"ds-node-t ds-node-ink\" x=\"234\" y=\"45\">Release</text><rect class=\"ds-node-manual\" x=\"324\" y=\"6\" width=\"140\" height=\"68\" rx=\"3\"/><text class=\"ds-node-t ds-node-ink\" x=\"394\" y=\"45\">วางบิลกับลูกค้า</text></svg>",
+      "css": ".ds-node-jwic { fill:#014A41; } .ds-node-std { fill:#fff; stroke:#E2E8E6; stroke-width:1.6; } .ds-node-manual { fill:#fff; stroke:#A6C0BD; stroke-width:1.6; stroke-dasharray:6 4; } .ds-node-t { font:600 16px \"Plus Jakarta Sans\",\"Anuphan\",sans-serif; text-anchor:middle; } .ds-node-on { fill:#fff; } .ds-node-ink { fill:#10241F; }"
     }
   ],
   "narrative": {
@@ -138,16 +505,66 @@
       "Microsoft's own brand hues appear only where Microsoft's own framework is being cited"
     ],
     "rules": [
-      { "name": "The Burgundy Toll Rule", "body": "Burgundy is the price of asking for something. If an element does not want a click, it does not get burgundy — not as a border, not as an icon tint, not as a hover. The nav has exactly one burgundy item; the hero has exactly one; a section has at most one.", "section": "colors" },
-      { "name": "The Quotation Rule", "body": "The --ms-* hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for --ms-blue, it has misunderstood what that token is for.", "section": "colors" },
-      { "name": "The Paper Rule", "body": "Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen.", "section": "colors" },
-      { "name": "The Thai Weight Floor Rule", "body": "Thai body text never goes below 18px/500. Thai glyphs at weight 400 read thin and tiring at the sizes Latin tolerates; the whole page was raised to 18/500 for this reason. A redesign that cleans up the type by dropping to 16px/400 has made the page worse for its actual readers.", "section": "typography" },
-      { "name": "The Loop Contrast Rule", "body": "Headings are loopless (Anuphan), body is looped (Niramit). Never set a Thai heading in Niramit or Thai body copy in Anuphan — the hierarchy is carried by loop, not by size.", "section": "typography" },
-      { "name": "The No-Break Rule", "body": "Thai has no inter-word spaces, so browsers break compound words mid-term. Wrap any term that must not split in .nb.", "section": "typography" },
-      { "name": "The Right-Edge Bleed Rule", "body": "The hero's color blocks are positioned with right: calc(50% - 50vw) so they run past the container to the viewport edge. They are hidden below 900px, where a single column would put them under the headline instead of beside it.", "section": "layout" },
-      { "name": "The Hero-Only Lift Rule", "body": "Soft wide shadows exist to say 'this is paper on a desk.' They belong to the hero document scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.", "section": "elevation" },
-      { "name": "The No Hover Lift Rule", "body": ".cta explicitly kills transform and box-shadow on hover and changes background only, in 125ms. Buttons do not rise. Cards still lift 5px, which is a live inconsistency the system has not yet resolved.", "section": "elevation" },
-      { "name": "The Two Radii Rule", "body": "New components use var(--ui-radius-btn) (3px) or var(--ui-radius-card) (8px). Do not introduce a third value. A literal border-radius: 14px in new code is a bug, not a choice.", "section": "shapes" }
+      {
+        "name": "The Burgundy Toll Rule",
+        "body": "Burgundy is the price of asking for something. If an element does not want a click, it does not get burgundy — not as a border, not as an icon tint, not as a hover. The nav has exactly one burgundy item; the hero has exactly one; a section has at most one.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Floor Rule",
+        "section": "colors",
+        "body": "Every text colour on this page clears WCAG 2.2 AA against the lightest ground it can land on — 4.5:1 for body, 3:1 at 24px or 18.66px/700. Where a ground is a gradient, the lightest stop is what counts, which is why .service-highlight lost its pink and sage radial washes: they lifted one corner to ~#4B6D6C and dropped three text colours below the floor. A new colour is not \"close enough\" at 4.4:1. Compute it before committing it."
+      },
+      {
+        "name": "The Quotation Rule",
+        "body": "The --ms-* hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for --ms-blue, it has misunderstood what that token is for.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper Rule",
+        "body": "Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen.",
+        "section": "colors"
+      },
+      {
+        "name": "The Thai Weight Floor Rule",
+        "body": "Thai body text never goes below 18px/500. Thai glyphs at weight 400 read thin and tiring at the sizes Latin tolerates; the whole page was raised to 18/500 for this reason. A redesign that cleans up the type by dropping to 16px/400 has made the page worse for its actual readers.",
+        "section": "typography"
+      },
+      {
+        "name": "The Loop Contrast Rule",
+        "body": "Headings are loopless (Anuphan), body is looped (Niramit). Never set a Thai heading in Niramit or Thai body copy in Anuphan — the hierarchy is carried by loop, not by size.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Break Rule",
+        "body": "Thai has no inter-word spaces, so browsers break compound words mid-term. Wrap any term that must not split in .nb.",
+        "section": "typography"
+      },
+      {
+        "name": "The Right-Edge Bleed Rule",
+        "body": "The hero's color blocks are positioned with right: calc(50% - 50vw) so they run past the container to the viewport edge. They are hidden below 900px, where a single column would put them under the headline instead of beside it.",
+        "section": "layout"
+      },
+      {
+        "name": "The Claim-and-Proof Rule",
+        "section": "layout",
+        "body": "Where a section pairs a set of claims with screenshots (#business-central), it uses the accordion-and-image pattern Microsoft's own Dynamics 365 pages use: the claims are an accordion list in the left column, exactly one open at a time, and the open item's screenshot fills the right column. The claim text lives inside the accordion, not as a caption under the image — the image carries no caption. Above 1081px the two columns sit side by side (.bento-tiles in column 1, .bento-shot in column 2, swapped by grid-column rather than by DOM order). Below 1081px they stack, image first, and the accordion stays a full-width vertical list — never a horizontal scroller, which hides items off-screen with no indication they exist."
+      },
+      {
+        "name": "The Hero-Only Lift Rule",
+        "body": "Soft wide shadows exist to say 'this is paper on a desk.' They belong to the hero document scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Hover Lift Rule",
+        "body": ".cta explicitly kills transform and box-shadow on hover and changes background only, in 125ms. Buttons do not rise. Cards still lift 5px, which is a live inconsistency the system has not yet resolved.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Two Radii Rule",
+        "body": "New components use var(--ui-radius-btn) (3px) or var(--ui-radius-card) (8px). Do not introduce a third value. A literal border-radius: 14px in new code is a bug, not a choice.",
+        "section": "shapes"
+      }
     ],
     "dos": [
       "Do put new tokens in the last :root in the file — the --ui-* block (currently around line 2171). Being last is what makes it the one that wins; find it by searching --ui-radius-btn, not by line number.",
