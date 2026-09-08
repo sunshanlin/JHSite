@@ -2467,7 +2467,6 @@
   .bf-ep { fill: none; stroke: var(--ui-muted); stroke-width: 2; }
   .bf-ep-e { stroke-width: 4; }
   .bf-token { fill: var(--brand-jade); }
-  .bf-ar7 { fill: var(--ui-muted); font: 700 11.5px "Plus Jakarta Sans", sans-serif; letter-spacing: 1px; text-anchor: middle; }
 
   .bf {
     background: #fff; border: 1px solid var(--ui-line);
@@ -4910,7 +4909,6 @@
         s += '<rect class="' + cls + '" x="' + n.x + '" y="' + n.y + '" width="' + n.w + '" height="68" rx="3"/>'
           + '<text class="bf-t ' + ink + '" x="' + cx + '" y="' + (n.y + 29) + '">' + esc(L(n)[0]) + '</text>'
           + '<text class="bf-t ' + ink + '" x="' + cx + '" y="' + (n.y + 49) + '">' + esc(L(n)[1]) + '</text>';
-        if (n.k === 'c') s += '<text class="bf-ar7" x="' + cx + '" y="' + (n.y + 66) + '">AR7 →</text>';
       });
       GATES.forEach((g) => {
         s += '<path class="bf-ng" d="M' + g.cx + ' ' + (g.cy - 54) + ' ' + (g.cx + 54) + ' ' + g.cy
