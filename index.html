@@ -2606,7 +2606,7 @@
   }
 
   @media (max-width: 900px) {
-    .bf-head, .bf-bar, .bf-status, .bf-foot, .bf-keys { padding-left: 18px; padding-right: 18px; }
+    .bf-head, .bf-bar, .bf-status, .bf-foot, .bf-keys, .bf-due { padding-left: 18px; padding-right: 18px; }
     .bf-cal-scroll { padding: 12px; }
     /* หัวการ์ดตกบรรทัดแล้ว margin-left:auto จะดันไปชิดขวา อ่านเป็นคนละเรื่องกัน */
     .bf-head .bf-count { margin-left: 0; width: 100%; }
@@ -3573,59 +3573,6 @@
   </div>
 </section>
 
-<section id="vat-service">
-  <div class="wrap">
-    <p class="section-kicker" data-vs="kicker">Clean master data</p>
-    <h2 data-vs="h2">เปิดลูกค้าใหม่ด้วยเลข 13 หลัก ไม่ใช่ด้วยความจำ</h2>
-    <p class="sub" data-vs="sub">ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง</p>
-
-    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="vsi-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></symbol>
-      <symbol id="vsi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
-      <symbol id="vsi-check" viewBox="0 0 24 24"><path d="M12 3 20 6v6.2c0 4.6-3.2 7.7-8 9.1-4.8-1.4-8-4.5-8-9.1V6z"/><polyline points="8.6 12 11.2 14.6 15.6 10.1"/></symbol>
-      <symbol id="vsi-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
-      <symbol id="vsi-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 4.5h-10a2 2 0 0 0-2 2v10"/></symbol>
-      <symbol id="vsi-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
-    </defs></svg>
-
-    <div class="vs reveal">
-      <div class="vs-bar">
-        <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
-        <div class="vs-form">
-          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><output class="vs-box" id="vs-tax">0105558000123</output></label>
-          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><output class="vs-box small" id="vs-branch">00000</output></label>
-          <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
-        </div>
-      </div>
-
-      <div class="vs-cases" id="vs-cases" role="group" aria-label="สถานการณ์ตัวอย่าง">
-        <span class="vs-lbl" data-vs="lblCase">ลองสถานการณ์</span>
-      </div>
-
-      <div id="vs-result"></div>
-
-      <div class="vs-cmp">
-        <div class="vs-side man">
-          <h3><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="hdMan">ที่พนักงานคีย์เอง</span></h3>
-          <p data-vs="hdManSub">พิมพ์จากเอกสารที่ได้มา</p>
-          <dl id="vs-man"></dl>
-        </div>
-        <span class="vs-mid" aria-hidden="true"><svg class="vs-ic"><use href="#vsi-arrow"/></svg></span>
-        <div class="vs-side rd">
-          <h3><svg class="vs-ic"><use href="#vsi-check"/></svg><span data-vs="hdRd">ที่ VAT Service เติมให้</span></h3>
-          <p data-vs="hdRdSub">ตามทะเบียนกรมสรรพากร</p>
-          <dl id="vs-rd"></dl>
-        </div>
-      </div>
-
-      <p class="vs-cost"><span class="vs-lbl" data-vs="lblCost">ราคาที่จ่ายจริง</span><span id="vs-cost"></span></p>
-    </div>
-
-    <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
-  </div>
-</section>
-
 <section id="billing-flow" class="alt">
   <div class="wrap">
     <p class="section-kicker" data-bf="kicker">Process AR6 · Billing Note</p>
@@ -3687,6 +3634,59 @@
     </div>
 
     <p class="bf-note" data-bf="note">ผังนี้เป็นหนึ่งใน Flow มาตรฐานที่เขียนไว้ครบทั้ง 14 สายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></p>
+  </div>
+</section>
+
+<section id="vat-service">
+  <div class="wrap">
+    <p class="section-kicker" data-vs="kicker">Clean master data</p>
+    <h2 data-vs="h2">เปิดลูกค้าใหม่ด้วยเลข 13 หลัก ไม่ใช่ด้วยความจำ</h2>
+    <p class="sub" data-vs="sub">ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง</p>
+
+    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="vsi-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></symbol>
+      <symbol id="vsi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
+      <symbol id="vsi-check" viewBox="0 0 24 24"><path d="M12 3 20 6v6.2c0 4.6-3.2 7.7-8 9.1-4.8-1.4-8-4.5-8-9.1V6z"/><polyline points="8.6 12 11.2 14.6 15.6 10.1"/></symbol>
+      <symbol id="vsi-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
+      <symbol id="vsi-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 4.5h-10a2 2 0 0 0-2 2v10"/></symbol>
+      <symbol id="vsi-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+    </defs></svg>
+
+    <div class="vs reveal">
+      <div class="vs-bar">
+        <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
+        <div class="vs-form">
+          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><output class="vs-box" id="vs-tax">0105558000123</output></label>
+          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><output class="vs-box small" id="vs-branch">00000</output></label>
+          <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
+        </div>
+      </div>
+
+      <div class="vs-cases" id="vs-cases" role="group" aria-label="สถานการณ์ตัวอย่าง">
+        <span class="vs-lbl" data-vs="lblCase">ลองสถานการณ์</span>
+      </div>
+
+      <div id="vs-result"></div>
+
+      <div class="vs-cmp">
+        <div class="vs-side man">
+          <h3><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="hdMan">ที่พนักงานคีย์เอง</span></h3>
+          <p data-vs="hdManSub">พิมพ์จากเอกสารที่ได้มา</p>
+          <dl id="vs-man"></dl>
+        </div>
+        <span class="vs-mid" aria-hidden="true"><svg class="vs-ic"><use href="#vsi-arrow"/></svg></span>
+        <div class="vs-side rd">
+          <h3><svg class="vs-ic"><use href="#vsi-check"/></svg><span data-vs="hdRd">ที่ VAT Service เติมให้</span></h3>
+          <p data-vs="hdRdSub">ตามทะเบียนกรมสรรพากร</p>
+          <dl id="vs-rd"></dl>
+        </div>
+      </div>
+
+      <p class="vs-cost"><span class="vs-lbl" data-vs="lblCost">ราคาที่จ่ายจริง</span><span id="vs-cost"></span></p>
+    </div>
+
+    <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
   </div>
 </section>
 
@@ -4804,8 +4804,11 @@
       footAmt: { th: 'ยอดที่ต้องวางบิลเดือนนี้', en: 'due to be billed this month' },
       footInv: { th: 'ใบแจ้งหนี้', en: 'invoices' },
       footGrp: { th: 'กลุ่มลูกค้า', en: 'customer groups' },
-      hint: { th: 'ลากกลุ่มลูกค้าไปวางวันอื่นเพื่อเลื่อนรอบวางบิล — บนจอสัมผัสให้แตะกลุ่มแล้วแตะวันปลายทาง',
-              en: 'Drag a customer group onto another day to move its billing cycle — on a touch screen, tap the group and then tap the day.' },
+      hint: { th: 'ลากกลุ่มลูกค้าไปวางวันอื่น เพื่อเปลี่ยนวันวางบิล — บนจอสัมผัสให้แตะกลุ่มแล้วแตะวันปลายทาง',
+              en: 'Drag a customer group onto another day to change its billing date — on a touch screen, tap the group and then tap the day.' },
+      dueLate: { th: 'เลยกำหนดวางบิล', en: 'Past its billing date' },
+      dueToday: { th: 'ถึงรอบวันนี้', en: 'Due today' },
+      dueNext: { th: 'รอบถัดไป', en: 'Upcoming' },
       same: { th: 'ยังอยู่วันเดิม', en: 'Still on the same day' },
       chose: { th: 'เลือกแล้ว — แตะวันที่ต้องการย้ายไป', en: 'Selected — now tap the day to move it to' },
       cleared: { th: 'ยกเลิกการเลือก', en: 'Selection cleared' },
@@ -4904,7 +4907,7 @@
     const START = 1, DAYS = 30, TODAY = 8;
     const SEED = [
       { id: 'g1', d: 10, n: 'บจก. สยามพลาสติก', inv: 3, amt: 248500 },
-      { id: 'g2', d: 15, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', inv: 2, amt: 86200 },
+      { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', inv: 2, amt: 86200 },
       { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม', inv: 5, amt: 1120000 },
       { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์', inv: 4, amt: 372900 },
       { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', inv: 1, amt: 54000 },
