@@ -10,10 +10,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lycheeverse/lychee-action@v2
         with:
-          # --exclude '^/#...' : ลิงก์ข้ามหน้ากลับ index.html#section (เช่น /#contact) —
-          # lychee resolve "/" เป็นโฟลเดอร์ ไม่ใช่ index.html เลยหา fragment ไม่เจอ (false positive)
+          # ลิงก์ข้ามหน้ากลับ index.html#section (เช่น /#contact) — lychee resolve "/"
+          # เป็นโฟลเดอร์ ไม่ใช่ index.html เลยหา fragment ไม่เจอ (false positive)
+          # ⚠ ต้องไล่ชื่อ fragment ทีละอัน เพราะ --exclude match ปลาย URI ที่ resolve แล้ว
+          # (file:///…/JHSite#contact) ไม่ใช่ href ดิบ — เขียน '^/#' จึงไม่ match
+          # เพิ่มลิงก์ /#ใหม่ ในบทความเมื่อไหร่ ต้องเติมชื่อ section ตรงนี้ด้วย ไม่งั้น CI แดง
           args: >-
             --offline --no-progress --include-fragments --root-dir "$GITHUB_WORKSPACE"
-            --exclude "#(contact|articles)$"
+            --exclude "#(contact|articles|billing-flow)$"
             "*.html" "articles/*.html"
           fail: true
