@@ -3595,7 +3595,7 @@
   <div class="wrap">
     <p class="section-kicker" data-bf="kicker">Highlight Feature</p>
     <h2 data-bf="h2">ระบบวางบิล</h2>
-    <p class="sub" data-bf="sub">12 ขั้นต่อกันเป็นเส้นเดียวบน Business Central — ตั้งรอบวางบิลรายลูกค้า ออกใบพร้อม QR PromptPay วางบิล แล้วระบุวันนัดรับชำระ ส่งต่อเข้างานรับชำระโดยไม่ต้องคีย์ซ้ำ</p>
+    <p class="sub" data-bf="sub">งานวางบิลจบในเส้นเดียวบน Business Central — ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน แล้วปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ</p>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -3606,12 +3606,12 @@
     <div class="bf reveal">
       <p class="bf-head">
         <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
-        <span class="bf-count"><b>8</b> <span data-bf="cntA">ใน 12 ขั้นเป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
+        <span class="bf-count"><b>8</b> <span data-bf="cntA">ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
       </p>
 
       <div class="bf-scroll">
         <svg viewBox="0 0 1440 700" role="img" aria-labelledby="bfTitle">
-          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล 12 ขั้น แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist</title>
+          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist</title>
           <defs>
             <marker id="bfAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 10 5 0 10z" fill="#739B97"/>
@@ -4812,12 +4812,12 @@
     const T = {
       kicker: { th: 'Highlight Feature', en: 'Highlight Feature' },
       h2: { th: 'ระบบวางบิล', en: 'Billing &amp; Receipt' },
-      sub: { th: '12 ขั้นต่อกันเป็นเส้นเดียวบน Business Central — ตั้งรอบวางบิลรายลูกค้า ออกใบพร้อม QR PromptPay วางบิล แล้วระบุวันนัดรับชำระ ส่งต่อเข้างานรับชำระโดยไม่ต้องคีย์ซ้ำ',
-            en: 'Twelve steps on one line inside Business Central — set each customer’s billing cycle, print the note with a PromptPay QR, place it, record the collection date, and hand the work to cash receipts without re-keying anything.' },
+      sub: { th: 'งานวางบิลจบในเส้นเดียวบน Business Central — ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน แล้วปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ',
+            en: 'The whole billing run on one line inside Business Central — set each customer’s billing date, plan the notes by cycle, record the collection appointment, and close with the receipt, without re-keying anything.' },
       flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
-      cntA: { th: 'ใน 12 ขั้นเป็นฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'of 12 steps are functions JWIC added' },
-      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล 12 ขั้น แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist',
-                  en: 'Twelve-step billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the totals, release, print with a PromptPay QR, then place the note with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, void the note and loop back to the worklist.' },
+      cntA: { th: 'ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'steps in this flow are functions JWIC added' },
+      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist',
+                  en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the totals, release, print with a PromptPay QR, then place the note with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, void the note and loop back to the worklist.' },
       keyJ: { th: 'ฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'Added by JWIC' },
       keyM: { th: 'ทำนอกระบบ', en: 'Done outside the system' },
       keyG: { th: 'ทางแยกตัดสินใจ', en: 'Decision' },
