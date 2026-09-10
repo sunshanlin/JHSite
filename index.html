@@ -2502,7 +2502,10 @@
   .bf-k-c { border: 2px solid var(--ui-ink); }
 
   /* ---- Billing Board ---- */
-  .bf-board { border-top: 1px solid var(--ui-line); background: var(--bg-soft); }
+  .bf-board {
+    border-top: 1px solid var(--ui-line); background: var(--bg-soft);
+    --cal-blue: var(--ms-blue); --cal-tint: #EFF6FC; --cal-line: #C3DFF2; --cal-ink: #0B5A8C;
+  }
   .bf-bar {
     display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap;
     padding: 15px 24px; border-bottom: 1px solid var(--ui-line);
@@ -2539,7 +2542,7 @@
     background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-btn);
     transition: background .125s ease, border-color .125s ease;
   }
-  .bf-day.off { background: var(--bg-soft); }
+  .bf-day.off { background: #F7FAFC; }
   .bf-day.blank { background: none; border-color: transparent; }
   .bf-dn {
     display: flex; align-items: center; gap: 6px;
@@ -2548,28 +2551,28 @@
   }
   /* ชื่อวันซ้ำกับหัวคอลัมน์บนจอกว้าง — โผล่เฉพาะตอนปฏิทินยุบเป็นรายการบนมือถือ */
   .bf-dw { display: none; font-style: normal; font-weight: 500; }
-  .bf-day.today .bf-dn { color: var(--brand-teal); }
+  .bf-day.today .bf-dn { color: var(--cal-ink); }
   .bf-day.today .bf-dn span {
     font-family: inherit; font-size: .68rem; font-weight: 600; letter-spacing: normal;
-    color: var(--brand-teal); background: var(--brand-pale); border-radius: 999px; padding: 1px 8px;
+    color: var(--cal-ink); background: var(--cal-tint); border-radius: 999px; padding: 1px 8px;
   }
   .bf-tot {
     margin-top: auto; text-align: right; font-variant-numeric: tabular-nums;
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: .76rem; font-weight: 700; color: var(--ui-ink);
   }
-  .bf-day.over { background: var(--brand-pale); border-color: var(--brand-jade); }
-  .bf-day.pick { border-style: dashed; border-color: var(--brand-mist); cursor: pointer; }
-  .bf-day.pick:hover { background: var(--bg-soft); border-color: var(--brand-jade); }
+  .bf-day.over { background: var(--cal-tint); border-color: var(--cal-blue); }
+  .bf-day.pick { border-style: dashed; border-color: var(--cal-line); cursor: pointer; }
+  .bf-day.pick:hover { background: var(--cal-tint); border-color: var(--cal-blue); }
 
   .bf-chip {
     display: block; width: 100%; text-align: left; font: inherit; cursor: grab;
-    color: var(--ui-ink); background: var(--bg-soft);
-    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn); padding: 6px 9px;
+    color: var(--ui-ink); background: var(--cal-tint);
+    border: 1px solid var(--cal-line); border-radius: var(--ui-radius-btn); padding: 6px 9px;
     transition: background .125s ease, border-color .125s ease, color .125s ease;
   }
-  .bf-chip:hover { border-color: var(--brand-jade); }
-  .bf-chip[aria-pressed="true"] { color: #fff; background: var(--brand-teal); border-color: var(--brand-teal); }
+  .bf-chip:hover { border-color: var(--cal-blue); }
+  .bf-chip[aria-pressed="true"] { color: #fff; background: var(--cal-blue); border-color: var(--cal-blue); }
   .bf-chip[aria-pressed="true"] .bf-cm { color: rgba(255,255,255,.82); }
   .bf-cn { display: block; font-size: .82rem; font-weight: 600; line-height: 1.35; }
   .bf-cm {
@@ -2589,7 +2592,7 @@
      สีเน้นวันวางบิลและรายการที่เลยกำหนด */
   .bf-chip.late { background: rgba(166,58,86,.07); border-color: rgba(166,58,86,.34); }
   .bf-chip.late .bf-cn { color: var(--brand-burgundy-dark); }
-  .bf-chip.due { border-color: var(--brand-teal); }
+  .bf-chip.due { border-color: var(--cal-blue); }
   .bf-chip[aria-pressed="true"].late .bf-cn { color: #fff; }
   .bf-day.late .bf-dn { color: var(--brand-burgundy-dark); }
   .bf-due {
@@ -2600,8 +2603,8 @@
   .bf-due span { display: flex; align-items: center; gap: 8px; }
   .bf-due i { width: 20px; height: 12px; flex: 0 0 auto; border-radius: 2px; }
   .bf-d-late { background: rgba(166,58,86,.07); border: 1px solid rgba(166,58,86,.34); }
-  .bf-d-due { background: var(--bg-soft); border: 1px solid var(--brand-teal); }
-  .bf-d-next { background: var(--bg-soft); border: 1px solid var(--brand-pale); }
+  .bf-d-due { background: var(--cal-tint); border: 1px solid var(--cal-blue); }
+  .bf-d-next { background: var(--cal-tint); border: 1px solid var(--cal-line); }
   .bf-foot {
     display: flex; flex-wrap: wrap; gap: 8px 30px;
     padding: 14px 24px 16px; border-top: 1px solid var(--ui-line); background: var(--bg-soft);
