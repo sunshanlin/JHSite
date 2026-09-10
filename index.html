@@ -3104,6 +3104,15 @@
     transition: background .125s ease, border-color .125s ease;
   }
   .vs-go:hover { background: var(--brand-deep); border-color: var(--brand-deep); }
+  /* ชี้ให้เห็นว่าช่องนี้พิมพ์เองได้ ไม่ใช่ตัวอย่างที่แตะไม่ได้ — สำนวนเดียวกับคำอธิบาย
+     สีชมพูในผัง #billing-flow */
+  /* .vs-field > span ชนะ .vs-tip ด้วย specificity ต้องเขียนแบบมีพ่อแม่นำ */
+  .vs-form > .vs-tip {
+    flex: 0 0 100%; display: flex; align-items: flex-end; gap: 4px; margin: -2px 0 -4px 10px;
+    color: var(--brand-pink-deep); font-size: .86rem; font-weight: 600;
+  }
+  .vs-tip-ar { width: 26px; height: 30px; flex: 0 0 auto; fill: none; stroke: var(--brand-pink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .vs-tip span { padding-bottom: 4px; }
 
   .vs-cases {
     display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
@@ -3692,6 +3701,12 @@
           <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><input class="vs-box" id="vs-tax" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="13" value="0105558000123"></label>
           <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><input class="vs-box small" id="vs-branch" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="5" value="00000"></label>
           <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
+          <span class="vs-tip" id="vs-tip">
+            <svg class="vs-tip-ar" viewBox="0 0 34 40" aria-hidden="true" focusable="false">
+              <path d="M27 37C13 33 6 22 13 6"/><path d="M13 6l7 10M13 6l-7 8"/>
+            </svg>
+            <span data-vs="tipType">พิมพ์เลขของลูกค้าคุณลงไปได้เลย</span>
+          </span>
         </div>
       </div>
 
@@ -4644,8 +4659,8 @@
         man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
         bad: [0, 1, 2, 3, 4],
         rd: HQ,
-        cost: { th: 'ใบกำกับภาษีที่ชื่อหรือที่อยู่ไม่ตรงหนังสือรับรอง ลูกค้าเอาไปใช้เป็นภาษีซื้อไม่ได้ — ตีกลับ ออกใบแทน แล้วเสียรอบวางบิลไปหนึ่งรอบ',
-                en: 'A tax invoice whose name or address misses the company registration is unusable as input VAT for your customer — it comes back, you reissue it, and a billing cycle is gone.' }
+        cost: { th: 'ใบกำกับภาษีที่ชื่อหรือที่อยู่ไม่ตรงหนังสือรับรอง ลูกค้าเอาไปใช้เป็นภาษีซื้อไม่ได้',
+                en: 'A tax invoice whose name or address misses the company registration is unusable as input VAT for your customer.' }
       },
       {
         tax: '0105558000123', branch: '',
@@ -4702,6 +4717,7 @@
       sub: { th: 'ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง',
              en: 'A name that misses the registration, a half-typed address, “head office” on a branch, the same customer opened twice — try each one and see what the Revenue Department’s VAT Service takes off the table.' },
       lblTax: { th: 'เลขประจำตัวผู้เสียภาษี', en: 'VAT Registration No.' },
+      tipType: { th: 'พิมพ์เลขของลูกค้าคุณลงไปได้เลย', en: 'Type your own customer’s ID here' },
       lblBranch: { th: 'เลขที่สาขา', en: 'Branch No.' },
       btnGo: { th: 'ค้นหา', en: 'Search' },
       lblCase: { th: 'ลองสถานการณ์', en: 'Try a case' },
@@ -4741,6 +4757,7 @@
     const ico = (id) => '<svg class="vs-ic"><use href="#' + id + '"/></svg>';
     const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
     let vsLang = 'th', cur = CASES[0], picked = 0, live = null;
+    const typed = {};   /* เลขที่ผู้ใช้พิมพ์เอง แยกตามสถานการณ์ */
 
     CASES.forEach((c, i) => {
       const b = document.createElement('button');
@@ -4782,9 +4799,10 @@
       document.querySelectorAll('[data-vs]').forEach((el) => { el.innerHTML = T[el.dataset.vs][vsLang]; });
       bar.querySelectorAll('button').forEach((b) => { b.textContent = CASES[+b.dataset.i].tab[vsLang]; });
 
-      byId('vs-tax').value = cur.tax;
+      const mine = typed[CASES.indexOf(cur)];
+      byId('vs-tax').value = mine ? mine.tin : cur.tax;
       const br = byId('vs-branch');
-      br.value = cur.branch || '';
+      br.value = mine ? mine.branch : (cur.branch || '');
       br.placeholder = T.anyBranch[vsLang];
 
       byId('vs-man').innerHTML = rows(cur.man, cur.bad, false);
@@ -4895,8 +4913,14 @@
     if (!VAT_API) {
       byId('vs-tax').readOnly = true;
       byId('vs-branch').readOnly = true;
+      byId('vs-tip').hidden = true;
       document.querySelector('[data-vs="note"]').dataset.vs = 'noteDemo';
     }
+
+    [byId('vs-tax'), byId('vs-branch')].forEach((el) =>
+      el.addEventListener('input', () => {
+        typed[CASES.indexOf(cur)] = { tin: byId('vs-tax').value, branch: byId('vs-branch').value };
+      }));
 
     byId('vs-go').addEventListener('click', go);
     [byId('vs-tax'), byId('vs-branch')].forEach((el) =>
