@@ -1647,6 +1647,7 @@
     --ms-navy: #153A73;
     --ms-blue: #0078D4;
     --ms-green: #498205;
+    --ms-red: #A4262C;
     --ms-teal: #008272;
     --ms-cyan: #0078A8;
     --ms-gold: #9A6700;
@@ -2464,8 +2465,8 @@
   .bf-ca { fill: var(--brand-pink-deep); font: 500 14px "Plus Jakarta Sans", "Anuphan", sans-serif; }
   .bf-ca-b { font-weight: 700; }
   .bf-cl { fill: none; stroke: var(--brand-pink-deep); stroke-width: 1.2; }
-  .bf-ep { fill: none; stroke: var(--ui-muted); stroke-width: 2; }
-  .bf-ep-e { stroke-width: 4; }
+  .bf-ep { fill: none; stroke: var(--ms-green); stroke-width: 2.5; }
+  .bf-ep-e { stroke: var(--ms-red); stroke-width: 4; }
   .bf-token { fill: var(--brand-jade); }
 
   .bf {
@@ -2496,7 +2497,8 @@
   .bf-keys i { width: 22px; height: 13px; flex: 0 0 auto; border-radius: 2px; }
   .bf-k-j { background: var(--brand-teal); }
   .bf-k-m { border: 1px dashed var(--brand-mist); }
-  .bf-k-g { width: 14px; height: 14px; border: 1px solid var(--brand-mist); transform: rotate(45deg); }
+  .bf-keys .bf-k-g { width: 15px; height: 15px; border-radius: 0; background: #fff;
+    border: 1px solid var(--brand-mist); transform: rotate(45deg); }
   .bf-k-c { border: 2px solid var(--ui-ink); }
 
   /* ---- Billing Board ---- */
