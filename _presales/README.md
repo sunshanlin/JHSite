@@ -18,7 +18,7 @@ powershell -File build\build.ps1              # ประกอบใหม่�
 powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 ```
 
-ต้นแบบ : 76 หน้า ฉายจริง 22 หน้า ที่เหลือซ่อนไว้ กด go-to-slide เอาตอน Q&A
+ต้นแบบ : 122 หน้า (10 ก.ย. 2026) ฉายจริงส่วนใหญ่ ที่เหลือซ่อนไว้ กด go-to-slide เอาตอน Q&A
 
 ## โครงสร้าง
 
@@ -31,7 +31,12 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 | `build\add-methodology.ps1` | สร้างหน้า Fast Implementation (ลำดับเฟส + Gate 1–5 **ไม่แสดงสัปดาห์**) แทรกหลังหน้า Success by Design · รันซ้ำได้ ลบของเดิมที่ตัวเองสร้างก่อน (รู้จักจากชื่อ shape `fim*`) |
 | `build\methodology-notes.json` | speaker notes ไทยของ 2 หน้านั้น (ไทยห้ามอยู่ใน .ps1) |
 | `build\add-dbd.ps1` | วางป้าย DBD Registered ท้ายหน้า About Us (สไลด์ 2) · รันซ้ำได้ ลบ shape `dbd*` ของเดิมก่อน |
-| `build\add-agenda.ps1` | สร้างหน้า Agenda (หัวข้อล้วน ไม่กำกับเวลา) แทรกถัดจาก About Us · รันซ้ำได้ ลบสไลด์ `JWIC_agenda` ของเดิมก่อน |
+| `build\add-agenda.ps1` | **เลิกใช้แล้ว** — หน้า Agenda ถูกแก้มือเป็นแบบการ์ดและย้ายไปสไลด์ 2 (10 ก.ย. 2026) รันซ้ำจะได้แบบ navy เก่าไปแทรกหลัง About Us · เก็บไว้เป็นตัวอย่างโค้ดเท่านั้น |
+| `build\add-reference.ps1` | สร้างหน้า Reference (Miele Thailand) แทรกถัดจาก About Us · รันซ้ำได้ ลบสไลด์ `JWIC_reference` ของเดิมก่อน |
+| `build\add-bpmn.ps1` | สร้างหน้า Standard Process Flows (ข้อ 10 ของหมวด Localization) แทรกถัดจากหน้า 09 + เติมแถว 10 บนหน้าภาพรวม · รันซ้ำได้ ลบสไลด์ `JWIC_bpmn` และ shape `JHBadge10/JHTitle10/JHSub10` ของเดิมก่อน |
+| `build\bpmn-notes.json` | speaker notes ไทยของหน้า Standard Process Flows |
+| `build\reference-notes.json` | speaker notes ไทยของหน้า Reference (ไทยห้ามอยู่ใน .ps1) |
+| `assets\` | โลโก้ลูกค้าของหน้า Reference — **ห้ามเก็บใน `img\`** เพราะ GitHub Pages เสิร์ฟออกไป โลโก้ลูกค้าโผล่บน jwicconsulting.com = อ้างว่าเขารับรองเรา |
 | `outline\` | ร่าง / สคริปต์พูด |
 
 **แก้เนื้อหาให้แก้ที่ต้นแบบโดยตรง แล้วรัน `verify.ps1`** — `build.ps1` เขียนลง `-rebuild.pptx` ทับต้นแบบไม่ได้
@@ -77,6 +82,32 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 
 <!-- ponytail: ยังไม่ทำ deck เจาะ vertical แยก (Finance-only / Manufacturing-only)
      ถ้าจะทำ ใช้ build.ps1 ตัวเดิม เปลี่ยนแค่ JSON -->
+
+## Standard Process Flows (ข้อ 10 ของหมวด Localization)
+
+**หมวด Localization ในเด็ค = โปรเจกต์ `D:\BC\Project\JHCore`** (ในเด็คเรียกชื่อลูกค้าว่า JWIC Localization ไม่เคยพูดคำว่า JHCore)
+`powershell -File build\add-bpmn.ps1` แล้วดูด้วยตา `build\shots.ps1 74 84`
+หน้านี้ขายสิ่งที่คู่แข่งไม่มี: ซื้อซอฟต์แวร์แล้วได้ **ผังกระบวนการมาตรฐานติดมาด้วย** — 14 กลุ่มงาน 103 กระบวนการ 967 ขั้นตอน (นับจาก `flows.json` ถ้าตัวเลขเปลี่ยนต้องแก้ `$CARDS` เอง)
+ตัวอย่างบนสไลด์คือ GL8 ยื่น ภ.ง.ด. ภายในวันที่ 7 — เลือกหน้านี้เพราะกล่องเขียว (Localization) เยอะ และต่อกับหน้า Reference ของ Miele ที่เป็นเรื่อง WHT เหมือนกัน
+
+วิธีทำภาพใหม่ (ไม่ได้ทำอัตโนมัติ):
+```
+"C:\Program Files\draw.io\draw.io.exe" --export --page-index 8 --format png --scale 3 --border 16 --output gl8.png "D:\BC\Project\JHCore\docs\BusinessProcess-BC\diagrams\GL-บัญชีแยกประเภทและภาษี (General Ledger and Tax).drawio"
+```
+แล้วครอปเอาเฉพาะ **แถบ 1** (ตัดตารางรายละเอียดใต้ผังทิ้ง) ย่อกว้าง 2400px เซฟทับ `assets\bpmn-gl8-band1.png` · อัตราส่วนเปลี่ยนต้องแก้ `$SHOTR` ในสคริปต์
+**`--page-index` ของ drawio ไม่ตรงกับลำดับหน้าที่นับเอง** (เลื่อนไป 1) เปิดไฟล์ที่ export ออกมาดูก่อนเสมอว่าได้หน้าที่ต้องการ
+ทั้งผัง (แถบ 1+2) อัตราส่วน 2:1 วางใต้หัวข้อไม่พอสูง จึงใช้แค่แถบ 1 แล้วบอกในคำบรรยายใต้ภาพว่าเป็นครึ่งแรก
+
+## Reference (สไลด์ 4 · ถัดจาก About Us)
+
+`powershell -File build\add-reference.ps1` แล้วดูด้วยตา `build\shots.ps1 3`
+เนื้อหา: Miele ขึ้น Business Central จากส่วนกลางที่เยอรมัน ประเทศไทยใช้เทมเพลตเดียวกับทุกประเทศ ส่วนภาษีหัก ณ ที่จ่ายของไทยใช้ JWIC Thai Localization ใช้งานจริงอยู่ · **ถ้อยคำบนสไลด์เป็นแบบ context / requirement / solution ไม่ลงรายละเอียดว่าเป็นข้อไหนของแพ็กเกจ** (ลูกค้าขอ)
+ลำดับเปิดเด็ค: ปก → Agenda (2) → About Us (3) → Reference (4) — แนะนำตัวจบแล้วมีของที่ใช้งานจริงให้ดูทันที ค่อยเข้าเนื้อหา
+หน้าตาเป็นการ์ดแบบเดียวกับหมวด Localization (พื้นสว่าง หัวข้อใหญ่ 2 บรรทัด การ์ด 3 ใบ) สร้างด้วยการ **duplicate หน้าภาพรวม JWIC Localization แล้วลบ shape ทิ้งทั้งหมด** พื้นหลัง/ธีม/โลโก้ JW จึงมาจากเด็คเอง
+**สีของหน้านี้คือแดง Miele `#8C0014`** (ดูดจากไฟล์โลโก้) ตั้งใจให้หน้าเป็นของลูกค้ารายนั้น ไม่ใช่โทนของเราเอง — เคยทำเป็นแถบ navy แบบหน้า About Us แล้ว ดูเก่า ทิ้งไปแล้ว
+โลโก้ `assets\miele-logo.png` เรนเดอร์จาก `assets\miele-logo.svg` ด้วย chromium ของ Playwright (`--headless --screenshot --window-size=1200,460`) เพราะ PowerPoint COM ไม่รับไฟล์ .svg
+**ก่อนเอาไปโชว์ลูกค้า ต้องเคลียร์กับ Miele ก่อนว่าอ้างชื่อ+โลโก้ได้** ตอนนี้หน้านี้กำกับไว้แค่ว่าเป็นเครื่องหมายการค้าของเขา
+**สคริปต์เองคือข้อสอบ**: ไม่มีไฟล์โลโก้ = throw ไม่แตะเด็ค
 
 ## DBD Registered (หน้า About Us)
 

@@ -7,3 +7,6 @@ decks/
 voice/edge-tts/node_modules/
 *.wav
 *.mp3
+
+# โลโก้ลูกค้าของหน้า Reference — ต้องเข้า git ไม่งั้น add-reference.ps1 รันไม่ได้บนเครื่องใหม่
+!assets/*.png
