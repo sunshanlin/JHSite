@@ -2706,6 +2706,9 @@
     border: 1px solid var(--ui-line); border-left: 3px solid var(--brand-pink-deep);
     background: var(--brand-ivory); background-image: none;
   }
+  /* ลิงก์ที่มาในกล่องนิยาม — สำนวนเดียวกับ .bf-note a ไม่ใช่ลิงก์น้ำเงินของเบราว์เซอร์ */
+  .tip a { color: #8E2C46; font-weight: 600; text-decoration: none; }
+  .tip a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
 
   /* แท็บฟังก์ชัน: เดิมเป็นแคปซูล 999px + gradient ฟ้า–เขียว + ยกตัว
      → segmented control แบบ Fluent เหลี่ยม แบน สีสถาบันสีเดียว */
@@ -3683,6 +3686,11 @@
     <p class="section-kicker" data-vs="kicker">Highlight Feature</p>
     <h2 data-vs="h2">ระบบ VAT Service</h2>
     <p class="sub" data-vs="sub">ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง</p>
+    <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?" -->
+    <div class="tip reveal">
+      <b data-vs="defTitle">💡 VAT Service คืออะไร?</b>
+      <p data-vs="defBody">บริการของกรมสรรพากรที่ใช้ตรวจว่าคู่ค้ามีตัวตนจริง จดทะเบียนถูกต้อง และยังมีสิทธิออกใบกำกับภาษีมูลค่าเพิ่มอยู่หรือไม่ — สถานะนี้เปลี่ยนได้ตลอดเวลา การตรวจก่อนรับใบกำกับภาษีจึงกันการแอบอ้างและความเสียหายที่ตามมา · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></p>
+    </div>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -4714,6 +4722,9 @@
     const T = {
       kicker: { th: 'Highlight Feature', en: 'Highlight Feature' },
       h2: { th: 'ระบบ VAT Service', en: 'VAT Service' },
+      defTitle: { th: '💡 VAT Service คืออะไร?', en: '💡 What is the VAT Service?' },
+      defBody: { th: 'บริการของกรมสรรพากรที่ใช้ตรวจว่าคู่ค้ามีตัวตนจริง จดทะเบียนถูกต้อง และยังมีสิทธิออกใบกำกับภาษีมูลค่าเพิ่มอยู่หรือไม่ — สถานะนี้เปลี่ยนได้ตลอดเวลา การตรวจก่อนรับใบกำกับภาษีจึงกันการแอบอ้างและความเสียหายที่ตามมา · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a>',
+                 en: 'Comprehensive information on taxpayers who are VAT registrants — it lets a business verify that a partner can legally issue a tax invoice, that the invoice received is valid for its input tax credit, and that the partner exists at all. · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">Source: the Revenue Department</a>' },
       sub: { th: 'ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง',
              en: 'A name that misses the registration, a half-typed address, “head office” on a branch, the same customer opened twice — try each one and see what the Revenue Department’s VAT Service takes off the table.' },
       lblTax: { th: 'เลขประจำตัวผู้เสียภาษี', en: 'VAT Registration No.' },
