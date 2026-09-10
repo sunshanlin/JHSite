@@ -3606,12 +3606,12 @@
     <div class="bf reveal">
       <p class="bf-head">
         <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
-        <span class="bf-count"><b>8</b> <span data-bf="cntA">ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
+        <span class="bf-count"><b>7</b> <span data-bf="cntA">ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
       </p>
 
       <div class="bf-scroll">
         <svg viewBox="0 0 1440 700" role="img" aria-labelledby="bfTitle">
-          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist</title>
+          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist</title>
           <defs>
             <marker id="bfAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 10 5 0 10z" fill="#739B97"/>
@@ -4816,8 +4816,8 @@
             en: 'The whole billing run on one line inside Business Central — set each customer’s billing date, plan the notes by cycle, record the collection appointment, and close with the receipt, without re-keying anything.' },
       flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
       cntA: { th: 'ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'steps in this flow are functions JWIC added' },
-      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจยอด Release พิมพ์พร้อม PromptPay QR แล้ววางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist',
-                  en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the totals, release, print with a PromptPay QR, then place the note with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, void the note and loop back to the worklist.' },
+      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist',
+                  en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the lines and totals, release and print the billing note, then place it with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, void the note and loop back to the worklist.' },
       keyJ: { th: 'ฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'Added by JWIC' },
       keyM: { th: 'ทำนอกระบบ', en: 'Done outside the system' },
       keyG: { th: 'ทางแยกตัดสินใจ', en: 'Decision' },
@@ -4846,8 +4846,8 @@
       eNot: { th: 'ยังไม่พร้อม', en: 'Not yet' },
       eYes: { th: 'รับ', en: 'Accepts' },
       eNo: { th: 'ไม่รับ', en: 'Rejects' },
-      c1a: { th: 'QR PromptPay อยู่บนใบวางบิลใบเดียวกัน', en: 'The PromptPay QR sits on the billing note itself' },
-      c1b: { th: 'ยอดตรงตามใบ ลูกค้าสแกนจ่ายได้ทันที', en: 'carrying the exact amount, ready to scan and pay' },
+      c1a: { th: 'ใบที่ Release แล้วกันวางบิลซ้ำ', en: 'A released note blocks duplicate billing' },
+      c1b: { th: 'ใบแจ้งหนี้ที่วางบิลแล้ว ไม่ถูกดึงซ้ำในรอบถัดไป', en: 'invoices on a note are never pulled again next cycle' },
       c2a: { th: 'รอบวางบิลตั้งรายลูกค้า — ทุกวันที่ 25, ทุกศุกร์สุดท้าย, หรือแล้วแต่ตกลง', en: 'Billing cycles are set per customer — the 25th, the last Friday, or whatever was agreed' },
       c2b: { th: 'เลื่อนได้ทั้งกลุ่ม หรือลากไปวางวันอื่นบน Billing Board', en: 'and a whole group moves at once, or is dragged to another day on the Billing Board' },
       c3a: { th: 'ลูกค้าไม่รับวางบิล = Void แล้วใบแจ้งหนี้เด้งกลับเข้ารอบถัดไป', en: 'A rejected note is voided and its invoices return to the next cycle' },
@@ -4860,10 +4860,9 @@
     const NODES = [
       { x: 176, y: 256, w: 190, k: 'j', th: ['เปิด Billing Worklist', 'หรือ Billing Board'], en: ['Open Billing Worklist', 'or Billing Board'] },
       { x: 176, y: 84, w: 182, k: 'j', th: ['เลื่อนกลุ่ม', 'ไปรอบถัดไป'], en: ['Move the group to', 'the next date'] },
-      { x: 534, y: 256, w: 144, k: 'j', th: ['สร้าง', 'ใบวางบิลร่าง'], en: ['Create draft', 'billing notes'] },
-      { x: 708, y: 256, w: 156, k: 'j', th: ['ตรวจรายการและยอด', 'บนใบร่าง'], en: ['Check lines', 'and totals'] },
-      { x: 894, y: 256, w: 138, k: 'j', th: ['Release', 'ใบวางบิล'], en: ['Release', 'the billing note'] },
-      { x: 1062, y: 256, w: 170, k: 'j', th: ['พิมพ์ใบวางบิล', 'พร้อม PromptPay QR'], en: ['Print with', 'PromptPay QR'] },
+      { x: 534, y: 256, w: 190, k: 'j', th: ['สร้าง', 'ใบวางบิลร่าง'], en: ['Create draft', 'billing notes'] },
+      { x: 754, y: 256, w: 200, k: 'j', th: ['ตรวจรายการและยอด', 'บนใบร่าง'], en: ['Check lines', 'and totals'] },
+      { x: 984, y: 256, w: 248, k: 'j', th: ['Release และพิมพ์', 'ใบวางบิล'], en: ['Release and print', 'the billing note'] },
       { x: 1262, y: 256, w: 136, k: 'm', th: ['วางบิล', 'กับลูกค้า'], en: ['Place it with', 'the customer'] },
       { x: 1010, y: 396, w: 194, k: 'j', th: ['ระบุวันนัดรับชำระ', 'Collection Date'], en: ['Set the', 'collection date'] },
       { x: 760, y: 396, w: 204, k: 'c', th: ['รับชำระ', 'และออกใบเสร็จ'], en: ['Collect and', 'issue the receipt'] },
@@ -4873,14 +4872,14 @@
       { cx: 450, cy: 290, th: ['ถึงรอบ', 'วางบิล?'], en: ['Group', 'due?'] },
       { cx: 1330, cy: 570, th: ['ลูกค้ารับ', 'วางบิล?'], en: ['Customer', 'accepts?'] }
     ];
-    const EDGES = ['M155 290H172', 'M366 290H392', 'M504 290H530', 'M678 290H704', 'M864 290H890',
-      'M1032 290H1058', 'M1232 290H1258', 'M1330 324V512', 'M1276 570H1240V430H1208',
+    const EDGES = ['M155 290H172', 'M366 290H392', 'M504 290H530', 'M724 290H750', 'M954 290H980',
+      'M1232 290H1258', 'M1330 324V512', 'M1276 570H1240V430H1208',
       'M1010 430H964', 'M760 430H730', 'M450 236V118H362'];
     const RETURNS = ['M222 152V252', 'M1330 624V650H269V468', 'M269 396V330'];
     const ELABS = [{ x: 511, y: 274, a: 'middle', k: 'eDue' }, { x: 462, y: 196, a: 'start', k: 'eNot' },
       { x: 1232, y: 500, a: 'end', k: 'eYes' }, { x: 1343, y: 646, a: 'start', k: 'eNo' }];
     const CALLS = [
-      { l: 'M1147 186V250', x: 1030, y: 140, k: ['c1a', 'c1b'] },
+      { l: 'M1108 186V250', x: 1000, y: 140, k: ['c1a', 'c1b'] },
       { l: 'M478 352 454 344', x: 482, y: 360, k: ['c2a', 'c2b'] },
       { l: 'M430 534 356 470', x: 436, y: 556, k: ['c3a', 'c3b'] }
     ];
