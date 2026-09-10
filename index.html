@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://*.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -4821,9 +4821,8 @@
     /* ── โหมดค้นจริง ────────────────────────────────────────────────
        ปลายทางคือ worker/vat-proxy.js ที่ยิง SOAP ไปกรมสรรพากรแทนเบราว์เซอร์
        ค่าว่าง = ปิดโหมดนี้ เหลือแค่สี่สถานการณ์ตัวอย่างเหมือนเดิม */
-    const VAT_API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
-      ? (new URLSearchParams(location.search).get('vat') || '')
-      : '';   /* ← ใส่ URL ที่ได้จาก `npx wrangler deploy` ในโฟลเดอร์ worker/ แล้วโหมดค้นจริงติดทันที */
+    const VAT_API = (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+      && new URLSearchParams(location.search).get('vat')) || 'https://jwic-vat.jwic.workers.dev';
     const dig = (v) => String(v || '').replace(/\D/g, '');
     const vatDate = (iso) => {
       const t = Date.parse(iso);
