@@ -5055,8 +5055,9 @@
       byId('bfFlow').innerHTML = s;
     }
 
-    /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ---- */
-    const START = 1, DAYS = 30, TODAY = 8;
+    /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ----
+       สัปดาห์เริ่มวันอาทิตย์ อังคารจึงเป็นคอลัมน์ที่ 2 (นับจาก 0) */
+    const START = 2, DAYS = 30, TODAY = 8;
     const SEED = [
       { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก', inv: 3, amt: 248500 },
       { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', inv: 2, amt: 86200 },
@@ -5065,7 +5066,7 @@
       { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', inv: 1, amt: 54000 },
       { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค', inv: 6, amt: 903450 }
     ];
-    const DOW = { th: ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา'], en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] };
+    const DOW = { th: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'], en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] };
     let groups = SEED.map((g) => ({ ...g }));
     let picked = null;
     const baht = (n) => '฿' + n.toLocaleString('en-US');
@@ -5081,7 +5082,7 @@
         const col = (START + day - 1) % 7;
         const here = groups.filter((g) => g.d === day);
         const target = picked ? ' pick' : '';
-        s += '<div class="bf-day' + (col > 4 ? ' off' : '') + (day === TODAY ? ' today' : '')
+        s += '<div class="bf-day' + (col === 0 || col === 6 ? ' off' : '') + (day === TODAY ? ' today' : '')
           + (here.length ? ' has' : '') + (here.length && day < TODAY ? ' late' : '') + target + '"'
           + ' data-day="' + day + '"' + (picked ? ' tabindex="0" role="button"' : '') + '>'
           + '<span class="bf-dn">' + day + '<i class="bf-dw">' + DOW[lang][col] + '</i>'
