@@ -2,6 +2,9 @@ name = "jwic-vat"
 main = "vat-proxy.js"
 compatibility_date = "2026-01-01"
 
+# ต้องระบุเอง — พอมี [[routes]] แล้ว wrangler จะปิด workers.dev ให้อัตโนมัติ
+workers_dev = true
+
 # ถ้ากรมสรรพากรออกบัญชีให้ ใช้ `npx wrangler secret put RD_USER` แทนการแก้โค้ด
 # ไม่ตั้ง = ใช้ anonymous/anonymous ซึ่งใช้งานได้อยู่แล้ว
 
@@ -11,3 +14,9 @@ name = "RL"
 type = "ratelimit"
 namespace_id = "1001"
 simple = { limit = 20, period = 60 }
+
+# ผูกกับโดเมนตัวเอง — หน้าเว็บเรียก /api/vat แบบ same-origin ไม่ต้องพึ่ง CORS
+# ต้องเปิด proxy (เมฆส้ม) ให้ record www ก่อน route ถึงจะทำงาน
+[[routes]]
+pattern = "www.jwicconsulting.com/api/vat*"
+zone_name = "jwicconsulting.com"
