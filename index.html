@@ -3613,7 +3613,7 @@
 
       <div class="bf-scroll">
         <svg viewBox="0 0 1440 700" role="img" aria-labelledby="bfTitle">
-          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist</title>
+          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Cancel แล้ววนกลับเข้า Worklist</title>
           <defs>
             <marker id="bfAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 10 5 0 10z" fill="#739B97"/>
@@ -4818,8 +4818,8 @@
             en: 'The whole billing run on one line inside Business Central — set each customer’s billing date, plan the notes by cycle, record the collection appointment, and close with the receipt, without re-keying anything.' },
       flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
       cntA: { th: 'ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'steps in this flow are functions JWIC added' },
-      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Void แล้ววนกลับเข้า Worklist',
-                  en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the lines and totals, release and print the billing note, then place it with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, void the note and loop back to the worklist.' },
+      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Cancel แล้ววนกลับเข้า Worklist',
+                  en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the lines and totals, release and print the billing note, then place it with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, cancel the note and loop back to the worklist.' },
       keyJ: { th: 'ฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'Added by JWIC' },
       keyM: { th: 'ทำนอกระบบ', en: 'Done outside the system' },
       keyG: { th: 'ทางแยกตัดสินใจ', en: 'Decision' },
@@ -4852,7 +4852,7 @@
       c1b: { th: 'ใบแจ้งหนี้ที่วางบิลแล้ว ไม่ถูกดึงซ้ำในรอบถัดไป', en: 'invoices on a note are never pulled again next cycle' },
       c2a: { th: 'รอบวางบิลตั้งรายลูกค้า — ทุกวันที่ 25, ทุกศุกร์สุดท้าย, หรือแล้วแต่ตกลง', en: 'Billing cycles are set per customer — the 25th, the last Friday, or whatever was agreed' },
       c2b: { th: 'เลื่อนได้ทั้งกลุ่ม หรือลากไปวางวันอื่นบน Billing Board', en: 'and a whole group moves at once, or is dragged to another day on the Billing Board' },
-      c3a: { th: 'ลูกค้าไม่รับวางบิล = Void แล้วใบแจ้งหนี้เด้งกลับเข้ารอบถัดไป', en: 'A rejected note is voided and its invoices return to the next cycle' },
+      c3a: { th: 'ลูกค้าไม่รับวางบิล = Cancel แล้วใบแจ้งหนี้เด้งกลับเข้ารอบถัดไป', en: 'A rejected note is cancelled and its invoices return to the next cycle' },
       c3b: { th: 'ใบวางบิลไม่ลงบัญชี ยอดลูกหนี้ยังเดินตามปกติ', en: 'Billing notes never post, so the receivable keeps running untouched' },
       note: { th: 'ผังนี้เป็นหนึ่งใน Flow มาตรฐานที่เขียนไว้ครบทั้ง 14 สายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a>',
              en: 'One of the standard process flows written for all 14 areas, every step traceable to the user manual the customer receives · the calendar above runs on a fictional company; the real system pulls each customer’s open invoices on the cycle you set · <a href="articles/business-central-vs-accounting-software.html">How Business Central differs from ordinary accounting software</a>' }
@@ -4868,7 +4868,7 @@
       { x: 1262, y: 256, w: 136, k: 'm', th: ['วางบิล', 'กับลูกค้า'], en: ['Place it with', 'the customer'] },
       { x: 1010, y: 396, w: 194, k: 'j', th: ['ระบุวันนัดรับชำระ', 'Collection Date'], en: ['Set the', 'collection date'] },
       { x: 760, y: 396, w: 204, k: 'c', th: ['รับชำระ', 'และออกใบเสร็จ'], en: ['Collect and', 'issue the receipt'] },
-      { x: 176, y: 396, w: 186, k: 'j', th: ['ยกเลิกใบวางบิล', 'ด้วย Void'], en: ['Void the', 'billing note'] }
+      { x: 176, y: 396, w: 186, k: 'j', th: ['ยกเลิกใบวางบิล', 'ด้วย Cancel'], en: ['Cancel the', 'billing note'] }
     ];
     const GATES = [
       { cx: 450, cy: 290, th: ['ถึงรอบ', 'วางบิล?'], en: ['Group', 'due?'] },
