@@ -1,0 +1,13 @@
+name = "jwic-vat"
+main = "vat-proxy.js"
+compatibility_date = "2026-01-01"
+
+# ถ้ากรมสรรพากรออกบัญชีให้ ใช้ `npx wrangler secret put RD_USER` แทนการแก้โค้ด
+# ไม่ตั้ง = ใช้ anonymous/anonymous ซึ่งใช้งานได้อยู่แล้ว
+
+# 20 ครั้ง/นาที/IP — เดโมหน้าเว็บใช้ไม่ถึง แต่กันเอาไปไล่ขูดทะเบียน
+[[unsafe.bindings]]
+name = "RL"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 20, period = 60 }

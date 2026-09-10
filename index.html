@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://*.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -3093,6 +3093,8 @@
     letter-spacing: .12em; font-variant-numeric: tabular-nums;
   }
   .vs-box.small { min-width: 104px; letter-spacing: .1em; }
+  input.vs-box { width: 232px; }
+  input.vs-box.small { width: 104px; }
   .vs-box.dim { color: var(--ui-muted); font-weight: 500; letter-spacing: normal; }
   .vs-go {
     display: inline-flex; align-items: center; gap: 8px;
@@ -3687,8 +3689,8 @@
       <div class="vs-bar">
         <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
         <div class="vs-form">
-          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><output class="vs-box" id="vs-tax">0105558000123</output></label>
-          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><output class="vs-box small" id="vs-branch">00000</output></label>
+          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><input class="vs-box" id="vs-tax" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="13" value="0105558000123"></label>
+          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><input class="vs-box small" id="vs-branch" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="5" value="00000"></label>
           <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
         </div>
       </div>
@@ -4620,8 +4622,10 @@
   });
 
   // ── #vat-service — เดโมค้นเลขผู้เสียภาษี ─────────────────────────
-  // ข้อมูลทั้งหมดตายตัวในหน้า ไม่มีการเรียกกรมสรรพากรจากเว็บสาธารณะ
-  // (เปิดให้ใครก็ยิงได้ = ช่องขูดข้อมูล + เสี่ยง PDPA + โดน RD บล็อก IP)
+  // สี่สถานการณ์ตัวอย่างตายตัวในหน้า · พิมพ์เลขเองแล้วกดค้นหา = ยิงถึงกรมสรรพากรจริง
+  // ผ่าน worker/vat-proxy.js (เบราว์เซอร์เรียก rdws.rd.go.th ตรงไม่ได้ ไม่มี CORS สักหัว)
+  // ที่กันไว้ไม่ให้กลายเป็นช่องขูดทะเบียน: worker เช็ค Origin, จำกัด 20 ครั้ง/นาที/IP,
+  // แคชคำตอบ 6 ชม. และไม่ log ผลลัพธ์ที่ค้นได้
   // คำแปลของส่วนนี้อยู่ในตัวมันเอง ไม่ได้อยู่ใน I18N เพราะ applyLang() เขียนทับ innerHTML
   // แล้วจะล้างสถานะที่ผู้ใช้กดค้างไว้ — applyLang เรียก window.renderVatService(lang) แทน
   (() => {
@@ -4706,9 +4710,25 @@
       hdRd: { th: 'ที่ VAT Service เติมให้', en: 'Filled by VAT Service' },
       hdRdSub: { th: 'ตามทะเบียนกรมสรรพากร', en: 'Straight from the Revenue Department registry' },
       lblCost: { th: 'ราคาที่จ่ายจริง', en: 'What it costs' },
-      note: { th: 'ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม',
-              en: 'A simulation on a fictional company — the real system calls the Revenue Department’s VAT Service from inside Business Central, when opening customers and vendors and when updating existing ones.' },
+      noteDemo: { th: 'ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม',
+                  en: 'A simulation on a fictional company — the real system calls the Revenue Department’s VAT Service from inside Business Central, when opening customers and vendors and when updating existing ones.' },
+      note: { th: 'สี่สถานการณ์ด้านบนเป็นข้อมูลบริษัทสมมติ — <b>พิมพ์เลขผู้เสียภาษีจริง 13 หลักแล้วกดค้นหา จะยิงถึงทะเบียนกรมสรรพากรจริง</b> ชุดเดียวกับที่ Business Central เรียกตอนเปิดลูกค้า เปิดผู้ขาย และอัปเดตรายเดิม',
+              en: 'The four scenarios run on a fictional company — <b>type a real 13-digit tax ID and press search to hit the Revenue Department’s live registry</b>, the same service Business Central calls when opening customers and vendors and when updating existing ones.' },
       wait: { th: 'เลือกสาขาจากรายการ', en: 'Pick a branch from the list' },
+      manLive: { th: 'ไม่มี — ค้นจากเลขที่กรอกเอง', en: 'Nothing — searched by the ID you typed' },
+      manLiveSub: { th: 'โหมดค้นจริง', en: 'Live lookup' },
+      rdLiveSub: { th: 'ตามทะเบียนกรมสรรพากร ณ ตอนนี้', en: 'From the Revenue Department registry, just now' },
+      liveWait: { th: 'กำลังถามทะเบียนกรมสรรพากร…', en: 'Asking the Revenue Department registry…' },
+      liveWaitCol: { th: 'รอคำตอบ', en: 'Waiting' },
+      liveOk: { th: '<b>ข้อมูลจริงจากทะเบียนภาษีมูลค่าเพิ่ม</b>', en: '<b>Live from the VAT registry</b>' },
+      liveVat: { th: 'จด VAT เมื่อ', en: 'VAT registered' },
+      liveHq: { th: 'สำนักงานใหญ่', en: 'Head office' },
+      liveCost: { th: 'ชุดนี้คือสิ่งที่ Business Central เติมให้เองตอนเปิดลูกค้า ไม่มีใครต้องคีย์',
+                  en: 'This is what Business Central fills in on its own when the record is opened — nobody types it.' },
+      liveErr: { th: 'ต่อกับกรมสรรพากรไม่ได้ในตอนนี้ ลองใหม่อีกครั้ง', en: 'The Revenue Department could not be reached — try again.' },
+      liveBadTin: { th: '<b>เลขประจำตัวผู้เสียภาษีต้องเป็นตัวเลข 13 หลัก</b>', en: '<b>A tax ID is 13 digits.</b>' },
+      liveCostErr: { th: 'เลขที่ค้นไม่เจอ ระบบจริงจะไม่เปิดเป็นลูกค้าให้ตั้งแต่แรก',
+                     en: 'An ID that cannot be found never becomes a customer record in the first place.' },
       held: { th: 'หยุดไว้ก่อน รอการตัดสินใจ', en: 'Held, awaiting your decision' },
       none: { th: 'ไม่มีข้อมูลให้เติม', en: 'Nothing to fill' },
       anyBranch: { th: 'ทุกสาขา', en: 'all' }
@@ -4720,7 +4740,7 @@
     const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const ico = (id) => '<svg class="vs-ic"><use href="#' + id + '"/></svg>';
     const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let vsLang = 'th', cur = CASES[0], picked = 0;
+    let vsLang = 'th', cur = CASES[0], picked = 0, live = null;
 
     CASES.forEach((c, i) => {
       const b = document.createElement('button');
@@ -4739,6 +4759,7 @@
     });
 
     function pickCase(i) {
+      live = null;
       cur = CASES[i];
       picked = cur.mode === 'list' || cur.mode === 'ask' ? -1 : 0;
       bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.i === i)));
@@ -4761,10 +4782,10 @@
       document.querySelectorAll('[data-vs]').forEach((el) => { el.innerHTML = T[el.dataset.vs][vsLang]; });
       bar.querySelectorAll('button').forEach((b) => { b.textContent = CASES[+b.dataset.i].tab[vsLang]; });
 
-      byId('vs-tax').textContent = cur.tax;
+      byId('vs-tax').value = cur.tax;
       const br = byId('vs-branch');
-      br.textContent = cur.branch || T.anyBranch[vsLang];
-      br.classList.toggle('dim', !cur.branch);
+      br.value = cur.branch || '';
+      br.placeholder = T.anyBranch[vsLang];
 
       byId('vs-man').innerHTML = rows(cur.man, cur.bad, false);
       document.querySelector('[data-vs="hdManSub"]').textContent = (cur.manSub || T.hdManSub)[vsLang];
@@ -4797,12 +4818,86 @@
       byId('vs-cost').textContent = cur.cost[vsLang];
     }
 
-    byId('vs-go').addEventListener('click', () => {
+    /* ── โหมดค้นจริง ────────────────────────────────────────────────
+       ปลายทางคือ worker/vat-proxy.js ที่ยิง SOAP ไปกรมสรรพากรแทนเบราว์เซอร์
+       ค่าว่าง = ปิดโหมดนี้ เหลือแค่สี่สถานการณ์ตัวอย่างเหมือนเดิม */
+    const VAT_API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+      ? (new URLSearchParams(location.search).get('vat') || '')
+      : '';   /* ← ใส่ URL ที่ได้จาก `npx wrangler deploy` ในโฟลเดอร์ worker/ แล้วโหมดค้นจริงติดทันที */
+    const dig = (v) => String(v || '').replace(/\D/g, '');
+    const vatDate = (iso) => {
+      const t = Date.parse(iso);
+      return t ? new Date(t).toLocaleDateString(vsLang === 'th' ? 'th-TH' : 'en-GB',
+        { day: 'numeric', month: 'short', year: 'numeric' }) : iso;
+    };
+
+    function drawLive() {
+      document.querySelectorAll('[data-vs]').forEach((el) => { el.innerHTML = T[el.dataset.vs][vsLang]; });
+      bar.querySelectorAll('button').forEach((b) => {
+        b.textContent = CASES[+b.dataset.i].tab[vsLang];
+        b.setAttribute('aria-pressed', 'false');
+      });
+      document.querySelector('[data-vs="hdManSub"]').textContent = T.manLiveSub[vsLang];
+      document.querySelector('[data-vs="hdRdSub"]').textContent = T.rdLiveSub[vsLang];
+      byId('vs-man').innerHTML = none('manLive');
+      const res = byId('vs-result'), rd = byId('vs-rd');
+
+      if (live.state === 'busy') {
+        res.innerHTML = '<div class="vs-msg ask">' + ico('vsi-search') + '<p>' + T.liveWait[vsLang] + '</p></div>';
+        rd.innerHTML = none('liveWaitCol');
+        byId('vs-cost').textContent = '';
+        return;
+      }
+      if (live.state === 'err') {
+        res.innerHTML = '<div class="vs-msg stop">' + ico('vsi-warn') + '<p>' + live.msg + '</p></div>';
+        rd.innerHTML = none('none');
+        byId('vs-cost').textContent = T.liveCostErr[vsLang];
+        return;
+      }
+      const d = live.data;
+      res.innerHTML = '<div class="vs-msg ask">' + ico('vsi-check') + '<p>' + T.liveOk[vsLang]
+        + (d.vatFrom ? ' — ' + T.liveVat[vsLang] + ' ' + esc(vatDate(d.vatFrom)) : '') + '</p></div>';
+      rd.innerHTML = rows([d.name, d.line1, d.line2, d.province, d.post,
+        d.branchNumber === '00000' ? T.liveHq[vsLang] : d.branchNumber + ' ' + d.branchName], null, !slow);
+      byId('vs-cost').textContent = T.liveCost[vsLang];
+    }
+
+    async function lookup(tin, branch) {
+      live = { state: 'busy' };
+      drawLive();
+      try {
+        const r = await fetch(VAT_API + '?tin=' + tin + (branch ? '&branch=' + branch : ''));
+        const d = await r.json();
+        live = d.ok ? { state: 'ok', data: d } : { state: 'err', msg: esc(d.message || '') || T.liveErr[vsLang] };
+      } catch (e) {
+        live = { state: 'err', msg: T.liveErr[vsLang] };
+      }
+      drawLive();
+    }
+
+    function go() {
+      const tin = dig(byId('vs-tax').value), branch = dig(byId('vs-branch').value);
+      if (VAT_API && (tin !== cur.tax || branch !== dig(cur.branch))) {
+        if (tin.length !== 13) { live = { state: 'err', msg: T.liveBadTin[vsLang] }; drawLive(); return; }
+        lookup(tin, branch);
+        return;
+      }
+      live = null;
       if (picked < 0 && cur.mode !== 'list' && cur.mode !== 'ask') picked = 0;
       draw();
-    });
+    }
 
-    window.renderVatService = (l) => { vsLang = l; draw(); };
+    if (!VAT_API) {
+      byId('vs-tax').readOnly = true;
+      byId('vs-branch').readOnly = true;
+      document.querySelector('[data-vs="note"]').dataset.vs = 'noteDemo';
+    }
+
+    byId('vs-go').addEventListener('click', go);
+    [byId('vs-tax'), byId('vs-branch')].forEach((el) =>
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } }));
+
+    window.renderVatService = (l) => { vsLang = l; if (live) drawLive(); else draw(); };
     draw();
   })();
 
