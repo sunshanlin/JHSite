@@ -1,0 +1,27 @@
+{
+  "_": "ตัวอย่างโครงของ build/reference.json (ไฟล์จริงไม่เข้า git เพราะมีชื่อลูกค้า) ก๊อปไฟล์นี้ไปเป็น reference.json แล้วกรอก",
+  "eyebrow": "CUSTOMER REFERENCE",
+  "accent": "#1C4A3C",
+  "logo": "assets/customer/acme-logo.png",
+  "logoWidth": 150,
+  "headline": [
+    "ACME Thailand on the group's global ERP.",
+    "Thai statutory reporting on JWIC Thai Localization."
+  ],
+  "cards": [
+    {
+      "h": "Global rollout",
+      "b": "How the core system was implemented and by whom."
+    },
+    {
+      "h": "Local requirement",
+      "b": "What the global template did not cover for Thailand."
+    },
+    {
+      "h": "Local solution",
+      "b": "What JWIC delivered and that it is in production today."
+    }
+  ],
+  "foot": "Shown as a customer reference. ACME is a trademark of its owner.",
+  "notes": "speaker notes ภาษาไทยของหน้านี้"
+}

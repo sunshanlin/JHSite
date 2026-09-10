@@ -7,3 +7,9 @@ decks/
 voice/edge-tts/node_modules/
 *.wav
 *.mp3
+
+# ภาพผัง BPMN ของเราเอง ต้องเข้า git ไม่งั้น add-bpmn.ps1 รันไม่ได้บนเครื่องใหม่
+!assets/bpmn-*.png
+# ของลูกค้า (โลโก้ + เนื้อหาหน้า Reference) ไม่เข้า git — repo นี้ public
+assets/customer/
+build/reference.json
