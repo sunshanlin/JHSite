@@ -3073,6 +3073,19 @@
   .vs-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
+  /* นิยาม VAT Service: สามข้อที่บริการนี้ตรวจให้ แทนย่อหน้าเดียวยาว ๆ
+     ค่าสี/ขอบ/มุม ชุดเดียวกับ .feature-chips li ของ #features — ไม่ได้คิดสไตล์ใหม่ */
+  #vat-service .tip { align-items: flex-start; }
+  .vs-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 9px 0 7px; }
+  .vs-chip {
+    display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 10px;
+    border: 1px solid rgba(1,74,65,.2); border-radius: 999px;
+    color: var(--brand-teal); background: rgba(65,119,113,.08);
+    font-size: .88rem; font-weight: 600;
+  }
+  .vs-chip .vs-ic { width: 14px; height: 14px; stroke-width: 2.6; color: var(--brand-jade); }
+  .vs-fine { display: block; font-size: .86rem; line-height: 1.6; }
+
   .vs {
     background: #fff; border: 1px solid var(--ui-line);
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
@@ -3123,11 +3136,16 @@
   }
   .vs-cases .vs-lbl { font-size: .82rem; color: var(--ui-muted); margin-right: 4px; }
   .vs-cases button {
+    display: inline-flex; align-items: center; gap: 8px;
     font-size: .88rem; font-weight: 500; color: var(--brand-teal); background: #fff;
     border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
     padding: 10px 15px; cursor: pointer;
     transition: background .125s ease, border-color .125s ease, color .125s ease;
   }
+  /* ไอคอนบอกชนิดของปัญหาก่อนอ่านชื่อปุ่ม — สีตามผลลัพธ์ ไม่ใช่ตกแต่ง */
+  .vs-cases button .vs-ic { width: 16px; height: 16px; color: var(--brand-jade); }
+  .vs-cases button.stop .vs-ic { color: var(--brand-burgundy); }
+  .vs-cases button[aria-pressed="true"] .vs-ic { color: currentColor; }
   .vs-cases button:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
   .vs-cases button[aria-pressed="true"] {
     color: #fff; background: var(--brand-teal); border-color: var(--brand-teal);
@@ -3227,10 +3245,12 @@
     border-top: 1px solid var(--ui-line); font-size: .95rem; line-height: 1.6;
   }
   .vs-cost .vs-lbl {
+    display: inline-flex; align-items: center; gap: 7px;
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em;
     color: var(--brand-burgundy); white-space: nowrap;
   }
+  .vs-cost .vs-ic { width: 15px; height: 15px; }
   .vs-note {
     margin: 20px auto 0; max-width: 760px; text-align: center;
     font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
@@ -3685,11 +3705,12 @@
   <div class="wrap">
     <p class="section-kicker" data-vs="kicker">Highlight Feature</p>
     <h2 data-vs="h2">ระบบ VAT Service</h2>
-    <p class="sub" data-vs="sub">ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง</p>
-    <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?" -->
+    <p class="sub" data-vs="sub">สี่สถานการณ์ที่ข้อมูลคู่ค้าเพี้ยนตั้งแต่วันเปิดลูกค้า — กดดูว่า VAT Service ตัดอันไหนออกได้บ้าง</p>
+    <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?"
+         เนื้อในเป็นชิปสามอันแทนย่อหน้า — ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
     <div class="tip reveal">
       <b data-vs="defTitle">💡 VAT Service คืออะไร?</b>
-      <p data-vs="defBody">บริการของกรมสรรพากรที่ใช้ตรวจว่าคู่ค้ามีตัวตนจริง จดทะเบียนถูกต้อง และยังมีสิทธิออกใบกำกับภาษีมูลค่าเพิ่มอยู่หรือไม่ — สถานะนี้เปลี่ยนได้ตลอดเวลา การตรวจก่อนรับใบกำกับภาษีจึงกันการแอบอ้างและความเสียหายที่ตามมา · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></p>
+      <p data-vs="defBody">บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class="vs-chips"><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>มีตัวตนจริง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>จดทะเบียนถูกต้อง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class="vs-fine">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></span></p>
     </div>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
@@ -3700,6 +3721,7 @@
       <symbol id="vsi-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
       <symbol id="vsi-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 4.5h-10a2 2 0 0 0-2 2v10"/></symbol>
       <symbol id="vsi-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <symbol id="vsi-branch" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="5" rx="1"/><rect x="2.5" y="16.5" width="6" height="5" rx="1"/><rect x="15.5" y="16.5" width="6" height="5" rx="1"/><path d="M12 7.5v4M5.5 16.5v-2.5h13v2.5"/></symbol>
     </defs></svg>
 
     <div class="vs reveal">
@@ -3738,7 +3760,7 @@
         </div>
       </div>
 
-      <p class="vs-cost"><span class="vs-lbl" data-vs="lblCost">ราคาที่จ่ายจริง</span><span id="vs-cost"></span></p>
+      <p class="vs-cost"><span class="vs-lbl"><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="lblCost">ราคาที่จ่ายจริง</span></span><span id="vs-cost"></span></p>
     </div>
 
     <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
@@ -4663,16 +4685,16 @@
     const CASES = [
       {
         tax: '0105558000123', branch: '00000',
-        tab: { th: 'เลขถูก', en: 'Valid ID' },
+        tab: { th: 'เลขถูก', en: 'Valid ID' }, tabIcon: 'vsi-check',
         man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
         bad: [0, 1, 2, 3, 4],
         rd: HQ,
-        cost: { th: 'ใบกำกับภาษีที่ชื่อหรือที่อยู่ไม่ตรงหนังสือรับรอง ลูกค้าเอาไปใช้เป็นภาษีซื้อไม่ได้',
-                en: 'A tax invoice whose name or address misses the company registration is unusable as input VAT for your customer.' }
+        cost: { th: 'ชื่อหรือที่อยู่ไม่ตรงหนังสือรับรอง = ลูกค้าใช้เป็นภาษีซื้อไม่ได้',
+                en: 'A name or address that misses the registration makes the invoice unusable as input VAT.' }
       },
       {
         tax: '0105558000123', branch: '',
-        tab: { th: 'เป็นสาขา ไม่ใช่สำนักงานใหญ่', en: 'It is a branch' },
+        tab: { th: 'เป็นสาขา ไม่ใช่สำนักงานใหญ่', en: 'It is a branch' }, tabIcon: 'vsi-branch',
         man: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 88/12 อาคารสมชายทาวเวอร์ ชั้น 9',
               'ถนนพระราม 3 แขวงบางโพงพาง เขตยานนาวา', 'กรุงเทพมหานคร', '10120', 'สำนักงานใหญ่'],
         bad: [1, 2, 3, 4, 5],
@@ -4686,36 +4708,36 @@
             row: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 55 หมู่ 4 ถนนบางนา-ตราด',
                   'ตำบลบางวัว อำเภอบางปะกง', 'ฉะเชิงเทรา', '24180', '00002 คลังสินค้าบางปะกง'] }
         ],
-        hint: { th: 'เลขเดียวกันมี 3 สาขาจดทะเบียนไว้ — เลือกสาขาที่ออกเอกสารจริง',
-                en: 'Three branches are registered under this tax ID — pick the one the document is issued from.' },
-        cost: { th: 'ติ๊ก “สำนักงานใหญ่” ทั้งที่ซื้อ–ขายกับสาขา ทำให้ใบแนบ ภ.พ.30 ผิด และแยกยื่นรายสาขาไม่ได้',
-                en: 'Marking a record “head office” when the transaction belongs to a branch breaks the PP30 attachment and makes separate branch filing impossible.' }
+        hint: { th: 'เลขเดียวกันมี 3 สาขาจดทะเบียนไว้ — เลือกสาขาที่ออกเอกสาร',
+                en: 'Three branches under this ID — pick the one issuing the document.' },
+        cost: { th: 'ติ๊ก “สำนักงานใหญ่” ทั้งที่เป็นสาขา = ใบแนบ ภ.พ.30 ผิด แยกยื่นรายสาขาไม่ได้',
+                en: '“Head office” on a branch transaction breaks the PP30 attachment and blocks separate branch filing.' }
       },
       {
         tax: '0105558000132', branch: '00000',
-        tab: { th: 'เลขพิมพ์สลับหลัก', en: 'Digits transposed' },
+        tab: { th: 'เลขพิมพ์สลับหลัก', en: 'Digits transposed' }, tabIcon: 'vsi-warn',
         man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
         bad: [0, 1, 2, 3, 4],
         mode: 'stop', icon: 'vsi-warn',
-        msg: { th: '<b>ไม่พบเลขประจำตัวผู้เสียภาษีนี้ในทะเบียน</b> — สองหลักท้ายสลับกัน (…123 ไม่ใช่ …132) ระบบไม่เปิดลูกค้าจากเลขที่ค้นไม่เจอ',
-               en: '<b>No taxpayer is registered under this ID.</b> The last two digits are transposed — …123, not …132 — and no record is opened from an ID that cannot be found.' },
-        cost: { th: 'เลขสลับหลักตามปกติจะไปโผล่ตอนยื่นภาษีสิ้นเดือน แล้วต้องไล่แก้ย้อนทั้งงวด — ที่นี่รู้ตั้งแต่วินาทีที่เปิดลูกค้า',
-                en: 'A transposed ID normally surfaces at month-end filing, when the whole period has to be corrected — here it surfaces the second the record is opened.' }
+        msg: { th: '<b>ไม่พบเลขนี้ในทะเบียน</b> — สองหลักท้ายสลับกัน (…123 ไม่ใช่ …132) ระบบไม่เปิดลูกค้าให้',
+               en: '<b>No taxpayer is registered under this ID.</b> The last two digits are transposed — …123, not …132 — and no record is opened.' },
+        cost: { th: 'เลขสลับหลักปกติโผล่ตอนยื่นสิ้นเดือน แล้วต้องไล่แก้ย้อนทั้งงวด',
+                en: 'A transposed ID normally surfaces at month-end filing, when the whole period has to be corrected.' }
       },
       {
         tax: '0105558000123', branch: '00000',
-        tab: { th: 'มีลูกค้ารายนี้แล้ว', en: 'Already on file' },
+        tab: { th: 'มีลูกค้ารายนี้แล้ว', en: 'Already on file' }, tabIcon: 'vsi-copy',
         man: ['Somchai Materials Co., Ltd.', '88/12 Rama 3 Rd.', '', 'Bangkok', '10120', 'สำนักงานใหญ่'],
         bad: [0, 1, 2, 3],
         manSub: { th: 'กำลังจะเปิดเป็นรหัส C00871', en: 'About to be opened as C00871' },
         rdSub: { th: 'ลูกค้าเดิม C00123 หลังอัปเดตตามทะเบียน', en: 'Existing customer C00123, updated from the registry' },
         mode: 'ask', icon: 'vsi-copy',
-        msg: { th: '<b>เลขนี้เป็นของลูกค้ารหัส C00123 อยู่แล้ว</b> “บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด” — ระบบถามก่อนที่รหัสที่สองจะเกิดขึ้น',
-               en: '<b>This ID already belongs to customer C00123</b> — “บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด”. You are asked before a second code exists.' },
+        msg: { th: '<b>เลขนี้เป็นของลูกค้ารหัส C00123 อยู่แล้ว</b> — ระบบถามก่อนที่รหัสที่สองจะเกิดขึ้น',
+               en: '<b>This ID already belongs to customer C00123.</b> You are asked before a second code exists.' },
         pick: { th: 'อัปเดตรายเดิมให้ตรงทะเบียน', en: 'Update the existing record' },
         rd: HQ,
-        cost: { th: 'ลูกค้ารายเดียวสองรหัส = ยอดลูกหนี้แตกเป็นสองก้อน อายุหนี้ผิด วงเงินเครดิตไม่จริง และส่ง statement ซ้ำให้ลูกค้าคนเดิม',
-                en: 'One customer under two codes splits the receivable in two, breaks the ageing, makes the credit limit fiction, and sends the same customer two statements.' }
+        cost: { th: 'ลูกค้ารายเดียวสองรหัส = ยอดลูกหนี้แตกสองก้อน อายุหนี้ผิด วงเงินเครดิตไม่จริง',
+                en: 'One customer under two codes splits the receivable, breaks the ageing and the credit limit.' }
       }
     ];
 
@@ -4723,10 +4745,10 @@
       kicker: { th: 'Highlight Feature', en: 'Highlight Feature' },
       h2: { th: 'ระบบ VAT Service', en: 'VAT Service' },
       defTitle: { th: '💡 VAT Service คืออะไร?', en: '💡 What is the VAT Service?' },
-      defBody: { th: 'บริการของกรมสรรพากรที่ใช้ตรวจว่าคู่ค้ามีตัวตนจริง จดทะเบียนถูกต้อง และยังมีสิทธิออกใบกำกับภาษีมูลค่าเพิ่มอยู่หรือไม่ — สถานะนี้เปลี่ยนได้ตลอดเวลา การตรวจก่อนรับใบกำกับภาษีจึงกันการแอบอ้างและความเสียหายที่ตามมา · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a>',
-                 en: 'Comprehensive information on taxpayers who are VAT registrants — it lets a business verify that a partner can legally issue a tax invoice, that the invoice received is valid for its input tax credit, and that the partner exists at all. · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">Source: the Revenue Department</a>' },
-      sub: { th: 'ชื่อไม่ตรงหนังสือรับรอง ที่อยู่ไม่ครบตามทะเบียน ติ๊กสำนักงานใหญ่ทั้งที่เป็นสาขา หรือเปิดลูกค้ารายเดิมซ้ำอีกรหัส — ลองกดดูว่า VAT Service ของกรมสรรพากรตัดปัญหาไหนออกไปบ้าง',
-             en: 'A name that misses the registration, a half-typed address, “head office” on a branch, the same customer opened twice — try each one and see what the Revenue Department’s VAT Service takes off the table.' },
+      defBody: { th: "บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class=\"vs-chips\"><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>มีตัวตนจริง</span><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>จดทะเบียนถูกต้อง</span><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class=\"vs-fine\">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href=\"https://www.rd.go.th/42535.html\" target=\"_blank\" rel=\"noopener noreferrer\">ที่มา: กรมสรรพากร</a></span>",
+                 en: "A Revenue Department service — check a partner before you accept their tax invoice:<span class=\"vs-chips\"><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>they exist</span><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>they are registered</span><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>they may still issue tax invoices</span></span><span class=\"vs-fine\">All three can change at any time, which is why checking first is what stops impersonation · <a href=\"https://www.rd.go.th/42535.html\" target=\"_blank\" rel=\"noopener noreferrer\">Source: the Revenue Department</a></span>" },
+      sub: { th: 'สี่สถานการณ์ที่ข้อมูลคู่ค้าเพี้ยนตั้งแต่วันเปิดลูกค้า — กดดูว่า VAT Service ตัดอันไหนออกได้บ้าง',
+             en: 'Four ways partner data goes wrong the day a record is opened — press each and see which one the VAT Service takes off the table.' },
       lblTax: { th: 'เลขประจำตัวผู้เสียภาษี', en: 'VAT Registration No.' },
       tipType: { th: 'พิมพ์เลขของลูกค้าคุณลงไปได้เลย', en: 'Type your own customer’s ID here' },
       lblBranch: { th: 'เลขที่สาขา', en: 'Branch No.' },
@@ -4737,10 +4759,10 @@
       hdRd: { th: 'ที่ VAT Service เติมให้', en: 'Filled by VAT Service' },
       hdRdSub: { th: 'ตามทะเบียนกรมสรรพากร', en: 'Straight from the Revenue Department registry' },
       lblCost: { th: 'ราคาที่จ่ายจริง', en: 'What it costs' },
-      noteDemo: { th: 'ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม',
-                  en: 'A simulation on a fictional company — the real system calls the Revenue Department’s VAT Service from inside Business Central, when opening customers and vendors and when updating existing ones.' },
-      note: { th: 'สี่สถานการณ์ด้านบนเป็นข้อมูลบริษัทสมมติ — <b>พิมพ์เลขผู้เสียภาษีจริง 13 หลักแล้วกดค้นหา จะยิงถึงทะเบียนกรมสรรพากรจริง</b> ชุดเดียวกับที่ Business Central เรียกตอนเปิดลูกค้า เปิดผู้ขาย และอัปเดตรายเดิม',
-              en: 'The four scenarios run on a fictional company — <b>type a real 13-digit tax ID and press search to hit the Revenue Department’s live registry</b>, the same service Business Central calls when opening customers and vendors and when updating existing ones.' },
+      noteDemo: { th: 'ข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service จากในหน้าจอ Business Central ตอนเปิดลูกค้า เปิดผู้ขาย และอัปเดตรายเดิม',
+                  en: 'A fictional company — the real system calls the VAT Service from inside Business Central when opening customers and vendors and updating existing ones.' },
+      note: { th: 'สี่สถานการณ์เป็นบริษัทสมมติ — <b>พิมพ์เลข 13 หลักจริงแล้วกดค้นหา จะยิงถึงทะเบียนกรมสรรพากรจริง</b> ชุดเดียวกับที่ Business Central เรียกตอนเปิดลูกค้า',
+              en: 'The scenarios run on a fictional company — <b>type a real 13-digit tax ID and press search to hit the live registry</b>, the same service Business Central calls when opening a customer.' },
       wait: { th: 'เลือกสาขาจากรายการ', en: 'Pick a branch from the list' },
       manLive: { th: 'ไม่มี — ค้นจากเลขที่กรอกเอง', en: 'Nothing — searched by the ID you typed' },
       manLiveSub: { th: 'โหมดค้นจริง', en: 'Live lookup' },
@@ -4773,6 +4795,7 @@
     CASES.forEach((c, i) => {
       const b = document.createElement('button');
       b.type = 'button'; b.dataset.i = i;
+      if (c.mode === 'stop') b.classList.add('stop');
       b.setAttribute('aria-pressed', String(i === 0));
       b.addEventListener('click', () => pickCase(i));
       b.addEventListener('keydown', (e) => {
@@ -4804,11 +4827,13 @@
       }).join('');
     }
 
+    const tabHtml = (c) => ico(c.tabIcon) + '<span>' + c.tab[vsLang] + '</span>';
+
     const none = (key) => '<div class="vs-none">' + ico('vsi-search') + '<span>' + T[key][vsLang] + '</span></div>';
 
     function draw() {
       document.querySelectorAll('[data-vs]').forEach((el) => { el.innerHTML = T[el.dataset.vs][vsLang]; });
-      bar.querySelectorAll('button').forEach((b) => { b.textContent = CASES[+b.dataset.i].tab[vsLang]; });
+      bar.querySelectorAll('button').forEach((b) => { b.innerHTML = tabHtml(CASES[+b.dataset.i]); });
 
       const mine = typed[CASES.indexOf(cur)];
       byId('vs-tax').value = mine ? mine.tin : cur.tax;
@@ -4868,7 +4893,7 @@
     function drawLive() {
       document.querySelectorAll('[data-vs]').forEach((el) => { el.innerHTML = T[el.dataset.vs][vsLang]; });
       bar.querySelectorAll('button').forEach((b) => {
-        b.textContent = CASES[+b.dataset.i].tab[vsLang];
+        b.innerHTML = tabHtml(CASES[+b.dataset.i]);
         b.setAttribute('aria-pressed', 'false');
       });
       document.querySelector('[data-vs="hdManSub"]').textContent = T.manLiveSub[vsLang];
