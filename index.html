@@ -2179,10 +2179,10 @@
     .plan-list-head { font-size: .98rem; }
   }
 
-  /* กระจก charcoal เดียวกับ #contact — FAQ อยู่กลุ่มเดียวกัน · ป้าย Q/A + ไถเปิดแบบ .plan-more */
-  .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+  /* กระจก charcoal เดียวกับ #contact — FAQ อยู่กลุ่มเดียวกัน · ป้ายเลขข้อ + ไถเปิดแบบ .plan-more */
+  .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; counter-reset: faq; }
   .faq-list details {
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; counter-increment: faq;
     background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
     padding: 2px 22px; box-shadow: none;
     transition: background-color .24s ease, border-color .24s ease;
@@ -2202,11 +2202,12 @@
     list-style: none; transition: color .2s ease;
   }
   .faq-list summary::-webkit-details-marker { display: none; }
-  /* ป้าย Q */
+  /* ป้ายเลขข้อ — นับจาก counter ไม่ต้องพิมพ์เลขใน HTML เพิ่ม/สลับข้อแล้วเลขไล่เอง */
   .faq-list summary::before {
-    content: "Q"; flex: 0 0 auto;
+    content: counter(faq); flex: 0 0 auto;
     display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px;
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .82rem; line-height: 1;
+    font-variant-numeric: tabular-nums;
     color: var(--brand-pink); background: rgba(224,140,162,.14);
     border: 1px solid rgba(224,140,162,.35);
     transition: background-color .24s ease, color .24s ease, transform .24s ease;
@@ -2223,16 +2224,10 @@
   .faq-list summary:hover::before { transform: translateY(-1px); }
   .faq-list summary:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 4px; border-radius: 8px; }
   .faq-list details[open] summary { border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 12px; }
+  /* เยื้อง 38px = ป้ายเลข 26 + gap 12 คำตอบจึงตรงคอลัมน์เดียวกับคำถาม (เดิมช่องนี้เป็นป้าย A) */
   .faq-list details > p {
-    position: relative; padding-left: 38px; color: #aeb4b7; line-height: 1.8;
+    padding-left: 38px; color: #aeb4b7; line-height: 1.8;
     padding-bottom: 16px; text-wrap: pretty;
-  }
-  /* ป้าย A ตรงคำตอบย่อหน้าแรก ให้ตรงคอลัมน์กับ Q */
-  .faq-list details > p:first-of-type::before {
-    content: "A"; position: absolute; left: 0; top: 1px;
-    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .82rem; font-weight: 700; line-height: 1;
-    color: var(--brand-mist); background: rgba(166,192,189,.12); border: 1px solid rgba(166,192,189,.28);
   }
   .faq-list details[open] > p { animation: planReveal .32s ease both; }
   /* ไถความสูงตอนเปิดถ้าเบราว์เซอร์รองรับ — ชุดเดียวกับแพ็คเกจ */
