@@ -3066,84 +3066,6 @@
   .plan-more, .plan-body { min-width: 0; }
 
 
-  /* ── #web-quote — ใบเสนอราคาจาก Google Form: ผัง 2 เส้น outbound-only ─────
-     การ์ดใบเดียวเหมือน .bf/.vs — หัวการ์ด · ผัง SVG · แถบตัวเลข คั่นด้วยเส้น 1px
-     ภาพเดียวที่ต้องจำได้: ลูกศรทุกเส้นที่ข้ามกำแพงชมพู มีหางอยู่ฝั่ง Business Central
-     สีทั้งหมดใช้โทเคนชุด .bf-* (กล่อง BC = teal ทึบ กล่องข้างนอก = ขาวขอบ mist) */
-  #web-quote > .wrap > .section-kicker,
-  #web-quote > .wrap > h2,
-  #web-quote > .wrap > .sub {
-    text-align: center; max-width: 760px; margin-left: auto; margin-right: auto;
-  }
-  .wq {
-    background: #fff; border: 1px solid var(--ui-line);
-    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
-  }
-  .wq-head {
-    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    padding: 16px 24px; border-bottom: 1px solid var(--ui-line);
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ui-muted);
-  }
-  .wq-head .bf-ic { width: 15px; height: 15px; color: var(--brand-jade); }
-  .wq-head .wq-count { margin-left: auto; text-transform: none; letter-spacing: normal; }
-  .wq-head .wq-count b { color: var(--brand-teal); font-weight: 700; }
-  .wq-scroll { overflow-x: auto; overflow-y: hidden; padding: 8px 0 4px; }
-  .wq-scroll svg { display: block; width: 100%; min-width: 900px; height: auto; }
-
-  .wq-lane { fill: none; stroke: var(--ui-line); }
-  .wq-lane-in { fill: var(--bg-soft); stroke: var(--ui-line); }
-  .wq-lane-t { fill: var(--ui-muted); font: 600 18px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle; }
-  .wq-nj { fill: var(--brand-teal); }
-  .wq-ng { fill: #fff; stroke: var(--brand-mist); stroke-width: 1.6; }
-  .wq-t { font: 600 16px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle; }
-  .wq-tj { fill: #fff; }
-  .wq-ti { fill: var(--ui-ink); }
-  .wq-ts { font: 500 13px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle; fill: var(--ui-muted); }
-  .wq-tjs { fill: #fff; opacity: .82; }
-  .wq-e { fill: none; stroke: var(--brand-mint); stroke-width: 1.7; }
-  /* ป้ายบนเส้น — ขอบขาวรอบตัวอักษรให้อ่านออกตอนคร่อมกำแพงและเส้นทาง */
-  .wq-el { fill: var(--ui-muted); font: 600 13px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle;
-    paint-order: stroke; stroke: #fff; stroke-width: 6px; stroke-linejoin: round; }
-  .wq-ca { fill: var(--brand-pink-deep); font: 700 14px "Plus Jakarta Sans", "Anuphan", sans-serif; }
-  .wq-cas { fill: var(--ui-muted); font: 500 13px "Plus Jakarta Sans", "Anuphan", sans-serif; }
-  .wq-wall { fill: none; stroke: var(--brand-pink-deep); stroke-width: 2; stroke-dasharray: 8 6; }
-  .wq-badge { fill: var(--brand-pink-deep); }
-  .wq-badge-t { fill: #fff; font: 700 14px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle; }
-  .wq-sep { fill: none; stroke: var(--ui-line); stroke-dasharray: 4 5; }
-  .wq-token { fill: var(--brand-jade); }
-
-  /* แถบตัวเลขในตัวการ์ด — เลขใหญ่ teal ป้ายเล็ก muted ไม่ใช้ .stat-row เพราะคำแปล
-     ของ .stat-row ผูก selector ไว้ไม่ scope ใช้ซ้ำแล้วป้ายจะถูกแปลเป็นคนละเรื่อง */
-  .wq-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--ui-line); background: var(--bg-soft);
-  }
-  .wq-stats > div { padding: 20px 16px; text-align: center; }
-  .wq-stats > div + div { border-left: 1px solid var(--ui-line); }
-  .wq-stats b {
-    display: block; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 2.2rem; font-weight: 700; line-height: 1.1; color: var(--brand-teal);
-    font-variant-numeric: tabular-nums;
-  }
-  .wq-stats span { display: block; margin-top: 4px; font-size: .86rem; color: var(--ui-muted); }
-  .wq-note {
-    margin: 20px auto 0; max-width: 760px; text-align: center;
-    font-size: .86rem; line-height: 1.65; color: var(--ui-muted); text-wrap: pretty;
-  }
-  @media (prefers-reduced-motion: reduce) { .wq-token { display: none; } }
-  @media (max-width: 900px) {
-    .wq-head { padding-left: 18px; padding-right: 18px; }
-    .wq-head .wq-count { margin-left: 0; width: 100%; }
-    .wq-stats { grid-template-columns: repeat(2, 1fr); }
-    .wq-stats > div { padding: 16px 12px; }
-    /* สองคอลัมน์แล้ว เส้นซ้ายของช่องที่ 3 จะชิดขอบการ์ด — เปลี่ยนเป็นเส้นบนแทน */
-    .wq-stats > div:nth-child(3) { border-left: 0; }
-    .wq-stats > div:nth-child(n+3) { border-top: 1px solid var(--ui-line); }
-  }
-
-
   /* ── #vat-service — เดโมค้นเลขผู้เสียภาษีจากกรมสรรพากร ────────────────
      การ์ดใบเดียวคุมทั้งส่วน ข้างในไม่มีการ์ดซ้อนการ์ด แบ่งน้ำหนักด้วยพื้นกับเส้น 1px
      burgundy ใช้เป็นเครื่องหมาย "ผิด" อย่างเดียว ปุ่มในส่วนนี้เป็น Deep Teal ทั้งหมด
@@ -3852,113 +3774,6 @@
     </div>
 
     <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
-  </div>
-</section>
-
-<section id="web-quote" class="alt">
-  <div class="wrap">
-    <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
-    <h2 data-wq="h2">สร้างใบเสนอราคาจาก Google Form</h2>
-    <p class="sub" data-wq="sub">ลูกค้ากรอก Google Form → Business Central สร้าง Contact และใบเสนอราคาให้เองภายใน 5 นาที โดย BC ไม่เปิด inbound port เลยแม้แต่พอร์ตเดียว</p>
-
-    <div class="wq reveal">
-      <p class="wq-head">
-        <svg class="bf-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 6h7v7M20 6l-9 9M4 4v16h16"/></svg>
-        <span data-wq="head">ผังการทำงาน · 2 เส้น · BC ยิงออกอย่างเดียว</span>
-        <span class="wq-count" data-wq="headCount"><b>3</b> ลูกศรข้ามกำแพง ต้นทางอยู่ใน BC ทั้งหมด</span>
-      </p>
-
-      <div class="wq-scroll">
-        <!-- พิกัด: เลน ลูกค้า 40–400 · Google 430–900 · กำแพง x=950 · BC 1000–1400
-             แถว 1 (Item Sync) กลาง y=185 · แถว 2 (Quote Fetch) y=399 กับ 513
-             กล่อง BC ทุกใบชิดขวาเท่ากัน (1060–1340) ลูกศรข้ามกำแพงทั้ง 3 เส้นเริ่มที่ x=1060 -->
-        <svg viewBox="0 0 1440 620" role="img" aria-labelledby="wqTitle">
-          <title id="wqTitle" data-wq="svgTitle">ผังการทำงานสองเส้น เส้นหนึ่ง Business Central ส่งรายการสินค้าออกไปเป็นหน้าแคตตาล็อกบน Google ให้ลูกค้าเลือกใส่ตะกร้าแล้วกรอกฟอร์ม เส้นสอง Business Central ดึงคำขอจาก Google Sheet มาจับคู่ Contact สร้างใบเสนอราคา แล้วเขียนเลขที่ใบกลับลงชีต ลูกศรทั้งสามเส้นที่ข้ามกำแพงมีต้นทางอยู่ใน Business Central จึงไม่ต้องเปิด inbound port</title>
-          <defs>
-            <marker id="wqAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 10 5 0 10z" fill="#739B97"/>
-            </marker>
-          </defs>
-
-          <!-- เลน -->
-          <rect class="wq-lane" x="40" y="24" width="360" height="536" rx="16"/>
-          <rect class="wq-lane" x="430" y="24" width="470" height="536" rx="16"/>
-          <rect class="wq-lane-in" x="1000" y="24" width="400" height="536" rx="16"/>
-          <text class="wq-lane-t" x="220" y="58" data-wq="laneC">ลูกค้า</text>
-          <text class="wq-lane-t" x="665" y="58" data-wq="laneG">Google · แคตตาล็อก / ฟอร์ม / ชีต</text>
-          <text class="wq-lane-t" x="1200" y="58" data-wq="laneB">Business Central</text>
-          <path class="wq-sep" d="M52 300 H388 M442 300 H888 M1012 300 H1388"/>
-
-          <!-- กำแพง: ไม่มี inbound port -->
-          <line class="wq-wall" x1="950" y1="108" x2="950" y2="560"/>
-          <rect class="wq-badge" x="874" y="74" width="152" height="30" rx="15"/>
-          <text class="wq-badge-t" x="950" y="94" data-wq="wall">0 inbound port</text>
-          <text class="wq-ts" x="950" y="592" data-wq="wallSub">ไม่ต้องมี tunnel หรือ gateway — โค้ดชุดเดียวใช้ทั้ง dev container และ SaaS</text>
-
-          <!-- แถว 1 · Item Sync -->
-          <text class="wq-ca" x="1060" y="122" data-wq="r1">เส้น 1 · Item Sync</text>
-          <text class="wq-cas" x="1060" y="140" data-wq="r1s">ทุก 5 นาที · ยิงเฉพาะตอนรายการเปลี่ยน</text>
-          <rect class="wq-nj" x="1060" y="147" width="280" height="76" rx="10"/>
-          <text class="wq-t wq-tj" x="1200" y="181" data-wq="b1">รายการสินค้าใน BC</text>
-          <text class="wq-ts wq-tjs" x="1200" y="204" data-wq="b1s">ติ๊ก “Appear in Form” ที่ตัวสินค้า</text>
-          <path class="wq-e" d="M1060 185 H862" marker-end="url(#wqAr)"/>
-          <text class="wq-el" x="960" y="172" data-wq="e1">POST op=items</text>
-          <rect class="wq-ng" x="470" y="147" width="390" height="76" rx="10"/>
-          <text class="wq-t wq-ti" x="665" y="181" data-wq="g1">หน้าแคตตาล็อกสินค้า</text>
-          <text class="wq-ts" x="665" y="204" data-wq="g1s">ค้นหาได้ · เมนูตามหมวด · ป้าย พร้อมส่ง / สั่งผลิต</text>
-          <path class="wq-e" d="M470 185 H372" marker-end="url(#wqAr)"/>
-          <rect class="wq-ng" x="70" y="147" width="300" height="76" rx="10"/>
-          <text class="wq-t wq-ti" x="220" y="181" data-wq="n1">เปิดแคตตาล็อกบนมือถือ</text>
-          <text class="wq-ts" x="220" y="204" data-wq="n1s">เลือกสินค้า ใส่ตะกร้า</text>
-          <path class="wq-e" d="M220 223 V359" marker-end="url(#wqAr)"/>
-          <text class="wq-el" x="220" y="288" data-wq="e2">ตะกร้า → ฟอร์มที่กรอกให้ล่วงหน้า</text>
-
-          <!-- แถว 2 · Quote Fetch -->
-          <text class="wq-ca" x="1060" y="334" data-wq="r2">เส้น 2 · Quote Fetch</text>
-          <text class="wq-cas" x="1060" y="352" data-wq="r2s">BC เป็นฝ่ายดึง · ทุก 5 นาที</text>
-          <rect class="wq-ng" x="70" y="361" width="300" height="76" rx="10"/>
-          <text class="wq-t wq-ti" x="220" y="395" data-wq="n2">กรอก Google Form</text>
-          <text class="wq-ts" x="220" y="418" data-wq="n2s">นิติบุคคล · บุคคลธรรมดา · ลูกค้าเดิม</text>
-          <path class="wq-e" d="M370 399 H468" marker-end="url(#wqAr)"/>
-          <text class="wq-el" x="419" y="386" data-wq="e3">ส่งฟอร์ม</text>
-          <rect class="wq-ng" x="470" y="361" width="390" height="160" rx="10"/>
-          <text class="wq-t wq-ti" x="665" y="395" data-wq="g2a">Google Sheet</text>
-          <text class="wq-ts" x="665" y="418" data-wq="g2b">แถวใหม่ + Submission ID กันใบซ้ำ</text>
-          <path class="wq-sep" d="M490 441 H840"/>
-          <text class="wq-t wq-ti" x="665" y="476" data-wq="g2c">เลขที่ใบเสนอราคา / เหตุผล error</text>
-          <text class="wq-ts" x="665" y="499" data-wq="g2d">เซลส์เห็นในชีตทันที ไม่ต้องรอเมล</text>
-          <rect class="wq-nj" x="1060" y="361" width="280" height="76" rx="10"/>
-          <text class="wq-t wq-tj" x="1200" y="395" data-wq="b2">ดึงคำขอ · จับคู่ Contact</text>
-          <text class="wq-ts wq-tjs" x="1200" y="418" data-wq="b2s">คีย์ = เลขผู้เสียภาษี + เลขสาขา ไม่ใช่ชื่อ</text>
-          <path class="wq-e" d="M1060 399 H862" marker-end="url(#wqAr)"/>
-          <!-- ป้ายบนเส้นข้ามกำแพงแยกสองบรรทัด บน/ล่างเส้น — บรรทัดเดียวยาวจนชนกล่อง BC -->
-          <text class="wq-el" x="960" y="386" data-wq="e4">GET op=pending</text>
-          <text class="wq-el" x="960" y="418" data-wq="e4b">BC เป็นฝ่ายดึงเอง</text>
-          <path class="wq-e" d="M1200 437 V473" marker-end="url(#wqAr)"/>
-          <text class="wq-el" x="1188" y="460" style="text-anchor:end" data-wq="e5">สร้าง Contact ให้ถ้ายังไม่มี</text>
-          <rect class="wq-nj" x="1060" y="475" width="280" height="76" rx="10"/>
-          <text class="wq-t wq-tj" x="1200" y="509" data-wq="b3">สร้าง Sales Quote</text>
-          <text class="wq-ts wq-tjs" x="1200" y="532" data-wq="b3s">ข้อมูลไม่ตรง → To Check ให้คนตัดสิน</text>
-          <path class="wq-e" d="M1060 513 H862" marker-end="url(#wqAr)"/>
-          <text class="wq-el" x="960" y="500" data-wq="e6">POST op=ack</text>
-          <text class="wq-el" x="960" y="532" data-wq="e6b">เขียนเลขที่ใบกลับลงชีต</text>
-
-          <!-- จุดวิ่ง 3 เม็ด เริ่มที่ฝั่ง BC ทุกเม็ด — ย้ำว่าต้นทางอยู่ข้างใน -->
-          <circle class="wq-token" r="5.5"><animateMotion dur="2.8s" begin="0s" repeatCount="indefinite" path="M1060,185 H862"/></circle>
-          <circle class="wq-token" r="5.5"><animateMotion dur="2.8s" begin="0.95s" repeatCount="indefinite" path="M1060,399 H862"/></circle>
-          <circle class="wq-token" r="5.5"><animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M1060,513 H862"/></circle>
-        </svg>
-      </div>
-
-      <div class="wq-stats">
-        <div><b>5</b><span data-wq="st1">นาที ต่อรอบ</span></div>
-        <div><b>0</b><span data-wq="st2">inbound port</span></div>
-        <div><b>200+</b><span data-wq="st3">SKU บนแคตตาล็อก</span></div>
-        <div><b>0</b><span data-wq="st4">บรรทัดโค้ดส่งเมล</span></div>
-      </div>
-    </div>
-
-    <p class="wq-note" data-wq="note">ฟอร์มสร้างได้แค่ Contact — Customer เกิดตอนเซลส์กด Release ด้วยกลไกมาตรฐานของ BC · ข้อมูลไม่ตรงไม่ทับอัตโนมัติ ติดสถานะ To Check ให้คนตัดสิน · Submission ID เดียว = ใบเสนอราคาใบเดียว ดึงซ้ำกี่รอบก็ไม่ซ้ำ</p>
   </div>
 </section>
 
@@ -5407,65 +5222,6 @@
     window.renderBillingFlow('th');
   })();
 
-  /* ---- #web-quote ----------------------------------------------------
-     ผังเป็น SVG นิ่ง ไม่มี state — คำแปลอยู่ในตัวเองเหมือน #billing-flow เพราะ
-     ข้อความอยู่ใน <text> ของ SVG ซึ่งใช้ nth-child ใน I18N แล้วอ่านไม่รู้เรื่อง
-     applyLang เรียก window.renderWebQuote(lang) */
-  (() => {
-    const T = {
-      kicker:    { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
-      h2:        { th: 'สร้างใบเสนอราคาจาก Google Form', en: 'Sales Quotes from Google Forms' },
-      sub:       { th: 'ลูกค้ากรอก Google Form → Business Central สร้าง Contact และใบเสนอราคาให้เองภายใน 5 นาที โดย BC ไม่เปิด inbound port เลยแม้แต่พอร์ตเดียว',
-                   en: 'A customer fills in a Google Form → within five minutes Business Central has created the Contact and the Sales Quote — without opening a single inbound port.' },
-      head:      { th: 'ผังการทำงาน · 2 เส้น · BC ยิงออกอย่างเดียว', en: 'How it runs · two lines · BC calls out only' },
-      headCount: { th: '<b>3</b> ลูกศรข้ามกำแพง ต้นทางอยู่ใน BC ทั้งหมด', en: '<b>3</b> arrows cross the wall — every one starts inside BC' },
-      svgTitle:  { th: 'ผังการทำงานสองเส้น เส้นหนึ่ง Business Central ส่งรายการสินค้าออกไปเป็นหน้าแคตตาล็อกบน Google ให้ลูกค้าเลือกใส่ตะกร้าแล้วกรอกฟอร์ม เส้นสอง Business Central ดึงคำขอจาก Google Sheet มาจับคู่ Contact สร้างใบเสนอราคา แล้วเขียนเลขที่ใบกลับลงชีต ลูกศรทั้งสามเส้นที่ข้ามกำแพงมีต้นทางอยู่ใน Business Central จึงไม่ต้องเปิด inbound port',
-                   en: 'Two-line diagram. Line one: Business Central pushes its item list out to a catalogue page on Google, where the customer fills a basket and then the form. Line two: Business Central pulls new requests from the Google Sheet, matches the Contact, creates the Sales Quote and writes the quote number back to the sheet. All three arrows that cross the wall start inside Business Central, so no inbound port is opened.' },
-      laneC:     { th: 'ลูกค้า', en: 'Customer' },
-      laneG:     { th: 'Google · แคตตาล็อก / ฟอร์ม / ชีต', en: 'Google · catalogue / form / sheet' },
-      laneB:     { th: 'Business Central', en: 'Business Central' },
-      wall:      { th: '0 inbound port', en: '0 inbound port' },
-      wallSub:   { th: 'ไม่ต้องมี tunnel หรือ gateway — โค้ดชุดเดียวใช้ทั้ง dev container และ SaaS', en: 'No tunnel, no gateway — one codebase for the dev container and SaaS alike' },
-      r1:        { th: 'เส้น 1 · Item Sync', en: 'Line 1 · Item Sync' },
-      r1s:       { th: 'ทุก 5 นาที · ยิงเฉพาะตอนรายการเปลี่ยน', en: 'every 5 min · sent only when items change' },
-      b1:        { th: 'รายการสินค้าใน BC', en: 'Items in BC' },
-      b1s:       { th: 'ติ๊ก “Appear in Form” ที่ตัวสินค้า', en: 'tick “Appear in Form” on the item' },
-      e1:        { th: 'POST op=items', en: 'POST op=items' },
-      g1:        { th: 'หน้าแคตตาล็อกสินค้า', en: 'Product catalogue page' },
-      g1s:       { th: 'ค้นหาได้ · เมนูตามหมวด · ป้าย พร้อมส่ง / สั่งผลิต', en: 'search · categories · in-stock / made-to-order badge' },
-      n1:        { th: 'เปิดแคตตาล็อกบนมือถือ', en: 'Opens the catalogue on a phone' },
-      n1s:       { th: 'เลือกสินค้า ใส่ตะกร้า', en: 'picks items, adds to basket' },
-      e2:        { th: 'ตะกร้า → ฟอร์มที่กรอกให้ล่วงหน้า', en: 'basket → pre-filled form' },
-      r2:        { th: 'เส้น 2 · Quote Fetch', en: 'Line 2 · Quote Fetch' },
-      r2s:       { th: 'BC เป็นฝ่ายดึง · ทุก 5 นาที', en: 'BC does the pulling · every 5 min' },
-      n2:        { th: 'กรอก Google Form', en: 'Fills in the Google Form' },
-      n2s:       { th: 'นิติบุคคล · บุคคลธรรมดา · ลูกค้าเดิม', en: 'company · individual · existing customer' },
-      e3:        { th: 'ส่งฟอร์ม', en: 'submit' },
-      g2a:       { th: 'Google Sheet', en: 'Google Sheet' },
-      g2b:       { th: 'แถวใหม่ + Submission ID กันใบซ้ำ', en: 'new row + Submission ID against duplicates' },
-      g2c:       { th: 'เลขที่ใบเสนอราคา / เหตุผล error', en: 'quote number / error reason' },
-      g2d:       { th: 'เซลส์เห็นในชีตทันที ไม่ต้องรอเมล', en: 'sales see it in the sheet — no e-mail to wait for' },
-      b2:        { th: 'ดึงคำขอ · จับคู่ Contact', en: 'Fetch requests · match Contact' },
-      b2s:       { th: 'คีย์ = เลขผู้เสียภาษี + เลขสาขา ไม่ใช่ชื่อ', en: 'key = tax ID + branch no., never the name' },
-      e4:        { th: 'GET op=pending', en: 'GET op=pending' },
-      e4b:       { th: 'BC เป็นฝ่ายดึงเอง', en: 'BC does the pulling' },
-      e5:        { th: 'สร้าง Contact ให้ถ้ายังไม่มี', en: 'creates the Contact if new' },
-      b3:        { th: 'สร้าง Sales Quote', en: 'Create Sales Quote' },
-      b3s:       { th: 'ข้อมูลไม่ตรง → To Check ให้คนตัดสิน', en: 'mismatch → To Check for a person to decide' },
-      e6:        { th: 'POST op=ack', en: 'POST op=ack' },
-      e6b:       { th: 'เขียนเลขที่ใบกลับลงชีต', en: 'writes the quote no. back' },
-      st1:       { th: 'นาที ต่อรอบ', en: 'minutes per cycle' },
-      st2:       { th: 'inbound port', en: 'inbound ports' },
-      st3:       { th: 'SKU บนแคตตาล็อก', en: 'SKUs on the catalogue' },
-      st4:       { th: 'บรรทัดโค้ดส่งเมล', en: 'lines of e-mail code' },
-      note:      { th: 'ฟอร์มสร้างได้แค่ Contact — Customer เกิดตอนเซลส์กด Release ด้วยกลไกมาตรฐานของ BC · ข้อมูลไม่ตรงไม่ทับอัตโนมัติ ติดสถานะ To Check ให้คนตัดสิน · Submission ID เดียว = ใบเสนอราคาใบเดียว ดึงซ้ำกี่รอบก็ไม่ซ้ำ',
-                   en: 'The form only ever creates a Contact — the Customer appears when sales press Release, through standard BC machinery · a mismatch is never overwritten; it goes to To Check for a person to decide · one Submission ID is one quote, however many times the fetch runs.' }
-    };
-    window.renderWebQuote = (lang) => {
-      document.querySelectorAll('[data-wq]').forEach((el) => { el.innerHTML = T[el.dataset.wq][lang]; });
-    };
-  })();
-
   // ── Bilingual TH/EN ─────────────────────────────────────────────
   // ponytail: selector-keyed dictionary in one place, no markup annotations.
   // ข้อแลกเปลี่ยน: ถ้าย้ายลำดับ element ที่อ้างด้วย nth-child ต้องอัปเดตที่นี่ด้วย
@@ -5661,7 +5417,6 @@
     // #vat-service วาดตัวเองใหม่จาก state ไม่ผ่าน I18N — ไม่งั้นสถานะที่ผู้ใช้กดค้างไว้หาย
     if (window.renderVatService) window.renderVatService(lang);
     if (window.renderBillingFlow) window.renderBillingFlow(lang);
-    if (window.renderWebQuote) window.renderWebQuote(lang);
     document.querySelectorAll('.lang button').forEach(b => {
       const on = b.dataset.lang === lang;
       b.classList.toggle('on', on);
