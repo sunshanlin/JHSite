@@ -3133,6 +3133,34 @@
     font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
   }
 
+  /* #web-quote (Highlight Feature 3) — ผังเดียวกับ .bf/.vs แต่เนื้อในเป็นภาพหลักฐานจริงล้วน ๆ ไม่ใช่ simulator แบบสองอันก่อนหน้า */
+  .wq {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+    margin-top: 28px;
+  }
+  .wq-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap;
+    padding: 15px 24px; border-bottom: 1px solid var(--ui-line);
+  }
+  .wq-app {
+    margin: 0; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ui-muted);
+  }
+  .wq-sample {
+    font-size: .74rem; color: var(--ui-muted); white-space: nowrap;
+    border: 1px solid var(--ui-line); border-radius: 999px; padding: 2px 11px;
+  }
+  .wq-shot { display: block; }
+  .wq-shot img { display: block; width: 100%; height: auto; }
+  .wq-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .86rem; line-height: 1.65; color: var(--ui-muted);
+  }
+  .wq-note a { color: #8E2C46; font-weight: 600; text-decoration: none; }
+  .wq-note a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
+
   @media (max-width: 900px) {
     .vs-cmp { grid-template-columns: 1fr; }
     .vs-side.rd { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
@@ -3501,8 +3529,8 @@
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
           <div class="feature-panel-copy">
             <h3>เชื่อมต่อข้อมูลภายนอกผ่าน API</h3>
-            <p>ดึง<strong>อัตราแลกเปลี่ยนและวันหยุดจากธนาคารแห่งประเทศไทย</strong>เข้าระบบอัตโนมัติ <strong>ลดงานคีย์</strong> และใช้ร่วมกับปฏิทินของคลัง ผู้ขนส่ง และลูกค้า เพื่อวางแผนการจัดส่ง การวางบิล และการรับ–จ่ายเงิน พร้อม<strong>สร้างใบเสนอราคาจากคำขอที่ลูกค้ากรอกใน Google Form ให้อัตโนมัติ</strong> ไม่ต้องคีย์ซ้ำเข้าระบบ</p>
-            <ul class="feature-chips"><li>BOT API</li><li>Exchange Rate</li><li>Google Form</li><li>Integration</li></ul>
+            <p>ดึง<strong>อัตราแลกเปลี่ยนและวันหยุดจากธนาคารแห่งประเทศไทย</strong>เข้าระบบอัตโนมัติ <strong>ลดงานคีย์</strong> และใช้ร่วมกับปฏิทินของคลัง ผู้ขนส่ง และลูกค้า เพื่อวางแผนการจัดส่ง การวางบิล และการรับ–จ่ายเงิน</p>
+            <ul class="feature-chips"><li>BOT API</li><li>Exchange Rate</li><li>Integration</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
           <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-api.webp" alt="นักพัฒนากำลังเขียนโปรแกรมเชื่อมต่อ API ในออฟฟิศ" loading="lazy" decoding="async"></div>
@@ -3646,6 +3674,26 @@
     </div>
 
     <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
+  </div>
+</section>
+
+<section id="web-quote" class="alt">
+  <div class="wrap">
+    <p class="section-kicker">Highlight Feature 3</p>
+    <h2>ขอใบเสนอราคาผ่าน LINE</h2>
+    <p class="sub">ลูกค้าเลือกสินค้าและกรอกข้อมูลเองผ่าน LINE — Cloudflare Worker ส่งเข้า Business Central สร้างใบเสนอราคาให้ทันที ไม่ต้องคีย์ซ้ำ</p>
+
+    <div class="wq reveal">
+      <div class="wq-bar">
+        <p class="wq-app">LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central</p>
+        <span class="wq-sample">ข้อมูลตัวอย่าง</span>
+      </div>
+      <a class="wq-shot" href="img/bc-liff-quote.webp" target="_blank" rel="noopener">
+        <img src="img/bc-liff-quote.webp" alt="ขั้นตอนขอใบเสนอราคาผ่าน LINE LIFF — เลือกสินค้า กรอกข้อมูลผู้ซื้อ จนถึงใบเสนอราคาตัวอย่างที่ถูกสร้างขึ้นใน Business Central โดยอัตโนมัติ" loading="lazy" width="1207" height="508">
+      </a>
+    </div>
+
+    <p class="wq-note">ตัวอย่างจากระบบทดสอบ ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement ของแต่ละบริษัท · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
   </div>
 </section>
 
@@ -5128,7 +5176,11 @@
     ['#feature-panel-docs .feature-points li:nth-child(2)', '<strong>Professionally designed, clean and easy to read</strong> — grouping and spacing that put the figure you are looking for in front of you, ready to hand to a customer as printed.'],
     ['#feature-panel-docs .feature-points li:nth-child(3)', '<strong>Prints in Thai or English</strong>, picked at print time, from one layout rather than two.'],
     ['#feature-panel-api h3', 'External Data via API'],
-    ['#feature-panel-api .feature-panel-copy > p', 'Pull <strong>exchange rates and bank holidays from the Bank of Thailand</strong> into the system automatically, <strong>cutting manual entry</strong>, and combine them with warehouse, carrier, and customer calendars to plan deliveries, billing, and payments — plus <strong>quotations created automatically from requests customers submit through a Google Form</strong>, with nothing keyed in twice.'],
+    ['#feature-panel-api .feature-panel-copy > p', 'Pull <strong>exchange rates and bank holidays from the Bank of Thailand</strong> into the system automatically, <strong>cutting manual entry</strong>, and combine them with warehouse, carrier, and customer calendars to plan deliveries, billing, and payments.'],
+    ['#web-quote h2', 'Request a Quote via LINE'],
+    ['#web-quote > .wrap > .sub', 'Customers pick products and fill in their own info via LINE — a Cloudflare Worker pushes it into Business Central and creates the quote instantly, with nothing keyed in twice.'],
+    ['.wq-sample', 'Sample data'],
+    ['.wq-note', 'Shown on a test system — scope and pricing are assessed as a separate project based on your Requirement · Built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>'],
     ['.feature-link', 'Ask about this feature <span aria-hidden="true">→</span>'],
     ['.stat-row .stat:nth-child(1) span', 'Ready-to-use Thai document forms'],
     ['.stat-row .stat:nth-child(2) span', 'Add-on features designed for Thai businesses'],
