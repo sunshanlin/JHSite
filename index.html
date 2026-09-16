@@ -2453,15 +2453,17 @@
   }
   .bf-reset:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
 
-  .bf-cal-scroll { overflow-x: auto; padding: 14px 18px; background: #fff; }
-  .bf-cal { display: grid; grid-template-columns: repeat(7, minmax(112px, 1fr)); gap: 5px; min-width: 812px; }
+  /* ปฏิทินซ้าย ใบวางบิลขวา — ปฏิทินย่อลงให้พรีวิวมีที่ */
+  .bf-work { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(330px, 1fr); background: #fff; }
+  .bf-cal-scroll { overflow-x: auto; padding: 14px 16px; background: #fff; }
+  .bf-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; min-width: 560px; }
   .bf-dow {
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em;
     text-transform: uppercase; color: var(--ui-muted); text-align: center; padding-bottom: 3px;
   }
   .bf-day {
-    display: flex; flex-direction: column; gap: 5px; min-height: 92px; padding: 7px;
+    display: flex; flex-direction: column; gap: 4px; min-height: 66px; padding: 5px;
     background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-btn);
     transition: background .125s ease, border-color .125s ease;
   }
@@ -2491,34 +2493,42 @@
   .bf-chip {
     display: block; width: 100%; text-align: left; font: inherit; cursor: grab;
     color: var(--ui-ink); background: var(--cal-tint);
-    border: 1px solid var(--cal-line); border-radius: var(--ui-radius-btn); padding: 6px 9px;
+    border: 1px solid var(--cal-line); border-radius: var(--ui-radius-btn); padding: 4px 5px;
     transition: background .125s ease, border-color .125s ease, color .125s ease;
   }
   .bf-chip:hover { border-color: var(--cal-blue); }
   .bf-chip[aria-pressed="true"] { color: #fff; background: var(--cal-blue); border-color: var(--cal-blue); }
   .bf-chip[aria-pressed="true"] .bf-cm { color: rgba(255,255,255,.82); }
-  .bf-cn { display: block; font-size: .82rem; font-weight: 600; line-height: 1.35; }
+  /* ชิปแสดงชื่อไม่มีคำนำหน้านิติบุคคล สูงสุด 2 บรรทัด — ชื่อเต็มอยู่ในใบวางบิลกับ title */
+  .bf-cn { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+    font-size: .72rem; font-weight: 600; line-height: 1.35; }
+  .bf-chip.cur { box-shadow: 0 0 0 2px var(--cal-blue); }
   .bf-cm {
     display: block; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .72rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
+    font-size: .68rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
   }
 
-  /* ชี้เมาส์/โฟกัสที่กลุ่ม = รายการใบแจ้งหนี้ในกลุ่มนั้น · ติดกับ body เพราะ .reveal มี transform
-     ซึ่งจะทำให้ position:fixed อ้างอิงผิดกล่อง */
-  .bf-tip {
-    position: fixed; z-index: 60; width: 260px; pointer-events: none;
-    background: #fff; border: 1px solid var(--ui-line); border-radius: 10px;
-    box-shadow: var(--ui-shadow); padding: 10px 12px 9px; color: var(--ui-ink);
-    font-family: "Anuphan", "Plus Jakarta Sans", sans-serif; font-size: .8rem; line-height: 1.4;
-  }
-  .bf-tip[hidden] { display: none; }
-  .bf-tip-h { font-weight: 600; margin: 0 0 6px; }
-  .bf-tip-r { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0;
-    border-top: 1px solid var(--ui-line); font-variant-numeric: tabular-nums; }
-  .bf-tip-r span:first-child { font-family: "Plus Jakarta Sans", sans-serif; font-size: .76rem; color: var(--ui-muted); }
-  .bf-tip-r span:last-child { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; }
-  .bf-tip-t { border-top: 1.5px solid var(--ui-ink); margin-top: 2px; font-weight: 700; }
-  .bf-tip-t span:first-child { font-family: inherit; color: var(--ui-ink); font-size: .8rem; }
+  /* พรีวิวใบวางบิล — ใช้การ์ด .wq-doc ชุดเดียวกับใบเสนอราคาของ #web-quote */
+  .bf-pv { border-left: 1px solid var(--ui-line); background: var(--bg-soft); padding: 14px 16px; }
+  .bf-pv .bf-doc { border-color: var(--ui-line); box-shadow: var(--ui-shadow); }
+  .bf-doc .wq-doc-no span { display: block; margin-top: 2px; font-size: .74rem; font-weight: 500;
+    letter-spacing: normal; color: var(--ui-muted); }
+  .bf-dm { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 0 0 11px; font-size: .8rem; }
+  .bf-nw { white-space: nowrap; }
+  .bf-dm dt { color: var(--ui-muted); }
+  .bf-dm dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .bf-stamp { display: inline-block; margin: 0 0 10px; padding: 2px 10px; border-radius: 999px;
+    font-size: .74rem; font-weight: 600; color: var(--brand-burgundy-dark);
+    background: rgba(166,58,86,.07); border: 1px solid rgba(166,58,86,.34); }
+  .bf-dl { display: grid; grid-template-columns: minmax(0, 1fr) 76px 76px 88px; gap: 8px;
+    padding: 6px 0; border-top: 1px solid var(--ui-line);
+    font-size: .8rem; font-variant-numeric: tabular-nums; }
+  .bf-dl.h { font-size: .7rem; font-weight: 600; color: var(--ui-muted); border-top: 2px solid var(--brand-pale); }
+  .bf-dl code { white-space: nowrap; font-weight: 700; color: var(--brand-teal); letter-spacing: .04em;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .bf-dl > :nth-child(n+2) { text-align: right; white-space: nowrap; }
+  .bf-dl > :nth-child(2), .bf-dl > :nth-child(3) { color: var(--ui-muted); }
+  .bf-doc .wq-sum { grid-template-columns: minmax(0, 1fr) auto; }
 
   .bf-status {
     margin: 0; padding: 13px 24px; min-height: 48px;
@@ -2533,6 +2543,7 @@
   .bf-chip.late { background: rgba(166,58,86,.07); border-color: rgba(166,58,86,.34); }
   .bf-chip.late .bf-cn { color: var(--brand-burgundy-dark); }
   .bf-chip.due { border-color: var(--cal-blue); }
+  .bf-chip[aria-pressed="true"].late { background: var(--brand-burgundy-dark); border-color: var(--brand-burgundy-dark); }
   .bf-chip[aria-pressed="true"].late .bf-cn { color: #fff; }
   .bf-day.late .bf-dn { color: var(--brand-burgundy-dark); }
   .bf-due {
@@ -2567,6 +2578,8 @@
   }
 
   @media (max-width: 900px) {
+    .bf-work { grid-template-columns: 1fr; }
+    .bf-pv { border-left: 0; border-top: 1px solid var(--ui-line); }
     .bf-head, .bf-bar, .bf-status, .bf-foot, .bf-keys, .bf-due { padding-left: 18px; padding-right: 18px; }
     .bf-cal-scroll { padding: 12px; }
     /* หัวการ์ดตกบรรทัดแล้ว margin-left:auto จะดันไปชิดขวา อ่านเป็นคนละเรื่องกัน */
@@ -2582,6 +2595,9 @@
      ดีกว่าบังคับเลื่อนตาราง 7 คอลัมน์แนวนอนบนจอ 430px ซึ่งมองไม่เห็นภาพรวมทั้งเดือน */
   @media (max-width: 760px) {
     .bf-cal { grid-template-columns: 1fr; min-width: 0; gap: 6px; }
+    .bf-cn { -webkit-line-clamp: unset; }
+    .bf-dl { grid-template-columns: minmax(0, 1fr) 70px 84px; }
+    .bf-dl > :nth-child(2) { display: none; }
     .bf-dow { display: none; }
     .bf-dw { display: inline; }
     .bf-day { min-height: 0; }
@@ -3980,8 +3996,11 @@
         <!-- วิธีใช้อยู่เหนือปฏิทิน ไม่ใช่ใต้ — ต้องอ่านเจอก่อนลอง ไม่ใช่หลังเลื่อนผ่าน
              บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
         <p class="bf-status" id="bfStatus" role="status"></p>
-        <div class="bf-cal-scroll">
-          <div class="bf-cal" id="bfCal"></div>
+        <div class="bf-work">
+          <div class="bf-cal-scroll">
+            <div class="bf-cal" id="bfCal"></div>
+          </div>
+          <div class="bf-pv" id="bfDoc" aria-live="polite"></div>
         </div>
         <p class="bf-due">
           <span><i class="bf-d-late"></i><span data-bf="dueLate">เลยกำหนดวางบิล</span></span>
@@ -5341,6 +5360,32 @@
     draw();
   })();
 
+  /* ตัวอักษรไทยของยอดเงิน — ของจริงพิมพ์บรรทัดนี้ในใบเสนอราคาและใบวางบิลทุกใบ (ใช้ร่วม #billing-flow กับ #web-quote)
+     กฎที่พลาดกันบ่อย: หลักหน่วยเป็น 1 ตามหลังตัวอื่น = "เอ็ด" · หลักสิบเป็น 2 = "ยี่" · หลักสิบเป็น 1 = ไม่ต้องมีคำนำ */
+  const TH_D = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+  const TH_P = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
+  function thWord(s) {
+    s = String(s).replace(/^0+(?=\d)/, '');
+    if (s.length > 7) {
+      const head = s.slice(0, s.length - 6), tail = s.slice(s.length - 6);
+      return thWord(head) + 'ล้าน' + (Number(tail) ? thWord(tail) : '');
+    }
+    let out = '';
+    for (let i = 0; i < s.length; i++) {
+      const d = +s[i], pos = s.length - i - 1;
+      if (!d) continue;
+      if (pos === 0 && d === 1 && s.length > 1) out += 'เอ็ด';
+      else if (pos === 1 && d === 2) out += 'ยี่';
+      else if (pos !== 1 || d !== 1) out += TH_D[d];
+      out += TH_P[pos];
+    }
+    return out;
+  }
+  function bahtText(v) {
+    const int = Math.floor(v + 1e-6), sat = Math.round((v - int) * 100);
+    return (int ? thWord(int) : 'ศูนย์') + 'บาท' + (sat ? thWord(sat) + 'สตางค์' : 'ถ้วน');
+  }
+
   /* ---- #billing-flow ----------------------------------------------------
      คำแปลอยู่ในตัวมันเองเหมือน #vat-service ไม่ได้อยู่ใน I18N เพราะ applyLang()
      เขียนทับ innerHTML แล้วกลุ่มที่ผู้ใช้ลากไว้บนปฏิทินจะเด้งกลับที่เดิม
@@ -5370,8 +5415,21 @@
       footAmt: { th: 'ยอดที่ต้องวางบิลเดือนนี้', en: 'due to be billed this month' },
       footInv: { th: 'ใบแจ้งหนี้', en: 'invoices' },
       footGrp: { th: 'กลุ่มลูกค้า', en: 'customer groups' },
-      hint: { th: 'ลากกลุ่มลูกค้าไปวางวันอื่น เพื่อเปลี่ยนวันวางบิล — บนจอสัมผัสให้แตะกลุ่มแล้วแตะวันปลายทาง',
-              en: 'Drag a customer group onto another day to change its billing date — on a touch screen, tap the group and then tap the day.' },
+      hint: { th: 'กดกลุ่มลูกค้าเพื่อดูใบวางบิล · ลากไปวางวันอื่นเพื่อเปลี่ยนวันวางบิล — บนจอสัมผัสให้แตะกลุ่มแล้วแตะวันปลายทาง',
+              en: 'Click a customer group to preview its billing note · drag it onto another day to change the billing date — on a touch screen, tap the group and then tap the day.' },
+      docTitle: { th: 'ใบวางบิล', en: 'Billing Note' },
+      docBy: { th: 'ออกโดย บริษัท ตัวอย่างการค้า จำกัด', en: 'Issued by Sample Trading Co., Ltd.' },
+      docDate: { th: 'วันที่เอกสาร', en: 'Date' },
+      docHQ: { th: 'สำนักงานใหญ่', en: 'Head office' },
+      docTerm: { th: 'เงื่อนไขการชำระ', en: 'Payment terms' },
+      docTermV: { th: 'ภายใน 30 วัน', en: 'Within 30 days' },
+      docDue: { th: 'วันที่ครบกำหนด', en: 'Due date' },
+      docLate: { th: 'เลยกำหนดวางบิล', en: 'Past its billing date' },
+      colNo: { th: 'เลขที่ใบแจ้งหนี้', en: 'Invoice no.' },
+      colDate: { th: 'วันที่', en: 'Date' },
+      colDue: { th: 'ครบกำหนด', en: 'Due' },
+      colAmt: { th: 'จำนวนเงิน', en: 'Amount' },
+      docTot: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
       dueLate: { th: 'เลยกำหนดวางบิล', en: 'Past its billing date' },
       dueToday: { th: 'ถึงรอบวันนี้', en: 'Due today' },
       dueNext: { th: 'รอบถัดไป', en: 'Upcoming' },
@@ -5525,31 +5583,61 @@
     /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ----
        สัปดาห์เริ่มวันอาทิตย์ อังคารจึงเป็นคอลัมน์ที่ 2 (นับจาก 0) */
     const START = 2, DAYS = 30, TODAY = 8;
+    /* บริษัทสมมติ · ใบแจ้งหนี้ [เลขที่, ยอด, วันที่ใบแจ้งหนี้] เลขเรียงตามวันที่ · ครบกำหนด = วันที่ใบแจ้งหนี้ + 30 วัน */
     const SEED = [
-      { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก',
-        lines: [['IV6908-0142', 120000], ['IV6908-0157', 86500], ['IV6908-0171', 42000]] },
-      { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ',
-        lines: [['IV6907-0388', 51700], ['IV6908-0103', 34500]] },
-      { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม',
-        lines: [['IV6908-0119', 420000], ['IV6908-0126', 310000], ['IV6908-0148', 185500], ['IV6908-0163', 128000], ['IV6908-0180', 76500]] },
-      { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์',
-        lines: [['IV6908-0204', 148200], ['IV6908-0215', 112000], ['IV6908-0229', 69300], ['IV6908-0236', 43400]] },
-      { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง',
-        lines: [['IV6908-0241', 54000]] },
-      { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค',
-        lines: [['IV6908-0252', 265000], ['IV6908-0258', 198750], ['IV6908-0263', 154300], ['IV6908-0270', 121900], ['IV6908-0277', 97500], ['IV6908-0285', 66000]] }
+      { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก', a: 'นิคมอุตสาหกรรมบางปู อ.เมืองสมุทรปราการ จ.สมุทรปราการ',
+        lines: [['IV6908-0142', 120000, '2026-08-10'], ['IV6908-0157', 86500, '2026-08-13'], ['IV6908-0171', 42000, '2026-08-17']] },
+      { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', a: 'ถ.มิตรภาพ อ.เมืองนครราชสีมา จ.นครราชสีมา',
+        lines: [['IV6907-0388', 51700, '2026-07-29'], ['IV6908-0103', 34500, '2026-08-03']] },
+      { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม', a: 'ถ.ฉลองกรุง เขตลาดกระบัง กรุงเทพมหานคร',
+        lines: [['IV6908-0119', 420000, '2026-08-05'], ['IV6908-0126', 310000, '2026-08-06'], ['IV6908-0148', 185500, '2026-08-11'], ['IV6908-0163', 128000, '2026-08-14'], ['IV6908-0180', 76500, '2026-08-19']] },
+      { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์', a: 'ถ.สุขุมวิท อ.ศรีราชา จ.ชลบุรี',
+        lines: [['IV6908-0204', 148200, '2026-08-21'], ['IV6908-0215', 112000, '2026-08-24'], ['IV6908-0229', 69300, '2026-08-25'], ['IV6908-0236', 43400, '2026-08-26']] },
+      { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', a: 'สวนอุตสาหกรรมบางกะดี อ.เมืองปทุมธานี จ.ปทุมธานี',
+        lines: [['IV6908-0241', 54000, '2026-08-27']] },
+      { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค', a: 'นิคมอุตสาหกรรมอมตะซิตี้ อ.ปลวกแดง จ.ระยอง',
+        lines: [['IV6908-0252', 265000, '2026-08-28'], ['IV6908-0258', 198750, '2026-08-28'], ['IV6908-0263', 154300, '2026-08-28'], ['IV6908-0270', 121900, '2026-08-31'], ['IV6908-0277', 97500, '2026-08-31'], ['IV6908-0285', 66000, '2026-08-31']] }
     ];
     SEED.forEach((g) => { g.inv = g.lines.length; g.amt = g.lines.reduce((a, l) => a + l[1], 0); });
     const DOW = { th: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'], en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] };
     let groups = SEED.map((g) => ({ ...g }));
     let picked = null;
+    let cur = 'g1';
     const baht = (n) => '฿' + n.toLocaleString('en-US');
+    const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* วันที่คิดแบบ UTC ล้วน ไม่งั้นเวลาไทย +07 เลื่อนวันผิด · แสดง dd/mm/yyyy แบบใบวางบิลจริง */
+    const plus = (iso, n) => { const t = new Date(iso + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
+    const dmy = (iso) => iso.slice(8, 10) + '/' + iso.slice(5, 7) + '/' + iso.slice(0, 4);
+    const sepDay = (d) => '2026-09-' + String(d).padStart(2, '0');
     const cal = byId('bfCal'), status = byId('bfStatus');
 
     function say(html) { status.innerHTML = html; }
 
+    function drawDoc() {
+      const g = groups.find((x) => x.id === cur);
+      const box = byId('bfDoc');
+      if (!g) { box.innerHTML = ''; return; }
+      const L = (k) => T[k][lang];
+      const date = sepDay(g.d);
+      const no = 'SBN2609' + String(SEED.findIndex((x) => x.id === g.id) + 1).padStart(4, '0');
+      box.innerHTML = '<article class="wq-doc bf-doc">'
+        + '<div class="wq-doc-head"><span><b>' + L('docTitle') + '</b><span>' + L('docBy') + '</span></span>'
+        + '<span class="wq-doc-no">' + no + '<span>' + L('docDate') + ' ' + dmy(date) + '</span></span></div>'
+        + (g.d < TODAY ? '<p class="bf-stamp">' + L('docLate') + '</p>' : '')
+        + '<p class="wq-doc-cust"><b>' + esc(g.n) + '</b><br>' + esc(g.a) + ' · <span class="bf-nw">' + L('docHQ') + '</span></p>'
+        + '<dl class="bf-dm"><dt>' + L('docTerm') + '</dt><dd>' + L('docTermV') + '</dd>'
+        + '<dt>' + L('docDue') + '</dt><dd>' + dmy(plus(date, 30)) + '</dd></dl>'
+        + '<div class="bf-dl h"><span>' + L('colNo') + '</span><span>' + L('colDate') + '</span><span>' + L('colDue') + '</span><span>' + L('colAmt') + '</span></div>'
+        + g.lines.map((l) => '<div class="bf-dl"><code>' + l[0] + '</code><span>' + dmy(l[2]) + '</span><span>'
+          + dmy(plus(l[2], 30)) + '</span><span>' + money(l[1]) + '</span></div>').join('')
+        + '<dl class="wq-sum"><dt class="tot">' + L('docTot') + '</dt><dd class="tot">' + money(g.amt) + '</dd></dl>'
+        + '<p class="wq-baht">(' + bahtText(g.amt) + ')</p></article>';
+      /* เล่นจังหวะเข้าใหม่ทุกครั้งที่เปลี่ยนใบ ใช้ keyframes เดียวกับใบเสนอราคา */
+      const doc = box.firstElementChild;
+      requestAnimationFrame(() => doc.classList.add('in'));
+    }
+
     function drawCal() {
-      hideTip();
       let s = '';
       DOW[lang].forEach((d) => { s += '<div class="bf-dow">' + d + '</div>'; });
       for (let i = 0; i < START; i++) s += '<div class="bf-day blank"></div>';
@@ -5565,10 +5653,10 @@
         here.forEach((g) => {
           /* เลยวันนี้ = เลยกำหนดวางบิล · ตรงวันนี้ = ถึงรอบ · ที่เหลือ = รอบถัดไป */
           const st = day < TODAY ? ' late' : day === TODAY ? ' due' : '';
-          s += '<button class="bf-chip' + st + '" type="button" draggable="true" data-id="' + g.id + '"'
-            + ' aria-pressed="' + (picked === g.id) + '">'
-            + '<span class="bf-cn">' + esc(g.n) + '</span>'
-            + '<span class="bf-cm">' + g.inv + (lang === 'th' ? ' ใบ · ' : ' inv · ') + baht(g.amt) + '</span></button>';
+          s += '<button class="bf-chip' + st + (cur === g.id ? ' cur' : '') + '" type="button" draggable="true" data-id="' + g.id + '"'
+            + ' aria-pressed="' + (picked === g.id) + '" title="' + esc(g.n) + '">'
+            + '<span class="bf-cn">' + esc(g.n.replace(/^(บจก|หจก|บมจ)\. /, '')) + '</span>'
+            + '<span class="bf-cm">' + baht(g.amt) + '</span></button>';
         });
         if (here.length) s += '<span class="bf-tot">' + baht(here.reduce((a, g) => a + g.amt, 0)) + '</span>';
         s += '</div>';
@@ -5577,49 +5665,8 @@
       /* บนมือถือปฏิทินยุบเหลือเฉพาะวันที่มีกลุ่ม — คลี่ครบ 30 วันเฉพาะตอนกำลังย้าย
          ไม่งั้นเดือนทั้งเดือนต้องเลื่อนแนวนอนบนจอ 430px แล้วมองไม่เห็นภาพรวม */
       cal.classList.toggle('moving', !!picked);
+      drawDoc();
     }
-
-    const tip = document.createElement('div');
-    tip.className = 'bf-tip';
-    tip.id = 'bfTip';
-    tip.setAttribute('role', 'tooltip');
-    tip.hidden = true;
-    document.body.appendChild(tip);
-    let tipFor = null;
-
-    function showTip(chip) {
-      const g = groups.find((x) => x.id === chip.dataset.id);
-      if (!g) return;
-      tip.innerHTML = '<p class="bf-tip-h">' + esc(g.n) + '</p>'
-        + g.lines.map((l) => '<div class="bf-tip-r"><span>' + l[0] + '</span><span>' + baht(l[1]) + '</span></div>').join('')
-        + '<div class="bf-tip-r bf-tip-t"><span>' + (lang === 'th' ? 'รวม ' + g.inv + ' ใบ' : g.inv + ' invoices') + '</span><span>' + baht(g.amt) + '</span></div>';
-      tip.hidden = false;
-      const r = chip.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
-      const below = r.bottom + 8 + h <= innerHeight;
-      tip.style.top = (below ? r.bottom + 8 : Math.max(8, r.top - 8 - h)) + 'px';
-      tip.style.left = Math.min(Math.max(8, r.left), innerWidth - w - 8) + 'px';
-      chip.setAttribute('aria-describedby', 'bfTip');
-      tipFor = chip;
-    }
-    function hideTip() {
-      tip.hidden = true;
-      if (tipFor) tipFor.removeAttribute('aria-describedby');
-      tipFor = null;
-    }
-    cal.addEventListener('pointerover', (e) => {
-      const chip = e.target.closest('.bf-chip');
-      if (chip && e.pointerType === 'mouse' && chip !== tipFor) showTip(chip);
-    });
-    cal.addEventListener('pointerout', (e) => {
-      const chip = e.target.closest('.bf-chip');
-      if (chip && !chip.contains(e.relatedTarget)) hideTip();
-    });
-    cal.addEventListener('focusin', (e) => {
-      const chip = e.target.closest('.bf-chip');
-      if (chip && chip.matches(':focus-visible')) showTip(chip);
-    });
-    cal.addEventListener('focusout', hideTip);
-    addEventListener('scroll', hideTip, { passive: true });
 
     function move(id, day) {
       const g = groups.find((x) => x.id === id);
@@ -5637,7 +5684,7 @@
     cal.addEventListener('dragstart', (e) => {
       const chip = e.target.closest('.bf-chip');
       if (!chip) return;
-      hideTip();
+      cur = chip.dataset.id;
       e.dataTransfer.setData('text/plain', chip.dataset.id);
       e.dataTransfer.effectAllowed = 'move';
     });
@@ -5662,6 +5709,7 @@
       const chip = e.target.closest('.bf-chip');
       if (chip) {
         picked = picked === chip.dataset.id ? null : chip.dataset.id;
+        cur = chip.dataset.id;
         drawCal();
         say(picked ? T.chose[lang] : T.cleared[lang]);
         return;
@@ -5680,6 +5728,7 @@
     byId('bfReset').addEventListener('click', () => {
       groups = SEED.map((g) => ({ ...g }));
       picked = null;
+      cur = 'g1';
       drawCal();
       say(T.didReset[lang]);
     });
@@ -5797,31 +5846,6 @@
               en: 'The demo does its arithmetic in the browser and touches nothing live · the seller on the document is a fictional company · scope and pricing are quoted per project against your Requirement · built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>' }
     };
 
-    /* ตัวอักษรไทยของยอดเงิน — ของจริงพิมพ์บรรทัดนี้ในใบเสนอราคาทุกใบ
-       กฎที่พลาดกันบ่อย: หลักหน่วยเป็น 1 ตามหลังตัวอื่น = "เอ็ด" · หลักสิบเป็น 2 = "ยี่" · หลักสิบเป็น 1 = ไม่ต้องมีคำนำ */
-    const TH_D = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
-    const TH_P = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
-    function thWord(s) {
-      s = String(s).replace(/^0+(?=\d)/, '');
-      if (s.length > 7) {
-        const head = s.slice(0, s.length - 6), tail = s.slice(s.length - 6);
-        return thWord(head) + 'ล้าน' + (Number(tail) ? thWord(tail) : '');
-      }
-      let out = '';
-      for (let i = 0; i < s.length; i++) {
-        const d = +s[i], pos = s.length - i - 1;
-        if (!d) continue;
-        if (pos === 0 && d === 1 && s.length > 1) out += 'เอ็ด';
-        else if (pos === 1 && d === 2) out += 'ยี่';
-        else if (pos !== 1 || d !== 1) out += TH_D[d];
-        out += TH_P[pos];
-      }
-      return out;
-    }
-    function bahtText(v) {
-      const int = Math.floor(v + 1e-6), sat = Math.round((v - int) * 100);
-      return (int ? thWord(int) : 'ศูนย์') + 'บาท' + (sat ? thWord(sat) + 'สตางค์' : 'ถ้วน');
-    }
     const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     const byId = (id) => document.getElementById(id);
