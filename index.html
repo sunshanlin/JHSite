@@ -2503,6 +2503,23 @@
     font-size: .72rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
   }
 
+  /* ชี้เมาส์/โฟกัสที่กลุ่ม = รายการใบแจ้งหนี้ในกลุ่มนั้น · ติดกับ body เพราะ .reveal มี transform
+     ซึ่งจะทำให้ position:fixed อ้างอิงผิดกล่อง */
+  .bf-tip {
+    position: fixed; z-index: 60; width: 260px; pointer-events: none;
+    background: #fff; border: 1px solid var(--ui-line); border-radius: 10px;
+    box-shadow: var(--ui-shadow); padding: 10px 12px 9px; color: var(--ui-ink);
+    font-family: "Anuphan", "Plus Jakarta Sans", sans-serif; font-size: .8rem; line-height: 1.4;
+  }
+  .bf-tip[hidden] { display: none; }
+  .bf-tip-h { font-weight: 600; margin: 0 0 6px; }
+  .bf-tip-r { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0;
+    border-top: 1px solid var(--ui-line); font-variant-numeric: tabular-nums; }
+  .bf-tip-r span:first-child { font-family: "Plus Jakarta Sans", sans-serif; font-size: .76rem; color: var(--ui-muted); }
+  .bf-tip-r span:last-child { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; }
+  .bf-tip-t { border-top: 1.5px solid var(--ui-ink); margin-top: 2px; font-weight: 700; }
+  .bf-tip-t span:first-child { font-family: inherit; color: var(--ui-ink); font-size: .8rem; }
+
   .bf-status {
     margin: 0; padding: 13px 24px; min-height: 48px;
     border-bottom: 1px solid var(--ui-line); background: var(--bg-soft);
@@ -5509,13 +5526,20 @@
        สัปดาห์เริ่มวันอาทิตย์ อังคารจึงเป็นคอลัมน์ที่ 2 (นับจาก 0) */
     const START = 2, DAYS = 30, TODAY = 8;
     const SEED = [
-      { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก', inv: 3, amt: 248500 },
-      { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', inv: 2, amt: 86200 },
-      { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม', inv: 5, amt: 1120000 },
-      { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์', inv: 4, amt: 372900 },
-      { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', inv: 1, amt: 54000 },
-      { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค', inv: 6, amt: 903450 }
+      { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก',
+        lines: [['IV6908-0142', 120000], ['IV6908-0157', 86500], ['IV6908-0171', 42000]] },
+      { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ',
+        lines: [['IV6907-0388', 51700], ['IV6908-0103', 34500]] },
+      { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม',
+        lines: [['IV6908-0119', 420000], ['IV6908-0126', 310000], ['IV6908-0148', 185500], ['IV6908-0163', 128000], ['IV6908-0180', 76500]] },
+      { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์',
+        lines: [['IV6908-0204', 148200], ['IV6908-0215', 112000], ['IV6908-0229', 69300], ['IV6908-0236', 43400]] },
+      { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง',
+        lines: [['IV6908-0241', 54000]] },
+      { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค',
+        lines: [['IV6908-0252', 265000], ['IV6908-0258', 198750], ['IV6908-0263', 154300], ['IV6908-0270', 121900], ['IV6908-0277', 97500], ['IV6908-0285', 66000]] }
     ];
+    SEED.forEach((g) => { g.inv = g.lines.length; g.amt = g.lines.reduce((a, l) => a + l[1], 0); });
     const DOW = { th: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'], en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] };
     let groups = SEED.map((g) => ({ ...g }));
     let picked = null;
@@ -5525,6 +5549,7 @@
     function say(html) { status.innerHTML = html; }
 
     function drawCal() {
+      hideTip();
       let s = '';
       DOW[lang].forEach((d) => { s += '<div class="bf-dow">' + d + '</div>'; });
       for (let i = 0; i < START; i++) s += '<div class="bf-day blank"></div>';
@@ -5554,6 +5579,48 @@
       cal.classList.toggle('moving', !!picked);
     }
 
+    const tip = document.createElement('div');
+    tip.className = 'bf-tip';
+    tip.id = 'bfTip';
+    tip.setAttribute('role', 'tooltip');
+    tip.hidden = true;
+    document.body.appendChild(tip);
+    let tipFor = null;
+
+    function showTip(chip) {
+      const g = groups.find((x) => x.id === chip.dataset.id);
+      if (!g) return;
+      tip.innerHTML = '<p class="bf-tip-h">' + esc(g.n) + '</p>'
+        + g.lines.map((l) => '<div class="bf-tip-r"><span>' + l[0] + '</span><span>' + baht(l[1]) + '</span></div>').join('')
+        + '<div class="bf-tip-r bf-tip-t"><span>' + (lang === 'th' ? 'รวม ' + g.inv + ' ใบ' : g.inv + ' invoices') + '</span><span>' + baht(g.amt) + '</span></div>';
+      tip.hidden = false;
+      const r = chip.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+      const below = r.bottom + 8 + h <= innerHeight;
+      tip.style.top = (below ? r.bottom + 8 : Math.max(8, r.top - 8 - h)) + 'px';
+      tip.style.left = Math.min(Math.max(8, r.left), innerWidth - w - 8) + 'px';
+      chip.setAttribute('aria-describedby', 'bfTip');
+      tipFor = chip;
+    }
+    function hideTip() {
+      tip.hidden = true;
+      if (tipFor) tipFor.removeAttribute('aria-describedby');
+      tipFor = null;
+    }
+    cal.addEventListener('pointerover', (e) => {
+      const chip = e.target.closest('.bf-chip');
+      if (chip && e.pointerType === 'mouse' && chip !== tipFor) showTip(chip);
+    });
+    cal.addEventListener('pointerout', (e) => {
+      const chip = e.target.closest('.bf-chip');
+      if (chip && !chip.contains(e.relatedTarget)) hideTip();
+    });
+    cal.addEventListener('focusin', (e) => {
+      const chip = e.target.closest('.bf-chip');
+      if (chip && chip.matches(':focus-visible')) showTip(chip);
+    });
+    cal.addEventListener('focusout', hideTip);
+    addEventListener('scroll', hideTip, { passive: true });
+
     function move(id, day) {
       const g = groups.find((x) => x.id === id);
       if (!g) return;
@@ -5570,6 +5637,7 @@
     cal.addEventListener('dragstart', (e) => {
       const chip = e.target.closest('.bf-chip');
       if (!chip) return;
+      hideTip();
       e.dataTransfer.setData('text/plain', chip.dataset.id);
       e.dataTransfer.effectAllowed = 'move';
     });
