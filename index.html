@@ -4025,14 +4025,14 @@
     </defs></svg>
 
     <div class="wq-arch reveal">
-      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งรายการสินค้าและราคาไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
+      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งรายการสินค้า (ไม่รวมราคา) ไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
       <div class="wq-app-node" aria-hidden="true">
         <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-chat"/></svg></span>
         <span class="wq-app-name">LINE</span>
         <span class="wq-app-role">(Login&nbsp;+&nbsp;LIFF)</span>
       </div>
       <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า + ราคา</span></span>
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">รายการสินค้า</span></span>
         <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
       </span>
       <div class="wq-app-node" aria-hidden="true">
@@ -4041,7 +4041,7 @@
         <span class="wq-app-role">(Cloudflare®&nbsp;Workers)</span>
       </div>
       <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า + ราคา</span></span>
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">รายการสินค้า</span></span>
         <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
       </span>
       <div class="wq-app-node" aria-hidden="true">
@@ -4051,7 +4051,7 @@
       </div>
       <p class="wq-legend" aria-hidden="true">
         <span><i class="wq-flow wq-fwd"></i><span data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">สินค้า + ราคา</span></span>
+        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">รายการสินค้า</span></span>
       </p>
     </div>
 
@@ -4064,7 +4064,7 @@
       <div class="wq-stage">
         <div class="wq-pick">
           <p class="wq-step"><b>01</b><span data-wq="s1">เลือกสินค้า</span></p>
-          <p class="wq-hint" data-wq="s1hint">แคตตาล็อกและราคาชุดเดียวกับที่ลูกค้าเห็นบน LINE</p>
+          <p class="wq-hint" data-wq="s1hint">รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE — ไม่แสดงราคา ราคามาจาก Business Central ตอนออกใบเสนอราคา</p>
           <div class="wq-items" id="wq-items"></div>
 
           <p class="wq-step"><b>02</b><span data-wq="s2">ท่านเป็น</span></p>
@@ -5579,13 +5579,13 @@
       sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
              en: 'Buyers pick their items inside LINE, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
       app: { th: 'เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์', en: 'Buyer-side demo · runs in your browser' },
-      archSr: { th: 'ลำดับการทำงาน: Business Central ส่งรายการสินค้าและราคาไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
-                en: 'How it flows: Business Central syncs items and prices to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
+      archSr: { th: 'ลำดับการทำงาน: Business Central ส่งรายการสินค้า (ไม่รวมราคา) ไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
+                en: 'How it flows: Business Central syncs the item list (no prices) to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
       flowReq: { th: 'คำขอใบเสนอราคา', en: 'Quote request' },
-      flowItems: { th: 'สินค้า + ราคา', en: 'Items + prices' },
+      flowItems: { th: 'รายการสินค้า', en: 'Item list' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
-      s1hint: { th: 'แคตตาล็อกและราคาชุดเดียวกับที่ลูกค้าเห็นบน LINE', en: 'The same catalogue and prices the buyer sees in LINE' },
+      s1hint: { th: 'รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE — ไม่แสดงราคา ราคามาจาก Business Central ตอนออกใบเสนอราคา', en: 'The same item list the buyer sees in LINE — no prices; Business Central prices the quote' },
       s2: { th: 'ท่านเป็น', en: 'You are' },
       s2hint: { th: 'ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ', en: 'This changes what Business Central does with the request' },
       send: { th: 'ส่งคำขอราคา', en: 'Send the request' },
@@ -5594,7 +5594,6 @@
       sendAgain: { th: 'ส่งคำขออีกครั้ง', en: 'Send another request' },
       plus: { th: 'เพิ่มจำนวน', en: 'Add one' },
       minus: { th: 'ลดจำนวน', en: 'Remove one' },
-      unit: { th: 'บาท', en: 'THB' },
       qtyNow: { th: 'ขณะนี้', en: 'now' },
       nodeLine: { th: 'LINE (LIFF)', en: 'LINE (LIFF)' },
       nodeWorker: { th: 'Cloudflare Worker', en: 'Cloudflare Worker' },
@@ -5677,7 +5676,7 @@
         last = it.g;
         return head + '<div class="wq-item' + (it.qty ? ' on' : '') + '">' + ico('wqi-box')
         + '<span class="wq-name"><b>' + esc(it.name) + '</b><span><code>' + it.code + '</code> · '
-        + it.price.toLocaleString('en-US') + ' ' + T.unit[lang] + '</span></span>'
+        + 'EA</span></span>'
         + '<span class="wq-qty">'
         + '<button type="button" data-i="' + i + '" data-d="-1" aria-label="' + T.minus[lang] + ' ' + it.code
         + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '"' + (it.qty ? '' : ' disabled') + '>&minus;</button>'
