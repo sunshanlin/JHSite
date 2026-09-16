@@ -2492,8 +2492,8 @@
 
   .bf-chip {
     display: block; width: 100%; text-align: left; font: inherit; cursor: grab;
-    color: var(--ui-ink); background: var(--cal-tint);
-    border: 1px solid var(--cal-line); border-radius: var(--ui-radius-btn); padding: 4px 5px;
+    color: var(--ui-ink); background: #fff;
+    border: 1px solid #B9C6C3; border-radius: var(--ui-radius-btn); padding: 4px 5px;
     transition: background .125s ease, border-color .125s ease, color .125s ease;
   }
   .bf-chip:hover { border-color: var(--cal-blue); }
@@ -2553,7 +2553,7 @@
      สีเน้นวันวางบิลและรายการที่เลยกำหนด */
   .bf-chip.late { background: rgba(166,58,86,.07); border-color: rgba(166,58,86,.34); }
   .bf-chip.late .bf-cn { color: var(--brand-burgundy-dark); }
-  .bf-chip.due { border-color: var(--cal-blue); }
+  .bf-chip.due { background: #D3E6F8; border-color: var(--cal-blue); }
   .bf-chip[aria-pressed="true"].late { background: var(--brand-burgundy-dark); border-color: var(--brand-burgundy-dark); }
   .bf-chip[aria-pressed="true"].late .bf-cn { color: #fff; }
   .bf-day.late .bf-dn { color: var(--brand-burgundy-dark); }
@@ -2565,8 +2565,8 @@
   .bf-due span { display: flex; align-items: center; gap: 8px; }
   .bf-due i { width: 20px; height: 12px; flex: 0 0 auto; border-radius: 2px; }
   .bf-d-late { background: rgba(166,58,86,.07); border: 1px solid rgba(166,58,86,.34); }
-  .bf-d-due { background: var(--cal-tint); border: 1px solid var(--cal-blue); }
-  .bf-d-next { background: var(--cal-tint); border: 1px solid var(--cal-line); }
+  .bf-d-due { background: #D3E6F8; border: 1px solid var(--cal-blue); }
+  .bf-d-next { background: #fff; border: 1px solid #B9C6C3; }
   .bf-foot {
     display: flex; flex-wrap: wrap; gap: 8px 30px;
     padding: 14px 24px 16px; border-top: 1px solid var(--ui-line); background: var(--bg-soft);
