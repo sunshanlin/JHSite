@@ -3172,34 +3172,34 @@
     margin-top: 2px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: .82rem; font-weight: 500; color: var(--ui-muted);
   }
-  /* ลูกศรยาวเส้นเดียว ปลายเป็นหัวลูกศร — เส้นยื่นเข้าไปในคอลัมน์ไอคอนให้ยาวขึ้น
-     แต่หยุดห่างขอบไอคอน ~20px ไม่ให้ดูอึดอัด
-     จุดวิ่งไปตามเส้นทีละช่วง สำนวนเดียวกับจุดเดินในผัง #billing-flow */
-  .wq-link {
-    position: relative; height: 2px; margin: 43px -18px 0 -20px;
-    background: var(--brand-jade); border-radius: 2px;
+  /* สองเส้นต่อช่วง: บน = สินค้า+ราคา ไหลกลับไปหาลูกค้า (Item Sync)
+                    ล่าง = คำขอใบเสนอราคา ไหลไปหา Business Central (Quote Fetch)
+     เส้นยื่นเข้าคอลัมน์ไอคอนให้ยาวขึ้น แต่หยุดห่างขอบไอคอน ~20px · อยู่นิ่ง ไม่มีแอนิเมชัน
+     คู่เส้นสูง 16px จัดกึ่งกลางที่แกนไอคอน (88/2 = 44) → เริ่มที่ 36px */
+  .wq-link { display: flex; flex-direction: column; gap: 12px; margin: 36px -18px 0 -20px; }
+  .wq-flow { position: relative; display: block; height: 2px; border-radius: 2px; }
+  .wq-flow::after {
+    content: ""; position: absolute; top: 50%; width: 10px; height: 10px; margin-top: -6px;
+    border-top: 2px solid currentColor; border-right: 2px solid currentColor; border-radius: 0 2px 0 0;
   }
-  .wq-link::after {
-    content: ""; position: absolute; right: 1px; top: 50%;
-    width: 11px; height: 11px; margin-top: -6.5px;
-    border-top: 2px solid var(--brand-jade); border-right: 2px solid var(--brand-jade);
-    border-radius: 0 2px 0 0; transform: rotate(45deg);
+  .wq-fwd { color: var(--brand-jade); background: var(--brand-jade); }
+  .wq-fwd::after { right: 1px; transform: rotate(45deg); }
+  .wq-back { color: var(--brand-mist); background: var(--brand-mist); }
+  .wq-back::after { left: 1px; transform: rotate(-135deg); }
+  .wq-tag {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; font-size: .8rem; font-weight: 600; line-height: 1.2;
   }
-  .wq-link::before {
-    content: ""; position: absolute; top: 50%; left: 0;
-    width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%;
-    background: var(--brand-jade); box-shadow: 0 0 0 4px rgba(65,119,113,.18);
-    opacity: 0; animation: wqDotA 3.6s cubic-bezier(.45,0,.55,1) infinite;
+  .wq-back .wq-tag { bottom: 8px; color: var(--ui-muted); }
+  .wq-fwd .wq-tag { top: 8px; color: var(--brand-teal); }
+  /* จอแคบ: ป้ายบนเส้นไม่พอที่ — ย้ายมาเป็นคำอธิบายใต้แถวแทน */
+  .wq-legend {
+    display: none; grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; gap: 6px 18px;
+    margin: 18px 0 0; font-size: .8rem; font-weight: 600; color: var(--ui-muted);
   }
-  .wq-link.wq-link-2::before { animation-name: wqDotB; }
-  @keyframes wqDotA {
-    0% { left: 0; opacity: 0; } 5% { opacity: 1; } 40% { opacity: 1; }
-    46% { left: calc(100% - 16px); opacity: 0; } 100% { left: calc(100% - 16px); opacity: 0; }
-  }
-  @keyframes wqDotB {
-    0%, 50% { left: 0; opacity: 0; } 55% { opacity: 1; } 90% { opacity: 1; }
-    96% { left: calc(100% - 16px); opacity: 0; } 100% { left: calc(100% - 16px); opacity: 0; }
-  }
+  .wq-legend > span { display: inline-flex; align-items: center; gap: 8px; }
+  .wq-legend .wq-flow { width: 24px; }
+  .wq-legend .wq-flow::after { width: 7px; height: 7px; margin-top: -4.5px; }
   .wq-sr {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -3227,11 +3227,9 @@
 
   .wq-stage { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
   .wq-pick { padding: 20px 24px 22px; min-width: 0; }
-  .wq-out {
-    padding: 20px 24px 22px; min-width: 0;
-    background: #EFF5F3; border-left: 1px solid var(--ui-line);
-    box-shadow: inset 3px 0 0 var(--brand-jade);
-  }
+  /* สองฝั่งต้องแยกกันออกด้วยตา: ซ้าย = ลูกค้า พื้นขาว · ขวา = ระบบ พื้น teal ทึบ
+     ใบเสนอราคาเป็นกระดาษขาววางบนพื้นเข้ม — สีตัวหนังสือของฝั่งขวาอยู่ในบล็อก "ฝั่งระบบ" ด้านล่าง */
+  .wq-out { padding: 20px 24px 22px; min-width: 0; background: var(--brand-teal); }
   .wq-step {
     display: flex; align-items: baseline; gap: 9px; margin: 0 0 6px;
     font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; color: var(--ui-ink);
@@ -3252,11 +3250,11 @@
   .wq-item:has(+ .wq-grp) { border-bottom: 1px solid var(--ui-line); }
   .wq-item {
     display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 13px; align-items: center;
-    padding: 11px 8px 11px 6px; border-top: 1px solid var(--ui-line);
+    padding: 11px 8px 11px 12px; border-top: 1px solid var(--ui-line);
     transition: background .16s ease;
   }
   .wq-item:last-child { border-bottom: 1px solid var(--ui-line); }
-  .wq-item.on { background: rgba(65,119,113,.07); }
+  .wq-item.on { box-shadow: inset 3px 0 0 var(--brand-jade); }
   .wq-item .wq-ic { width: 26px; height: 26px; color: var(--brand-mint); }
   .wq-item.on .wq-ic { color: var(--brand-jade); }
   .wq-name { min-width: 0; }
@@ -3373,6 +3371,17 @@
   }
   .wq-empty .wq-ic { width: 26px; height: 26px; color: var(--brand-mist); }
 
+  /* ── ฝั่งระบบบนพื้น teal: ข้อความสว่าง (#BFD3D0 = 6.5:1, ขาว = 10:1) จุดและเส้นสี mint ── */
+  .wq-out .wq-node:not(:last-child)::before { background: rgba(255,255,255,.2); }
+  .wq-out .wq-node.on:not(:last-child)::before { background: #7CCBC4; }
+  .wq-out .wq-dot { border-color: rgba(255,255,255,.45); background: transparent; }
+  .wq-out .wq-node.on .wq-dot { border-color: #7CCBC4; background: #7CCBC4; }
+  .wq-out .wq-txt b { color: rgba(255,255,255,.75); }
+  .wq-out .wq-node.on .wq-txt b { color: #fff; }
+  .wq-out .wq-txt > span { color: #BFD3D0; }
+  .wq-out .wq-empty { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.32); color: #BFD3D0; }
+  .wq-out .wq-empty .wq-ic { color: rgba(255,255,255,.55); }
+  .wq-doc { color: var(--ui-ink); box-shadow: 0 16px 32px -18px rgba(0,0,0,.55); border-color: transparent; }
   .wq-keyed {
     display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: baseline;
     margin: 0; padding: 17px 24px; background: var(--bg-soft);
@@ -3436,7 +3445,7 @@
 
   @media (max-width: 900px) {
     .wq-stage { grid-template-columns: 1fr; }
-    .wq-out { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
+    .wq-out { border-top: 0; }
     .wq-bar, .wq-keyed, .wq-proof, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
     .wq-send { width: 100%; }
   }
@@ -3453,15 +3462,17 @@
     .wq-app-tile { border-radius: 13px; }
     .wq-app-tile img { width: 38px; height: 38px; }
     .wq-app-tile .wq-ic { width: 36px; height: 36px; }
-    /* จอแคบ: เส้นยื่นเข้าคอลัมน์ไอคอนแค่ 3px ยังเหลือระยะห่างขอบไอคอน ~12px */
-    .wq-link { margin: 27px -3px 0 -3px; }
-    .wq-link::after { width: 8px; height: 8px; margin-top: -5px; }
-    .wq-link::before { width: 7px; height: 7px; margin-top: -3.5px; box-shadow: 0 0 0 3px rgba(65,119,113,.18); }
+    /* จอแคบ: เส้นยื่นเข้าคอลัมน์ไอคอนแค่ 3px ยังเหลือระยะห่างขอบไอคอน ~10px
+       คู่เส้นสูง 12px กึ่งกลางที่ 28px (56/2) → เริ่มที่ 22px */
+    .wq-link { gap: 8px; margin: 22px -3px 0 -3px; }
+    .wq-flow::after { width: 7px; height: 7px; margin-top: -4.5px; }
+    .wq-tag { display: none; }
+    .wq-legend { display: flex; }
     .wq-app-name { font-size: .88rem; }
-    .wq-app-role { font-size: .72rem; white-space: nowrap; }
+    .wq-app-role { font-size: .72rem; }
   }
   @media (max-width: 520px) {
-    .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 2px; padding-right: 2px; }
+    .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 9px; padding-right: 2px; }
     .wq-item .wq-ic { width: 22px; height: 22px; }
     .wq-qty button { width: 32px; height: 32px; }
     .wq-qty output { min-width: 24px; }
@@ -3473,7 +3484,6 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .wq-doc.in { animation: none; }
-    .wq-link::before { animation: none; display: none; }
     .wq-dot, .wq-txt b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item, .wq-fig a { transition: none; }
     .wq-fig a:hover { transform: none; }
     .wq-node.on .wq-dot { transform: none; }
@@ -4015,24 +4025,34 @@
     </defs></svg>
 
     <div class="wq-arch reveal">
-      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: ลูกค้าเข้าสู่ระบบและส่งคำขอผ่าน LINE (LIFF) คำขอไปพักที่ Cloudflare Workers แล้ว Business Central ดึงคำขอไปสร้างใบเสนอราคา</p>
+      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งรายการสินค้าและราคาไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
       <div class="wq-app-node" aria-hidden="true">
         <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-chat"/></svg></span>
         <span class="wq-app-name">LINE</span>
-        <span class="wq-app-role">(Login + LIFF)</span>
+        <span class="wq-app-role">(Login&nbsp;+&nbsp;LIFF)</span>
       </div>
-      <span class="wq-link" aria-hidden="true"></span>
+      <span class="wq-link" aria-hidden="true">
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า + ราคา</span></span>
+        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
+      </span>
       <div class="wq-app-node" aria-hidden="true">
         <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-cloud"/></svg></span>
-        <span class="wq-app-name">Cloudflare®</span>
-        <span class="wq-app-role">(Workers)</span>
+        <span class="wq-app-name">Middleware</span>
+        <span class="wq-app-role">(Cloudflare®&nbsp;Workers)</span>
       </div>
-      <span class="wq-link wq-link-2" aria-hidden="true"></span>
+      <span class="wq-link" aria-hidden="true">
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า + ราคา</span></span>
+        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
+      </span>
       <div class="wq-app-node" aria-hidden="true">
         <span class="wq-app-icon wq-app-tile"><img src="img/tech/business-central.svg" alt="" width="58" height="58"></span>
         <span class="wq-app-name">Business Central</span>
-        <span class="wq-app-role">(Quote Fetch)</span>
+        <span class="wq-app-role">(Item&nbsp;Sync + Quote&nbsp;Fetch)</span>
       </div>
+      <p class="wq-legend" aria-hidden="true">
+        <span><i class="wq-flow wq-fwd"></i><span data-wq="flowReq">คำขอใบเสนอราคา</span></span>
+        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">สินค้า + ราคา</span></span>
+      </p>
     </div>
 
     <div class="wq reveal">
@@ -5559,8 +5579,10 @@
       sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
              en: 'Buyers pick their items inside LINE with nothing to install, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
       app: { th: 'เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์', en: 'Buyer-side demo · runs in your browser' },
-      archSr: { th: 'ลำดับการทำงาน: ลูกค้าเข้าสู่ระบบและส่งคำขอผ่าน LINE (LIFF) คำขอไปพักที่ Cloudflare Workers แล้ว Business Central ดึงคำขอไปสร้างใบเสนอราคา',
-                en: 'How it flows: the buyer signs in and sends the request through LINE (LIFF), the request waits on Cloudflare Workers, and Business Central fetches it to create the quote' },
+      archSr: { th: 'ลำดับการทำงาน: Business Central ส่งรายการสินค้าและราคาไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
+                en: 'How it flows: Business Central syncs items and prices to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
+      flowReq: { th: 'คำขอใบเสนอราคา', en: 'Quote request' },
+      flowItems: { th: 'สินค้า + ราคา', en: 'Items + prices' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
       s1hint: { th: 'แคตตาล็อกและราคาชุดเดียวกับที่ลูกค้าเห็นบน LINE', en: 'The same catalogue and prices the buyer sees in LINE' },
