@@ -3180,6 +3180,12 @@
   .wq-hint { margin: 0 0 12px; font-size: .84rem; color: var(--ui-muted); }
 
   .wq-items { margin: 0 0 22px; }
+  .wq-grp {
+    margin: 16px 0 6px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ui-muted);
+  }
+  .wq-grp:first-child { margin-top: 0; }
+  .wq-item:has(+ .wq-grp) { border-bottom: 1px solid var(--ui-line); }
   .wq-item {
     display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 13px; align-items: center;
     padding: 11px 8px 11px 6px; border-top: 1px solid var(--ui-line);
@@ -3236,6 +3242,7 @@
   .wq-send:hover:not(:disabled) { background: var(--brand-deep); border-color: var(--brand-deep); }
   .wq-send:disabled { background: var(--brand-mist); border-color: var(--brand-mist); cursor: default; }
   .wq-send .wq-ic { width: 17px; height: 17px; }
+  .wq-pdpa { margin: 10px 0 0; font-size: .78rem; line-height: 1.55; color: var(--ui-muted); }
 
   /* ท่อสามโหนด — จุดสว่างไล่ทีละขั้นหลังกดส่ง เส้นต่อระหว่างโหนดคือ ::before */
   .wq-pipe { margin: 0 0 18px; }
@@ -3282,7 +3289,7 @@
     padding: 7px 0; border-top: 1px solid var(--ui-line);
     font-size: .85rem; font-variant-numeric: tabular-nums;
   }
-  .wq-line code { font-weight: 700; color: var(--brand-teal); letter-spacing: .05em; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .wq-line code { white-space: nowrap; font-weight: 700; color: var(--brand-teal); letter-spacing: .05em; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
   .wq-line i { font-style: normal; color: var(--ui-muted); text-align: right; }
   .wq-line em { font-style: normal; text-align: right; }
   .wq-sum {
@@ -3347,9 +3354,14 @@
     .wq-send { width: 100%; }
   }
   @media (max-width: 520px) {
-    .wq-item { grid-template-columns: 26px minmax(0, 1fr); row-gap: 9px; }
-    .wq-item .wq-qty { grid-column: 2; justify-self: start; }
-    .wq-line { grid-template-columns: 54px minmax(0, 1fr) 34px 78px; gap: 7px; font-size: .8rem; }
+    .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 2px; padding-right: 2px; }
+    .wq-item .wq-ic { width: 22px; height: 22px; }
+    .wq-qty button { width: 32px; height: 32px; }
+    .wq-qty output { min-width: 24px; }
+    .wq-line { grid-template-columns: 58px minmax(0, 1fr) 20px 82px; gap: 7px; font-size: .8rem; }
+    .wq-line code { letter-spacing: .02em; }
+    .wq-keyed { grid-template-columns: 1fr; gap: 4px; }
+    .wq-doc-no { text-align: left; }
     .wq-sum { grid-template-columns: minmax(0, 1fr) 86px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -3907,6 +3919,7 @@
           <div class="wq-who" id="wq-who" role="group" aria-label="ประเภทผู้ซื้อ"></div>
 
           <button class="wq-send" type="button" id="wq-send"><svg class="wq-ic"><use href="#wqi-send"/></svg><span data-wq="send">ส่งคำขอราคา</span></button>
+          <p class="wq-pdpa" data-wq="pdpa">ข้อมูลที่ท่านส่งมาพร้อมคำขอนี้ใช้เพื่อจัดทำใบเสนอราคาและติดต่อกลับเท่านั้น</p>
         </div>
 
         <div class="wq-out">
@@ -3921,11 +3934,11 @@
       </p>
 
       <p class="wq-proof-cap">
-        <span><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว — ภาพจากระบบทดสอบบน quote.jwicconsulting.com</span></span>
+        <span><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว — ใบ QG000010 จากระบบทดสอบ ตรงกับเดโมด้านบนทุกบรรทัด</span></span>
         <span data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</span>
       </p>
       <a class="wq-proof" href="img/bc-liff-quote.webp" target="_blank" rel="noopener">
-        <img src="img/bc-liff-quote.webp" alt="สามขั้นจากระบบทดสอบจริง — เลือกสินค้าใน LINE, กรอกข้อมูลผู้ซื้อ, แล้วใบเสนอราคา QG000007 ที่ Business Central สร้างให้" loading="lazy" width="1201" height="508">
+        <img src="img/bc-liff-quote.webp" alt="จากระบบทดสอบจริง — ข้อมูลผู้ติดต่อที่กรอกใน LINE แล้วใบเสนอราคา QG000010 เก้ารายการที่ Business Central สร้างให้ ช่องอีเมลเบลอไว้" loading="lazy" width="1039" height="608">
       </a>
     </div>
 
@@ -5357,18 +5370,26 @@
     const itemBox = document.getElementById('wq-items');
     if (!itemBox) return;
 
-    /* ราคาต่อหน่วยชุดเดียวกับใบเสนอราคาจริงที่ออกจากระบบทดสอบ (QG000005, QG000007)
-       จำนวนตั้งต้นตรงกับภาพหลักฐานใต้การ์ด — เปิดมาเห็นเลขเดียวกับของจริง */
+    /* แคตตาล็อก ราคา และจำนวนตั้งต้นชุดเดียวกับใบเสนอราคาจริง QG000010 ที่ออกจากระบบทดสอบ
+       at = ลำดับที่ลูกค้ากดเพิ่มลงตะกร้า ใบเสนอราคาเรียงบรรทัดตามนี้เหมือนของจริง
+       เปิดมากดส่งเลยโดยไม่แตะอะไร = ได้ใบเดียวกับภาพหลักฐานทุกบรรทัด */
+    const GROUPS = ['Laboratory Analyzers', 'Medical Devices'];
     const ITEMS = [
-      { code: 'LA-001', name: 'Hematology Analyzer', price: 850000, qty: 2 },
-      { code: 'LA-002', name: 'Chemistry Analyzer', price: 1284000, qty: 0 },
-      { code: 'LA-003', name: 'Immunoassay Analyzer', price: 1500000, qty: 1 }
+      { g: 0, code: 'LA-001', name: 'Hematology Analyzer', price: 850000, qty: 2, at: 1 },
+      { g: 0, code: 'LA-002', name: 'Chemistry Analyzer', price: 1200000, qty: 1, at: 9 },
+      { g: 0, code: 'LA-003', name: 'Immunoassay Analyzer', price: 1500000, qty: 1, at: 2 },
+      { g: 0, code: 'LA-004', name: 'Electrolyte Analyzer', price: 350000, qty: 1, at: 8 },
+      { g: 1, code: 'MD-001', name: 'Patient Monitor', price: 95000, qty: 1, at: 3 },
+      { g: 1, code: 'MD-002', name: 'Infusion Pump', price: 45000, qty: 1, at: 4 },
+      { g: 1, code: 'MD-003', name: 'ECG Machine', price: 110000, qty: 1, at: 5 },
+      { g: 1, code: 'MD-004', name: 'Examination Light', price: 28000, qty: 1, at: 6 },
+      { g: 1, code: 'MD-005', name: 'Medical Suction Unit', price: 35000, qty: 1, at: 7 }
     ];
 
     const WHO = [
       { tab: { th: 'ลูกค้าเดิม', en: 'Existing customer' },
-        cust: { th: 'บริษัท ซื้อมาขายไป จำกัด', en: 'Suemakhaipai Co., Ltd.' },
-        sub: { th: 'ลูกค้ารหัส C00123 · เครดิต 30 วัน', en: 'Customer C00123 · 30-day terms' },
+        cust: { th: 'โรงพยาบาลเมดิคอลพาร์ค กรุงเทพฯ', en: 'Medical Park Hospital Bangkok' },
+        sub: { th: 'ลูกค้ารหัส C00123 · ผู้ติดต่อ คุณวาริณ', en: 'Customer C00123 · contact: Khun Warin' },
         bc: { th: 'เจอเลขผู้เสียภาษีในระบบ — ใช้ลูกค้า C00123 ที่อยู่ เครดิต และเงื่อนไขชำระเดิม',
               en: 'Tax ID matched — customer C00123 is reused with its address, credit limit and terms' } },
       { tab: { th: 'นิติบุคคลใหม่', en: 'New company' },
@@ -5384,7 +5405,7 @@
     ];
 
     const SELLER = { th: 'บริษัท ตัวอย่างการค้า จำกัด', en: 'Sample Trading Co., Ltd.' };
-    const DISCOUNT = 0.10, VAT = 0.07;
+    const DISCOUNT = 0.20, VAT = 0.07;
 
     const T = {
       kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
@@ -5398,10 +5419,12 @@
       s2: { th: 'ท่านเป็น', en: 'You are' },
       s2hint: { th: 'ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ', en: 'This changes what Business Central does with the request' },
       send: { th: 'ส่งคำขอราคา', en: 'Send the request' },
+      pdpa: { th: 'ข้อมูลที่ท่านส่งมาพร้อมคำขอนี้ใช้เพื่อจัดทำใบเสนอราคาและติดต่อกลับเท่านั้น',
+              en: 'Details sent with this request are used only to prepare the quote and get back to you' },
       sendAgain: { th: 'ส่งคำขออีกครั้ง', en: 'Send another request' },
       plus: { th: 'เพิ่มจำนวน', en: 'Add one' },
       minus: { th: 'ลดจำนวน', en: 'Remove one' },
-      unit: { th: 'บาท/หน่วย', en: 'THB each' },
+      unit: { th: 'บาท', en: 'THB' },
       qtyNow: { th: 'ขณะนี้', en: 'now' },
       nodeLine: { th: 'LINE (LIFF)', en: 'LINE (LIFF)' },
       nodeWorker: { th: 'Cloudflare Worker', en: 'Cloudflare Worker' },
@@ -5418,7 +5441,7 @@
       docDate: { th: 'วันที่เอกสาร', en: 'Document date' },
       colQty: { th: 'จำนวน', en: 'Qty' },
       sumNet: { th: 'รวมเป็นเงิน', en: 'Subtotal' },
-      sumDisc: { th: 'ส่วนลด 10%', en: 'Discount 10%' },
+      sumDisc: { th: 'ส่วนลด 20%', en: 'Discount 20%' },
       sumAfter: { th: 'จำนวนเงินหลังหักส่วนลด', en: 'After discount' },
       sumVat: { th: 'ภาษีมูลค่าเพิ่ม 7%', en: 'VAT 7%' },
       sumTotal: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
@@ -5427,8 +5450,8 @@
       keyedLbl: { th: 'ช่องที่ฝ่ายขายต้องคีย์ซ้ำ', en: 'Fields sales has to retype' },
       keyedVal: { th: '<b>0</b> — ทั้งใบมาจากสิ่งที่ลูกค้ากรอกเอง ฝ่ายขายเปิดมาตรวจแล้วกดส่งได้เลย',
                   en: '<b>0</b> — every line comes from what the buyer filled in; sales opens it, checks it and sends it' },
-      proof: { th: 'ของจริงทำงานแล้ว — ภาพจากระบบทดสอบบน quote.jwicconsulting.com',
-               en: 'Already running — screenshots from the test system on quote.jwicconsulting.com' },
+      proof: { th: 'ของจริงทำงานแล้ว — ใบ QG000010 จากระบบทดสอบ ตรงกับเดโมด้านบนทุกบรรทัด',
+               en: 'Already running — quote QG000010 from the test system, line for line the same as the demo above' },
       proofZoom: { th: 'คลิกที่ภาพเพื่อดูขนาดเต็ม', en: 'Click the image for full size' },
       note: { th: 'ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>',
               en: 'The demo does its arithmetic in the browser and touches nothing live · the seller on the document is a fictional company · scope and pricing are quoted per project against your Requirement · built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>' }
@@ -5466,29 +5489,34 @@
     const ico = (id) => '<svg class="wq-ic"><use href="#' + id + '"/></svg>';
     const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let lang = 'th', who = 0, sent = false, step = 0, quoteNo = 7;
+    let lang = 'th', who = 0, sent = false, step = 0, quoteNo = 10, seq = ITEMS.length;
     let timers = [];
 
-    const lines = () => ITEMS.filter((it) => it.qty > 0);
+    const lines = () => ITEMS.filter((it) => it.qty > 0).sort((a, b) => a.at - b.at);
     const stop = () => { timers.forEach(clearTimeout); timers = []; };
     /* แตะอะไรก็ตามหลังส่งแล้ว = กลับไปสถานะยังไม่ส่ง ผู้ดูจะได้เห็นว่าเอกสารมาจากการกดส่ง ไม่ใช่โผล่เอง */
     const reset = () => { stop(); sent = false; step = 0; };
 
     function drawItems() {
-      itemBox.innerHTML = ITEMS.map((it, i) =>
-        '<div class="wq-item' + (it.qty ? ' on' : '') + '">' + ico('wqi-box')
+      let last = -1;
+      itemBox.innerHTML = ITEMS.map((it, i) => {
+        const head = it.g !== last ? '<p class="wq-grp">' + GROUPS[it.g] + '</p>' : '';
+        last = it.g;
+        return head + '<div class="wq-item' + (it.qty ? ' on' : '') + '">' + ico('wqi-box')
         + '<span class="wq-name"><b>' + esc(it.name) + '</b><span><code>' + it.code + '</code> · '
-        + money(it.price) + ' ' + T.unit[lang] + '</span></span>'
+        + it.price.toLocaleString('en-US') + ' ' + T.unit[lang] + '</span></span>'
         + '<span class="wq-qty">'
         + '<button type="button" data-i="' + i + '" data-d="-1" aria-label="' + T.minus[lang] + ' ' + it.code
         + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '"' + (it.qty ? '' : ' disabled') + '>&minus;</button>'
         + '<output>' + it.qty + '</output>'
         + '<button type="button" data-i="' + i + '" data-d="1" aria-label="' + T.plus[lang] + ' ' + it.code
         + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '">+</button>'
-        + '</span></div>').join('');
+        + '</span></div>';
+      }).join('');
       itemBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
-        const i = b.dataset.i, d = b.dataset.d, it = ITEMS[+i];
+        const i = b.dataset.i, d = b.dataset.d, it = ITEMS[+i], was = it.qty;
         it.qty = Math.max(0, Math.min(99, it.qty + (+d)));
+        if (!was && it.qty) it.at = ++seq;
         reset(); render();
         const same = itemBox.querySelector('button[data-i="' + i + '"][data-d="' + d + '"]');
         (same && !same.disabled ? same : itemBox.querySelector('button[data-i="' + i + '"][data-d="1"]')).focus();
