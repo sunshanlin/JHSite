@@ -1,4 +1,4 @@
-# Adds "Standard Process Flows" as item 10 of the JWIC Localization section:
+# Adds "Standard Process Flows" as item 09 of the JWIC Localization section:
 # a detail slide after "Everyday Quality of Life", plus the matching row on the
 # JWIC Localization overview page.
 #
@@ -6,12 +6,12 @@
 # process, written from the same user manual - so the customer sees what their
 # team will actually follow, not only what the software can do.
 #
-# The slide is built by duplicating the 09 detail slide and rewriting it, so the
+# The slide is built by duplicating the 08 detail slide and rewriting it, so the
 # layout, background, JW logo and title styling come from the deck itself and
 # stay right even when the section is restyled by hand later.
 #
 # Re-runnable: the slide is named JWIC_bpmn and is deleted first; the overview
-# row is named JHBadge10 / JHTitle10 / JHSub10 and is rebuilt in place.
+# row is named JHBadge9 / JHTitle9 / JHSub9 and is rebuilt in place.
 # ASCII only - PowerShell 5.1 reads .ps1 as ANSI. Thai lives in bpmn-notes.json.
 param([string]$Path)
 $ErrorActionPreference = 'Stop'
@@ -29,7 +29,7 @@ $NAME  = 'JWIC_bpmn'
 $SHOT  = Join-Path (Split-Path -Parent $root) 'assets\bpmn-gl8-band1.png'
 $SHOTR = 4.027                   # width / height of that file
 
-$NUM   = '10'
+$NUM   = '09'
 $TITLE = 'Standard Process Flows'
 $SUB   = 'one BPMN per process, yours at handover'
 $LEAD  = 'Every module is delivered with the process flow it is meant to run - drawn from the same user manual your team is trained on.'
@@ -49,7 +49,7 @@ function Hex2Ole([string]$h) {
   return ($b * 65536) + ($g * 256) + $r      # PowerPoint wants BGR
 }
 # sampled off the section: every item has its own accent, cream chip text, grey
-# body copy. 2F4858 is the one shade the other nine items do not already use.
+# body copy. 2F4858 is the one shade the other items do not already use.
 $ACC   = Hex2Ole '#2F4858'
 $CREAM = Hex2Ole '#F5F1EA'
 $BODY  = Hex2Ole '#5A6270'
@@ -122,12 +122,12 @@ try {
     $sh = $slide.Shapes.Item($i)
     $txt = ''
     if ($sh.HasTextFrame -eq -1 -and $sh.TextFrame.HasText -eq -1) { $txt = $sh.TextFrame.TextRange.Text }
-    if ($txt -eq '09') { $chip = $sh; continue }
+    if ($txt -eq '08') { $chip = $sh; continue }
     if ($sh.Name -eq 'Title 1') { $head = $sh; continue }
     if ([math]::Round($sh.Width) -eq 88 -and [math]::Round($sh.Height) -eq 3) { $rule = $sh; continue }
     $sh.Delete()
   }
-  if ($null -eq $chip -or $null -eq $rule -or $null -eq $head) { throw 'the 09 slide is not shaped the way this script expects' }
+  if ($null -eq $chip -or $null -eq $rule -or $null -eq $head) { throw 'the 08 slide is not shaped the way this script expects' }
 
   $chip.TextFrame.TextRange.Text = $NUM
   $chip.TextFrame.TextRange.Font.Color.RGB = $CREAM
@@ -161,29 +161,32 @@ try {
   $o = $pres.Slides.Item($ov)
   for ($i = $o.Shapes.Count; $i -ge 1; $i--) {
     $n = $o.Shapes.Item($i).Name
-    if ($n -eq 'JHBadge10' -or $n -eq 'JHTitle10' -or $n -eq 'JHSub10') { $o.Shapes.Item($i).Delete() }
+    if ($n -eq 'JHBadge9' -or $n -eq 'JHTitle9' -or $n -eq 'JHSub9') { $o.Shapes.Item($i).Delete() }
   }
-  # the right column stopped at 09: grow its rail and drop its end dot onto the
-  # same line as the left column so the two columns still finish together
+  # the right column stopped at 08: grow its rail down to this row and put its
+  # end dot under the badge, the same way the left column finishes at 05
   for ($i = 1; $i -le $o.Shapes.Count; $i++) {
     $sh = $o.Shapes.Item($i)
-    if ($sh.Name -eq 'Flair_RightRail')   { $sh.Height = [single]302 }
-    if ($sh.Name -eq 'Flair_RightEndDot') { $sh.Top = [single]467 }
+    if ($sh.Name -eq 'Flair_RightRail')   { $sh.Height = [single]226 }
+    if ($sh.Name -eq 'Flair_RightEndDot') { $sh.Top = [single]391 }
   }
-  $badge = $o.Shapes.AddShape(5, 500, 454, 34, 34)
-  $badge.Name = 'JHBadge10'
+  $badge = $o.Shapes.AddShape(5, 500, 378, 34, 34)
+  $badge.Name = 'JHBadge9'
   $badge.Adjustments.Item(1) = 0.24
   $badge.Fill.ForeColor.RGB = $ACC
   $badge.Line.Visible = 0
   $badge.TextFrame.WordWrap = 0
   $badge.TextFrame.MarginLeft = 0; $badge.TextFrame.MarginRight = 0
+  $badge.TextFrame.MarginTop = 0;  $badge.TextFrame.MarginBottom = 0
+  $badge.TextFrame.VerticalAnchor = 3          # middle - the default put the number in a corner
   $bt = $badge.TextFrame.TextRange
   $bt.Text = $NUM
+  $bt.ParagraphFormat.Alignment = 2            # centre
   $bt.Font.Name = $FONT; $bt.Font.Size = 14; $bt.Font.Bold = -1; $bt.Font.Color.RGB = $CREAM
-  $t1 = Add-Text $o 546 453 354 23 $TITLE 17 $ACC -1
-  $t1.Name = 'JHTitle10'
-  $t2 = Add-Text $o 546 477 354 16.4 $SUB 13.5 $GREY 0
-  $t2.Name = 'JHSub10'
+  $t1 = Add-Text $o 546 377 354 23 $TITLE 17 $ACC -1
+  $t1.Name = 'JHTitle9'
+  $t2 = Add-Text $o 546 401 354 16.4 $SUB 13.5 $GREY 0
+  $t2.Name = 'JHSub9'
 
   $pres.Save()
   Write-Host ("bpmn added as slide {0} of {1}; overview row on slide {2}" -f ($anchor + 1), $pres.Slides.Count, $ov)

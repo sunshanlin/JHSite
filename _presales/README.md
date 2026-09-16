@@ -18,7 +18,7 @@ powershell -File build\build.ps1              # ประกอบใหม่�
 powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 ```
 
-ต้นแบบ : 122 หน้า (10 ก.ย. 2026) ฉายจริงส่วนใหญ่ ที่เหลือซ่อนไว้ กด go-to-slide เอาตอน Q&A
+ต้นแบบ : 121 หน้า (13 ก.ย. 2026) ฉายจริงส่วนใหญ่ ที่เหลือซ่อนไว้ กด go-to-slide เอาตอน Q&A
 
 ## โครงสร้าง
 
@@ -33,7 +33,7 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 | `build\add-dbd.ps1` | วางป้าย DBD Registered ท้ายหน้า About Us (สไลด์ 2) · รันซ้ำได้ ลบ shape `dbd*` ของเดิมก่อน |
 | `build\add-agenda.ps1` | **เลิกใช้แล้ว** — หน้า Agenda ถูกแก้มือเป็นแบบการ์ดและย้ายไปสไลด์ 2 (10 ก.ย. 2026) รันซ้ำจะได้แบบ navy เก่าไปแทรกหลัง About Us · เก็บไว้เป็นตัวอย่างโค้ดเท่านั้น |
 | `build/add-reference.ps1` | สร้างหน้า Reference (ลูกค้าอ้างอิง) แทรกถัดจาก About Us · เนื้อหาทั้งหน้าอ่านจาก `build/reference.json` · รันซ้ำได้ ลบสไลด์ `JWIC_reference` ของเดิมก่อน |
-| `build\add-bpmn.ps1` | สร้างหน้า Standard Process Flows (ข้อ 10 ของหมวด Localization) แทรกถัดจากหน้า 09 + เติมแถว 10 บนหน้าภาพรวม · รันซ้ำได้ ลบสไลด์ `JWIC_bpmn` และ shape `JHBadge10/JHTitle10/JHSub10` ของเดิมก่อน |
+| `build\add-bpmn.ps1` | สร้างหน้า Standard Process Flows (ข้อ 09 ของหมวด Localization) แทรกถัดจากหน้า 08 + เติมแถว 09 บนหน้าภาพรวม · รันซ้ำได้ ลบสไลด์ `JWIC_bpmn` และ shape `JHBadge9/JHTitle9/JHSub9` ของเดิมก่อน |
 | `build\bpmn-notes.json` | speaker notes ไทยของหน้า Standard Process Flows |
 | `build/reference.json` | **ไม่เข้า git** — ชื่อลูกค้า โลโก้ พาดหัว การ์ด speaker notes ของหน้า Reference (repo นี้ public) ขอไฟล์จากซัน · โครงดูที่ `build/reference.example.json` |
 | `assets/` | `bpmn-*.png` ภาพผังของเราเอง เข้า git · `assets/customer/` โลโก้ลูกค้า **ไม่เข้า git** — และ**ห้ามเก็บใน `img/`** เพราะ GitHub Pages เสิร์ฟออกไป |
@@ -42,14 +42,14 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 **แก้เนื้อหาให้แก้ที่ต้นแบบโดยตรง แล้วรัน `verify.ps1`** — `build.ps1` เขียนลง `-rebuild.pptx` ทับต้นแบบไม่ได้
 งานมือที่ทำหลังจากนี้ไม่มีใน `deck-core.json` ถ้า rebuild ต้องยกตามเอง
 
-## Fast Implementation (สไลด์ 85 · หน้า Success by Design คือ 84)
+## Fast Implementation (สไลด์ 86 · หน้า Success by Design คือ 85)
 
 เนื้อหามาจาก `D:\BC\Project\JHCore\docs\Methodology\FastImplement-SME.html` — แก้เอกสารแล้วต้องยกมาที่สคริปต์เอง ไม่ได้อ่านอัตโนมัติ
-`powershell -File build\add-methodology.ps1` แล้วดูด้วยตา `build\shots.ps1 84 85`
-`build\fix-payment.ps1` = เขียนตาราง Payment Schedule (หน้า 97) ใหม่ให้ตรง Gate 1–5 (30/15/20/20/15 · Gate 4+5 รวมงวดเดียว · Hypercare แยกบรรทัด) แก้เปอร์เซ็นต์ที่ `$rows` ในสคริปต์
+`powershell -File build\add-methodology.ps1` แล้วดูด้วยตา `build\shots.ps1 85 86`
+`build\fix-payment.ps1` = เขียนตาราง Payment Schedule (หน้า 88) ใหม่ให้ตรง Gate 1–5 (30/15/20/20/15 · Gate 4+5 รวมงวดเดียว · Hypercare แยกบรรทัด) แก้เปอร์เซ็นต์ที่ `$rows` ในสคริปต์
 **สไลด์ไม่ผูกปฏิทินแล้ว** (4 ก.ย. 2026) — ตัดไม้บรรทัด WEEK 1–14 และเลขสัปดาห์ท้ายชื่อ Gate ออก เพราะยังไม่สรุประยะเวลากับลูกค้า
 ความกว้างแถบเหลือเป็นน้ำหนักงานเชิงเปรียบเทียบเท่านั้น · แผนจริงใน `FastImplement-Plan.xlsx` ยังคาบเกี่ยวกันช่วงส่งไม้ แถวกิจกรรมด้านล่างเป็นตัวบอกรายละเอียด
-เนื้อหาสไลด์ 84 อ่านจาก `deck-core.json` (`new:sbd`) — ปรับให้ตรงแผนแล้ว: ไม่มี BRD/EDD/SDD (ยุบเป็น Scope & Fit-Gap Statement + Solution Design Note) และไม่มี end-user manual
+เนื้อหาสไลด์ 85 อ่านจาก `deck-core.json` (`new:sbd`) — ปรับให้ตรงแผนแล้ว: ไม่มี BRD/EDD/SDD (ยุบเป็น Scope & Fit-Gap Statement + Solution Design Note) และไม่มี end-user manual
 
 ## แหล่งข้อมูล
 
@@ -83,10 +83,11 @@ powershell -File build\verify.ps1 -Path decks\JWIC-BC-Core-rebuild.pptx
 <!-- ponytail: ยังไม่ทำ deck เจาะ vertical แยก (Finance-only / Manufacturing-only)
      ถ้าจะทำ ใช้ build.ps1 ตัวเดิม เปลี่ยนแค่ JSON -->
 
-## Standard Process Flows (ข้อ 10 ของหมวด Localization)
+## Standard Process Flows (ข้อ 09 ของหมวด Localization)
 
 **หมวด Localization ในเด็ค = โปรเจกต์ `D:\BC\Project\JHCore`** (ในเด็คเรียกชื่อลูกค้าว่า JWIC Localization ไม่เคยพูดคำว่า JHCore)
-`powershell -File build\add-bpmn.ps1` แล้วดูด้วยตา `build\shots.ps1 74 84`
+`powershell -File build\add-bpmn.ps1` แล้วดูด้วยตา `build\shots.ps1 74 83`
+หมวด Localization เหลือ 9 ข้อ — ตัดข้อ 07 Business Process Customization ออกแล้ว (13 ก.ย. 2026) แต่ `deck-core.json` ยังมีอยู่ ถ้า rebuild ต้องตัดตาม
 หน้านี้ขายสิ่งที่คู่แข่งไม่มี: ซื้อซอฟต์แวร์แล้วได้ **ผังกระบวนการมาตรฐานติดมาด้วย** — 14 กลุ่มงาน 103 กระบวนการ 967 ขั้นตอน (นับจาก `flows.json` ถ้าตัวเลขเปลี่ยนต้องแก้ `$CARDS` เอง)
 ตัวอย่างบนสไลด์คือ GL8 ยื่น ภ.ง.ด. ภายในวันที่ 7 — เลือกหน้านี้เพราะกล่องเขียว (Localization) เยอะ และต่อกับหน้า Reference ที่เป็นเรื่อง WHT เหมือนกัน
 
