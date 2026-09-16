@@ -2332,15 +2332,18 @@
   /* ผังแบบ journey — ป้ายสัญลักษณ์เดินซ้ายไปขวา สองเลน เส้นวาดด้วย SVG ตามตำแหน่งจริงของป้าย
      รูปทรงป้ายตรงกับคำอธิบายสัญลักษณ์ใต้ผัง: ทึบ = JWIC · เส้นประ = นอกระบบ · ข้าวหลามตัด = ตัดสินใจ · ขอบเข้ม = ส่งต่อ
      ทางวนกลับเป็นเส้นประสีกุหลาบ · สี teal สว่างอยู่ในโทเคน --bfj-* ของ .bf เท่านั้น */
+  /* ฟอนต์ไม่มีหัว (Anuphan) ทั้งผัง · คำอ่านแบ่งบรรทัดไว้ในข้อมูล ห้ามตัดคำเอง — คอลัมน์กว้างตามบรรทัดที่ยาวสุด */
+  .bfj, .bfj-v { font-family: "Anuphan", "Plus Jakarta Sans", sans-serif; }
+  .bfj-l { display: block; white-space: nowrap; }
   .bfj { position: relative; display: grid; min-width: 1080px;
-    grid-template-columns: 78px repeat(9, minmax(98px, 1fr)); column-gap: 10px;
+    grid-template-columns: 78px repeat(9, minmax(max-content, 1fr)); column-gap: 14px;
     grid-template-rows: 74px auto auto 74px; padding-right: 18px; }
   .bfj-band { grid-column: 1 / -1; }
   .bfj-band.a { grid-row: 2; background: var(--bfj-lane-a); }
   .bfj-band.c { grid-row: 3; background: var(--bfj-lane-c); }
   .bfj-lane { grid-column: 1; z-index: 2; display: grid; place-items: center;
     writing-mode: vertical-rl; transform: rotate(180deg);
-    font: 600 13px "Plus Jakarta Sans", "Anuphan", sans-serif; color: var(--bfj-lane-t); }
+    font: 600 13px "Anuphan", "Plus Jakarta Sans", sans-serif; color: var(--bfj-lane-t); }
   .bfj-lane.a { grid-row: 2; } .bfj-lane.c { grid-row: 3; }
   .bfj-wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
   .bfj-wires path { fill: none; stroke: var(--bfj-track); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
@@ -2354,9 +2357,10 @@
     background: #fff; border: 1px solid var(--bfj-rose); border-radius: 12px; padding: 7px 12px 7px 7px;
     font-size: .8125rem; line-height: 1.35; color: var(--ui-ink); }
   .bfj-detour b { font-weight: 700; color: var(--bfj-rose-ink); }
+  .bfj-detour > span { white-space: nowrap; }
   .bfj-detour small { display: block; font-size: .75rem; color: var(--ui-muted); }
   .bfj-tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); white-space: nowrap;
-    font: 700 11px/1 "Plus Jakarta Sans", "Anuphan", sans-serif; color: var(--bfj-glyph);
+    font: 700 11px/1 "Anuphan", "Plus Jakarta Sans", sans-serif; color: var(--bfj-glyph);
     background: #fff; border: 1px solid var(--ui-line); border-radius: 999px; padding: 4px 8px; }
   .bfj-sign { width: 56px; height: 56px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
     border-radius: 16px; background: var(--bfj-sign); }
@@ -2378,6 +2382,9 @@
   .bfj-vst:not(:last-child)::before { content: ""; position: absolute; left: 26px; top: 54px; bottom: 0;
     width: 3px; border-radius: 2px; background: var(--bfj-track); }
   .bfj-vst .bfj-t { font-size: .95rem; padding-top: 4px; }
+  /* จอแคบ: ตัดบรรทัดได้เฉพาะระหว่างท่อนที่แบ่งไว้ */
+  .bfj-vst .bfj-l { display: inline-block; margin-right: .3em; }
+  .bfj-v .bfj-detour > span { white-space: normal; }
   .bfj-who { display: inline-block; margin-left: 6px; font-size: .75rem; font-weight: 500; color: var(--bfj-lane-t); }
   .bfj-vst .bfj-detour { margin-top: 8px; }
 
@@ -5370,17 +5377,17 @@
 
     /* ขั้นของผังเรียงตามทางหลัก — lane a = บัญชีลูกหนี้, c = ลูกค้า · kind: gate/out/hand ตามคำอธิบายสัญลักษณ์ */
     const STEPS = [
-      { k: 'open', lane: 'a', th: 'เปิด Billing Worklist หรือ Billing Board', en: 'Open the Billing Worklist or Billing Board' },
-      { k: 'due', lane: 'a', kind: 'gate', yes: 'eDue', th: 'ถึงรอบวางบิลหรือยัง?', en: 'Is the group due?',
-        note: { th: 'ทุกวันที่ 25, ศุกร์สุดท้าย หรือตามตกลง', en: 'The 25th, the last Friday, or as agreed' } },
-      { k: 'draft', lane: 'a', th: 'สร้างใบวางบิลร่าง', en: 'Create draft billing notes' },
-      { k: 'check', lane: 'a', th: 'ตรวจรายการและยอดบนใบร่าง', en: 'Check lines and totals on the draft' },
-      { k: 'release', lane: 'a', th: 'Release และพิมพ์ใบวางบิล', en: 'Release and print the billing note',
-        note: { th: 'กันวางบิลซ้ำรอบถัดไป', en: 'Blocks duplicate billing next cycle' } },
-      { k: 'hand', lane: 'a', kind: 'out', th: 'วางบิลกับลูกค้า', en: 'Place it with the customer' },
-      { k: 'accept', lane: 'c', kind: 'gate', yes: 'eYes', th: 'ลูกค้ารับวางบิลไหม?', en: 'Does the customer accept?' },
-      { k: 'date', lane: 'a', th: 'ระบุวันนัดรับชำระ Collection Date', en: 'Set the collection date' },
-      { k: 'pay', lane: 'a', kind: 'hand', th: 'รับชำระและออกใบเสร็จ', en: 'Collect and issue the receipt' }
+      { k: 'open', lane: 'a', th: ['เปิด Billing', 'Worklist หรือ', 'Billing Board'], en: ['Open the', 'Billing Worklist', 'or Billing Board'] },
+      { k: 'due', lane: 'a', kind: 'gate', yes: 'eDue', th: ['ถึงรอบวางบิล', 'หรือยัง?'], en: ['Is the group', 'due?'],
+        note: { th: ['ทุกวันที่ 25', 'ศุกร์สุดท้าย', 'หรือตามตกลง'], en: ['The 25th,', 'last Friday,', 'or as agreed'] } },
+      { k: 'draft', lane: 'a', th: ['สร้าง', 'ใบวางบิลร่าง'], en: ['Create draft', 'billing notes'] },
+      { k: 'check', lane: 'a', th: ['ตรวจรายการ', 'และยอดบนใบร่าง'], en: ['Check lines', 'and totals'] },
+      { k: 'release', lane: 'a', th: ['Release และพิมพ์', 'ใบวางบิล'], en: ['Release and', 'print the note'],
+        note: { th: ['กันวางบิลซ้ำ', 'รอบถัดไป'], en: ['Blocks duplicate', 'billing next cycle'] } },
+      { k: 'hand', lane: 'a', kind: 'out', th: ['วางบิล', 'กับลูกค้า'], en: ['Place it with', 'the customer'] },
+      { k: 'accept', lane: 'c', kind: 'gate', yes: 'eYes', th: ['ลูกค้ารับ', 'วางบิลไหม?'], en: ['Customer', 'accepts?'] },
+      { k: 'date', lane: 'a', th: ['ระบุวันนัดรับชำระ', 'Collection Date'], en: ['Set the', 'collection date'] },
+      { k: 'pay', lane: 'a', kind: 'hand', th: ['รับชำระ', 'และออกใบเสร็จ'], en: ['Collect and', 'issue the receipt'] }
     ];
     /* ทางวนกลับ — row 1 = เหนือเลน, row 4 = ใต้เลน · cols คือช่วงคอลัมน์ของการ์ดอธิบาย */
     const DETOURS = [
@@ -5408,6 +5415,7 @@
     const byId = (id) => document.getElementById(id);
     let lang = 'th';
     const L = (o) => o[lang] || o.th;
+    const lines = (a) => a.map((t) => '<span class="bfj-l">' + esc(t) + '</span>').join('');
     const sign = (k, cls) => '<span class="bfj-sign ' + (cls || '') + '"><svg viewBox="0 0 48 48" aria-hidden="true">' + GLYPH[k] + '</svg></span>';
     const detour = (d) => sign(d.k, 'mini') + '<span><b>' + esc(L(T[d.q])) + '</b> → ' + esc(L(d))
       + (d.sub ? '<small>' + esc(L(d.sub)) + '</small>' : '') + '<small>' + esc(L(T.back)) + '</small></span>';
@@ -5464,7 +5472,7 @@
         el.style.gridColumn = i + 2;
         el.style.gridRow = st.lane === 'a' ? 2 : 3;
         el.innerHTML = sign(st.k, st.kind) + '<span class="bfj-n">' + String(i + 1).padStart(2, '0') + '</span>'
-          + '<span class="bfj-t">' + esc(L(st)) + '</span>' + (st.note ? '<span class="bfj-note">' + esc(L(st.note)) + '</span>' : '');
+          + '<span class="bfj-t">' + lines(L(st)) + '</span>' + (st.note ? '<span class="bfj-note">' + lines(L(st.note)) + '</span>' : '');
         J.appendChild(el);
         return el;
       });
@@ -5487,9 +5495,9 @@
       });
       byId('bfVline').innerHTML = STEPS.map((st, i) => {
         const d = DETOURS.find((x) => x.from === i);
-        return '<div class="bfj-vst">' + sign(st.k, st.kind) + '<div><p class="bfj-t">' + (i + 1) + '. ' + esc(L(st))
+        return '<div class="bfj-vst">' + sign(st.k, st.kind) + '<div><p class="bfj-t">' + (i + 1) + '. ' + lines(L(st))
           + '<span class="bfj-who">' + esc(L(T[st.lane === 'a' ? 'lane1' : 'lane2']).replace(' *', '')) + '</span></p>'
-          + (st.note ? '<p class="bfj-note">' + esc(L(st.note)) + '</p>' : '')
+          + (st.note ? '<p class="bfj-note">' + lines(L(st.note)) + '</p>' : '')
           + (d ? '<div class="bfj-detour">' + detour(d) + '</div>' : '') + '</div></div>';
       }).join('');
       drawWires();
