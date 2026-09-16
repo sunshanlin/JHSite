@@ -3138,6 +3138,13 @@
      เดโมฝั่งลูกค้า: กดเลือกสินค้าเอง แล้วเห็น Sales Quote ที่ BC สร้างให้
      คิดเลขในเบราว์เซอร์ล้วน ไม่แตะระบบจริง · โครงการ์ดและสองคอลัมน์ยืมสำนวน .vs
      ฝั่งขวาพื้นเขียวจาง = ฝั่งที่ระบบทำให้ เหมือน .vs-side.rd */
+  #web-quote > .wrap > .section-kicker,
+  #web-quote > .wrap > h2,
+  #web-quote > .wrap > .sub {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  /* ชื่อเต็มของ LIFF ยาวเกินจะอยู่บรรทัดเดียวกับหัวเรื่อง — ให้ลงบรรทัดใหม่ ตัวเล็กกว่า สีจางกว่า */
+  .wq-h2-note { display: block; margin-top: .2em; font-size: .5em; font-weight: 500; letter-spacing: 0; color: var(--ui-muted); }
   .wq-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .wq {
@@ -3920,8 +3927,8 @@
 <section id="web-quote" class="alt">
   <div class="wrap">
     <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
-    <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LINE</h2>
-    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE แล้วใบเสนอราคาไปโผล่ใน Business Central — ลองกดเป็นลูกค้าดูได้เลย ไม่ต้องติดตั้งอะไร</p>
+    <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span></h2>
+    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central ออกใบเสนอราคาให้ทันที ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย</p>
 
     <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -3977,8 +3984,9 @@
           <span class="wq-arrow" aria-hidden="true"><svg class="wq-ic"><use href="#wqi-next"/></svg></span>
           <figure class="wq-fig">
             <figcaption><b>02</b><span data-wq="proof2">Business Central ออกใบเสนอราคาให้เอง</span></figcaption>
-            <a class="wq-paper" href="img/bc-liff-quote.webp" target="_blank" rel="noopener">
-              <img src="img/bc-liff-quote.webp" alt="ใบเสนอราคา QG000010 ที่ Business Central สร้างจากคำขอนั้น เก้ารายการ ยอดรวมทั้งสิ้น 4,333,928.00 บาท ช่องอีเมลเบลอไว้" loading="lazy" width="1522" height="1492">
+            <!-- ?v= : Pages ตั้ง cache 4 ชม. และชื่อไฟล์นี้เคยเป็นภาพ collage — เปลี่ยนภาพทีไรให้ขยับเลข -->
+            <a class="wq-paper" href="img/bc-liff-quote.webp?v=2" target="_blank" rel="noopener">
+              <img src="img/bc-liff-quote.webp?v=2" alt="ใบเสนอราคา QG000010 ที่ Business Central สร้างจากคำขอนั้น เก้ารายการ ยอดรวมทั้งสิ้น 4,333,928.00 บาท ประทับว่าข้อมูลทดสอบ ช่องอีเมลเบลอไว้" loading="lazy" width="1756" height="1721">
             </a>
           </figure>
         </div>
@@ -5453,9 +5461,9 @@
 
     const T = {
       kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
-      h2: { th: 'ขอใบเสนอราคาผ่าน LINE', en: 'Quotes that start in LINE' },
-      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้วใบเสนอราคาไปโผล่ใน Business Central — ลองกดเป็นลูกค้าดูได้เลย ไม่ต้องติดตั้งอะไร',
-             en: 'The buyer picks the items in LINE and the quote lands in Business Central — press through it here as if you were that buyer.' },
+      h2: { th: 'ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>', en: 'Quote Requests via LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>' },
+      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central ออกใบเสนอราคาให้ทันที ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
+             en: 'Buyers pick their items inside LINE with nothing to install, and Business Central issues the quote on the spot — nobody retypes a thing. Try it below as the buyer.' },
       app: { th: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central', en: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
