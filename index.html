@@ -4009,7 +4009,7 @@
   <div class="wrap">
     <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
     <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span></h2>
-    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย</p>
+    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย</p>
 
     <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -5576,8 +5576,8 @@
     const T = {
       kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
       h2: { th: 'ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>', en: 'Quote Requests via LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>' },
-      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
-             en: 'Buyers pick their items inside LINE with nothing to install, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
+      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
+             en: 'Buyers pick their items inside LINE, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
       app: { th: 'เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์', en: 'Buyer-side demo · runs in your browser' },
       archSr: { th: 'ลำดับการทำงาน: Business Central ส่งรายการสินค้าและราคาไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
                 en: 'How it flows: Business Central syncs items and prices to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
