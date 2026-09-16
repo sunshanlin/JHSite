@@ -2319,8 +2319,8 @@
   /* ---- #billing-flow: ผังกระบวนการวางบิล + Billing Board ที่ลากได้ ----
      การ์ดใบเดียวของทั้ง section เหมือน .vs ของ #vat-service — ข้างในแบ่งน้ำหนัก
      ด้วยพื้นอ่อนกับเส้น 1px ไม่มีการ์ดซ้อนการ์ด
-     ผังวาดบนกระดาษตาม The Paper Rule ไม่ใช่แถบสีเข้ม: กล่องของ JWIC เป็น teal ทึบ
-     กล่องที่เหลือเป็นขาวเส้นบาง — ความต่างอ่านได้โดยไม่ต้องพึ่งพื้นเข้ม */
+     ผังวาดบนกระดาษตาม The Paper Rule ไม่ใช่แถบสีเข้ม: ป้ายของ JWIC เป็น teal อ่อนทึบ
+     ป้ายที่เหลือเป็นขาวมีขอบ — ความต่างอ่านได้โดยไม่ต้องพึ่งพื้นเข้ม */
   #billing-flow > .wrap > .section-kicker,
   #billing-flow > .wrap > h2,
   #billing-flow > .wrap > .sub {
@@ -2329,30 +2329,62 @@
   .bf-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ผังใช้โทเคนชุดเดิมทั้งหมด ไม่มีค่าสีใหม่ — สีอยู่ใน CSS ไม่ใช่ attribute
-     เพราะ fill="var(--x)" ใน attribute ของ SVG ใช้ไม่ได้ */
-  .bf-lane { fill: none; stroke: var(--ui-line); }
-  .bf-lane-x { fill: var(--bg-soft); stroke: var(--ui-line); }
-  .bf-lane-t { fill: var(--ui-muted); font: 600 18px "Plus Jakarta Sans", "Anuphan", sans-serif; }
-  .bf-e { fill: none; stroke: var(--brand-mint); stroke-width: 1.7; }
-  .bf-e-r { fill: none; stroke: var(--brand-mist); stroke-width: 1.6; stroke-dasharray: 7 5; }
-  .bf-nj { fill: var(--brand-teal); }
-  .bf-nm { fill: #fff; stroke: var(--brand-mist); stroke-width: 1.6; stroke-dasharray: 6 4; }
-  .bf-ng { fill: #fff; stroke: var(--brand-mist); stroke-width: 1.6; }
-  .bf-nc { fill: #fff; stroke: var(--ui-ink); stroke-width: 2.4; }
-  .bf-t { font: 600 16px "Plus Jakarta Sans", "Anuphan", sans-serif; text-anchor: middle; }
-  .bf-tg { font-size: 13.5px; }
-  .bf-tj { fill: #fff; }
-  .bf-ti { fill: var(--ui-ink); }
-  .bf-el { fill: var(--ui-muted); font: 500 13px "Plus Jakarta Sans", "Anuphan", sans-serif; }
-  .bf-ca { fill: var(--brand-pink-deep); font: 500 14px "Plus Jakarta Sans", "Anuphan", sans-serif; }
-  .bf-ca-b { font-weight: 700; }
-  .bf-cl { fill: none; stroke: var(--brand-pink-deep); stroke-width: 1.2; }
-  .bf-ep { fill: none; stroke: var(--ms-green); stroke-width: 2.5; }
-  .bf-ep-e { stroke: var(--ms-red); stroke-width: 4; }
-  .bf-token { fill: var(--brand-jade); }
+  /* ผังแบบ journey — ป้ายสัญลักษณ์เดินซ้ายไปขวา สองเลน เส้นวาดด้วย SVG ตามตำแหน่งจริงของป้าย
+     รูปทรงป้ายตรงกับคำอธิบายสัญลักษณ์ใต้ผัง: ทึบ = JWIC · เส้นประ = นอกระบบ · ข้าวหลามตัด = ตัดสินใจ · ขอบเข้ม = ส่งต่อ
+     ทางวนกลับเป็นเส้นประสีกุหลาบ · สี teal สว่างอยู่ในโทเคน --bfj-* ของ .bf เท่านั้น */
+  .bfj { position: relative; display: grid; min-width: 1080px;
+    grid-template-columns: 78px repeat(9, minmax(98px, 1fr)); column-gap: 10px;
+    grid-template-rows: 74px auto auto 74px; padding-right: 18px; }
+  .bfj-band { grid-column: 1 / -1; }
+  .bfj-band.a { grid-row: 2; background: var(--bfj-lane-a); }
+  .bfj-band.c { grid-row: 3; background: var(--bfj-lane-c); }
+  .bfj-lane { grid-column: 1; z-index: 2; display: grid; place-items: center;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font: 600 13px "Plus Jakarta Sans", "Anuphan", sans-serif; color: var(--bfj-lane-t); }
+  .bfj-lane.a { grid-row: 2; } .bfj-lane.c { grid-row: 3; }
+  .bfj-wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+  .bfj-wires path { fill: none; stroke: var(--bfj-track); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .bfj-wires path.d { stroke: var(--bfj-rose-ink); stroke-dasharray: 6 5; opacity: .7; }
+  .bfj-ah { fill: var(--bfj-track); } .bfj-ahd { fill: var(--bfj-rose-ink); }
+  .bfj-stop { z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 22px 0 20px; }
+  .bfj-t { font-size: .875rem; font-weight: 600; line-height: 1.35; color: var(--ui-ink); }
+  .bfj-n { font: 800 11px/1 "Plus Jakarta Sans", sans-serif; letter-spacing: .06em; color: var(--ui-muted); }
+  .bfj-note { font-size: .75rem; line-height: 1.4; color: var(--bfj-rose-ink); }
+  .bfj-detour { z-index: 3; align-self: center; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
+    background: #fff; border: 1px solid var(--bfj-rose); border-radius: 12px; padding: 7px 12px 7px 7px;
+    font-size: .8125rem; line-height: 1.35; color: var(--ui-ink); }
+  .bfj-detour b { font-weight: 700; color: var(--bfj-rose-ink); }
+  .bfj-detour small { display: block; font-size: .75rem; color: var(--ui-muted); }
+  .bfj-tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); white-space: nowrap;
+    font: 700 11px/1 "Plus Jakarta Sans", "Anuphan", sans-serif; color: var(--bfj-glyph);
+    background: #fff; border: 1px solid var(--ui-line); border-radius: 999px; padding: 4px 8px; }
+  .bfj-sign { width: 56px; height: 56px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
+    border-radius: 16px; background: var(--bfj-sign); }
+  .bfj-sign svg { position: relative; width: 32px; height: 32px; fill: none; stroke: var(--bfj-glyph);
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .bfj-sign.out { background: #fff; border: 2px dashed var(--bfj-edge); }
+  .bfj-sign.hand { background: #fff; border: 2.5px solid var(--bfj-glyph); }
+  .bfj-sign.gate { background: transparent; }
+  .bfj-sign.gate::before { content: ""; position: absolute; inset: 8px; transform: rotate(45deg);
+    background: var(--bfj-sand); border: 2px solid var(--bfj-edge); border-radius: 7px; }
+  .bfj-sign.gate svg { width: 24px; height: 24px; }
+  .bfj-sign.mini { width: 34px; height: 34px; border-radius: 10px; background: var(--bfj-rose); }
+  .bfj-sign.mini svg { width: 20px; height: 20px; stroke: var(--bfj-rose-ink); }
+  .bfj-q { font: 800 24px "Plus Jakarta Sans", sans-serif; fill: var(--bfj-glyph); stroke: none; }
+  .bfj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* จอแคบ: ข้อมูลชุดเดียวกันเรียงลงแนวตั้ง ไม่ต้องปัดข้าง */
+  .bfj-v { display: none; padding: 22px 18px 4px; }
+  .bfj-vst { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 14px; padding-bottom: 22px; }
+  .bfj-vst:not(:last-child)::before { content: ""; position: absolute; left: 26px; top: 54px; bottom: 0;
+    width: 3px; border-radius: 2px; background: var(--bfj-track); }
+  .bfj-vst .bfj-t { font-size: .95rem; padding-top: 4px; }
+  .bfj-who { display: inline-block; margin-left: 6px; font-size: .75rem; font-weight: 500; color: var(--bfj-lane-t); }
+  .bfj-vst .bfj-detour { margin-top: 8px; }
 
   .bf {
+    --bfj-lane-a: #E2F6F5; --bfj-lane-c: #FBF0F2; --bfj-lane-t: #3F8E8C;
+    --bfj-sign: #C4EEEB; --bfj-glyph: #0B7B79; --bfj-edge: #6FCBC6; --bfj-track: #86D6D1;
+    --bfj-rose: #F3E0E6; --bfj-rose-ink: #A04B66; --bfj-sand: #FDF4E0;
     background: #fff; border: 1px solid var(--ui-line);
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
   }
@@ -2368,8 +2400,7 @@
   .bf-head .bf-count b { color: var(--brand-teal); font-weight: 700; }
 
   /* ผังกว้างกว่าจอแคบ — เลื่อนในกล่องตัวเอง ไม่ให้หน้าเลื่อนแนวนอน */
-  .bf-scroll { overflow-x: auto; overflow-y: hidden; padding: 8px 0 4px; }
-  .bf-scroll svg { display: block; width: 100%; min-width: 900px; height: auto; }
+  .bf-scroll { overflow-x: auto; overflow-y: hidden; padding: 8px 0 18px; }
 
   .bf-keys {
     display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center;
@@ -2378,11 +2409,13 @@
   }
   .bf-keys span { display: flex; align-items: center; gap: 9px; }
   .bf-keys i { width: 22px; height: 13px; flex: 0 0 auto; border-radius: 2px; }
-  .bf-k-j { background: var(--brand-teal); }
-  .bf-k-m { border: 1px dashed var(--brand-mist); }
-  .bf-keys .bf-k-g { width: 15px; height: 15px; border-radius: 0; background: #fff;
-    border: 1px solid var(--brand-mist); transform: rotate(45deg); }
-  .bf-k-c { border: 2px solid var(--ui-ink); }
+  .bf-keys i { width: 18px; height: 18px; border-radius: 5px; }
+  .bf-k-j { background: var(--bfj-sign); }
+  .bf-k-m { border: 2px dashed var(--bfj-edge); }
+  .bf-keys .bf-k-g { width: 13px; height: 13px; border-radius: 3px; margin: 0 2px; background: var(--bfj-sand);
+    border: 2px solid var(--bfj-edge); transform: rotate(45deg); }
+  .bf-k-c { border: 2px solid var(--bfj-glyph); }
+  .bf-k-r { background: var(--bfj-rose); }
 
   /* ---- Billing Board ---- */
   .bf-board {
@@ -2505,9 +2538,7 @@
   .bf-note a { color: #8E2C46; font-weight: 600; text-decoration: none; }
   .bf-note a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
 
-  /* จังหวะเดียวของ section: จุดเดินตามเส้นทางหลักของผังรอบละ 9 วินาที */
   @media (prefers-reduced-motion: reduce) {
-    .bf-token { display: none; }
     .bf-day, .bf-chip, .bf-reset { transition: none; }
   }
 
@@ -2516,6 +2547,10 @@
     .bf-cal-scroll { padding: 12px; }
     /* หัวการ์ดตกบรรทัดแล้ว margin-left:auto จะดันไปชิดขวา อ่านเป็นคนละเรื่องกัน */
     .bf-head .bf-count { margin-left: 0; width: 100%; }
+  }
+  @media (max-width: 760px) {
+    .bf-scroll { display: none; }
+    .bfj-v { display: block; }
   }
 
   /* มือถือ: ปฏิทินเปลี่ยนเป็นรายการวันเรียงลง เหลือเฉพาะวันที่มีกลุ่มวางบิล
@@ -3886,26 +3921,28 @@
         <span class="bf-count"><b>7</b> <span data-bf="cntA">ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
       </p>
 
+      <p class="bfj-sr" id="bfTitle" data-bf="svgTitle"></p>
       <div class="bf-scroll">
-        <svg viewBox="0 0 1440 700" role="img" aria-labelledby="bfTitle">
-          <title id="bfTitle" data-bf="svgTitle">ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Cancel แล้ววนกลับเข้า Worklist</title>
-          <defs>
-            <marker id="bfAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 10 5 0 10z" fill="#739B97"/>
-            </marker>
-            <marker id="bfArD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 10 5 0 10z" fill="#A6C0BD"/>
-            </marker>
-          </defs>
-          <g id="bfFlow"></g>
-        </svg>
+        <div class="bfj" id="bfJourney" aria-describedby="bfTitle">
+          <div class="bfj-band a"></div><div class="bfj-band c"></div>
+          <div class="bfj-lane a" data-bf="lane1">บัญชีลูกหนี้</div><div class="bfj-lane c" data-bf="lane2">ลูกค้า *</div>
+          <svg class="bfj-wires" aria-hidden="true">
+            <defs>
+              <marker id="bfAr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ah" d="M0 0 10 5 0 10z"/></marker>
+              <marker id="bfArD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ahd" d="M0 0 10 5 0 10z"/></marker>
+            </defs>
+            <g id="bfWires"></g>
+          </svg>
+        </div>
       </div>
+      <div class="bfj-v" id="bfVline"></div>
 
       <p class="bf-keys">
         <span><i class="bf-k-j"></i><span data-bf="keyJ">ฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
         <span><i class="bf-k-m"></i><span data-bf="keyM">ทำนอกระบบ</span></span>
         <span><i class="bf-k-g"></i><span data-bf="keyG">ทางแยกตัดสินใจ</span></span>
         <span><i class="bf-k-c"></i><span data-bf="keyC">ส่งต่อกระบวนการอื่น</span></span>
+        <span><i class="bf-k-r"></i><span data-bf="keyR">ทางวนกลับ</span></span>
         <span data-bf="keyX">* เลนของคู่ค้าภายนอกบริษัท</span>
       </p>
 
@@ -5285,7 +5322,7 @@
      เขียนทับ innerHTML แล้วกลุ่มที่ผู้ใช้ลากไว้บนปฏิทินจะเด้งกลับที่เดิม
      applyLang เรียก window.renderBillingFlow(lang) แทน
 
-     พิกัดผังกับคำอ่านอยู่ในตารางเดียวกัน (BF_NODES) เพื่อไม่ให้กล่องกับคำแปลหลุดจากกัน
+     ขั้นของผังกับคำอ่านอยู่ในตารางเดียวกัน (STEPS/DETOURS) เพื่อไม่ให้ป้ายกับคำแปลหลุดจากกัน
      ตัวเลขทุกตัวอ้างอิง docs/BusinessProcess-BC/flows.json กระบวนการ AR6 */
   (() => {
     const T = {
@@ -5301,6 +5338,7 @@
       keyM: { th: 'ทำนอกระบบ', en: 'Done outside the system' },
       keyG: { th: 'ทางแยกตัดสินใจ', en: 'Decision' },
       keyC: { th: 'ส่งต่อกระบวนการอื่น', en: 'Handover to another process' },
+      keyR: { th: 'ทางวนกลับ', en: 'Loops back' },
       keyX: { th: '* เลนของคู่ค้าภายนอกบริษัท', en: '* lane belongs to a party outside the company' },
       month: { th: 'กันยายน 2569', en: 'September 2026' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
@@ -5325,85 +5363,139 @@
       eNot: { th: 'ยังไม่พร้อม', en: 'Not yet' },
       eYes: { th: 'รับ', en: 'Accepts' },
       eNo: { th: 'ไม่รับ', en: 'Rejects' },
-      c1a: { th: 'ใบที่ Release แล้วกันวางบิลซ้ำ', en: 'A released note blocks duplicate billing' },
-      c1b: { th: 'ใบแจ้งหนี้ที่วางบิลแล้ว ไม่ถูกดึงซ้ำในรอบถัดไป', en: 'invoices on a note are never pulled again next cycle' },
-      c2a: { th: 'รอบวางบิลตั้งรายลูกค้า — ทุกวันที่ 25, ทุกศุกร์สุดท้าย, หรือแล้วแต่ตกลง', en: 'Billing cycles are set per customer — the 25th, the last Friday, or whatever was agreed' },
-      c2b: { th: 'เลื่อนได้ทั้งกลุ่ม หรือลากไปวางวันอื่นบน Billing Board', en: 'and a whole group moves at once, or is dragged to another day on the Billing Board' },
-      c3a: { th: 'ลูกค้าไม่รับวางบิล = Cancel แล้วใบแจ้งหนี้เด้งกลับเข้ารอบถัดไป', en: 'A rejected note is cancelled and its invoices return to the next cycle' },
-      c3b: { th: 'ใบวางบิลไม่ลงบัญชี ยอดลูกหนี้ยังเดินตามปกติ', en: 'Billing notes never post, so the receivable keeps running untouched' },
+      back: { th: '↩ กลับไปขั้น 1', en: '↩ back to step 1' },
       note: { th: 'ผังนี้เป็นหนึ่งใน Flow มาตรฐานที่เขียนไว้ครบทุกสายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a>',
              en: 'One of the standard process flows written for every area, every step traceable to the user manual the customer receives · the calendar above runs on a fictional company; the real system pulls each customer’s open invoices on the cycle you set · <a href="articles/business-central-vs-accounting-software.html">How Business Central differs from ordinary accounting software</a>' }
     };
 
-    /* กล่องสูง 68 ทุกใบ บรรทัดแรกอยู่ y+29 บรรทัดสองอยู่ y+49 */
-    const NODES = [
-      { x: 176, y: 256, w: 190, k: 'j', th: ['เปิด Billing Worklist', 'หรือ Billing Board'], en: ['Open Billing Worklist', 'or Billing Board'] },
-      { x: 176, y: 84, w: 182, k: 'j', th: ['เลื่อนกลุ่ม', 'ไปรอบถัดไป'], en: ['Move the group to', 'the next date'] },
-      { x: 534, y: 256, w: 190, k: 'j', th: ['สร้าง', 'ใบวางบิลร่าง'], en: ['Create draft', 'billing notes'] },
-      { x: 754, y: 256, w: 200, k: 'j', th: ['ตรวจรายการและยอด', 'บนใบร่าง'], en: ['Check lines', 'and totals'] },
-      { x: 984, y: 256, w: 248, k: 'j', th: ['Release และพิมพ์', 'ใบวางบิล'], en: ['Release and print', 'the billing note'] },
-      { x: 1262, y: 256, w: 136, k: 'm', th: ['วางบิล', 'กับลูกค้า'], en: ['Place it with', 'the customer'] },
-      { x: 1010, y: 396, w: 194, k: 'j', th: ['ระบุวันนัดรับชำระ', 'Collection Date'], en: ['Set the', 'collection date'] },
-      { x: 760, y: 396, w: 204, k: 'c', th: ['รับชำระ', 'และออกใบเสร็จ'], en: ['Collect and', 'issue the receipt'] },
-      { x: 176, y: 396, w: 186, k: 'j', th: ['ยกเลิกใบวางบิล', 'ด้วย Cancel'], en: ['Cancel the', 'billing note'] }
+    /* ขั้นของผังเรียงตามทางหลัก — lane a = บัญชีลูกหนี้, c = ลูกค้า · kind: gate/out/hand ตามคำอธิบายสัญลักษณ์ */
+    const STEPS = [
+      { k: 'open', lane: 'a', th: 'เปิด Billing Worklist หรือ Billing Board', en: 'Open the Billing Worklist or Billing Board' },
+      { k: 'due', lane: 'a', kind: 'gate', yes: 'eDue', th: 'ถึงรอบวางบิลหรือยัง?', en: 'Is the group due?',
+        note: { th: 'ทุกวันที่ 25, ศุกร์สุดท้าย หรือตามตกลง', en: 'The 25th, the last Friday, or as agreed' } },
+      { k: 'draft', lane: 'a', th: 'สร้างใบวางบิลร่าง', en: 'Create draft billing notes' },
+      { k: 'check', lane: 'a', th: 'ตรวจรายการและยอดบนใบร่าง', en: 'Check lines and totals on the draft' },
+      { k: 'release', lane: 'a', th: 'Release และพิมพ์ใบวางบิล', en: 'Release and print the billing note',
+        note: { th: 'กันวางบิลซ้ำรอบถัดไป', en: 'Blocks duplicate billing next cycle' } },
+      { k: 'hand', lane: 'a', kind: 'out', th: 'วางบิลกับลูกค้า', en: 'Place it with the customer' },
+      { k: 'accept', lane: 'c', kind: 'gate', yes: 'eYes', th: 'ลูกค้ารับวางบิลไหม?', en: 'Does the customer accept?' },
+      { k: 'date', lane: 'a', th: 'ระบุวันนัดรับชำระ Collection Date', en: 'Set the collection date' },
+      { k: 'pay', lane: 'a', kind: 'hand', th: 'รับชำระและออกใบเสร็จ', en: 'Collect and issue the receipt' }
     ];
-    const GATES = [
-      { cx: 450, cy: 290, th: ['ถึงรอบ', 'วางบิล?'], en: ['Group', 'due?'] },
-      { cx: 1330, cy: 570, th: ['ลูกค้ารับ', 'วางบิล?'], en: ['Customer', 'accepts?'] }
+    /* ทางวนกลับ — row 1 = เหนือเลน, row 4 = ใต้เลน · cols คือช่วงคอลัมน์ของการ์ดอธิบาย */
+    const DETOURS = [
+      { from: 1, k: 'postpone', q: 'eNot', row: 1, cols: '4 / 8',
+        th: 'เลื่อนทั้งกลุ่มไปรอบถัดไป', en: 'Move the whole group to the next date' },
+      { from: 6, k: 'cancel', q: 'eNo', row: 4, cols: '3 / 8',
+        th: 'ยกเลิกใบวางบิลด้วย Cancel', en: 'Cancel the billing note',
+        sub: { th: 'ใบแจ้งหนี้กลับเข้ารอบถัดไป', en: 'Its invoices return to the next cycle' } }
     ];
-    const EDGES = ['M155 290H172', 'M366 290H392', 'M504 290H530', 'M724 290H750', 'M954 290H980',
-      'M1232 290H1258', 'M1330 324V512', 'M1276 570H1240V430H1208',
-      'M1010 430H964', 'M760 430H730', 'M450 236V118H362'];
-    const RETURNS = ['M222 152V252', 'M1330 624V650H269V468', 'M269 396V330'];
-    const ELABS = [{ x: 511, y: 274, a: 'middle', k: 'eDue' }, { x: 462, y: 196, a: 'start', k: 'eNot' },
-      { x: 1232, y: 500, a: 'end', k: 'eYes' }, { x: 1343, y: 646, a: 'start', k: 'eNo' }];
-    const CALLS = [
-      { l: 'M1108 186V250', x: 1000, y: 140, k: ['c1a', 'c1b'] },
-      { l: 'M478 352 454 344', x: 482, y: 360, k: ['c2a', 'c2b'] },
-      { l: 'M430 534 356 470', x: 436, y: 556, k: ['c3a', 'c3b'] }
-    ];
+    const GLYPH = {
+      open: '<rect x="7" y="9" width="34" height="23" rx="3"/><path d="M3 38h42M13 17h16M13 24h10"/>',
+      due: '<text class="bfj-q" x="24" y="33" text-anchor="middle">?</text>',
+      postpone: '<rect x="6" y="9" width="36" height="32" rx="4"/><path d="M6 18h36M15 5v8M33 5v8M15 30h16m-5-5 5 5-5 5"/>',
+      draft: '<path d="M11 5h18l9 9v29H11z" stroke-dasharray="5 4"/><path d="M17 22h14M17 29h9"/>',
+      check: '<path d="M10 5h17l7 7v8M10 5v36h14"/><circle cx="31" cy="30" r="8"/><path d="M37 36l6 6"/>',
+      release: '<path d="M14 17V5h20v12"/><rect x="5" y="17" width="38" height="16" rx="3"/><path d="M14 28h20v15H14zM19 34h10"/>',
+      hand: '<circle cx="12" cy="10" r="4.5"/><circle cx="36" cy="10" r="4.5"/><path d="M5 44V27a7 7 0 0 1 14 0M29 27a7 7 0 0 1 14 0v17"/><path d="M19 30h10"/><rect x="20" y="20" width="8" height="10" rx="1"/>',
+      cancel: '<path d="M10 5h19l9 9v29H10z"/><path d="M17 20l14 14M31 20 17 34"/>',
+      date: '<rect x="5" y="9" width="30" height="28" rx="4"/><path d="M5 17h30M13 5v8M27 5v8"/><circle cx="36" cy="36" r="8"/><path d="M36 32v8"/>',
+      pay: '<path d="M11 4h26v40l-4.3-3-4.4 3-4.3-3-4.3 3-4.4-3L11 44z"/><path d="M17 15h14M17 22h14M17 29l4 4 8-8"/>'
+    };
+    GLYPH.accept = GLYPH.due;
 
     const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const byId = (id) => document.getElementById(id);
     let lang = 'th';
+    const L = (o) => o[lang] || o.th;
+    const sign = (k, cls) => '<span class="bfj-sign ' + (cls || '') + '"><svg viewBox="0 0 48 48" aria-hidden="true">' + GLYPH[k] + '</svg></span>';
+    const detour = (d) => sign(d.k, 'mini') + '<span><b>' + esc(L(T[d.q])) + '</b> → ' + esc(L(d))
+      + (d.sub ? '<small>' + esc(L(d.sub)) + '</small>' : '') + '<small>' + esc(L(T.back)) + '</small></span>';
+
+    const J = byId('bfJourney');
+    let stops = [], chips = [], tags = [];
+
+    /* เส้นมุมมนตั้งฉาก ผ่านจุดตามลำดับ */
+    function route(p, r = 12) {
+      let d = 'M' + p[0][0] + ' ' + p[0][1];
+      for (let i = 1; i < p.length - 1; i++) {
+        const [x0, y0] = p[i - 1], [x, y] = p[i], [x1, y1] = p[i + 1];
+        const a = Math.min(r, Math.hypot(x - x0, y - y0) / 2), b = Math.min(r, Math.hypot(x1 - x, y1 - y) / 2);
+        const ux = Math.sign(x - x0), uy = Math.sign(y - y0), vx = Math.sign(x1 - x), vy = Math.sign(y1 - y);
+        d += ' L' + (x - ux * a) + ' ' + (y - uy * a) + ' Q' + x + ' ' + y + ' ' + (x + vx * b) + ' ' + (y + vy * b);
+      }
+      const e = p[p.length - 1];
+      return d + ' L' + e[0] + ' ' + e[1];
+    }
+
+    /* วาดเส้นตามตำแหน่งจริงของป้าย — เรียกใหม่ทุกครั้งที่ขนาดเปลี่ยน */
+    function drawWires() {
+      if (!J.offsetParent || !stops.length) return;
+      const R = J.getBoundingClientRect();
+      const box = (el) => { const b = el.getBoundingClientRect();
+        return { l: b.left - R.left, r: b.right - R.left, t: b.top - R.top, b: b.bottom - R.top,
+          x: (b.left + b.right) / 2 - R.left, y: (b.top + b.bottom) / 2 - R.top }; };
+      const sg = stops.map((el) => box(el.firstElementChild));
+      const cell = stops.map(box);
+      const gap = 5, P = [];
+      let ti = 0;
+      for (let i = 0; i < sg.length - 1; i++) {
+        const a = sg[i], b = sg[i + 1], mx = (cell[i].r + cell[i + 1].l) / 2;
+        let pts, tx, ty;
+        if (Math.abs(a.y - b.y) < 2) { pts = [[a.r + gap, a.y], [b.l - gap - 2, b.y]]; tx = (a.r + b.l) / 2; ty = a.y - 16; }
+        else if (b.y > a.y) { pts = [[a.r + gap, a.y], [b.x, a.y], [b.x, b.t - gap - 2]]; tx = b.x; ty = (a.y + b.t) / 2; }
+        else { pts = [[a.r + gap, a.y], [mx, a.y], [mx, b.y], [b.l - gap - 2, b.y]]; tx = mx; ty = (a.y + b.y) / 2; }
+        P.push('<path d="' + route(pts) + '" marker-end="url(#bfAr)"/>');
+        if (STEPS[i].yes) { tags[ti].style.left = tx + 'px'; tags[ti].style.top = ty + 'px'; ti++; }
+      }
+      const s1 = sg[0];
+      const c1 = box(chips[0]), g1 = sg[DETOURS[0].from];
+      P.push('<path class="d" d="' + route([[g1.x, g1.t + 4], [g1.x, c1.y], [s1.x, c1.y], [s1.x, s1.t - gap - 2]]) + '" marker-end="url(#bfArD)"/>');
+      const c2 = box(chips[1]), g2 = sg[DETOURS[1].from], ex = sg[DETOURS[1].from - 1].x, x0 = cell[0].l - 6;
+      P.push('<path class="d" d="' + route([[g2.l + 4, g2.y], [ex, g2.y], [ex, c2.y], [x0, c2.y], [x0, s1.y], [s1.l - gap - 2, s1.y]]) + '" marker-end="url(#bfArD)"/>');
+      byId('bfWires').innerHTML = P.join('');
+    }
 
     function drawFlow() {
-      const L = (o) => o[lang] || o.th;
-      let s = '';
-      /* เลน — เลนลูกค้าได้พื้นอ่อนเพราะอยู่นอกบริษัท */
-      s += '<rect class="bf-lane" x="96" y="40" width="1344" height="460"/>'
-        + '<rect class="bf-lane-x" x="96" y="500" width="1344" height="168"/>'
-        + '<text class="bf-lane-t" transform="translate(58,270) rotate(-90)" text-anchor="middle">' + esc(L(T.lane1)) + '</text>'
-        + '<text class="bf-lane-t" transform="translate(58,584) rotate(-90)" text-anchor="middle">' + esc(L(T.lane2)) + '</text>';
-      EDGES.forEach((d) => { s += '<path class="bf-e" d="' + d + '" marker-end="url(#bfAr)"/>'; });
-      RETURNS.forEach((d) => { s += '<path class="bf-e-r" d="' + d + '" marker-end="url(#bfArD)"/>'; });
-      s += '<circle class="bf-token" r="5.5"><animateMotion dur="9s" repeatCount="indefinite" path="M140,290 H1330 V570 H1240 V430 H730"/>'
-        + '<animate attributeName="opacity" dur="9s" repeatCount="indefinite" values="0;1;1;1;0" keyTimes="0;.04;.5;.94;1"/></circle>'
-        + '<circle class="bf-ep" cx="140" cy="290" r="15"/><circle class="bf-ep bf-ep-e" cx="710" cy="430" r="16"/>';
-      NODES.forEach((n) => {
-        const cls = n.k === 'j' ? 'bf-nj' : n.k === 'm' ? 'bf-nm' : n.k === 'c' ? 'bf-nc' : 'bf-ng';
-        const ink = n.k === 'j' ? 'bf-tj' : 'bf-ti';
-        const cx = n.x + n.w / 2;
-        s += '<rect class="' + cls + '" x="' + n.x + '" y="' + n.y + '" width="' + n.w + '" height="68" rx="3"/>'
-          + '<text class="bf-t ' + ink + '" x="' + cx + '" y="' + (n.y + 29) + '">' + esc(L(n)[0]) + '</text>'
-          + '<text class="bf-t ' + ink + '" x="' + cx + '" y="' + (n.y + 49) + '">' + esc(L(n)[1]) + '</text>';
+      [...stops, ...chips, ...tags].forEach((el) => el.remove());
+      stops = STEPS.map((st, i) => {
+        const el = document.createElement('div');
+        el.className = 'bfj-stop';
+        el.style.gridColumn = i + 2;
+        el.style.gridRow = st.lane === 'a' ? 2 : 3;
+        el.innerHTML = sign(st.k, st.kind) + '<span class="bfj-n">' + String(i + 1).padStart(2, '0') + '</span>'
+          + '<span class="bfj-t">' + esc(L(st)) + '</span>' + (st.note ? '<span class="bfj-note">' + esc(L(st.note)) + '</span>' : '');
+        J.appendChild(el);
+        return el;
       });
-      GATES.forEach((g) => {
-        s += '<path class="bf-ng" d="M' + g.cx + ' ' + (g.cy - 54) + ' ' + (g.cx + 54) + ' ' + g.cy
-          + ' ' + g.cx + ' ' + (g.cy + 54) + ' ' + (g.cx - 54) + ' ' + g.cy + 'z"/>'
-          + '<text class="bf-t bf-tg bf-ti" x="' + g.cx + '" y="' + (g.cy - 4) + '">' + esc(L(g)[0]) + '</text>'
-          + '<text class="bf-t bf-tg bf-ti" x="' + g.cx + '" y="' + (g.cy + 13) + '">' + esc(L(g)[1]) + '</text>';
+      chips = DETOURS.map((d) => {
+        const el = document.createElement('div');
+        el.className = 'bfj-detour';
+        el.style.gridRow = d.row;
+        el.style.gridColumn = d.cols;
+        el.style.justifySelf = d.row === 1 ? 'start' : 'end';
+        el.innerHTML = detour(d);
+        J.appendChild(el);
+        return el;
       });
-      ELABS.forEach((e) => {
-        s += '<text class="bf-el" x="' + e.x + '" y="' + e.y + '" text-anchor="' + e.a + '">' + esc(L(T[e.k])) + '</text>';
+      tags = STEPS.filter((st) => st.yes).map((st) => {
+        const el = document.createElement('span');
+        el.className = 'bfj-tag';
+        el.textContent = L(T[st.yes]);
+        J.appendChild(el);
+        return el;
       });
-      CALLS.forEach((c) => {
-        s += '<path class="bf-cl" d="' + c.l + '"/>'
-          + '<text class="bf-ca bf-ca-b" x="' + c.x + '" y="' + c.y + '">' + esc(L(T[c.k[0]])) + '</text>'
-          + '<text class="bf-ca" x="' + c.x + '" y="' + (c.y + 20) + '">' + esc(L(T[c.k[1]])) + '</text>';
-      });
-      byId('bfFlow').innerHTML = s;
+      byId('bfVline').innerHTML = STEPS.map((st, i) => {
+        const d = DETOURS.find((x) => x.from === i);
+        return '<div class="bfj-vst">' + sign(st.k, st.kind) + '<div><p class="bfj-t">' + (i + 1) + '. ' + esc(L(st))
+          + '<span class="bfj-who">' + esc(L(T[st.lane === 'a' ? 'lane1' : 'lane2']).replace(' *', '')) + '</span></p>'
+          + (st.note ? '<p class="bfj-note">' + esc(L(st.note)) + '</p>' : '')
+          + (d ? '<div class="bfj-detour">' + detour(d) + '</div>' : '') + '</div></div>';
+      }).join('');
+      drawWires();
     }
+    new ResizeObserver(drawWires).observe(J);
+    if (document.fonts) document.fonts.ready.then(drawWires);
 
     /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ----
        สัปดาห์เริ่มวันอาทิตย์ อังคารจึงเป็นคอลัมน์ที่ 2 (นับจาก 0) */
