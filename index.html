@@ -4025,14 +4025,14 @@
     </defs></svg>
 
     <div class="wq-arch reveal">
-      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งรายการสินค้า (ไม่รวมราคา) ไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
+      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
       <div class="wq-app-node" aria-hidden="true">
         <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-chat"/></svg></span>
         <span class="wq-app-name">LINE</span>
         <span class="wq-app-role">(Login&nbsp;+&nbsp;LIFF)</span>
       </div>
       <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">รายการสินค้า</span></span>
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
         <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
       </span>
       <div class="wq-app-node" aria-hidden="true">
@@ -4041,7 +4041,7 @@
         <span class="wq-app-role">(Cloudflare®&nbsp;Workers)</span>
       </div>
       <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">รายการสินค้า</span></span>
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
         <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
       </span>
       <div class="wq-app-node" aria-hidden="true">
@@ -4051,7 +4051,7 @@
       </div>
       <p class="wq-legend" aria-hidden="true">
         <span><i class="wq-flow wq-fwd"></i><span data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">รายการสินค้า</span></span>
+        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">สินค้า</span></span>
       </p>
     </div>
 
@@ -5579,10 +5579,10 @@
       sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
              en: 'Buyers pick their items inside LINE, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
       app: { th: 'เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์', en: 'Buyer-side demo · runs in your browser' },
-      archSr: { th: 'ลำดับการทำงาน: Business Central ส่งรายการสินค้า (ไม่รวมราคา) ไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
-                en: 'How it flows: Business Central syncs the item list (no prices) to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
+      archSr: { th: 'ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
+                en: 'How it flows: Business Central syncs item data to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
       flowReq: { th: 'คำขอใบเสนอราคา', en: 'Quote request' },
-      flowItems: { th: 'รายการสินค้า', en: 'Item list' },
+      flowItems: { th: 'สินค้า', en: 'Items' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
       s1hint: { th: 'รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE — ไม่แสดงราคา ราคามาจาก Business Central ตอนออกใบเสนอราคา', en: 'The same item list the buyer sees in LINE — no prices; Business Central prices the quote' },
