@@ -3133,6 +3133,231 @@
     font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
   }
 
+
+  /* ── #web-quote (Highlight Feature 3) ─────────────────────────────
+     เดโมฝั่งลูกค้า: กดเลือกสินค้าเอง แล้วเห็น Sales Quote ที่ BC สร้างให้
+     คิดเลขในเบราว์เซอร์ล้วน ไม่แตะระบบจริง · โครงการ์ดและสองคอลัมน์ยืมสำนวน .vs
+     ฝั่งขวาพื้นเขียวจาง = ฝั่งที่ระบบทำให้ เหมือน .vs-side.rd */
+  .wq-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .wq {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+    margin-top: 30px;
+  }
+  .wq-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap;
+    padding: 15px 24px; background: var(--bg-soft); border-bottom: 1px solid var(--ui-line);
+  }
+  .wq-app {
+    display: flex; align-items: center; gap: 8px; margin: 0;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ui-muted);
+  }
+  .wq-app .wq-ic { width: 15px; height: 15px; color: var(--brand-jade); }
+  .wq-sample {
+    font-size: .74rem; color: var(--ui-muted); white-space: nowrap;
+    border: 1px solid var(--ui-line); border-radius: 999px; padding: 2px 11px;
+  }
+
+  .wq-stage { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
+  .wq-pick { padding: 20px 24px 22px; min-width: 0; }
+  .wq-out {
+    padding: 20px 24px 22px; min-width: 0;
+    background: #EFF5F3; border-left: 1px solid var(--ui-line);
+    box-shadow: inset 3px 0 0 var(--brand-jade);
+  }
+  .wq-step {
+    display: flex; align-items: baseline; gap: 9px; margin: 0 0 6px;
+    font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; color: var(--ui-ink);
+  }
+  .wq-step b {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .8rem; font-weight: 700; color: var(--brand-jade);
+    font-variant-numeric: tabular-nums;
+  }
+  .wq-hint { margin: 0 0 12px; font-size: .84rem; color: var(--ui-muted); }
+
+  .wq-items { margin: 0 0 22px; }
+  .wq-item {
+    display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 13px; align-items: center;
+    padding: 11px 8px 11px 6px; border-top: 1px solid var(--ui-line);
+    transition: background .16s ease;
+  }
+  .wq-item:last-child { border-bottom: 1px solid var(--ui-line); }
+  .wq-item.on { background: rgba(65,119,113,.07); }
+  .wq-item .wq-ic { width: 26px; height: 26px; color: var(--brand-mint); }
+  .wq-item.on .wq-ic { color: var(--brand-jade); }
+  .wq-name { min-width: 0; }
+  .wq-name b { display: block; font-size: .95rem; font-weight: 600; line-height: 1.4; }
+  .wq-name span {
+    display: block; font-size: .78rem; color: var(--ui-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .wq-name code {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .78rem; font-weight: 700; letter-spacing: .08em; color: var(--brand-teal);
+  }
+  .wq-qty {
+    display: inline-flex; align-items: center;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn); background: #fff;
+  }
+  .wq-qty button {
+    width: 36px; height: 36px; display: grid; place-items: center;
+    font: inherit; font-size: 1.1rem; font-weight: 700; line-height: 1;
+    color: var(--brand-teal); background: transparent; border: 0; cursor: pointer;
+    transition: background .125s ease, color .125s ease;
+  }
+  .wq-qty button:hover:not(:disabled) { background: var(--bg-soft); }
+  .wq-qty button:disabled { color: var(--brand-mist); cursor: default; }
+  .wq-qty output {
+    min-width: 30px; text-align: center; font-size: .98rem; font-weight: 700;
+    color: var(--ui-ink); font-variant-numeric: tabular-nums;
+  }
+
+  .wq-who { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; }
+  .wq-who button {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .88rem; font-weight: 500; color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
+    padding: 10px 15px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease, color .125s ease;
+  }
+  .wq-who button:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
+  .wq-who button[aria-pressed="true"] { color: #fff; background: var(--brand-teal); border-color: var(--brand-teal); }
+  .wq-send {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-teal);
+    border: 1px solid var(--brand-teal); border-radius: var(--ui-radius-btn);
+    padding: 0 22px; min-height: 46px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .wq-send:hover:not(:disabled) { background: var(--brand-deep); border-color: var(--brand-deep); }
+  .wq-send:disabled { background: var(--brand-mist); border-color: var(--brand-mist); cursor: default; }
+  .wq-send .wq-ic { width: 17px; height: 17px; }
+
+  /* ท่อสามโหนด — จุดสว่างไล่ทีละขั้นหลังกดส่ง เส้นต่อระหว่างโหนดคือ ::before */
+  .wq-pipe { margin: 0 0 18px; }
+  .wq-node { position: relative; display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; padding-bottom: 15px; }
+  .wq-node:last-child { padding-bottom: 0; }
+  .wq-node:not(:last-child)::before {
+    content: ""; position: absolute; left: 9px; top: 19px; bottom: 3px; width: 2px;
+    background: var(--brand-pale); transition: background .3s ease;
+  }
+  .wq-node.on:not(:last-child)::before { background: var(--brand-jade); }
+  .wq-dot {
+    width: 14px; height: 14px; margin-top: 4px; border-radius: 50%;
+    border: 2px solid var(--brand-mist); background: #fff;
+    transition: border-color .3s ease, background .3s ease, transform .3s ease;
+  }
+  .wq-node.on .wq-dot { border-color: var(--brand-jade); background: var(--brand-jade); transform: scale(1.14); }
+  .wq-txt { min-width: 0; }
+  .wq-txt b { display: block; font-size: .92rem; font-weight: 600; color: var(--ui-muted); transition: color .3s ease; }
+  .wq-node.on .wq-txt b { color: var(--brand-teal); }
+  .wq-txt > span { display: block; font-size: .84rem; line-height: 1.55; color: var(--ui-muted); min-height: 1.3em; }
+
+  .wq-doc {
+    position: relative; overflow: hidden;
+    background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card);
+    padding: 15px 17px 16px;
+  }
+  .wq-doc.in { animation: wqDoc .4s cubic-bezier(.2,.75,.2,1) both; }
+  @keyframes wqDoc { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+  .wq-doc-head {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 9px; margin-bottom: 11px; border-bottom: 2px solid var(--brand-pale);
+  }
+  .wq-doc-head b { font-size: 1rem; font-weight: 700; color: var(--ui-ink); }
+  .wq-doc-head span span { display: block; font-size: .78rem; font-weight: 500; letter-spacing: normal; color: var(--ui-muted); }
+  .wq-doc-no {
+    text-align: right; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .88rem; font-weight: 700; color: var(--brand-teal);
+    letter-spacing: .06em; font-variant-numeric: tabular-nums;
+  }
+  .wq-doc-cust { margin: 0 0 11px; font-size: .86rem; line-height: 1.5; color: var(--ui-muted); }
+  .wq-doc-cust b { color: var(--ui-ink); font-weight: 600; }
+  .wq-line {
+    display: grid; grid-template-columns: 62px minmax(0, 1fr) 42px 92px; gap: 10px;
+    padding: 7px 0; border-top: 1px solid var(--ui-line);
+    font-size: .85rem; font-variant-numeric: tabular-nums;
+  }
+  .wq-line code { font-weight: 700; color: var(--brand-teal); letter-spacing: .05em; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .wq-line i { font-style: normal; color: var(--ui-muted); text-align: right; }
+  .wq-line em { font-style: normal; text-align: right; }
+  .wq-sum {
+    display: grid; grid-template-columns: minmax(0, 1fr) 100px; gap: 5px 12px;
+    margin: 11px 0 0; padding-top: 10px; border-top: 1px solid var(--ui-line);
+    font-size: .85rem; font-variant-numeric: tabular-nums;
+  }
+  .wq-sum dt { color: var(--ui-muted); }
+  .wq-sum dd { margin: 0; text-align: right; }
+  .wq-sum .tot { padding-top: 7px; border-top: 1px solid var(--brand-pale); font-weight: 700; color: var(--brand-teal); }
+  .wq-sum dt.tot { color: var(--ui-ink); }
+  .wq-baht { margin: 9px 0 0; font-size: .8rem; color: var(--ui-muted); }
+  .wq-wm {
+    position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 700; letter-spacing: .14em;
+    color: rgba(166,58,86,.11); transform: rotate(-17deg); white-space: nowrap;
+  }
+  .wq-empty {
+    display: flex; flex-direction: column; align-items: center; gap: 9px;
+    padding: 52px 16px; text-align: center; color: var(--ui-muted); font-size: .92rem;
+    background: #fff; border: 1px dashed var(--brand-pale); border-radius: var(--ui-radius-card);
+  }
+  .wq-empty .wq-ic { width: 26px; height: 26px; color: var(--brand-mist); }
+
+  .wq-keyed {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: baseline;
+    margin: 0; padding: 17px 24px; background: var(--bg-soft);
+    border-top: 1px solid var(--ui-line); font-size: .95rem; line-height: 1.6;
+  }
+  .wq-keyed .wq-lbl {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    color: var(--brand-burgundy); white-space: nowrap;
+  }
+  .wq-keyed .wq-ic { width: 15px; height: 15px; }
+  .wq-keyed b { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-weight: 700; color: var(--brand-teal); }
+
+  /* แถวหลักฐาน: ภาพจากระบบจริง ไม่ใช่เดโม — ปิดท้ายการ์ดให้เห็นว่าที่เล่นอยู่มีของจริงรองรับ */
+  .wq-proof { display: block; }
+  .wq-proof img { display: block; width: 100%; height: auto; }
+  .wq-proof-cap {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap;
+    padding: 15px 24px 11px; border-top: 1px solid var(--ui-line);
+    font-size: .82rem; color: var(--ui-muted);
+  }
+  .wq-proof-cap .wq-ic { width: 14px; height: 14px; color: var(--brand-jade); flex: 0 0 auto; }
+  .wq-proof-cap > span { display: inline-flex; align-items: center; gap: 7px; }
+
+  .wq-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
+  }
+  .wq-note a { color: #8E2C46; font-weight: 600; text-decoration: none; }
+  .wq-note a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 900px) {
+    .wq-stage { grid-template-columns: 1fr; }
+    .wq-out { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
+    .wq-bar, .wq-keyed, .wq-proof-cap, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
+    .wq-send { width: 100%; }
+  }
+  @media (max-width: 520px) {
+    .wq-item { grid-template-columns: 26px minmax(0, 1fr); row-gap: 9px; }
+    .wq-item .wq-qty { grid-column: 2; justify-self: start; }
+    .wq-line { grid-template-columns: 54px minmax(0, 1fr) 34px 78px; gap: 7px; font-size: .8rem; }
+    .wq-sum { grid-template-columns: minmax(0, 1fr) 86px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wq-doc.in { animation: none; }
+    .wq-dot, .wq-node b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item { transition: none; }
+    .wq-node.on .wq-dot { transform: none; }
+  }
+
   @media (max-width: 900px) {
     .vs-cmp { grid-template-columns: 1fr; }
     .vs-side.rd { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
@@ -3646,6 +3871,65 @@
     </div>
 
     <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ — ระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
+  </div>
+</section>
+
+<section id="web-quote" class="alt">
+  <div class="wrap">
+    <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
+    <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LINE</h2>
+    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE แล้วใบเสนอราคาไปโผล่ใน Business Central — ลองกดเป็นลูกค้าดูได้เลย ไม่ต้องติดตั้งอะไร</p>
+
+    <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="wqi-flow" viewBox="0 0 24 24"><path d="M13 6h7v7M20 6l-9 9M4 4v16h16"/></symbol>
+      <symbol id="wqi-box" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9.5" x2="13" y2="9.5"/><line x1="7" y1="13.5" x2="11" y2="13.5"/><circle cx="17" cy="14" r="1.5"/></symbol>
+      <symbol id="wqi-send" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7.5 3 3 7.5z"/><path d="M21 3 10.5 13.5"/></symbol>
+      <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
+      <symbol id="wqi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
+      <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+    </defs></svg>
+
+    <div class="wq reveal">
+      <div class="wq-bar">
+        <p class="wq-app"><svg class="wq-ic"><use href="#wqi-flow"/></svg><span data-wq="app">LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central</span></p>
+        <span class="wq-sample" data-wq="sample">ข้อมูลตัวอย่าง</span>
+      </div>
+
+      <div class="wq-stage">
+        <div class="wq-pick">
+          <p class="wq-step"><b>01</b><span data-wq="s1">เลือกสินค้า</span></p>
+          <p class="wq-hint" data-wq="s1hint">แคตตาล็อกและราคาชุดเดียวกับที่ลูกค้าเห็นบน LINE</p>
+          <div class="wq-items" id="wq-items"></div>
+
+          <p class="wq-step"><b>02</b><span data-wq="s2">ท่านเป็น</span></p>
+          <p class="wq-hint" data-wq="s2hint">ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ</p>
+          <div class="wq-who" id="wq-who" role="group" aria-label="ประเภทผู้ซื้อ"></div>
+
+          <button class="wq-send" type="button" id="wq-send"><svg class="wq-ic"><use href="#wqi-send"/></svg><span data-wq="send">ส่งคำขอราคา</span></button>
+        </div>
+
+        <div class="wq-out">
+          <div class="wq-pipe" id="wq-pipe"></div>
+          <div id="wq-result" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <p class="wq-keyed">
+        <span class="wq-lbl"><svg class="wq-ic"><use href="#wqi-warn"/></svg><span data-wq="keyedLbl">ช่องที่ฝ่ายขายต้องคีย์ซ้ำ</span></span>
+        <span id="wq-keyed"></span>
+      </p>
+
+      <p class="wq-proof-cap">
+        <span><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว — ภาพจากระบบทดสอบบน quote.jwicconsulting.com</span></span>
+        <span data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</span>
+      </p>
+      <a class="wq-proof" href="img/bc-liff-quote.webp" target="_blank" rel="noopener">
+        <img src="img/bc-liff-quote.webp" alt="สามขั้นจากระบบทดสอบจริง — เลือกสินค้าใน LINE, กรอกข้อมูลผู้ซื้อ, แล้วใบเสนอราคา QG000007 ที่ Business Central สร้างให้" loading="lazy" width="1201" height="508">
+      </a>
+    </div>
+
+    <p class="wq-note" data-wq="note">ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
   </div>
 </section>
 
@@ -5063,6 +5347,237 @@
     window.renderBillingFlow('th');
   })();
 
+  /* ---- #web-quote (Highlight Feature 3) --------------------------------
+     เดโมฝั่งลูกค้า: กดเลือกสินค้า แล้วเห็นใบเสนอราคาที่ Business Central สร้างให้
+     คิดเลขในเบราว์เซอร์ล้วน ไม่ยิงระบบจริงสักครั้ง · ผู้ขายในเอกสารเป็นบริษัทสมมติ
+     (ข้อยกเว้นเดียวกับใบกำกับภาษีจำลองใน hero — ไม่ใช่ราคาของ JWIC จึงมี VAT ได้)
+     คำแปลอยู่ในตัวเองเหมือน #vat-service เพราะ applyLang() เขียนทับ innerHTML
+     แล้วจำนวนที่ผู้ใช้กดค้างไว้จะหายหมด — applyLang เรียก window.renderWebQuote แทน */
+  (() => {
+    const itemBox = document.getElementById('wq-items');
+    if (!itemBox) return;
+
+    /* ราคาต่อหน่วยชุดเดียวกับใบเสนอราคาจริงที่ออกจากระบบทดสอบ (QG000005, QG000007)
+       จำนวนตั้งต้นตรงกับภาพหลักฐานใต้การ์ด — เปิดมาเห็นเลขเดียวกับของจริง */
+    const ITEMS = [
+      { code: 'LA-001', name: 'Hematology Analyzer', price: 850000, qty: 2 },
+      { code: 'LA-002', name: 'Chemistry Analyzer', price: 1284000, qty: 0 },
+      { code: 'LA-003', name: 'Immunoassay Analyzer', price: 1500000, qty: 1 }
+    ];
+
+    const WHO = [
+      { tab: { th: 'ลูกค้าเดิม', en: 'Existing customer' },
+        cust: { th: 'บริษัท ซื้อมาขายไป จำกัด', en: 'Suemakhaipai Co., Ltd.' },
+        sub: { th: 'ลูกค้ารหัส C00123 · เครดิต 30 วัน', en: 'Customer C00123 · 30-day terms' },
+        bc: { th: 'เจอเลขผู้เสียภาษีในระบบ — ใช้ลูกค้า C00123 ที่อยู่ เครดิต และเงื่อนไขชำระเดิม',
+              en: 'Tax ID matched — customer C00123 is reused with its address, credit limit and terms' } },
+      { tab: { th: 'นิติบุคคลใหม่', en: 'New company' },
+        cust: { th: 'บริษัท พรีเมียร์แล็บ จำกัด', en: 'Premier Lab Co., Ltd.' },
+        sub: { th: 'ลูกค้าใหม่ · สร้างเป็น Contact', en: 'New buyer · created as a Contact' },
+        bc: { th: 'ไม่เคยมีเลขนี้ในระบบ — สร้าง Contact ใหม่จากข้อมูลที่ลูกค้ากรอก แล้วออกใบเสนอราคาต่อทันที',
+              en: 'Tax ID not on file — a Contact is created from what the buyer typed, then the quote follows immediately' } },
+      { tab: { th: 'บุคคลธรรมดา', en: 'Individual' },
+        cust: { th: 'คุณมุก ศรีสุวรรณ', en: 'Ms. Mook Srisuwan' },
+        sub: { th: 'ลูกค้าใหม่ · ไม่มีเลขนิติบุคคล', en: 'New buyer · no company tax ID' },
+        bc: { th: 'สร้าง Contact แบบบุคคลธรรมดา ไม่บังคับเลขผู้เสียภาษี 13 หลัก ใบเสนอราคายังออกได้',
+              en: 'An individual Contact is created — no 13-digit company ID required, the quote still goes out' } }
+    ];
+
+    const SELLER = { th: 'บริษัท ตัวอย่างการค้า จำกัด', en: 'Sample Trading Co., Ltd.' };
+    const DISCOUNT = 0.10, VAT = 0.07;
+
+    const T = {
+      kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
+      h2: { th: 'ขอใบเสนอราคาผ่าน LINE', en: 'Quotes that start in LINE' },
+      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้วใบเสนอราคาไปโผล่ใน Business Central — ลองกดเป็นลูกค้าดูได้เลย ไม่ต้องติดตั้งอะไร',
+             en: 'The buyer picks the items in LINE and the quote lands in Business Central — press through it here as if you were that buyer.' },
+      app: { th: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central', en: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central' },
+      sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
+      s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
+      s1hint: { th: 'แคตตาล็อกและราคาชุดเดียวกับที่ลูกค้าเห็นบน LINE', en: 'The same catalogue and prices the buyer sees in LINE' },
+      s2: { th: 'ท่านเป็น', en: 'You are' },
+      s2hint: { th: 'ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ', en: 'This changes what Business Central does with the request' },
+      send: { th: 'ส่งคำขอราคา', en: 'Send the request' },
+      sendAgain: { th: 'ส่งคำขออีกครั้ง', en: 'Send another request' },
+      plus: { th: 'เพิ่มจำนวน', en: 'Add one' },
+      minus: { th: 'ลดจำนวน', en: 'Remove one' },
+      unit: { th: 'บาท/หน่วย', en: 'THB each' },
+      qtyNow: { th: 'ขณะนี้', en: 'now' },
+      nodeLine: { th: 'LINE (LIFF)', en: 'LINE (LIFF)' },
+      nodeWorker: { th: 'Cloudflare Worker', en: 'Cloudflare Worker' },
+      nodeBc: { th: 'Business Central', en: 'Business Central' },
+      idleLine: { th: 'รอคำขอจากลูกค้า', en: 'Waiting for a request' },
+      idleWorker: { th: 'ไม่มีเซิร์ฟเวอร์ให้ดูแล ทำงานเมื่อมีคำขอเท่านั้น', en: 'No server to babysit — it runs only when a request arrives' },
+      idleBc: { th: 'ยังไม่มีเอกสารใหม่', en: 'No new document yet' },
+      doneLine: { th: 'รับคำขอ {n} รายการ พร้อมข้อมูลผู้ซื้อ', en: 'Request received — {n} line(s) plus the buyer details' },
+      doneWorker: { th: 'ตรวจข้อมูล จับคู่รหัสสินค้า แล้วส่งต่อใน 0.3 วินาที', en: 'Validated, item codes matched, handed over in 0.3s' },
+      empty: { th: 'กด “ส่งคำขอราคา” เพื่อดูใบเสนอราคาที่ Business Central สร้างให้', en: 'Press “Send the request” to see the quote Business Central writes' },
+      emptyNone: { th: 'เลือกอย่างน้อยหนึ่งรายการก่อนส่งคำขอ', en: 'Pick at least one item before sending' },
+      docTitle: { th: 'ใบเสนอราคา', en: 'Sales Quote' },
+      docBy: { th: 'ออกโดย', en: 'Issued by' },
+      docDate: { th: 'วันที่เอกสาร', en: 'Document date' },
+      colQty: { th: 'จำนวน', en: 'Qty' },
+      sumNet: { th: 'รวมเป็นเงิน', en: 'Subtotal' },
+      sumDisc: { th: 'ส่วนลด 10%', en: 'Discount 10%' },
+      sumAfter: { th: 'จำนวนเงินหลังหักส่วนลด', en: 'After discount' },
+      sumVat: { th: 'ภาษีมูลค่าเพิ่ม 7%', en: 'VAT 7%' },
+      sumTotal: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
+      baht: { th: '', en: 'Thai baht text, written by the system: ' },
+      wm: { th: 'ตัวอย่าง', en: 'SAMPLE' },
+      keyedLbl: { th: 'ช่องที่ฝ่ายขายต้องคีย์ซ้ำ', en: 'Fields sales has to retype' },
+      keyedVal: { th: '<b>0</b> — ทั้งใบมาจากสิ่งที่ลูกค้ากรอกเอง ฝ่ายขายเปิดมาตรวจแล้วกดส่งได้เลย',
+                  en: '<b>0</b> — every line comes from what the buyer filled in; sales opens it, checks it and sends it' },
+      proof: { th: 'ของจริงทำงานแล้ว — ภาพจากระบบทดสอบบน quote.jwicconsulting.com',
+               en: 'Already running — screenshots from the test system on quote.jwicconsulting.com' },
+      proofZoom: { th: 'คลิกที่ภาพเพื่อดูขนาดเต็ม', en: 'Click the image for full size' },
+      note: { th: 'ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>',
+              en: 'The demo does its arithmetic in the browser and touches nothing live · the seller on the document is a fictional company · scope and pricing are quoted per project against your Requirement · built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>' }
+    };
+
+    /* ตัวอักษรไทยของยอดเงิน — ของจริงพิมพ์บรรทัดนี้ในใบเสนอราคาทุกใบ
+       กฎที่พลาดกันบ่อย: หลักหน่วยเป็น 1 ตามหลังตัวอื่น = "เอ็ด" · หลักสิบเป็น 2 = "ยี่" · หลักสิบเป็น 1 = ไม่ต้องมีคำนำ */
+    const TH_D = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+    const TH_P = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
+    function thWord(s) {
+      s = String(s).replace(/^0+(?=\d)/, '');
+      if (s.length > 7) {
+        const head = s.slice(0, s.length - 6), tail = s.slice(s.length - 6);
+        return thWord(head) + 'ล้าน' + (Number(tail) ? thWord(tail) : '');
+      }
+      let out = '';
+      for (let i = 0; i < s.length; i++) {
+        const d = +s[i], pos = s.length - i - 1;
+        if (!d) continue;
+        if (pos === 0 && d === 1 && s.length > 1) out += 'เอ็ด';
+        else if (pos === 1 && d === 2) out += 'ยี่';
+        else if (pos !== 1 || d !== 1) out += TH_D[d];
+        out += TH_P[pos];
+      }
+      return out;
+    }
+    function bahtText(v) {
+      const int = Math.floor(v + 1e-6), sat = Math.round((v - int) * 100);
+      return (int ? thWord(int) : 'ศูนย์') + 'บาท' + (sat ? thWord(sat) + 'สตางค์' : 'ถ้วน');
+    }
+    const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const byId = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const ico = (id) => '<svg class="wq-ic"><use href="#' + id + '"/></svg>';
+    const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let lang = 'th', who = 0, sent = false, step = 0, quoteNo = 7;
+    let timers = [];
+
+    const lines = () => ITEMS.filter((it) => it.qty > 0);
+    const stop = () => { timers.forEach(clearTimeout); timers = []; };
+    /* แตะอะไรก็ตามหลังส่งแล้ว = กลับไปสถานะยังไม่ส่ง ผู้ดูจะได้เห็นว่าเอกสารมาจากการกดส่ง ไม่ใช่โผล่เอง */
+    const reset = () => { stop(); sent = false; step = 0; };
+
+    function drawItems() {
+      itemBox.innerHTML = ITEMS.map((it, i) =>
+        '<div class="wq-item' + (it.qty ? ' on' : '') + '">' + ico('wqi-box')
+        + '<span class="wq-name"><b>' + esc(it.name) + '</b><span><code>' + it.code + '</code> · '
+        + money(it.price) + ' ' + T.unit[lang] + '</span></span>'
+        + '<span class="wq-qty">'
+        + '<button type="button" data-i="' + i + '" data-d="-1" aria-label="' + T.minus[lang] + ' ' + it.code
+        + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '"' + (it.qty ? '' : ' disabled') + '>&minus;</button>'
+        + '<output>' + it.qty + '</output>'
+        + '<button type="button" data-i="' + i + '" data-d="1" aria-label="' + T.plus[lang] + ' ' + it.code
+        + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '">+</button>'
+        + '</span></div>').join('');
+      itemBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+        const i = b.dataset.i, d = b.dataset.d, it = ITEMS[+i];
+        it.qty = Math.max(0, Math.min(99, it.qty + (+d)));
+        reset(); render();
+        const same = itemBox.querySelector('button[data-i="' + i + '"][data-d="' + d + '"]');
+        (same && !same.disabled ? same : itemBox.querySelector('button[data-i="' + i + '"][data-d="1"]')).focus();
+      }));
+    }
+
+    function drawWho() {
+      const bar = byId('wq-who');
+      bar.innerHTML = WHO.map((w, i) =>
+        '<button type="button" data-i="' + i + '" aria-pressed="' + (i === who) + '">' + esc(w.tab[lang]) + '</button>').join('');
+      bar.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+        who = +b.dataset.i; reset(); render();
+        bar.querySelector('button[data-i="' + who + '"]').focus();
+      }));
+    }
+
+    function node(on, name, text) {
+      return '<div class="wq-node' + (on ? ' on' : '') + '"><span class="wq-dot"></span>'
+        + '<span class="wq-txt"><b>' + name + '</b><span>' + text + '</span></span></div>';
+    }
+
+    function drawPipe() {
+      byId('wq-pipe').innerHTML =
+        node(step >= 1, T.nodeLine[lang], step >= 1 ? T.doneLine[lang].replace('{n}', lines().length) : T.idleLine[lang])
+        + node(step >= 2, T.nodeWorker[lang], step >= 2 ? T.doneWorker[lang] : T.idleWorker[lang])
+        + node(step >= 3, T.nodeBc[lang], step >= 3
+            ? WHO[who].bc[lang] + ' — ' + T.docTitle[lang] + ' ' + quoteId()
+            : T.idleBc[lang]);
+    }
+
+    const quoteId = () => 'QG' + String(quoteNo).padStart(6, '0');
+
+    function drawResult() {
+      const el = byId('wq-result');
+      if (!sent || step < 3) {
+        el.innerHTML = '<div class="wq-empty">' + ico('wqi-doc') + '<span>'
+          + (lines().length ? T.empty[lang] : T.emptyNone[lang]) + '</span></div>';
+        return;
+      }
+      const sub = lines().reduce((a, it) => a + it.price * it.qty, 0);
+      const disc = sub * DISCOUNT, after = sub - disc, vat = after * VAT, tot = after + vat;
+      const d = new Date();
+      const date = String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
+      el.innerHTML = '<div class="wq-doc in"><span class="wq-wm" aria-hidden="true">' + T.wm[lang] + '</span>'
+        + '<div class="wq-doc-head"><span><b>' + T.docTitle[lang] + '</b>'
+        + '<span>' + T.docBy[lang] + ' ' + esc(SELLER[lang]) + '</span></span>'
+        + '<span class="wq-doc-no">' + quoteId() + '<span>' + T.docDate[lang] + ' ' + date + '</span></span></div>'
+        + '<p class="wq-doc-cust"><b>' + esc(WHO[who].cust[lang]) + '</b><br>' + esc(WHO[who].sub[lang]) + '</p>'
+        + lines().map((it) => '<div class="wq-line"><code>' + it.code + '</code><span>' + esc(it.name) + '</span>'
+            + '<i>' + it.qty + '</i><em>' + money(it.price * it.qty) + '</em></div>').join('')
+        + '<dl class="wq-sum">'
+        + '<dt>' + T.sumNet[lang] + '</dt><dd>' + money(sub) + '</dd>'
+        + '<dt>' + T.sumDisc[lang] + '</dt><dd>' + money(disc) + '</dd>'
+        + '<dt>' + T.sumAfter[lang] + '</dt><dd>' + money(after) + '</dd>'
+        + '<dt>' + T.sumVat[lang] + '</dt><dd>' + money(vat) + '</dd>'
+        + '<dt class="tot">' + T.sumTotal[lang] + '</dt><dd class="tot">' + money(tot) + '</dd>'
+        + '</dl>'
+        + '<p class="wq-baht">' + T.baht[lang] + '(' + bahtText(tot) + ')</p>'
+        + '</div>';
+    }
+
+    function render() {
+      document.querySelectorAll('[data-wq]').forEach((el) => { el.innerHTML = T[el.dataset.wq][lang]; });
+      drawItems();
+      drawWho();
+      drawPipe();
+      drawResult();
+      byId('wq-keyed').innerHTML = T.keyedVal[lang];
+      const btn = byId('wq-send');
+      btn.disabled = !lines().length;
+      btn.querySelector('[data-wq="send"]').innerHTML = sent && step >= 3 ? T.sendAgain[lang] : T.send[lang];
+    }
+
+    function send() {
+      if (!lines().length) return;
+      stop();
+      quoteNo++;
+      sent = true;
+      if (slow) { step = 3; render(); return; }
+      step = 1; render();
+      timers.push(setTimeout(() => { step = 2; render(); }, 480));
+      timers.push(setTimeout(() => { step = 3; render(); }, 980));
+    }
+
+    byId('wq-send').addEventListener('click', send);
+    window.renderWebQuote = (l) => { lang = l; render(); };
+    render();
+  })();
+
   // ── Bilingual TH/EN ─────────────────────────────────────────────
   // ponytail: selector-keyed dictionary in one place, no markup annotations.
   // ข้อแลกเปลี่ยน: ถ้าย้ายลำดับ element ที่อ้างด้วย nth-child ต้องอัปเดตที่นี่ด้วย
@@ -5245,6 +5760,7 @@
     // #vat-service วาดตัวเองใหม่จาก state ไม่ผ่าน I18N — ไม่งั้นสถานะที่ผู้ใช้กดค้างไว้หาย
     if (window.renderVatService) window.renderVatService(lang);
     if (window.renderBillingFlow) window.renderBillingFlow(lang);
+    if (window.renderWebQuote) window.renderWebQuote(lang);
     document.querySelectorAll('.lang button').forEach(b => {
       const on = b.dataset.lang === lang;
       b.classList.toggle('on', on);
