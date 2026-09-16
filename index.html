@@ -3931,7 +3931,7 @@
   <div class="wrap">
     <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
     <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span></h2>
-    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central ออกใบเสนอราคาให้ทันที ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย</p>
+    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย</p>
 
     <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -5450,8 +5450,8 @@
       { tab: { th: 'นิติบุคคลใหม่', en: 'New company' },
         cust: { th: 'บริษัท พรีเมียร์แล็บ จำกัด', en: 'Premier Lab Co., Ltd.' },
         sub: { th: 'ลูกค้าใหม่ · สร้างเป็น Contact', en: 'New buyer · created as a Contact' },
-        bc: { th: 'ไม่เคยมีเลขนี้ในระบบ — สร้าง Contact ใหม่จากข้อมูลที่ลูกค้ากรอก แล้วออกใบเสนอราคาต่อทันที',
-              en: 'Tax ID not on file — a Contact is created from what the buyer typed, then the quote follows immediately' } },
+        bc: { th: 'ไม่เคยมีเลขนี้ในระบบ — สร้าง Contact ใหม่จากข้อมูลที่ลูกค้ากรอก แล้วสร้างใบเสนอราคาตามคำขอ',
+              en: 'Tax ID not on file — a Contact is created from what the buyer typed, then the quote is created from the request' } },
       { tab: { th: 'บุคคลธรรมดา', en: 'Individual' },
         cust: { th: 'คุณมุก ศรีสุวรรณ', en: 'Ms. Mook Srisuwan' },
         sub: { th: 'ลูกค้าใหม่ · ไม่มีเลขนิติบุคคล', en: 'New buyer · no company tax ID' },
@@ -5465,8 +5465,8 @@
     const T = {
       kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
       h2: { th: 'ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>', en: 'Quote Requests via LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>' },
-      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central ออกใบเสนอราคาให้ทันที ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
-             en: 'Buyers pick their items inside LINE with nothing to install, and Business Central issues the quote on the spot — nobody retypes a thing. Try it below as the buyer.' },
+      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
+             en: 'Buyers pick their items inside LINE with nothing to install, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
       app: { th: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central', en: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
