@@ -3150,6 +3150,38 @@
   .wq-h2-note { display: block; margin-top: .2em; font-size: .5em; font-weight: 500; letter-spacing: 0; color: var(--ui-muted); }
   .wq-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* แถวสถาปัตยกรรม LINE >>> Cloudflare >>> Business Central
+     ไอคอน LINE และ Business Central เป็นไฟล์ทางการ ใช้ตามต้นฉบับ ไม่เปลี่ยนสี ไม่หมุน ไม่ขยับ
+     (แนวทางของ LINE ห้ามใส่แอนิเมชันให้โลโก้ — ที่เคลื่อนไหวคือลูกศรระหว่างกลางเท่านั้น)
+     Cloudflare อนุญาตแค่ชื่อ ไม่ให้ใช้โลโก้ — ช่องกลางจึงเป็นไอคอนเส้นของเว็บเอง สีของเว็บ */
+  .wq-arch {
+    display: grid; align-items: start; max-width: 820px; margin: 34px auto 4px;
+    grid-template-columns: minmax(0, 1fr) minmax(40px, 110px) minmax(0, 1fr) minmax(40px, 110px) minmax(0, 1fr);
+  }
+  .wq-app-node { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+  .wq-app-icon { display: block; width: 88px; height: 88px; margin: 0 0 14px; }
+  .wq-app-tile {
+    display: grid; place-items: center; border-radius: 20px;
+    background: #fff; border: 1px solid var(--ui-line); box-shadow: 0 10px 24px -14px rgba(1,47,42,.45);
+  }
+  .wq-app-tile img { display: block; width: 58px; height: 58px; }
+  .wq-app-tile .wq-ic { width: 56px; height: 56px; color: var(--brand-teal); stroke-width: 1.5; }
+  .wq-app-name { font-size: 1.05rem; font-weight: 700; line-height: 1.35; color: var(--ui-ink); }
+  .wq-app-role {
+    margin-top: 2px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .82rem; font-weight: 500; color: var(--ui-muted);
+  }
+  .wq-link {
+    height: 12px; margin-top: 38px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12' viewBox='0 0 14 12'%3E%3Cpath d='M4 2l4 4-4 4' fill='none' stroke='%23417771' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") repeat-x 0 0 / 14px 12px;
+    animation: wqChev .9s linear infinite;
+  }
+  @keyframes wqChev { to { background-position: 14px 0; } }
+  .wq-sr {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
   .wq {
     background: #fff; border: 1px solid var(--ui-line);
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
@@ -3393,6 +3425,16 @@
     .wq-arrow { transform: rotate(90deg); }
     .wq-proof-zoom { text-align: center; }
   }
+  @media (max-width: 640px) {
+    .wq-arch { grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr); margin-top: 24px; }
+    .wq-app-icon { width: 56px; height: 56px; margin-bottom: 10px; }
+    .wq-app-tile { border-radius: 13px; }
+    .wq-app-tile img { width: 38px; height: 38px; }
+    .wq-app-tile .wq-ic { width: 36px; height: 36px; }
+    .wq-link { margin-top: 22px; }
+    .wq-app-name { font-size: .88rem; }
+    .wq-app-role { font-size: .72rem; }
+  }
   @media (max-width: 520px) {
     .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 2px; padding-right: 2px; }
     .wq-item .wq-ic { width: 22px; height: 22px; }
@@ -3406,6 +3448,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .wq-doc.in { animation: none; }
+    .wq-link { animation: none; }
     .wq-dot, .wq-txt b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item, .wq-fig a { transition: none; }
     .wq-fig a:hover { transform: none; }
     .wq-node.on .wq-dot { transform: none; }
@@ -3941,12 +3984,34 @@
       <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
       <symbol id="wqi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
       <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <symbol id="wqi-cloud" viewBox="0 0 48 48"><path d="M14 36h21a8 8 0 0 0 .9-15.95A12 12 0 0 0 13 18.5 9 9 0 0 0 14 36z"/><path d="M21.5 23.5 18 27l3.5 3.5M26.5 23.5 30 27l-3.5 3.5"/></symbol>
       <symbol id="wqi-next" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
     </defs></svg>
 
+    <div class="wq-arch reveal">
+      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: ลูกค้าเข้าสู่ระบบและส่งคำขอผ่าน LINE (LIFF) คำขอไปพักที่ Cloudflare Workers แล้ว Business Central ดึงคำขอไปสร้างใบเสนอราคา</p>
+      <div class="wq-app-node" aria-hidden="true">
+        <img class="wq-app-icon" src="img/tech/line.png" alt="" width="88" height="88">
+        <span class="wq-app-name">LINE</span>
+        <span class="wq-app-role">(Login + LIFF)</span>
+      </div>
+      <span class="wq-link" aria-hidden="true"></span>
+      <div class="wq-app-node" aria-hidden="true">
+        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-cloud"/></svg></span>
+        <span class="wq-app-name">Cloudflare®</span>
+        <span class="wq-app-role">(Workers)</span>
+      </div>
+      <span class="wq-link" aria-hidden="true"></span>
+      <div class="wq-app-node" aria-hidden="true">
+        <span class="wq-app-icon wq-app-tile"><img src="img/tech/business-central.svg" alt="" width="58" height="58"></span>
+        <span class="wq-app-name">Business Central</span>
+        <span class="wq-app-role">(Quote Fetch)</span>
+      </div>
+    </div>
+
     <div class="wq reveal">
       <div class="wq-bar">
-        <p class="wq-app"><svg class="wq-ic"><use href="#wqi-flow"/></svg><span data-wq="app">LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central</span></p>
+        <p class="wq-app"><svg class="wq-ic"><use href="#wqi-flow"/></svg><span data-wq="app">เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์</span></p>
         <span class="wq-sample" data-wq="sample">ข้อมูลตัวอย่าง</span>
       </div>
 
@@ -5467,7 +5532,9 @@
       h2: { th: 'ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>', en: 'Quote Requests via LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>' },
       sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE โดยไม่ต้องติดตั้งแอปเพิ่ม แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ — ลองกดเป็นลูกค้าดูได้เลย',
              en: 'Buyers pick their items inside LINE with nothing to install, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
-      app: { th: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central', en: 'LINE LIFF &rarr; Cloudflare Worker &rarr; Business Central' },
+      app: { th: 'เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์', en: 'Buyer-side demo · runs in your browser' },
+      archSr: { th: 'ลำดับการทำงาน: ลูกค้าเข้าสู่ระบบและส่งคำขอผ่าน LINE (LIFF) คำขอไปพักที่ Cloudflare Workers แล้ว Business Central ดึงคำขอไปสร้างใบเสนอราคา',
+                en: 'How it flows: the buyer signs in and sends the request through LINE (LIFF), the request waits on Cloudflare Workers, and Business Central fetches it to create the quote' },
       sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
       s1hint: { th: 'แคตตาล็อกและราคาชุดเดียวกับที่ลูกค้าเห็นบน LINE', en: 'The same catalogue and prices the buyer sees in LINE' },
