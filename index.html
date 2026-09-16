@@ -2515,6 +2515,17 @@
     letter-spacing: normal; color: var(--ui-muted); }
   .bf-dm { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 0 0 11px; font-size: .8rem; }
   .bf-nw { white-space: nowrap; }
+  /* เงื่อนไขวางบิลของลูกค้า — รอบในปฏิทินต้องตรงกับเงื่อนไขนี้ ลากไปวันอื่นแล้วขึ้นว่านอกรอบ */
+  .bf-rule { margin: 0 0 12px; padding: 12px 15px; background: #fff;
+    border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card); }
+  .bf-rule-k { margin: 0 0 4px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted); }
+  .bf-rule-m { margin: 0; font-size: .98rem; font-weight: 700; color: var(--brand-teal); }
+  .bf-rule ul { margin: 6px 0 0; padding-left: 1.1em; font-size: .8rem; line-height: 1.5; color: var(--ui-muted); }
+  .bf-rule-s { display: inline-block; margin: 9px 0 0; padding: 2px 10px; border-radius: 999px;
+    font-size: .74rem; font-weight: 600; color: var(--brand-teal);
+    background: var(--bg-soft); border: 1px solid var(--brand-pale); }
+  .bf-rule-s.off { color: var(--brand-burgundy-dark); background: rgba(166,58,86,.07); border-color: rgba(166,58,86,.34); }
   .bf-dm dt { color: var(--ui-muted); }
   .bf-dm dd { margin: 0; font-variant-numeric: tabular-nums; }
   .bf-stamp { display: inline-block; margin: 0 0 10px; padding: 2px 10px; border-radius: 999px;
@@ -5417,6 +5428,9 @@
       footGrp: { th: 'กลุ่มลูกค้า', en: 'customer groups' },
       hint: { th: 'กดกลุ่มลูกค้าเพื่อดูใบวางบิล · ลากไปวางวันอื่นเพื่อเปลี่ยนวันวางบิล — บนจอสัมผัสให้แตะกลุ่มแล้วแตะวันปลายทาง',
               en: 'Click a customer group to preview its billing note · drag it onto another day to change the billing date — on a touch screen, tap the group and then tap the day.' },
+      ruleK: { th: 'เงื่อนไขการวางบิลของลูกค้า', en: 'Customer billing terms' },
+      ruleOk: { th: 'ตรงรอบวางบิล', en: 'On the agreed cycle' },
+      ruleOff: { th: 'นอกรอบปกติ — รอบของเดือนนี้: ', en: 'Off the usual cycle — this month: ' },
       docTitle: { th: 'ใบวางบิล', en: 'Billing Note' },
       docBy: { th: 'ออกโดย บริษัท ตัวอย่างการค้า จำกัด', en: 'Issued by Sample Trading Co., Ltd.' },
       docDate: { th: 'วันที่เอกสาร', en: 'Date' },
@@ -5586,16 +5600,28 @@
     /* บริษัทสมมติ · ใบแจ้งหนี้ [เลขที่, ยอด, วันที่ใบแจ้งหนี้] เลขเรียงตามวันที่ · ครบกำหนด = วันที่ใบแจ้งหนี้ + 30 วัน */
     const SEED = [
       { id: 'g1', d: 8, n: 'บจก. สยามพลาสติก', a: 'นิคมอุตสาหกรรมบางปู อ.เมืองสมุทรปราการ จ.สมุทรปราการ',
+        rule: { days: [8], th: ['วางบิลทุกวันที่ 8 ของทุกเดือน', 'ไม่นับใบแจ้งหนี้ของเดือนที่จัดส่ง — ส่งของเดือนไหน วางบิลเดือนถัดไป'],
+          en: ['The 8th of every month', 'Invoices from the delivery month wait for the next month'] },
         lines: [['IV6908-0142', 120000, '2026-08-10'], ['IV6908-0157', 86500, '2026-08-13'], ['IV6908-0171', 42000, '2026-08-17']] },
       { id: 'g2', d: 3, n: 'หจก. ทรัพย์เจริญค้าวัสดุ', a: 'ถ.มิตรภาพ อ.เมืองนครราชสีมา จ.นครราชสีมา',
+        rule: { days: [3], th: ['ทุกวันพฤหัสบดีแรกของเดือน', 'รับวางบิลเวลา 9:00–12:00 ที่ฝ่ายบัญชีเจ้าหนี้'],
+          en: ['First Thursday of each month', 'Accepted 9:00–12:00 at accounts payable'] },
         lines: [['IV6907-0388', 51700, '2026-07-29'], ['IV6908-0103', 34500, '2026-08-03']] },
       { id: 'g3', d: 15, n: 'บมจ. นครหลวงอุตสาหกรรม', a: 'ถ.ฉลองกรุง เขตลาดกระบัง กรุงเทพมหานคร',
+        rule: { days: [15], th: ['ทุกวันที่ 15 ของทุกเดือน', 'แนบสำเนาใบสั่งซื้อ (PO) และใบรับสินค้าทุกใบ'],
+          en: ['The 15th of every month', 'Attach the PO and goods receipt for every invoice'] },
         lines: [['IV6908-0119', 420000, '2026-08-05'], ['IV6908-0126', 310000, '2026-08-06'], ['IV6908-0148', 185500, '2026-08-11'], ['IV6908-0163', 128000, '2026-08-14'], ['IV6908-0180', 76500, '2026-08-19']] },
       { id: 'g4', d: 25, n: 'บจก. อีสเทิร์นฟู้ดส์', a: 'ถ.สุขุมวิท อ.ศรีราชา จ.ชลบุรี',
+        rule: { days: [25], th: ['ทุกวันศุกร์สุดท้ายของเดือน', 'ตัดรอบใบแจ้งหนี้ถึงสิ้นเดือนก่อนหน้า'],
+          en: ['Last Friday of each month', 'Covers invoices up to the end of the previous month'] },
         lines: [['IV6908-0204', 148200, '2026-08-21'], ['IV6908-0215', 112000, '2026-08-24'], ['IV6908-0229', 69300, '2026-08-25'], ['IV6908-0236', 43400, '2026-08-26']] },
-      { id: 'g5', d: 25, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', a: 'สวนอุตสาหกรรมบางกะดี อ.เมืองปทุมธานี จ.ปทุมธานี',
+      { id: 'g5', d: 11, n: 'บจก. เอ็มพี เอ็นจิเนียริ่ง', a: 'สวนอุตสาหกรรมบางกะดี อ.เมืองปทุมธานี จ.ปทุมธานี',
+        rule: { days: [11, 25], th: ['ทุกวันศุกร์ที่ 2 และ 4 ของเดือน', 'ใบแจ้งหนี้ที่ออกหลังรอบศุกร์ที่ 2 รอไปรอบศุกร์ที่ 4'],
+          en: ['Second and fourth Friday of each month', 'Invoices issued after the 2nd-Friday run wait for the 4th Friday'] },
         lines: [['IV6908-0241', 54000, '2026-08-27']] },
-      { id: 'g6', d: 30, n: 'บจก. ไทยเมทัลเวิร์ค', a: 'นิคมอุตสาหกรรมอมตะซิตี้ อ.ปลวกแดง จ.ระยอง',
+      { id: 'g6', d: 10, n: 'บจก. ไทยเมทัลเวิร์ค', a: 'นิคมอุตสาหกรรมอมตะซิตี้ อ.ปลวกแดง จ.ระยอง',
+        rule: { days: [10, 30], th: ['รับวางบิลเฉพาะวันที่ 10 และ 30 เท่านั้น', 'วันอื่นไม่รับเอกสาร', 'ตรงวันหยุด เลื่อนเป็นวันทำการก่อนหน้า'],
+          en: ['Only on the 10th and the 30th', 'Documents are refused on any other day', 'On a holiday, move to the previous working day'] },
         lines: [['IV6908-0252', 265000, '2026-08-28'], ['IV6908-0258', 198750, '2026-08-28'], ['IV6908-0263', 154300, '2026-08-28'], ['IV6908-0270', 121900, '2026-08-31'], ['IV6908-0277', 97500, '2026-08-31'], ['IV6908-0285', 66000, '2026-08-31']] }
     ];
     SEED.forEach((g) => { g.inv = g.lines.length; g.amt = g.lines.reduce((a, l) => a + l[1], 0); });
@@ -5620,7 +5646,13 @@
       const L = (k) => T[k][lang];
       const date = sepDay(g.d);
       const no = 'SBN2609' + String(SEED.findIndex((x) => x.id === g.id) + 1).padStart(4, '0');
-      box.innerHTML = '<article class="wq-doc bf-doc">'
+      const on = g.rule.days.includes(g.d);
+      const days = g.rule.days.map((d) => lang === 'th' ? d + ' ก.ย.' : 'Sep ' + d).join(', ');
+      const rule = g.rule[lang];
+      box.innerHTML = '<div class="bf-rule"><p class="bf-rule-k">' + L('ruleK') + ' · ' + esc(g.n) + '</p>'
+        + '<p class="bf-rule-m">' + rule[0] + '</p><ul>' + rule.slice(1).map((t) => '<li>' + t + '</li>').join('') + '</ul>'
+        + '<p class="bf-rule-s' + (on ? '' : ' off') + '">' + (on ? L('ruleOk') + ' · ' + days : L('ruleOff') + days) + '</p></div>'
+        + '<article class="wq-doc bf-doc">'
         + '<div class="wq-doc-head"><span><b>' + L('docTitle') + '</b><span>' + L('docBy') + '</span></span>'
         + '<span class="wq-doc-no">' + no + '<span>' + L('docDate') + ' ' + dmy(date) + '</span></span></div>'
         + (g.d < TODAY ? '<p class="bf-stamp">' + L('docLate') + '</p>' : '')
@@ -5633,7 +5665,7 @@
         + '<dl class="wq-sum"><dt class="tot">' + L('docTot') + '</dt><dd class="tot">' + money(g.amt) + '</dd></dl>'
         + '<p class="wq-baht">(' + bahtText(g.amt) + ')</p></article>';
       /* เล่นจังหวะเข้าใหม่ทุกครั้งที่เปลี่ยนใบ ใช้ keyframes เดียวกับใบเสนอราคา */
-      const doc = box.firstElementChild;
+      const doc = box.querySelector('.bf-doc');
       requestAnimationFrame(() => doc.classList.add('in'));
     }
 
