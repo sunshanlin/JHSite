@@ -3302,12 +3302,6 @@
   .wq-sum .tot { padding-top: 7px; border-top: 1px solid var(--brand-pale); font-weight: 700; color: var(--brand-teal); }
   .wq-sum dt.tot { color: var(--ui-ink); }
   .wq-baht { margin: 9px 0 0; font-size: .8rem; color: var(--ui-muted); }
-  .wq-wm {
-    position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 700; letter-spacing: .14em;
-    color: rgba(166,58,86,.11); transform: rotate(-17deg); white-space: nowrap;
-  }
   .wq-empty {
     display: flex; flex-direction: column; align-items: center; gap: 9px;
     padding: 52px 16px; text-align: center; color: var(--ui-muted); font-size: .92rem;
@@ -3330,15 +3324,44 @@
   .wq-keyed b { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-weight: 700; color: var(--brand-teal); }
 
   /* แถวหลักฐาน: ภาพจากระบบจริง ไม่ใช่เดโม — ปิดท้ายการ์ดให้เห็นว่าที่เล่นอยู่มีของจริงรองรับ */
-  .wq-proof { display: block; }
-  .wq-proof img { display: block; width: 100%; height: auto; }
-  .wq-proof-cap {
-    display: flex; align-items: center; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap;
-    padding: 15px 24px 11px; border-top: 1px solid var(--ui-line);
-    font-size: .82rem; color: var(--ui-muted);
+  .wq-proof { padding: 22px 24px 18px; background: var(--bg-soft); border-top: 1px solid var(--ui-line); }
+  .wq-proof-head {
+    display: flex; align-items: flex-start; gap: 8px; max-width: 920px; margin: 0 auto 20px;
+    font-size: .95rem; font-weight: 600; color: var(--ui-ink);
   }
-  .wq-proof-cap .wq-ic { width: 14px; height: 14px; color: var(--brand-jade); flex: 0 0 auto; }
-  .wq-proof-cap > span { display: inline-flex; align-items: center; gap: 7px; }
+  .wq-proof-head .wq-ic { width: 17px; height: 17px; margin-top: .22em; color: var(--brand-jade); stroke-width: 2.4; }
+  /* 46fr : 100fr = ความกว้างที่ทำให้ภาพมือถือ (828x1792) กับใบเสนอราคา (1522x1492) สูงเท่ากันพอดี
+     รวมกรอบ 6px และขอบกระดาษ 9px แล้ว */
+  .wq-proof-row {
+    display: grid; align-items: start; gap: 0 20px; max-width: 920px; margin: 0 auto;
+    grid-template-columns: minmax(0, 46fr) 36px minmax(0, 100fr);
+  }
+  /* กฎส่วนกลางใส่เงา+ขอบมนให้ figure ทุกอัน — ที่นี่เงาอยู่ที่กรอบมือถือ/กระดาษแทน */
+  .wq-fig { margin: 0; min-width: 0; box-shadow: none; border-radius: 0; background: none; }
+  .wq-fig figcaption {
+    display: flex; align-items: baseline; gap: 9px; margin: 0 0 12px;
+    font-size: .92rem; font-weight: 600; line-height: 1.45; color: var(--ui-ink);
+  }
+  .wq-fig figcaption b {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .8rem; font-weight: 700; color: var(--brand-jade); font-variant-numeric: tabular-nums;
+  }
+  .wq-fig a { display: block; transition: transform .2s ease; }
+  .wq-fig a:hover { transform: translateY(-2px); }
+  .wq-fig img { display: block; width: 100%; height: auto; }
+  /* กรอบโทรศัพท์บาง ๆ พอให้อ่านออกว่าเป็นหน้าจอมือถือ ไม่ต้องพึ่งภาพ mockup */
+  .wq-phone { padding: 6px; border-radius: 30px; background: #10241F; box-shadow: 0 14px 30px -16px rgba(1,47,42,.55); }
+  .wq-phone img { border-radius: 24px; }
+  .wq-paper {
+    padding: 8px; background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: 0 14px 30px -18px rgba(1,47,42,.4);
+  }
+  .wq-arrow {
+    align-self: center; width: 36px; height: 36px; display: grid; place-items: center;
+    border-radius: 50%; background: #fff; border: 1px solid var(--ui-line); color: var(--brand-jade);
+  }
+  .wq-arrow .wq-ic { width: 17px; height: 17px; }
+  .wq-proof-zoom { max-width: 920px; margin: 14px auto 0; text-align: right; font-size: .8rem; color: var(--ui-muted); }
 
   .wq-note {
     margin: 20px auto 0; max-width: 760px; text-align: center;
@@ -3350,8 +3373,15 @@
   @media (max-width: 900px) {
     .wq-stage { grid-template-columns: 1fr; }
     .wq-out { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
-    .wq-bar, .wq-keyed, .wq-proof-cap, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
+    .wq-bar, .wq-keyed, .wq-proof, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
     .wq-send { width: 100%; }
+  }
+  @media (max-width: 640px) {
+    .wq-proof-row { grid-template-columns: 1fr; gap: 14px; justify-items: center; }
+    .wq-fig { width: 100%; }
+    .wq-fig:first-child { max-width: 270px; }
+    .wq-arrow { transform: rotate(90deg); }
+    .wq-proof-zoom { text-align: center; }
   }
   @media (max-width: 520px) {
     .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 2px; padding-right: 2px; }
@@ -3366,7 +3396,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .wq-doc.in { animation: none; }
-    .wq-dot, .wq-node b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item { transition: none; }
+    .wq-dot, .wq-txt b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item, .wq-fig a { transition: none; }
+    .wq-fig a:hover { transform: none; }
     .wq-node.on .wq-dot { transform: none; }
   }
 
@@ -3900,6 +3931,7 @@
       <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
       <symbol id="wqi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
       <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <symbol id="wqi-next" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
     </defs></svg>
 
     <div class="wq reveal">
@@ -3933,13 +3965,25 @@
         <span id="wq-keyed"></span>
       </p>
 
-      <p class="wq-proof-cap">
-        <span><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว — ใบ QG000010 จากระบบทดสอบ ตรงกับเดโมด้านบนทุกบรรทัด</span></span>
-        <span data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</span>
-      </p>
-      <a class="wq-proof" href="img/bc-liff-quote.webp" target="_blank" rel="noopener">
-        <img src="img/bc-liff-quote.webp" alt="จากระบบทดสอบจริง — ข้อมูลผู้ติดต่อที่กรอกใน LINE แล้วใบเสนอราคา QG000010 เก้ารายการที่ Business Central สร้างให้ ช่องอีเมลเบลอไว้" loading="lazy" width="1039" height="608">
-      </a>
+      <div class="wq-proof">
+        <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว — ใบ QG000010 จากระบบทดสอบ ตรงกับเดโมด้านบนทุกบรรทัด</span></p>
+        <div class="wq-proof-row">
+          <figure class="wq-fig">
+            <figcaption><b>01</b><span data-wq="proof1">ลูกค้ากรอกคำขอใน LINE</span></figcaption>
+            <a class="wq-phone" href="img/bc-liff-form.webp" target="_blank" rel="noopener">
+              <img src="img/bc-liff-form.webp" alt="หน้าจอขอใบเสนอราคาใน LINE จากระบบทดสอบ — วันที่ต้องการรับสินค้า หมายเหตุ เบอร์โทร และผู้ติดต่อที่ลูกค้ากรอก ช่องอีเมลเบลอไว้" loading="lazy" width="828" height="1792">
+            </a>
+          </figure>
+          <span class="wq-arrow" aria-hidden="true"><svg class="wq-ic"><use href="#wqi-next"/></svg></span>
+          <figure class="wq-fig">
+            <figcaption><b>02</b><span data-wq="proof2">Business Central ออกใบเสนอราคาให้เอง</span></figcaption>
+            <a class="wq-paper" href="img/bc-liff-quote.webp" target="_blank" rel="noopener">
+              <img src="img/bc-liff-quote.webp" alt="ใบเสนอราคา QG000010 ที่ Business Central สร้างจากคำขอนั้น เก้ารายการ ยอดรวมทั้งสิ้น 4,333,928.00 บาท ช่องอีเมลเบลอไว้" loading="lazy" width="1522" height="1492">
+            </a>
+          </figure>
+        </div>
+        <p class="wq-proof-zoom" data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</p>
+      </div>
     </div>
 
     <p class="wq-note" data-wq="note">ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
@@ -5446,13 +5490,14 @@
       sumVat: { th: 'ภาษีมูลค่าเพิ่ม 7%', en: 'VAT 7%' },
       sumTotal: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
       baht: { th: '', en: 'Thai baht text, written by the system: ' },
-      wm: { th: 'ตัวอย่าง', en: 'SAMPLE' },
       keyedLbl: { th: 'ช่องที่ฝ่ายขายต้องคีย์ซ้ำ', en: 'Fields sales has to retype' },
       keyedVal: { th: '<b>0</b> — ทั้งใบมาจากสิ่งที่ลูกค้ากรอกเอง ฝ่ายขายเปิดมาตรวจแล้วกดส่งได้เลย',
                   en: '<b>0</b> — every line comes from what the buyer filled in; sales opens it, checks it and sends it' },
       proof: { th: 'ของจริงทำงานแล้ว — ใบ QG000010 จากระบบทดสอบ ตรงกับเดโมด้านบนทุกบรรทัด',
                en: 'Already running — quote QG000010 from the test system, line for line the same as the demo above' },
-      proofZoom: { th: 'คลิกที่ภาพเพื่อดูขนาดเต็ม', en: 'Click the image for full size' },
+      proof1: { th: 'ลูกค้ากรอกคำขอใน LINE', en: 'The buyer fills in the request on LINE' },
+      proof2: { th: 'Business Central ออกใบเสนอราคาให้เอง', en: 'Business Central writes the quote' },
+      proofZoom: { th: 'คลิกที่ภาพเพื่อดูขนาดเต็ม', en: 'Click an image for full size' },
       note: { th: 'ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>',
               en: 'The demo does its arithmetic in the browser and touches nothing live · the seller on the document is a fictional company · scope and pricing are quoted per project against your Requirement · built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>' }
     };
@@ -5560,7 +5605,7 @@
       const disc = sub * DISCOUNT, after = sub - disc, vat = after * VAT, tot = after + vat;
       const d = new Date();
       const date = String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
-      el.innerHTML = '<div class="wq-doc in"><span class="wq-wm" aria-hidden="true">' + T.wm[lang] + '</span>'
+      el.innerHTML = '<div class="wq-doc in">'
         + '<div class="wq-doc-head"><span><b>' + T.docTitle[lang] + '</b>'
         + '<span>' + T.docBy[lang] + ' ' + esc(SELLER[lang]) + '</span></span>'
         + '<span class="wq-doc-no">' + quoteId() + '<span>' + T.docDate[lang] + ' ' + date + '</span></span></div>'
