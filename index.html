@@ -2712,6 +2712,9 @@
     color: var(--brand-mint); font-size: .8rem; line-height: 1.75;
     font-variant-numeric: tabular-nums;
   }
+  /* แนวทางเครื่องหมายการค้าของ Cloudflare บังคับบรรทัดนี้ไว้ท้ายหน้าที่ใช้ชื่อเขา — รวม Microsoft/LINE ไว้ด้วยกัน */
+  /* footer span (tagline) ทำตัวพิมพ์ใหญ่+เว้นตัวอักษร — บรรทัดกฎหมายต้องอ่านเป็นประโยคปกติ */
+  .footer-tm { display: inline-block; margin-top: 4px; font-size: .92em; line-height: 1.6; letter-spacing: normal; text-transform: none; }
   /* ป้าย DBD Registered บนแถบเมนู — รูปโหลดจากเซิร์ฟเวอร์ DBD ตาม snippet ที่เขาให้มา
      เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
 
@@ -4446,7 +4449,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933</p>
+      <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933<br><span class="footer-tm">Microsoft และ Dynamics 365 เป็นเครื่องหมายการค้าของกลุ่มบริษัท Microsoft · Cloudflare และ Cloudflare Workers เป็นเครื่องหมายการค้าและ/หรือเครื่องหมายการค้าจดทะเบียนของ Cloudflare, Inc. ในสหรัฐอเมริกาและประเทศอื่น · LINE เป็นเครื่องหมายการค้าของ LY Corporation</span></p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
   </div>
@@ -5485,7 +5488,9 @@
       idleWorker: { th: 'ไม่มีเซิร์ฟเวอร์ให้ดูแล ทำงานเมื่อมีคำขอเท่านั้น', en: 'No server to babysit — it runs only when a request arrives' },
       idleBc: { th: 'ยังไม่มีเอกสารใหม่', en: 'No new document yet' },
       doneLine: { th: 'รับคำขอ {n} รายการ พร้อมข้อมูลผู้ซื้อ', en: 'Request received — {n} line(s) plus the buyer details' },
-      doneWorker: { th: 'ตรวจข้อมูล จับคู่รหัสสินค้า แล้วส่งต่อใน 0.3 วินาที', en: 'Validated, item codes matched, handed over in 0.3s' },
+      doneWorker: { th: 'ตรวจข้อมูล จับคู่รหัสสินค้า แล้วเก็บคำขอไว้รอ Business Central มาดึง', en: 'Validated, item codes matched, and held for Business Central to fetch' },
+      bcFetch: { th: 'ดึงคำขอใหม่เข้าระบบ', en: 'Fetched the new request' },
+      bcIssue: { th: 'ออกใบเสนอราคา', en: 'issued quote' },
       empty: { th: 'กด “ส่งคำขอราคา” เพื่อดูใบเสนอราคาที่ Business Central สร้างให้', en: 'Press “Send the request” to see the quote Business Central writes' },
       emptyNone: { th: 'เลือกอย่างน้อยหนึ่งรายการก่อนส่งคำขอ', en: 'Pick at least one item before sending' },
       docTitle: { th: 'ใบเสนอราคา', en: 'Sales Quote' },
@@ -5596,7 +5601,7 @@
         node(step >= 1, T.nodeLine[lang], step >= 1 ? T.doneLine[lang].replace('{n}', lines().length) : T.idleLine[lang])
         + node(step >= 2, T.nodeWorker[lang], step >= 2 ? T.doneWorker[lang] : T.idleWorker[lang])
         + node(step >= 3, T.nodeBc[lang], step >= 3
-            ? WHO[who].bc[lang] + ' — ' + T.docTitle[lang] + ' ' + quoteId()
+            ? T.bcFetch[lang] + ' · ' + WHO[who].bc[lang] + ' · ' + T.bcIssue[lang] + ' ' + quoteId()
             : T.idleBc[lang]);
     }
 
@@ -5809,7 +5814,7 @@
     ['.footer-menu a[href="#articles"]', 'Articles', 'บทความ'],
     ['.footer-reach .footer-head', 'Contact', 'ติดต่อ'],
     ['.footer-reach a[href="#contact"]', 'Contact us', 'ติดต่อเรา'],
-    ['.footer-legal', '175 Udomsuk 58, Sukhumvit 103 Road, Bang Na, Bangkok 10260 · Commercial registration no. 1101700150933', '175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933'],
+    ['.footer-legal', '175 Udomsuk 58, Sukhumvit 103 Road, Bang Na, Bangkok 10260 · Commercial registration no. 1101700150933<br><span class="footer-tm">Microsoft and Dynamics 365 are trademarks of the Microsoft group of companies · Cloudflare and Cloudflare Workers are trademarks and/or registered trademarks of Cloudflare, Inc. in the United States and other jurisdictions · LINE is a trademark of LY Corporation</span>', '175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933<br><span class="footer-tm">Microsoft และ Dynamics 365 เป็นเครื่องหมายการค้าของกลุ่มบริษัท Microsoft · Cloudflare และ Cloudflare Workers เป็นเครื่องหมายการค้าและ/หรือเครื่องหมายการค้าจดทะเบียนของ Cloudflare, Inc. ในสหรัฐอเมริกาและประเทศอื่น · LINE เป็นเครื่องหมายการค้าของ LY Corporation</span>'],
   ];
   const I18N_ATTR = [
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
