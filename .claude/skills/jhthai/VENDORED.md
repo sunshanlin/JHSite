@@ -1,4 +1,4 @@
-# jwic-thai / kode-thai — ของที่ยกมาจากต้นทาง
+# jhthai / kode-thai — ของที่ยกมาจากต้นทาง
 
 | | |
 |---|---|
@@ -25,12 +25,12 @@
 | `SKILL.md` | เติมตัวชี้ไป `references/jwic-house.md` สองจุด (ท้าย Stylistic conventions + หัว References) |
 | `kode-thai/SKILL.md` | ข้อ 1 ให้โหลด `jwic-house.md` ด้วย |
 | `kode-thai/SKILL.md` | หัวข้อ "Best input" — ตัดทางที่ให้รัน `thai-route.sh` ออก ด้วยเหตุผลเดียวกัน |
-| `kode-thai/SKILL.md` | ข้อ 1 ชี้มาที่ `../jwic-thai/` และตัดวงเล็บเรื่อง pytest harness ของโปรเจกต์ต้นทางออก |
+| `kode-thai/SKILL.md` | ข้อ 1 ชี้มาที่ `../jhthai/` และตัดวงเล็บเรื่อง pytest harness ของโปรเจกต์ต้นทางออก |
 
-`SKILL.md` ของ `jwic-thai` **ไม่ใช่ไฟล์ของต้นทาง** — เป็นของเรา ประกอบจากกฎบ้านเรา (เขียนเองทั้งหมด)
+`SKILL.md` ของ `jhthai` **ไม่ใช่ไฟล์ของต้นทาง** — เป็นของเรา ประกอบจากกฎบ้านเรา (เขียนเองทั้งหมด)
 ต่อด้วยหัวข้อ Why / 7 frame / Person deixis / Workflow ที่ยกมาจาก `kien-thai/SKILL.md` แล้วตัดส่วน
 native-model route ออก · resync ให้เอาเฉพาะ `references/` ทับ แล้วไล่ดูว่า 7 frame ของต้นทางขยับไหม
 ห้ามทับ `SKILL.md` ทั้งไฟล์
 
-รวมสองสกิลเป็นตัวเดียวชื่อ `jwic-thai` เมื่อ 17 ก.ย. 2026 — เดิมเป็น `kien-thai` (ต้นทาง) +
+รวมสองสกิลเป็นตัวเดียวชื่อ `jhthai` เมื่อ 17 ก.ย. 2026 — เดิมเป็น `kien-thai` (ต้นทาง) +
 `references/jwic-house.md` (ของเรา) ตอนนี้กฎบ้านเราอยู่ในตัว `SKILL.md` แล้ว

@@ -1,9 +1,9 @@
 ---
-name: jwic-thai
+name: jhthai
 description: "เขียน แก้ และรีวิวข้อความภาษาไทยของ JWIC ให้อ่านเหมือนคนไทยเขียน ไม่ใช่ภาษาแปล — 7 frame ของโครงประโยคไทย + กฎบ้านเรา (register ของแต่ละงาน, ทับศัพท์ที่ห้ามแปล, คำที่ห้ามใช้ในเอกสารที่ลูกค้าเซ็น). TRIGGER when writing, editing, translating or reviewing any Thai prose of a paragraph or longer — a Word document, a user manual, a web page, an article, a sales e-mail, a deck script. Invoke it BEFORE writing the first Thai sentence, every time. DO NOT TRIGGER for single words, button labels, UI strings, code identifiers, code comments, or chat replies in Thai."
 ---
 
-# jwic-thai — ภาษาไทยของบ้านเรา
+# jhthai — ภาษาไทยของบ้านเรา
 
 สกิลของ JWIC เอง ประกอบจากสองส่วน: **กฎบ้านเรา** (ส่วนแรก — ชนะทุกข้อที่ขัดกัน) และ
 **7 frame ของโครงประโยคไทย** ที่ยกมาจาก [chakrit/kien-thai](https://github.com/chakrit/kien-thai)
