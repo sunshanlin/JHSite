@@ -1,9 +1,83 @@
 ---
-name: kien-thai
-description: "Write Thai-language prose (technical documentation, marketing copy, explainers, blog posts, translations) that reads like a real Thai writer — not generic AI output. Counters training-data skew toward over-formal, over-polite, calqued Thai. TRIGGER when: user asks for any non-trivial Thai prose output (paragraph or longer — blog post, landing page, doc page, README in Thai, email, announcement, section); user asks to translate English into Thai; user asks to edit, rewrite, or review existing Thai prose; conversation is in Thai and user asks for a prose deliverable. DO NOT TRIGGER for: single-word or single-phrase translations, button labels, code identifiers, short UI strings, code comments, or conversational chat replies in Thai that aren't deliverable prose."
+name: jwic-thai
+description: "เขียน แก้ และรีวิวข้อความภาษาไทยของ JWIC ให้อ่านเหมือนคนไทยเขียน ไม่ใช่ภาษาแปล — 7 frame ของโครงประโยคไทย + กฎบ้านเรา (register ของแต่ละงาน, ทับศัพท์ที่ห้ามแปล, คำที่ห้ามใช้ในเอกสารที่ลูกค้าเซ็น). TRIGGER when writing, editing, translating or reviewing any Thai prose of a paragraph or longer — a Word document, a user manual, a web page, an article, a sales e-mail, a deck script. Invoke it BEFORE writing the first Thai sentence, every time. DO NOT TRIGGER for single words, button labels, UI strings, code identifiers, code comments, or chat replies in Thai."
 ---
 
-# kien-thai
+# jwic-thai — ภาษาไทยของบ้านเรา
+
+สกิลของ JWIC เอง ประกอบจากสองส่วน: **กฎบ้านเรา** (ส่วนแรก — ชนะทุกข้อที่ขัดกัน) และ
+**7 frame ของโครงประโยคไทย** ที่ยกมาจาก [chakrit/kien-thai](https://github.com/chakrit/kien-thai)
+(MIT — ดู `LICENSE` และ `VENDORED.md`) reference เชิงลึกทั้ง 8 ไฟล์อยู่ใน `references/`
+
+รีวิวภาษาไทยทุกครั้งให้ใช้ `/kode-thai` ซึ่งวน audit→fix จนรอบหนึ่งไม่มีอะไรให้แก้
+
+## กฎบ้านเรา — อ่านก่อน ชนะทุกข้อที่ขัดกัน
+
+## แต่ละที่ในรีโปนี้ใช้ register ไหน
+
+| เขียนที่ไหน | register | หมายเหตุ |
+|---|---|---|
+| `index.html` เนื้อหน้าเว็บ | Marketing — SaaS-SME | คนอ่านคือเจ้าของกิจการ/ฝ่ายบัญชี SMB ที่กำลังตัดสินใจซื้อ ERP |
+| `articles/*.html` | Explainer | ตั้งปัญหาก่อน ไม่มีคำลงท้าย ไม่มี ครับ/ค่ะ ในเนื้อ |
+| `_presales/` สคริปต์พูดประกอบเด็ค | Explainer แบบพูด | เขียนให้คนพูดออกเสียงได้ ประโยคสั้นกว่าเนื้อบทความ |
+| `_presales/voice/` บทให้ TTS อ่าน | **ดูข้อยกเว้น TTS ข้างล่าง** | กฎ TTS ชนะ kien-thai ทุกข้อที่ขัดกัน |
+| `poster.html` `banner.html` | Marketing — หัวข้อสั้น | เป็นป้าย ไม่ใช่ prose skill แทบไม่ต้องยุ่ง |
+
+## คำเรียกผู้อ่าน — ยึด `คุณ` ทั้งหน้า
+
+ตัดสินไว้ 17 ก.ย. 2026 ตอนนั้นหน้าเว็บปน `ท่าน` 14 ครั้งกับ `คุณ` 8 ครั้ง
+เขียนใหม่หรือแก้ของเดิมให้ใช้ `คุณ` **ห้ามปนสองคำในหน้าเดียว** (`deixis-continuity`)
+
+คำเรียกกลุ่ม — `ผู้ประกอบการ` `เจ้าของธุรกิจ` `ผู้ใช้งาน` — ใช้ได้เฉพาะหัวข้อกับป้ายหมวด
+ห้ามเอามาแทน `คุณ` ในเนื้อความ ตามกฎ person deixis ของ SKILL.md
+
+## ทับศัพท์ — pin ทับ 4 ถังของ `style-rules.md`
+
+**ถัง 3 บังคับ (คงอักษรละติน ห้ามถอดเสียง ห้ามแปล)**
+Business Central · Microsoft Dynamics 365 · ชื่อ page/field/report/module ของ BC ทุกตัว
+(Sales Order, Item Card, Customer Ledger Entries, Posting Setup …) · API · LINE · LIFF ·
+ชื่อแอปของเรา (JHCore, JHEnhance, Riposte)
+
+เหตุผล: ลูกค้าเห็นคำพวกนี้บนจอจริงเป็นอังกฤษ พอหน้าเว็บเขียน `เซลส์ออร์เดอร์` เขาจะหาไม่เจอ
+กฎเดียวกับที่ `JHCore/.claude/skills/docgen/SKILL.md` ใช้กับเอกสารส่งลูกค้า
+
+**ถัง 1 บังคับ (ไทยเท่านั้น สะกดตามกรมสรรพากร/กรมพัฒน์)**
+ใบกำกับภาษี · ภาษีหัก ณ ที่จ่าย · หนังสือรับรองการหักภาษี ณ ที่จ่าย (50 ทวิ) ·
+ภ.ง.ด.1/2/3/53/54 · ภ.พ.30/36 · ใบวางบิล · ใบเสร็จรับเงิน · ใบลดหนี้ · ใบเพิ่มหนี้ ·
+รายงานภาษีซื้อ/ภาษีขาย
+
+ห้ามเปลี่ยนเป็น withholding tax / tax invoice ในข้อความไทย และห้ามสลับ ภ.ง.ด. เป็น PND
+(ฝั่ง EN ของ I18N ใช้คำอังกฤษได้ตามเดิม)
+
+## ข้อยกเว้น TTS — `_presales/voice/README.md` ชนะ
+
+บทที่เอาไปให้เครื่องอ่านออกเสียง กฎกลับด้านกับถัง 3:
+
+- ศัพท์อังกฤษต้องเขียนเป็นคำอ่านไทย `Purchase and Payables` → `เพอร์เชส แอนด์ เพเยเบิลส์`
+  (ไม่งั้นอ่านออกมาเป็น "ปล่อย และ ปล่อย") คำอ่าน ERP ทั้งชุดอยู่ `_presales/voice/tts-test-script-thai.txt`
+- ห้ามไล่รายการคั่นด้วยจุลภาคล้วน ต้องมีคำไทยคั่นทุกตัว ไม่งั้นโมเดลเข้าลูปพ่นคำซ้ำ
+  ข้อนี้ไปทางเดียวกับ f6 (ก็) กับ f2 (ขึ้นต้นด้วยเงื่อนไข) อยู่แล้ว ใช้ทั้งคู่ได้เลย
+
+## แก้ข้อความไทยบนหน้าเว็บ = ต้องแตะคู่แปลด้วย
+
+`index.html` มี dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>`
+เพิ่ม ย้าย หรือแก้ข้อความไทยแล้วคู่แปลต้องตามทันที โดยเฉพาะ selector แบบ nth-child
+ที่เลื่อนตามตำแหน่ง · `#articles` ตั้งใจไม่แปล อย่าไปเติมให้
+
+## ที่ห้ามแตะ
+
+- คำอังกฤษฝั่ง EN ของ I18N — คนละภาษา คนละงาน skill นี้ดูแค่ไทย
+- JSON-LD, meta, `sitemap.xml`, `llms.txt` — โครงสร้างข้อมูล ไม่ใช่ prose
+- อีเมลติดต่อ `jirapat.wi@outlook.co.th` ต้องเป็นตัวนี้ทั้งไฟล์ อย่าสลับโดเมน
+- ชื่อไฟล์และ URL ที่มีอยู่ — ย้ายแล้วลิงก์ที่แชร์ไปแล้วพัง
+
+## ผลตรวจฐาน 17 ก.ย. 2026 (ก่อนเริ่มใช้ skill)
+
+- blocklist 13 วลีใน `forbidden-phrases.md` — หน้าเว็บ บทความ 7 ชิ้น และเด็ค presales ผ่านหมด
+- จุดกลางย่อหน้า (f3) — ที่ grep ติด 35 จุดเป็นอักษรย่อล้วน (`ธปท.` `ภ.ง.ด.` `ชม.`) ไม่ใช่ period spam
+- งบคำเชื่อม (≤1 ซึ่ง/โดย/ดังนั้น ต่อย่อหน้า) — `localization-thailand.html` 6 ตัว
+  `success-by-design.html` 4 ตัว เกินงบ รอบหน้าที่แตะบทความพวกนี้ให้เกลาด้วย
+- `ท่าน`/`คุณ` ปนกันในหน้าเดียว — ตัดสินแล้วว่ายึด `คุณ` ยังไม่ได้ไล่แก้บนหน้า
 
 ## Why this skill exists
 
@@ -15,36 +89,7 @@ rules in `references/ai-tells.md` (mechanical), `references/grammar.md`
 (surface), and `references/craft.md` (taste) become applications of the
 frames — many auto-resolve once the frames are right.
 
-## Best output: draft with a Thai-native model when one is reachable
-
-Honest admission up front: **base-model choice may be a larger lever on Thai
-naturalness than this skill.** The machine-sounding Thai the frames below fight
-is mostly an artifact of English-centric models (Claude, Codex) writing Thai. A
-Thai-pretrained model — Typhoon-2, SEA-LION, OpenThaiGPT — carries the native
-distribution in its weights rather than translating into it.
-
-**How strong is that claim? Not very, yet.** In one native-ear reading, bare
-unconditioned Typhoon-2 8B drafted Thai with no grammatical fault and no calque
-— the failure modes most of these rules exist to catch. That result is a single
-register, a single draft, and has not been replicated. Mechanical comparison
-since then is mixed: on some registers the native draft carries *more* formal
-connectives than this skill's output, and it has shown instruction-following
-lapses (emitting outline labels instead of prose) that the frames never address.
-
-Treat the route as promising and unsettled, not as a known win.
-
-So when a Thai-native model is reachable, the best result comes from **drafting
-with it and then auditing with this skill**, not from drafting with the skill
-alone. The frames don't go away — they become the audit layer (the kode-thai
-loop) over a native-drafted base. When no such model is reachable, kien-thai
-drafts and audits directly, exactly as the rest of this file describes. **The
-skill stands alone; the model makes it better.**
-
-**JWIC: the native-model route is not vendored.** Upstream ships
-`scripts/thai-route.sh` + `thai-native-draft.py`, which need a local ollama with
-Typhoon-2 / SEA-LION / OpenThaiGPT pulled. We have neither, so the scripts were
-left behind and this skill always drafts and audits directly (steps 1–4 below).
-If ollama ever lands on the box, re-pull them from upstream — see `VENDORED.md`.
+## 7 frame ของโครงประโยคไทย (ต้นทาง kien-thai)
 
 ### `f1` *(frame · all-registers · structural)*
 
@@ -251,17 +296,6 @@ Full per-register deixis defaults, brand mood / gender / formality voice
 attributes, and the Krungsri "body in `เรา`, advisory in `คุณ`" pattern live
 in `references/register.md`.
 
-## Stylistic conventions (apply on top of the frames)
-
-Surface-level voice fine-tuning lives in `references/style-rules.md` (positive
-rules: sentence shape, verbs over nouns, openers/closings, concreteness, voice,
-ทับศัพท์, translation craft) and `references/craft.md` (soft taste rules).
-
-**JWIC house rules override all of the above — read `references/jwic-house.md`
-before drafting.** It pins the ทับศัพท์ buckets for Business Central captions and
-Revenue Department form names, maps each surface in this repo to a register, and
-names the text this skill must not touch.
-
 ## Workflow when asked to write Thai prose
 
 1. **Identify register, voice, and person deixis.** ASK if any are unclear —
@@ -286,7 +320,7 @@ names the text this skill must not touch.
 
    Voice attributes (gender, brand mood, formality level) are orthogonal to
    register — pick both. For any piece with a reader, also pick 1st/2nd/3rd
-   person deixis (see section above).
+   person deixis (see section above). **กฎบ้านเราที่ต้นไฟล์ตัดสินเรื่องนี้ให้แล้วสำหรับงานในรีโปนี้ — อ่านก่อน**
 
 2. **Draft frame-first.** Before picking words, walk the seven frames:
    - Topic fronted? (Frame 1)
@@ -342,15 +376,10 @@ Minimum checklist:
 
 ## References
 
-`jwic-house.md` (JWIC overrides — read first, wins every conflict), then
-upstream bundle order: `ai-tells.md` (mechanical), `craft.md` (soft taste),
-`examples.md` (register-tagged before/after), `forbidden-phrases.md` (audit
-blocklist), `grammar.md` (surface), `register.md` (6 register families +
-deixis + voice), `style-rules.md` (positive style), then `exemplars.md`
-(native corpus excerpts) pinned last so native prose sits closest to the
-task prompt. Harness scopes `register.md`, `examples.md`, and `exemplars.md`
-to the active register when known.
+โหลดเพิ่มเมื่อต้องการความลึก (ของต้นทาง ไม่ได้แก้):
+`ai-tells.md` (กลิ่น AI แบบ mechanical) · `craft.md` (รสนิยม) · `examples.md` (ก่อน-หลังรายตระกูล) ·
+`forbidden-phrases.md` (blocklist ที่ `/kode-thai` ไล่ก่อนเสมอ) · `grammar.md` (ไวยากรณ์) ·
+`register.md` (6 ตระกูลภาษา + deixis + voice) · `style-rules.md` (สไตล์เชิงบวก + ทับศัพท์ 4 ถัง) ·
+`exemplars.md` (งานเขียนคนไทยจริง)
 
-Scholarly provenance (Iwasaki & Ingkaphirom, Smyth, Prasithrathsint,
-Takahashi, Olsson, Thai Discourse Treebank, Singnoi, Royal Institute,
-Marcel Barang) lives in `corpus/curated/scholarly/` — not in the bundle.
+ที่มา sha ที่ยกมา และรายการที่เราแก้จากต้นฉบับ อยู่ใน `VENDORED.md`

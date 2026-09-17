@@ -1,11 +1,11 @@
 ---
 name: kode-thai
-description: Run an iterative audit-and-fix loop on Thai prose using the kien-thai skill — repeats audit/fix passes until a full pass produces zero new edits. TRIGGER when user invokes `/kode-thai`, asks for "audit loop" / "วน audit" / "ตรวจวนๆ" / "ขัดภาษาไทยให้สุด" on Thai writing, says variants of "แก้ไปเรื่อยๆ จนกว่าจะไม่เจอที่ผิด", or explicitly requests repeated review passes on Thai prose. DO NOT TRIGGER for single-pass rewrites or one-off Thai edits (use kien-thai directly), or for non-Thai content.
+description: Run an iterative audit-and-fix loop on Thai prose using the jwic-thai skill — repeats audit/fix passes until a full pass produces zero new edits. TRIGGER when user invokes `/kode-thai`, asks for "audit loop" / "วน audit" / "ตรวจวนๆ" / "ขัดภาษาไทยให้สุด" on Thai writing, says variants of "แก้ไปเรื่อยๆ จนกว่าจะไม่เจอที่ผิด", or explicitly requests repeated review passes on Thai prose. DO NOT TRIGGER for single-pass rewrites or one-off Thai edits (use jwic-thai directly), or for non-Thai content.
 ---
 
 # kode-thai
 
-โคตรไทย — invoke kien-thai in a loop until the prose stops changing.
+โคตรไทย — invoke jwic-thai in a loop until the prose stops changing.
 
 ## Why this exists
 
@@ -15,15 +15,12 @@ new awkward seam appears. Loop until clean.
 
 ## Protocol
 
-1. Load `kien-thai` in full — `SKILL.md`, `references/jwic-house.md`
-   (JWIC overrides, wins every conflict), plus all eight upstream references
+1. Load `../jwic-thai/SKILL.md` in full — its house rules open the file and win
+   every conflict — plus all eight references in `../jwic-thai/references/`
    (`ai-tells.md`, `craft.md`, `grammar.md`, `style-rules.md`, `register.md`,
    `examples.md`, `exemplars.md`, `forbidden-phrases.md`). Don't skip
    references. Both audit and fix passes need depth — this is a deep
-   language-analysis job, not mechanical scanning. (The pytest harness injects
-   a leaner audit-mode bundle instead — register-scoped, draft-workflow
-   sections stripped; see the project CLAUDE.md "Two-tier injection". "In
-   full" governs interactive runs.)
+   language-analysis job, not mechanical scanning.
 
 2. Read the target file end-to-end before editing anything. Skim-and-fix
    produces shallow passes.
@@ -53,7 +50,7 @@ issue caused by that fix. Only a fully clean pass terminates.
 
 ## Token cost
 
-Each pass reloads kien-thai (~tens of thousands of tokens of skill +
+Each pass reloads jwic-thai (~tens of thousands of tokens of skill +
 references) plus the full target file. For long prose this compounds fast.
 Warn the user before starting on files over ~1000 words so they can decide
 whether to scope the loop to a section.
@@ -63,13 +60,13 @@ whether to scope the loop to a section.
 This loop audits any Thai prose, but its highest-value use is over a draft from
 a Thai-native model (Typhoon and peers), not Claude/Codex output. **JWIC: the
 route scripts are not vendored** — they need a local ollama we don't have, so
-the draft comes from kien-thai itself and this loop is the audit half over it.
-See `../kien-thai/VENDORED.md` if ollama ever lands on the box.
+the draft comes from jwic-thai itself and this loop is the audit half over it.
+See `../jwic-thai/VENDORED.md` if ollama ever lands on the box.
 
-## Relationship to kien-thai
+## Relationship to jwic-thai
 
-`kien-thai` is the rule set. `kode-thai` is the loop. `kode-thai` doesn't add
-new rules — it enforces that kien-thai's rules get applied to convergence. If
-the audit surfaces a pattern no kien-thai rule covers, follow the iteration
+`jwic-thai` is the rule set. `kode-thai` is the loop. `kode-thai` doesn't add
+new rules — it enforces that jwic-thai's rules get applied to convergence. If
+the audit surfaces a pattern no jwic-thai rule covers, follow the iteration
 discipline in the project `CLAUDE.md` ("Iteration discipline — READ FIRST"):
 trace the gap before adding a rule, don't synthesize on vibes.
