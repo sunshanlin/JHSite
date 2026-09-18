@@ -104,6 +104,10 @@ components:
 
 # Design System: JWIC Consulting
 
+> **Token source of truth: this file.** `.impeccable/design.json` is Impeccable's generated copy for its detector to scan, not the origin. It carries the tokens and the narrative, but not the signature component specs below.
+> When the two disagree, whatever actually renders in `index.html` wins — for a given token that is its *last* `:root` declaration. Fix it here first, then regenerate `design.json`.
+> Checked 2026-09-18: `design.json` (generated 2026-09-08) still carries `--ui-muted: #5C736E`, which the contrast pass replaced with `#516661`, and it is missing `--brand-pink-soft: #EFA9BB` entirely. Both values came out of the WCAG AA sweep — pull them from `design.json` and the contrast regresses.
+
 ## Overview
 
 **Creative North Star: "The Fluent Ledger"**
