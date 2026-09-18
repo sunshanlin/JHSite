@@ -6,7 +6,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 - ไฟล์เดียว: `index.html` — HTML + CSS inline ทั้งหมด ไม่มี build step, ไม่มี dependency (`poster.html` = โปสเตอร์ A4 สั่ง print เป็น PDF)
 - รัน/แคปหน้าจอ/ทดสอบ: ใช้ skill `/run-promote-site` (อย่าใช้ `python -m http.server` — python ในเครื่องนี้เป็น Store stub)
 - ติดต่อ: โทร/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · อีเมล **`jirapat.wi@outlook.co.th`** — ใช้ตัวนี้ในทุกไฟล์ของ repo นี้ (หน้าเว็บ 8 จุด, JSON-LD, บทความ, PRODUCT.md) `@outlook.com` ก็ส่งถึงเหมือนกัน (LinkedIn ใช้ตัวนั้น) แต่หน้าเว็บให้คงเป็น `.co.th` ตัวเดียวทั้งไฟล์ อย่าสลับไปมา — schema กับ Google Business Profile ควรตรงกัน
-- สไตล์: อ่าน DESIGN.md ก่อนแก้ — ไฟล์มี `:root` ซ้อนกัน 4 บล็อก (บรรทัด 155, 762, 1577, 2171) ค่าที่เรนเดอร์จริงมาจาก 1577 (สีแบรนด์) กับ 2171 (`--ui-*` ทับ body/heading/ปุ่ม) เท่านั้น แก้ที่ `:root` แรกไม่มีผล
+- สไตล์: อ่าน DESIGN.md ก่อนแก้ — ไฟล์มี `:root` 6 บล็อก (บรรทัด 203, 816, 1597, 2150 กับบล็อกบรรทัดเดียวที่ 2970, 2984) ตัวที่ประกาศทีหลังชนะเสมอ ที่มีผลจริงคือ 1597 (สีแบรนด์ 34 ตัว ชนะทั้งหมด) · 2150 (`--ui-*` ทับ body/heading/ปุ่ม ชนะ 8 จาก 9) · 2970 กับ 2984 (`--ui-muted: #516661` `--brand-pink-soft: #EFA9BB` มาจากรอบไล่ WCAG AA ห้ามย้อน) ส่วน 203 เหลือ `--bg` กับ `--card` ที่ยังชนะอยู่ (ถูกใช้ 8 จุด) และ 816 ตายสนิท ไม่ชนะสักตัว · เลขบรรทัดเลื่อนทุกครั้งที่แก้ไฟล์ ให้ค้น `:root` เอาแทนการเชื่อเลข
 - Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ
 
 ## โครงไฟล์ — ไฟล์ใหม่เข้าโฟลเดอร์ไหน
