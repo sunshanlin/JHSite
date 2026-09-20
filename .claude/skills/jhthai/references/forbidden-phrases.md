@@ -1,9 +1,9 @@
 # Forbidden phrase blocklist
 
 Mechanically grep-able blocklist of phrases that mark AI-generated Thai prose. These
-should never appear **as use** (in the model's own prose) in any register. The
-`kode-thai` audit loop scans this list as a pre-check before deeper rule-based audit
-— any un-backticked occurrence is an automatic flag.
+should never appear **as use** (in the model's own prose) in any register. Scan this
+list as a pre-check before the deeper rule-based audit — any un-backticked occurrence
+is an automatic flag.
 
 ## Use vs mention
 
