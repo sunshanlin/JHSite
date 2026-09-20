@@ -11,6 +11,7 @@
 | `emails` | ซีเควนซ์เมลแบบ nurture / lifecycle (คนที่คุยอยู่แล้ว) | เดียวกัน | MIT © Corey Haines |
 | `negotiation` | เจรจาต่อรอง — tactical empathy, calibrated question, Ackerman (Chris Voss) | [wondelai/skills](https://github.com/wondelai/skills) v1.2.0 | MIT © Wondel.ai |
 | `pricing-negotiation` | ตั้งรับคำขอส่วนลด, ปกป้องราคา, ต่อรองกับ procurement | [louisblythe/Sales-Skills](https://github.com/louisblythe/Sales-Skills) | MIT (ประกาศใน README ไม่มีไฟล์ LICENSE) |
+| `jhthai` | เขียน/แก้/แปลข้อความไทยบนหน้าเว็บ บทความ และสคริปต์เด็ค — กฎบ้านเราเปิดไฟล์ ตามด้วย 7 frame ของประโยคไทย + blocklist วลีกลิ่น AI | ของเรา + [chakrit/kien-thai](https://github.com/chakrit/kien-thai) `3695c88` | MIT © Chakrit Wichian |
 | `run-promote-site` | ของเดิมในโปรเจกต์ — รัน/แคปหน้าเว็บ | — | — |
 
 ### เคยลงแล้วตัดออก (6 ก.ย. 2026)
@@ -25,6 +26,12 @@
 
 ## หมายเหตุ
 
+- **ข้อความไทยที่ลงไฟล์ให้เรียก `jhthai` ก่อนทุกครั้ง** — หน้าเว็บ บทความ สคริปต์เด็ค และเอกสารที่ลูกค้าอ่าน
+  รีวิวก็ใช้กฎชุดเดียวกัน อ่านสกิลแล้วแก้ตามที่เจอในรอบเดียว · ภาษาไทยที่ตอบในแชต ข้อความ commit
+  และ label บนจอ **ไม่ต้องเรียก** (สกิล `kode-thai` ที่วน audit→fix ลบทิ้ง 20 ก.ย. 2026)
+- **กฎบ้านเราอยู่ต้น `jhthai/SKILL.md`** (เดิมเป็นไฟล์ `references/jwic-house.md` ยุบเข้ามา 17 ก.ย. 2026) — คำเรียกผู้อ่านยึด `คุณ` ทั้งหน้า,
+  ชื่อ caption/โมดูลของ Business Central คงอักษรละติน, ศัพท์ภาษีสะกดตามกรมสรรพากร และบทให้ TTS อ่าน
+  ใช้กฎของ `_presales/voice/README.md` แทน · ที่มา/ที่แก้จากต้นฉบับอยู่ใน `jhthai/VENDORED.md`
 - **ตัวสร้างไฟล์จริง** ยังเป็นสกิล `pptx` ตัวเดิม — สกิลพวกนี้คุมแค่ *เนื้อหา/โครงสไลด์* ไม่ได้เขียน .pptx เอง
 - สกิลจาก marketingskills จะมองหา `.agents/product-marketing.md` (เอกสาร positioning/ลูกค้า/จุดขาย) ก่อนทำงาน — ยังไม่มีในโปรเจกต์นี้ ถ้าไม่สร้าง มันจะถามคำถามเดิมซ้ำทุกครั้ง
 - **compliance ในสกิลพวกนี้เป็น US/EU/แคนาดา ไม่มี PDPA ไทย** — กติกาหา lead / เก็บอีเมล ให้ยึด `JHMail/CLAUDE.md` เป็นหลักเสมอ

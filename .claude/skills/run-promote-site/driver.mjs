@@ -39,10 +39,15 @@ if (/^[A-Za-z]:[\\/]/.test(urlPath)) urlPath = "/" + urlPath.replace(/^.*[\\/]/,
 else if (!urlPath.startsWith("/")) urlPath = "/" + urlPath;
 const url = `http://127.0.0.1:${server.address().port}${urlPath}`;
 
-const CHROME = ["C:/Program Files/Google/Chrome/Application/chrome.exe",
-                "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"].find(existsSync);
+const CHROME = [process.env.CHROME_PATH,
+                "C:/Program Files/Google/Chrome/Application/chrome.exe",
+                "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+                "/opt/pw-browsers/chromium",          // Claude Code on the web (Linux container)
+                "/usr/bin/chromium", "/usr/bin/google-chrome"].filter(Boolean).find(existsSync);
+if (!CHROME) { console.error("no chrome/chromium found — set CHROME_PATH"); process.exit(1); }
 const profile = await mkdtemp(path.join(os.tmpdir(), "site-drv-"));
 const chrome = spawn(CHROME, ["--headless=new", "--disable-gpu", "--remote-debugging-port=0",
+  ...(process.platform === "win32" ? [] : ["--no-sandbox"]),   // Linux container runs as root
   `--user-data-dir=${profile}`, "--no-first-run", "--window-size=1400,1000", "about:blank"]);
 const wsUrl = await new Promise((resolve, reject) => {
   let buf = "";
