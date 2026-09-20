@@ -1,4 +1,4 @@
-# jhthai / kode-thai — ของที่ยกมาจากต้นทาง
+# jhthai — ของที่ยกมาจากต้นทาง
 
 | | |
 |---|---|
@@ -15,6 +15,7 @@
 |---|---|
 | `skills/kien-thai/scripts/` | `thai-route.sh` + `thai-native-draft.py` ต้องมี ollama ที่ pull Typhoon-2 / SEA-LION / OpenThaiGPT ไว้ในเครื่อง เราไม่มี ดึงกลับได้ทันทีถ้าวันหน้าลง ollama |
 | `corpus/` `workspace/` `tests/` `docs/` `ace.toml` `.lowfat` | เป็นของโปรเจกต์ต้นทางเอง (คลังตัวอย่าง, รอบ iteration, pytest harness) skill ไม่ได้อ่าน |
+| `skills/kode-thai/` | เคยเอามาเป็นสกิลวน audit→fix ลบทิ้ง 20 ก.ย. 2026 — กฎอยู่ใน `jhthai` อยู่แล้ว วนรอบซ้ำแค่เผา token กับทำให้สกิลไทยถูกเรียกในงานที่ไม่ใช่เอกสาร |
 
 ## ที่แก้จากต้นฉบับ — resync แล้วต้องใส่กลับ
 
@@ -23,9 +24,7 @@
 | `SKILL.md` | หัวข้อ "Best output: draft with a Thai-native model" — แทนบล็อกคำสั่ง `thai-route.sh` ด้วยหมายเหตุว่าเราไม่ได้เอา scripts มา |
 | `SKILL.md` | Workflow ตัดข้อ 0 (Route first) ทิ้ง เพราะเรียกสคริปต์ที่ไม่มี |
 | `SKILL.md` | เติมตัวชี้ไป `references/jwic-house.md` สองจุด (ท้าย Stylistic conventions + หัว References) |
-| `kode-thai/SKILL.md` | ข้อ 1 ให้โหลด `jwic-house.md` ด้วย |
-| `kode-thai/SKILL.md` | หัวข้อ "Best input" — ตัดทางที่ให้รัน `thai-route.sh` ออก ด้วยเหตุผลเดียวกัน |
-| `kode-thai/SKILL.md` | ข้อ 1 ชี้มาที่ `../jhthai/` และตัดวงเล็บเรื่อง pytest harness ของโปรเจกต์ต้นทางออก |
+| `references/forbidden-phrases.md` | ย่อหน้าแรกเคยอ้างสกิล `kode-thai` — เขียนใหม่เป็น "scan this list as a pre-check" ตอนลบสกิลนั้นทิ้ง 20 ก.ย. 2026 |
 
 `SKILL.md` ของ `jhthai` **ไม่ใช่ไฟล์ของต้นทาง** — เป็นของเรา ประกอบจากกฎบ้านเรา (เขียนเองทั้งหมด)
 ต่อด้วยหัวข้อ Why / 7 frame / Person deixis / Workflow ที่ยกมาจาก `kien-thai/SKILL.md` แล้วตัดส่วน

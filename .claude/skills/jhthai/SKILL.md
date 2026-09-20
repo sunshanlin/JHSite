@@ -1,6 +1,6 @@
 ---
 name: jhthai
-description: "เขียน แก้ และรีวิวข้อความภาษาไทยของ JWIC ให้อ่านเหมือนคนไทยเขียน ไม่ใช่ภาษาแปล — 7 frame ของโครงประโยคไทย + กฎบ้านเรา (register ของแต่ละงาน, ทับศัพท์ที่ห้ามแปล, คำที่ห้ามใช้ในเอกสารที่ลูกค้าเซ็น). TRIGGER when writing, editing, translating or reviewing any Thai prose of a paragraph or longer — a Word document, a user manual, a web page, an article, a sales e-mail, a deck script. Invoke it BEFORE writing the first Thai sentence, every time. DO NOT TRIGGER for single words, button labels, UI strings, code identifiers, code comments, or chat replies in Thai."
+description: "กฎภาษาไทยของ JWIC สำหรับข้อความที่ลงไฟล์และมีคนอื่นอ่าน — 7 frame ของโครงประโยคไทย + กฎบ้านเรา (register ของแต่ละงาน, ทับศัพท์ที่ห้ามแปล, คำที่ห้ามใช้ในเอกสารที่ลูกค้าเซ็น). TRIGGER ONLY when Thai prose is written, edited, translated or reviewed INTO A FILE that ships — เนื้อหน้าเว็บใน index.html, บทความใน articles/, สคริปต์เด็คและบท TTS ใน _presales/, เอกสาร Word, เมลเสนอราคา. Invoke it BEFORE the first Thai sentence of such a file. NEVER TRIGGER for Thai in the conversation itself — answers, explanations, plans, summaries, status reports, questions to the user — however long they run, and never for commit messages, PR or issue text, code comments, UI strings, button labels, alt text, file names, or single words and phrases."
 ---
 
 # jhthai — ภาษาไทยของบ้านเรา
@@ -9,7 +9,8 @@ description: "เขียน แก้ และรีวิวข้อคว�
 **7 frame ของโครงประโยคไทย** ที่ยกมาจาก [chakrit/kien-thai](https://github.com/chakrit/kien-thai)
 (MIT — ดู `LICENSE` และ `VENDORED.md`) reference เชิงลึกทั้ง 8 ไฟล์อยู่ใน `references/`
 
-รีวิวภาษาไทยทุกครั้งให้ใช้ `/kode-thai` ซึ่งวน audit→fix จนรอบหนึ่งไม่มีอะไรให้แก้
+**สกิลนี้ใช้กับข้อความไทยที่ลงไฟล์เท่านั้น** — หน้าเว็บ บทความ สคริปต์เด็ค และเอกสารที่ลูกค้าอ่าน
+ภาษาไทยที่ตอบในแชต ข้อความ commit คอมเมนต์ในโค้ด และ label บนจอ ไม่ต้องเรียกสกิลนี้
 
 ## กฎบ้านเรา — อ่านก่อน ชนะทุกข้อที่ขัดกัน
 
@@ -378,7 +379,7 @@ Minimum checklist:
 
 โหลดเพิ่มเมื่อต้องการความลึก (ของต้นทาง ไม่ได้แก้):
 `ai-tells.md` (กลิ่น AI แบบ mechanical) · `craft.md` (รสนิยม) · `examples.md` (ก่อน-หลังรายตระกูล) ·
-`forbidden-phrases.md` (blocklist ที่ `/kode-thai` ไล่ก่อนเสมอ) · `grammar.md` (ไวยากรณ์) ·
+`forbidden-phrases.md` (blocklist ไล่ก่อนเสมอ) · `grammar.md` (ไวยากรณ์) ·
 `register.md` (6 ตระกูลภาษา + deixis + voice) · `style-rules.md` (สไตล์เชิงบวก + ทับศัพท์ 4 ถัง) ·
 `exemplars.md` (งานเขียนคนไทยจริง)
 
