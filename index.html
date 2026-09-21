@@ -2444,16 +2444,16 @@
   .bfj-lane.a { grid-row: 2; } .bfj-lane.c { grid-row: 3; }
   .bfj-wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
   .bfj-wires path { fill: none; stroke: var(--bfj-track); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
-  .bfj-wires path.d { stroke: var(--bfj-rose-ink); stroke-dasharray: 6 5; opacity: .7; }
-  .bfj-ah { fill: var(--bfj-track); } .bfj-ahd { fill: var(--bfj-rose-ink); }
+  .bfj-wires path.d { stroke: var(--bfj-orchid-ink); stroke-dasharray: 6 5; opacity: .7; }
+  .bfj-ah { fill: var(--bfj-track); } .bfj-ahd { fill: var(--bfj-orchid-ink); }
   .bfj-stop { z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 22px 0 20px; }
   .bfj-t { font-size: .875rem; font-weight: 600; line-height: 1.35; color: var(--ui-ink); }
   .bfj-n { font: 800 11px/1 "Plus Jakarta Sans", sans-serif; letter-spacing: .06em; color: var(--ui-muted); }
-  .bfj-note { font-size: .75rem; line-height: 1.4; color: var(--bfj-rose-ink); }
+  .bfj-note { font-size: .75rem; line-height: 1.4; color: var(--bfj-orchid-ink); }
   .bfj-detour { z-index: 3; align-self: center; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
-    background: #fff; border: 1px solid var(--bfj-rose); border-radius: 12px; padding: 7px 12px 7px 7px;
+    background: #fff; border: 1px solid var(--bfj-orchid); border-radius: 12px; padding: 7px 12px 7px 7px;
     font-size: .8125rem; line-height: 1.35; color: var(--ui-ink); }
-  .bfj-detour b { font-weight: 700; color: var(--bfj-rose-ink); }
+  .bfj-detour b { font-weight: 700; color: var(--bfj-orchid-ink); }
   .bfj-detour > span { white-space: nowrap; }
   .bfj-detour small { display: block; font-size: .75rem; color: var(--ui-muted); }
   .bfj-tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); white-space: nowrap;
@@ -2469,8 +2469,8 @@
   .bfj-sign.gate::before { content: ""; position: absolute; inset: 8px; transform: rotate(45deg);
     background: var(--bfj-sand); border: 2px solid var(--bfj-edge); border-radius: 7px; }
   .bfj-sign.gate svg { width: 24px; height: 24px; }
-  .bfj-sign.mini { width: 34px; height: 34px; border-radius: 10px; background: var(--bfj-rose); }
-  .bfj-sign.mini svg { width: 20px; height: 20px; stroke: var(--bfj-rose-ink); }
+  .bfj-sign.mini { width: 34px; height: 34px; border-radius: 10px; background: var(--bfj-orchid); }
+  .bfj-sign.mini svg { width: 20px; height: 20px; stroke: var(--bfj-orchid-ink); }
   .bfj-q { font: 800 24px "Plus Jakarta Sans", sans-serif; fill: var(--bfj-glyph); stroke: none; }
   .bfj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* จอแคบ: ข้อมูลชุดเดียวกันเรียงลงแนวตั้ง ไม่ต้องปัดข้าง */
@@ -2486,9 +2486,11 @@
   .bfj-vst .bfj-detour { margin-top: 8px; }
 
   .bf {
-    --bfj-lane-a: #E2F6F5; --bfj-lane-c: #FBF0F2; --bfj-lane-t: #3F8E8C;
+    --bfj-lane-a: #E2F6F5; --bfj-lane-c: #F6EEF8; --bfj-lane-t: #3F8E8C;
     --bfj-sign: #C4EEEB; --bfj-glyph: #0B7B79; --bfj-edge: #6FCBC6; --bfj-track: #86D6D1;
-    --bfj-rose: #F3E0E6; --bfj-rose-ink: #A04B66; --bfj-sand: #FDF4E0;
+    --bfj-orchid: #EADCF1; --bfj-orchid-ink: #74509E; --bfj-sand: #FDF4E0;
+    /* เลนลูกค้า + ทางวนกลับ เดิมชมพู/แดง → ม่วงกล้วยไม้เฉดเดียวกับแผง "ที่ VAT Service เติมให้"
+       หมึก #74509E: บนขาว 6.21 · เลนฟ้า 5.54 · เลนม่วง 5.47 */
     background: #fff; border: 1px solid var(--ui-line);
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
   }
@@ -2500,8 +2502,6 @@
     text-transform: uppercase; color: var(--ui-muted);
   }
   .bf-head .bf-ic { width: 15px; height: 15px; color: var(--brand-jade); }
-  .bf-head .bf-count { margin-left: auto; text-transform: none; letter-spacing: normal; }
-  .bf-head .bf-count b { color: var(--brand-teal); font-weight: 700; }
 
   /* ผังกว้างกว่าจอแคบ — เลื่อนในกล่องตัวเอง ไม่ให้หน้าเลื่อนแนวนอน */
   .bf-scroll { overflow-x: auto; overflow-y: hidden; padding: 8px 0 18px; }
@@ -2519,7 +2519,7 @@
   .bf-keys .bf-k-g { width: 13px; height: 13px; border-radius: 3px; margin: 0 2px; background: var(--bfj-sand);
     border: 2px solid var(--bfj-edge); transform: rotate(45deg); }
   .bf-k-c { border: 2px solid var(--bfj-glyph); }
-  .bf-k-r { background: var(--bfj-rose); }
+  .bf-k-r { background: var(--bfj-orchid); }
 
   /* ---- Billing Board ---- */
   .bf-board {
@@ -2529,18 +2529,6 @@
   .bf-bar {
     display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap;
     padding: 15px 24px; border-bottom: 1px solid var(--ui-line);
-  }
-  .bf-app {
-    display: flex; align-items: center; gap: 8px; margin: 0;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ui-muted);
-  }
-  .bf-app .bf-ic { width: 15px; height: 15px; color: var(--brand-jade); }
-  .bf-month { font-size: .88rem; color: var(--ui-ink); font-weight: 600; }
-  .bf-sample {
-    font-size: .74rem; color: var(--ui-muted);
-    border: 1px solid var(--ui-line); border-radius: 999px; padding: 2px 11px;
   }
   .bf-reset {
     margin-left: auto; font: 500 .88rem/1 inherit; cursor: pointer;
@@ -2622,7 +2610,8 @@
   /* พรีวิวใบวางบิล — ใช้การ์ด .wq-doc ชุดเดียวกับใบเสนอราคาของ #web-quote */
   /* เงื่อนไข + ใบวางบิล — ใบวางบิลยืดให้ขอบล่างเสมอกล่องปฏิทิน */
   .bf-pv { display: grid; grid-template-rows: auto 1fr; gap: 12px; min-width: 0; }
-  .bf-pv .bf-doc { border-color: var(--ui-line); box-shadow: var(--ui-shadow); }
+  /* ใบวางบิล = กล่องม่วงลาเวนเดอร์ของ bento (สีเดียวที่ยังไม่มีในบอร์ด) ตัวหนังสือบนนี้ 5.46–14.43 */
+  .bf-pv .bf-doc { background: #F3F0FC; border-color: #DCD5F3; box-shadow: var(--ui-shadow); }
   .bf-doc .wq-doc-no span { display: block; margin-top: 2px; font-size: .74rem; font-weight: 500;
     letter-spacing: normal; color: var(--ui-muted); }
   .bf-dm { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 0 0 11px; font-size: .8rem; }
@@ -2653,9 +2642,9 @@
   .bf-dl > :nth-child(2), .bf-dl > :nth-child(3) { color: var(--ui-muted); }
   .bf-doc .wq-sum { grid-template-columns: minmax(0, 1fr) auto; }
 
+  /* วิธีใช้ + ผลตอนย้ายเสร็จ อยู่ในแถบบนร่วมกับปุ่มคืนค่าเดิม (ปุ่มชิดขวาด้วย margin-left:auto) */
   .bf-status {
-    margin: 0; padding: 13px 24px; min-height: 48px;
-    border-bottom: 1px solid var(--ui-line); background: var(--bg-soft);
+    flex: 1 1 320px; margin: 0;
     font-size: .92rem; line-height: 1.6; color: var(--ui-muted);
   }
   .bf-status b { color: var(--brand-teal); font-weight: 700; }
@@ -2711,10 +2700,8 @@
 
   @media (max-width: 900px) {
     .bf-work { grid-template-columns: 1fr; }
-    .bf-head, .bf-bar, .bf-status, .bf-keys { padding-left: 18px; padding-right: 18px; }
+    .bf-head, .bf-bar, .bf-keys { padding-left: 18px; padding-right: 18px; }
     .bf-cal-scroll { padding: 12px; }
-    /* หัวการ์ดตกบรรทัดแล้ว margin-left:auto จะดันไปชิดขวา อ่านเป็นคนละเรื่องกัน */
-    .bf-head .bf-count { margin-left: 0; width: 100%; }
   }
   @media (max-width: 760px) {
     .bf-scroll { display: none; }
@@ -3274,9 +3261,11 @@
      สำนวนเดียวกับแถบซ้ายของแถวที่เปิดอยู่ใน Claim Accordion ของ #business-central */
   .vs-cmp { display: grid; grid-template-columns: 1fr 1fr; position: relative; }
   .vs-side { padding: 22px 24px 20px; min-width: 0; }
+  /* ฝั่งที่ระบบเติมให้ = ม่วงกล้วยไม้ อีกเฉดของม่วงลาเวนเดอร์ในใบวางบิล (ผลลัพธ์จากระบบเป็นโทนม่วงทั้งคู่)
+     ตัวหนังสือบนพื้นนี้ 5.41–14.30 · แถบซ้าย #8E6DB5 ได้ 3.70 */
   .vs-side.rd {
-    background: #EFF5F3; border-left: 1px solid var(--ui-line);
-    box-shadow: inset 3px 0 0 var(--brand-jade);
+    background: #F6EEF8; border-left: 1px solid #E6D8EC;
+    box-shadow: inset 3px 0 0 #8E6DB5;
   }
   .vs-side h3 {
     display: flex; align-items: center; gap: 8px; margin: 0 0 2px;
@@ -3299,7 +3288,7 @@
     display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: baseline;
     padding: 10px 0; border-top: 1px solid var(--ui-line);
   }
-  .vs-side.rd .vs-line { border-top-color: color-mix(in srgb, var(--brand-jade) 24%, transparent); }
+  .vs-side.rd .vs-line { border-top-color: color-mix(in srgb, #8E6DB5 24%, transparent); }
   .vs dt { font-size: .82rem; color: var(--ui-muted); }
   .vs dd { margin: 0; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
   .vs dd.empty { color: var(--brand-mist); }
@@ -3409,21 +3398,6 @@
     background: #fff; border: 1px solid var(--ui-line);
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
     margin-top: 30px;
-  }
-  .wq-bar {
-    display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap;
-    padding: 15px 24px; background: var(--bg-soft); border-bottom: 1px solid var(--ui-line);
-  }
-  .wq-app {
-    display: flex; align-items: center; gap: 8px; margin: 0;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ui-muted);
-  }
-  .wq-app .wq-ic { width: 15px; height: 15px; color: var(--brand-jade); }
-  .wq-sample {
-    font-size: .74rem; color: var(--ui-muted); white-space: nowrap;
-    border: 1px solid var(--ui-line); border-radius: 999px; padding: 2px 11px;
   }
 
   .wq-stage { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
@@ -3587,19 +3561,6 @@
   .wq-out .wq-empty { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.32); color: #BFD3D0; }
   .wq-out .wq-empty .wq-ic { color: rgba(255,255,255,.55); }
   .wq-doc { color: var(--ui-ink); box-shadow: 0 16px 32px -18px rgba(0,0,0,.55); border-color: transparent; }
-  .wq-keyed {
-    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: baseline;
-    margin: 0; padding: 17px 24px; background: var(--bg-soft);
-    border-top: 1px solid var(--ui-line); font-size: .95rem; line-height: 1.6;
-  }
-  .wq-keyed .wq-lbl {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: .08em;
-    color: var(--brand-burgundy); white-space: nowrap;
-  }
-  .wq-keyed .wq-ic { width: 15px; height: 15px; }
-  .wq-keyed b { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-weight: 700; color: var(--brand-teal); }
 
   /* แถวหลักฐาน: ภาพจากระบบจริง ไม่ใช่เดโม — ปิดท้ายการ์ดให้เห็นว่าที่เล่นอยู่มีของจริงรองรับ */
   .wq-proof { padding: 22px 24px 18px; background: var(--bg-soft); border-top: 1px solid var(--ui-line); }
@@ -3651,7 +3612,7 @@
   @media (max-width: 900px) {
     .wq-stage { grid-template-columns: 1fr; }
     .wq-out { border-top: 0; }
-    .wq-bar, .wq-keyed, .wq-proof, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
+    .wq-proof, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
     .wq-send { width: 100%; }
   }
   @media (max-width: 640px) {
@@ -3683,7 +3644,6 @@
     .wq-qty output { min-width: 24px; }
     .wq-line { grid-template-columns: 58px minmax(0, 1fr) 20px 82px; gap: 7px; font-size: .8rem; }
     .wq-line code { letter-spacing: .02em; }
-    .wq-keyed { grid-template-columns: 1fr; gap: 4px; }
     .wq-doc-no { text-align: left; }
     .wq-sum { grid-template-columns: minmax(0, 1fr) 86px; }
   }
@@ -3696,7 +3656,7 @@
 
   @media (max-width: 900px) {
     .vs-cmp { grid-template-columns: 1fr; }
-    .vs-side.rd { border-left: 0; border-top: 1px solid var(--ui-line); box-shadow: inset 0 3px 0 var(--brand-jade); }
+    .vs-side.rd { border-left: 0; border-top: 1px solid #E6D8EC; box-shadow: inset 0 3px 0 #8E6DB5; }
     .vs-mid { transform: rotate(90deg); }
     .vs-bar, .vs-cases, .vs-list, .vs-cost { padding-left: 18px; padding-right: 18px; }
     .vs-msg { margin-left: 18px; margin-right: 18px; }
@@ -4062,13 +4022,11 @@
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
       <symbol id="bfi-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></symbol>
-      <symbol id="bfi-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><line x1="8" y1="3" x2="8" y2="6.5"/><line x1="16" y1="3" x2="16" y2="6.5"/></symbol>
     </defs></svg>
 
     <div class="bf reveal">
       <p class="bf-head">
         <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
-        <span class="bf-count"><b>7</b> <span data-bf="cntA">ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
       </p>
 
       <p class="bfj-sr" id="bfTitle" data-bf="svgTitle"></p>
@@ -4097,15 +4055,12 @@
       </p>
 
       <div class="bf-board">
-        <div class="bf-bar">
-          <p class="bf-app"><svg class="bf-ic"><use href="#bfi-cal"/></svg>Business Central · Billing Board</p>
-          <span class="bf-month" data-bf="month">กันยายน 2569</span>
-          <span class="bf-sample" data-bf="sample">ข้อมูลตัวอย่าง</span>
-          <button class="bf-reset" type="button" id="bfReset" data-bf="reset">คืนค่าเดิม</button>
-        </div>
         <!-- วิธีใช้อยู่เหนือปฏิทิน ไม่ใช่ใต้ — ต้องอ่านเจอก่อนลอง ไม่ใช่หลังเลื่อนผ่าน
              บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
-        <p class="bf-status" id="bfStatus" role="status"></p>
+        <div class="bf-bar">
+          <p class="bf-status" id="bfStatus" role="status"></p>
+          <button class="bf-reset" type="button" id="bfReset" data-bf="reset">คืนค่าเดิม</button>
+        </div>
         <div class="bf-work">
           <div class="bf-cal-tile">
             <div class="bf-cal-scroll">
@@ -4205,11 +4160,9 @@
 
     <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="wqi-flow" viewBox="0 0 24 24"><path d="M13 6h7v7M20 6l-9 9M4 4v16h16"/></symbol>
       <symbol id="wqi-box" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9.5" x2="13" y2="9.5"/><line x1="7" y1="13.5" x2="11" y2="13.5"/><circle cx="17" cy="14" r="1.5"/></symbol>
       <symbol id="wqi-send" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7.5 3 3 7.5z"/><path d="M21 3 10.5 13.5"/></symbol>
       <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
-      <symbol id="wqi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
       <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
       <symbol id="wqi-chat" viewBox="0 0 48 48"><rect x="13" y="5" width="22" height="38" rx="4"/><path d="M21 38.5h6"/><path d="M18.5 15h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H24l-4 3.5V26h-1.5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/><path d="M20.5 20.5h.01M24 20.5h.01M27.5 20.5h.01" stroke-width="2.6"/></symbol>
       <symbol id="wqi-cloud" viewBox="0 0 48 48"><path d="M14 36h21a8 8 0 0 0 .9-15.95A12 12 0 0 0 13 18.5 9 9 0 0 0 14 36z"/><path d="M21.5 23.5 18 27l3.5 3.5M26.5 23.5 30 27l-3.5 3.5"/></symbol>
@@ -4248,11 +4201,6 @@
     </div>
 
     <div class="wq reveal">
-      <div class="wq-bar">
-        <p class="wq-app"><svg class="wq-ic"><use href="#wqi-flow"/></svg><span data-wq="app">เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์</span></p>
-        <span class="wq-sample" data-wq="sample">ข้อมูลตัวอย่าง</span>
-      </div>
-
       <div class="wq-stage">
         <div class="wq-pick">
           <p class="wq-step"><b>01</b><span data-wq="s1">เลือกสินค้า</span></p>
@@ -4272,11 +4220,6 @@
           <div id="wq-result" role="status" aria-live="polite"></div>
         </div>
       </div>
-
-      <p class="wq-keyed">
-        <span class="wq-lbl"><svg class="wq-ic"><use href="#wqi-warn"/></svg><span data-wq="keyedLbl">ช่องที่ฝ่ายขายต้องคีย์ซ้ำ</span></span>
-        <span id="wq-keyed"></span>
-      </p>
 
       <div class="wq-proof">
         <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับเดโมด้านบนทุกบรรทัด</span></p>
@@ -5543,7 +5486,6 @@
       sub: { th: 'งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ',
             en: 'The whole billing run on one line inside Business Central — set each customer’s billing date, plan the notes by cycle, record the collection appointment, and close with the receipt, without re-keying anything.' },
       flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
-      cntA: { th: 'ขั้นในผังนี้เป็นฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'steps in this flow are functions JWIC added' },
       svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Cancel แล้ววนกลับเข้า Worklist',
                   en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the lines and totals, release and print the billing note, then place it with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, cancel the note and loop back to the worklist.' },
       keyJ: { th: 'ฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'Added by JWIC' },
@@ -5552,8 +5494,6 @@
       keyC: { th: 'ส่งต่อกระบวนการอื่น', en: 'Handover to another process' },
       keyR: { th: 'ทางวนกลับ', en: 'Loops back' },
       keyX: { th: '* เลนของคู่ค้าภายนอกบริษัท', en: '* lane belongs to a party outside the company' },
-      month: { th: 'กันยายน 2569', en: 'September 2026' },
-      sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       reset: { th: 'คืนค่าเดิม', en: 'Reset' },
       footAmt: { th: 'ยอดที่ต้องวางบิลเดือนนี้', en: 'due to be billed this month' },
       footInv: { th: 'ใบแจ้งหนี้', en: 'invoices' },
@@ -5959,12 +5899,10 @@
       h2: { th: 'ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>', en: 'Quote Requests via LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>' },
       sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ ลองกดเป็นลูกค้าดูได้เลย',
              en: 'Buyers pick their items inside LINE, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
-      app: { th: 'เดโมฝั่งลูกค้า · คำนวณในเบราว์เซอร์', en: 'Buyer-side demo · runs in your browser' },
       archSr: { th: 'ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
                 en: 'How it flows: Business Central syncs item data to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
       flowReq: { th: 'คำขอใบเสนอราคา', en: 'Quote request' },
       flowItems: { th: 'สินค้า', en: 'Items' },
-      sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
       s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
       s1hint: { th: 'รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE', en: 'The same item list the buyer sees in LINE' },
       s2: { th: 'คุณเป็น', en: 'You are' },
@@ -5998,9 +5936,6 @@
       sumVat: { th: 'ภาษีมูลค่าเพิ่ม 7%', en: 'VAT 7%' },
       sumTotal: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
       baht: { th: '', en: 'Thai baht text, written by the system: ' },
-      keyedLbl: { th: 'ช่องที่ฝ่ายขายต้องคีย์ซ้ำ', en: 'Fields sales has to retype' },
-      keyedVal: { th: '<b>0</b> ช่อง · ข้อมูลทั้งใบมาจากที่ลูกค้ากรอกเอง ฝ่ายขายแค่เปิดตรวจแล้วกดส่ง',
-                  en: '<b>0</b> fields · everything on the quote comes from what the buyer filled in; sales just checks it and sends it' },
       proof: { th: 'ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับเดโมด้านบนทุกบรรทัด',
                en: 'Already running — quote QG000010 from the test system, line for line the same as the demo above' },
       proof1: { th: 'ลูกค้ากรอกคำขอใน LINE', en: 'The buyer fills in the request on LINE' },
@@ -6112,7 +6047,6 @@
       drawWho();
       drawPipe();
       drawResult();
-      byId('wq-keyed').innerHTML = T.keyedVal[lang];
       const btn = byId('wq-send');
       btn.disabled = !lines().length;
       btn.querySelector('[data-wq="send"]').innerHTML = sent && step >= 3 ? T.sendAgain[lang] : T.send[lang];
