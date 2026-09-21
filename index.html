@@ -2551,8 +2551,18 @@
   .bf-reset:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
 
   /* ปฏิทินซ้าย ใบวางบิลขวา — ปฏิทินย่อลงให้พรีวิวมีที่ */
-  .bf-work { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(330px, 1fr); background: #fff; }
-  .bf-cal-scroll { overflow-x: auto; padding: 14px 16px; background: #fff; }
+  /* bento: ปฏิทิน · เงื่อนไขลูกค้า · ใบวางบิล · ตัวเลขท้ายบอร์ด เป็นกล่องแยกบนพื้น --bg-soft สีไม่ซ้ำกัน
+     พื้นกล่องใช้สีชุด --bfj-* ของผังด้านบน + Horizon glow ส่วนใบวางบิลคงเป็นกระดาษขาว
+     สีสถานะในปฏิทิน (burgundy / น้ำเงิน / jade) ไม่เอามาเป็นพื้นกล่อง ความหมายจะได้ไม่ปน */
+  .bf-work {
+    display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(330px, 1fr);
+    gap: 12px; padding: 12px; background: var(--bg-soft);
+  }
+  .bf-cal-tile {
+    min-width: 0; overflow: hidden; background: var(--bfj-lane-a);
+    border: 1px solid #C6E8E4; border-radius: var(--ui-radius-card);
+  }
+  .bf-cal-scroll { overflow-x: auto; padding: 14px 16px; }
   .bf-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; min-width: 560px; }
   .bf-dow {
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
@@ -2610,15 +2620,16 @@
   }
 
   /* พรีวิวใบวางบิล — ใช้การ์ด .wq-doc ชุดเดียวกับใบเสนอราคาของ #web-quote */
-  .bf-pv { border-left: 1px solid var(--ui-line); background: var(--bg-soft); padding: 14px 16px; }
+  /* เงื่อนไข + ใบวางบิล — ใบวางบิลยืดให้ขอบล่างเสมอกล่องปฏิทิน */
+  .bf-pv { display: grid; grid-template-rows: auto 1fr; gap: 12px; min-width: 0; }
   .bf-pv .bf-doc { border-color: var(--ui-line); box-shadow: var(--ui-shadow); }
   .bf-doc .wq-doc-no span { display: block; margin-top: 2px; font-size: .74rem; font-weight: 500;
     letter-spacing: normal; color: var(--ui-muted); }
   .bf-dm { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 0 0 11px; font-size: .8rem; }
   .bf-nw { white-space: nowrap; }
   /* เงื่อนไขวางบิลของลูกค้า — รอบในปฏิทินต้องตรงกับเงื่อนไขนี้ ลากไปวันอื่นแล้วขึ้นว่านอกรอบ */
-  .bf-rule { margin: 0 0 12px; padding: 12px 15px; background: #fff;
-    border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card); }
+  .bf-rule { margin: 0; padding: 12px 15px; background: var(--bfj-sand);
+    border: 1px solid #EEDDB4; border-radius: var(--ui-radius-card); }
   .bf-rule-k { margin: 0 0 4px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
     font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted); }
   .bf-rule-m { margin: 0; font-size: .98rem; font-weight: 700; color: var(--brand-teal); }
@@ -2660,7 +2671,7 @@
   .bf-day.late .bf-dn { color: var(--brand-burgundy-dark); }
   .bf-due {
     display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0;
-    padding: 12px 24px; border-top: 1px solid var(--ui-line); background: #fff;
+    padding: 11px 16px 13px; border-top: 1px solid #C6E8E4;
     font-size: .84rem; color: var(--ui-muted);
   }
   .bf-due span { display: flex; align-items: center; gap: 8px; }
@@ -2668,13 +2679,22 @@
   .bf-d-late { background: #F4E7EB; border: 1px solid rgba(166,58,86,.4); border-left: 3px solid var(--brand-burgundy); }
   .bf-d-due { background: #D3E6F8; border: 1px solid var(--cal-blue); border-left-width: 3px; }
   .bf-d-next { background: #fff; border: 1px solid #B9C6C3; border-left: 3px solid var(--brand-jade); }
+  /* ตัวเลขท้ายบอร์ด = การ์ดตัวเลขแบบหน้า Microsoft: ขาวด้านบน สีเรืองขึ้นจากขอบล่าง คนละสี
+     ป้ายใต้ตัวเลข (#516661) ตกบนสีเข้มสุดได้ 4.61–5.2 ผ่านทุกกล่อง */
   .bf-foot {
-    display: flex; flex-wrap: wrap; gap: 8px 30px;
-    padding: 14px 24px 16px; border-top: 1px solid var(--ui-line); background: var(--bg-soft);
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    margin: 0; padding: 0 12px 12px; background: var(--bg-soft);
     font-size: .9rem; color: var(--ui-muted);
   }
+  .bf-foot > span {
+    display: flex; flex-direction: column; gap: 2px; padding: 14px 16px 16px;
+    border: 1px solid; border-radius: var(--ui-radius-card);
+  }
+  .bf-foot > span:nth-child(1) { background: linear-gradient(to top, var(--glow-sand), #fff 78%); border-color: #EADBB0; }
+  .bf-foot > span:nth-child(2) { background: linear-gradient(to top, var(--glow-sea), #fff 78%); border-color: #BFE0D7; }
+  .bf-foot > span:nth-child(3) { background: linear-gradient(to top, #D6E8F7, #fff 78%); border-color: var(--cal-line); }
   .bf-foot b {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.45rem; line-height: 1.2;
     font-weight: 700; color: var(--ui-ink); font-variant-numeric: tabular-nums;
   }
 
@@ -2691,8 +2711,7 @@
 
   @media (max-width: 900px) {
     .bf-work { grid-template-columns: 1fr; }
-    .bf-pv { border-left: 0; border-top: 1px solid var(--ui-line); }
-    .bf-head, .bf-bar, .bf-status, .bf-foot, .bf-keys, .bf-due { padding-left: 18px; padding-right: 18px; }
+    .bf-head, .bf-bar, .bf-status, .bf-keys { padding-left: 18px; padding-right: 18px; }
     .bf-cal-scroll { padding: 12px; }
     /* หัวการ์ดตกบรรทัดแล้ว margin-left:auto จะดันไปชิดขวา อ่านเป็นคนละเรื่องกัน */
     .bf-head .bf-count { margin-left: 0; width: 100%; }
@@ -2717,6 +2736,9 @@
     .bf-cal:not(.moving) .bf-day:not(.has) { display: none; }
     .bf-cal.moving .bf-day:not(.has) { padding: 9px 10px; }
     .bf-tot { margin-top: 4px; }
+    /* ยอดเงินยาวสุด ให้กินเต็มแถว อีกสองกล่องเคียงกันข้างล่าง */
+    .bf-foot { grid-template-columns: 1fr 1fr; }
+    .bf-foot > span:first-child { grid-column: 1 / -1; }
   }
 
 
@@ -4085,16 +4107,18 @@
              บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
         <p class="bf-status" id="bfStatus" role="status"></p>
         <div class="bf-work">
-          <div class="bf-cal-scroll">
-            <div class="bf-cal" id="bfCal"></div>
+          <div class="bf-cal-tile">
+            <div class="bf-cal-scroll">
+              <div class="bf-cal" id="bfCal"></div>
+            </div>
+            <p class="bf-due">
+              <span><i class="bf-d-late"></i><span data-bf="dueLate">เลยกำหนดวางบิล</span></span>
+              <span><i class="bf-d-due"></i><span data-bf="dueToday">ถึงรอบวันนี้</span></span>
+              <span><i class="bf-d-next"></i><span data-bf="dueNext">รอบถัดไป</span></span>
+            </p>
           </div>
           <div class="bf-pv" id="bfDoc" aria-live="polite"></div>
         </div>
-        <p class="bf-due">
-          <span><i class="bf-d-late"></i><span data-bf="dueLate">เลยกำหนดวางบิล</span></span>
-          <span><i class="bf-d-due"></i><span data-bf="dueToday">ถึงรอบวันนี้</span></span>
-          <span><i class="bf-d-next"></i><span data-bf="dueNext">รอบถัดไป</span></span>
-        </p>
         <p class="bf-foot">
           <span><b>฿2,785,050</b> <span data-bf="footAmt">ยอดที่ต้องวางบิลเดือนนี้</span></span>
           <span><b>21</b> <span data-bf="footInv">ใบแจ้งหนี้</span></span>

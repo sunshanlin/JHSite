@@ -170,7 +170,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 
 **The Quotation Rule.** The `--ms-*` hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for `--ms-blue`, it has misunderstood what that token is for. The same logic admits two more borrowed colors, each in one place: LINE Green (`#06C755`) and Cloudflare Orange (`#F38020`) fill the LINE and Cloudflare Worker dots in `#web-quote`'s three-node pipeline once they light up, the way a logo would. Business Central's dot stays mint. Both clear 3:1 on the Signing Teal panel (4.52 and 3.85).
 
-**The Paper Rule.** Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen. A section ground may also carry the Horizon Glow — the four glow tokens, on the bottom edge, and nothing else: no fifth glow color, no glow on a card, and never burgundy or a Microsoft hue in a wash.
+**The Paper Rule.** Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen. A section ground may also carry the Horizon Glow — the four glow tokens, on the bottom edge, and nothing else: no fifth glow color, no glow on a card, and never burgundy or a Microsoft hue in a wash. The one place tinted surfaces are allowed is inside the Billing Board, which is a mock of an application screen rather than a page surface (see Billing Board below).
 
 ## Typography
 
@@ -269,6 +269,10 @@ The hero contributes the system's one piece of geometry: a `200px` bottom-left r
 Three `.plan-card` surfaces in `#pricing`, identical by design: white ground, 1px Pale Edge, 8px, Hairline. A flat Deep Teal banner runs across the top of each — the banner is a label, not a control, so it never takes burgundy; the only burgundy in the section is the one `.pricing-cta` per card. The discounted plan is marked by a Deep Teal border on the card, nothing louder.
 
 Above 1081px the three cards are direct children of one grid (`.plan-group` and `.plan-group-cards` go `display: contents`) and each card subgrids the parent's seven rows — banner, name, description, price, note, CTA, details. Rows therefore align from real content. **Do not reintroduce `min-height` to line the cards up**: six hand-measured values used to do this job and had to be re-measured every time the copy or the font changed.
+
+### Billing Board (bento)
+
+The working demo in `#billing-flow` is laid out as bento tiles on the `--bg-soft` ground, 12px apart, 8px corners, and no two tiles share a color. The calendar tile sits on the diagram's aqua (`--bfj-lane-a`), with its color legend inside the tile's foot, so the white day cells stand out. The customer's billing rule sits on sand (`--bfj-sand`). The billing note stays white paper and stretches to line up with the calendar's bottom edge. The three totals under the board are stat tiles in the shape of Microsoft's ROI cards: white at the top where the number sits, with a glow rising from the bottom edge in Sand, Sea, and a pale BC blue. The calendar's state colors (burgundy for late, blue for due today, jade for next cycle) never become a tile ground, so a state keeps a single meaning. Every label clears 4.5:1 on its tile's strongest stop (4.61–5.61). Below 760px the amount tile takes a full row and the other two share the row beneath it.
 
 ### Footer
 
