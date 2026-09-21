@@ -2561,22 +2561,25 @@
   }
   .bf-day {
     display: flex; flex-direction: column; gap: 4px; min-height: 66px; padding: 5px;
-    background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-btn);
+    background: #fff; border: 1px solid #CDD8D5; border-radius: var(--ui-radius-btn);
     transition: background .125s ease, border-color .125s ease;
   }
-  .bf-day.off { background: #F7FAFC; }
+  /* ปฏิทินเดิมจางจนกริดหาย (เส้น #E2E8E6 = 1.24:1 บนขาว, เสาร์อาทิตย์ #F7FAFC แยกไม่ออก)
+     เข้มเส้นช่อง พื้นเสาร์อาทิตย์ เลขวันเป็นสีหมึก และชิปมีแถบสีซ้ายตามสถานะแบบปฏิทิน Outlook */
+  .bf-day.off { background: #F2F5F7; }
   .bf-day.blank { background: none; border-color: transparent; }
   .bf-dn {
     display: flex; align-items: center; gap: 6px;
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .8rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
+    font-size: .8rem; font-weight: 600; color: var(--ui-ink); font-variant-numeric: tabular-nums;
   }
+  .bf-day.off .bf-dn { color: var(--ui-muted); }
   /* ชื่อวันซ้ำกับหัวคอลัมน์บนจอกว้าง — โผล่เฉพาะตอนปฏิทินยุบเป็นรายการบนมือถือ */
   .bf-dw { display: none; font-style: normal; font-weight: 500; }
   .bf-day.today .bf-dn { color: var(--cal-ink); }
   .bf-day.today .bf-dn span {
     font-family: inherit; font-size: .68rem; font-weight: 600; letter-spacing: normal;
-    color: var(--cal-ink); background: var(--cal-tint); border-radius: 999px; padding: 1px 8px;
+    color: #fff; background: var(--cal-blue); border-radius: 999px; padding: 1px 8px;
   }
   .bf-tot {
     margin-top: auto; text-align: right; font-variant-numeric: tabular-nums;
@@ -2590,7 +2593,8 @@
   .bf-chip {
     display: block; width: 100%; text-align: left; font: inherit; cursor: grab;
     color: var(--ui-ink); background: #fff;
-    border: 1px solid #B9C6C3; border-radius: var(--ui-radius-btn); padding: 4px 5px;
+    border: 1px solid #B9C6C3; border-left: 3px solid var(--brand-jade);
+    border-radius: var(--ui-radius-btn); padding: 4px 5px;
     transition: background .125s ease, border-color .125s ease, color .125s ease;
   }
   .bf-chip:hover { border-color: var(--cal-blue); }
@@ -2648,7 +2652,7 @@
   /* สถานะตามวัน — burgundy ทำหน้าที่เป็นเครื่องหมาย "มีปัญหา" สำนวนเดียวกับ .vs-msg.stop
      ไม่ใช่สีของปุ่ม จึงไม่ขัด Burgundy Toll Rule · ตรงกับที่ #features บอกว่ามี
      สีเน้นวันวางบิลและรายการที่เลยกำหนด */
-  .bf-chip.late { background: rgba(166,58,86,.07); border-color: rgba(166,58,86,.34); }
+  .bf-chip.late { background: #F4E7EB; border-color: rgba(166,58,86,.4); border-left-color: var(--brand-burgundy); }
   .bf-chip.late .bf-cn { color: var(--brand-burgundy-dark); }
   .bf-chip.due { background: #D3E6F8; border-color: var(--cal-blue); }
   .bf-chip[aria-pressed="true"].late { background: var(--brand-burgundy-dark); border-color: var(--brand-burgundy-dark); }
@@ -2661,9 +2665,9 @@
   }
   .bf-due span { display: flex; align-items: center; gap: 8px; }
   .bf-due i { width: 20px; height: 12px; flex: 0 0 auto; border-radius: 2px; }
-  .bf-d-late { background: rgba(166,58,86,.07); border: 1px solid rgba(166,58,86,.34); }
-  .bf-d-due { background: #D3E6F8; border: 1px solid var(--cal-blue); }
-  .bf-d-next { background: #fff; border: 1px solid #B9C6C3; }
+  .bf-d-late { background: #F4E7EB; border: 1px solid rgba(166,58,86,.4); border-left: 3px solid var(--brand-burgundy); }
+  .bf-d-due { background: #D3E6F8; border: 1px solid var(--cal-blue); border-left-width: 3px; }
+  .bf-d-next { background: #fff; border: 1px solid #B9C6C3; border-left: 3px solid var(--brand-jade); }
   .bf-foot {
     display: flex; flex-wrap: wrap; gap: 8px 30px;
     padding: 14px 24px 16px; border-top: 1px solid var(--ui-line); background: var(--bg-soft);
