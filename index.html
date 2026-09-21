@@ -3550,7 +3550,11 @@
   .wq-out .wq-node:not(:last-child)::before { background: rgba(255,255,255,.2); }
   .wq-out .wq-node.on:not(:last-child)::before { background: #7CCBC4; }
   .wq-out .wq-dot { border-color: rgba(255,255,255,.45); background: transparent; }
-  .wq-out .wq-node.on .wq-dot { border-color: #7CCBC4; background: #7CCBC4; }
+  /* จุดของ LINE กับ Cloudflare ใช้สีแบรนด์ของเจ้าของบริการ (อ้างถึงเขาเหมือนโลโก้) ส่วน BC คงมิ้นต์
+     บนพื้น teal: #06C755 ได้ 4.52:1, #F38020 ได้ 3.85:1 ผ่านเกณฑ์ 3:1 ของ graphic */
+  .wq-out .wq-node-line { --node: #06C755; }
+  .wq-out .wq-node-cf { --node: #F38020; }
+  .wq-out .wq-node.on .wq-dot { border-color: var(--node, #7CCBC4); background: var(--node, #7CCBC4); }
   .wq-out .wq-txt b { color: rgba(255,255,255,.75); }
   .wq-out .wq-node.on .wq-txt b { color: #fff; }
   .wq-out .wq-txt > span { color: #BFD3D0; }
@@ -6029,16 +6033,16 @@
       }));
     }
 
-    function node(on, name, text) {
-      return '<div class="wq-node' + (on ? ' on' : '') + '"><span class="wq-dot"></span>'
+    function node(key, on, name, text) {
+      return '<div class="wq-node wq-node-' + key + (on ? ' on' : '') + '"><span class="wq-dot"></span>'
         + '<span class="wq-txt"><b>' + name + '</b><span>' + text + '</span></span></div>';
     }
 
     function drawPipe() {
       byId('wq-pipe').innerHTML =
-        node(step >= 1, T.nodeLine[lang], step >= 1 ? T.doneLine[lang].replace('{n}', lines().length) : T.idleLine[lang])
-        + node(step >= 2, T.nodeWorker[lang], step >= 2 ? T.doneWorker[lang] : T.idleWorker[lang])
-        + node(step >= 3, T.nodeBc[lang], step >= 3
+        node('line', step >= 1, T.nodeLine[lang], step >= 1 ? T.doneLine[lang].replace('{n}', lines().length) : T.idleLine[lang])
+        + node('cf', step >= 2, T.nodeWorker[lang], step >= 2 ? T.doneWorker[lang] : T.idleWorker[lang])
+        + node('bc', step >= 3, T.nodeBc[lang], step >= 3
             ? T.bcFetch[lang] + ' · ' + WHO[who].bc[lang] + ' · ' + T.bcIssue[lang] + ' ' + quoteId()
             : T.idleBc[lang]);
     }
