@@ -1307,15 +1307,13 @@
   }
   .credential-card:hover .credential-card-link { transform: translate(2px,-2px); background: rgba(124,203,196,.1); }
 
-  /* ponytail: charcoal แยกจากธีมเขียวของทั้งหน้าโดยตั้งใจ — จุดพัก 10% ให้ปุ่ม burgundy เด่นสุดในหน้า
-     Contact + FAQ อยู่กลุ่มเดียวกัน (ต่อเนื่องกัน) เลยใช้พื้นหลังเดียวกัน */
-  #contact, #faq {
+  /* ponytail: charcoal แยกจากธีมเขียวของทั้งหน้าโดยตั้งใจ — จุดพัก 10% ให้ปุ่ม burgundy เด่นสุดในหน้า */
+  #contact {
     color: #c7cbce;
     background: linear-gradient(165deg, #1c1e20 0%, #101112 100%);
   }
-  #contact .section-kicker, #faq .section-kicker { color: #8a9194; }
-  #contact h2, #faq h2 { color: #fff; }
-  #faq .sub { color: #aeb4b7; }
+  #contact .section-kicker { color: #8a9194; }
+  #contact h2 { color: #fff; }
   .contact-grid {
     grid-template-columns: .92fr 1.08fr; align-items: stretch;
     padding: 0; gap: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.1);
@@ -1663,11 +1661,10 @@
   .topnav .brand .wordmark b { color: inherit; font-weight: 800; }
   .topnav .brand .wordmark i { color: inherit; font-weight: 600; }
 
-  /* Pink ทำหน้าที่เป็น editorial accent; Ivory ทำให้ surface อุ่นขึ้น */
+  /* Pink ทำหน้าที่เป็น editorial accent */
   .section-kicker { color: var(--brand-plum); }
   #about .section-kicker, #contact .section-kicker { color: var(--brand-plum-light); }
   header .tagline { color: var(--brand-plum-light); }
-  section.alt { background: linear-gradient(180deg, var(--brand-ivory) 0%, var(--brand-ivory-deep) 100%); }
 
   /* Section heading stays on Pantone; only the five stage labels use Microsoft hues. */
   #services > .wrap > .section-kicker { color: var(--brand-burgundy); }
@@ -2122,12 +2119,12 @@
     .plan-list-head { font-size: .98rem; }
   }
 
-  /* กระจก charcoal เดียวกับ #contact — FAQ อยู่กลุ่มเดียวกัน · ป้ายเลขข้อ + ไถเปิดแบบ .plan-more */
+  /* การ์ดขาวบนพื้นสว่าง (ผิวเดียวกับการ์ดทั้งหน้า) · ป้ายเลขข้อ + ไถเปิดแบบ .plan-more */
   .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; counter-reset: faq; }
   .faq-list details {
     position: relative; overflow: hidden; counter-increment: faq;
-    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
-    padding: 2px 22px; box-shadow: none;
+    background: #fff; border: 1px solid var(--brand-pale); border-radius: 14px;
+    padding: 2px 22px; box-shadow: var(--ui-shadow);
     transition: background-color .24s ease, border-color .24s ease;
   }
   /* แถบเน้นซ้าย โผล่ตอนเปิด — สำนวนเดียวกับ .bento-item */
@@ -2136,12 +2133,11 @@
     background: linear-gradient(var(--brand-pink), var(--brand-pink-deep));
     opacity: 0; transition: opacity .24s ease;
   }
-  .faq-list details:hover { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.2); }
-  .faq-list details[open] { background: rgba(255,255,255,.06); border-color: rgba(191,233,224,.26); }
+  .faq-list details:hover, .faq-list details[open] { border-color: var(--brand-mist); }
   .faq-list details[open]::before { opacity: 1; }
   .faq-list summary {
     display: flex; align-items: center; gap: 12px;
-    cursor: pointer; font-weight: 700; color: #bfe9e0; padding: 15px 0;
+    cursor: pointer; font-weight: 700; color: var(--ui-ink); padding: 15px 0;
     list-style: none; transition: color .2s ease;
   }
   .faq-list summary::-webkit-details-marker { display: none; }
@@ -2151,11 +2147,11 @@
     display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px;
     font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .82rem; line-height: 1;
     font-variant-numeric: tabular-nums;
-    color: var(--brand-pink); background: rgba(224,140,162,.14);
-    border: 1px solid rgba(224,140,162,.35);
+    color: var(--brand-teal); background: var(--brand-pale);
+    border: 1px solid var(--brand-pale);
     transition: background-color .24s ease, color .24s ease, transform .24s ease;
   }
-  .faq-list details[open] summary::before { color: #fff; background: var(--brand-pink-deep); border-color: transparent; }
+  .faq-list details[open] summary::before { color: #fff; background: var(--brand-teal); border-color: transparent; }
   /* chevron ท้ายคำถาม — สำนวนเดียวกับ .plan-more > summary::after */
   .faq-list summary::after {
     content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin: 0 2px 3px auto;
@@ -2163,13 +2159,13 @@
     transform: rotate(45deg); opacity: .5; transition: transform .24s ease, opacity .24s ease;
   }
   .faq-list details[open] summary::after { transform: rotate(-135deg); margin-bottom: -3px; opacity: 1; }
-  .faq-list summary:hover { color: var(--brand-pink); }
+  .faq-list summary:hover { color: var(--brand-teal); }
   .faq-list summary:hover::before { transform: translateY(-1px); }
-  .faq-list summary:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 4px; border-radius: 8px; }
-  .faq-list details[open] summary { border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 12px; }
+  .faq-list summary:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 4px; border-radius: 8px; }
+  .faq-list details[open] summary { border-bottom: 1px solid var(--ui-line); margin-bottom: 12px; }
   /* เยื้อง 38px = ป้ายเลข 26 + gap 12 คำตอบจึงตรงคอลัมน์เดียวกับคำถาม (เดิมช่องนี้เป็นป้าย A) */
   .faq-list details > p {
-    padding-left: 38px; color: #aeb4b7; line-height: 1.8;
+    padding-left: 38px; color: var(--ui-muted); line-height: 1.8;
     padding-bottom: 16px; text-wrap: pretty;
   }
   .faq-list details[open] > p { animation: planReveal .32s ease both; }
@@ -2210,9 +2206,57 @@
     --ui-radius-btn: 3px;
     --ui-radius-card: 8px;
     --ui-shadow: 0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14);
+    /* Horizon glow — แสงเรืองขอบล่างของ section แบบหน้า Dynamics 365 รุ่นใหม่ แต่ใช้โทนแบรนด์ล้วน
+       (ทราย = งาช้างที่อิ่มขึ้น, มิ้นต์/น้ำทะเล = ปลายอ่อนของตระกูล teal) ไม่ยืมเหลือง/ฟ้าของ Microsoft
+       จุดที่เข้มสุดยังให้ --ui-muted (#516661) ได้ 4.61–4.84:1 ตัวหนังสือตกตรงไหนก็ผ่าน AA
+       --glow-fade ชั้นบนสุดของ section ที่ต่อด้วยพื้นเรียบ: ดึง 96px สุดท้ายกลับเป็น --ui-page ไม่ให้เห็นรอยตัด */
+    --glow-sand: #EFDFB3;
+    --glow-mint: #CDEBE2;
+    --glow-sea: #C6E6DD;
+    --glow-rose: #F7DAE1;
+    --glow-fade: linear-gradient(to top, var(--ui-page) 0, transparent 96px);
   }
 
   .nb { white-space: nowrap; }   /* กันเบราว์เซอร์ตัดกลางคำไทย เช่น ครบ|วงจร */
+
+  /* ---- Horizon glow: แสงเรืองครึ่งล่างของ section บนพื้น --ui-page ผืนเดียว ----
+     เทียบจากหน้า Business Central ของ Microsoft (th-th, ก.ย. 2026): เขาใช้แสงแค่ ~5 จาก 14 section
+     เป็นจังหวะ (showcase / หลักฐาน / แหล่งข้อมูล / CTA) ส่วน section ที่ต้องอ่านหรือต้องตัดสินใจ
+     — ราคา, FAQ, grid ฟีเจอร์ — เรียบหมด ของเราเลยมี 3 จุด:
+       #features (showcase) · #web-quote (หลักฐาน) · #articles (แหล่งข้อมูล)
+     เรียบโดยตั้งใจ: #services #billing-flow #vat-service #reports #pricing #faq
+     กติกา:
+     - แสงไม่ขึ้นไปถึงหัวข้อกับ .sub ด้านบน — .sub ทั้งหน้ายังเป็น #57746F ได้แค่ 3.81 บนน้ำทะเล
+       #features/#articles ให้แสงสูงได้ เพราะตัวหนังสือบนพื้นมีแค่หัวข้อที่สูงจากขอบล่าง 880px ขึ้นไป
+       ที่เหลืออยู่ในการ์ดขาวทั้งหมด
+     - ใช้แค่ --glow-* 4 สี ไม่มีเบอร์กันดี (สีของปุ่ม) หรือสีของ Microsoft ในแสง
+     - แต่ละจุดจัดไม่ซ้ำกัน รวมไว้ที่นี่ที่เดียว และต้องอยู่หลังกฎ #pricing เก่าที่มี radial เบอร์กันดี */
+  section.alt, #pricing { background: var(--ui-page); }
+  /* showcase: ทราย → มิ้นต์ → น้ำทะเล สูงขึ้นมาหลังแผงฟีเจอร์ครึ่งล่าง (แบบ Industries ของ MS) */
+  #features {
+    background: var(--glow-fade),
+      radial-gradient(1000px 620px at 0% 100%, var(--glow-sand), transparent 72%),
+      radial-gradient(1100px 520px at 55% 108%, var(--glow-mint), transparent 72%),
+      radial-gradient(900px 640px at 100% 100%, var(--glow-sea), transparent 72%),
+      var(--ui-page);
+  }
+  /* หลักฐาน (ใบ QG000010 ของจริง): ทรายแผ่กว้างกลางขอบ ขนาบด้วยมิ้นต์/น้ำทะเลเล็ก ๆ
+     แถว .wq-note (#516661) อยู่บนแสงตรง ๆ — สีนี้ผ่านทุกสีแสง */
+  #web-quote {
+    background: var(--glow-fade),
+      radial-gradient(1300px 380px at 50% 100%, var(--glow-sand), transparent 72%),
+      radial-gradient(560px 300px at 0% 100%, var(--glow-mint), transparent 72%),
+      radial-gradient(560px 300px at 100% 100%, var(--glow-sea), transparent 72%),
+      var(--ui-page);
+  }
+  /* แหล่งข้อมูล: น้ำทะเลซ้าย ชมพูขวา เติมที่ว่างข้างการ์ดใบสุดท้าย (แบบ Get started ของ MS)
+     ต่อด้วย footer พื้นเข้ม ไม่ต้องมี --glow-fade */
+  #articles {
+    background:
+      radial-gradient(1000px 640px at 100% 100%, var(--glow-rose), transparent 72%),
+      radial-gradient(1000px 600px at 10% 100%, var(--glow-sea), transparent 72%),
+      var(--ui-page);
+  }
 
   h1, h2, h3, .feature-panel h3, .step-heading {
     font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
@@ -2361,15 +2405,13 @@
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
   }
 
-  /* ---- #contact/#faq: จาก charcoal กลางๆ มาเป็นเขียวแบรนด์ให้เข้าธีม ---- */
-  #contact, #faq {
+  /* ---- #contact: จาก charcoal กลางๆ มาเป็นเขียวแบรนด์ให้เข้าธีม ---- */
+  #contact {
     color: #CBDCD8;
     background: linear-gradient(165deg, #01211D 0%, var(--brand-deep) 55%, var(--brand-teal) 100%);
   }
-  #contact .section-kicker, #faq .section-kicker { color: var(--brand-mist); }
-  #faq .sub { color: #B4C9C5; }
-  #contact h2, #faq h2 { color: #fff; }
-  .faq-list details > p { color: #B4C9C5; }
+  #contact .section-kicker { color: var(--brand-mist); }
+  #contact h2 { color: #fff; }
 
   /* ---- #billing-flow: ผังกระบวนการวางบิล + Billing Board ที่ลากได้ ----
      การ์ดใบเดียวของทั้ง section เหมือน .vs ของ #vat-service — ข้างในแบ่งน้ำหนัก
@@ -2927,10 +2969,6 @@
            ตรงระดับกัน — ต้องวัดใหม่ทุกครั้งที่แก้ข้อความหรือฟอนต์
      ทางแก้: ผิวเดียวกันทั้ง 3 ใบ + subgrid ให้แต่ละแถวจัดตัวเองจากเนื้อหาจริง
      ========================================================================== */
-
-  /* พื้น #pricing เดิมมี radial เบอร์กันดี+เขียวจาง ๆ ซ้อนอยู่ — ผิด The Paper Rule
-     (พื้นต้องเป็นงาช้าง/ขาว/cool page เท่านั้น ไม่ใช่ tint ของสีเน้น) */
-  #pricing { background: linear-gradient(180deg, #fbfaf6 0%, var(--brand-ivory-deep) 100%); }
 
   /* กรอบครอบ 2 ใบซ้ายไม่มีป้ายบอกว่าคืออะไร — ยุบทิ้ง ให้ทั้งสามใบอยู่บนกริดเดียว เทียบตรง ๆ */
   .plan-group, .plan-group-cards { display: contents; }

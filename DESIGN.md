@@ -16,6 +16,10 @@ colors:
   brand-pink-deep: "#C25470"
   brand-ivory: "#fbf8f1"
   brand-ivory-deep: "#f6f1e5"
+  glow-sand: "#EFDFB3"
+  glow-mint: "#CDEBE2"
+  glow-sea: "#C6E6DD"
+  glow-rose: "#F7DAE1"
   hero-canvas: "#EFEFE9"
   ui-page: "#f6f8f7"
   ui-ink: "#10241F"
@@ -114,13 +118,13 @@ components:
 
 This is a Business Central screen that grew up and became a website. The visitor is an accountant or a finance lead who spends their working day inside Microsoft's ERP, and the page borrows that room's manners on purpose: square corners, hairline separators, a single saturated action color, and headings set at weight 500 rather than the heavy 700 that marketing pages default to. When someone who already runs BC lands here, the surface should feel like the same building — not like a startup selling to them.
 
-The restraint is a credibility argument, not a stylistic preference. The practice sells one thing above all — a Thai localization package that already exists and already works — and the design's job is to make that claim look inspectable rather than promoted. Flat surfaces read as fact. Gradients, glows, and lifted cards read as sales. Everywhere the page has a choice, it takes the version that looks like documentation.
+The restraint is a credibility argument, not a stylistic preference. The practice sells one thing above all — a Thai localization package that already exists and already works — and the design's job is to make that claim look inspectable rather than promoted. Flat surfaces read as fact. Gradients, glows, and lifted cards read as sales. Everywhere the page has a choice, it takes the version that looks like documentation. The one deliberate exception is the ground itself: a soft Horizon Glow in the lower half of three sections, placed the way Microsoft's own Business Central page places its washes. It lights the page behind white cards, never on a button and never at the top of a section where the reading starts.
 
-Warmth comes from two places only. The ivory paper tones (`#EFEFE9`, `#fbf8f1`) that carry the hero and every alternate section give the page the color of real accounting stock instead of the blue-white of a dashboard. And burgundy — a color no ERP vendor uses — is spent exclusively on the things a visitor is meant to touch. The deep teal family does the institutional work; burgundy does the asking.
+Warmth comes from two places only. The ivory paper of the hero (`#EFEFE9`) and the sand end of the Horizon Glow give the page the color of real accounting stock instead of the blue-white of a dashboard. And burgundy — a color no ERP vendor uses — is spent exclusively on the things a visitor is meant to touch. The deep teal family does the institutional work; burgundy does the asking.
 
 **Key Characteristics:**
 - Square-cornered and flat: 3px buttons, 8px cards, hairline shadows
-- Ivory paper ground rather than blue-white dashboard ground
+- One cool-page ground warmed by a sand-to-sea Horizon Glow, never blue-white dashboard ground
 - One action color (burgundy) against one institutional family (deep teal)
 - Headings at weight 500, tight tracking (-0.025em) — Fluent, not marketing
 - Thai body copy set at 18px/500 for sustained reading, never smaller
@@ -135,19 +139,25 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 - **Deep Burgundy** (`#7D2440`): the pressed and hovered state of the above. Never a resting fill.
 
 ### Secondary
-- **Deep Teal** (`#012F2A`): the institution. Section grounds for `#contact` and `#faq`, the language-toggle active state, the hero's quarter-round block, and the darkest stop of every teal gradient. This is the color of the practice itself.
+- **Deep Teal** (`#012F2A`): the institution. The section ground of `#contact`, the language-toggle active state, the hero's quarter-round block, and the darkest stop of every teal gradient. This is the color of the practice itself.
 - **Signing Teal** (`#014A41`): one step up from Deep Teal, used for the `#services` heading and for hover states on dark surfaces.
 - **Jade** (`#417771`): the mid-tone workhorse — hero proof-list bullets, the fourth Success-by-Design phase.
 - **Sage** (`#739B97`) and **Mist** (`#A6C0BD`): the pale end of the teal ramp. Sage closes the progress gradient and fills the fifth phase; Mist carries kickers on dark grounds.
 
 ### Tertiary
-- **Editorial Pink** (`#E08CA2`) and **Deep Rose** (`#C25470`): burgundy's quieter relatives. The hero tagline, the contact arrow, the `.tip` left rule. They signal "this is an aside" without spending an action color. Neither reaches 4.5:1 on the deep-teal grounds, so on dark they hand off to **Soft Pink** (`#EFA9BB`, 5.38:1 on Signing Teal), which carries every kicker in `#about`, `#contact` and the service highlight.
+- **Editorial Pink** (`#E08CA2`) and **Deep Rose** (`#C25470`): burgundy's quieter relatives. The hero tagline, the contact arrow, the `.tip` left rule. They signal "this is an aside" without spending an action color. Neither reaches 4.5:1 on the deep-teal grounds, so on dark they hand off to **Soft Pink** (`#EFA9BB`, 5.38:1 on Signing Teal), which carries every kicker in `#about` and `#contact`.
 - **Microsoft Stage Hues** (`#0078D4` blue, `#498205` green, `#008272` teal, `#0078A8` cyan, `#9A6700` gold): the five Success by Design phase labels in `#services`, and nothing else. They are a quotation from Microsoft, so they are used at Microsoft's values.
 
 ### Neutral
 - **Paper Ivory** (`#EFEFE9`): the hero ground.
-- **Warm Ivory** (`#fbf8f1` → `#f6f1e5`): every `section.alt`, as a soft vertical gradient. This is what stops the page from reading as a dashboard.
-- **Cool Page** (`#f6f8f7`): the default `body` ground under the non-alt sections.
+- **Warm Ivory** (`#fbf8f1` → `#f6f1e5`): small paper surfaces only — the `.tip` callout, the price boxes, the plan assurance note. It is no longer a section ground.
+- **Cool Page** (`#f6f8f7`): the one ground under every light section.
+
+### Horizon Glow
+- **Sand** (`#EFDFB3`), **Mint** (`#CDEBE2`), **Sea** (`#C6E6DD`), **Rose** (`#F7DAE1`): the only four glow colors, tokens in the `--ui-*` `:root` next to `--glow-fade`. Sand is ivory with more warmth, Mint and Sea are the pale end of the teal family, Rose is Editorial Pink at its palest — Microsoft's yellow-to-cyan wash retold in JWIC's own hues.
+- **Shape:** radial washes anchored on the bottom edge. Where the next section is flat and light, `--glow-fade` sits on top and fades the last 96px back to Cool Page so the two never meet at a visible seam; before a dark section it is left off.
+- **Where:** `#features` (the showcase), `#web-quote` (the proof: a real quote, QG000010), and `#articles` (the resources). That is where Microsoft's Business Central page (th-th, checked September 2026) spends its washes: about five of fourteen sections, on its industry showcase, its proof numbers, its resources, and its final CTA. Every section a visitor reads to decide stays flat, on Microsoft's page and on this one: `#services`, `#billing-flow`, `#vat-service`, `#reports`, `#pricing`, `#faq`.
+- **No two alike:** each glow section composes its own arrangement, all in one block right after the `--ui-*` `:root`. `#features` runs Sand → Mint → Sea and rises tall behind the feature panel, the way Microsoft's industry showcase does; `#web-quote` spreads Sand across the middle between small Mint and Sea corners; `#articles` sets Sea left and Rose right, filling the empty space beside the last article card. A new glow section gets a new arrangement, not a copy.
 - **Ink Green-Black** (`#10241F`): all headings and body text. Not pure black — a green-cast near-black that sits inside the teal family.
 - **Slate Sage** (`#516661`): kickers, hero lead, secondary description text. Darkened from `#5C736E`, which read 4.40:1 on the hero's Paper Ivory — just under the 4.5:1 floor, on the page's opening paragraph. The current value clears every ground it lands on: 5.31 on Paper Ivory, 5.75 on Cool Page, 6.13 on white.
 - **Hairline** (`#E2E8E6`) and **Pale Edge** (`#D9E4E3`): the only two border values. Cards, inputs, nav underline, icon frames.
@@ -156,11 +166,11 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 
 **The Burgundy Toll Rule.** Burgundy is the price of asking for something. If an element does not want a click, it does not get burgundy — not as a border, not as an icon tint, not as a hover. The nav has exactly one burgundy item; the hero has exactly one; a section has at most one.
 
-**The Contrast Floor Rule.** Every text colour on this page clears WCAG 2.2 AA against the *lightest* ground it can land on — 4.5:1 for body, 3:1 at 24px or 18.66px/700. Where a ground is a gradient, the lightest stop is what counts, which is why the since-removed `.service-highlight` panel lost its pink and sage radial washes: they lifted one corner to ~#4B6D6C and dropped three text colours below the floor. A new colour is not "close enough" at 4.4:1. Compute it before committing it.
+**The Contrast Floor Rule.** Every text colour on this page clears WCAG 2.2 AA against the *lightest* ground it can land on — 4.5:1 for body, 3:1 at 24px or 18.66px/700. Where a ground is a gradient, the lightest stop is what counts, which is why the since-removed `.service-highlight` panel lost its pink and sage radial washes: they lifted one corner to ~#4B6D6C and dropped three text colours below the floor. A new colour is not "close enough" at 4.4:1. Compute it before committing it. The Horizon Glow stops were picked against this rule: Slate Sage clears 4.61–4.84 on the strongest stop of each. Lighter greys do not — `.sub` is still `#57746F` (3.81 on Sea), Jade numerals 3.84 — so the glow never climbs to a section's heading block. `#features` and `#articles` can run tall washes because every line below their heading sits in a white card; `#web-quote`'s washes stay low because its `.wq-note` sits on the ground (in Slate Sage, which passes).
 
 **The Quotation Rule.** The `--ms-*` hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for `--ms-blue`, it has misunderstood what that token is for.
 
-**The Paper Rule.** Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen.
+**The Paper Rule.** Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen. A section ground may also carry the Horizon Glow — the four glow tokens, on the bottom edge, and nothing else: no fifth glow color, no glow on a card, and never burgundy or a Microsoft hue in a wash.
 
 ## Typography
 
@@ -191,7 +201,7 @@ A single 1180px container (`.wrap`) with 28px gutters, holding a 13-section vert
 
 Content grids are `repeat(auto-fit, minmax(260px, 1fr))` at 22px gaps — the column count is a consequence of width, not a fixed number. `#articles` is the exception: it is pinned to 3 columns above 981px, because auto-fit gave 4 columns to 6 cards and left a half-empty last row. The hero is the one bespoke grid: `1.15fr .85fr` at 56px, collapsing to a single column at 900px.
 
-Alternating ground is the primary rhythm device: `section.alt` takes the warm ivory gradient, everything else sits on cool page. Two sections break out entirely — `#contact` and `#faq` share a deep-teal gradient ground, and `#about` runs on its own dark gradient in English.
+The whole light page sits on one Cool Page ground, and three Horizon Glows — `#features`, `#web-quote`, `#articles` — are the rhythm device, spaced through the page the way Microsoft spaces its washes. They replaced alternating ivory/cool stripes, whose seams every screen-height made the page busy. Two sections break out entirely — `#about` and `#contact` run on dark teal gradients. `#faq` used to share `#contact`'s ground, which stacked three dark sections in a row; it is light and flat now, the pause before `#articles`.
 
 **Breakpoints** cluster at 900px (the main two-column → one-column collapse), 760px (nav becomes a toggle menu), and 720/600/560/520px for progressive tightening. 1080/1100px handle wide-layout adjustments.
 
@@ -302,6 +312,7 @@ One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine time
 - **Don't** let a button lift or glow on hover. Background change only, 125ms.
 - **Don't** spend burgundy on anything that isn't asking for a click.
 - **Don't** use the `--ms-*` hues outside the five Success by Design stage labels.
+- **Don't** let the Horizon Glow reach a section's heading block, and don't give it to a section a visitor reads to decide — pricing, FAQ, the working demos. It belongs to the showcase, the proof, and the resources.
 - **Don't** introduce a new radius value. The long tail of 9/12/14/16/18/20/22/24/28px is debt, not vocabulary.
 - **Don't** put a gradient back on `header`. The hero ground is flat Paper Ivory (`#EFEFE9`). A multi-stop teal gradient and its `--hero-deep` / `--hero-mid` / `--hero-end` tokens lived here for a while, overridden and never rendering; they have been deleted.
 - **Don't** add a new `!important`. The existing ones are documented specificity fights; each new one makes the next change harder.
