@@ -44,7 +44,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 
 ทุกไฟล์ผ่าน `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` ให้สว่าง/สดขึ้นก่อนแปลงเป็น WebP
 
-`img/credentials/dbd-registered.png` = สำเนาป้าย DBD ไว้ใช้ในสไลด์เท่านั้น — **หน้าเว็บต้อง hotlink จาก `dbdregistered.dbd.go.th` ต่อไป** ป้ายที่ DBD ออกให้ต้องเสิร์ฟจากเขาถึงจะกดไปหน้าตรวจสอบได้
+`img/credentials/dbd-registered.png` = สำเนาป้าย DBD ใช้ในสไลด์ และเป็น**ตัวสำรองตอนเซิร์ฟเวอร์ DBD ล่ม** (`onerror` บน `<img>` ของ `.dbd`) — **หน้าเว็บต้อง hotlink จาก `dbdregistered.dbd.go.th` เป็นตัวหลักต่อไป** ห้ามสลับให้สำเนาเป็นตัวหลัก ลิงก์ของป้ายต้องชี้หน้าตรวจสอบของ DBD เสมอ
 
 ## _presales/ — งาน presales ที่รวมมาจาก repo JHPresales (4 ก.ย. 2026)
 

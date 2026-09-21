@@ -2803,6 +2803,9 @@
   .footer-tm { display: inline-block; margin-top: 4px; font-size: .92em; line-height: 1.6; letter-spacing: normal; text-transform: none; }
   /* ป้าย DBD Registered บนแถบเมนู — รูปโหลดจากเซิร์ฟเวอร์ DBD ตาม snippet ที่เขาให้มา
      เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
+     เซิร์ฟเวอร์ DBD ล่มบ่อย (TLS พัง) -> onerror สลับไปสำเนาใน img/credentials/ ขนาดไฟล์/ขอบใสเท่ากันเป๊ะ
+     ตัวเลขข้างล่างจึงใช้ได้ทั้งสองรูป · ลิงก์ยังชี้หน้าตรวจสอบของ DBD เหมือนเดิม
+     onerror ต้องอยู่บนแท็ก ไม่ใช่ addEventListener ใน <script> ท้ายหน้า — ถ้า DBD ตอบ error เร็ว มันยิงก่อนสคริปต์ผูกทัน
 
      จัด "ให้เสมอกัน" กับแบรนด์ ต้องวัดจากหมึกจริง ไม่ใช่ขอบไฟล์:
        PNG 324x154 มีขอบใสรอบตัว หมึกจริงสูงแค่ 114/154 และไม่ได้อยู่กลางไฟล์
@@ -3619,7 +3622,7 @@
       <span class="wordmark"><b>JWIC</b> <i>Consulting</i></span>
     </a>
     <a class="dbd" href="https://dbdregistered.dbd.go.th/api/public/shopinfo?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" target="_blank" rel="noopener" aria-label="DBD Registered — เครื่องหมายรับรองการจดทะเบียนพาณิชย์อิเล็กทรอนิกส์ กรมพัฒนาธุรกิจการค้า">
-      <img src="https://dbdregistered.dbd.go.th/api/public/banner?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" width="324" height="154" alt="">
+      <img src="https://dbdregistered.dbd.go.th/api/public/banner?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" width="324" height="154" alt="" onerror="this.onerror=null;this.src='img/credentials/dbd-registered.png'">
     </a>
     <div class="links" id="primary-nav">
       <a href="#top">หน้าแรก</a>
