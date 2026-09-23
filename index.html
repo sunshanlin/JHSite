@@ -246,21 +246,74 @@
 }
 </script>
 <style>
+  /* ============================================================
+     Design tokens — :root บล็อกเดียวของทั้งไฟล์ (รวมจาก 6 บล็อกเดิม 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว)
+     ค่าอ้างอิงอยู่ที่ DESIGN.md · token ใหม่เพิ่มในบล็อกนี้ ห้ามเปิด :root บล็อกใหม่
+     ============================================================ */
   :root {
-    /* palette BC (deep blue → cyan → mint) เวอร์ชัน modern: สดขึ้น คูลขึ้น */
-    --navy: #0D5257;
-    --ink: #0D5257;
-    --text: #122e33;
-    --muted: #0f4a52; /* เข้มขึ้นจาก #55898C เพื่อ contrast ที่อ่านสบายตา */
-    --accent: #35AF9E;
-    --accent-dark: #1F7A87;
-    --cyan: #59bdb1;
-    --mint: #7CCBC4;
+    /* แบรนด์: ตระกูล Deep Teal #014A41 + Burgundy/Pink (burgundy ใช้กับสิ่งที่ให้กดเท่านั้น) */
+    --brand-deep: #012F2A;
+    --brand-teal: #014A41;
+    --brand-ocean: #1A5B54;
+    --brand-jade: #417771;
+    --brand-mint: #739B97;
+    --brand-mist: #A6C0BD;
+    --brand-pale: #D9E4E3;
+    --brand-burgundy: #A63A56;
+    --brand-burgundy-dark: #7D2440;
+    --brand-pink: #E08CA2;
+    --brand-pink-deep: #C25470;
+    /* kicker ชมพูบนพื้นเข้ม: #E08CA2 ได้แค่ 4.10–3.16 → #EFA9BB ได้ 5.38/4.98 (รอบไล่ WCAG AA ห้ามย้อน) */
+    --brand-pink-soft: #EFA9BB;
+    --brand-plum: var(--brand-pink-deep);
+    --brand-plum-light: var(--brand-pink);
+    --brand-ivory: #fbf8f1;
+    --brand-ivory-deep: #f6f1e5;
+
+    /* สีของ Microsoft — ใช้เฉพาะป้าย 5 เฟส Success by Design (The Quotation Rule) */
+    --ms-blue: #0078D4;
+    --ms-green: #498205;
+    --ms-teal: #008272;
+    --ms-cyan: #0078A8;
+    --ms-gold: #9A6700;
+
+    /* ชื่อรุ่นเก่าที่ rule ส่วนต้นไฟล์ยังเรียกอยู่ — ชี้เข้าแบรนด์แล้ว */
+    --navy: var(--brand-deep);
+    --ink: #013F38;
+    --text: #274D47;
+    --muted: #57746F;
+    --accent: var(--brand-jade);
+    --accent-dark: var(--brand-teal);
+    --cyan: var(--brand-ocean);
+    --mint: var(--brand-mint);
     --bg: #ffffff;
-    --bg-soft: #f2f9f7;
+    --bg-soft: #F3F7F6;
     --card: #ffffff;
-    --line: #BEE3DF;
-    --shadow: 0 10px 30px -12px rgba(13,82,87, .18);
+    --line: var(--brand-pale);
+    --shadow: 0 22px 60px -34px rgba(1,74,65,.32);
+    --shadow-lg: 0 34px 80px -40px rgba(1,47,42,.46);
+
+    /* เลเยอร์ Fluent — ค่าตัวเลข (44px/500, kicker 12px/600/.08em, radius 3px, 125ms)
+       วัดมาจาก microsoft.com/dynamics-365/products/business-central */
+    --ui-ink: #10241F;        /* ตัวหนังสือหลัก — ดำอมเขียว ไม่ใช่ดำสนิท */
+    /* kicker / คำอธิบาย · เดิม #5C736E บนพื้น hero ivory ได้ 4.40 ต่ำกว่าเกณฑ์ และครอบ p.lead ย่อหน้านำของทั้งหน้า
+       #516661 ได้ 5.31 (ivory) / 5.75 (cool) / 6.13 (ขาว) — รอบไล่ WCAG AA ห้ามย้อน */
+    --ui-muted: #516661;
+    --ui-page: #f6f8f7;
+    --ui-line: #E2E8E6;
+    --ui-primary: #012F2A;
+    --ui-radius-btn: 3px;
+    --ui-radius-card: 8px;
+    --ui-shadow: 0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14);
+    /* Horizon glow — แสงเรืองขอบล่างของ section แบบหน้า Dynamics 365 รุ่นใหม่ แต่ใช้โทนแบรนด์ล้วน
+       (ทราย = งาช้างที่อิ่มขึ้น, มิ้นต์/น้ำทะเล = ปลายอ่อนของตระกูล teal) ไม่ยืมเหลือง/ฟ้าของ Microsoft
+       จุดที่เข้มสุดยังให้ --ui-muted (#516661) ได้ 4.61–4.84:1 ตัวหนังสือตกตรงไหนก็ผ่าน AA
+       --glow-fade ชั้นบนสุดของ section ที่ต่อด้วยพื้นเรียบ: ดึง 96px สุดท้ายกลับเป็น --ui-page ไม่ให้เห็นรอยตัด */
+    --glow-sand: #EFDFB3;
+    --glow-mint: #CDEBE2;
+    --glow-sea: #C6E6DD;
+    --glow-rose: #F7DAE1;
+    --glow-fade: linear-gradient(to top, var(--ui-page) 0, transparent 96px);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -850,20 +903,6 @@
   .chat-fab-btn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ---- 2026 visual refresh ---- */
-  :root {
-    --navy: #072d30;
-    --ink: #102a43;
-    --text: #1F7A87;
-    --muted: #55898C;
-    --accent: #35AF9E;
-    --accent-dark: #1F7A87;
-    --cyan: #59bdb1;
-    --mint: #7CCBC4;
-    --bg-soft: #f3f8fb;
-    --line: #dce9ef;
-    --shadow: 0 22px 60px -34px rgba(7,45,48, .32);
-    --shadow-lg: 0 34px 80px -40px rgba(4, 30, 56, .42);
-  }
   html { scroll-padding-top: 76px; }
   body { overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
   ::selection { color: var(--navy); background: rgba(124,203,196, .42); }
@@ -1593,42 +1632,6 @@
   .stat-row .stat:nth-child(3) b { color: #35AF9E; }
 
   /* ---- Deep Teal #014A41 shade system + Burgundy/Pink accents ---- */
-  :root {
-    --brand-deep: #012F2A;
-    --brand-teal: #014A41;
-    --brand-ocean: #1A5B54;
-    --brand-jade: #417771;
-    --brand-mint: #739B97;
-    --brand-mist: #A6C0BD;
-    --brand-pale: #D9E4E3;
-    --brand-burgundy: #A63A56;
-    --brand-burgundy-dark: #7D2440;
-    --brand-pink: #E08CA2;
-    --brand-pink-deep: #C25470;
-    --ms-navy: #153A73;
-    --ms-blue: #0078D4;
-    --ms-green: #498205;
-    --ms-red: #A4262C;
-    --ms-teal: #008272;
-    --ms-cyan: #0078A8;
-    --ms-gold: #9A6700;
-    --brand-plum: var(--brand-pink-deep);
-    --brand-plum-light: var(--brand-pink);
-    --brand-ivory: #fbf8f1;
-    --brand-ivory-deep: #f6f1e5;
-    --navy: var(--brand-deep);
-    --ink: #013F38;
-    --text: #274D47;
-    --muted: #57746F;
-    --accent: var(--brand-jade);
-    --accent-dark: var(--brand-teal);
-    --cyan: var(--brand-ocean);
-    --mint: var(--brand-mint);
-    --bg-soft: #F3F7F6;
-    --line: var(--brand-pale);
-    --shadow: 0 22px 60px -34px rgba(1,74,65,.32);
-    --shadow-lg: 0 34px 80px -40px rgba(1,47,42,.46);
-  }
 
   ::selection { color: #fff; background: rgba(166,58,86,.82); }
   a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
@@ -2196,26 +2199,6 @@
      วัดมาจาก microsoft.com/dynamics-365/products/business-central
      ฟอนต์ยังเป็นของเดิม (Plus Jakarta Sans + Anuphan) เปลี่ยนแค่น้ำหนัก
      ============================================================ */
-  :root {
-    --ui-ink: #10241F;        /* ตัวหนังสือหลัก — ดำอมเขียว ไม่ใช่ดำสนิท */
-    --ui-muted: #5C736E;      /* kicker / คำอธิบาย */
-    --ui-page: #f6f8f7;
-    --ui-line: #E2E8E6;
-    --ui-primary: #012F2A;
-    --ui-primary-hover: #014A41;
-    --ui-radius-btn: 3px;
-    --ui-radius-card: 8px;
-    --ui-shadow: 0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14);
-    /* Horizon glow — แสงเรืองขอบล่างของ section แบบหน้า Dynamics 365 รุ่นใหม่ แต่ใช้โทนแบรนด์ล้วน
-       (ทราย = งาช้างที่อิ่มขึ้น, มิ้นต์/น้ำทะเล = ปลายอ่อนของตระกูล teal) ไม่ยืมเหลือง/ฟ้าของ Microsoft
-       จุดที่เข้มสุดยังให้ --ui-muted (#516661) ได้ 4.61–4.84:1 ตัวหนังสือตกตรงไหนก็ผ่าน AA
-       --glow-fade ชั้นบนสุดของ section ที่ต่อด้วยพื้นเรียบ: ดึง 96px สุดท้ายกลับเป็น --ui-page ไม่ให้เห็นรอยตัด */
-    --glow-sand: #EFDFB3;
-    --glow-mint: #CDEBE2;
-    --glow-sea: #C6E6DD;
-    --glow-rose: #F7DAE1;
-    --glow-fade: linear-gradient(to top, var(--ui-page) 0, transparent 96px);
-  }
 
   .nb { white-space: nowrap; }   /* กันเบราว์เซอร์ตัดกลางคำไทย เช่น ครบ|วงจร */
 
@@ -3076,10 +3059,6 @@
 
   /* ---- 1.4.3 Contrast (Minimum) — ข้อความ AA ต้อง 4.5:1 (ตัวใหญ่ 3:1) ---- */
 
-  /* --ui-muted เดิม #5C736E บนพื้น hero ivory ได้ 4.40 — ต่ำกว่าเกณฑ์อยู่นิดเดียว
-     แต่ครอบ p.lead ซึ่งเป็นย่อหน้านำของทั้งหน้า #516661 ได้ 5.31 (ivory) / 5.75 (cool) / 6.13 (ขาว) */
-  :root { --ui-muted: #516661; }
-
   /* เลข 01–05 ในแอคคอร์เดียน: Deep Rose ได้ 4.11 — เปลี่ยนเป็น Jade 4.80
      ตรงกับที่ DESIGN.md กำหนดให้ Jade เป็นสีกลางของระบบอยู่แล้ว */
   .bento-num { color: var(--brand-jade); }
@@ -3092,7 +3071,6 @@
   footer span { color: var(--brand-mint); }                                            /* 5.55 (เดิม 4.32) */
 
   /* kicker ชมพูบนพื้นเข้มทุกจุด: #E08CA2 ได้ 4.10–3.16 แล้วแต่จุด → #EFA9BB ได้ 5.38/4.98 */
-  :root { --brand-pink-soft: #EFA9BB; }
   #about .section-kicker,
   #contact .section-kicker { color: var(--brand-pink-soft); }
 

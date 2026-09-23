@@ -25,7 +25,6 @@ colors:
   ui-ink: "#10241F"
   ui-muted: "#516661"
   ui-line: "#E2E8E6"
-  ms-navy: "#153A73"
   ms-blue: "#0078D4"
   ms-green: "#498205"
   ms-teal: "#008272"
@@ -110,7 +109,7 @@ components:
 
 > **Token source of truth: this file.** `.impeccable/design.json` is Impeccable's generated copy for its detector to scan, not the origin. It carries the tokens and the narrative, but not the signature component specs below.
 > When the two disagree, whatever actually renders in `index.html` wins — for a given token that is its *last* `:root` declaration. Fix it here first, then regenerate `design.json`.
-> Checked 2026-09-18: `design.json` (generated 2026-09-08) still carries `--ui-muted: #5C736E`, which the contrast pass replaced with `#516661`, and it is missing `--brand-pink-soft: #EFA9BB` entirely. Both values came out of the WCAG AA sweep — pull them from `design.json` and the contrast regresses.
+> Synced 2026-09-23: `design.json` now carries `--ui-muted: #516661` and `--brand-pink-soft: #EFA9BB` from the WCAG AA sweep, and drops the unused `--ms-navy`. In `index.html` every token lives in one `:root` block at the top of `<style>` (merged from six on 2026-09-23 with identical values).
 
 ## Overview
 
@@ -154,10 +153,10 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 - **Cool Page** (`#f6f8f7`): the one ground under every light section.
 
 ### Horizon Glow
-- **Sand** (`#EFDFB3`), **Mint** (`#CDEBE2`), **Sea** (`#C6E6DD`), **Rose** (`#F7DAE1`): the only four glow colors, tokens in the `--ui-*` `:root` next to `--glow-fade`. Sand is ivory with more warmth, Mint and Sea are the pale end of the teal family, Rose is Editorial Pink at its palest — Microsoft's yellow-to-cyan wash retold in JWIC's own hues.
+- **Sand** (`#EFDFB3`), **Mint** (`#CDEBE2`), **Sea** (`#C6E6DD`), **Rose** (`#F7DAE1`): the only four glow colors, tokens in the single `:root` next to `--glow-fade`. Sand is ivory with more warmth, Mint and Sea are the pale end of the teal family, Rose is Editorial Pink at its palest — Microsoft's yellow-to-cyan wash retold in JWIC's own hues.
 - **Shape:** radial washes anchored on the bottom edge. Where the next section is flat and light, `--glow-fade` sits on top and fades the last 96px back to Cool Page so the two never meet at a visible seam; before a dark section it is left off.
 - **Where:** `#features` (the showcase), `#web-quote` (the proof: a real quote, QG000010), and `#articles` (the resources). That is where Microsoft's Business Central page (th-th, checked September 2026) spends its washes: about five of fourteen sections, on its industry showcase, its proof numbers, its resources, and its final CTA. Every section a visitor reads to decide stays flat, on Microsoft's page and on this one: `#services`, `#billing-flow`, `#vat-service`, `#reports`, `#pricing`, `#faq`.
-- **No two alike:** each glow section composes its own arrangement, all in one block right after the `--ui-*` `:root`. `#features` runs Sand → Mint → Sea and rises tall behind the feature panel, the way Microsoft's industry showcase does; `#web-quote` spreads Sand across the middle between small Mint and Sea corners; `#articles` sets Sea left and Rose right, filling the empty space beside the last article card. A new glow section gets a new arrangement, not a copy.
+- **No two alike:** each glow section composes its own arrangement, all in one block in the Fluent layer (search `Horizon glow:`). `#features` runs Sand → Mint → Sea and rises tall behind the feature panel, the way Microsoft's industry showcase does; `#web-quote` spreads Sand across the middle between small Mint and Sea corners; `#articles` sets Sea left and Rose right, filling the empty space beside the last article card. A new glow section gets a new arrangement, not a copy.
 - **Ink Green-Black** (`#10241F`): all headings and body text. Not pure black — a green-cast near-black that sits inside the teal family.
 - **Slate Sage** (`#516661`): kickers, hero lead, secondary description text. Darkened from `#5C736E`, which read 4.40:1 on the hero's Paper Ivory — just under the 4.5:1 floor, on the page's opening paragraph. The current value clears every ground it lands on: 5.31 on Paper Ivory, 5.75 on Cool Page, 6.13 on white.
 - **Hairline** (`#E2E8E6`) and **Pale Edge** (`#D9E4E3`): the only two border values. Cards, inputs, nav underline, icon frames.
@@ -302,7 +301,7 @@ One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine time
 ## Do's and Don'ts
 
 ### Do:
-- **Do** put new tokens in the **last** `:root` in the file — the `--ui-*` block (currently around line 2171). Being last is what makes it the one that wins; find it by searching `--ui-radius-btn`, not by line number.
+- **Do** put new tokens in the one `:root` block at the top of `<style>`. Group them with their family (brand, Microsoft quotation, legacy aliases, Fluent `--ui-*`, glow).
 - **Do** use `var(--ui-radius-btn)` (3px) or `var(--ui-radius-card)` (8px) for every new corner.
 - **Do** give every new surface the Hairline shadow, and reach for a soft shadow only inside the hero document scene.
 - **Do** keep Thai body copy at 18px/500 and Thai headings in Anuphan.
@@ -312,8 +311,8 @@ One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine time
 - **Do** keep the burgundy CTA the single loudest thing in any viewport.
 
 ### Don't:
-- **Don't** add a fifth `:root` block. There are already four (currently around lines 155, 762, 1577, 2171) and three of them are mostly dead. New work consolidates; it does not stack.
-- **Don't** trust a color you read in the first `:root`. `--navy: #0D5257` and `--muted: #0f4a52` there are overridden and never render. The live values come from the `--brand-*` block and the `--ui-*` block that follow it — read both before quoting any value.
+- **Don't** open a second `:root` block. Six of them used to stack here, each overriding the last, until they were merged into one on 2026-09-23. A later block silently beats an earlier one, which is how a contrast fix can die unnoticed.
+- **Don't** give the legacy aliases (`--navy`, `--ink`, `--text`, `--muted`, `--accent`, `--cyan`, `--mint`, `--line`) their own colors again. They exist so the oldest rules keep working, and they point into the brand family. New rules use `--brand-*` or `--ui-*` directly.
 - **Don't** put a gradient on a button. `.cta` strips `background-image` with `!important` precisely because earlier layers added them.
 - **Don't** let a button lift or glow on hover. Background change only, 125ms.
 - **Don't** spend burgundy on anything that isn't asking for a click.
