@@ -22,6 +22,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | CSS ที่ใช้ร่วมหลายหน้า | `css/` |
 | หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
 | งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | `_presales/` — ไม่ขึ้นเว็บ อ่าน `_presales/README.md` |
+| แผนงาน/บันทึกประเมินหน้าเว็บ (ไม่ขึ้นเว็บ) | `_plans/` — ขึ้นต้นด้วย `_` เหตุผลเดียวกับ `_presales/` ล่าสุด `_plans/2026-09-improvement-plan.md` |
 | ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
 
 ## เครดิตรูปถ่าย
