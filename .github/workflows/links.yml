@@ -17,6 +17,6 @@ jobs:
           # เพิ่มลิงก์ /#ใหม่ ในบทความเมื่อไหร่ ต้องเติมชื่อ section ตรงนี้ด้วย ไม่งั้น CI แดง
           args: >-
             --offline --no-progress --include-fragments --root-dir "$GITHUB_WORKSPACE"
-            --exclude "#(contact|articles|billing-flow)$"
+            --exclude "#(contact|articles|billing-flow|pricing|vat-service)$"
             "*.html" "articles/*.html"
           fail: true

@@ -6,8 +6,8 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 - ไฟล์เดียว: `index.html` — HTML + CSS inline ทั้งหมด ไม่มี build step, ไม่มี dependency (`poster.html` = โปสเตอร์ A4 สั่ง print เป็น PDF)
 - รัน/แคปหน้าจอ/ทดสอบ: ใช้ skill `/run-promote-site` (อย่าใช้ `python -m http.server` — python ในเครื่องนี้เป็น Store stub)
 - ติดต่อ: โทร/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · อีเมล **`jirapat.wi@outlook.co.th`** — ใช้ตัวนี้ในทุกไฟล์ของ repo นี้ (หน้าเว็บ 8 จุด, JSON-LD, บทความ, PRODUCT.md) `@outlook.com` ก็ส่งถึงเหมือนกัน (LinkedIn ใช้ตัวนั้น) แต่หน้าเว็บให้คงเป็น `.co.th` ตัวเดียวทั้งไฟล์ อย่าสลับไปมา — schema กับ Google Business Profile ควรตรงกัน
-- สไตล์: อ่าน DESIGN.md ก่อนแก้ — ไฟล์มี `:root` 6 บล็อก (บรรทัด 203, 816, 1597, 2150 กับบล็อกบรรทัดเดียวที่ 2970, 2984) ตัวที่ประกาศทีหลังชนะเสมอ ที่มีผลจริงคือ 1597 (สีแบรนด์ 34 ตัว ชนะทั้งหมด) · 2150 (`--ui-*` ทับ body/heading/ปุ่ม ชนะ 8 จาก 9) · 2970 กับ 2984 (`--ui-muted: #516661` `--brand-pink-soft: #EFA9BB` มาจากรอบไล่ WCAG AA ห้ามย้อน) ส่วน 203 เหลือ `--bg` กับ `--card` ที่ยังชนะอยู่ (ถูกใช้ 8 จุด) และ 816 ตายสนิท ไม่ชนะสักตัว · เลขบรรทัดเลื่อนทุกครั้งที่แก้ไฟล์ ให้ค้น `:root` เอาแทนการเชื่อเลข
-- Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ
+- สไตล์: อ่าน DESIGN.md ก่อนแก้ — design token ทั้งหมดอยู่ใน `:root` **บล็อกเดียว**ต้น `<style>` (รวมจาก 6 บล็อกเมื่อ 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว) token ใหม่เพิ่มในบล็อกนั้น ห้ามเปิด `:root` บล็อกใหม่ · `--ui-muted: #516661` กับ `--brand-pink-soft: #EFA9BB` มาจากรอบไล่ WCAG AA ห้ามย้อน · ชื่อรุ่นเก่า (`--navy` `--accent` `--muted` ฯลฯ) ยังถูกเรียกจาก rule ต้นไฟล์ ชี้เข้าแบรนด์แล้ว
+- Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ · `aria-label` / `alt` / `title` ภาษาไทยต้องมีคู่ใน `I18N_ATTR` (ใช้ `querySelector` ตัวแรกตัวเดียว selector ต้องไม่ซ้ำ) ยกเว้นปุ่มที่ป้ายเปลี่ยนตามสถานะ ให้สลับภาษาในสคริปต์ของมันเอง — CI ตรวจให้
 
 ## โครงไฟล์ — ไฟล์ใหม่เข้าโฟลเดอร์ไหน
 
@@ -20,8 +20,12 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | รูปแม่ไม่มีลายน้ำ | `img/originals/` — gitignore แล้ว ห้าม commit ขึ้นโฮสต์ |
 | PDF ใบเซอร์ตัวจริง | `credentials/` |
 | CSS ที่ใช้ร่วมหลายหน้า | `css/` |
-| หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
+| ฟอนต์ (woff2 self-host + `OFL.txt`) | `css/fonts/` — ชุดเดียวกับที่ Google Fonts เสิร์ฟ ประกาศ `@font-face` ต้น `<style>` ของ index.html และต้น `css/article.css` |
+| JS ที่ใช้ร่วมหลายหน้า (ตอนนี้มีแค่ `js/article.js` = แถบคุกกี้ + GA ของบทความ) | `js/` |
+| ภาพแชร์ og:image ของบทความ 1200×630 | `img/og/` — สร้างด้วย `node .claude/skills/run-promote-site/og.mjs` |
+| หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html` `flyer-overview.html` `flyer-implementation.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
 | งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | `_presales/` — ไม่ขึ้นเว็บ อ่าน `_presales/README.md` |
+| แผนงาน/บันทึกประเมินหน้าเว็บ (ไม่ขึ้นเว็บ) | `_plans/` — ขึ้นต้นด้วย `_` เหตุผลเดียวกับ `_presales/` ล่าสุด `_plans/2026-09-improvement-plan.md` |
 | ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
 
 ## เครดิตรูปถ่าย
@@ -51,3 +55,15 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 โฟลเดอร์ขึ้นต้นด้วย `_` **เพราะ Jekyll ของ GitHub Pages ไม่เสิร์ฟโฟลเดอร์แบบนี้** — สคริปต์/JSON เนื้อหาสไลด์จึงไม่กลายเป็น URL สาธารณะ
 ⚠ **ห้ามเพิ่มไฟล์ `.nojekyll` ที่ root** มันปิด Jekyll ทั้งตัว แล้ว `_presales/` ทั้งโฟลเดอร์จะโหลดได้จาก jwicconsulting.com ทันที
 `decks/` (ตัว .pptx 292MB) กับไฟล์เสียง gitignore ไว้ที่ `_presales/.gitignore` เหมือนเดิม · path ต้นแบบอยู่ที่ `_presales/build/deck-core.json` คีย์ `master`/`out`
+
+## worker/ — ตัวกลางเรียก VAT Service ของกรมสรรพากร (Cloudflare Worker `jwic-vat`)
+
+- `#vat-service` บนเว็บจริงเรียก `/api/vat` แบบ same-origin · รันในเครื่อง (localhost) เรียก `https://jwic-vat.jwic.workers.dev` แทน (หรือ `?vat=<url>`)
+- route `www.jwicconsulting.com/api/vat*` ใน `worker/wrangler.toml` ทำงานเฉพาะตอน record `www` เปิด proxy (เมฆส้ม) ใน Cloudflare — ถ้า DNS ชี้ตรงไป GitHub Pages `/api/vat` จะได้หน้า 404 HTML แทน JSON แล้วช่องค้นเลขจริงในเดโมขึ้นข้อความผิดพลาด (ปุ่มตัวอย่าง 4 ปุ่มยังใช้ได้ เพราะใช้ข้อมูลในหน้า)
+- ยังไม่ได้ยืนยันบน production (23 ก.ย. 2026 — เครื่องที่ทำงานรอบนั้นออกเน็ตไป jwicconsulting.com / workers.dev ไม่ได้) · วิธีเช็ก: `curl -s "https://www.jwicconsulting.com/api/vat?tin=0105558000123"` ได้ JSON ขึ้นต้น `{"ok"` = route ทำงาน · ได้ HTML = route ไม่ทำงาน
+- จำกัด 20 ครั้ง/นาที/IP (`[[unsafe.bindings]]` ชื่อ RL) · บัญชีกรมสรรพากรใส่ผ่าน `npx wrangler secret put RD_USER` ห้ามเขียนลงโค้ด — ทุกไฟล์ใน `worker/` เป็น URL สาธารณะ
+
+## CI
+
+- `links.yml` — ลิงก์/รูปภายในไม่ 404 (lychee offline) · เพิ่มลิงก์ `/#section` ใหม่ในบทความต้องเติมชื่อ section ใน `--exclude`
+- `page-checks.yml` — html-validate (กฎใน `.github/htmlvalidate.json`) + เปิดหน้าใน Chrome จริงด้วย `.github/scripts/page-checks.mjs`: console/CSP error, หน้าเลื่อนข้าง, แถบเมนูตกสองแถว, I18N selector ตาย, ข้อความไทยหรือ aria-label/alt ไทยค้างในโหมด EN, ข้อความ #pricing ล้นหรือต้องพึ่ง `.wrap-rescue`, ปุ่มเล็กกว่า 24px, ความยาวหน้ามือถือ, CTA/บทความอื่นในทุกบทความ, จำนวนหน้าตอนพิมพ์ — รันในเครื่อง: `npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs`

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง | JWIC Consulting</title>
 <meta name="description" content="Localization คือชุดฟังก์ชันที่ทำให้ระบบทำงานตามข้อกำหนดของประเทศได้ บทความนี้ใช้การแบ่งหมวดของ Microsoft จำแนกงาน localization ของไทย ทั้ง VAT สาขาภาษี WHT และใบวางบิล">
@@ -17,9 +17,6 @@
 <meta property="og:image" content="https://www.jwicconsulting.com/img/pp30-report.png">
 <meta property="og:locale" content="th_TH">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/article.css">
 <script type="application/ld+json">
 {
@@ -40,6 +37,7 @@
   "dateModified": "2026-07-21"
 }
 </script>
+<script src="/js/article.js" defer></script>
 </head>
 <body>
 
@@ -156,12 +154,19 @@
   <div class="article-cta">
     <h2>กำลังประเมินว่าต้องทำ localization แค่ไหน?</h2>
     <p>นัดคุยเพื่อไล่ดูงานที่ธุรกิจของคุณต้องใช้ และแยกว่าอันไหนเป็นข้อกำหนดตามกฎหมาย อันไหนเป็นมาตรฐานทางการค้า</p>
-    <a href="/#contact">ปรึกษาเรื่องขอบเขตงาน →</a>
+    <div class="cta-row">
+      <a href="/#contact">ปรึกษาเรื่องขอบเขตงาน →</a>
+      <a class="alt" href="https://line.me/ti/p/~0841487480" rel="noopener">คุยทาง LINE</a>
+      <a class="alt" href="tel:0841487480">โทร 084-148-7480</a>
+    </div>
+    <p class="cta-price"><a href="/#pricing">ดูราคาแพ็กเกจบนหน้าแรก</a></p>
   </div>
 
   <div class="more">
     <h2>บทความอื่น</h2>
     <ul>
+      <li><a href="/articles/pp30-branch-filing.html">ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้</a></li>
+      <li><a href="/articles/fixed-asset-register-stock-card.html">ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central</a></li>
       <li><a href="/articles/wht-50tawi-rdprep.html">ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</a></li>
       <li><a href="/articles/billing-note-billing-day.html">ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</a></li>
       <li><a href="/articles/bot-exchange-rate-api.html">รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</a></li>
@@ -175,7 +180,8 @@
 <footer>
   <div class="wrap">
     <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
-    <div><a href="/">jwicconsulting.com</a></div>
+    <div class="foot-reach"><a href="tel:0841487480">084-148-7480</a> · <a href="https://line.me/ti/p/~0841487480" rel="noopener">LINE 0841487480</a> · <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a></div>
+    <div><a href="/">jwicconsulting.com</a><button type="button" class="cookie-manage" hidden>จัดการคุกกี้</button></div>
   </div>
 </footer>
 

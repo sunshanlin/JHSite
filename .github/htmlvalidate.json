@@ -1,0 +1,9 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "tel-non-breaking": "off",
+    "prefer-tbody": "off",
+    "long-title": "off",
+    "no-inline-style": "off"
+  }
+}

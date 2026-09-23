@@ -13,3 +13,6 @@ script.txt
 
 # cache ของ wrangler dev — ทุกไฟล์ที่ commit = URL สาธารณะ
 worker/.wrangler/
+
+# playwright-core ของ CI page-checks (ติดตั้งตอนรันเท่านั้น)
+.github/scripts/node_modules/

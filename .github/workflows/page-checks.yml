@@ -1,0 +1,28 @@
+name: page-checks
+on: [push, pull_request]
+
+# ตรวจหน้าเว็บจริงในเบราว์เซอร์ก่อน deploy — แต่ละข้อที่ตรวจและเหตุผลดูหัวไฟล์ .github/scripts/page-checks.mjs
+# ไม่มี dependency ของหน้าเว็บ: ใช้ Google Chrome ที่ติดมากับ runner ของ GitHub + playwright-core ตัวเดียว
+jobs:
+  html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # ปิดเฉพาะกฎรูปแบบ (เบอร์โทรใน <a>, <tbody>, ความยาว <title>, style inline ของ SVG sprite) ดู .github/htmlvalidate.json
+      - name: html-validate
+        run: npx --yes html-validate@11 --config .github/htmlvalidate.json index.html 404.html "articles/*.html"
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: install playwright-core
+        run: npm install --no-save --no-audit --no-fund --prefix .github/scripts playwright-core@1.56.1
+      - name: page checks
+        run: node .github/scripts/page-checks.mjs

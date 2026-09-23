@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- แม่แบบภาพ og:image ของบทความ 1200×630 — ไม่ขึ้นเว็บ (.claude/ ไม่ถูกเสิร์ฟ)
+     ใช้: node .claude/skills/run-promote-site/og.mjs  (อ่านหัวเรื่อง/ป้ายจากบทความเอง แล้วเขียน img/og/<slug>.png) -->
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>OG template</title>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=Plus+Jakarta+Sans:wght@700;800&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: #012F2A; color: #fff; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  /* บล็อกสีขอบขวาแบบ hero ของหน้าแรก: ชนกันเป็นแผ่น ไม่มีช่องว่าง */
+  .blk { position: absolute; }
+  .b1 { left: 846px; top: 0; width: 354px; height: 630px; background: #014A41; border-bottom-left-radius: 190px; }
+  .b2 { left: 846px; top: 0; width: 170px; height: 300px; background: #417771; }
+  .b3 { left: 1016px; top: 0; width: 184px; height: 140px; background: #739B97; }
+  .b4 { left: 846px; top: 470px; width: 118px; height: 160px; background: #A63A56; }
+  .b5 { left: 964px; top: 470px; width: 52px; height: 160px; background: #E08CA2; }
+  .brand { position: absolute; left: 72px; top: 64px; display: flex; align-items: center; gap: 16px; }
+  .brand svg { width: 58px; height: 58px; border-radius: 9px; }
+  .brand span { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .tag { position: absolute; left: 72px; top: 176px; padding: 7px 18px; border: 1px solid rgba(239,169,187,.55); border-radius: 999px;
+         color: #EFA9BB; font-family: "Anuphan", sans-serif; font-size: 21px; font-weight: 600; letter-spacing: .06em; }
+  h1 { position: absolute; left: 72px; top: 236px; width: 720px; margin: 0; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+       font-weight: 600; font-size: 54px; line-height: 1.32; letter-spacing: -.015em; text-wrap: balance; }
+  h1 .nb { white-space: nowrap; }
+  h1 .th { font-family: "Anuphan", sans-serif; }
+  .foot { position: absolute; left: 72px; bottom: 58px; font-family: "Anuphan", sans-serif; font-size: 22px; font-weight: 500; color: #A6C0BD; }
+</style>
+</head>
+<body>
+  <div class="blk b1"></div><div class="blk b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+  <div class="brand">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs><g clip-path="url(#lg)"><rect width="64" height="64" fill="#1c4a3c"/><polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/><polygon points="64,0 42,0 64,22" fill="#c07f8b"/><text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text></g></svg>
+    <span>JWIC Consulting</span>
+  </div>
+  <div class="tag" id="tag"></div>
+  <h1 id="t"></h1>
+  <div class="foot">บทความ · jwicconsulting.com</div>
+<script>
+  const q = new URLSearchParams(location.search);
+  // ชื่อเฉพาะห้ามตัดกลาง (RD | Prep) — ห่อเป็น .nb ทีละคำ ที่เหลือปล่อยให้ text-wrap: balance จัดบรรทัด
+  const KEEP = ['Business Central', 'Dynamics 365', 'Success by Design', 'RD Prep', 'BOT API', 'VAT Service', 'Stock Card', 'ภ.พ.30', 'ภ.ง.ด.', '50 ทวิ', 'เป็นพัน', 'ค่าใช้จ่าย'];
+  const title = q.get('t') || 'หัวเรื่องบทความ';
+  const re = new RegExp('(' + KEEP.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')');
+  const h1 = document.getElementById('t');
+  title.split(re).forEach((part, i) => { if (!part) return; if (i % 2) { const s = document.createElement('span'); s.className = 'nb'; s.textContent = part; h1.append(s); } else h1.append(part); });
+  const tag = q.get('tag'); const tg = document.getElementById('tag');
+  if (tag) tg.textContent = tag; else tg.remove();
+  // หัวเรื่องยาวเกิน 4 บรรทัด ย่อขนาดลงทีละนิดจนพอดี
+  document.fonts.ready.then(() => {
+    const h = document.getElementById('t'); let size = 54;
+    while (h.getBoundingClientRect().height > 300 && size > 36) { size -= 2; h.style.fontSize = size + 'px'; }
+    document.body.dataset.ready = '1';
+  });
+</script>
+</body>
+</html>
