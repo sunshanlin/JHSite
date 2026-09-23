@@ -644,16 +644,19 @@
   }
   .bento-item:hover .bento-num, .bento-item[aria-pressed="true"] .bento-num { opacity: 1; }
   /* chevron ท้ายหัวข้อ — ใช้สำนวนเดียวกับ .plan-more > summary::after */
-  .bento-item h3 {
+  /* หัวข้อในปุ่มเป็น <span class="bento-h"> ไม่ใช่ <h3> — หัวข้อซ้อนในปุ่มผิด HTML (ปุ่มรับได้แค่ phrasing content)
+     และโปรแกรมอ่านจออ่านลูกของปุ่มเป็นข้อความเรียบอยู่แล้ว ไม่ได้ประกาศว่าเป็นหัวข้อ · ฟอนต์/น้ำหนัก/สีเดิมมาจากกฎ h3 กลาง ยกมาไว้ตรงนี้ */
+  .bento-item .bento-h {
     display: flex; align-items: center; gap: 14px; margin-top: 8px;
+    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif; font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
     font-size: 1.1rem; line-height: 1.45; transition: color .22s ease;
   }
-  .bento-item h3::after {
+  .bento-item .bento-h::after {
     content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin: 0 4px 3px auto;
     border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
     transform: rotate(45deg); opacity: .45; transition: transform .22s ease, opacity .22s ease;
   }
-  .bento-item[aria-pressed="true"] h3::after { transform: rotate(-135deg); margin-bottom: -3px; opacity: 1; }
+  .bento-item[aria-pressed="true"] .bento-h::after { transform: rotate(-135deg); margin-bottom: -3px; opacity: 1; }
   /* เนื้อความกางเฉพาะข้อที่เปิด */
   /* ponytail: ไถความสูง 0↔auto ด้วย interpolate-size — เบราว์เซอร์ที่ไม่รองรับได้แค่ fade (เท่าของเดิม) */
   .bento-tiles { interpolate-size: allow-keywords; }
@@ -761,7 +764,7 @@
     .topnav .links { transition: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .bento-shot figure, .bento-shot figure.is-active, .bento-shot a, .bento-shot a::after,
-    .bento-item, .bento-item::after, .bento-item h3, .bento-item h3::after, .bento-num { transition: none; }
+    .bento-item, .bento-item::after, .bento-item .bento-h, .bento-item .bento-h::after, .bento-num { transition: none; }
     .bento-body { transition: none; }
   }
 
@@ -1429,9 +1432,12 @@
 
   .steps .step { min-height: 0; }
 
+  /* บรรทัดเดียวเฉพาะภาษาไทย — ประโยค EN ยาวกว่าจอ (1,300px) เลยล้นขวาจนตัวหนังสือโดนตัดและหน้าเลื่อนข้างได้ (พบ ก.ย. 2026)
+     EN ตัดบรรทัดปกติในกรอบ 720px · ฝั่งไทยยาว ~920px เกินกรอบ 720px ที่ใช้จัดกลาง ข้อความจึงเริ่มที่ขอบซ้ายของกรอบ
+     แล้วเยื้องขวาจากหัวข้อ ~100px (และล้นจอที่ 1101px) — ปลด max-width ให้บรรทัดจัดกลางในความกว้างเต็มของ .wrap */
   @media (min-width: 1101px) {
-    #services > .wrap > .sub,
-    #features > .wrap > .sub { white-space: nowrap; }
+    html[lang="th"] #services > .wrap > .sub,
+    html[lang="th"] #features > .wrap > .sub { white-space: nowrap; max-width: none; }
   }
 
 
@@ -3670,7 +3676,7 @@
     <p class="section-kicker">Success by Design</p>
     <h2>บริการวางระบบครบวงจร</h2>
     <p class="sub">ส่งมอบบริการตามแนวทาง Success by Design ของ Microsoft ครบ 5 เฟส ตั้งแต่ทำความเข้าใจธุรกิจจนถึงดูแลหลังใช้งานจริง</p>
-    <div class="steps" aria-label="ขั้นตอนการวางระบบ">
+    <div class="steps" role="group" aria-label="ขั้นตอนการวางระบบ">
       <div class="steps-progress" aria-hidden="true"><span></span></div>
       <div class="step reveal" data-step="1">
         <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="10.5" cy="11.5" r="6.5"/><circle cx="10.5" cy="11.5" r="2.25"/><path d="M10.5 5V3M17 11.5h2M10.5 18v2M4 11.5H2"/><path d="M18.5 3.5v4M16.5 5.5h4"/></svg></span>
@@ -3740,27 +3746,27 @@
         <div class="bento-tiles">
         <button type="button" class="bento-item a-p1" aria-pressed="true" aria-controls="bc-shot-1">
           <span class="bento-num">01</span>
-          <h3>ลดงานซ้ำด้วยระบบอัตโนมัติ</h3>
+          <span class="bento-h">ลดงานซ้ำด้วยระบบอัตโนมัติ</span>
           <span class="bento-body">ตั้ง Workflow อนุมัติแล้วเอกสารใหม่วิ่งเข้าผู้อนุมัติเอง ไม่ต้องเดินกระดาษ</span>
         </button>
         <button type="button" class="bento-item a-p2" aria-pressed="false" aria-controls="bc-shot-2">
           <span class="bento-num">02</span>
-          <h3>ใช้งานร่วมกับ Microsoft 365</h3>
+          <span class="bento-h">ใช้งานร่วมกับ Microsoft 365</span>
           <span class="bento-body">เปิดข้อมูลจากระบบต่อใน Excel ได้ทันที สรุปยอดด้วย PivotTable และกรองดูมุมที่ต้องการได้เอง</span>
         </button>
         <button type="button" class="bento-item a-p3" aria-pressed="false" aria-controls="bc-shot-3">
           <span class="bento-num">03</span>
-          <h3>ความปลอดภัยระดับองค์กร</h3>
+          <span class="bento-h">ความปลอดภัยระดับองค์กร</span>
           <span class="bento-body">ทำงานบนคลาวด์ผ่านเบราว์เซอร์ เข้าใช้ด้วยบัญชี Microsoft 365 และเห็นเฉพาะเมนูที่ได้รับสิทธิ์</span>
         </button>
         <button type="button" class="bento-item a-p4" aria-pressed="false" aria-controls="bc-shot-4">
           <span class="bento-num">04</span>
-          <h3>ตัดสินใจจากตัวเลขจริง</h3>
+          <span class="bento-h">ตัดสินใจจากตัวเลขจริง</span>
           <span class="bento-body">Dashboard สรุปรายได้ กำไร และ DSO จากข้อมูลจริงในระบบ ไม่ต้องรอปิดงบ</span>
         </button>
         <button type="button" class="bento-item a-p5" aria-pressed="false" aria-controls="bc-shot-5">
           <span class="bento-num">05</span>
-          <h3>เพิ่มยอดขายและงานบริการ</h3>
+          <span class="bento-h">เพิ่มยอดขายและงานบริการ</span>
           <span class="bento-body">ภาพรวมการขายบอกได้ว่าลูกค้ารายไหนทำรายได้สูงสุดและยอดค้างรับเหลือเท่าไร เจาะดูรายละเอียดต่อได้ทันที</span>
         </button>
         </div>
@@ -4215,8 +4221,8 @@
       <div class="vs-bar">
         <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
         <div class="vs-form">
-          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><input class="vs-box" id="vs-tax" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="13" value="0105558000123"></label>
-          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><input class="vs-box small" id="vs-branch" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="5" value="00000"></label>
+          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><input class="vs-box" id="vs-tax" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="13" value="0105558000123"></label>
+          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><input class="vs-box small" id="vs-branch" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="5" value="00000"></label>
           <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
           <span class="vs-tip" id="vs-tip">
             <svg class="vs-tip-ar" viewBox="0 0 34 40" aria-hidden="true" focusable="false">
@@ -4431,7 +4437,7 @@
           <p class="credential-overview-copy">ใบรับรองครอบคลุมงาน ERP ซัพพลายเชน การเงิน และ AI</p>
         </div>
         <div class="credential-visuals">
-          <div class="credential-badges" aria-label="เหรียญ Microsoft Certified ที่ได้รับ">
+          <div class="credential-badges" role="group" aria-label="เหรียญ Microsoft Certified ที่ได้รับ">
             <figure class="credential-badge">
               <img src="img/credentials/microsoft-certified-expert.svg" alt="เหรียญ Microsoft Certified ระดับ Expert" width="300" height="300">
               <figcaption>Expert</figcaption>
@@ -6045,11 +6051,11 @@
     ['.a-p3 .bento-body', 'Cloud access through the browser — sign in with a Microsoft 365 account and see only the menus you are entitled to'],
     ['.a-p4 .bento-body', 'Revenue, profit, and DSO from live data — no waiting for the books to close'],
     ['.a-p5 .bento-body', 'Sales overview — top customers by value and outstanding receivables, drillable on the spot'],
-    ['.a-p1 h3', 'Automate the repetitive work'],
-    ['.a-p2 h3', 'Works with Microsoft 365'],
-    ['.a-p3 h3', 'Enterprise-grade security'],
-    ['.a-p4 h3', 'Decide on real numbers'],
-    ['.a-p5 h3', 'Boost sales and service'],
+    ['.a-p1 .bento-h', 'Automate the repetitive work'],
+    ['.a-p2 .bento-h', 'Works with Microsoft 365'],
+    ['.a-p3 .bento-h', 'Enterprise-grade security'],
+    ['.a-p4 .bento-h', 'Decide on real numbers'],
+    ['.a-p5 .bento-h', 'Boost sales and service'],
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
     ['#features > .wrap > h2', 'JWIC Thai Localization for Business Central'],

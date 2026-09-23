@@ -55,3 +55,15 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 โฟลเดอร์ขึ้นต้นด้วย `_` **เพราะ Jekyll ของ GitHub Pages ไม่เสิร์ฟโฟลเดอร์แบบนี้** — สคริปต์/JSON เนื้อหาสไลด์จึงไม่กลายเป็น URL สาธารณะ
 ⚠ **ห้ามเพิ่มไฟล์ `.nojekyll` ที่ root** มันปิด Jekyll ทั้งตัว แล้ว `_presales/` ทั้งโฟลเดอร์จะโหลดได้จาก jwicconsulting.com ทันที
 `decks/` (ตัว .pptx 292MB) กับไฟล์เสียง gitignore ไว้ที่ `_presales/.gitignore` เหมือนเดิม · path ต้นแบบอยู่ที่ `_presales/build/deck-core.json` คีย์ `master`/`out`
+
+## worker/ — ตัวกลางเรียก VAT Service ของกรมสรรพากร (Cloudflare Worker `jwic-vat`)
+
+- `#vat-service` บนเว็บจริงเรียก `/api/vat` แบบ same-origin · รันในเครื่อง (localhost) เรียก `https://jwic-vat.jwic.workers.dev` แทน (หรือ `?vat=<url>`)
+- route `www.jwicconsulting.com/api/vat*` ใน `worker/wrangler.toml` ทำงานเฉพาะตอน record `www` เปิด proxy (เมฆส้ม) ใน Cloudflare — ถ้า DNS ชี้ตรงไป GitHub Pages `/api/vat` จะได้หน้า 404 HTML แทน JSON แล้วช่องค้นเลขจริงในเดโมขึ้นข้อความผิดพลาด (ปุ่มตัวอย่าง 4 ปุ่มยังใช้ได้ เพราะใช้ข้อมูลในหน้า)
+- ยังไม่ได้ยืนยันบน production (23 ก.ย. 2026 — เครื่องที่ทำงานรอบนั้นออกเน็ตไป jwicconsulting.com / workers.dev ไม่ได้) · วิธีเช็ก: `curl -s "https://www.jwicconsulting.com/api/vat?tin=0105558000123"` ได้ JSON ขึ้นต้น `{"ok"` = route ทำงาน · ได้ HTML = route ไม่ทำงาน
+- จำกัด 20 ครั้ง/นาที/IP (`[[unsafe.bindings]]` ชื่อ RL) · บัญชีกรมสรรพากรใส่ผ่าน `npx wrangler secret put RD_USER` ห้ามเขียนลงโค้ด — ทุกไฟล์ใน `worker/` เป็น URL สาธารณะ
+
+## CI
+
+- `links.yml` — ลิงก์/รูปภายในไม่ 404 (lychee offline) · เพิ่มลิงก์ `/#section` ใหม่ในบทความต้องเติมชื่อ section ใน `--exclude`
+- `page-checks.yml` — html-validate (กฎใน `.github/htmlvalidate.json`) + เปิดหน้าใน Chrome จริงด้วย `.github/scripts/page-checks.mjs`: console/CSP error, หน้าเลื่อนข้าง, I18N selector ตาย, ข้อความไทยค้างในโหมด EN, ข้อความ #pricing ล้นหรือต้องพึ่ง `.wrap-rescue`, ปุ่มเล็กกว่า 24px, ความยาวหน้ามือถือ, CTA/บทความอื่นในทุกบทความ, จำนวนหน้าตอนพิมพ์ — รันในเครื่อง: `npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs`
