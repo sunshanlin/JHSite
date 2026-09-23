@@ -2674,6 +2674,13 @@
     .topnav .wrap > .dbd img { width: 54px; }
     .dbd::before { height: 20px; }
   }
+  /* ≤339px (iPhone SE รุ่นแรก, Android จอเล็ก): โลโก้+ชื่อ 172 + ป้าย 64 + ปุ่มเมนู 34 + ช่องไฟ 30 = 300px
+     แต่มีที่ 280px ปุ่มเมนูเลยตกลงแถวสอง แถบสูง 114px — บีบช่องไฟกับตัวอักษรชื่อแบรนด์ลงนิด ป้าย DBD คงขนาดเดิม */
+  @media (max-width: 339px) {
+    .topnav .wrap { gap: 8px; }
+    .topnav .wrap > .dbd { margin-left: 0; padding-left: 8px; }
+    .topnav .brand .wordmark { font-size: 1rem; }
+  }
   .dbd:focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
   #cookie-manage {
     min-height: 36px; padding: 7px 16px; cursor: pointer;
@@ -4663,12 +4670,15 @@
   // เมนูมือถือ
   const menuToggle = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('#primary-nav');
+  // ป้ายของปุ่มเปลี่ยนตามสถานะเปิด/ปิด จึงอยู่ใน I18N_ATTR ไม่ได้ (แคชไทยจะคืนค่าผิดสถานะ) — applyLang เรียก syncMenuLabel แทน
+  const menuLabel = (open) => { const en = document.documentElement.lang === 'en'; return open ? (en ? 'Close menu' : 'ปิดเมนู') : (en ? 'Open menu' : 'เปิดเมนู'); };
   function setMobileMenu(open) {
     if (!menuToggle || !primaryNav) return;
     menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+    menuToggle.setAttribute('aria-label', menuLabel(open));
     primaryNav.classList.toggle('open', open);
   }
+  window.syncMenuLabel = () => { if (menuToggle) menuToggle.setAttribute('aria-label', menuLabel(menuToggle.getAttribute('aria-expanded') === 'true')); };
   if (menuToggle && primaryNav) {
     menuToggle.addEventListener('click', () => setMobileMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
     primaryNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMobileMenu(false)));
@@ -4928,11 +4938,16 @@
     // มือถือไม่เล่นเอง — หลักฐาน (ภ.พ.30, 50 ทวิ, Billing Board) ต้องไม่เลื่อนหนีคนที่กำลังอ่าน กดปุ่มเล่นเองได้
     let userPaused = window.matchMedia('(max-width: 760px)').matches;
     const playBtn = document.querySelector('.slider-play');
+    // ป้ายทุกปุ่มของสไลด์ตามภาษาของหน้า — applyLang เรียกผ่าน window.syncSlidePlay
+    const prevBtn = document.querySelector('.snav.prev'), nextBtn = document.querySelector('.snav.next');
     function syncPlayBtn() {
       const en = document.documentElement.lang === 'en';
       playBtn.setAttribute('aria-pressed', String(userPaused));
       playBtn.textContent = userPaused ? '▶' : '❚❚';
       playBtn.setAttribute('aria-label', userPaused ? (en ? 'Play slideshow' : 'เล่นสไลด์อัตโนมัติ') : (en ? 'Pause slideshow' : 'หยุดสไลด์อัตโนมัติ'));
+      prevBtn.setAttribute('aria-label', en ? 'Previous example' : 'ตัวอย่างก่อนหน้า');
+      nextBtn.setAttribute('aria-label', en ? 'Next example' : 'ตัวอย่างถัดไป');
+      thumbs.forEach((b, i) => b.setAttribute('aria-label', en ? `Go to example ${i + 1}` : `ไปที่ตัวอย่างที่ ${i + 1}`));
     }
     window.syncSlidePlay = syncPlayBtn;
     syncPlayBtn();
@@ -6212,6 +6227,44 @@
     ['.credential-card[href*="E43361CA566D9719"]', 'aria-label', 'Verify Dynamics 365 Finance Functional Consultant Associate credential on Microsoft Learn'],
     ['.credential-card[href*="8C3E8B3ED7093FCF"]', 'aria-label', 'Verify Dynamics 365 Supply Chain Management Functional Consultant Associate credential on Microsoft Learn'],
     ['.credential-card[href*="162D6519ED56AB08"]', 'aria-label', 'Verify Microsoft Certified AI Business Professional credential on Microsoft Learn'],
+    /* ป้ายสำหรับโปรแกรมอ่านจอและคำอธิบายรูป — ข้อความบนจอแปลครบแล้ว แต่ส่วนนี้ยังเป็นไทยในโหมด EN (พบ ก.ย. 2026)
+       ไม่แปล: .lang (ป้ายสองภาษาโดยตั้งใจ ให้คนอ่านไม่ออกทั้งสองภาษาก็หาปุ่มเจอ) · title ของชิปใน Billing Board = ชื่อบริษัทสมมติ แสดงเป็นไทยทั้งสองภาษา
+       ปุ่มเมนู ปุ่มสไลด์ และ thumbnail เปลี่ยนตามสถานะ จึงสลับภาษาในสคริปต์ของมันเอง (syncMenuLabel / syncSlidePlay) */
+    ['.topnav', 'aria-label', 'Main menu'],
+    ['.steps', 'aria-label', 'Implementation phases'],
+    ['.feature-tablist', 'aria-label', 'JWIC Localization features'],
+    ['#vs-cases', 'aria-label', 'Example scenarios'],
+    ['#wq-who', 'aria-label', 'Buyer type'],
+    ['.chat-fab-tip .tip-close', 'aria-label', 'Close'],
+    ['.chat-fab-btn', 'aria-label', 'Chat with us on LINE'],
+    ['.bento-shot img[src$="bc-power-automate.webp"]', 'alt', 'Power Automate flow that sends an approval request automatically when a new document is created in Business Central'],
+    ['.bento-shot img[src$="bc-excel-pivot.webp"]', 'alt', 'Aged receivables report opened in Excel as a PivotTable, with slicers filtering by department and customer group'],
+    ['.bento-shot img[src$="bc-home.webp"]', 'alt', 'Business Central home page in the cloud, showing the company name and the task menus the user has rights to'],
+    ['.bento-shot img[src$="bc-powerbi-overview.webp"]', 'alt', 'Power BI dashboard summarising revenue, net profit, ROA and the largest customers from Business Central data'],
+    ['.bento-shot img[src$="bc-dashboard.webp"]', 'alt', 'Business analysis page in Business Central showing the top customers by sales and the trial balance'],
+    ['img.feature-photo[src$="feat-vat.webp"]', 'alt', 'Tax return forms and a calculator on a desk'],
+    ['img.feature-photo[src$="feat-wht.webp"]', 'alt', 'Accountant checking withholding tax documents at a desk'],
+    ['img.feature-photo[src$="feat-messenger.webp"]', 'alt', 'Messenger opening an envelope of billing notes outside an office building'],
+    ['img.feature-photo[src$="feat-stock.webp"]', 'alt', 'Warehouse staff counting stock with a tablet'],
+    ['img.feature-photo[src$="pricing-consultation.webp"]', 'alt', 'Four colleagues looking at data on a laptop together'],
+    ['img.feature-photo[src$="feat-api.webp"]', 'alt', 'Developer writing API integration code in an office'],
+    ['.slider figure img[src$="bc-home.webp"]', 'alt', 'Business Central Home with the Thai tax and billing menus'],
+    ['.slider figure img[src$="bc-dashboard.webp"]', 'alt', 'Business analysis dashboard in Business Central'],
+    ['.slider figure img[src$="vat-service.webp"]', 'alt', 'Tax ID lookup from the Revenue Department VAT Service inside Business Central'],
+    ['.slider figure img[src$="sales-vat-report.webp"]', 'alt', 'Sales VAT report'],
+    ['.slider figure img[src$="pp30-form.webp"]', 'alt', 'PP30 VAT return calculation screen in Business Central'],
+    ['.slider figure img[src$="pp30-report.webp"]', 'alt', 'PP30 form filled in automatically by the system'],
+    ['.slider figure img[src$="billing-worklist.webp"]', 'alt', 'Billing Worklist — items waiting to be billed on each customer\'s billing cycle'],
+    ['.slider figure img[src$="billing-board.webp"]', 'alt', 'Billing Board — a monthly calendar of billing items by day and customer'],
+    ['.slider figure img[src$="receivable-receipt.webp"]', 'alt', 'Receipt / tax invoice (Tax Receipt)'],
+    ['.slider figure img[src$="fixed-asset-register.webp"]', 'alt', 'Fixed Asset Register'],
+    ['.slider figure img[src$="stock-card.webp"]', 'alt', 'Stock movement report (Stock Card)'],
+    ['.slider figure img[src$="sales-invoice.webp"]', 'alt', 'Invoice / tax invoice (Sales Invoice)'],
+    ['.slider figure img[src$="po.webp"]', 'alt', 'Purchase Order'],
+    ['.slider figure img[src$="credit-note.webp"]', 'alt', 'Credit Note'],
+    ['.ci-photo', 'alt', 'Consultant walking clients through the work at a meeting table'],
+    ['img[src*="bc-liff-form"]', 'alt', 'Quote request screen in LINE from the test system — delivery date, note, phone number and contact person entered by the customer; the email field is blurred'],
+    ['img[src*="bc-liff-quote"]', 'alt', 'Quote QG000010 created by Business Central from that request — nine lines, grand total THB 4,333,928.00, stamped as test data; the email field is blurred'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
     ['#cookie-bar', 'aria-label', 'Cookie consent'],
     ['.mcta', 'aria-label', 'Quick contact'],
@@ -6243,6 +6296,7 @@
     if (window.renderBillingFlow) window.renderBillingFlow(lang);
     if (window.renderWebQuote) window.renderWebQuote(lang);
     if (window.syncSlidePlay) window.syncSlidePlay();
+    if (window.syncMenuLabel) window.syncMenuLabel();
     document.querySelectorAll('.lang button').forEach(b => {
       const on = b.dataset.lang === lang;
       b.classList.toggle('on', on);

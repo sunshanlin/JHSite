@@ -265,7 +265,7 @@ The hero contributes the system's one piece of geometry: a `200px` bottom-left r
 - **Links follow the page order:** บริการ · ฟังก์ชัน · ตัวอย่างรายงาน · แพ็กเกจ · นำเสนอ (`#billing-flow`) · FAQ · เกี่ยวกับเรา · บทความ. The Thai copy uses the Thai word นำเสนอ, not the loanword เดโม; English keeps Demos. There is no Home link; the logo goes to the top. Links carry 7px side padding. The DBD badge is the only item in the bar that can shrink, so any width the links need comes out of the badge: at 1180px and up it shows at 94px in Thai against the intended 97px, and full size in English. Between 1101 and 1179px the bar itself narrows with the screen, so the links drop to 6px and the bar's gaps to 10px to keep the badge legible
 - **The last link is the contact CTA:** burgundy fill, white text, 3px radius — the only colored item in the bar
 - **Language toggle:** two small outlined buttons; the active one fills Deep Teal
-- **Mobile (≤760px):** collapses to a bordered hamburger; the link list animates open via `max-height` + opacity in 220ms. The hamburger (34px) and the DBD badge keep their size so the bar stays 68px tall; each gets a transparent `::after` that grows its tap area to 44px. TH/EN are 44×44
+- **Mobile (≤760px):** collapses to a bordered hamburger; the link list animates open via `max-height` + opacity in 220ms. The hamburger (34px) and the DBD badge keep their size so the bar stays 68px tall; each gets a transparent `::after` that grows its tap area to 44px. TH/EN are 44×44. Below 340px the logo, badge and hamburger need 300px in a 280px row, so the bar's gaps drop to 8px and the wordmark to 1rem; the badge keeps its 54px
 
 ### Price Cards (signature)
 

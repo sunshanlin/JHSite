@@ -7,7 +7,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 - รัน/แคปหน้าจอ/ทดสอบ: ใช้ skill `/run-promote-site` (อย่าใช้ `python -m http.server` — python ในเครื่องนี้เป็น Store stub)
 - ติดต่อ: โทร/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · อีเมล **`jirapat.wi@outlook.co.th`** — ใช้ตัวนี้ในทุกไฟล์ของ repo นี้ (หน้าเว็บ 8 จุด, JSON-LD, บทความ, PRODUCT.md) `@outlook.com` ก็ส่งถึงเหมือนกัน (LinkedIn ใช้ตัวนั้น) แต่หน้าเว็บให้คงเป็น `.co.th` ตัวเดียวทั้งไฟล์ อย่าสลับไปมา — schema กับ Google Business Profile ควรตรงกัน
 - สไตล์: อ่าน DESIGN.md ก่อนแก้ — design token ทั้งหมดอยู่ใน `:root` **บล็อกเดียว**ต้น `<style>` (รวมจาก 6 บล็อกเมื่อ 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว) token ใหม่เพิ่มในบล็อกนั้น ห้ามเปิด `:root` บล็อกใหม่ · `--ui-muted: #516661` กับ `--brand-pink-soft: #EFA9BB` มาจากรอบไล่ WCAG AA ห้ามย้อน · ชื่อรุ่นเก่า (`--navy` `--accent` `--muted` ฯลฯ) ยังถูกเรียกจาก rule ต้นไฟล์ ชี้เข้าแบรนด์แล้ว
-- Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ
+- Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ · `aria-label` / `alt` / `title` ภาษาไทยต้องมีคู่ใน `I18N_ATTR` (ใช้ `querySelector` ตัวแรกตัวเดียว selector ต้องไม่ซ้ำ) ยกเว้นปุ่มที่ป้ายเปลี่ยนตามสถานะ ให้สลับภาษาในสคริปต์ของมันเอง — CI ตรวจให้
 
 ## โครงไฟล์ — ไฟล์ใหม่เข้าโฟลเดอร์ไหน
 
@@ -66,4 +66,4 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 ## CI
 
 - `links.yml` — ลิงก์/รูปภายในไม่ 404 (lychee offline) · เพิ่มลิงก์ `/#section` ใหม่ในบทความต้องเติมชื่อ section ใน `--exclude`
-- `page-checks.yml` — html-validate (กฎใน `.github/htmlvalidate.json`) + เปิดหน้าใน Chrome จริงด้วย `.github/scripts/page-checks.mjs`: console/CSP error, หน้าเลื่อนข้าง, I18N selector ตาย, ข้อความไทยค้างในโหมด EN, ข้อความ #pricing ล้นหรือต้องพึ่ง `.wrap-rescue`, ปุ่มเล็กกว่า 24px, ความยาวหน้ามือถือ, CTA/บทความอื่นในทุกบทความ, จำนวนหน้าตอนพิมพ์ — รันในเครื่อง: `npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs`
+- `page-checks.yml` — html-validate (กฎใน `.github/htmlvalidate.json`) + เปิดหน้าใน Chrome จริงด้วย `.github/scripts/page-checks.mjs`: console/CSP error, หน้าเลื่อนข้าง, แถบเมนูตกสองแถว, I18N selector ตาย, ข้อความไทยหรือ aria-label/alt ไทยค้างในโหมด EN, ข้อความ #pricing ล้นหรือต้องพึ่ง `.wrap-rescue`, ปุ่มเล็กกว่า 24px, ความยาวหน้ามือถือ, CTA/บทความอื่นในทุกบทความ, จำนวนหน้าตอนพิมพ์ — รันในเครื่อง: `npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs`

@@ -4,9 +4,9 @@
 //
 // What fails the build (each check guards something that already broke once, see comments):
 //   1. console errors / page errors / CSP violations on the homepage and every article
-//   2. horizontal page overflow (a sideways-scrolling page on phones)
+//   2. horizontal page overflow (a sideways-scrolling page on phones), and a top bar that wrapped onto two rows
 //   3. I18N selectors that match nothing (text moved, translation left behind)
-//   4. Thai text left on the page in EN mode
+//   4. Thai text, or Thai aria-label / alt / title, left on the page in EN mode
 //   5. #pricing text that needed the .wrap-rescue safety net (someone forgot <wbr>) or still overflows
 //   6. interactive targets smaller than 24×24 CSS px (WCAG 2.2 SC 2.5.8)
 //   7. homepage length on a 390px phone over budget (the demos un-collapsed → 25,000px again)
@@ -23,6 +23,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../.
 const MOBILE_LENGTH_BUDGET = 21000; // px at 390×844, TH, demos collapsed (Sep 2026: ~18,700)
 const PRINT_PAGE_BUDGET = 5;        // A4 pages (Sep 2026: 4)
 const MIN_TARGET = 24;              // WCAG 2.5.8
+const NAV_MAX = 77;                 // px: one row is 69px, 76px at 601–767px by design (folded menu line); two rows = 114px
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.json': 'application/json', '.txt': 'text/plain', '.xml': 'application/xml', '.pdf': 'application/pdf' };
 const server = http.createServer((req, res) => {
@@ -72,6 +73,15 @@ const thaiLeftInEn = () => {
     if (el.closest('#articles, script, style, noscript, [aria-hidden="true"], .hero-doc, #vat-service, #billing-flow, #web-quote, [lang="th"], .bf-sr')) continue;
     out.push((el.closest('[id]')?.id || '?') + ' › ' + t.slice(0, 40));
   }
+  // what screen readers announce: aria-label / alt / title. The demos are included here (their labels are static);
+  // .lang is bilingual on purpose, and Billing Board chips carry fictional Thai company names in both languages
+  for (const el of document.querySelectorAll('[aria-label], [alt], [title]')) {
+    if (el.closest('#articles, .hero-doc, [lang="th"], .lang, .bf-chip')) continue;
+    for (const a of ['aria-label', 'alt', 'title']) {
+      const v = el.getAttribute(a);
+      if (v && /[\u0E00-\u0E7F]/.test(v)) out.push((el.closest('[id]')?.id || '?') + ` › ${el.tagName.toLowerCase()}[${a}] ` + v.slice(0, 40));
+    }
+  }
   return out;
 };
 const smallTargets = (min) => {
@@ -90,8 +100,10 @@ for (const width of [320, 390, 768, 1024, 1101, 1280, 1440]) for (const lang of 
   const where = `index ${width}px ${lang}`;
   const { page, ctx, errors } = await open('/', width, { lang });
   if (errors.length) fail(where, 'console errors: ' + errors.join(' | '));
-  const m = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: innerWidth, H: document.documentElement.scrollHeight }));
+  const m = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: innerWidth, H: document.documentElement.scrollHeight, nav: document.querySelector('.topnav').getBoundingClientRect().height }));
   if (m.sw > m.iw) fail(where, `page scrolls sideways (${m.sw}px wide in a ${m.iw}px viewport)`);
+  // one-row bar: anchors assume it (scroll-padding-top 69px) — at 320px it used to wrap to 114px
+  if (m.nav > NAV_MAX) fail(where, `top bar is ${Math.round(m.nav)}px tall — it wrapped onto a second row (max ${NAV_MAX}px)`);
   const dead = await page.evaluate(sels => sels.filter(s => { try { return !document.querySelector(s); } catch { return true; } }), i18nSelectors);
   if (dead.length) fail(where, `I18N selectors match nothing: ${dead.join(', ')}`);
   if (lang === 'en') { const left = await page.evaluate(thaiLeftInEn); if (left.length) fail(where, `Thai text left in EN mode: ${left.slice(0, 8).join(' | ')}`); }
