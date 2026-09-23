@@ -72,7 +72,7 @@ Open `index.html` directly in a browser — it's fully self-contained.
   reappears and consent state never persists between runs.
 - Clicking ยอมรับ loads **real GA** (`G-NGDPEC4BZ1`) and records a localhost
   pageview — harmless noise, but don't loop it.
-- The driver waits 1.2 s after load for Google Fonts + hero entrance
+- The driver waits 1.2 s after load for web fonts (self-hosted in `css/fonts/` since Sep 2026) + hero entrance
   animations; screenshots taken faster show half-faded content.
 
 ## Test

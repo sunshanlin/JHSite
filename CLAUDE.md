@@ -20,6 +20,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | รูปแม่ไม่มีลายน้ำ | `img/originals/` — gitignore แล้ว ห้าม commit ขึ้นโฮสต์ |
 | PDF ใบเซอร์ตัวจริง | `credentials/` |
 | CSS ที่ใช้ร่วมหลายหน้า | `css/` |
+| ฟอนต์ (woff2 self-host + `OFL.txt`) | `css/fonts/` — ชุดเดียวกับที่ Google Fonts เสิร์ฟ ประกาศ `@font-face` ต้น `<style>` ของ index.html และต้น `css/article.css` |
 | JS ที่ใช้ร่วมหลายหน้า (ตอนนี้มีแค่ `js/article.js` = แถบคุกกี้ + GA ของบทความ) | `js/` |
 | ภาพแชร์ og:image ของบทความ 1200×630 | `img/og/` — สร้างด้วย `node .claude/skills/run-promote-site/og.mjs` |
 | หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html` `flyer-overview.html` `flyer-implementation.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |

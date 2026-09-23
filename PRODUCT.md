@@ -61,7 +61,7 @@ web
 - deploy ผ่าน GitHub Pages ทันทีที่ push ขึ้น `main` (repo `sunshanlin/JHSite`) — ห้ามลบ `CNAME`
 - **ห้ามย้ายหรือเปลี่ยนชื่อไฟล์ที่มีอยู่** ทุกไฟล์ที่ commit เป็น URL จริงที่อาจถูกแชร์ไปแล้ว
 - สองภาษา TH/EN สลับด้วย dictionary `I18N` (selector → EN/TH) ท้าย `<script>` — แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ `nth-child`; `#articles` ไม่แปลโดยตั้งใจ
-- มี CSP `<meta>` ที่ระบุ origin ไว้ชัด (Google Fonts, GA/GTM, Cal.com) — เพิ่ม origin ใหม่ต้องแก้ CSP และต้องขออนุมัติก่อน
+- มี CSP `<meta>` ที่ระบุ origin ไว้ชัด (GA/GTM, Cal.com, ป้าย DBD, worker ของ VAT Service) — ฟอนต์ self-host ที่ `css/fonts/` ตั้งแต่ ก.ย. 2026 จึงไม่มี Google Fonts ใน CSP แล้ว (`font-src 'self'`) — เพิ่ม origin ใหม่ต้องแก้ CSP และต้องขออนุมัติก่อน
 
 ## Brand Commitments
 

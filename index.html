@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/jwic-icon.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Niramit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <meta name="description" content="บริการวางระบบ ERP สำหรับธุรกิจไทยแบบครบวงจร ตั้งแต่วิเคราะห์กระบวนการ ตั้งค่าระบบ พัฒนาเพิ่มเติม และย้ายข้อมูล ไปจนถึงอบรมผู้ใช้และสนับสนุนหลังเริ่มใช้งาน พร้อมรองรับงานบัญชีและภาษีไทย">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -246,6 +243,25 @@
 }
 </script>
 <style>
+  /* ฟอนต์ self-host ใน css/fonts/ (D3 ก.ย. 2026) — ไฟล์ woff2 ชุดเดียวกับที่ Google Fonts เสิร์ฟ (Anuphan v6, Niramit, Plus Jakarta Sans)
+     เลิกโหลด stylesheet ของ Google ที่บล็อกการวาดหน้าแรก และไม่ส่ง IP ผู้เข้าชมไปที่ fonts.googleapis.com
+     ตัดน้ำหนัก 400 (วัดแล้วไม่มีตัวไหนใช้) กับ subset เวียดนาม/ซีริลลิก · Anuphan กับ Plus Jakarta Sans เป็น variable font
+     ไฟล์เดียวต่อ subset จึงประกาศเป็นช่วงน้ำหนัก · Niramit เป็นไฟล์แยกต่อน้ำหนัก · สัญญาอนุญาต OFL อยู่ที่ css/fonts/OFL.txt
+     บทความใช้ชุดเดียวกัน (เฉพาะ Anuphan + Plus Jakarta Sans) ที่ต้น css/article.css — แก้ที่นี่ต้องแก้ที่นั่นด้วย */
+  @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/niramit-thai-500.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/niramit-thai-600.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/niramit-thai-700.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/niramit-latin-ext-500.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/niramit-latin-ext-600.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/niramit-latin-ext-700.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/niramit-latin-500.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/niramit-latin-600.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/niramit-latin-700.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   /* ============================================================
      Design tokens — :root บล็อกเดียวของทั้งไฟล์ (รวมจาก 6 บล็อกเดิม 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว)
      ค่าอ้างอิงอยู่ที่ DESIGN.md · token ใหม่เพิ่มในบล็อกนี้ ห้ามเปิด :root บล็อกใหม่
