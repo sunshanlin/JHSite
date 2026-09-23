@@ -21,6 +21,9 @@ Key facts:
 - [Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365](https://www.jwicconsulting.com/articles/success-by-design.html)
 - [ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง](https://www.jwicconsulting.com/articles/accounting-to-erp.html)
 - [Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร](https://www.jwicconsulting.com/articles/business-central-vs-accounting-software.html)
+- [ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้](https://www.jwicconsulting.com/articles/pp30-branch-filing.html)
+- [ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central](https://www.jwicconsulting.com/articles/fixed-asset-register-stock-card.html)
+- [งบวางระบบ Business Central ในไทยมีอะไรบ้าง](https://www.jwicconsulting.com/articles/business-central-cost-thailand.html)
 
 ## Contact
 

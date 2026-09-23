@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central | JWIC Consulting</title>
+<meta name="description" content="ทะเบียนทรัพย์สินและ Stock Card ที่ผู้สอบบัญชีไทยขอ ออกจาก Business Central ได้อย่างไร ค่าเสื่อมทางบัญชีกับภาษีต่างกันตรงไหน และทำไมต้นทุนสินค้ายังขยับหลังปิดงวด">
+<link rel="canonical" href="https://www.jwicconsulting.com/articles/fixed-asset-register-stock-card.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/brand/jwic-icon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central">
+<meta property="og:description" content="ทะเบียนทรัพย์สิน ค่าเสื่อมทางบัญชีกับภาษี และ Stock Card ที่ไล่รับ-จ่ายได้ทีละเอกสาร บน Business Central">
+<meta property="og:url" content="https://www.jwicconsulting.com/articles/fixed-asset-register-stock-card.html">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/og/fixed-asset-register-stock-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.jwicconsulting.com/img/og/fixed-asset-register-stock-card.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central",
+  "description": "ทะเบียนทรัพย์สิน ค่าเสื่อมทางบัญชีกับภาษี และ Stock Card ที่ไล่รับ-จ่ายได้ทีละเอกสาร บน Business Central",
+  "image": "https://www.jwicconsulting.com/img/og/fixed-asset-register-stock-card.png",
+  "inLanguage": "th",
+  "mainEntityOfPage": "https://www.jwicconsulting.com/articles/fixed-asset-register-stock-card.html",
+  "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "JWIC Consulting",
+    "logo": { "@type": "ImageObject", "url": "https://www.jwicconsulting.com/img/brand/jwic-icon.png" }
+  },
+  "datePublished": "2026-09-23",
+  "dateModified": "2026-09-23"
+}
+</script>
+<script src="/js/article.js" defer></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="bar" data-nosnippet>
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" role="img" aria-label="JWIC Consulting">
+        <defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#lg)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <span class="wordmark">JWIC <i>Consulting</i></span>
+    </a>
+    <a class="back" href="/#articles">← บทความทั้งหมด</a>
+  </div>
+</nav>
+
+<header class="article-head">
+  <div class="wrap">
+    <span class="tag">Asset &amp; Stock</span>
+    <h1>ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central</h1>
+    <p class="lead">ปิดงบทุกปี ผู้สอบบัญชีขอเอกสารสองชุดนี้แทบทุกครั้ง ทะเบียนทรัพย์สินที่บอกว่าค่าเสื่อมแต่ละปีมาจากไหน กับรายงานสินค้าที่ไล่รับ-จ่ายได้ทีละเอกสาร Business Central เก็บข้อมูลไว้ครบแล้ว ที่ยังขาดคือรูปแบบที่ทีมบัญชีไทยหยิบไปส่งต่อได้เลย</p>
+    <p class="meta">โดย Jirapat Wichayapong · ที่ปรึกษาและนักพัฒนา Business Central · กันยายน 2026</p>
+  </div>
+</header>
+
+<div class="wrap">
+<article>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>ทะเบียนทรัพย์สินต้องตอบคำถามอะไร?</h2>
+  <p>ค่าเสื่อมราคาเป็นรายจ่ายที่ไม่มีเงินสดจ่ายออกไปจริง ผู้ตรวจจึงไล่ที่มาของตัวเลขทีละรายการ ราคาทุนเท่าไร เริ่มคิดค่าเสื่อมวันไหน อายุการใช้งานกี่ปี ใช้วิธีอะไร ค่าเสื่อมสะสมถึงต้นงวดเท่าไร และงวดนี้คิดเพิ่มเท่าไร</p>
+  <p>ฝั่งภาษี พระราชกฤษฎีกาฉบับที่ 145 กำหนดอัตราสูงสุดที่หักเป็นรายจ่ายได้ เช่น อาคารถาวรไม่เกินร้อยละ 5 ต่อปี ทรัพย์สินอื่นที่เสื่อมราคาได้ นอกจากที่ดินและสินค้า ไม่เกินร้อยละ 20 ต่อปี ถ้านโยบายบัญชีคิดเร็วกว่านั้น ส่วนที่เกินต้องบวกกลับตอนคำนวณกำไรสุทธิทางภาษี</p>
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="15" x2="9" y2="15"/></svg></span>Business Central มาตรฐานเก็บอะไรไว้แล้ว?</h2>
+  <p>โมดูล Fixed Assets ของ Business Central มาตรฐานครบในเชิงข้อมูล ทรัพย์สินทุกชิ้นมี FA Card ผูกกับ FA Posting Group สำหรับลงบัญชี และคิดค่าเสื่อมผ่าน Depreciation Book ที่ตั้งได้หลายเล่มตามวัตถุประสงค์ แต่ละเล่มเลือกได้ว่าจะผูกกับ G/L หรือไม่</p>
+  <p>จุดที่มักสับสนคือชื่อรายงาน Fixed Asset Register ของ Business Central เป็นทะเบียนรายการที่ Post เรียงตามเลข Register ไม่ใช่ทะเบียนทรัพย์สินแบบที่ผู้สอบบัญชีไทยคุ้นเคย รายงานมาตรฐานที่ใกล้ที่สุดคือ Fixed Asset Book Value 01 และ 02 ซึ่งยังเป็นรูปแบบภาษาอังกฤษ และเรียงคอลัมน์ไม่ตรงกับที่ทีมบัญชีไทยใช้ส่งต่อ</p>
+  <figure class="article-figure">
+    <img src="/img/fixed-asset-register.webp" alt="ทะเบียนทรัพย์สินรูปแบบไทยจาก Business Central แยกตามกลุ่มทรัพย์สิน แสดงวันที่เริ่มคิดค่าเสื่อม อายุ มูลค่าตั้งต้น ค่าเสื่อมสะสม และมูลค่าสุทธิ" width="1919" height="987" loading="lazy" decoding="async">
+    <figcaption>ทะเบียนทรัพย์สินแยกตาม FA Posting Group มีรวมกลุ่มและรวมทั้งสิ้น เลือกสมุดค่าเสื่อม (Depreciation Book) และงวดที่ต้องการได้ (ข้อมูลทดสอบ)</figcaption>
+  </figure>
+  <h3>คอลัมน์ที่ทะเบียนทรัพย์สินควรมี</h3>
+  <ul>
+    <li>รหัสและชื่อทรัพย์สิน ที่ตั้งหรือหน่วยงานที่ใช้</li>
+    <li>วันที่เริ่มคิดค่าเสื่อม วันที่คิดค่าเสื่อมล่าสุด และวันที่ตัดจำหน่าย</li>
+    <li>อายุการใช้งานเป็นปี และจำนวนวันที่เหลือ</li>
+    <li>มูลค่าตั้งต้น มูลค่าซาก ค่าเสื่อมสะสมยกมา ค่าเสื่อมงวดนี้ มูลค่ายกไป และมูลค่าสุทธิ</li>
+  </ul>
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></span>ค่าเสื่อมทางบัญชีกับทางภาษีไม่จำเป็นต้องเท่ากัน</h2>
+  <p>ถ้าอายุการใช้งานตามนโยบายบัญชีสั้นกว่าที่กฎหมายภาษียอม ให้ตั้ง Depreciation Book สองเล่ม เล่มบัญชีผูก G/L ส่วนเล่มภาษีไม่ผูก ใช้คำนวณส่วนต่างตอนทำภาษีเงินได้นิติบุคคล รายการซื้อ ค่าเสื่อม และการจำหน่าย ส่งลงทั้งสองเล่มพร้อมกันได้ด้วย Duplication List ทะเบียนทรัพย์สินก็พิมพ์ได้ทีละเล่ม ผู้ตรวจเห็นทั้งสองชุดจากข้อมูลทรัพย์สินชุดเดียว</p>
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><polyline points="3 6 4 7 6 5"/><polyline points="3 12 4 13 6 11"/><polyline points="3 18 4 19 6 17"/></svg></span>Stock Card: ไล่รับ-จ่ายได้ทีละเอกสาร</h2>
+  <p>ผู้ประกอบการจดทะเบียนภาษีมูลค่าเพิ่มที่ขายสินค้าต้องทำรายงานสินค้าและวัตถุดิบตามมาตรา 87 แสดงรับ จ่าย และคงเหลือของสินค้าแต่ละรายการ แยกตามสถานประกอบการ ตามประกาศอธิบดีฯ ฉบับที่ 89 รายงานนี้ทำด้วยคอมพิวเตอร์และใช้ภาษาไทยหรือภาษาอังกฤษก็ได้ นอกจากเรื่องภาษี Stock Card ยังเป็นเอกสารที่ใช้ตอบคำถามว่าต้นทุนขายเดือนนี้มาจากไหนด้วย</p>
+  <p>Business Central เก็บทุกการเคลื่อนไหวไว้ใน Item Ledger Entry และเก็บต้นทุนไว้ใน Value Entry ข้อมูลพอจะออก Stock Card ได้ครบ ที่ต้องเพิ่มคือรายงานที่เรียงรายการต่อสินค้า เริ่มจากยอดยกมา แล้วบอกคงเหลือและมูลค่าหลังเอกสารแต่ละใบ</p>
+  <figure class="article-figure">
+    <img src="/img/stock-card.webp" alt="รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card) จาก Business Central แสดงยอดยกมา รับ จ่าย คงเหลือ ต้นทุนต่อหน่วย และมูลค่าต้นทุนรายเอกสาร" width="1905" height="908" loading="lazy" decoding="async">
+    <figcaption>Stock Card รายสินค้า เริ่มจากยอดยกมา ตามด้วยเอกสารรับ-จ่ายทุกใบ พร้อมคลัง Lot คงเหลือ และมูลค่าต้นทุนหลังแต่ละรายการ หัวรายงานมีชื่อผู้ประกอบการ สถานประกอบการ และเลขประจำตัวผู้เสียภาษี (ข้อมูลทดสอบ)</figcaption>
+  </figure>
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>ทำไมต้นทุนใน Stock Card ยังขยับได้?</h2>
+  <p>ถ้าสินค้าใช้ต้นทุนเฉลี่ย หรือมีค่าใช้จ่ายตามมาทีหลังอย่างค่าขนส่งที่ลงเป็น Item Charge ต้นทุนของรายการจ่ายจะถูกปรับตอนรัน Adjust Cost – Item Entries แล้วค่อยลงบัญชีด้วย Post Inventory Cost to G/L พิมพ์ Stock Card ก่อนสองขั้นนี้ ตัวเลขต้นทุนก็อาจยังไม่ตรงกับงบ</p>
+  <p>วิธีที่เราใช้คือตั้งสองงานนี้ใน Job Queue ให้รันทุกคืน แล้วรันซ้ำอีกรอบก่อนปิดงวด Stock Card ที่ส่งให้ผู้สอบบัญชีจะได้ตรงกับยอดสินค้าคงเหลือใน G/L</p>
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></span>JWIC Localization ช่วยตรงไหน</h2>
+  <ul>
+    <li><strong>ทะเบียนทรัพย์สินรูปแบบไทย</strong> แยกตามกลุ่มทรัพย์สิน แสดงค่าเสื่อมสะสมยกมา ค่าเสื่อมงวดนี้ และมูลค่ายกไป เลือกสมุดค่าเสื่อมและงวดได้</li>
+    <li><strong>Stock Card รายสินค้า</strong> รับ จ่าย คงเหลือ พร้อมต้นทุนต่อหน่วยและมูลค่า กรองตามคลัง หมวดสินค้า และ Posting Group ได้</li>
+    <li>หัวรายงานมีชื่อผู้ประกอบการ สถานประกอบการ ที่อยู่ และเลขประจำตัวผู้เสียภาษีพร้อมสาขา</li>
+  </ul>
+
+  <div class="note">
+    <b>ย้ายระบบกลางปี</b>
+    <p>ทรัพย์สินที่ย้ายมาจากระบบเดิมต้องลงราคาทุนและค่าเสื่อมสะสมถึงวันตัดยอดให้ครบก่อนเปิดใช้งาน Microsoft แนะนำให้ลงยอดยกมาตอนที่ยังไม่เปิดการผูกกับ G/L แล้วค่อยเปิดทีหลัง ข้ามขั้นนี้ไป ทะเบียนทรัพย์สินปีแรกก็จะไม่ตรงกับงบ</p>
+  </div>
+
+  <p class="source-note">อ้างอิง: <a href="https://www.rd.go.th/2369.html">พระราชกฤษฎีกาฉบับที่ 145</a> · <a href="https://www.rd.go.th/3374.html">ประกาศอธิบดีกรมสรรพากรเกี่ยวกับภาษีมูลค่าเพิ่ม ฉบับที่ 89</a> · <a href="https://learn.microsoft.com/dynamics365/business-central/fa-how-setup-general">Microsoft Learn: Set up general fixed assets information</a> · <a href="https://learn.microsoft.com/dynamics365/business-central/reports/report-5603">Fixed Asset Register (report)</a> · <a href="https://learn.microsoft.com/dynamics365/business-central/finance-how-to-post-inventory-costs-to-the-general-ledger">Reconcile inventory costs with the general ledger</a></p>
+
+  <div class="article-cta">
+    <h2>ผู้สอบบัญชีขอทะเบียนทรัพย์สินทีไร ต้องทำใน Excel ทุกที?</h2>
+    <p>นัดคุยเพื่อดูว่าข้อมูลทรัพย์สินและสินค้าของคุณพร้อมออกรายงานจากระบบแค่ไหน แล้วดู Demo รายงานทั้งสองแบบ <span class="nb">ไม่มีค่าใช้จ่าย</span></p>
+    <div class="cta-row">
+      <a href="/#contact">ปรึกษาเรื่องรายงานบัญชี →</a>
+      <a class="alt" href="https://line.me/ti/p/~0841487480" rel="noopener">คุยทาง LINE</a>
+      <a class="alt" href="tel:0841487480">โทร 084-148-7480</a>
+    </div>
+    <p class="cta-price"><a href="/#pricing">ดูราคาแพ็กเกจบนหน้าแรก</a></p>
+  </div>
+
+  <div class="more">
+    <h2>บทความอื่น</h2>
+    <ul>
+      <li><a href="/articles/localization-thailand.html">Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</a></li>
+      <li><a href="/articles/pp30-branch-filing.html">ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้</a></li>
+      <li><a href="/articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></li>
+    </ul>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
+    <div class="foot-reach"><a href="tel:0841487480">084-148-7480</a> · <a href="https://line.me/ti/p/~0841487480" rel="noopener">LINE 0841487480</a> · <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a></div>
+    <div><a href="/">jwicconsulting.com</a><button type="button" class="cookie-manage" hidden>จัดการคุกกี้</button></div>
+  </div>
+</footer>
+
+</body>
+</html>
