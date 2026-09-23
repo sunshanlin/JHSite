@@ -176,6 +176,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 **Display Font:** Plus Jakarta Sans (Latin) with **Anuphan** (Thai, loopless) — all headings, kickers, buttons, numerals
 **Body Font:** Plus Jakarta Sans (Latin) with **Niramit** (Thai, looped) — all running copy
 **Fallbacks:** Segoe UI, Leelawadee UI, Tahoma
+**Delivery:** self-hosted in `css/fonts/` since September 2026 — the same woff2 files Google Fonts serves, Thai/Latin/Latin-ext subsets only, weights 500–800 (400 was measured unused on every page and dropped). The `@font-face` rules open the `<style>` block of `index.html` and the top of `css/article.css`; keep the two in step. The print pages (`poster.html`, `banner.html`, the flyers) still load Google Fonts
 
 **Character:** The pairing runs a deliberate Thai contrast that has no Latin equivalent: headings are loopless (Anuphan, ไม่มีหัว) and body is looped (Niramit, มีหัว). To a Thai reader this separates voice from statement as clearly as a serif/sans pairing does in English, and it happens without changing weight or size. The Latin faces stay in one family across both roles so the bilingual page does not fracture when the visitor flips to English.
 
@@ -196,11 +197,13 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 
 ## Layout
 
-A single 1180px container (`.wrap`) with 28px gutters, holding a 13-section vertical scroll under a sticky nav. Sections are 72px tall in padding with `scroll-margin-top: 58px` and `scroll-padding-top: 76px` so anchored jumps clear the sticky bar.
+A single 1180px container (`.wrap`) with 28px gutters, holding a 13-section vertical scroll under a sticky nav. Sections are 72px tall in padding. Anchored jumps land the section's top edge exactly under the 69px bar: `html { scroll-padding-top: 69px }`, `section { scroll-margin-top: 0 }`, and the nav's click handler measures the real `.topnav` height instead of assuming one. Links from the articles (`/#pricing`, `/#contact`) land in the same place as a nav click.
+
+**Section order (September 2026) is decision-first:** hero → `#services` → `#features` → `#reports` → `#pricing` → `#contact` → `#billing-flow` → `#vat-service` → `#web-quote` → `#faq` → `#about` → `#articles`. A phone reaches the prices at ~5,300px and the contact block at ~7,300px (they sat at 14,559 and 19,212 behind the three demos). The demos are for visitors who are already interested, so they follow the contact block instead of standing between the proof and the price.
 
 Content grids are `repeat(auto-fit, minmax(260px, 1fr))` at 22px gaps — the column count is a consequence of width, not a fixed number. `#articles` is the exception: it is pinned to 3 columns above 981px, because auto-fit gave 4 columns to 6 cards and left a half-empty last row. The hero is the one bespoke grid: `1.15fr .85fr` at 56px, collapsing to a single column at 900px.
 
-The whole light page sits on one Cool Page ground, and three Horizon Glows — `#features`, `#web-quote`, `#articles` — are the rhythm device, spaced through the page the way Microsoft spaces its washes. They replaced alternating ivory/cool stripes, whose seams every screen-height made the page busy. Two sections break out entirely — `#about` and `#contact` run on dark teal gradients. `#faq` used to share `#contact`'s ground, which stacked three dark sections in a row; it is light and flat now, the pause before `#articles`.
+The whole light page sits on one Cool Page ground, and three Horizon Glows — `#features`, `#web-quote`, `#articles` — are the rhythm device, spaced through the page the way Microsoft spaces its washes. They replaced alternating ivory/cool stripes, whose seams every screen-height made the page busy. Two sections break out entirely — `#about` and `#contact` run on dark teal gradients, and the new order keeps them apart: the demos follow `#contact`, and `#faq` is the light, flat pause before `#about`.
 
 **Breakpoints** cluster at 900px (the main two-column → one-column collapse), 760px (nav becomes a toggle menu), and 720/600/560/520px for progressive tightening. 1080/1100px handle wide-layout adjustments.
 
@@ -259,13 +262,14 @@ The hero contributes the system's one piece of geometry: a `200px` bottom-left r
 - **Style:** sticky, `rgba(255,255,255,.94)` with a 1px Hairline bottom border. Ink links, 0.9rem, weight 500, in the display family
 - **Hover:** ink → Deep Teal with a `rgba(1,47,42,.06)` wash
 - **Active:** a pink→burgundy gradient underline via `::after`
+- **Links follow the page order:** บริการ · ฟังก์ชัน · ตัวอย่างรายงาน · แพ็กเกจ · เดโม (`#billing-flow`) · FAQ · เกี่ยวกับเรา · บทความ. There is no Home link; the logo goes to the top. Between 1101 and 1240px the links tighten to 7px side padding so the bar still fits on one row in both languages
 - **The last link is the contact CTA:** burgundy fill, white text, 3px radius — the only colored item in the bar
 - **Language toggle:** two small outlined buttons; the active one fills Deep Teal
-- **Mobile (≤760px):** collapses to a bordered hamburger; the link list animates open via `max-height` + opacity in 220ms
+- **Mobile (≤760px):** collapses to a bordered hamburger; the link list animates open via `max-height` + opacity in 220ms. The hamburger (34px) and the DBD badge keep their size so the bar stays 68px tall; each gets a transparent `::after` that grows its tap area to 44px. TH/EN are 44×44
 
 ### Price Cards (signature)
 
-Three `.plan-card` surfaces in `#pricing`, identical by design: white ground, 1px Pale Edge, 8px, Hairline. A flat Deep Teal banner runs across the top of each — the banner is a label, not a control, so it never takes burgundy; the only burgundy in the section is the one `.pricing-cta` per card. The discounted plan is marked by a Deep Teal border on the card, nothing louder.
+Three `.plan-card` surfaces in `#pricing`, identical by design: white ground, 1px Pale Edge, 8px, Hairline. A flat Deep Teal banner runs across the top of each — the banner is a label, not a control, so it never takes burgundy; the only burgundy in the section is the one `.pricing-cta` per card. The discounted plan is marked by a Deep Teal border on the card, nothing louder. Every price box ends with `.plan-excl` — "ไม่รวม Microsoft License · ค่าดูแลรายปี · Customization" in 0.82rem Slate Sage — so the question "does this include everything?" is answered under the number; the full sentence stays in `.pricing-excludes`. Never add VAT to that line (PRODUCT.md).
 
 Above 1081px the three cards are direct children of one grid (`.plan-group` and `.plan-group-cards` go `display: contents`) and each card subgrids the parent's seven rows — banner, name, description, price, note, CTA, details. Rows therefore align from real content. **Do not reintroduce `min-height` to line the cards up**: six hand-measured values used to do this job and had to be re-measured every time the copy or the font changed.
 
@@ -281,11 +285,23 @@ Deep Teal ground (`#01211D`), Mist and `#CBDCD8` text, one hairline rule. Three 
 
 Under the rule sits the ghost **Cookie settings** button (`#cookie-manage`) on its own, flush left with the columns above, which reopens the consent bar and focuses Accept. It is the only route back to the choice once it has been made. Withdrawing consent after it was granted reloads the page — GA's script stays resident otherwise, and a consent control that leaves the tracker running is worse than not offering one.
 
+### Consent Bar
+One sentence and two buttons on one row: "เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน" · Accept (Deep Teal fill) · Reject (ghost). 74px tall on a 390px phone in both languages, so the hero's primary and secondary buttons both stay above the fold on first load (it was 196px with a title and a second sentence). Pinned 24px from the bottom-right at 760px wide max on desktop; 8px from the edges below 760px, and it moves up above the Mobile Contact Bar when that bar is showing. The LINE button (`.chat-fab`) stays hidden while the bar is open, because the bar covers its corner.
+
+### Mobile Contact Bar (`.mcta`, ≤760px)
+A white bar fixed to the bottom edge: **คุยทาง LINE** (Burgundy Seal fill, the only burgundy in the bar), **โทร** and **ดูราคา** (ghost), all 44px tall. It appears once the hero's buttons have scrolled off the top and hides while `#contact` is on screen, where the full set of channels already is. While it shows, the floating LINE button hides (same job) and the footer gains bottom padding so its last line is never under the bar. No animation, so there is nothing for reduced motion to switch off.
+
+### Demo Toggle (≤760px)
+The three demo sections keep their kicker, heading, and intro on phones, but the demo itself sits behind a full-width ghost button, **ลองใช้เดโม** / **ซ่อนเดโม**, with a chevron that flips like the Claim Accordion's. The toggles are `hidden` in the markup and only revealed by script below 760px, so without JavaScript, and on every wider screen, the demos show in full exactly as before. Each demo's footnote lives inside the collapsible part, because it describes buttons you cannot see while the demo is closed. Closing a demo scrolls its section back to the top.
+
+### Print
+Printing is for handing the offer to someone else, so `@media print` keeps the hero headline, the five phases and the Business Central overview text, every feature panel (the tabs are unfolded into a two-column list without the photos), the three price cards side by side on their own page with their details opened and the exclusion note, then the contact block and the footer's legal line: four A4 pages. Everything interactive or decorative is dropped — nav links, floating buttons, consent bar, demos, the report carousel, FAQ, `#about`, `#articles`. Dark grounds are re-inked dark-on-white, the Deep Teal plan banners keep their fill (`print-color-adjust: exact`), and `#pricing` lets Thai wrap normally, because the screen's nowrap-plus-`<wbr>` mechanism is tuned to screen widths.
+
 ### Feature Tabs (signature)
 Six tabs (`#feature-tab-vat` … `#feature-tab-api`) switching six panels in `#features`. Panel copy enters with `panelCopyIn` — 550ms on `cubic-bezier(.2,.75,.2,1)`, 80ms delay. This is the page's main interactive proof surface: it is where the localization package stops being a list and starts being a thing.
 
 ### Claim Accordion (signature)
-Five rows in `#business-central`, one open at a time, each swapping the screenshot in the adjacent column. A row is not a card: no border, no radius, no fill — a 1px `#E2E8E6` rule along the top, a quiet tracked number (`01`–`05`) above the heading, and a chevron built from two `currentColor` borders rotated 45°, flipping to −135° when open. The open row is marked by a 3px Burgundy Seal bar down its left edge and by its body copy revealing on `panelCopyIn`. Hover is a `rgba(1,47,42,.035)` wash and nothing else — the rows never lift.
+Five rows in `#business-central`, one open at a time, each swapping the screenshot in the adjacent column. A row is a `<button>`, so its heading is a `<span class="bento-h">`, not an `h3`: headings are not allowed inside buttons and screen readers flatten a button's children anyway. A row is not a card: no border, no radius, no fill — a 1px `#E2E8E6` rule along the top, a quiet tracked number (`01`–`05`) above the heading, and a chevron built from two `currentColor` borders rotated 45°, flipping to −135° when open. The open row is marked by a 3px Burgundy Seal bar down its left edge and by its body copy revealing on `panelCopyIn`. Hover is a `rgba(1,47,42,.035)` wash and nothing else — the rows never lift.
 
 ### Hero Document Scene (signature)
 A rotated `.doc-card` Thai tax invoice built entirely in CSS — no image — surrounded by five `.doc-mini` slips (VAT report, PO, receipt, billing note, credit note) at rotations between -5° and +7°, with a dashed burgundy `.doc-stamp`. The card breathes on a 7.6s `docCardFloat` loop; the minis run 6.8s `docMiniFloat`; the stamp lands with `stampPop` at 1.25s on an overshoot curve (`cubic-bezier(.2,.9,.25,1.35)`).
