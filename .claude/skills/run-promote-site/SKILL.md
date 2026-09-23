@@ -44,6 +44,19 @@ node .claude/skills/run-promote-site/driver.mjs out.png \
 # → {"consent":"granted","bannerHidden":true,"gaLoaded":true}
 ```
 
+## Article share images (og:image)
+
+```bash
+node .claude/skills/run-promote-site/og.mjs                 # every article whose og:image points at img/og/
+node .claude/skills/run-promote-site/og.mjs accounting-to-erp
+```
+
+Reads each article's `<h1>` and `.tag`, renders `og-template.html` (1200×630) through
+`driver.mjs`, and writes `img/og/<slug>.png`. Articles that already use a real
+screenshot as their share image are skipped on purpose. A new article opts in by
+pointing its `og:image`, `twitter:image` and JSON-LD `image` at `/img/og/<slug>.png`.
+Product names listed in `KEEP` inside the template never split across lines.
+
 ## Run (human path)
 
 Open `index.html` directly in a browser — it's fully self-contained.

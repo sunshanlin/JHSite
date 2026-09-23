@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง | JWIC Consulting</title>
 <meta name="description" content="สัญญาณที่บอกว่ากิจการโตเกินโปรแกรมบัญชีสำเร็จรูป วิธีเตรียมข้อมูล สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี">
@@ -14,9 +14,12 @@
 <meta property="og:title" content="ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง">
 <meta property="og:description" content="สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี">
 <meta property="og:url" content="https://www.jwicconsulting.com/articles/accounting-to-erp.html">
-<meta property="og:image" content="https://www.jwicconsulting.com/img/brand/jwic-icon.png">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/og/accounting-to-erp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="th_TH">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.jwicconsulting.com/img/og/accounting-to-erp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +30,7 @@
   "@type": "Article",
   "headline": "ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง",
   "description": "สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี",
-  "image": "https://www.jwicconsulting.com/img/brand/jwic-icon.png",
+  "image": "https://www.jwicconsulting.com/img/og/accounting-to-erp.png",
   "inLanguage": "th",
   "mainEntityOfPage": "https://www.jwicconsulting.com/articles/accounting-to-erp.html",
   "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
@@ -40,6 +43,7 @@
   "dateModified": "2026-07-26"
 }
 </script>
+<script src="/js/article.js" defer></script>
 </head>
 <body>
 
@@ -126,8 +130,13 @@
 
   <div class="article-cta">
     <h2>ยังไม่แน่ใจว่ากิจการถึงเวลาหรือยัง?</h2>
-    <p>นัดคุยเพื่อไล่ดูขั้นตอนงานปัจจุบัน แล้วประเมินตรง ๆ ว่าควรย้ายหรือยังไม่ควร โดยไม่มีค่าใช้จ่าย</p>
-    <a href="/#contact">ปรึกษาเรื่องระบบ →</a>
+    <p>นัดคุยเพื่อไล่ดูขั้นตอนงานปัจจุบัน แล้วประเมินตรง ๆ ว่าควรย้ายหรือยังไม่ควร โดย<span class="nb">ไม่มีค่าใช้จ่าย</span></p>
+    <div class="cta-row">
+      <a href="/#contact">ปรึกษาเรื่องระบบ →</a>
+      <a class="alt" href="https://line.me/ti/p/~0841487480" rel="noopener">คุยทาง LINE</a>
+      <a class="alt" href="tel:0841487480">โทร 084-148-7480</a>
+    </div>
+    <p class="cta-price"><a href="/#pricing">ดูราคาแพ็กเกจบนหน้าแรก</a></p>
   </div>
 
   <div class="more">
@@ -144,7 +153,8 @@
 <footer>
   <div class="wrap">
     <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
-    <div><a href="/">jwicconsulting.com</a></div>
+    <div class="foot-reach"><a href="tel:0841487480">084-148-7480</a> · <a href="https://line.me/ti/p/~0841487480" rel="noopener">LINE 0841487480</a> · <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a></div>
+    <div><a href="/">jwicconsulting.com</a><button type="button" class="cookie-manage" hidden>จัดการคุกกี้</button></div>
   </div>
 </footer>
 

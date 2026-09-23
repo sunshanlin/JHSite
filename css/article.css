@@ -154,3 +154,53 @@ footer a { color: var(--teal-4); }
   .note b { white-space: normal; }
   .article-cta { padding: 26px 22px; }
 }
+
+/* ปุ่มรองใน CTA ท้ายบทความ — LINE / โทร (ผู้ซื้อไทยคุยผ่าน LINE มากกว่าอีเมล) */
+.article-cta .cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.article-cta .cta-row a { min-height: 44px; display: inline-flex; align-items: center; }
+.article-cta .cta-row a.alt {
+  padding: 12px 20px; font-weight: 700; background: transparent; box-shadow: none;
+  border: 1px solid rgba(255,255,255,.45); color: #fff;
+}
+.article-cta .cta-row a.alt:hover { background: rgba(255,255,255,.1); }
+.article-cta .cta-price { margin: 16px 0 0; font-size: .92rem; }
+.article-cta .cta-price a {
+  display: inline-block; padding: 10px 0;
+  background: none; box-shadow: none; border-radius: 0;
+  color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* footer: ช่องทางติดต่อ + ปุ่มจัดการคุกกี้ (โผล่เมื่อ js/article.js ทำงาน) */
+footer .foot-reach a { color: var(--teal-4); }
+footer .cookie-manage {
+  margin-left: 6px; padding: 6px 12px; min-height: 32px; border-radius: 3px; cursor: pointer;
+  font: inherit; font-size: .82rem; color: #cfe6e4; background: transparent; border: 1px solid rgba(255,255,255,.3);
+}
+footer .cookie-manage:hover { background: rgba(255,255,255,.08); }
+
+/* แถบขอความยินยอมคุกกี้ — เล็กกว่าหน้าแรก ไม่บังเนื้อหาที่กำลังอ่าน */
+.cookie-bar {
+  position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60;
+  max-width: 760px; margin: 0 auto; padding: 12px 14px;
+  display: flex; gap: 12px; align-items: center;
+  background: #fff; color: var(--text); border: 1px solid var(--line); border-radius: 8px;
+  box-shadow: 0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28);
+}
+.cookie-bar[hidden] { display: none; }
+.cookie-bar p { margin: 0; flex: 1 1 auto; font-size: .86rem; line-height: 1.5; }
+.cookie-bar .cookie-actions { display: flex; gap: 8px; flex: 0 0 auto; }
+.cookie-bar button {
+  min-height: 44px; padding: 8px 16px; border-radius: 3px; cursor: pointer;
+  font: inherit; font-size: .9rem; font-weight: 600;
+  border: 1px solid #10241F; background: transparent; color: #10241F;
+}
+.cookie-bar button.accept { background: #014A41; border-color: #014A41; color: #fff; }
+.cookie-bar button:focus-visible, footer .cookie-manage:focus-visible, .article-cta a:focus-visible { outline: 2px solid #A63A56; outline-offset: 2px; }
+@media (max-width: 600px) {
+  .cookie-bar { left: 8px; right: 8px; bottom: 8px; padding: 10px 12px; gap: 10px; }
+  .cookie-bar p { font-size: .8rem; }
+  .cookie-bar button { padding: 8px 12px; }
+}
+
+/* คำที่ห้ามตัดกลาง เช่น ค่าใช้|จ่าย — ตัวตัดคำไทยของเบราว์เซอร์ตัดตามพจนานุกรม ไม่รู้ว่าเป็นคำเดียว */
+.nb { white-space: nowrap; }

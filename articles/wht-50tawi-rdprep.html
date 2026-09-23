@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก Business Central โดยไม่คีย์ซ้ำ | JWIC Consulting</title>
 <meta name="description" content="จัดการภาษีหัก ณ ที่จ่ายบน Business Central จากข้อมูลการจ่ายชุดเดียว เพื่อออกหนังสือรับรอง 50 ทวิ จัดทำ ภ.ง.ด. และเตรียมไฟล์สำหรับ RD Prep">
@@ -40,6 +40,7 @@
   "dateModified": "2026-07-20"
 }
 </script>
+<script src="/js/article.js" defer></script>
 </head>
 <body>
 
@@ -143,8 +144,13 @@
 
   <div class="article-cta">
     <h2>ยังต้องคีย์ 50 ทวิ ใน Excel อยู่ไหม?</h2>
-    <p>นัดคุยเพื่อดูขั้นตอนงานปัจจุบันของทีมบัญชี และดู Demo ระบบเบื้องต้นได้โดยไม่มีค่าใช้จ่าย</p>
-    <a href="/#contact">ปรึกษาเรื่องระบบภาษี →</a>
+    <p>นัดคุยเพื่อดูขั้นตอนงานปัจจุบันของทีมบัญชี และดู Demo ระบบเบื้องต้นได้โดย<span class="nb">ไม่มีค่าใช้จ่าย</span></p>
+    <div class="cta-row">
+      <a href="/#contact">ปรึกษาเรื่องระบบภาษี →</a>
+      <a class="alt" href="https://line.me/ti/p/~0841487480" rel="noopener">คุยทาง LINE</a>
+      <a class="alt" href="tel:0841487480">โทร 084-148-7480</a>
+    </div>
+    <p class="cta-price"><a href="/#pricing">ดูราคาแพ็กเกจบนหน้าแรก</a></p>
   </div>
 
   <div class="more">
@@ -161,7 +167,8 @@
 <footer>
   <div class="wrap">
     <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
-    <div><a href="/">jwicconsulting.com</a></div>
+    <div class="foot-reach"><a href="tel:0841487480">084-148-7480</a> · <a href="https://line.me/ti/p/~0841487480" rel="noopener">LINE 0841487480</a> · <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a></div>
+    <div><a href="/">jwicconsulting.com</a><button type="button" class="cookie-manage" hidden>จัดการคุกกี้</button></div>
   </div>
 </footer>
 
