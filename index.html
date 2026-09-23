@@ -3337,6 +3337,11 @@
   .wq-out .wq-node:not(:last-child)::before { background: rgba(255,255,255,.2); }
   .wq-out .wq-node.on:not(:last-child)::before { background: #7CCBC4; }
   .wq-out .wq-dot { border-color: rgba(255,255,255,.45); background: transparent; }
+  /* จุดของ LINE กับ Cloudflare ใช้สีแบรนด์ของเจ้าของบริการ (อ้างถึงเขาเหมือนโลโก้) ส่วน BC คงมิ้นต์
+     บนพื้น teal: #06C755 ได้ 4.52:1, #F38020 ได้ 3.85:1 ผ่านเกณฑ์ 3:1 ของ graphic
+     ⚠ class wq-node-line/-cf ต่อสตริงใน node() ของสคริปต์ ('wq-node-' + key) — grep หา class เต็มไม่เจอ แต่ไม่ใช่โค้ดตาย ห้ามตัด */
+  .wq-out .wq-node-line { --node: #06C755; }
+  .wq-out .wq-node-cf { --node: #F38020; }
   .wq-out .wq-node.on .wq-dot { border-color: var(--node, #7CCBC4); background: var(--node, #7CCBC4); }
   .wq-out .wq-txt b { color: rgba(255,255,255,.75); }
   .wq-out .wq-node.on .wq-txt b { color: #fff; }
