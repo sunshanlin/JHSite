@@ -766,15 +766,14 @@
   .cookie-bar {
     position: fixed; left: 16px; z-index: 100;
     background: var(--card); border: 1px solid var(--line); 
-    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center;
     font-size: .92rem;
   }
   .cookie-bar[hidden] { display: none; }
-  .cookie-title { display: block; margin-bottom: 5px; color: var(--ink); font-size: 1rem; }
-  .cookie-bar p { line-height: 1.65; }
+  .cookie-bar p { margin: 0; font-size: .88rem; line-height: 1.5; text-wrap: pretty; }
   .cookie-actions { display: flex; gap: 10px; }
   .cookie-bar button {
-    min-height: 42px; padding: 8px 18px; white-space: nowrap;
+    min-height: 44px; padding: 8px 18px; white-space: nowrap;
     font: inherit; cursor: pointer; 
     border: 1px solid var(--line); background: var(--bg-soft); color: var(--text);
   }
@@ -840,6 +839,9 @@
     transition: color .18s ease, background .18s ease, transform .18s ease;
   }
   .topnav .links a:hover { color: #fff; background: rgba(255,255,255,.08); }
+  /* เมนูมี 8 ลิงก์ (เพิ่ม เดโม กับ FAQ ก.ย. 2026) — ช่วง 1101–1240px เหลือที่ว่างแค่ ~6px ถ้าฟอนต์เว็บโหลดไม่ทัน
+     ฟอนต์สำรองกว้างกว่านิดเดียวก็ล้นจอ จึงบีบ padding ของลิงก์ในช่วงนี้ลง */
+  @media (min-width: 1101px) and (max-width: 1240px) { .topnav .links a { padding-inline: 7px; } }
   .topnav .links a:last-child {
     margin-left: 4px; padding-left: 14px; padding-right: 14px;
   }
@@ -1229,7 +1231,7 @@
 
   .cookie-bar {
     left: auto; right: 24px; bottom: 24px; width: calc(100% - 48px); max-width: 760px; margin: 0;
-    padding: 18px 20px; box-shadow: 0 24px 60px -28px rgba(4,30,56,.5);
+    padding: 12px 14px 12px 18px; box-shadow: 0 24px 60px -28px rgba(4,30,56,.5);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1331,12 +1333,6 @@
     .feature-panel { grid-template-columns: 1fr; gap: 18px; min-height: 0; }
     .feature-panel-icon { width: 52px; height: 52px; }
     .slider img { height: 220px; }
-    .cookie-bar {
-      left: 12px; right: 12px; bottom: 12px; width: auto; max-width: none; padding: 16px;
-      grid-template-columns: 1fr; gap: 14px;
-    }
-    .cookie-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
-    .cookie-bar button { width: 100%; }
   }
 
   /* scrollspy: ขีดเส้นใต้เมนูตาม section ที่กำลังดู */
@@ -2821,6 +2817,56 @@
   .slider-thumbs button { height: 44px; }
   .hero-learn-link { display: inline-block; padding-block: 10px; }
   .bf-reset, #cookie-manage { min-height: 44px; }
+  /* เดโม 3 ตัวบนมือถือพับไว้หลังปุ่ม "ลองใช้เดโม" — รวมกันสูง ~7,200px คั่นอยู่กลางหน้า
+     ปุ่มซ่อนเป็นค่าตั้งต้น (hidden) สคริปต์เปิดให้เห็นเฉพาะจอ ≤760px ไม่มี JS ก็เห็นเดโมเต็มเหมือนเดิม
+     ปุ่มรองแบบ ghost ไม่ใช่ burgundy — ไม่ได้ขอให้ติดต่อ (Burgundy Toll Rule) */
+  .demo-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; min-height: 48px; margin: 8px 0 20px; padding: 10px 22px;
+    border: 1px solid var(--ui-ink); border-radius: var(--ui-radius-btn);
+    background: #fff; color: var(--ui-ink); cursor: pointer;
+    font: 500 1rem/1.3 "Plus Jakarta Sans", "Anuphan", sans-serif;
+  }
+  .demo-toggle[hidden] { display: none; }
+  .demo-toggle::after { content: ""; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+  .demo-toggle[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
+  .demo-toggle:hover { background: rgba(1,47,42,.06); }
+  .demo-toggle:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+  .demo-toggle[aria-expanded="false"] .dt-close, .demo-toggle[aria-expanded="true"] .dt-open { display: none; }
+
+  /* แถบคุกกี้แบบย่อ — เดิมสูง 196px บนมือถือ (23% ของจอ) บังปุ่มรองใน hero และซ่อนปุ่ม LINE
+     เหลือประโยคเดียว + ปุ่มสองปุ่มแถวเดียวกัน · หมวดคุกกี้มีหมวดเดียว คำว่า "ทั้งหมด" จึงตัดทิ้ง */
+  @media (max-width: 760px) {
+    .cookie-bar { left: 8px; right: 8px; bottom: 8px; width: auto; max-width: none; padding: 8px 8px 8px 12px; gap: 10px; }
+    .cookie-bar p { font-size: .8rem; line-height: 1.45; }
+    .cookie-actions { gap: 6px; }
+    .cookie-bar button { padding: 6px 12px; }
+  }
+
+  /* แถบติดต่อด่วนบนมือถือ (.mcta): LINE / โทร / ดูราคา ติดขอบล่าง ในระยะนิ้วโป้งทุกตำแหน่งของหน้า
+     burgundy ที่ปุ่ม LINE ปุ่มเดียว = การขอให้ติดต่อ (Burgundy Toll Rule) อีกสองปุ่มเป็น ghost
+     ตอนแถบนี้แสดง ปุ่ม LINE ลอยมุมขวา (chat-fab) ซ่อน เพราะทำหน้าที่เดียวกัน */
+  .mcta { display: none; }
+  @media (max-width: 760px) {
+    .mcta:not([hidden]) {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
+      display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 8px;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(255,255,255,.97); border-top: 1px solid var(--ui-line);
+      box-shadow: 0 -2px 12px rgba(1,47,42,.08);
+    }
+    .mcta a {
+      display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 0 8px;
+      border: 1px solid var(--ui-ink); border-radius: var(--ui-radius-btn); background: #fff; color: var(--ui-ink);
+      font: 600 .95rem/1.2 "Plus Jakarta Sans", "Anuphan", sans-serif; text-decoration: none; white-space: nowrap;
+    }
+    .mcta a.mcta-line { background: var(--brand-burgundy); border-color: var(--brand-burgundy); color: #fff; }
+    .mcta a:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
+    .mcta svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.has-mcta .chat-fab { display: none; }
+    body.has-mcta .cookie-bar { bottom: calc(68px + env(safe-area-inset-bottom)); }
+    body.has-mcta footer { padding-bottom: calc(30px + 62px + env(safe-area-inset-bottom)); }
+  }
   @media (max-width: 760px) {
     .topnav .lang button { min-width: 44px; min-height: 44px; }
     .topnav .wrap > .dbd { position: relative; }
@@ -3376,6 +3422,94 @@
     .vs-side.rd dd.fill { animation: none; opacity: 1; }
     .vs-go, .vs-cases button, .vs-row, .vs-pick { transition: none; }
   }
+  /* ---- พิมพ์ / Save as PDF (B8) ----
+     คนสั่งพิมพ์หน้านี้ส่วนใหญ่จะส่งต่อให้ CFO หรือหุ้นส่วน จึงเหลือเฉพาะ ทำอะไร · ครอบคลุมแค่ไหน · ราคาเท่าไร · ติดต่อใคร
+     เดโม สไลด์รายงาน FAQ ประวัติ บทความ ใช้บนจอดีกว่า ซ่อนไว้ ท้ายกระดาษมีที่อยู่เว็บให้กลับมาดูต่อ
+     .reveal ที่ยังไม่ได้เลื่อนถึงต้องบังคับให้เห็น ไม่งั้นพิมพ์ออกมาเป็นช่องว่าง
+     รายละเอียดแพ็กเกจใน <details> สคริปต์เปิดให้ตอน beforeprint แล้วปิดคืนตอน afterprint
+     ความกว้างกระดาษ A4 (~718px) ตรงกับ media query มือถือ ≤760px — กฎมือถือจึงทำงานตอนพิมพ์ด้วย ต้องทับให้ครบ */
+  @media print {
+    @page { size: A4; margin: 12mm 12mm 14mm; }
+    html { scroll-padding-top: 0; }
+    body { background: #fff; color: #10241f; font-size: 13px; }
+    *, *::before, *::after { animation: none !important; transition: none !important; box-shadow: none !important; text-shadow: none !important; }
+    .reveal, .hero-copy > * { opacity: 1 !important; transform: none !important; }
+    .skip-link, .chat-fab, .cookie-bar, .mcta, .demo-toggle,
+    .topnav .links, .topnav .social, .topnav .lang, .menu-toggle,
+    .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
+    #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link,
+    #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
+    #billing-flow, #vat-service, #web-quote, #faq, #about, #articles,
+    .footer-menu, #cookie-manage, footer a[href="#contact"], .ci-flyer { display: none !important; }
+
+    .topnav { position: static; border-bottom: 1px solid #c9d6d2; }
+    .topnav .wrap { min-height: 0; padding-block: 0 8px; }
+    .wrap { max-width: none; padding-left: 0; padding-right: 0; }
+    section, header#top { padding: 14px 0 !important; min-height: 0 !important; background: #fff !important; }
+    header#top .hero-grid { display: block; min-height: 0; }
+    header#top h1 { font-size: 26px; line-height: 1.25; }
+    header#top .lead { max-width: none; font-size: 13px; }
+    h2 { font-size: 20px !important; margin-bottom: 6px; }
+    .section-kicker { margin-bottom: 4px; }
+    .sub { font-size: 13px; margin-bottom: 10px; }
+
+    /* ขั้นตอน Success by Design: 5 ขั้นเรียงแถวเดียว */
+    .steps { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+    .steps-progress, .step-icon { display: none; }
+    .step { min-height: 0 !important; padding: 8px !important; break-inside: avoid; }
+    .step h3 { font-size: 12px !important; }
+    #business-central { padding-top: 12px !important; }
+    #business-central h3 { font-size: 16px; }
+
+    /* ฟังก์ชัน: แท็บพิมพ์ไม่ได้ — กางทุกแผงเรียงลงมา ตัดรูปประกอบ */
+    .tip { padding: 10px 12px; margin-bottom: 8px; }
+    .feature-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; min-height: 0; margin-top: 8px; }
+    .feature-panel {
+      grid-area: auto; display: block; min-height: 0; padding: 10px 12px; overflow: visible;
+      opacity: 1; visibility: visible; transform: none; break-inside: avoid;
+    }
+    .feature-panel::before, .feature-panel-icon { display: none; }
+    .feature-panel h3 { font-size: 14px; margin-bottom: 4px; }
+    .feature-panel p, .feature-panel li { font-size: 11.5px; line-height: 1.55; }
+
+    /* ราคา: สามใบเทียบกันในหน้าเดียว ปล่อยตัดบรรทัดปกติ (nowrap + <wbr> เป็นกลไกของจอ) */
+    #pricing { break-before: page; overflow: visible; }
+    #pricing, #pricing * { white-space: normal !important; }
+    #pricing .nb, #pricing .plan-price-line { white-space: nowrap !important; }
+    .pricing-plans { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; max-width: none !important; margin-top: 10px !important; }
+    .plan-card { break-inside: avoid; border: 1px solid #9fb5af; }
+    .plan-banner { padding: 6px 10px !important; font-size: 11px !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .plan-icon { display: none; }
+    .plan-body { padding: 10px !important; }
+    .plan-name { font-size: 15px !important; min-height: 0 !important; }
+    .plan-desc { font-size: 11px !important; min-height: 0 !important; margin-bottom: 8px !important; }
+    .plan-price, .plan-note { min-height: 0 !important; }
+    .plan-price-box { padding: 8px !important; }
+    .plan-price-line strong, .plan-price-quote { font-size: 22px !important; }
+    .plan-more { margin-top: 6px; }
+    .plan-more::details-content { transition: none !important; }
+    .plan-features { gap: 3px; }
+    .plan-features li, .plan-assurance, .plan-list-head { font-size: 10.5px !important; line-height: 1.45; }
+    .plan-assurance { padding: 6px 8px !important; }
+    .pricing-excludes { max-width: none !important; margin-top: 10px !important; font-size: 11px; break-inside: avoid; }
+
+    /* ติดต่อ: เหลือชื่อ + ช่องทาง · section นี้พื้นเข้มตัวหนังสือขาว พื้นไม่พิมพ์ ต้องสลับเป็นตัวเข้ม */
+    #contact { break-inside: avoid; }
+    #contact, #contact * { color: #10241f !important; }
+    #contact .section-kicker { color: #8E2C46 !important; }
+    #contact .contact-grid { display: block; }
+    .contact-info { padding: 0 !important; }
+    .ci-list { margin-top: 6px; }
+
+    /* footer: พื้นเข้มไม่พิมพ์ — สลับเป็นตัวหนังสือเข้มบนกระดาษขาว */
+    footer { background: #fff !important; color: #10241f !important; padding: 10px 0 0 !important; border-top: 1px solid #c9d6d2; }
+    footer *, footer a { color: #10241f !important; }
+    footer .footer-main { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+    footer .footer-reach { display: flex; flex-wrap: wrap; gap: 0 16px; align-items: baseline; }
+    footer .footer-reach a { min-height: 0; }
+    .footer-legal { font-size: 10px; }
+    footer .footer-bottom::after { content: "jwicconsulting.com"; display: block; margin-top: 6px; font-weight: 600; }
+  }
 </style>
 </head>
 <body>
@@ -3400,11 +3534,12 @@
       <img src="https://dbdregistered.dbd.go.th/api/public/banner?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC" width="324" height="154" alt="" onerror="this.onerror=null;this.src='img/credentials/dbd-registered.png'">
     </a>
     <div class="links" id="primary-nav">
-      <a href="#top">หน้าแรก</a>
       <a href="#services">บริการ</a>
       <a href="#features">ฟังก์ชัน</a>
       <a href="#reports">ตัวอย่างรายงาน</a>
       <a href="#pricing">แพ็กเกจ</a>
+      <a href="#billing-flow">เดโม</a>
+      <a href="#faq">FAQ</a>
       <a href="#about">เกี่ยวกับเรา</a>
       <a href="#articles">บทความ</a>
       <div class="lang lang-m" role="group" aria-label="เลือกภาษา / Language">
@@ -3711,240 +3846,6 @@
   </div>
 </section>
 
-<section id="billing-flow" class="alt">
-  <div class="wrap">
-    <p class="section-kicker" data-bf="kicker">Highlight Feature 1</p>
-    <h2 data-bf="h2">ระบบวางบิล</h2>
-    <p class="sub" data-bf="sub">งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ</p>
-
-    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="bfi-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></symbol>
-    </defs></svg>
-
-    <div class="bf reveal">
-      <p class="bf-head">
-        <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
-      </p>
-
-      <p class="bfj-sr" id="bfTitle" data-bf="svgTitle"></p>
-      <div class="bf-scroll">
-        <div class="bfj" id="bfJourney" aria-describedby="bfTitle">
-          <div class="bfj-band a"></div><div class="bfj-band c"></div>
-          <div class="bfj-lane a" data-bf="lane1">บัญชีลูกหนี้</div><div class="bfj-lane c" data-bf="lane2">ลูกค้า *</div>
-          <svg class="bfj-wires" aria-hidden="true">
-            <defs>
-              <marker id="bfAr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ah" d="M0 0 10 5 0 10z"/></marker>
-              <marker id="bfArD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ahd" d="M0 0 10 5 0 10z"/></marker>
-            </defs>
-            <g id="bfWires"></g>
-          </svg>
-        </div>
-      </div>
-      <div class="bfj-v" id="bfVline"></div>
-
-      <p class="bf-keys">
-        <span><i class="bf-k-j"></i><span data-bf="keyJ">ฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
-        <span><i class="bf-k-m"></i><span data-bf="keyM">ทำนอกระบบ</span></span>
-        <span><i class="bf-k-g"></i><span data-bf="keyG">ทางแยกตัดสินใจ</span></span>
-        <span><i class="bf-k-c"></i><span data-bf="keyC">ส่งต่อกระบวนการอื่น</span></span>
-        <span><i class="bf-k-r"></i><span data-bf="keyR">ทางวนกลับ</span></span>
-        <span data-bf="keyX">* เลนของคู่ค้าภายนอกบริษัท</span>
-      </p>
-
-      <div class="bf-board">
-        <!-- วิธีใช้อยู่เหนือปฏิทิน ไม่ใช่ใต้ — ต้องอ่านเจอก่อนลอง ไม่ใช่หลังเลื่อนผ่าน
-             บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
-        <div class="bf-bar">
-          <p class="bf-status" id="bfStatus" role="status"></p>
-          <button class="bf-reset" type="button" id="bfReset" data-bf="reset">คืนค่าเดิม</button>
-        </div>
-        <div class="bf-work">
-          <div class="bf-cal-tile">
-            <div class="bf-cal-scroll">
-              <div class="bf-cal" id="bfCal"></div>
-            </div>
-            <p class="bf-due">
-              <span><i class="bf-d-late"></i><span data-bf="dueLate">เลยกำหนดวางบิล</span></span>
-              <span><i class="bf-d-due"></i><span data-bf="dueToday">ถึงรอบวันนี้</span></span>
-              <span><i class="bf-d-next"></i><span data-bf="dueNext">รอบถัดไป</span></span>
-            </p>
-          </div>
-          <div class="bf-pv" id="bfDoc" aria-live="polite"></div>
-        </div>
-        <p class="bf-foot">
-          <span><b>฿2,785,050</b> <span data-bf="footAmt">ยอดที่ต้องวางบิลเดือนนี้</span></span>
-          <span><b>21</b> <span data-bf="footInv">ใบแจ้งหนี้</span></span>
-          <span><b>6</b> <span data-bf="footGrp">กลุ่มลูกค้า</span></span>
-        </p>
-      </div>
-    </div>
-
-    <p class="bf-note" data-bf="note">ผังนี้เป็น Flow มาตรฐานชุดหนึ่งที่เขียนไว้ครบทุกสายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></p>
-  </div>
-</section>
-
-<section id="vat-service">
-  <div class="wrap">
-    <p class="section-kicker" data-vs="kicker">Highlight Feature 2</p>
-    <h2 data-vs="h2">ระบบ VAT Service</h2>
-    <p class="sub" data-vs="sub">สร้างข้อมูลลูกค้าและผู้ขายจากเลขประจำตัวผู้เสียภาษี ระบุชื่อ ที่อยู่ สาขา อัตโนมัติ<br>ลดข้อผิดพลาด ถูกต้อง รวดเร็ว</p>
-    <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?"
-         เนื้อในเป็นชิปสามอันแทนย่อหน้า — ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
-    <div class="tip reveal">
-      <b data-vs="defTitle">💡 VAT Service คืออะไร?</b>
-      <p data-vs="defBody">บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class="vs-chips"><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>มีตัวตนจริง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>จดทะเบียนถูกต้อง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class="vs-fine">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></span></p>
-    </div>
-
-    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="vsi-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></symbol>
-      <symbol id="vsi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
-      <symbol id="vsi-check" viewBox="0 0 24 24"><path d="M12 3 20 6v6.2c0 4.6-3.2 7.7-8 9.1-4.8-1.4-8-4.5-8-9.1V6z"/><polyline points="8.6 12 11.2 14.6 15.6 10.1"/></symbol>
-      <symbol id="vsi-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
-      <symbol id="vsi-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 4.5h-10a2 2 0 0 0-2 2v10"/></symbol>
-      <symbol id="vsi-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
-      <symbol id="vsi-branch" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="5" rx="1"/><rect x="2.5" y="16.5" width="6" height="5" rx="1"/><rect x="15.5" y="16.5" width="6" height="5" rx="1"/><path d="M12 7.5v4M5.5 16.5v-2.5h13v2.5"/></symbol>
-    </defs></svg>
-
-    <div class="vs reveal">
-      <div class="vs-bar">
-        <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
-        <div class="vs-form">
-          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><input class="vs-box" id="vs-tax" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="13" value="0105558000123"></label>
-          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><input class="vs-box small" id="vs-branch" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="5" value="00000"></label>
-          <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
-          <span class="vs-tip" id="vs-tip">
-            <svg class="vs-tip-ar" viewBox="0 0 34 40" aria-hidden="true" focusable="false">
-              <path d="M27 37C13 33 6 22 13 6"/><path d="M13 6l7 10M13 6l-7 8"/>
-            </svg>
-            <span data-vs="tipType">พิมพ์เลขของลูกค้าคุณเองได้เลย</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="vs-cases" id="vs-cases" role="group" aria-label="สถานการณ์ตัวอย่าง">
-        <span class="vs-lbl" data-vs="lblCase">ลองสถานการณ์</span>
-      </div>
-
-      <div id="vs-result"></div>
-
-      <div class="vs-cmp">
-        <div class="vs-side man">
-          <h3><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="hdMan">ที่พนักงานคีย์เอง</span></h3>
-          <p data-vs="hdManSub">พิมพ์จากเอกสารที่ได้มา</p>
-          <dl id="vs-man"></dl>
-        </div>
-        <span class="vs-mid" aria-hidden="true"><svg class="vs-ic"><use href="#vsi-arrow"/></svg></span>
-        <div class="vs-side rd">
-          <h3><svg class="vs-ic"><use href="#vsi-check"/></svg><span data-vs="hdRd">ที่ VAT Service เติมให้</span></h3>
-          <p data-vs="hdRdSub">ตามทะเบียนกรมสรรพากร</p>
-          <dl id="vs-rd"></dl>
-        </div>
-      </div>
-
-      <p class="vs-cost"><span class="vs-lbl"><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="lblCost">ราคาที่จ่ายจริง</span></span><span id="vs-cost"></span></p>
-    </div>
-
-    <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ ส่วนระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
-  </div>
-</section>
-
-<section id="web-quote" class="alt">
-  <div class="wrap">
-    <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
-    <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span></h2>
-    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ ลองกดเป็นลูกค้าดูได้เลย</p>
-
-    <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="wqi-box" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9.5" x2="13" y2="9.5"/><line x1="7" y1="13.5" x2="11" y2="13.5"/><circle cx="17" cy="14" r="1.5"/></symbol>
-      <symbol id="wqi-send" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7.5 3 3 7.5z"/><path d="M21 3 10.5 13.5"/></symbol>
-      <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
-      <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
-      <symbol id="wqi-chat" viewBox="0 0 48 48"><rect x="13" y="5" width="22" height="38" rx="4"/><path d="M21 38.5h6"/><path d="M18.5 15h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H24l-4 3.5V26h-1.5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/><path d="M20.5 20.5h.01M24 20.5h.01M27.5 20.5h.01" stroke-width="2.6"/></symbol>
-      <symbol id="wqi-cloud" viewBox="0 0 48 48"><path d="M14 36h21a8 8 0 0 0 .9-15.95A12 12 0 0 0 13 18.5 9 9 0 0 0 14 36z"/><path d="M21.5 23.5 18 27l3.5 3.5M26.5 23.5 30 27l-3.5 3.5"/></symbol>
-      <symbol id="wqi-next" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
-    </defs></svg>
-
-    <div class="wq-arch reveal">
-      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
-      <div class="wq-app-node" aria-hidden="true">
-        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-chat"/></svg></span>
-        <span class="wq-app-name">LINE</span>
-        <span class="wq-app-role">(Login&nbsp;+&nbsp;LIFF)</span>
-      </div>
-      <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
-        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-      </span>
-      <div class="wq-app-node" aria-hidden="true">
-        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-cloud"/></svg></span>
-        <span class="wq-app-name">Middleware</span>
-        <span class="wq-app-role">(Cloudflare®&nbsp;Workers)</span>
-      </div>
-      <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
-        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-      </span>
-      <div class="wq-app-node" aria-hidden="true">
-        <span class="wq-app-icon wq-app-tile"><img src="img/tech/business-central.svg" alt="" width="58" height="58"></span>
-        <span class="wq-app-name">Business Central</span>
-        <span class="wq-app-role">(Item&nbsp;Sync + Quote&nbsp;Fetch)</span>
-      </div>
-      <p class="wq-legend" aria-hidden="true">
-        <span><i class="wq-flow wq-fwd"></i><span data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">สินค้า</span></span>
-      </p>
-    </div>
-
-    <div class="wq reveal">
-      <div class="wq-stage">
-        <div class="wq-pick">
-          <p class="wq-step"><b>01</b><span data-wq="s1">เลือกสินค้า</span></p>
-          <p class="wq-hint" data-wq="s1hint">รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE</p>
-          <div class="wq-items" id="wq-items"></div>
-
-          <p class="wq-step"><b>02</b><span data-wq="s2">คุณเป็น</span></p>
-          <p class="wq-hint" data-wq="s2hint">ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ</p>
-          <div class="wq-who" id="wq-who" role="group" aria-label="ประเภทผู้ซื้อ"></div>
-
-          <button class="wq-send" type="button" id="wq-send"><svg class="wq-ic"><use href="#wqi-send"/></svg><span data-wq="send">ส่งคำขอราคา</span></button>
-          <p class="wq-pdpa" data-wq="pdpa">ข้อมูลที่คุณส่งมาพร้อมคำขอนี้ใช้เพื่อจัดทำใบเสนอราคาและติดต่อกลับเท่านั้น</p>
-        </div>
-
-        <div class="wq-out">
-          <div class="wq-pipe" id="wq-pipe"></div>
-          <div id="wq-result" role="status" aria-live="polite"></div>
-        </div>
-      </div>
-
-      <div class="wq-proof">
-        <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับเดโมด้านบนทุกบรรทัด</span></p>
-        <div class="wq-proof-row">
-          <figure class="wq-fig">
-            <figcaption><b>01</b><span data-wq="proof1">ลูกค้ากรอกคำขอใน LINE</span></figcaption>
-            <a class="wq-phone" href="img/bc-liff-form.webp" target="_blank" rel="noopener">
-              <img src="img/bc-liff-form.webp" alt="หน้าจอขอใบเสนอราคาใน LINE จากระบบทดสอบ — วันที่ต้องการรับสินค้า หมายเหตุ เบอร์โทร และผู้ติดต่อที่ลูกค้ากรอก ช่องอีเมลเบลอไว้" loading="lazy" width="828" height="1792">
-            </a>
-          </figure>
-          <span class="wq-arrow" aria-hidden="true"><svg class="wq-ic"><use href="#wqi-next"/></svg></span>
-          <figure class="wq-fig">
-            <figcaption><b>02</b><span data-wq="proof2">Business Central ออกใบเสนอราคาให้เอง</span></figcaption>
-            <!-- ?v= : Pages ตั้ง cache 4 ชม. และชื่อไฟล์นี้เคยเป็นภาพ collage — เปลี่ยนภาพทีไรให้ขยับเลข -->
-            <a class="wq-paper" href="img/bc-liff-quote.webp?v=2" target="_blank" rel="noopener">
-              <img src="img/bc-liff-quote.webp?v=2" alt="ใบเสนอราคา QG000010 ที่ Business Central สร้างจากคำขอนั้น เก้ารายการ ยอดรวมทั้งสิ้น 4,333,928.00 บาท ประทับว่าข้อมูลทดสอบ ช่องอีเมลเบลอไว้" loading="lazy" width="1756" height="1721">
-            </a>
-          </figure>
-        </div>
-        <p class="wq-proof-zoom" data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</p>
-      </div>
-    </div>
-
-    <p class="wq-note" data-wq="note">ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
-  </div>
-</section>
-
 <section id="reports">
   <div class="wrap">
     <p class="section-kicker">See it in action</p>
@@ -4134,6 +4035,335 @@
   </div>
 </section>
 
+<section id="contact" class="alt">
+  <div class="wrap">
+    <p class="section-kicker">Let's find the right approach together</p>
+    <h2>ปรึกษาแนวทางการวางระบบที่เหมาะกับธุรกิจของคุณ</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="ci-name">Jirapat Wichayapong (Sun)</p>
+        <p class="ci-role">ERP Consultant</p>
+        <ul class="ci-list">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Bangna, Bangkok 10260</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:0841487480">084-148-7480</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span>Line ID: <a href="https://line.me/ti/p/~0841487480">0841487480</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a>
+          </li>
+          <li class="ci-flyer">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+            <a href="flyer-overview.html" target="_blank" rel="noopener">ใบปลิวสรุประบบ 1 หน้า ส่งต่อให้ทีมได้</a>
+          </li>
+        </ul>
+        <div class="form-heading">
+          <h3>เลือกเวลาที่สะดวกเพื่อสอบถามได้ทันที</h3>
+          <span class="ci-arrow" aria-hidden="true">
+            <svg viewBox="0 0 40 16"><path d="M0 8h34M28 2l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="contact-form">
+        <img class="ci-photo" src="img/consult-meeting.webp" alt="ที่ปรึกษากำลังอธิบายงานให้ลูกค้ารอบโต๊ะประชุม" width="1400" height="1050" loading="lazy" decoding="async">
+        <div class="cal-actions">
+          <!-- ไทยเป็น default (หน้านี้ lang="th") — คำแปล EN อยู่ใน I18N -->
+          <a class="cta ghost cal-line" href="https://line.me/ti/p/~0841487480">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span class="cal-copy"><strong>สอบถามทาง Line</strong><span>ปรึกษาได้ทันที</span></span>
+          </a>
+          <button type="button" class="cta" data-cal-namespace="1hour" data-cal-link="jwicconsulting/1hour" data-cal-config='{"layout":"month_view"}'>
+            <svg viewBox="0 0 24 24"><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/><path d="M23 7l-7 5 7 5V7z"/></svg>
+            <span class="cal-copy"><strong>นัด Demo ผ่าน Zoom</strong><span>1 ชั่วโมง · ดูระบบจริงและสรุปขอบเขต</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="billing-flow" class="alt">
+  <div class="wrap">
+    <p class="section-kicker" data-bf="kicker">Highlight Feature 1</p>
+    <h2 data-bf="h2">ระบบวางบิล</h2>
+    <p class="sub" data-bf="sub">งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ</p>
+
+    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="bfi-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></symbol>
+    </defs></svg>
+
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="bf-demo" hidden><span class="dt-open">ลองใช้เดโม</span><span class="dt-close">ซ่อนเดโม</span></button>
+    <div class="demo-body" id="bf-demo">
+    <div class="bf reveal">
+      <p class="bf-head">
+        <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
+      </p>
+
+      <p class="bfj-sr" id="bfTitle" data-bf="svgTitle"></p>
+      <div class="bf-scroll">
+        <div class="bfj" id="bfJourney" aria-describedby="bfTitle">
+          <div class="bfj-band a"></div><div class="bfj-band c"></div>
+          <div class="bfj-lane a" data-bf="lane1">บัญชีลูกหนี้</div><div class="bfj-lane c" data-bf="lane2">ลูกค้า *</div>
+          <svg class="bfj-wires" aria-hidden="true">
+            <defs>
+              <marker id="bfAr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ah" d="M0 0 10 5 0 10z"/></marker>
+              <marker id="bfArD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ahd" d="M0 0 10 5 0 10z"/></marker>
+            </defs>
+            <g id="bfWires"></g>
+          </svg>
+        </div>
+      </div>
+      <div class="bfj-v" id="bfVline"></div>
+
+      <p class="bf-keys">
+        <span><i class="bf-k-j"></i><span data-bf="keyJ">ฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
+        <span><i class="bf-k-m"></i><span data-bf="keyM">ทำนอกระบบ</span></span>
+        <span><i class="bf-k-g"></i><span data-bf="keyG">ทางแยกตัดสินใจ</span></span>
+        <span><i class="bf-k-c"></i><span data-bf="keyC">ส่งต่อกระบวนการอื่น</span></span>
+        <span><i class="bf-k-r"></i><span data-bf="keyR">ทางวนกลับ</span></span>
+        <span data-bf="keyX">* เลนของคู่ค้าภายนอกบริษัท</span>
+      </p>
+
+      <div class="bf-board">
+        <!-- วิธีใช้อยู่เหนือปฏิทิน ไม่ใช่ใต้ — ต้องอ่านเจอก่อนลอง ไม่ใช่หลังเลื่อนผ่าน
+             บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
+        <div class="bf-bar">
+          <p class="bf-status" id="bfStatus" role="status"></p>
+          <button class="bf-reset" type="button" id="bfReset" data-bf="reset">คืนค่าเดิม</button>
+        </div>
+        <div class="bf-work">
+          <div class="bf-cal-tile">
+            <div class="bf-cal-scroll">
+              <div class="bf-cal" id="bfCal"></div>
+            </div>
+            <p class="bf-due">
+              <span><i class="bf-d-late"></i><span data-bf="dueLate">เลยกำหนดวางบิล</span></span>
+              <span><i class="bf-d-due"></i><span data-bf="dueToday">ถึงรอบวันนี้</span></span>
+              <span><i class="bf-d-next"></i><span data-bf="dueNext">รอบถัดไป</span></span>
+            </p>
+          </div>
+          <div class="bf-pv" id="bfDoc" aria-live="polite"></div>
+        </div>
+        <p class="bf-foot">
+          <span><b>฿2,785,050</b> <span data-bf="footAmt">ยอดที่ต้องวางบิลเดือนนี้</span></span>
+          <span><b>21</b> <span data-bf="footInv">ใบแจ้งหนี้</span></span>
+          <span><b>6</b> <span data-bf="footGrp">กลุ่มลูกค้า</span></span>
+        </p>
+      </div>
+    </div>
+
+    <p class="bf-note" data-bf="note">ผังนี้เป็น Flow มาตรฐานชุดหนึ่งที่เขียนไว้ครบทุกสายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="vat-service">
+  <div class="wrap">
+    <p class="section-kicker" data-vs="kicker">Highlight Feature 2</p>
+    <h2 data-vs="h2">ระบบ VAT Service</h2>
+    <p class="sub" data-vs="sub">สร้างข้อมูลลูกค้าและผู้ขายจากเลขประจำตัวผู้เสียภาษี ระบุชื่อ ที่อยู่ สาขา อัตโนมัติ<br>ลดข้อผิดพลาด ถูกต้อง รวดเร็ว</p>
+    <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?"
+         เนื้อในเป็นชิปสามอันแทนย่อหน้า — ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
+    <div class="tip reveal">
+      <b data-vs="defTitle">💡 VAT Service คืออะไร?</b>
+      <p data-vs="defBody">บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class="vs-chips"><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>มีตัวตนจริง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>จดทะเบียนถูกต้อง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class="vs-fine">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></span></p>
+    </div>
+
+    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="vsi-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></symbol>
+      <symbol id="vsi-warn" viewBox="0 0 24 24"><path d="M12 3.6 21.2 19.4a1.4 1.4 0 0 1-1.2 2.1H4a1.4 1.4 0 0 1-1.2-2.1z"/><line x1="12" y1="9.5" x2="12" y2="14.5"/><line x1="12" y1="17.6" x2="12" y2="17.7"/></symbol>
+      <symbol id="vsi-check" viewBox="0 0 24 24"><path d="M12 3 20 6v6.2c0 4.6-3.2 7.7-8 9.1-4.8-1.4-8-4.5-8-9.1V6z"/><polyline points="8.6 12 11.2 14.6 15.6 10.1"/></symbol>
+      <symbol id="vsi-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
+      <symbol id="vsi-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 4.5h-10a2 2 0 0 0-2 2v10"/></symbol>
+      <symbol id="vsi-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <symbol id="vsi-branch" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="5" rx="1"/><rect x="2.5" y="16.5" width="6" height="5" rx="1"/><rect x="15.5" y="16.5" width="6" height="5" rx="1"/><path d="M12 7.5v4M5.5 16.5v-2.5h13v2.5"/></symbol>
+    </defs></svg>
+
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="vs-demo" hidden><span class="dt-open">ลองใช้เดโม</span><span class="dt-close">ซ่อนเดโม</span></button>
+    <div class="demo-body" id="vs-demo">
+    <div class="vs reveal">
+      <div class="vs-bar">
+        <p class="vs-app"><svg class="vs-ic"><use href="#vsi-search"/></svg>Business Central · VAT Service</p>
+        <div class="vs-form">
+          <label class="vs-field"><span data-vs="lblTax">เลขประจำตัวผู้เสียภาษี</span><input class="vs-box" id="vs-tax" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="13" value="0105558000123"></label>
+          <label class="vs-field"><span data-vs="lblBranch">เลขที่สาขา</span><input class="vs-box small" id="vs-branch" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="5" value="00000"></label>
+          <button class="vs-go" type="button" id="vs-go"><svg class="vs-ic"><use href="#vsi-search"/></svg><span data-vs="btnGo">ค้นหา</span></button>
+          <span class="vs-tip" id="vs-tip">
+            <svg class="vs-tip-ar" viewBox="0 0 34 40" aria-hidden="true" focusable="false">
+              <path d="M27 37C13 33 6 22 13 6"/><path d="M13 6l7 10M13 6l-7 8"/>
+            </svg>
+            <span data-vs="tipType">พิมพ์เลขของลูกค้าคุณเองได้เลย</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="vs-cases" id="vs-cases" role="group" aria-label="สถานการณ์ตัวอย่าง">
+        <span class="vs-lbl" data-vs="lblCase">ลองสถานการณ์</span>
+      </div>
+
+      <div id="vs-result"></div>
+
+      <div class="vs-cmp">
+        <div class="vs-side man">
+          <h3><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="hdMan">ที่พนักงานคีย์เอง</span></h3>
+          <p data-vs="hdManSub">พิมพ์จากเอกสารที่ได้มา</p>
+          <dl id="vs-man"></dl>
+        </div>
+        <span class="vs-mid" aria-hidden="true"><svg class="vs-ic"><use href="#vsi-arrow"/></svg></span>
+        <div class="vs-side rd">
+          <h3><svg class="vs-ic"><use href="#vsi-check"/></svg><span data-vs="hdRd">ที่ VAT Service เติมให้</span></h3>
+          <p data-vs="hdRdSub">ตามทะเบียนกรมสรรพากร</p>
+          <dl id="vs-rd"></dl>
+        </div>
+      </div>
+
+      <p class="vs-cost"><span class="vs-lbl"><svg class="vs-ic"><use href="#vsi-warn"/></svg><span data-vs="lblCost">ราคาที่จ่ายจริง</span></span><span id="vs-cost"></span></p>
+    </div>
+
+    <p class="vs-note" data-vs="note">ตัวอย่างจำลองด้วยข้อมูลบริษัทสมมติ ส่วนระบบจริงเรียก VAT Service ของกรมสรรพากรจากในหน้าจอ Business Central ทั้งตอนเปิดลูกค้า เปิดผู้ขาย และตอนอัปเดตรายเดิม</p>
+    </div>
+  </div>
+</section>
+
+<section id="web-quote" class="alt">
+  <div class="wrap">
+    <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
+    <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span></h2>
+    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ ลองกดเป็นลูกค้าดูได้เลย</p>
+
+    <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="wqi-box" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9.5" x2="13" y2="9.5"/><line x1="7" y1="13.5" x2="11" y2="13.5"/><circle cx="17" cy="14" r="1.5"/></symbol>
+      <symbol id="wqi-send" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7.5 3 3 7.5z"/><path d="M21 3 10.5 13.5"/></symbol>
+      <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
+      <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <symbol id="wqi-chat" viewBox="0 0 48 48"><rect x="13" y="5" width="22" height="38" rx="4"/><path d="M21 38.5h6"/><path d="M18.5 15h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H24l-4 3.5V26h-1.5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/><path d="M20.5 20.5h.01M24 20.5h.01M27.5 20.5h.01" stroke-width="2.6"/></symbol>
+      <symbol id="wqi-cloud" viewBox="0 0 48 48"><path d="M14 36h21a8 8 0 0 0 .9-15.95A12 12 0 0 0 13 18.5 9 9 0 0 0 14 36z"/><path d="M21.5 23.5 18 27l3.5 3.5M26.5 23.5 30 27l-3.5 3.5"/></symbol>
+      <symbol id="wqi-next" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
+    </defs></svg>
+
+    <div class="wq-arch reveal">
+      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
+      <div class="wq-app-node" aria-hidden="true">
+        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-chat"/></svg></span>
+        <span class="wq-app-name">LINE</span>
+        <span class="wq-app-role">(Login&nbsp;+&nbsp;LIFF)</span>
+      </div>
+      <span class="wq-link" aria-hidden="true">
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
+        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
+      </span>
+      <div class="wq-app-node" aria-hidden="true">
+        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-cloud"/></svg></span>
+        <span class="wq-app-name">Middleware</span>
+        <span class="wq-app-role">(Cloudflare®&nbsp;Workers)</span>
+      </div>
+      <span class="wq-link" aria-hidden="true">
+        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
+        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
+      </span>
+      <div class="wq-app-node" aria-hidden="true">
+        <span class="wq-app-icon wq-app-tile"><img src="img/tech/business-central.svg" alt="" width="58" height="58"></span>
+        <span class="wq-app-name">Business Central</span>
+        <span class="wq-app-role">(Item&nbsp;Sync + Quote&nbsp;Fetch)</span>
+      </div>
+      <p class="wq-legend" aria-hidden="true">
+        <span><i class="wq-flow wq-fwd"></i><span data-wq="flowReq">คำขอใบเสนอราคา</span></span>
+        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">สินค้า</span></span>
+      </p>
+    </div>
+
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="wq-demo" hidden><span class="dt-open">ลองใช้เดโม</span><span class="dt-close">ซ่อนเดโม</span></button>
+    <div class="demo-body" id="wq-demo">
+    <div class="wq reveal">
+      <div class="wq-stage">
+        <div class="wq-pick">
+          <p class="wq-step"><b>01</b><span data-wq="s1">เลือกสินค้า</span></p>
+          <p class="wq-hint" data-wq="s1hint">รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE</p>
+          <div class="wq-items" id="wq-items"></div>
+
+          <p class="wq-step"><b>02</b><span data-wq="s2">คุณเป็น</span></p>
+          <p class="wq-hint" data-wq="s2hint">ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ</p>
+          <div class="wq-who" id="wq-who" role="group" aria-label="ประเภทผู้ซื้อ"></div>
+
+          <button class="wq-send" type="button" id="wq-send"><svg class="wq-ic"><use href="#wqi-send"/></svg><span data-wq="send">ส่งคำขอราคา</span></button>
+          <p class="wq-pdpa" data-wq="pdpa">ข้อมูลที่คุณส่งมาพร้อมคำขอนี้ใช้เพื่อจัดทำใบเสนอราคาและติดต่อกลับเท่านั้น</p>
+        </div>
+
+        <div class="wq-out">
+          <div class="wq-pipe" id="wq-pipe"></div>
+          <div id="wq-result" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="wq-proof">
+        <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับเดโมด้านบนทุกบรรทัด</span></p>
+        <div class="wq-proof-row">
+          <figure class="wq-fig">
+            <figcaption><b>01</b><span data-wq="proof1">ลูกค้ากรอกคำขอใน LINE</span></figcaption>
+            <a class="wq-phone" href="img/bc-liff-form.webp" target="_blank" rel="noopener">
+              <img src="img/bc-liff-form.webp" alt="หน้าจอขอใบเสนอราคาใน LINE จากระบบทดสอบ — วันที่ต้องการรับสินค้า หมายเหตุ เบอร์โทร และผู้ติดต่อที่ลูกค้ากรอก ช่องอีเมลเบลอไว้" loading="lazy" width="828" height="1792">
+            </a>
+          </figure>
+          <span class="wq-arrow" aria-hidden="true"><svg class="wq-ic"><use href="#wqi-next"/></svg></span>
+          <figure class="wq-fig">
+            <figcaption><b>02</b><span data-wq="proof2">Business Central ออกใบเสนอราคาให้เอง</span></figcaption>
+            <!-- ?v= : Pages ตั้ง cache 4 ชม. และชื่อไฟล์นี้เคยเป็นภาพ collage — เปลี่ยนภาพทีไรให้ขยับเลข -->
+            <a class="wq-paper" href="img/bc-liff-quote.webp?v=2" target="_blank" rel="noopener">
+              <img src="img/bc-liff-quote.webp?v=2" alt="ใบเสนอราคา QG000010 ที่ Business Central สร้างจากคำขอนั้น เก้ารายการ ยอดรวมทั้งสิ้น 4,333,928.00 บาท ประทับว่าข้อมูลทดสอบ ช่องอีเมลเบลอไว้" loading="lazy" width="1756" height="1721">
+            </a>
+          </figure>
+        </div>
+        <p class="wq-proof-zoom" data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</p>
+      </div>
+    </div>
+
+    <p class="wq-note" data-wq="note">ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="section-kicker">Frequently asked questions</p>
+    <h2>คำถามที่พบบ่อย</h2>
+    <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
+    <div class="faq-list">
+      <details class="reveal" open>
+        <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
+        <p>Business Central สามารถใช้งานร่วมกับ JWIC Localization เพื่อรองรับข้อกำหนดด้านภาษีอากรและเอกสารสำหรับธุรกิจในประเทศไทยได้อย่างครบถ้วน โดยครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</p>
+        <p>นอกจากนี้ ยังรองรับภาษีหัก ณ ที่จ่าย หนังสือรับรอง 50 ทวิ ไฟล์สำหรับนำเข้า RD Prep ระบบใบวางบิล และฟอร์มเอกสารที่จำเป็นต่อการดำเนินงาน</p>
+      </details>
+      <details class="reveal">
+        <summary>วางระบบ Business Central ใช้เวลานานแค่ไหน?</summary>
+        <p>ด้วยแนวทาง Best Practice และ Fast Implementation เราวางแผนโครงการและกำหนดระยะเวลาอย่างชัดเจนตั้งแต่เริ่มต้น เพื่อให้การติดตั้งดำเนินไปอย่างเป็นระบบและพร้อมเริ่มใช้งานได้อย่างรวดเร็ว</p>
+      </details>
+      <details class="reveal">
+        <summary>ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?</summary>
+        <p>JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ หากต้องการเรียกใช้เป็นงาน ๆ ไม่ผูกเป็นโครงการ มีอัตรา On-Demand 9,000 บาทต่อ Manday โดยประเมินจำนวนวันตามเนื้องานจริงและสรุปให้ยืนยันก่อนเริ่ม ราคาและค่าบริการไม่รวมค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
+      </details>
+      <details class="reveal">
+        <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
+        <p>ได้ บริการครอบคลุมการย้ายข้อมูลจากระบบเดิม ทั้งข้อมูลหลัก เช่น ลูกค้า ผู้ขาย สินค้า ผังบัญชี และยอดยกมา พร้อมตรวจกระทบยอดก่อนเริ่มใช้งานจริง</p>
+      </details>
+      <details class="reveal">
+        <summary>หลัง Go-live มีบริการดูแลต่อหรือไม่?</summary>
+        <p>แน่นอน เราดูแลต่อเนื่องหลัง Go-live ทั้งตอบปัญหาการใช้งาน แก้ไขข้อผิดพลาด และรองรับการอัปเดตเวอร์ชันใหม่ของ Microsoft</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="about" lang="en">
   <div class="wrap">
     <p class="section-kicker">Your implementation partner</p>
@@ -4263,90 +4493,6 @@
   </div>
 </section>
 
-
-
-<section id="contact" class="alt">
-  <div class="wrap">
-    <p class="section-kicker">Let's find the right approach together</p>
-    <h2>ปรึกษาแนวทางการวางระบบที่เหมาะกับธุรกิจของคุณ</h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p class="ci-name">Jirapat Wichayapong (Sun)</p>
-        <p class="ci-role">ERP Consultant</p>
-        <ul class="ci-list">
-          <li>
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Bangna, Bangkok 10260</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="tel:0841487480">084-148-7480</a>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>Line ID: <a href="https://line.me/ti/p/~0841487480">0841487480</a></span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a>
-          </li>
-        </ul>
-        <div class="form-heading">
-          <h3>เลือกเวลาที่สะดวกเพื่อสอบถามได้ทันที</h3>
-          <span class="ci-arrow" aria-hidden="true">
-            <svg viewBox="0 0 40 16"><path d="M0 8h34M28 2l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </div>
-      <div class="contact-form">
-        <img class="ci-photo" src="img/consult-meeting.webp" alt="ที่ปรึกษากำลังอธิบายงานให้ลูกค้ารอบโต๊ะประชุม" width="1400" height="1050" loading="lazy" decoding="async">
-        <div class="cal-actions">
-          <!-- ไทยเป็น default (หน้านี้ lang="th") — คำแปล EN อยู่ใน I18N -->
-          <a class="cta ghost cal-line" href="https://line.me/ti/p/~0841487480">
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span class="cal-copy"><strong>สอบถามทาง Line</strong><span>ปรึกษาได้ทันที</span></span>
-          </a>
-          <button type="button" class="cta" data-cal-namespace="1hour" data-cal-link="jwicconsulting/1hour" data-cal-config='{"layout":"month_view"}'>
-            <svg viewBox="0 0 24 24"><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/><path d="M23 7l-7 5 7 5V7z"/></svg>
-            <span class="cal-copy"><strong>นัด Demo ผ่าน Zoom</strong><span>1 ชั่วโมง · ดูระบบจริงและสรุปขอบเขต</span></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap">
-    <p class="section-kicker">Frequently asked questions</p>
-    <h2>คำถามที่พบบ่อย</h2>
-    <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
-    <div class="faq-list">
-      <details class="reveal" open>
-        <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
-        <p>Business Central สามารถใช้งานร่วมกับ JWIC Localization เพื่อรองรับข้อกำหนดด้านภาษีอากรและเอกสารสำหรับธุรกิจในประเทศไทยได้อย่างครบถ้วน โดยครอบคลุมรายงานภาษีซื้อ–ขายและ ภ.พ.30 รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</p>
-        <p>นอกจากนี้ ยังรองรับภาษีหัก ณ ที่จ่าย หนังสือรับรอง 50 ทวิ ไฟล์สำหรับนำเข้า RD Prep ระบบใบวางบิล และฟอร์มเอกสารที่จำเป็นต่อการดำเนินงาน</p>
-      </details>
-      <details class="reveal">
-        <summary>วางระบบ Business Central ใช้เวลานานแค่ไหน?</summary>
-        <p>ด้วยแนวทาง Best Practice และ Fast Implementation เราวางแผนโครงการและกำหนดระยะเวลาอย่างชัดเจนตั้งแต่เริ่มต้น เพื่อให้การติดตั้งดำเนินไปอย่างเป็นระบบและพร้อมเริ่มใช้งานได้อย่างรวดเร็ว</p>
-      </details>
-      <details class="reveal">
-        <summary>ค่าใช้จ่ายในการวางระบบอยู่ที่ประมาณเท่าไร?</summary>
-        <p>JWIC Thai Localization สำหรับกิจการที่ใช้ Business Central อยู่แล้ว ลดจาก 300,000 บาท เหลือ 280,000 บาท สำหรับ 1 บริษัท ชำระครั้งเดียว ใช้งานได้ตลอดไป ส่วนบริการ Full Implementation ยินดีให้คำปรึกษาและประเมินราคาตามขอบเขตโครงการ หากต้องการเรียกใช้เป็นงาน ๆ ไม่ผูกเป็นโครงการ มีอัตรา On-Demand 9,000 บาทต่อ Manday โดยประเมินจำนวนวันตามเนื้องานจริงและสรุปให้ยืนยันก่อนเริ่ม ราคาและค่าบริการไม่รวมค่า Microsoft License, ค่าบริการดูแลรายปี และ Customization เพิ่มเติม</p>
-      </details>
-      <details class="reveal">
-        <summary>ย้ายข้อมูลจากระบบเดิมได้หรือไม่?</summary>
-        <p>ได้ บริการครอบคลุมการย้ายข้อมูลจากระบบเดิม ทั้งข้อมูลหลัก เช่น ลูกค้า ผู้ขาย สินค้า ผังบัญชี และยอดยกมา พร้อมตรวจกระทบยอดก่อนเริ่มใช้งานจริง</p>
-      </details>
-      <details class="reveal">
-        <summary>หลัง Go-live มีบริการดูแลต่อหรือไม่?</summary>
-        <p>แน่นอน เราดูแลต่อเนื่องหลัง Go-live ทั้งตอบปัญหาการใช้งาน แก้ไขข้อผิดพลาด และรองรับการอัปเดตเวอร์ชันใหม่ของ Microsoft</p>
-      </details>
-    </div>
-  </div>
-</section>
-
 <section id="articles" lang="th">
   <div class="wrap">
     <p class="section-kicker">Knowledge from real projects</p>
@@ -4412,9 +4558,11 @@
         <p class="footer-head">เมนู</p>
         <a href="#services">บริการ</a>
         <a href="#features">ฟังก์ชัน</a>
-        <a href="#vat-service">VAT Service</a>
         <a href="#reports">ตัวอย่างรายงาน</a>
         <a href="#pricing">แพ็กเกจ</a>
+        <a href="#billing-flow">เดโมระบบวางบิล</a>
+        <a href="#vat-service">VAT Service</a>
+        <a href="#faq">คำถามที่พบบ่อย</a>
         <a href="#about">เกี่ยวกับเรา</a>
         <a href="#articles">บทความ</a>
       </nav>
@@ -4433,14 +4581,11 @@
   </div>
 </footer>
 
-<div class="cookie-bar" id="cookie-bar" hidden role="dialog" aria-label="Cookie consent">
-  <div class="cookie-copy">
-    <strong class="cookie-title">เราให้ความสำคัญกับความเป็นส่วนตัวของคุณ</strong>
-    <p>เราใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อวัดประสิทธิภาพและปรับปรุงเว็บไซต์ เลือก “ปฏิเสธทั้งหมด” เพื่อใช้งานต่อโดยไม่มีการติดตาม</p>
-  </div>
+<div class="cookie-bar" id="cookie-bar" hidden role="dialog" aria-label="การใช้คุกกี้">
+  <p>เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน</p>
   <div class="cookie-actions">
-    <button type="button" class="accept" id="cookie-accept">ยอมรับทั้งหมด</button>
-    <button type="button" id="cookie-decline">ปฏิเสธทั้งหมด</button>
+    <button type="button" class="accept" id="cookie-accept">ยอมรับ</button>
+    <button type="button" id="cookie-decline">ปฏิเสธ</button>
   </div>
 </div>
 
@@ -4453,6 +4598,13 @@
     <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
   </a>
 </div>
+
+<!-- แถบติดต่อด่วนบนมือถือ: โผล่หลังเลื่อนพ้น hero ซ่อนเมื่อถึง #contact · สคริปต์คุมการแสดง ไม่มี JS ก็ไม่แสดง -->
+<nav class="mcta" id="mcta" aria-label="ติดต่อด่วน" hidden>
+  <a class="mcta-line" href="https://line.me/ti/p/~0841487480" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>คุยทาง LINE</span></a>
+  <a class="mcta-tel" href="tel:0841487480"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>โทร</span></a>
+  <a class="mcta-price" href="#pricing"><span>ดูราคา</span></a>
+</nav>
 
 <script>
   // ปุ่มจองคิว Cal.com ใน #contact — official embed snippet จาก cal.com/docs
@@ -4847,15 +4999,48 @@
   // เดโม: ยิงครั้งเดียวต่อเดโมต่อการโหลดหน้า ตอนที่คนเริ่มกด/พิมพ์ครั้งแรก
   ['billing-flow', 'vat-service', 'web-quote'].forEach(id => {
     const sec = document.getElementById(id); if (!sec) return;
-    const once = () => { trackSeoEvent('demo_use', { demo: id }); sec.removeEventListener('click', once); sec.removeEventListener('input', once); };
+    const once = (e) => { if (e && e.target.closest && e.target.closest('.demo-toggle')) return; trackSeoEvent('demo_use', { demo: id }); sec.removeEventListener('click', once); sec.removeEventListener('input', once); };
     sec.addEventListener('click', once); sec.addEventListener('input', once);
   });
+  // เดโมบนมือถือ: พับไว้หลังปุ่ม ลองใช้เดโม (จอ >760px เห็นเต็มเสมอ)
+  const demoMQ = window.matchMedia('(max-width: 760px)');
+  const demoToggles = [...document.querySelectorAll('.demo-toggle')].map(btn => ({ btn, body: document.getElementById(btn.getAttribute('aria-controls')) }));
+  function syncDemos() {
+    demoToggles.forEach(({ btn, body }) => {
+      if (demoMQ.matches) { btn.hidden = false; body.hidden = btn.getAttribute('aria-expanded') !== 'true'; }
+      else { btn.hidden = true; body.hidden = false; }
+    });
+  }
+  demoToggles.forEach(({ btn, body }) => btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    body.hidden = !open;
+    if (open) { window.dispatchEvent(new Event('resize')); trackSeoEvent('demo_open', { demo: btn.closest('section').id }); }
+    else btn.closest('section').scrollIntoView({ block: 'start' });
+  }));
+  demoMQ.addEventListener('change', syncDemos);
+  syncDemos();
+  // แถบติดต่อด่วนบนมือถือ: แสดงเมื่อปุ่มใน hero เลื่อนพ้นจอขึ้นไปแล้ว และยังไม่ถึง #contact (ที่นั่นมีปุ่มครบอยู่แล้ว)
+  // จับที่ .hero-actions ไม่ใช่ทั้ง hero — บนมือถือภาพเอกสารใต้ปุ่มสูงอีก ~600px ช่วงนั้นจะไม่มีปุ่มติดต่อเลย
+  const mcta = document.getElementById('mcta');
+  const heroCta = document.querySelector('.hero-actions') || document.getElementById('top');
+  if (mcta && heroCta && 'IntersectionObserver' in window) {
+    let pastHero = false, atContact = false;
+    const syncMcta = () => { const show = demoMQ.matches && pastHero && !atContact; mcta.hidden = !show; document.body.classList.toggle('has-mcta', show); };
+    new IntersectionObserver(en => { pastHero = !en[0].isIntersecting && en[0].boundingClientRect.top < 0; syncMcta(); }).observe(heroCta);
+    new IntersectionObserver(en => { atContact = en[0].isIntersecting; syncMcta(); }, { threshold: .2 }).observe(document.getElementById('contact'));
+    demoMQ.addEventListener('change', syncMcta);
+  }
   // เห็นราคาแล้ว (30% ของ section อยู่ในจอ) — ยิงครั้งเดียว
   const pricingSec = document.getElementById('pricing');
   if (pricingSec && 'IntersectionObserver' in window) {
     const pio = new IntersectionObserver((en) => { if (en.some(x => x.isIntersecting)) { trackSeoEvent('view_pricing', {}); pio.disconnect(); } }, { threshold: .3 });
     pio.observe(pricingSec);
   }
+  // พิมพ์: เปิดรายละเอียดแพ็กเกจให้ครบก่อนพิมพ์ แล้วปิดคืนเฉพาะใบที่เราเปิดให้
+  let printOpened = [];
+  window.addEventListener('beforeprint', () => { printOpened = [...document.querySelectorAll('#pricing details:not([open])')]; printOpened.forEach(d => { d.open = true; }); });
+  window.addEventListener('afterprint', () => { printOpened.forEach(d => { d.open = false; }); printOpened = []; });
   Cal("on", { action: "bookingSuccessful", callback: () => {
     trackSeoEvent('generate_lead', { method: 'cal_booking' });
   } });
@@ -5794,13 +5979,13 @@
   // รูปแบบ: [selector, EN html, TH html (ใส่เฉพาะจุดที่ต้นฉบับเป็น EN)]
   const I18N = [
     ['.skip-link', 'Skip to main content'],
-    ['.topnav .links a[href="#top"]', 'Home'],
     ['.topnav .links a[href="#services"]', 'Services'],
     ['.topnav .links a[href="#features"]', 'Features'],
     ['.topnav .links a[href="#reports"]', 'Reports'],
     ['.topnav .links a[href="#articles"]', 'Articles'],
     ['.topnav .links a[href="#pricing"]', 'Pricing'],
     ['.hero-actions .cta.ghost', 'See package pricing'],
+    ['.topnav .links a[href="#billing-flow"]', 'Demos'],
     ['.topnav .links a[href="#about"]', 'About'],
     ['.topnav .links a[href="#contact"]', 'Contact'],
     ['#chat-fab .tip-text', 'Chat with us'],
@@ -5816,7 +6001,7 @@
     ['.step[data-step="4"] h3', 'Prepare <span>Get ready for go-live</span>'],
     ['.step[data-step="5"] h3', 'Operate <span>Continuous care</span>'],
     ['#business-central > .wrap > h3', 'What is Microsoft Dynamics 365 Business Central?'],
-    ['#business-central > .wrap > .sub', 'Microsoft\'s cloud ERP — finance, sales, purchasing, inventory, and projects on a single database. Named the best ERP system of 2024 by Forbes Advisor.'],
+    ['#business-central > .wrap > .sub', 'Microsoft\'s ERP built for SMEs to run the whole business — finance, manufacturing, sales, shipping, projects and service. Extensions add Thai legal requirements or industry-specific work, and it is easy to set up and quick to go live.'],
     ['.a-p1 .bento-body', 'Approval workflows run themselves — a new document reaches the approver without paper changing hands'],
     ['.a-p2 .bento-body', 'Open live data in Excel — summarize with PivotTables and filter it any way you need'],
     ['.a-p3 .bento-body', 'Cloud access through the browser — sign in with a Microsoft 365 account and see only the menus you are entitled to'],
@@ -5921,6 +6106,12 @@
     ['.cal-actions .cta[data-cal-namespace="1hour"] .cal-copy', '<strong>Book a Meeting (Zoom)</strong><span>1 hour · demo and scope</span>'],
     ['.profile-quote', '<p>I believe ERP implementation has reached a point where businesses can transition to a new system quickly, without compromising the accuracy of their data.</p><p>With experience in ERP consulting and implementation, I am committed to delivering practical solutions that align with your business processes, achieve measurable results, and provide the right balance of functionality, quality, and cost.</p>'],
     ['.contact-info .form-heading h3', 'Pick a time that works — book instantly'],
+    ['.demo-toggle .dt-open', 'Try the demo'],
+    ['.mcta-line span', 'Chat on LINE'],
+    ['.mcta-tel span', 'Call'],
+    ['.mcta-price span', 'Pricing'],
+    ['.ci-flyer a', 'One-page flyer to share with your team (Thai)'],
+    ['.demo-toggle .dt-close', 'Hide the demo'],
     ['#faq h2', 'Frequently Asked Questions'],
     ['#faq > .wrap > .sub', 'Short answers to the questions clients ask us most.'],
     ['#faq details:nth-of-type(1) summary', 'Does Business Central support Thai tax and documents?'],
@@ -5934,15 +6125,16 @@
     ['#faq details:nth-of-type(4) > p', 'Yes — the service covers migration from legacy systems: master data such as customers, vendors, items, and chart of accounts, plus opening balances, reconciled before go-live.'],
     ['#faq details:nth-of-type(5) summary', 'Is there support after go-live?'],
     ['#faq details:nth-of-type(5) > p', 'Absolutely — we provide continuous care after go-live: user support, fixing issues, and keeping up with new Microsoft releases.'],
-    ['.cookie-title', 'We value your privacy', 'เราให้ความสำคัญกับความเป็นส่วนตัวของคุณ'],
-    ['#cookie-bar p', 'We use optional analytics cookies (Google Analytics) to measure performance and improve this site — choose “Reject All” to continue without tracking.', 'เราใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อวัดประสิทธิภาพและปรับปรุงเว็บไซต์ เลือก “ปฏิเสธทั้งหมด” เพื่อใช้งานต่อโดยไม่มีการติดตาม'],
-    ['#cookie-accept', 'Accept All', 'ยอมรับทั้งหมด'],
-    ['#cookie-decline', 'Reject All', 'ปฏิเสธทั้งหมด'],
+    ['#cookie-bar p', 'May we use Google Analytics cookies to improve this site? It works the same either way.', 'เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน'],
+    ['#cookie-accept', 'Accept', 'ยอมรับ'],
+    ['#cookie-decline', 'Reject', 'ปฏิเสธ'],
     ['#cookie-manage', 'Cookie settings', 'จัดการคุกกี้'],
     ['.footer-menu .footer-head', 'Menu', 'เมนู'],
     ['.footer-menu a[href="#services"]', 'Services', 'บริการ'],
     ['.footer-menu a[href="#features"]', 'Features', 'ฟังก์ชัน'],
+    ['.footer-menu a[href="#billing-flow"]', 'Billing demo', 'เดโมระบบวางบิล'],
     ['.footer-menu a[href="#vat-service"]', 'VAT Service', 'VAT Service'],
+    ['.footer-menu a[href="#faq"]', 'FAQ', 'คำถามที่พบบ่อย'],
     ['.footer-menu a[href="#reports"]', 'Reports', 'ตัวอย่างรายงาน'],
     ['.footer-menu a[href="#pricing"]', 'Pricing', 'แพ็กเกจ'],
     ['.footer-menu a[href="#about"]', 'About', 'เกี่ยวกับเรา'],
@@ -5955,6 +6147,8 @@
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
     ['.profile-quote', 'lang', 'en'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
+    ['#cookie-bar', 'aria-label', 'Cookie consent'],
+    ['.mcta', 'aria-label', 'Quick contact'],
     ['.topnav .dbd', 'aria-label', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
