@@ -853,14 +853,18 @@
   .topnav .brand svg { width: 34px; height: 34px; }
   .topnav .brand .wordmark { font-size: 1.08rem; letter-spacing: -.025em; }
   .topnav .links { gap: 2px; flex-wrap: nowrap; }
+  /* เมนูมี 8 ลิงก์ + ปุ่มติดต่อ (ก.ย. 2026) · ป้าย DBD เป็นตัวเดียวในแถวที่หดได้ (รูป max-width:100%)
+     ที่ขาดไปทุก px ป้ายจะยอมหดแทน — padding ลิงก์ 7px ทำให้ป้ายไทยเหลือ 94px จาก 97px ที่ตั้งใจ (EN เต็ม)
+     ช่วง 1101–1179px .wrap แคบกว่า 1,124px ตามจอ จึงบีบ padding กับ gap ลงอีกขั้น ไม่งั้นป้ายเหลือ ~15px */
   .topnav .links a {
-    padding: 8px 9px; border-radius: 8px; white-space: nowrap;
+    padding: 8px 7px; border-radius: 8px; white-space: nowrap;
     transition: color .18s ease, background .18s ease, transform .18s ease;
   }
   .topnav .links a:hover { color: #fff; background: rgba(255,255,255,.08); }
-  /* เมนูมี 8 ลิงก์ (เพิ่ม เดโม กับ FAQ ก.ย. 2026) — ช่วง 1101–1240px เหลือที่ว่างแค่ ~6px ถ้าฟอนต์เว็บโหลดไม่ทัน
-     ฟอนต์สำรองกว้างกว่านิดเดียวก็ล้นจอ จึงบีบ padding ของลิงก์ในช่วงนี้ลง */
-  @media (min-width: 1101px) and (max-width: 1240px) { .topnav .links a { padding-inline: 7px; } }
+  @media (min-width: 1101px) and (max-width: 1179px) {
+    .topnav .wrap { gap: 10px; }
+    .topnav .links a { padding-inline: 6px; }
+  }
   .topnav .links a:last-child {
     margin-left: 4px; padding-left: 14px; padding-right: 14px;
   }
@@ -2843,7 +2847,7 @@
   .slider-thumbs button { height: 44px; }
   .hero-learn-link { display: inline-block; padding-block: 10px; }
   .bf-reset, #cookie-manage { min-height: 44px; }
-  /* เดโม 3 ตัวบนมือถือพับไว้หลังปุ่ม "ลองใช้เดโม" — รวมกันสูง ~7,200px คั่นอยู่กลางหน้า
+  /* เดโม 3 ตัวบนมือถือพับไว้หลังปุ่ม "ดูการนำเสนอ" — รวมกันสูง ~7,200px คั่นอยู่กลางหน้า
      ปุ่มซ่อนเป็นค่าตั้งต้น (hidden) สคริปต์เปิดให้เห็นเฉพาะจอ ≤760px ไม่มี JS ก็เห็นเดโมเต็มเหมือนเดิม
      ปุ่มรองแบบ ghost ไม่ใช่ burgundy — ไม่ได้ขอให้ติดต่อ (Burgundy Toll Rule) */
   .demo-toggle {
@@ -3564,7 +3568,7 @@
       <a href="#features">ฟังก์ชัน</a>
       <a href="#reports">ตัวอย่างรายงาน</a>
       <a href="#pricing">แพ็กเกจ</a>
-      <a href="#billing-flow">เดโม</a>
+      <a href="#billing-flow">นำเสนอ</a>
       <a href="#faq">FAQ</a>
       <a href="#about">เกี่ยวกับเรา</a>
       <a href="#articles">บทความ</a>
@@ -4127,7 +4131,7 @@
       <symbol id="bfi-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></symbol>
     </defs></svg>
 
-    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="bf-demo" hidden><span class="dt-open">ลองใช้เดโม</span><span class="dt-close">ซ่อนเดโม</span></button>
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="bf-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
     <div class="demo-body" id="bf-demo">
     <div class="bf reveal">
       <p class="bf-head">
@@ -4215,7 +4219,7 @@
       <symbol id="vsi-branch" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="5" rx="1"/><rect x="2.5" y="16.5" width="6" height="5" rx="1"/><rect x="15.5" y="16.5" width="6" height="5" rx="1"/><path d="M12 7.5v4M5.5 16.5v-2.5h13v2.5"/></symbol>
     </defs></svg>
 
-    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="vs-demo" hidden><span class="dt-open">ลองใช้เดโม</span><span class="dt-close">ซ่อนเดโม</span></button>
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="vs-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
     <div class="demo-body" id="vs-demo">
     <div class="vs reveal">
       <div class="vs-bar">
@@ -4309,7 +4313,7 @@
       </p>
     </div>
 
-    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="wq-demo" hidden><span class="dt-open">ลองใช้เดโม</span><span class="dt-close">ซ่อนเดโม</span></button>
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="wq-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
     <div class="demo-body" id="wq-demo">
     <div class="wq reveal">
       <div class="wq-stage">
@@ -4333,7 +4337,7 @@
       </div>
 
       <div class="wq-proof">
-        <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับเดโมด้านบนทุกบรรทัด</span></p>
+        <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับที่นำเสนอด้านบนทุกบรรทัด</span></p>
         <div class="wq-proof-row">
           <figure class="wq-fig">
             <figcaption><b>01</b><span data-wq="proof1">ลูกค้ากรอกคำขอใน LINE</span></figcaption>
@@ -4354,7 +4358,7 @@
       </div>
     </div>
 
-    <p class="wq-note" data-wq="note">ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
+    <p class="wq-note" data-wq="note">ตัวเลขที่นำเสนอด้านบนคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
     </div>
   </div>
 </section>
@@ -4604,7 +4608,7 @@
         <a href="#features">ฟังก์ชัน</a>
         <a href="#reports">ตัวอย่างรายงาน</a>
         <a href="#pricing">แพ็กเกจ</a>
-        <a href="#billing-flow">เดโมระบบวางบิล</a>
+        <a href="#billing-flow">นำเสนอระบบวางบิล</a>
         <a href="#vat-service">VAT Service</a>
         <a href="#faq">คำถามที่พบบ่อย</a>
         <a href="#about">เกี่ยวกับเรา</a>
@@ -5046,7 +5050,7 @@
     const once = (e) => { if (e && e.target.closest && e.target.closest('.demo-toggle')) return; trackSeoEvent('demo_use', { demo: id }); sec.removeEventListener('click', once); sec.removeEventListener('input', once); };
     sec.addEventListener('click', once); sec.addEventListener('input', once);
   });
-  // เดโมบนมือถือ: พับไว้หลังปุ่ม ลองใช้เดโม (จอ >760px เห็นเต็มเสมอ)
+  // เดโมบนมือถือ: พับไว้หลังปุ่ม ดูการนำเสนอ (จอ >760px เห็นเต็มเสมอ)
   const demoMQ = window.matchMedia('(max-width: 760px)');
   const demoToggles = [...document.querySelectorAll('.demo-toggle')].map(btn => ({ btn, body: document.getElementById(btn.getAttribute('aria-controls')) }));
   function syncDemos() {
@@ -5884,12 +5888,12 @@
       sumVat: { th: 'ภาษีมูลค่าเพิ่ม 7%', en: 'VAT 7%' },
       sumTotal: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
       baht: { th: '', en: 'Thai baht text, written by the system: ' },
-      proof: { th: 'ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับเดโมด้านบนทุกบรรทัด',
+      proof: { th: 'ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับที่นำเสนอด้านบนทุกบรรทัด',
                en: 'Already running — quote QG000010 from the test system, line for line the same as the demo above' },
       proof1: { th: 'ลูกค้ากรอกคำขอใน LINE', en: 'The buyer fills in the request on LINE' },
       proof2: { th: 'Business Central ออกใบเสนอราคาให้เอง', en: 'Business Central writes the quote' },
       proofZoom: { th: 'คลิกที่ภาพเพื่อดูขนาดเต็ม', en: 'Click an image for full size' },
-      note: { th: 'ตัวเลขในเดโมคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>',
+      note: { th: 'ตัวเลขที่นำเสนอด้านบนคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>',
               en: 'The demo does its arithmetic in the browser and touches nothing live · the seller on the document is a fictional company · scope and pricing are quoted per project against your Requirement · built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>' }
     };
 
@@ -6184,7 +6188,7 @@
     ['.footer-menu .footer-head', 'Menu', 'เมนู'],
     ['.footer-menu a[href="#services"]', 'Services', 'บริการ'],
     ['.footer-menu a[href="#features"]', 'Features', 'ฟังก์ชัน'],
-    ['.footer-menu a[href="#billing-flow"]', 'Billing demo', 'เดโมระบบวางบิล'],
+    ['.footer-menu a[href="#billing-flow"]', 'Billing demo', 'นำเสนอระบบวางบิล'],
     ['.footer-menu a[href="#vat-service"]', 'VAT Service', 'VAT Service'],
     ['.footer-menu a[href="#faq"]', 'FAQ', 'คำถามที่พบบ่อย'],
     ['.footer-menu a[href="#reports"]', 'Reports', 'ตัวอย่างรายงาน'],
