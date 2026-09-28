@@ -227,7 +227,7 @@ The soft, wide, low-opacity shadows are reserved for the hero's floating documen
 
 **The Hero-Only Lift Rule.** Soft wide shadows exist to say "this is paper on a desk." They belong to the hero document scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.
 
-**The No Hover Lift Rule.** `.cta` explicitly kills `transform` and `box-shadow` on hover and changes background only, in 125ms. Buttons do not rise. `.pricing-cta`, `.snav`, `.chat-fab-btn` and the `#services` phase cards have been brought in line. `.card` still lifts 5px, which is the one remaining inconsistency.
+**The No Hover Lift Rule.** `.cta` explicitly kills `transform` and `box-shadow` on hover and changes background only, in 125ms. Buttons do not rise. `.pricing-cta`, `.snav` and the `#services` phase cards have been brought in line. `.card` still lifts 5px, which is the one remaining inconsistency.
 
 ## Shapes
 
@@ -286,7 +286,7 @@ Deep Teal ground (`#01211D`), Mist and `#CBDCD8` text, one hairline rule. Three 
 Under the rule sits the ghost **Cookie settings** button (`#cookie-manage`) on its own, flush left with the columns above, which reopens the consent bar and focuses Accept. It is the only route back to the choice once it has been made. Withdrawing consent after it was granted reloads the page — GA's script stays resident otherwise, and a consent control that leaves the tracker running is worse than not offering one.
 
 ### Consent Bar
-One sentence and two buttons on one row: "เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน" · Accept (Deep Teal fill) · Reject (ghost). 74px tall on a 390px phone in both languages, so the hero's primary and secondary buttons both stay above the fold on first load (it was 196px with a title and a second sentence). Pinned 24px from the bottom-right at 760px wide max on desktop; 8px from the edges below 760px. The LINE button (`.chat-fab`) stays hidden while the bar is open, because the bar covers its corner.
+One sentence and two buttons on one row: "เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน" · Accept (Deep Teal fill) · Reject (ghost). 74px tall on a 390px phone in both languages, so the hero's primary and secondary buttons both stay above the fold on first load (it was 196px with a title and a second sentence). Pinned 24px from the bottom-right at 760px wide max on desktop; 8px from the edges below 760px.
 
 ### Demo Toggle (≤760px)
 The three demo sections keep their kicker, heading, and intro on phones, but the demo itself sits behind a full-width ghost button, **ดูการนำเสนอ** / **ซ่อนการนำเสนอ**, with a chevron that flips like the Claim Accordion's. The toggles are `hidden` in the markup and only revealed by script below 760px, so without JavaScript, and on every wider screen, the demos show in full exactly as before. Each demo's footnote lives inside the collapsible part, because it describes buttons you cannot see while the demo is closed. Closing a demo scrolls its section back to the top.
