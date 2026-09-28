@@ -167,7 +167,7 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 
 **The Contrast Floor Rule.** Every text colour on this page clears WCAG 2.2 AA against the *lightest* ground it can land on — 4.5:1 for body, 3:1 at 24px or 18.66px/700. Where a ground is a gradient, the lightest stop is what counts, which is why the since-removed `.service-highlight` panel lost its pink and sage radial washes: they lifted one corner to ~#4B6D6C and dropped three text colours below the floor. A new colour is not "close enough" at 4.4:1. Compute it before committing it. The Horizon Glow stops were picked against this rule: Slate Sage clears 4.61–4.84 on the strongest stop of each. Lighter greys do not — `.sub` is still `#57746F` (3.81 on Sea), Jade numerals 3.84 — so the glow never climbs to a section's heading block. `#features` and `#articles` can run tall washes because every line below their heading sits in a white card; `#web-quote`'s washes stay low because its `.wq-note` sits on the ground (in Slate Sage, which passes).
 
-**The Quotation Rule.** The `--ms-*` hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for `--ms-blue`, it has misunderstood what that token is for. The same logic admits two more borrowed colors, each in one place: LINE Green (`#06C755`) and Cloudflare Orange (`#F38020`) fill the LINE and Cloudflare Worker dots in `#web-quote`'s three-node pipeline once they light up, the way a logo would. Business Central's dot stays mint. Both clear 3:1 on the Signing Teal panel (4.52 and 3.85).
+**The Quotation Rule.** The `--ms-*` hues are Microsoft's, borrowed to label Microsoft's own five-phase framework. They never leak into JWIC's own UI. If a new element needs a color and reaches for `--ms-blue`, it has misunderstood what that token is for. The same logic admits two more borrowed colors, each in one place: LINE Green (`#06C755`) and Cloudflare Orange (`#F38020`) fill the LINE and Cloudflare Worker dots in `#web-quote`'s three-node pipeline once they light up, the way a logo would. Business Central's dot stays mint. Both clear 3:1 on the Signing Teal panel (4.52 and 3.85). The hero's Business Central screen (`.hs-screen`) quotes the BC web client the same way: its near-black app bar (`#1F1F1F`) and Fluent greys (`#242424`, `#424242`, `#616161`, `#E0E0E0`) exist inside that screen and nowhere else.
 
 **The Paper Rule.** Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen. A section ground may also carry the Horizon Glow — the four glow tokens, on the bottom edge, and nothing else: no fifth glow color, no glow on a card, and never burgundy or a Microsoft hue in a wash. Tinted surfaces are allowed only inside the working demos (the Billing Board, its flow diagram, and the VAT Service panel), because those are mocks of an application screen rather than page surfaces (see Billing Board below).
 
@@ -207,7 +207,7 @@ The whole light page sits on one Cool Page ground, and three Horizon Glows — `
 
 **Breakpoints** cluster at 900px (the main two-column → one-column collapse), 760px (nav becomes a toggle menu), and 720/600/560/520px for progressive tightening. 1080/1100px handle wide-layout adjustments.
 
-**The Right-Edge Bleed Rule.** The hero's color blocks are positioned with `right: calc(50% - 50vw)` so they run past the container to the viewport edge. They are hidden below 900px, where a single column would put them under the headline instead of beside it.
+**The Right-Edge Bleed Rule.** The hero's color blocks are positioned with `right: calc(50% - 50vw)` so they run past the container to the viewport edge. Below 900px the column version is hidden, because a single column would put it under the headline, and the same four blocks plus the quarter-round move under the hero scene instead: pseudo-elements of `.hero-doc`, which is centred, so `calc(50% - 50vw)` still reaches both viewport edges and the band can never climb behind the text. The pink block ends exactly where sage ends (34% → 46%) in both versions; it used to overshoot sage by 1.2%, a 7px step on desktop.
 
 **The Claim-and-Proof Rule.** Where a section pairs a set of claims with screenshots (`#business-central`, the block under the five phases inside `#services`, headed by an `h3`), it uses the accordion-and-image pattern Microsoft's own Dynamics 365 pages use: the claims are an accordion list in the left column, exactly one open at a time, and the open item's screenshot fills the right column. The claim text lives inside the accordion, not as a caption under the image — the image carries no caption. Above 1081px the two columns sit side by side (`.bento-tiles` in column 1, `.bento-shot` in column 2, swapped by `grid-column` rather than by DOM order). Below 1081px they stack, image first, and the accordion stays a full-width vertical list — never a horizontal scroller, which hides items off-screen with no indication they exist.
 
@@ -215,23 +215,23 @@ The whole light page sits on one Cool Page ground, and three Horizon Glows — `
 
 **Hybrid, weighted heavily toward flat.** The default is a Fluent-style hairline: `0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14)` on every card, figure, feature panel, and price card. It reads as a printed edge, not a lifted object. Depth in the body of the page comes from ground color changes and hairline borders, not from shadow.
 
-The soft, wide, low-opacity shadows are reserved for the hero's floating document mocks, where the fiction is literally paper lying on a desk and the shadow is doing representational work. Outside the hero they are legacy and should be replaced with the hairline.
+The soft, wide, low-opacity shadows are reserved for the hero scene, where the fiction is literally a screen and a sheet of paper lying on a desk and the shadow is doing representational work. Outside the hero they are legacy and should be replaced with the hairline.
 
 ### Shadow Vocabulary
 - **Hairline** (`0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14)`): the default for every surface below the hero.
-- **Document Lift** (`0 34px 64px -26px rgba(7,45,48,.6)`): the hero's primary `.doc-card`.
-- **Document Float** (`0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28)`): the five `.doc-mini` slips scattered around it.
+- **Document Lift** (`0 1px 2px rgba(1,47,42,.16), 0 12px 22px -10px rgba(1,47,42,.3), 0 44px 80px -30px rgba(1,47,42,.66)`): the printed tax invoice `.hs-paper` in the hero scene.
+- **Screen Float** (`0 0 0 1px rgba(0,0,0,.05), 0 18px 38px -18px rgba(1,47,42,.55)`): the Business Central screen `.hs-screen` behind it, and a smaller cut of it under the `.hs-hinge` label.
 - **Focus Ring** (`outline: 2px solid #A63A56; outline-offset: 2px` on `.cta`; `3px rgba(124,203,196,.72)` elsewhere): never a shadow, always an outline.
 
 ### Named Rules
 
-**The Hero-Only Lift Rule.** Soft wide shadows exist to say "this is paper on a desk." They belong to the hero document scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.
+**The Hero-Only Lift Rule.** Soft wide shadows exist to say "this is paper on a desk." They belong to the hero scene. A new card, panel, or price block gets the hairline. If a new element wants a big shadow, the honest question is whether it wants to be in the hero.
 
 **The No Hover Lift Rule.** `.cta` explicitly kills `transform` and `box-shadow` on hover and changes background only, in 125ms. Buttons do not rise. `.pricing-cta`, `.snav` and the `#services` phase cards have been brought in line. `.card` still lifts 5px, which is the one remaining inconsistency.
 
 ## Shapes
 
-Sharp by default. Buttons are 3px — barely rounded, deliberately close to square, matching Fluent's button geometry. Cards and panels are 8px. These two values are the system, and the reclaim block at the end of the `--ui-*` layer now maps the whole legacy tail (6, 9, 10, 11, 12, 14, 16, 17, 18, 20, 22, 24, 28px) onto them. What is left off-system is deliberate and decorative: the 4px `.doc-line` bars inside the hero document mock, and two inline SVG frames.
+Sharp by default. Buttons are 3px — barely rounded, deliberately close to square, matching Fluent's button geometry. Cards and panels are 8px. These two values are the system, and the reclaim block at the end of the `--ui-*` layer now maps the whole legacy tail (6, 9, 10, 11, 12, 14, 16, 17, 18, 20, 22, 24, 28px) onto them. What is left off-system is deliberate and decorative: the two inline SVG frames. (The 4px `.doc-line` bars of the old hero document mock went with it in September 2026; the new hero scene uses only 3px, 8px and the 999px pill of its hinge label.)
 
 Full rounds survive in two justified places: `50%` for avatars, social buttons, and icon dots, and `999px` for badges and pills.
 
@@ -300,23 +300,25 @@ Six tabs (`#feature-tab-vat` … `#feature-tab-api`) switching six panels in `#f
 ### Claim Accordion (signature)
 Five rows in `#business-central`, one open at a time, each swapping the screenshot in the adjacent column. A row is a `<button>`, so its heading is a `<span class="bento-h">`, not an `h3`: headings are not allowed inside buttons and screen readers flatten a button's children anyway. A row is not a card: no border, no radius, no fill — a 1px `#E2E8E6` rule along the top, a quiet tracked number (`01`–`05`) above the heading, and a chevron built from two `currentColor` borders rotated 45°, flipping to −135° when open. The open row is marked by a 3px Burgundy Seal bar down its left edge and by its body copy revealing on `panelCopyIn`. Hover is a `rgba(1,47,42,.035)` wash and nothing else — the rows never lift.
 
-### Hero Document Scene (signature)
-A rotated `.doc-card` Thai tax invoice built entirely in CSS — no image — surrounded by five `.doc-mini` slips (VAT report, PO, receipt, billing note, credit note) at rotations between -5° and +7°, with a dashed burgundy `.doc-stamp`. The card breathes on a 7.6s `docCardFloat` loop; the minis run 6.8s `docMiniFloat`; the stamp lands with `stampPop` at 1.25s on an overshoot curve (`cubic-bezier(.2,.9,.25,1.35)`).
+### Hero Scene: Screen to Seal (signature)
+A Business Central screen and the Thai tax invoice it prints, built entirely in HTML and CSS — no image. Behind and above: `.hs-screen`, a Posted Sales Invoice in the BC web client as the customer really sees it, in English, with the Thai report promoted in its action bar (`ใบแจ้งหนี้/ใบกำกับภาษี` + `TH`). In front, turned 1.6°: `.hs-paper`, the printed form drawn after the package's real output (`img/sales-invoice.webp`) — logo, seller and tax ID, `ต้นฉบับ/Original`, the customer and document boxes, one line, the total in Thai words, VAT on its own line. On the seam sits `.hs-hinge`, a white pill reading **JWIC Thai Localization**: the only element that touches both surfaces. The one warm mark is `.hs-stamp`, "✓ ถูกต้องตามประมวลรัษฎากร" in burgundy ink with a double rule, pressed at −7° (a quiet nod to 7% VAT) and roughened by the SVG filter `#hero-ink`.
 
-This is the single most product-specific element on the site. It is the localization package, drawn. Do not replace it with stock imagery or a generic dashboard screenshot.
+The rule that makes it evidence rather than decoration: **every figure is identical on both surfaces** — `IV26090001`, tax ID `0105558000123`, branch `00001`, `28/09/2026`, 50,000.00 / 3,500.00 / 53,500.00. The date stays Christian-era because the real form prints it that way; do not convert it to พ.ศ., and do not add a field the product does not print. The parties are fictional (the buyer is the `#vat-service` demo company, and both 13-digit IDs fail the check digit). Every size in the scene is `calc(n * var(--u))`, with `--u` at 1px on phones, 1.1px on tablets, 1px in the narrow 901–1100px desktop column and 1.15px above that, so the whole scene scales as one drawing. There is no loop animation: the scene only fades in with the rest of the hero. The reasoning is in `_plans/2026-09-hero-screen-to-seal.md`.
+
+This is the single most product-specific element on the site. It is the localization package, shown working. Do not replace it with stock imagery or a generic dashboard screenshot.
 
 ### Success by Design Stepper (signature)
 Five `.step` items in `#services`, each carrying a `--phase` token from the teal ramp and a `--stage-text` token from the Microsoft hues. A `.steps-progress` bar fills across them in flat Jade on a Pale Edge track; the current step pulses on a 1.8s `stepPulse`. The English stage name is set as a Label (12px/600/0.08em) in its Microsoft hue and the Thai line under it is the Title — the Thai reader's sentence carries the hierarchy, not the borrowed English word.
 
 ### Motion
-One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine times for entrances and reveals. State changes are faster and linear-ish (125–250ms `ease`). Six `prefers-reduced-motion: reduce` blocks disable animation, transitions, and the float loops — this coverage is a system commitment, not an optional extra.
+One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine times for entrances and reveals. State changes are faster and linear-ish (125–250ms `ease`). Six `prefers-reduced-motion: reduce` blocks disable animation and transitions — this coverage is a system commitment, not an optional extra. (The hero's float loops — `docCardFloat`, `docMiniFloat`, `stampPop` — were retired with the old document scene in September 2026.)
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** put new tokens in the one `:root` block at the top of `<style>`. Group them with their family (brand, Microsoft quotation, legacy aliases, Fluent `--ui-*`, glow).
 - **Do** use `var(--ui-radius-btn)` (3px) or `var(--ui-radius-card)` (8px) for every new corner.
-- **Do** give every new surface the Hairline shadow, and reach for a soft shadow only inside the hero document scene.
+- **Do** give every new surface the Hairline shadow, and reach for a soft shadow only inside the hero scene.
 - **Do** keep Thai body copy at 18px/500 and Thai headings in Anuphan.
 - **Do** wrap unbreakable Thai compounds in `.nb`.
 - **Do** update the `I18N` dictionary at the end of `<script>` whenever page text moves — especially `nth-child` selectors, which silently mistranslate when a sibling is inserted.
