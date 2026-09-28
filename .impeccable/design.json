@@ -345,13 +345,13 @@
       },
       {
         "name": "document-lift",
-        "value": "0 34px 64px -26px rgba(7,45,48,.6)",
-        "purpose": "The hero's primary .doc-card tax invoice. Representational — paper lying on a desk."
+        "value": "0 1px 2px rgba(1,47,42,.16), 0 12px 22px -10px rgba(1,47,42,.3), 0 44px 80px -30px rgba(1,47,42,.66)",
+        "purpose": "The printed tax invoice .hs-paper in the hero scene. Representational — paper lying on a desk."
       },
       {
-        "name": "document-float",
-        "value": "0 0 2px rgba(0,0,0,.12), 0 8px 24px -8px rgba(0,0,0,.28)",
-        "purpose": "The five .doc-mini slips scattered around the hero card."
+        "name": "screen-float",
+        "value": "0 0 0 1px rgba(0,0,0,.05), 0 18px 38px -18px rgba(1,47,42,.55)",
+        "purpose": "The Business Central screen .hs-screen behind the invoice in the hero scene, and a smaller cut of it under the .hs-hinge label."
       },
       {
         "name": "legacy-soft",
@@ -552,7 +552,7 @@
       },
       {
         "name": "The Right-Edge Bleed Rule",
-        "body": "The hero's color blocks are positioned with right: calc(50% - 50vw) so they run past the container to the viewport edge. They are hidden below 900px, where a single column would put them under the headline instead of beside it.",
+        "body": "The hero's color blocks are positioned with right: calc(50% - 50vw) so they run past the container to the viewport edge. Below 900px the column version is hidden and the same blocks move under the hero scene as pseudo-elements of the centred .hero-doc, so they never climb behind the headline. Pink ends exactly where sage ends (34% → 46%).",
         "section": "layout"
       },
       {
