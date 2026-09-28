@@ -800,34 +800,6 @@
     background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
   }
 
-  /* chat FAB → เปิดแชท LINE */
-  .chat-fab {
-    position: fixed; right: 18px; bottom: 18px; z-index: 90;
-    display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
-  }
-  /* กล่องคุกกี้ (z-index 100) บัง FAB อยู่ — คนเปิดครั้งแรกบนมือถือจึงไม่เห็นปุ่ม LINE เลย
-     ซ่อนไว้ระหว่างที่ยังไม่เลือก แล้วโผล่ทันทีที่กด ยอมรับ/ปฏิเสธ */
-  body:has(#cookie-bar:not([hidden])) .chat-fab { display: none; }
-  .chat-fab-tip {
-    position: relative; color: #fff; 
-    padding: 9px 32px 9px 14px; font-size: .9rem; font-weight: 600;
-  }
-  .chat-fab-tip::after {
-    content: ""; position: absolute; right: 14px; bottom: -6px;
-    border: 6px solid transparent; border-bottom: 0;
-  }
-  .chat-fab-tip .tip-close {
-    position: absolute; 
-    background: none; border: 0; color: #fff; font-size: 14px; line-height: 1; cursor: pointer;
-  }
-  .chat-fab-btn {
-    display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
-    color: #fff;
-    transition: transform .15s;
-  }
-  .chat-fab-btn:hover { transform: translateY(-2px); }
-  .chat-fab-btn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
   /* ---- 2026 visual refresh ---- */
   html { scroll-padding-top: 69px; }
   body { overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -2471,7 +2443,6 @@
 
   .feature-tab,
   .plan-icon,
-  .chat-fab-tip,
   .pricing-cta,
   .faq-list summary::before { border-radius: var(--ui-radius-btn); }
 
@@ -2577,22 +2548,6 @@
      จึงไปทับกฎมือถือที่บรรทัด 1316/1359 (มาก่อนในไฟล์) — เกิดที่ว่างเปล่า ~230px เหนือหัวเรื่อง */
   @media (max-width: 900px) { header { min-height: 0; padding: 56px 0 72px; } }
   @media (max-width: 560px) { header { padding: 40px 0 56px; } }
-
-  /* ---- 8. ปุ่มแชทลอย ----
-     บนมือถือ ป้าย "สอบถาม คลิก" ทับปุ่ม "ดูราคาแพ็กเกจ" ใน hero พอดี — เหลือแค่ปุ่มกลม */
-  .chat-fab-btn {
-    background: var(--brand-deep); background-image: none;
-    box-shadow: var(--ui-shadow); transition: background .125s ease;
-  }
-  .chat-fab-btn:hover { transform: none; background: var(--brand-teal); }
-  .chat-fab-btn:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
-  .chat-fab-tip { background: var(--brand-deep); box-shadow: var(--ui-shadow); }
-  .chat-fab-tip::after { border-top-color: var(--brand-deep); }
-  @media (max-width: 760px) {
-    .chat-fab { right: 14px; bottom: 14px; }
-    .chat-fab-tip { display: none; }
-    .chat-fab-btn { width: 50px; height: 50px; }
-  }
 
   /* ---- 10. footer ----
      เดิมมีแค่โลโก้กับบรรทัด copyright — ไม่มีทางไปต่อ ไม่มีช่องทางติดต่อ และไม่มีทาง
@@ -2830,18 +2785,6 @@
   /* #about .linkedin-link (specificity 1,1,0) ทับ .linkedin-link เปล่า ๆ ต้องเขียนให้เท่ากัน */
   #about .linkedin-link { border-color: rgba(92,201,224,.85); } /* 3.4 บน #185A52 (เดิม 2.68) */
 
-  /* ---- 2.5.8 Target Size (Minimum) — ใหม่ใน WCAG 2.2, ต้อง 24x24 CSS px ----
-     ปุ่มปิดป้ายแชทเดิม 20x22 ไม่เข้าข้อยกเว้นข้อใดเลย (ไม่ใช่ลิงก์ในบรรทัดข้อความ
-     ไม่มีทางเลือกอื่นที่ทำสิ่งเดียวกัน และไม่ใช่ตำแหน่งที่กฎหมาย/การนำเสนอบังคับ) */
-  .chat-fab-tip .tip-close {
-    display: grid; place-items: center;
-    top: 2px; right: 2px; width: 24px; height: 24px; padding: 0;
-    border-radius: var(--ui-radius-btn);
-  }
-  .chat-fab-tip { padding-right: 34px; }
-  .chat-fab-tip .tip-close:hover { background: rgba(255,255,255,.16); }
-  .chat-fab-tip .tip-close:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
-
   /* ---- 2.5.5 Target Size (Enhanced) — ปุ่มที่กดด้วยนิ้วให้ได้ 44×44 (วัดที่ 390px ก.ย. 2026) ----
      เดิม: ปุ่มเมนู 34×34 · TH/EN 34×33 · ปุ่มเล่นสไลด์ 12×34 (ถูก flex บีบ) · thumbnail 64×40
      ลิงก์ "ศึกษาข้อมูลเพิ่มเติม" สูง 24 · ปุ่มคืนค่าเดิม 43 · ปุ่มจัดการคุกกี้ 39 · ป้าย DBD 64×26
@@ -2880,30 +2823,6 @@
     .cookie-bar button { padding: 6px 12px; }
   }
 
-  /* แถบติดต่อด่วนบนมือถือ (.mcta): LINE / โทร / ดูราคา ติดขอบล่าง ในระยะนิ้วโป้งทุกตำแหน่งของหน้า
-     burgundy ที่ปุ่ม LINE ปุ่มเดียว = การขอให้ติดต่อ (Burgundy Toll Rule) อีกสองปุ่มเป็น ghost
-     ตอนแถบนี้แสดง ปุ่ม LINE ลอยมุมขวา (chat-fab) ซ่อน เพราะทำหน้าที่เดียวกัน */
-  .mcta { display: none; }
-  @media (max-width: 760px) {
-    .mcta:not([hidden]) {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
-      display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 8px;
-      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
-      background: rgba(255,255,255,.97); border-top: 1px solid var(--ui-line);
-      box-shadow: 0 -2px 12px rgba(1,47,42,.08);
-    }
-    .mcta a {
-      display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 0 8px;
-      border: 1px solid var(--ui-ink); border-radius: var(--ui-radius-btn); background: #fff; color: var(--ui-ink);
-      font: 600 .95rem/1.2 "Plus Jakarta Sans", "Anuphan", sans-serif; text-decoration: none; white-space: nowrap;
-    }
-    .mcta a.mcta-line { background: var(--brand-burgundy); border-color: var(--brand-burgundy); color: #fff; }
-    .mcta a:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
-    .mcta svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    body.has-mcta .chat-fab { display: none; }
-    body.has-mcta .cookie-bar { bottom: calc(68px + env(safe-area-inset-bottom)); }
-    body.has-mcta footer { padding-bottom: calc(30px + 62px + env(safe-area-inset-bottom)); }
-  }
   @media (max-width: 760px) {
     .topnav .lang button { min-width: 44px; min-height: 44px; }
     .topnav .wrap > .dbd { position: relative; }
@@ -3476,7 +3395,7 @@
     body { background: #fff; color: #10241f; font-size: 13px; }
     *, *::before, *::after { animation: none !important; transition: none !important; box-shadow: none !important; text-shadow: none !important; }
     .reveal, .hero-copy > * { opacity: 1 !important; transform: none !important; }
-    .skip-link, .chat-fab, .cookie-bar, .mcta, .demo-toggle,
+    .skip-link, .cookie-bar, .demo-toggle,
     .topnav .links, .topnav .social, .topnav .lang, .menu-toggle,
     .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
     #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link,
@@ -4649,23 +4568,6 @@
   </div>
 </div>
 
-<div class="chat-fab" id="chat-fab">
-  <div class="chat-fab-tip">
-    <span class="tip-text">สอบถาม คลิก</span>
-    <button type="button" class="tip-close" aria-label="ปิด">✕</button>
-  </div>
-  <a class="chat-fab-btn" href="https://line.me/ti/p/~0841487480" aria-label="แชทสอบถามทาง LINE">
-    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-  </a>
-</div>
-
-<!-- แถบติดต่อด่วนบนมือถือ: โผล่หลังเลื่อนพ้น hero ซ่อนเมื่อถึง #contact · สคริปต์คุมการแสดง ไม่มี JS ก็ไม่แสดง -->
-<nav class="mcta" id="mcta" aria-label="ติดต่อด่วน" hidden>
-  <a class="mcta-line" href="https://line.me/ti/p/~0841487480" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>คุยทาง LINE</span></a>
-  <a class="mcta-tel" href="tel:0841487480"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>โทร</span></a>
-  <a class="mcta-price" href="#pricing"><span>ดูราคา</span></a>
-</nav>
-
 <script>
   // ปุ่มจองคิว Cal.com ใน #contact — official embed snippet จาก cal.com/docs
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -5049,7 +4951,7 @@
 
   // ── funnel events (ยิงผ่าน trackSeoEvent เท่านั้น — ไม่ได้ consent ก็ไม่มีอะไรออกไป) ──
   // location = section/ส่วนของหน้าที่ถูกกด ใช้ดูว่าปุ่มตรงไหนพาคนไปติดต่อ
-  const whereOf = (el) => { const box = el.closest('#chat-fab, .mcta, .topnav, footer, header#top, section[id]'); return box ? (box.id || box.className.split(' ')[0] || box.tagName.toLowerCase()) : 'page'; };
+  const whereOf = (el) => { const box = el.closest('.topnav, footer, header#top, section[id]'); return box ? (box.id || box.className.split(' ')[0] || box.tagName.toLowerCase()) : 'page'; };
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
@@ -5088,17 +4990,6 @@
   }));
   demoMQ.addEventListener('change', syncDemos);
   syncDemos();
-  // แถบติดต่อด่วนบนมือถือ: แสดงเมื่อปุ่มใน hero เลื่อนพ้นจอขึ้นไปแล้ว และยังไม่ถึง #contact (ที่นั่นมีปุ่มครบอยู่แล้ว)
-  // จับที่ .hero-actions ไม่ใช่ทั้ง hero — บนมือถือภาพเอกสารใต้ปุ่มสูงอีก ~600px ช่วงนั้นจะไม่มีปุ่มติดต่อเลย
-  const mcta = document.getElementById('mcta');
-  const heroCta = document.querySelector('.hero-actions') || document.getElementById('top');
-  if (mcta && heroCta && 'IntersectionObserver' in window) {
-    let pastHero = false, atContact = false;
-    const syncMcta = () => { const show = demoMQ.matches && pastHero && !atContact; mcta.hidden = !show; document.body.classList.toggle('has-mcta', show); };
-    new IntersectionObserver(en => { pastHero = !en[0].isIntersecting && en[0].boundingClientRect.top < 0; syncMcta(); }).observe(heroCta);
-    new IntersectionObserver(en => { atContact = en[0].isIntersecting; syncMcta(); }, { threshold: .2 }).observe(document.getElementById('contact'));
-    demoMQ.addEventListener('change', syncMcta);
-  }
   // เห็นราคาแล้ว (30% ของ section อยู่ในจอ) — ยิงครั้งเดียว
   const pricingSec = document.getElementById('pricing');
   if (pricingSec && 'IntersectionObserver' in window) {
@@ -5112,11 +5003,6 @@
   Cal("on", { action: "bookingSuccessful", callback: () => {
     trackSeoEvent('generate_lead', { method: 'cal_booking' });
   } });
-
-  // chat FAB: ปุ่ม ✕ ซ่อน tooltip (โผล่ใหม่เมื่อโหลดหน้าใหม่)
-  document.querySelector('#chat-fab .tip-close').addEventListener('click', () => {
-    document.querySelector('.chat-fab-tip').hidden = true;
-  });
 
   // ── #vat-service — เดโมค้นเลขผู้เสียภาษี ─────────────────────────
   // สี่สถานการณ์ตัวอย่างตายตัวในหน้า · พิมพ์เลขเองแล้วกดค้นหา = ยิงถึงกรมสรรพากรจริง
@@ -6056,7 +5942,6 @@
     ['.topnav .links a[href="#billing-flow"]', 'Demos'],
     ['.topnav .links a[href="#about"]', 'About'],
     ['.topnav .links a[href="#contact"]', 'Contact'],
-    ['#chat-fab .tip-text', 'Chat with us'],
     ['header h1', 'Business Central implementation<br> with complete <span class="hero-accent">Thai Localization</span>'],
     ['header .lead', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
     ['.hero-actions .cta:not(.secondary, .ghost)', 'Book a free consultation &amp; demo'],
@@ -6183,9 +6068,6 @@
     ['.credential-verification span', 'Verified on Microsoft Learn'],
     ['.contact-info .form-heading h3', 'Pick a time that works — book instantly'],
     ['.demo-toggle .dt-open', 'Try the demo'],
-    ['.mcta-line span', 'Chat on LINE'],
-    ['.mcta-tel span', 'Call'],
-    ['.mcta-price span', 'Pricing'],
     ['.ci-flyer a', 'One-page flyer to share with your team (Thai)'],
     ['.demo-toggle .dt-close', 'Hide the demo'],
     ['#faq h2', 'Frequently Asked Questions'],
@@ -6240,8 +6122,6 @@
     ['.feature-tablist', 'aria-label', 'JWIC Localization features'],
     ['#vs-cases', 'aria-label', 'Example scenarios'],
     ['#wq-who', 'aria-label', 'Buyer type'],
-    ['.chat-fab-tip .tip-close', 'aria-label', 'Close'],
-    ['.chat-fab-btn', 'aria-label', 'Chat with us on LINE'],
     ['.bento-shot img[src$="bc-power-automate.webp"]', 'alt', 'Power Automate flow that sends an approval request automatically when a new document is created in Business Central'],
     ['.bento-shot img[src$="bc-excel-pivot.webp"]', 'alt', 'Aged receivables report opened in Excel as a PivotTable, with slicers filtering by department and customer group'],
     ['.bento-shot img[src$="bc-home.webp"]', 'alt', 'Business Central home page in the cloud, showing the company name and the task menus the user has rights to'],
@@ -6272,7 +6152,6 @@
     ['img[src*="bc-liff-quote"]', 'alt', 'Quote QG000010 created by Business Central from that request — nine lines, grand total THB 4,333,928.00, stamped as test data; the email field is blurred'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
     ['#cookie-bar', 'aria-label', 'Cookie consent'],
-    ['.mcta', 'aria-label', 'Quick contact'],
     ['.topnav .dbd', 'aria-label', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
     ['header .hero-learn-link', 'aria-label', 'Learn more about Business Central on the Microsoft website (opens in a new tab)'],
     ['meta[name="description"]', 'content', 'End-to-end ERP implementation for Thai businesses — from process analysis, system setup, development, and data migration to user training and post-go-live support, with Thai accounting and tax fully covered.'],
