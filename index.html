@@ -1269,6 +1269,12 @@
     }
     .about-details { grid-template-columns: 1fr; }
   }
+  /* จอแคบ: แผงที่ไม่ได้เลือกออกจาก layout — ถ้าซ้อนไว้ในช่องเดียวกัน ทุกแผงจะถูกยืดสูงเท่าแผงที่ยาวสุด
+     แล้วเกิดช่องว่างใหญ่ระหว่างไอคอนกับหัวข้อ (screen เท่านั้น ตอนพิมพ์ยังกางครบทุกแผง) */
+  @media screen and (max-width: 900px) {
+    .feature-panels { min-height: 0; }
+    .feature-panel:not(.is-active) { display: none; }
+  }
 
   @media (max-width: 720px) {
     .wrap { padding-left: 20px; padding-right: 20px; }
@@ -3736,8 +3742,8 @@
           <div class="feature-panel-icon"><svg viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
           <div class="feature-panel-copy">
             <h3>ภาษีมูลค่าเพิ่ม</h3>
-            <p>จัดทำรายงานภาษีซื้อ–ขาย <strong>รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</strong> พร้อม <strong>กรอกข้อมูลลงแบบ ภ.พ.30 ของกรมสรรพากรให้อัตโนมัติ</strong> รองรับภาษีไม่ถึงกำหนดและใบแทนใบกำกับภาษี และ <strong>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร</strong> ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</p>
-            <ul class="feature-chips"><li>ภ.พ.30</li><li>Unrealized VAT</li><li>Branch VAT</li><li>VAT Service</li></ul>
+            <p>จัดทำรายงานภาษีซื้อ–ขาย <strong>รองรับทั้งสำนักงานใหญ่และสาขา รวมถึงการแยกยื่นรายสาขา</strong> พร้อม <strong>กรอกข้อมูลลงแบบ ภ.พ.30 ของกรมสรรพากรให้อัตโนมัติ</strong> รองรับภาษีไม่ถึงกำหนดและใบแทนใบกำกับภาษี ส่วนค่าบริการที่จ่ายไปต่างประเทศ <strong>ระบบจัดทำแบบ ภ.พ.36 สำหรับนำส่งภาษีแทน</strong><span class="nb"><strong>ผู้ให้บริการ</strong>ให้ด้วย</span></p>
+            <ul class="feature-chips"><li>ภ.พ.30</li><li>ภ.พ.36</li><li>Unrealized VAT</li><li>Tax Branch</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
           <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-vat.webp" width="1400" height="933" alt="แบบแสดงรายการภาษีและเครื่องคิดเลขบนโต๊ะทำงาน" loading="lazy" decoding="async"></div>
@@ -5975,8 +5981,9 @@
     ['#feature-tab-assets', 'Stock &amp; Assets'],
     ['#feature-tab-docs', 'Thai Documents'],
     ['#feature-panel-vat h3', 'Value Added Tax (VAT)'],
-    ['#feature-panel-vat .feature-panel-copy > p', 'Purchase–sales VAT reports <strong>supporting head office and branches, including separate branch filing</strong>, with <strong>the official PP30 form filled in automatically</strong>. Unrealized VAT and substitute tax invoices covered, plus <strong>tax ID and branch number lookup via the Revenue Department VAT Service</strong> — name and address filled in for you.'],
+    ['#feature-panel-vat .feature-panel-copy > p', 'Purchase–sales VAT reports <strong>supporting head office and branches, including separate branch filing</strong>, with <strong>the official PP30 form filled in automatically</strong>. Unrealized VAT and substitute tax invoices covered. For services paid to overseas providers, <strong>the PP36 return is prepared so you can remit VAT on their behalf</strong>.'],
     ['#feature-panel-vat .feature-chips li:nth-child(1)', 'PP30'],
+    ['#feature-panel-vat .feature-chips li:nth-child(2)', 'PP36'],
     ['#feature-panel-wht h3', 'Withholding Tax'],
     ['#feature-panel-wht .feature-chips li:nth-child(1)', '50 Bis'],
     ['#feature-panel-wht .feature-chips li:nth-child(2)', 'PND 3/53'],
