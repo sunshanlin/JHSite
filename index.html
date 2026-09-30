@@ -2598,9 +2598,6 @@
     color: var(--brand-mint); font-size: .8rem; line-height: 1.75;
     font-variant-numeric: tabular-nums;
   }
-  /* แนวทางเครื่องหมายการค้าของ Cloudflare บังคับบรรทัดนี้ไว้ท้ายหน้าที่ใช้ชื่อเขา — รวม Microsoft/LINE ไว้ด้วยกัน */
-  /* footer span (tagline) ทำตัวพิมพ์ใหญ่+เว้นตัวอักษร — บรรทัดกฎหมายต้องอ่านเป็นประโยคปกติ */
-  .footer-tm { display: inline-block; margin-top: 4px; font-size: .92em; line-height: 1.6; letter-spacing: normal; text-transform: none; }
   /* ป้าย DBD Registered บนแถบเมนู — รูปโหลดจากเซิร์ฟเวอร์ DBD ตาม snippet ที่เขาให้มา
      เครื่องหมายจึงหายเองถ้าทะเบียนถูกถอน · แถบพื้นสว่างอยู่แล้ว โลโก้ม่วง/น้ำเงินไม่ต้องรองขาว
      เซิร์ฟเวอร์ DBD ล่มบ่อย (TLS พัง) -> onerror สลับไปสำเนาใน img/credentials/ ขนาดไฟล์/ขอบใสเท่ากันเป๊ะ
@@ -3064,7 +3061,7 @@
   /* แถวสถาปัตยกรรม LINE -> Cloudflare -> Business Central
      Business Central เป็นไฟล์ทางการจากชุดไอคอน Dynamics 365 ใช้ตามต้นฉบับ ไม่หมุน ไม่ดัด
      LINE และ Cloudflare เป็นไอคอนเส้นของเว็บเอง (Cloudflare ไม่อนุญาตให้ใช้โลโก้ · LINE เลือกไม่ใช้)
-     ใช้แค่ชื่อกำกับ พร้อมบรรทัดเครื่องหมายการค้าที่ footer */
+     ใช้แค่ชื่อกำกับ */
   .wq-arch {
     display: grid; align-items: start; max-width: 920px; margin: 34px auto 4px;
     grid-template-columns: 170px minmax(60px, 1fr) 170px minmax(60px, 1fr) 170px;
@@ -4567,7 +4564,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933<br><span class="footer-tm">Microsoft และ Dynamics 365 เป็นเครื่องหมายการค้าของกลุ่มบริษัท Microsoft · Cloudflare และ Cloudflare Workers เป็นเครื่องหมายการค้าและ/หรือเครื่องหมายการค้าจดทะเบียนของ Cloudflare, Inc. ในสหรัฐอเมริกาและประเทศอื่น · LINE เป็นเครื่องหมายการค้าของ LY Corporation</span></p>
+      <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933</p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
   </div>
@@ -6113,7 +6110,7 @@
     ['.footer-menu a[href="#articles"]', 'Articles', 'บทความ'],
     ['.footer-reach .footer-head', 'Contact', 'ติดต่อ'],
     ['.footer-reach a[href="#contact"]', 'Contact us', 'ติดต่อเรา'],
-    ['.footer-legal', '175 Udomsuk 58, Sukhumvit 103 Road, Bang Na, Bangkok 10260 · Commercial registration no. 1101700150933<br><span class="footer-tm">Microsoft and Dynamics 365 are trademarks of the Microsoft group of companies · Cloudflare and Cloudflare Workers are trademarks and/or registered trademarks of Cloudflare, Inc. in the United States and other jurisdictions · LINE is a trademark of LY Corporation</span>', '175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933<br><span class="footer-tm">Microsoft และ Dynamics 365 เป็นเครื่องหมายการค้าของกลุ่มบริษัท Microsoft · Cloudflare และ Cloudflare Workers เป็นเครื่องหมายการค้าและ/หรือเครื่องหมายการค้าจดทะเบียนของ Cloudflare, Inc. ในสหรัฐอเมริกาและประเทศอื่น · LINE เป็นเครื่องหมายการค้าของ LY Corporation</span>'],
+    ['.footer-legal', '175 Udomsuk 58, Sukhumvit 103 Road, Bang Na, Bangkok 10260 · Commercial registration no. 1101700150933', '175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933'],
   ];
   const I18N_ATTR = [
     /* blockquote ตั้ง lang="th" ไว้ — พอสลับเป็นอังกฤษต้องเปลี่ยนตาม ไม่งั้นฟอนต์/screen reader อ่านผิดภาษา */
