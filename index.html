@@ -3143,6 +3143,10 @@
   .ct-step.on .ct-lv { color: var(--ct-thread); }
   .ct-step.done .ct-nm { color: var(--ui-muted); }
   .ct-step.done::after { background: var(--brand-pale); }
+  /* ภาพประจำขั้น: ไอคอนเส้นชุดเดียวกับ .ct-ic สี jade · ขั้นที่เล่นอยู่เป็นทองแดงตามขอบกับเส้นใต้ · ขั้นที่ผ่านแล้วจางลง */
+  .ct-pic { width: 28px; height: 28px; margin-bottom: 4px; stroke-width: 1.6; color: var(--brand-jade); }
+  .ct-step.on .ct-pic { color: var(--ct-thread); }
+  .ct-step.done .ct-pic { color: var(--ui-muted); }
 
   /* คำบรรยายทุกบทวางซ้อนในช่องเดียว (บทที่ไม่ได้แสดงซ่อนแบบ visibility) ช่องจึงสูงเท่าบทที่ยาวสุดเสมอ
      หน้าต่างข้างล่างไม่กระโดดตอนเล่นอัตโนมัติ ทุกความกว้างและทุกภาษา */
@@ -3319,6 +3323,7 @@
     .ct-head { margin-bottom: 14px; }
     .ct-play { width: 100%; justify-content: center; }
     .ct-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ct-pic { width: 24px; height: 24px; }
     .ct-narr > * { grid-template-columns: minmax(0, 1fr); }
     .ct-narr-lv { grid-row: auto; padding-top: 0; }
     .ct-bc { margin: 0 12px 12px; }
@@ -4185,6 +4190,14 @@
       <symbol id="cti-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
       <symbol id="cti-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
       <symbol id="cti-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+      <!-- ภาพประจำขั้นของปุ่มขั้น (วาดเอง): ส่งขาย · บรรจุกล่อง · ไลน์บรรจุ · pool ลัง · ถุงมือ · น้ำยางกับสารเคมี · เรือนำเข้า -->
+      <symbol id="cti-truck" viewBox="0 0 24 24"><rect x="2.5" y="6" width="11" height="9.5" rx="1"/><path d="M13.5 9.5h4l3 3.5v2.5h-7"/><circle cx="6.5" cy="17.8" r="1.8"/><circle cx="17" cy="17.8" r="1.8"/></symbol>
+      <symbol id="cti-box" viewBox="0 0 24 24"><path d="M12 3.5 20 7.5v9L12 20.5 4 16.5v-9z"/><path d="M4 7.5 12 11.5 20 7.5M12 11.5v9"/></symbol>
+      <symbol id="cti-line" viewBox="0 0 24 24"><rect x="2.5" y="14.5" width="19" height="4.5" rx="2.25"/><circle cx="6.75" cy="16.75" r=".6"/><circle cx="17.25" cy="16.75" r=".6"/><rect x="5" y="8" width="5.5" height="6.5" rx=".8"/><rect x="13.5" y="9.5" width="5" height="5" rx=".8"/></symbol>
+      <symbol id="cti-pool" viewBox="0 0 24 24"><path d="M4 11h16v4.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M7.5 15h9"/><path d="M9 3v5M7 6l2 2 2-2M15 3v5M13 6l2 2 2-2"/></symbol>
+      <symbol id="cti-glove" viewBox="0 0 24 24"><path d="M8.5 13V5.5a1.5 1.5 0 0 1 3 0V11M11.5 11V4.5a1.5 1.5 0 0 1 3 0V11M14.5 11V5.5a1.5 1.5 0 0 1 3 0V11M17.5 11V7.5a1.5 1.5 0 0 1 3 0v6.5a6 6 0 0 1-3 5.2V21M8.5 13 6.7 11.2a1.5 1.5 0 0 0-2.3 1.9L7 17v4M7 18.5h11"/></symbol>
+      <symbol id="cti-drum" viewBox="0 0 24 24"><ellipse cx="8.5" cy="6" rx="5" ry="2"/><path d="M3.5 6v12c0 1.1 2.2 2 5 2s5-.9 5-2V6M3.5 12c0 1.1 2.2 2 5 2s5-.9 5-2"/><path d="M17 10v3l-2.5 5a1.3 1.3 0 0 0 1.2 2h4.6a1.3 1.3 0 0 0 1.2-2L19 13v-3M16.3 10h3.4"/></symbol>
+      <symbol id="cti-ship" viewBox="0 0 24 24"><path d="M2.5 14.5h19l-2.3 4.2a1.5 1.5 0 0 1-1.3.8H6.1a1.5 1.5 0 0 1-1.3-.8z"/><rect x="5.5" y="10" width="4.5" height="4.5"/><rect x="10" y="10" width="4.5" height="4.5"/><path d="M7.75 10V6.5h4.5V10M16.5 14.5V8h2.5v6.5"/></symbol>
       <symbol id="cti-table" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M1.5 6h13M6 6v7.5M10.5 6v7.5"/></symbol>
       <symbol id="cti-graph" viewBox="0 0 16 16"><rect x="1" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="9.5" width="5" height="4" rx=".8"/><path d="M6 4.5h4M8 4.5v7h2"/></symbol>
       <symbol id="cti-expand" viewBox="0 0 16 16"><path d="M3.5 3.5 8 8l4.5-4.5M3.5 8.5 8 13l4.5-4.5"/></symbol>
@@ -5721,26 +5734,26 @@
 
     const STEPS = [
       // open = กิ่งที่กางในขั้นนั้น — เฉพาะที่คำบรรยายพูดถึง กราฟจึงไม่บานจนต้องเลื่อนหา
-      { focus: 's', open: [], nm: { th: 'จัดส่งขาย', en: 'Sales shipment' },
+      { focus: 's', ic: 'truck', open: [], nm: { th: 'จัดส่งขาย', en: 'Sales shipment' },
         tx: { th: 'ใบจัดส่งขาย SS-0912 ส่งถุงมือ 1,200 กล่องจาก Lot NGM-260915 ให้ลูกค้า และลงต้นทุนขายไว้ 98,403.92 บาท รายการนี้แหละคือจุดที่คุณเริ่มไล่ย้อนกลับ',
               en: 'Sales shipment SS-0912 sends 1,200 boxes from lot NGM-260915 to a customer, at a cost of goods sold of 98,403.92 baht. This is where you start tracing back.' } },
-      { focus: 'op', open: ['s'], nm: { th: 'บรรจุกล่อง', en: 'Packing' },
+      { focus: 'op', ic: 'box', open: ['s'], nm: { th: 'บรรจุกล่อง', en: 'Packing' },
         tx: { th: 'ใบสั่งผลิต PCK-093 บรรจุถุงมือได้ 2,000 กล่อง ต้นทุนรวม 164,006.54 บาท ตกกล่องละ 82.00 บาท ในยอดนี้มี Indirect cost 6,307.94 บาทที่ระบบลงไว้บน Output ด้วย',
               en: 'Production order PCK-093 packs 2,000 boxes for 164,006.54 baht in total, 82.00 a box. That total includes 6,307.94 of indirect cost, which Business Central posts on the Output.' } },
-      { focus: 'cb', open: ['s', 'op'], nm: { th: 'เบิกเข้าไลน์บรรจุ', en: 'Packing-line issues' },
+      { focus: 'cb', ic: 'line', open: ['s', 'op'], nm: { th: 'เบิกเข้าไลน์บรรจุ', en: 'Packing-line issues' },
         tx: { th: 'ใบสั่งผลิต PCK-093 เบิกถุงมือ bulk 200,000 ชิ้นจาก Lot DL3-260910 กล่อง dispenser 2,000 ใบ กับลังอีก 200 ใบ แล้วใช้ Capacity ของไลน์ตรวจและบรรจุไป 16 ชั่วโมง',
               en: 'Production order PCK-093 consumes 200,000 bulk gloves from lot DL3-260910, 2,000 dispenser boxes and 200 cartons, then uses 16 hours of inspection-and-packing line capacity.' } },
       // กิ่งข้างที่ระดับเดียวกับไลน์จุ่ม: ลังใช้ Average ต้นทุนมาจาก pool ของงวด ไม่ใช่ใบรับใบเดียว
-      { focus: 'ap9', open: ['s', 'op', 'cc', 'ap9'], nm: { th: 'ต้นทุนเฉลี่ยของลัง', en: 'Carton average cost' },
+      { focus: 'ap9', ic: 'pool', open: ['s', 'op', 'cc', 'ap9'], nm: { th: 'ต้นทุนเฉลี่ยของลัง', en: 'Carton average cost' },
         tx: { th: 'ลังใช้ Costing Method แบบ Average ต้นทุนจึงไม่ได้ผูกกับใบรับใบใดใบหนึ่ง แต่มาจาก Average Cost Pool ของเดือนกันยายน ที่รวมยอดยกมา 400 ใบกับของที่รับเข้าในเดือนอีก 1,000 ใบ เฉลี่ยแล้วใบละ 14.00 บาท ตรงกับหน้า Average Cost Calc. Overview ของ Business Central อยากดูที่มาของยอดยกมา กด Previous period ย้อนไปเดือนสิงหาคมได้เลย',
               en: "Cartons use the Average costing method, so their cost is not tied to any one receipt. It comes from the September Average Cost Pool: 400 cartons carried over plus 1,000 received during the month, averaging 14.00 baht each, exactly as Business Central's Average Cost Calc. Overview shows. To see where the carried-over value came from, press Previous period to go back to August." } },
-      { focus: 'od', open: ['s', 'op', 'cb', 'cx'], nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
+      { focus: 'od', ic: 'glove', open: ['s', 'op', 'cb', 'cx'], nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
         tx: { th: 'ถุงมือ bulk ชุดนี้มาจากใบสั่งผลิต DIP-091 ของไลน์จุ่มที่ 3 ต้นทุน 142,898.60 บาท ตกชิ้นละ 0.71449 บาท กล่อง Output ยังแยก Actual Cost ของทั้งใบสั่งผลิตไว้ให้ตรงกับหน้า Statistics ด้วย ส่วนกล่อง dispenser ซื้อมาจากผู้ขายในประเทศ',
               en: "These bulk gloves come from production order DIP-091 on dipping line 3: 142,898.60 baht, or 0.71449 a glove. The Output box also breaks down the whole order's actual cost, matching its Statistics page. The dispenser boxes were bought from a local vendor." } },
-      { focus: 'cl1', open: ['s', 'op', 'cb', 'od'], nm: { th: 'เบิกน้ำยางและสารเคมี', en: 'Latex and chemicals' },
+      { focus: 'cl1', ic: 'drum', open: ['s', 'op', 'cb', 'od'], nm: { th: 'เบิกน้ำยางและสารเคมี', en: 'Latex and chemicals' },
         tx: { th: 'ไลน์จุ่มเบิกน้ำยาง NBR ไป 1,560 กก. ตาม FIFO น้ำยางชุดนี้มาจาก 2 Lot คือ Lot เดือนสิงหาคม 1,000 กก. กับ Lot เดือนกันยายนอีก 560 กก. ระบบจึงแยกเป็น 2 รายการ นอกจากน้ำยางแล้ว ยังมีซิงก์ออกไซด์ สารเร่ง และ Capacity ของไลน์อีก 40 ชั่วโมงด้วย',
               en: 'The dipping line draws 1,560 kg of NBR latex under FIFO. It comes from two lots, 1,000 kg from the August lot and 560 kg from the September lot, so Business Central posts two entries. Zinc oxide, an accelerator and 40 hours of line capacity go in as well.' } },
-      { focus: 'pn1', open: ['s', 'op', 'cb', 'od', 'cl1', 'cl2'], nm: { th: 'รับน้ำยางนำเข้า', en: 'Imported latex' },
+      { focus: 'pn1', ic: 'ship', open: ['s', 'op', 'cb', 'od', 'cl1', 'cl2'], nm: { th: 'รับน้ำยางนำเข้า', en: 'Imported latex' },
         tx: { th: 'ปลายทางคือใบรับน้ำยาง NBR ที่นำเข้าจากเกาหลี 2 ครั้ง ราคา USD แปลงเป็นบาทตามอัตราของแต่ละใบ แล้วบวก Item Charge ค่าขนส่ง อากร และค่าเคลียร์เข้าไป ต้นทุนจริงจึงออกมาที่กิโลกรัมละ 45.00 และ 46.00 บาท',
               en: 'The trail ends at two receipts of NBR latex imported from Korea. Each USD price is converted at its own rate, then the freight, duty and clearance Item Charges are added, so the real cost comes to 45.00 and 46.00 baht a kilogram.' } }
     ];
@@ -5957,6 +5970,7 @@
     function drawStatic() {
       document.querySelectorAll('[data-ct]').forEach((el) => { el.innerHTML = L(T[el.dataset.ct]); });
       byId('ct-steps').innerHTML = STEPS.map((s, i) => '<li><button class="ct-step" type="button" data-i="' + i + '">'
+        + '<svg class="ct-ic ct-pic" aria-hidden="true"><use href="#cti-' + s.ic + '"/></svg>'
         + '<span class="ct-lv">' + lvText(i) + '</span><span class="ct-nm">' + L(s.nm) + '</span></button></li>').join('');
       const box = byId('ct-narr');
       box.querySelectorAll('.ct-narr-size').forEach((el) => el.remove());
