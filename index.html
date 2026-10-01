@@ -3079,16 +3079,17 @@
      ยกโครงจาก showcase ใน repo JHEnhance (docs/Site/cost-trace-showcase.html) แล้วแต่งตัวใหม่ตาม DESIGN.md
      การ์ด .ct ใบเดียวคุมทั้งเดโมแบบ .vs · ปุ่มในส่วนนี้เป็น teal ทั้งหมด ไม่แย่งความดังจาก CTA เบอร์กันดีของหน้า
      หน้าต่าง .ct-bc = ภาพของ BC web client แบบ .hs-screen ใน hero: เทาของ Fluent อยู่ในหน้าต่างนี้เท่านั้น
-     และสีน้ำเงินของ BC เปลี่ยนเป็นตระกูล teal · --ct-thread ใช้กับทางเดินของต้นทุนอย่างเดียว (The Cost Thread Rule)
+     น้ำเงินของ BC (--bc-blue) ก็เช่นกัน · --ct-thread ทองแดงใช้นอกหน้าต่างเท่านั้น (ดูข้างล่าง)
      ชื่อขึ้นต้น ct- ทุกตัว — .step/.steps ของหน้ามีอยู่แล้วเกือบ 80 กฎ ห้ามใช้ชื่อซ้ำ */
-  /* --ct-thread = ทางเดินของต้นทุนจากรายการตั้งต้นถึงกล่องที่เลือกเท่านั้น ไม่ใช่พื้น ไม่ใช่ปุ่ม
-     6.17 บนขาว · 5.78 บน --ui-page · 5.52 บนพื้นกราฟ #F3F2F1 (ทองแดงเดิมของ showcase #B9561A ได้แค่ 4.47) */
+  /* --ct-thread = ขั้นปัจจุบันของ stepper กับเส้นข้างคำบรรยาย ไม่ใช่พื้น ไม่ใช่ปุ่ม — ในหน้าต่าง BC ทางเดินของต้นทุนกับกล่องที่เลือกใช้ --bc-blue แบบแอปจริง
+     6.17 บนขาว · 5.78 บน --ui-page (ทองแดงเดิมของ showcase #B9561A ได้แค่ 4.47) */
   #cost-trace { --ct-thread: #9C4A16; }
   #cost-trace > .wrap > .section-kicker,
-  #cost-trace > .wrap > h2,
-  #cost-trace > .wrap > .sub {
+  #cost-trace > .wrap > h2 {
     text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
   }
+  /* ไม่มี .sub ใต้หัวข้อ — เว้นก่อนกล่อง tip เท่าที่ .sub เว้นใน section อื่น (44px) */
+  #cost-trace > .wrap > h2 { margin-bottom: 44px; }
   .ct-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .ct-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -3215,8 +3216,8 @@
   .ct-lines { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
   .ct-lines path { fill: none; stroke: var(--bc-link); stroke-width: 1.2; transition: stroke .25s ease; }
   .ct-lines path.arw { fill: var(--bc-link); stroke: none; }
-  .ct-lines path.on { stroke: var(--ct-thread); stroke-width: 2.5; }
-  .ct-lines path.arw.on { fill: var(--ct-thread); stroke: none; }
+  .ct-lines path.on { stroke: var(--bc-blue); stroke-width: 2.5; }
+  .ct-lines path.arw.on { fill: var(--bc-blue); stroke: none; }
   .ct-colhead {
     position: absolute; top: 12px; height: 34px; display: flex; align-items: center; justify-content: center;
     background: var(--bc-field);
@@ -3230,8 +3231,10 @@
   /* เข้าใหม่เฉพาะกล่องที่เพิ่งโผล่ (กางกิ่ง/เดินขั้น) ไม่ใช่ทุกกล่องทุกครั้งที่วาด */
   .ct-card.ct-new { animation: ctRise .35s cubic-bezier(.2,.75,.2,1) both; }
   @keyframes ctRise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  /* กล่องที่เลือก = วงทองแดงด้านใน — ต่างจากวง focus ของปุ่ม (outline 3px ด้านนอก) */
-  .ct-card.sel { box-shadow: inset 0 0 0 2px var(--ct-thread), var(--bc-depth); }
+  /* กล่องที่เลือก = วงน้ำเงินด้านใน — ต่างจากวง focus ของปุ่ม (outline 3px ด้านนอก)
+     กล่องตั้งต้นมีแถบน้ำเงินซ้ายอยู่แล้ว ไม่ใส่วงซ้ำ (หน้าจริงของ BC ไม่มีวง) */
+  .ct-card.sel { box-shadow: inset 0 0 0 2px var(--bc-blue), var(--bc-depth); }
+  .ct-card.root.sel { box-shadow: var(--bc-depth); }
   .ct-card.cap { background: var(--bc-cap); }
   .ct-card.cap .ct-title { color: var(--bc-cap-ink); }
   .ct-open { display: block; width: 100%; padding: 0; text-align: left; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -3240,7 +3243,9 @@
   .ct-title { font-size: 14px; font-weight: 600; }
   .ct-item { margin-top: 1px; color: var(--bc-item); }
   .ct-detail { margin-top: 1px; color: var(--bc-sub); }
-  .ct-box { display: grid; gap: 2px; margin-top: 7px; padding-top: 5px; border-top: 1px solid var(--bc-rule); }
+  /* minmax(0, 1fr): ให้คอลัมน์หดได้ ป้ายยาวจึงตัดเป็น … แทนการดันตัวเลขล้นขอบกล่อง
+     (ฟอนต์ที่กว้างกว่า Segoe UI เช่นบน Mac/มือถือ เคยล้น 9–39px) */
+  .ct-box { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin-top: 7px; padding-top: 5px; border-top: 1px solid var(--bc-rule); }
   .ct-ln { display: flex; gap: 8px; }
   .ct-ln > span:first-child { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--bc-sub); }
   .ct-ord-cap { margin-bottom: 2px; font-weight: 600; color: var(--bc-sub); }
@@ -3259,7 +3264,7 @@
     padding: 0 10px; border-radius: 999px; background: #fff; border: 1px solid var(--bc-link);
     font-size: 12px; white-space: nowrap; transition: border-color .25s ease, color .25s ease;
   }
-  .ct-flow.on { border-color: var(--ct-thread); color: var(--ct-thread); font-weight: 600; }
+  .ct-flow.on { border-color: var(--bc-blue); color: var(--bc-blue); font-weight: 600; }
 
   /* Full Screen (Focus mode): <dialog> เด้งขึ้นเหนือหน้า เว้นขอบให้รู้ว่ายังอยู่หน้าเดิม · มือถือเต็มจอ
      ขนาดอิง inset ของ dialog เอง ไม่ใช้ 100vw (100vw นับแถบเลื่อนของหน้าด้วย จอที่มีแถบเลื่อนจะล้นขวา) */
@@ -4160,11 +4165,10 @@
   <div class="wrap">
     <p class="section-kicker">Highlight Feature 3</p>
     <h2>Cost Traceability</h2>
-    <p class="sub" data-ct="sub">ตรวจสอบต้นทุนย้อนหลังได้ถึงต้นทาง เพียงเลือกรายการสินค้า ก็สามารถดูได้ว่าต้นทุนประกอบด้วยอะไรบ้าง ตั้งแต่ราคาสินค้า ค่าขนส่ง ไปจนถึงค่าใช้จ่ายในการนำเข้า โดยไม่ต้องไล่เปิดเอกสารทีละรายการ</p>
     <!-- นิยามย่อ ใช้กล่อง .tip ชุดเดียวกับ VAT Service — รายการ ✓ ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
     <div class="tip reveal">
       <b data-ct="tipTitle">💡 Cost Traceability คืออะไร?</b>
-      <p data-ct="tipBody">Cost Traceability ช่วยให้การตรวจสอบที่มาของต้นทุนสินค้าทำได้ง่ายขึ้น ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต พร้อมดูรายละเอียดต้นทุนที่เกี่ยวข้องได้ในหน้าจอเดียว<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบต้นทุนย้อนหลัง</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ดูต้นทุนแยกตาม Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>รองรับทั้ง FIFO, Average และ Standard Cost</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ</span></span></p>
+      <p data-ct="tipBody">ความสามารถตรวจสอบย้อนหลังได้ว่าต้นทุนสินค้ามีที่มาจากอะไร ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต เพื่อให้เห็นที่มาของต้นทุนได้อย่างชัดเจน<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบต้นทุนย้อนหลัง</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ดูต้นทุนแยกตาม Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>รองรับทั้ง FIFO, Average และ Standard Cost</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ</span></span></p>
     </div>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปุ่มใหม่ทุกครั้งที่กด -->
@@ -5719,13 +5723,11 @@
 
     const chips = (a) => '<span class="ct-chips">' + a.map((t) => '<span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>' + t + '</span>').join('') + '</span>';
     const T = {
-      sub: { th: 'ตรวจสอบต้นทุนย้อนหลังได้ถึงต้นทาง เพียงเลือกรายการสินค้า ก็สามารถดูได้ว่าต้นทุนประกอบด้วยอะไรบ้าง ตั้งแต่ราคาสินค้า ค่าขนส่ง ไปจนถึงค่าใช้จ่ายในการนำเข้า โดยไม่ต้องไล่เปิดเอกสารทีละรายการ',
-             en: 'Trace any cost back to its source. Pick an item entry and see exactly what its cost is made of, from the purchase price and freight to the cost of importing, without opening documents one by one.' },
       tipTitle: { th: '💡 Cost Traceability คืออะไร?', en: '💡 What is Cost Traceability?' },
-      tipBody: { th: 'Cost Traceability ช่วยให้การตรวจสอบที่มาของต้นทุนสินค้าทำได้ง่ายขึ้น ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต พร้อมดูรายละเอียดต้นทุนที่เกี่ยวข้องได้ในหน้าจอเดียว'
+      tipBody: { th: 'ความสามารถตรวจสอบย้อนหลังได้ว่าต้นทุนสินค้ามีที่มาจากอะไร ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต เพื่อให้เห็นที่มาของต้นทุนได้อย่างชัดเจน'
                    + chips(['ตรวจสอบต้นทุนย้อนหลัง', 'ดูต้นทุนแยกตาม Lot และ Serial No.', 'ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน',
                             'รองรับทั้ง FIFO, Average และ Standard Cost', 'ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ']),
-                 en: "Cost Traceability makes it easier to check where an item's cost comes from — purchasing, freight, importing and production — with the related cost details on a single screen."
+                 en: "The ability to trace an item's cost back to where it came from — purchasing, freight, importing and production — so every source of cost is plain to see."
                    + chips(['Trace costs back to the source', 'See costs by lot and serial number', 'Follow costs through multi-step production',
                             'Supports FIFO, Average and Standard costing', 'Review posted entries without changing existing data']) },
       demoTitle: { th: 'สินค้า <span class="nb">1,200 กล่อง</span> ส่งถึงลูกค้าด้วยต้นทุนเท่าไร?',
@@ -6034,14 +6036,14 @@
           + '" fill="' + cs.color + '"' + (mid ? ' text-anchor="middle"' : fit) + '>' + X(el.textContent.trim()) + '</text>';
       };
       let s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" font-family="Segoe UI, Arial, sans-serif">'
-        + '<style>path{fill:none;stroke:#8A8886;stroke-width:1.2}path.arw{fill:#8A8886;stroke:none}path.on{stroke:#9C4A16;stroke-width:2.5}path.arw.on{fill:#9C4A16}</style>'
+        + '<style>path{fill:none;stroke:#8A8886;stroke-width:1.2}path.arw{fill:#8A8886;stroke:none}path.on{stroke:#0F6CBD;stroke-width:2.5}path.arw.on{fill:#0F6CBD}</style>'
         + '<rect width="' + W + '" height="' + H + '" fill="#F3F2F1"/>' + cv.querySelector('.ct-lines').innerHTML;
       cv.querySelectorAll('.ct-colhead').forEach((el) => { s += rect(el) + text(el, true); });
       cv.querySelectorAll('.ct-card').forEach((c, i) => {
         const [x, y, w, h] = at(c);
         s += rect(c, ' stroke="#E0E0E0"')
           + (c.classList.contains('root') ? '<rect x="' + x + '" y="' + y + '" width="3" height="' + h + '" fill="#0F6CBD"/>' : '')
-          + (c.classList.contains('sel') ? '<rect x="' + (x + 1) + '" y="' + (y + 1) + '" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="2" fill="none" stroke="#9C4A16" stroke-width="2"/>' : '')
+          + (c.classList.contains('sel') && !c.classList.contains('root') ? '<rect x="' + (x + 1) + '" y="' + (y + 1) + '" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="2" fill="none" stroke="#0F6CBD" stroke-width="2"/>' : '')
           + '<clipPath id="k' + i + '"><rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/></clipPath><g clip-path="url(#k' + i + ')">';
         c.querySelectorAll('.ct-title, .ct-item, .ct-detail, .ct-ln > span, .ct-ord-cap, .ct-foot > span, .ct-foot > b').forEach((t) => { s += text(t); });
         c.querySelectorAll('.ct-box').forEach((b) => { const [bx, by, bw] = at(b); s += '<line x1="' + bx + '" y1="' + by + '" x2="' + (bx + bw) + '" y2="' + by + '" stroke="#E0E0E0"/>'; });
