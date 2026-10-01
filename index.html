@@ -3254,7 +3254,8 @@
   .ct-ln { display: flex; gap: 8px; }
   .ct-ln > span:first-child { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--bc-sub); }
   .ct-ord-cap { margin-bottom: 2px; font-weight: 600; color: var(--bc-sub); }
-  .ct-ln .ct-q { color: var(--bc-sub); }
+  .ct-ln .ct-q { color: var(--bc-sub); white-space: nowrap; }
+  .ct-ln .ct-q b { color: var(--bc-text); }
   /* ค่าเฉลี่ยของ pool / Opening value บอกที่มาของ Unit Cost เป็นการหารด้วยตัวเลขของ BC เอง วางเหนือบรรทัดล่าง */
   .ct-avg { margin-top: 7px; color: var(--bc-formula); }
   .ct-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 7px; }
@@ -5830,8 +5831,10 @@
       if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
       h += '<span class="ct-detail" title="' + esc(detailText(n)) + '">' + esc(detailText(n)) + '</span></button>';
       if (n.ln.length) h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
-      // pool มีบรรทัด Opening value บรรทัดเดียว: จำนวน (ไม่มีหน่วย) กับยอดเงิน
-      if (n.ov) h += '<div class="ct-box"><div class="ct-ln"><span>Opening value</span><span class="ct-q">' + qty(n.ov[0]) + '</span><span>' + money(n.ov[1]) + '</span></div></div>';
+      // pool มีบรรทัด Opening value บรรทัดเดียว: จำนวน หน่วย @ Unit Cost ของยอดยกมา (ตัวหนาแบบบรรทัดล่าง) กับยอดเงิน
+      if (n.ov) h += '<div class="ct-box"><div class="ct-ln"><span>Opening value</span><span class="ct-q">' + qty(n.ov[0]) + ' ' + n.u
+        + '<span title="Unit Cost (LCY)"><span class="ct-unit"> @ </span><b>' + money(Math.round(n.ov[1] / n.ov[0] * 100) / 100) + '</b></span></span>'
+        + '<span>' + money(n.ov[1]) + '</span></div></div>';
       if (n.ord) {
         h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
           + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
