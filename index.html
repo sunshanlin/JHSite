@@ -3152,41 +3152,66 @@
   .ct-narr-t { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
   .ct-narr-x { max-width: 82ch; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
 
-  /* หน้าต่าง BC — เทาของ Fluent ประกาศบนตัวหน้าต่าง (แบบ --bfj-* ของ #billing-flow) ไม่ขึ้น :root */
+  /* หน้าต่าง BC — ยกหน้าตาจากหน้า Cost Traceability ของจริงใน BC: หัวเพจ แถบคำสั่ง แถบซูม สีน้ำเงินของ BC ฟอนต์ Segoe UI
+     สีทั้งหมดประกาศบนตัวหน้าต่าง (แบบ --bfj-* ของ #billing-flow) ไม่ขึ้น :root และไม่หลุดออกนอกหน้าต่างนี้ */
   .ct-bc {
     --bc-text: #242424; --bc-item: #424242; --bc-sub: #616161; --bc-rule: #E0E0E0;
     --bc-canvas: #F3F2F1; --bc-field: #EBEBEB; --bc-link: #8A8886; --bc-cap: #EEF6F6; --bc-cap-ink: #0B6A6A;
+    --bc-blue: #0F6CBD; --bc-blue-soft: #EBF3FC; --bc-ok: #0E700E; --bc-ok-bg: #F1FAF1;
+    --bc-depth: 0 1.6px 3.6px rgba(0,0,0,.13), 0 .3px .9px rgba(0,0,0,.11);
     margin: 0 24px 24px; overflow: hidden;
     background: #fff; color: var(--bc-text); border: 1px solid var(--bc-rule); border-radius: var(--ui-radius-card);
-    font: 500 .84rem/1.4 "Plus Jakarta Sans", "Anuphan", sans-serif; font-variant-numeric: tabular-nums;
+    font: 500 .84rem/1.4 "Plus Jakarta Sans", "Anuphan", sans-serif;   /* ฟอนต์ของเว็บแบบ .hs-screen ใน hero (มีแค่น้ำหนัก 500–800) */
+    font-variant-numeric: tabular-nums;
   }
-  .ct-acts { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 8px 12px; border-bottom: 1px solid var(--bc-rule); }
+  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ · ไอคอนกลาง (ภาพประกอบ) · open in new window + Focus mode */
+  /* ไอคอนกลางอยู่กลางหัวเพจแบบ BC: คอลัมน์ 4 เป็นที่ว่างถ่วงกับชื่อรายการ */
+  .ct-hdr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr) auto; align-items: center; gap: 0 18px; padding: 12px 14px 10px 12px; }
+  .ct-hr { grid-column: 5; }
+  .ct-back { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--bc-item); background: rgba(15,108,189,.08); }
+  .ct-back .ct-ic { width: 18px; height: 18px; }
+  .ct-crumb, .ct-page { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .ct-crumb { font-size: 12px; color: var(--bc-sub); }
+  .ct-page { margin-top: 2px; font-size: 24px; font-weight: 500; line-height: 1.25; letter-spacing: -.01em; }
+  .ct-hico, .ct-hr { display: flex; align-items: center; color: var(--bc-blue); }
+  .ct-hico { gap: 26px; }
+  .ct-hr { gap: 4px; }
+  .ct-hico .ct-ic, .ct-hr .ct-ic { width: 17px; height: 17px; stroke-width: 1.4; }
+  .ct-pop, .ct-focus { display: grid; place-items: center; width: 32px; height: 32px; }
+  .ct-focus { padding: 0; color: inherit; background: none; border: 0; border-radius: var(--ui-radius-btn); cursor: pointer; }
+  .ct-focus:hover { background: var(--bc-field); }
+
+  .ct-acts { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 6px 12px; border-top: 1px solid var(--bc-rule); border-bottom: 1px solid var(--bc-rule); }
   .ct-act {
-    display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 9px;
-    font: inherit; font-size: .88rem; color: var(--bc-text); background: none; border: 0;
+    display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 8px;
+    font: inherit; font-size: 14px; color: var(--bc-text); background: none; border: 0;
     border-radius: var(--ui-radius-btn); cursor: pointer; transition: background .125s ease;
   }
   .ct-act:hover { background: var(--bc-field); }
-  .ct-act .ct-ic { width: 16px; height: 16px; stroke-width: 1.6; color: var(--brand-jade); }
-  .ct-fast { padding: 14px 20px 18px; border-bottom: 1px solid var(--bc-rule); }
-  #cost-trace .ct-fast h4 {
-    margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1.5px solid var(--bc-text);
-    font-size: 1rem; font-weight: 700; letter-spacing: 0; color: var(--bc-text);
-  }
-  .ct-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 48px; }
-  .ct-fld { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 12px; align-items: center; min-width: 0; }
-  .ct-fld span { display: flex; gap: 6px; overflow: hidden; white-space: nowrap; color: var(--bc-sub); }
-  .ct-fld span::after { content: ""; flex: 1 1 auto; border-bottom: 1.5px dotted var(--bc-link); transform: translateY(-5px); opacity: .7; }
-  .ct-fld output { min-height: 30px; padding: 5px 7px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; background: var(--bc-field); }
-  .ct-fld output.num { text-align: right; }
+  .ct-act .ct-ic { width: 16px; height: 16px; stroke-width: 1.6; color: var(--bc-blue); }
 
-  /* กราฟ: คอลัมน์ละหนึ่งระดับ ตำแหน่งกล่องวัดจาก DOM ในสคริปต์ */
+  /* แถบซูมมุมขวาบนของพื้นกราฟ แบบแอปจริง: −  แถบเลื่อน  +  เปอร์เซ็นต์  Fit */
+  .ct-zoom { display: flex; justify-content: flex-end; align-items: center; gap: 6px; padding: 10px 12px 0; background: var(--bc-canvas); }
+  .ct-zoom[hidden] { display: none; }
+  .ct-zb, .ct-zp {
+    display: grid; place-items: center; min-width: 28px; height: 28px; padding: 0 8px;
+    font: inherit; font-size: 12px; color: var(--bc-text); background: #fff;
+    border: 1px solid #C8C6C4; border-radius: var(--ui-radius-btn);
+  }
+  .ct-zb { cursor: pointer; }
+  .ct-zb:hover { background: var(--bc-field); }
+  .ct-zb .ct-ic { width: 12px; height: 12px; stroke-width: 1.8; }
+  .ct-zp { min-width: 48px; }
+  .ct-zr { width: 110px; margin: 0; accent-color: var(--bc-blue); }
+
+  /* กราฟ: คอลัมน์ละหนึ่งระดับ ตำแหน่งกล่องวัดจาก DOM ในสคริปต์ · ซูม = scale ที่ .ct-canvas ส่วน .ct-sizer กันพื้นที่เลื่อนให้เท่าขนาดหลังซูม */
   .ct-scroll, .ct-table-wrap {
     overflow: auto; max-height: min(660px, 70vh); scrollbar-width: thin; scrollbar-color: #C8C6C4 transparent;
   }
   .ct-scroll { position: relative; background: var(--bc-canvas); scroll-behavior: smooth; }
   .ct-scroll[hidden], .ct-table-wrap[hidden] { display: none; }
-  .ct-canvas { position: relative; }
+  .ct-sizer { position: relative; overflow: hidden; }
+  .ct-canvas { position: relative; transform-origin: 0 0; }
   .ct-lines { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
   .ct-lines path { fill: none; stroke: var(--bc-link); stroke-width: 1.2; transition: stroke .25s ease; }
   .ct-lines path.arw { fill: var(--bc-link); stroke: none; }
@@ -3194,72 +3219,58 @@
   .ct-lines path.arw.on { fill: var(--ct-thread); stroke: none; }
   .ct-colhead {
     position: absolute; top: 12px; height: 34px; display: flex; align-items: center; justify-content: center;
-    background: var(--bc-field); font-size: .84rem;
+    background: var(--bc-field);
   }
-  .ct-colhead.first { background: var(--brand-deep); color: #fff; }
+  .ct-colhead.first { background: var(--bc-blue); color: #fff; }
   .ct-card {
     position: absolute; width: 280px; padding: 8px 11px 9px;
-    background: #fff; border-radius: var(--ui-radius-btn); box-shadow: var(--ui-shadow);
+    background: #fff; border-radius: var(--ui-radius-btn); box-shadow: var(--bc-depth);
   }
+  .ct-card.root { border-left: 3px solid var(--bc-blue); }
   /* เข้าใหม่เฉพาะกล่องที่เพิ่งโผล่ (กางกิ่ง/เดินขั้น) ไม่ใช่ทุกกล่องทุกครั้งที่วาด */
   .ct-card.ct-new { animation: ctRise .35s cubic-bezier(.2,.75,.2,1) both; }
   @keyframes ctRise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   /* กล่องที่เลือก = วงทองแดงด้านใน — ต่างจากวง focus ของปุ่ม (outline 3px ด้านนอก) */
-  .ct-card.sel { box-shadow: inset 0 0 0 2px var(--ct-thread), var(--ui-shadow); }
+  .ct-card.sel { box-shadow: inset 0 0 0 2px var(--ct-thread), var(--bc-depth); }
   .ct-card.cap { background: var(--bc-cap); }
   .ct-card.cap .ct-title { color: var(--bc-cap-ink); }
   .ct-open { display: block; width: 100%; padding: 0; text-align: left; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
   .ct-open:hover .ct-title { text-decoration: underline; text-underline-offset: 3px; }
   .ct-title, .ct-item, .ct-detail { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  .ct-title { font-size: .9rem; font-weight: 700; }
+  .ct-title { font-size: 14px; font-weight: 600; }
   .ct-item { margin-top: 1px; color: var(--bc-item); }
   .ct-detail { margin-top: 1px; color: var(--bc-sub); }
   .ct-box { display: grid; gap: 2px; margin-top: 7px; padding-top: 5px; border-top: 1px solid var(--bc-rule); }
   .ct-ln { display: flex; gap: 8px; }
   .ct-ln > span:first-child { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--bc-sub); }
-  .ct-ord-cap { margin-bottom: 2px; font-weight: 700; color: var(--bc-sub); }
+  .ct-ord-cap { margin-bottom: 2px; font-weight: 600; color: var(--bc-sub); }
   .ct-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 7px; }
   .ct-unit { color: var(--bc-sub); }
-  .ct-adj {
-    display: inline-block; margin-top: 7px; padding: 1px 9px; border-radius: 999px;
-    font-size: .74rem; font-weight: 600; color: var(--brand-teal); background: rgba(65,119,113,.1);
-  }
+  .ct-adj { display: inline-block; margin-top: 7px; padding: 1px 9px; border-radius: 999px; font-size: 11.5px; color: var(--bc-ok); background: var(--bc-ok-bg); }
   .ct-badge {
     position: absolute; left: calc(100% + 10px); top: 12px; min-width: 32px; height: 28px; padding: 0 8px;
-    font: inherit; font-size: .82rem; font-weight: 700; color: var(--brand-teal);
-    background: #E6F0EE; border: 1px solid var(--brand-teal); border-radius: var(--ui-radius-btn); cursor: pointer;
+    font: inherit; color: var(--bc-blue); background: var(--bc-blue-soft);
+    border: 1px solid var(--bc-blue); border-radius: var(--ui-radius-btn); cursor: pointer;
   }
   .ct-badge::after { content: ""; position: absolute; inset: -8px; }
   .ct-badge[aria-expanded="false"] { background: #fff; }
   .ct-flow {
     position: absolute; right: calc(100% + 6px); top: 12px; height: 28px; display: flex; align-items: center;
     padding: 0 10px; border-radius: 999px; background: #fff; border: 1px solid var(--bc-link);
-    font-size: .76rem; white-space: nowrap; transition: border-color .25s ease, color .25s ease;
+    font-size: 12px; white-space: nowrap; transition: border-color .25s ease, color .25s ease;
   }
-  .ct-flow.on { border-color: var(--ct-thread); color: var(--ct-thread); font-weight: 700; }
-  /* กล่องนอกเส้นทางที่เลือก = แถวย่อสองบรรทัด (ชื่อ + ยอด / สินค้า) ทั้งเส้นจึงพอดีกรอบ ไม่ต้องเลื่อนผ่านพื้นที่ว่าง */
-  .ct-card.mini { padding: 6px 10px 7px; }
-  .ct-card.mini .ct-open { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 10px; }
-  .ct-mini-t, .ct-mini-i { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  .ct-mini-t, .ct-mini-v { font-weight: 700; }
-  .ct-mini-i { grid-column: 1 / -1; color: var(--bc-sub); }
-  .ct-card.cap .ct-mini-t { color: var(--bc-cap-ink); }
-  .ct-open:hover .ct-mini-t { text-decoration: underline; text-underline-offset: 3px; }
-  .ct-card.mini .ct-badge, .ct-card.mini .ct-flow { top: 11px; }
+  .ct-flow.on { border-color: var(--ct-thread); color: var(--ct-thread); font-weight: 600; }
 
-  /* Full Screen: <dialog> เด้งขึ้นเหนือหน้า เว้นขอบให้รู้ว่ายังอยู่หน้าเดิม · มือถือเต็มจอ */
-  .ct-act.ct-full-btn { margin-left: auto; }
-  .ct-act[hidden] { display: none; }
+  /* Full Screen (Focus mode): <dialog> เด้งขึ้นเหนือหน้า เว้นขอบให้รู้ว่ายังอยู่หน้าเดิม · มือถือเต็มจอ
+     ขนาดอิง inset ของ dialog เอง ไม่ใช้ 100vw (100vw นับแถบเลื่อนของหน้าด้วย จอที่มีแถบเลื่อนจะล้นขวา) */
   .ct-dlg {
-    width: calc(100vw - 48px); height: calc(100vh - 48px); height: calc(100dvh - 48px);
-    max-width: 1600px; max-height: none; margin: auto; padding: 0; overflow: hidden;
+    position: fixed; inset: 24px; width: auto; height: auto; max-width: none; max-height: none;
+    margin: 0; padding: 0; overflow: hidden;
     background: #fff; border: 0; border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
   }
   .ct-dlg::backdrop { background: rgba(1,47,42,.45); }
   .ct-dlg .ct-bc { display: flex; flex-direction: column; height: 100%; margin: 0; border: 0; border-radius: 0; }
-  .ct-dlg .ct-scroll, .ct-dlg .ct-table-wrap { flex: 1 1 auto; max-height: none; }
-  /* จอกว้าง: ช่อง Traced Entry เรียง 4 คอลัมน์ เหลือ 2 แถว คืนความสูงให้กราฟ */
-  @media (min-width: 1100px) { .ct-dlg .ct-fields { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px 28px; } }
+  .ct-dlg .ct-scroll, .ct-dlg .ct-table-wrap { flex: 1 1 auto; min-height: 0; max-height: none; }
   html.ct-locked { overflow: hidden; }
 
   .ct-table-wrap { background: #fff; }
@@ -3271,14 +3282,14 @@
   .ct-tbl td { padding: 7px 12px; white-space: nowrap; border-bottom: 1px solid var(--bc-rule); }
   .ct-tbl tbody tr { cursor: pointer; }
   .ct-tbl tbody tr:hover td { background: var(--bc-canvas); }
-  .ct-tbl tr.sel td { background: #E6F0EE; }
+  .ct-tbl tr.sel td { background: var(--bc-blue-soft); }
   .ct-tbl .num { text-align: right; }
   .ct-tree { display: inline-block; width: 14px; }
   .ct-tree.has::before {
     content: ""; display: inline-block; width: 6px; height: 6px; transform: translateY(-3px) rotate(45deg);
     border-right: 1.5px solid var(--bc-link); border-bottom: 1.5px solid var(--bc-link);
   }
-  .ct-tlink { min-height: 24px; padding: 3px 0; text-align: left; font: inherit; font-weight: 600; color: var(--brand-teal); background: none; border: 0; cursor: pointer; }
+  .ct-tlink { min-height: 24px; padding: 3px 0; text-align: left; font: inherit; color: var(--bc-blue); background: none; border: 0; cursor: pointer; }
   .ct-tlink:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   @media (max-width: 900px) {
@@ -3286,7 +3297,9 @@
     .ct-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .ct-narr { margin-left: 18px; margin-right: 18px; }
     .ct-bc { margin: 0 18px 18px; }
-    .ct-fields { grid-template-columns: 1fr; gap: 6px; }
+    .ct-hico { display: none; }
+    .ct-hdr { grid-template-columns: auto minmax(0, 1fr) auto; }
+    .ct-hr { grid-column: 3; }
   }
   @media (max-width: 600px) {
     .ct-head { margin-bottom: 14px; }
@@ -3295,11 +3308,11 @@
     .ct-narr > * { grid-template-columns: minmax(0, 1fr); }
     .ct-narr-lv { grid-row: auto; padding-top: 0; }
     .ct-bc { margin: 0 12px 12px; }
-    .ct-fast { padding: 12px 14px 14px; }
-    .ct-fld { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
-    .ct-dlg { width: 100vw; height: 100vh; height: 100dvh; max-width: none; border-radius: 0; }
-    /* มือถือเต็มจอ: ช่อง Traced Entry ซ้ำกับกล่องที่เลือกอยู่แล้ว ซ่อนไว้ให้กราฟได้ทั้งจอ */
-    .ct-dlg .ct-fast { display: none; }
+    .ct-hdr { gap: 0 10px; padding: 10px 8px 8px 10px; }
+    .ct-page { font-size: 21px; }
+    .ct-pop { display: none; }
+    .ct-zr { width: 64px; }
+    .ct-dlg { inset: 0; border-radius: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ct-card.ct-new { animation: none; }
@@ -4163,8 +4176,17 @@
       <symbol id="cti-graph" viewBox="0 0 16 16"><rect x="1" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="9.5" width="5" height="4" rx=".8"/><path d="M6 4.5h4M8 4.5v7h2"/></symbol>
       <symbol id="cti-expand" viewBox="0 0 16 16"><path d="M3.5 3.5 8 8l4.5-4.5M3.5 8.5 8 13l4.5-4.5"/></symbol>
       <symbol id="cti-collapse" viewBox="0 0 16 16"><path d="M3.5 12.5 8 8l4.5 4.5M3.5 7.5 8 3l4.5 4.5"/></symbol>
-      <symbol id="cti-full" viewBox="0 0 16 16"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></symbol>
-      <symbol id="cti-exit" viewBox="0 0 16 16"><path d="M6 2.5V6H2.5M13.5 6H10V2.5M10 13.5V10h3.5M2.5 10H6v3.5"/></symbol>
+      <symbol id="cti-full" viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M13.5 2.5 9 7M6.5 13.5h-4v-4M2.5 13.5 7 9"/></symbol>
+      <symbol id="cti-exit" viewBox="0 0 16 16"><path d="M13.5 2.5 9 7M9 3.5V7h3.5M2.5 13.5 7 9M7 12.5V9H3.5"/></symbol>
+      <symbol id="cti-back" viewBox="0 0 16 16"><path d="M13 8H3.5M7.5 4 3.5 8l4 4"/></symbol>
+      <symbol id="cti-edit" viewBox="0 0 16 16"><path d="M11 2.5 13.5 5 6 12.5H3.5V10z"/></symbol>
+      <symbol id="cti-share" viewBox="0 0 16 16"><path d="M6 9.5c1-3 3.5-4.5 7.5-4.5M10.5 2.5l3 2.5-3 2.5M12.5 10v3.5h-10v-9H6"/></symbol>
+      <symbol id="cti-new" viewBox="0 0 16 16"><path d="M8 2.5v11M2.5 8h11"/></symbol>
+      <symbol id="cti-del" viewBox="0 0 16 16"><path d="M2.5 4h11M6 4V2.5h4V4M4 4l.7 9.5h6.6L12 4M6.8 6.5v4.5M9.2 6.5v4.5"/></symbol>
+      <symbol id="cti-pop" viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M13.5 2.5 8 8M11.5 9.5v4h-9v-9h4"/></symbol>
+      <symbol id="cti-export" viewBox="0 0 16 16"><path d="M9 2.5H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6.5zM9 2.5v4h4M8 8.5v3.5M6.5 10.5 8 12l1.5-1.5"/></symbol>
+      <symbol id="cti-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
+      <symbol id="cti-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
     </defs></svg>
 
     <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="ct-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
@@ -4182,18 +4204,32 @@
       </div>
       <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
       <div class="ct-bc" role="group" aria-label="Cost Traceability">
+        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับ ไอคอนกลาง และ open in new window เป็นภาพประกอบ (aria-hidden)
+             ปุ่มที่กดได้จริงคือ Focus mode มุมขวา = เต็มจอ -->
+        <div class="ct-hdr">
+          <span class="ct-back" aria-hidden="true"><svg class="ct-ic"><use href="#cti-back"/></svg></span>
+          <div class="ct-hdr-t">
+            <p class="ct-crumb">Cost Traceability | Work Date: 30/09/2026</p>
+            <p class="ct-page">Sale SS-0912</p>
+          </div>
+          <span class="ct-hico" aria-hidden="true"><svg class="ct-ic"><use href="#cti-edit"/></svg><svg class="ct-ic"><use href="#cti-share"/></svg><svg class="ct-ic"><use href="#cti-new"/></svg><svg class="ct-ic"><use href="#cti-del"/></svg></span>
+          <span class="ct-hr"><span class="ct-pop" aria-hidden="true"><svg class="ct-ic"><use href="#cti-pop"/></svg></span><button class="ct-focus" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button></span>
+        </div>
         <div class="ct-acts">
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
           <button class="ct-act" id="ct-expand" type="button"><svg class="ct-ic"><use href="#cti-expand"/></svg><span>Expand All</span></button>
           <button class="ct-act" id="ct-collapse" type="button"><svg class="ct-ic"><use href="#cti-collapse"/></svg><span>Collapse All</span></button>
-          <button class="ct-act ct-full-btn" id="ct-full" type="button"><svg class="ct-ic"><use href="#cti-full"/></svg><span>Full Screen</span></button>
+          <button class="ct-act" id="ct-export" type="button"><svg class="ct-ic"><use href="#cti-export"/></svg><span>Export Image</span></button>
         </div>
-        <div class="ct-fast">
-          <h4 id="ct-fast-title">Traced Entry</h4>
-          <div class="ct-fields" id="ct-fields"></div>
+        <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูเส้นทางต้นทุนของกล่องนั้น ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
+        <div class="ct-zoom" id="ct-zoom">
+          <button class="ct-zb" id="ct-zout" type="button" aria-label="Zoom out"><svg class="ct-ic"><use href="#cti-minus"/></svg></button>
+          <input class="ct-zr" id="ct-zr" type="range" min="30" max="150" step="10" value="100" aria-label="Zoom">
+          <button class="ct-zb" id="ct-zin" type="button" aria-label="Zoom in"><svg class="ct-ic"><use href="#cti-plus"/></svg></button>
+          <output class="ct-zp" id="ct-zp" for="ct-zr">100%</output>
+          <button class="ct-zb ct-zfit" id="ct-zfit" type="button">Fit</button>
         </div>
-        <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูรายละเอียดที่ Traced Entry ด้านบน ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
-        <div class="ct-scroll" id="ct-graph" aria-describedby="ct-graph-desc"><div class="ct-canvas" id="ct-canvas"></div></div>
+        <div class="ct-scroll" id="ct-graph" aria-describedby="ct-graph-desc"><div class="ct-sizer" id="ct-sizer"><div class="ct-canvas" id="ct-canvas"></div></div></div>
         <div class="ct-table-wrap" id="ct-table" hidden></div>
       </div>
       <!-- Full Screen: สคริปต์ย้ายหน้าต่าง .ct-bc เข้ามาตอนเปิด แล้วย้ายกลับที่เดิมตอนปิด -->
@@ -5701,9 +5737,8 @@
                  en: "Cost trace graph. The leftmost column is the entry you start from, and each column further right goes one level deeper. Press a box title to show its details under Traced Entry; the number button opens or closes that box's sources." },
       play: { th: 'เล่นทีละขั้น', en: 'Play step by step' },
       stop: { th: 'หยุด', en: 'Stop' },
-      introT: { th: 'ห่วงโซ่ต้นทุนทั้งเส้น', en: 'The whole cost chain' },
-      introTx: { th: 'เริ่มจากใบจัดส่งขาย 1 ใบ ย้อนผ่านงานบรรจุกับไลน์จุ่มขึ้นรูป ไปจนถึงใบรับน้ำยางนำเข้า 2 ใบ และใบรับของจากผู้ขายในประเทศอีก 4 ใบ กด <b>เล่นทีละขั้น</b> แล้วไล่ดูไปทีละระดับได้เลย',
-                 en: 'It starts from one sales shipment and runs back through packing and the dipping line to two imported latex receipts and four local purchases. Press <b>Play step by step</b> to follow it level by level.' },
+      introTx: { th: 'กด <b>เล่นทีละขั้น</b> เพื่อไล่ดูต้นทุนย้อนกลับทีละระดับ',
+                 en: 'Press <b>Play step by step</b> to trace the cost back one level at a time.' },
       srcs: { th: 'ต้นทาง {n} รายการ', en: '{n} cost sources' },
       ordTip: { th: 'ต้นทุนจริงของทั้งใบสั่งผลิตแยกตามประเภท แบบเดียวกับหน้า Production Order Statistics หรือ Posted Assembly Order Statistics ไม่ใช่ส่วนของ Output กล่องนี้',
                 en: "The actual cost of the whole order by kind, as its Statistics page shows it: Production Order Statistics or Posted Assembly Order Statistics. Not this output's share." }
@@ -5711,9 +5746,9 @@
     let lang = 'th';
     const L = (o) => o[lang] || o.th;
 
-    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18, VGAP_MINI = 8;
+    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18, ZMIN = .3, ZMAX = 1.5;
     const state = { open: {}, sel: ROOT, view: 'graph', step: -1, timer: null };
-    let pending = true, shown = null, rt = 0;
+    let pending = true, shown = null, rt = 0, zoom = 1;
 
     const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const qty = (v) => v.toLocaleString('en-US', { maximumFractionDigits: 2 });
@@ -5736,32 +5771,26 @@
 
     const narrHTML = (i) => {
       const s = STEPS[i];
+      // บทเปิด (ยังไม่เลือกขั้น) มีแค่บรรทัดวิธีใช้ ไม่มีหัวเรื่อง
       return '<span class="ct-narr-lv">' + (s ? (i ? 'Level ' + i : 'Traced entry') : '6 levels') + '</span>'
-        + '<span class="ct-narr-t">' + L(s ? s.nm : T.introT) + '</span>'
+        + (s ? '<span class="ct-narr-t">' + L(s.nm) + '</span>' : '')
         + '<span class="ct-narr-x">' + L(s ? s.tx : T.introTx) + '</span>';
     };
 
-    // กล่องบนเส้นทางที่เลือก = กล่องเต็ม · กล่องอื่น = แถวย่อสองบรรทัด (ชื่อ + ยอด / สินค้า) กดแล้วขึ้นมาเป็นกล่องเต็ม
     function cardHTML(n, o) {
-      let h = '<div class="ct-card' + (n.kind ? ' ' + n.kind : '') + (o.mini ? ' mini' : '') + (o.sel ? ' sel' : '') + (o.fresh ? ' ct-new' : '') + '" data-id="' + n.id + '">'
-        + '<button class="ct-open" type="button" data-sel="' + n.id + '"' + (o.sel ? ' aria-current="true"' : '') + '>';
-      if (o.mini) {
-        const sub = n.kind === 'cap' ? n.det : itemText(n);
-        h += '<span class="ct-mini-t">' + esc(n.t) + '</span><b class="ct-mini-v">' + money(n.total) + '</b>'
-          + '<span class="ct-mini-i" title="' + esc(sub) + '">' + esc(sub) + '</span></button>';
-      } else {
-        h += '<span class="ct-title">' + esc(n.t) + '</span>';
-        if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
-        h += '<span class="ct-detail" title="' + esc(n.d + ' · ' + n.det) + '">' + esc(n.d + ' · ' + n.det) + '</span></button>';
-        h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
-        if (n.ord) {
-          h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
-            + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
-        }
-        const uc = unitCost(n);
-        h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span class="ct-unit" title="Unit Cost (LCY)"> @ ' + uc + '</span>' : '') + '</span><b>' + money(n.total) + '</b></div>'
-          + '<span class="ct-adj">Adjusted</span>';
+      let h = '<div class="ct-card' + (n.id === ROOT ? ' root' : '') + (n.kind ? ' ' + n.kind : '') + (o.sel ? ' sel' : '') + (o.fresh ? ' ct-new' : '') + '" data-id="' + n.id + '">'
+        + '<button class="ct-open" type="button" data-sel="' + n.id + '"' + (o.sel ? ' aria-current="true"' : '') + '>'
+        + '<span class="ct-title">' + esc(n.t) + '</span>';
+      if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
+      h += '<span class="ct-detail" title="' + esc(n.d + ' · ' + n.det) + '">' + esc(n.d + ' · ' + n.det) + '</span></button>';
+      h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
+      if (n.ord) {
+        h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
+          + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
       }
+      const uc = unitCost(n);
+      h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span class="ct-unit" title="Unit Cost (LCY)"> @ ' + uc + '</span>' : '') + '</span><b>' + money(n.total) + '</b></div>'
+        + '<span class="ct-adj">Adjusted</span>';
       if (n.flow) h += '<span class="ct-flow' + (o.on ? ' on' : '') + '">' + esc(n.flow) + '</span>';
       if (n.src.length) {
         h += '<button class="ct-badge" type="button" data-tog="' + n.id + '" aria-expanded="' + !!o.open + '" aria-label="'
@@ -5784,7 +5813,7 @@
       }
       vis.forEach((id) => {
         const n = N[id];
-        html += cardHTML(n, { sel: id === state.sel, on: on[id] && n.parent && on[n.parent], open: state.open[id], mini: !on[id],
+        html += cardHTML(n, { sel: id === state.sel, on: on[id] && n.parent && on[n.parent], open: state.open[id],
           fresh: !!shown && !shown.has(id) && !slow.matches });
       });
       shown = new Set(vis);
@@ -5795,7 +5824,7 @@
       const pos = {};
       (function place(id, y) {
         pos[id] = { x: PADX + N[id].depth * (COLW + GAP), y };
-        let end = y + el[id].offsetHeight + (el[id].classList.contains('mini') ? VGAP_MINI : VGAP);
+        let end = y + el[id].offsetHeight + VGAP;
         if (state.open[id]) { let cy = y; N[id].src.forEach((c) => { cy = place(c, cy); }); end = Math.max(end, cy); }
         return end;
       })(ROOT, TOP);
@@ -5808,6 +5837,7 @@
       const W = PADX * 2 + (maxD + 1) * COLW + maxD * GAP + 50, H = maxY + 28;
       canvas.style.width = W + 'px';
       canvas.style.height = H + 'px';
+      applyZoom();
 
       // เส้นต่อวัดจากกึ่งกลางปุ่มตัวเลขกับป้ายบนเส้นจริง ไม่ฝังเลขไว้ — ขนาดสองตัวนี้ขึ้นกับฟอนต์
       let p = '';
@@ -5835,10 +5865,10 @@
       svg.innerHTML = p;
       refocus(keep, canvas);
       if (scrollTo && pos[scrollTo]) {
-        // จอกว้างเห็นกล่องแม่ด้วย · จอกลางเหลือขอบซ้ายไว้นิดหน่อย · จอแคบกว่ากล่อง+ขอบ ให้กล่องชิดซ้ายเห็นทั้งใบ
-        const w = graph.clientWidth, lead = w > 900 ? COLW + GAP + 40 : w >= COLW + 140 ? 110 : 12;
-        graph.scrollTo({ left: Math.max(0, pos[scrollTo].x - lead),
-          top: Math.max(0, pos[scrollTo].y - 90), behavior: slow.matches ? 'auto' : 'smooth' });
+        // จอกว้างเห็นกล่องแม่ด้วย · จอกลางเหลือขอบซ้ายไว้นิดหน่อย · จอแคบกว่ากล่อง+ขอบ ให้กล่องชิดซ้ายเห็นทั้งใบ (ตำแหน่ง × ซูม)
+        const w = graph.clientWidth, lead = w > 900 ? (COLW + GAP + 40) * zoom : w >= COLW * zoom + 140 ? 110 : 12;
+        graph.scrollTo({ left: Math.max(0, pos[scrollTo].x * zoom - lead),
+          top: Math.max(0, (pos[scrollTo].y - 90) * zoom), behavior: slow.matches ? 'auto' : 'smooth' });
       }
     }
 
@@ -5859,18 +5889,6 @@
         + '<th class="num">Quantity</th><th class="num">Unit Cost (LCY)</th><th class="num">Cost Amount (Actual)</th>'
         + '<th class="num">Applied Quantity</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
       refocus(keep, box);
-    }
-
-    function renderFields() {
-      const n = N[state.sel];
-      const f = [
-        ['Item No.', n.ino], ['Quantity', qty(n.q) + ' ' + n.u, 1],
-        ['Item Description', n.idesc], ['Unit Cost (LCY)', unitCost(n) || '0.00', 1],
-        ['Location Code', n.kind === 'cap' ? '' : 'RAYONG'], ['Cost Amount (Actual)', money(n.total), 1],
-        ['Posting Date', n.d], ['Status', 'Adjusted']
-      ];
-      byId('ct-fast-title').textContent = state.sel === ROOT ? 'Traced Entry' : 'Traced Entry · Level ' + n.depth;
-      byId('ct-fields').innerHTML = f.map((x) => '<div class="ct-fld"><span>' + x[0] + '</span><output' + (x[2] ? ' class="num"' : '') + '>' + esc(x[1]) + '</output></div>').join('');
     }
 
     // ปุ่มขั้นสร้างครั้งเดียวต่อภาษา ระหว่างเล่นอัตโนมัติแค่สลับคลาส ปุ่มที่ focus อยู่จึงไม่หาย
@@ -5896,13 +5914,13 @@
     }
     function render(scrollTo) {
       syncSteps();
-      renderFields();
       if (state.view === 'graph') renderGraph(scrollTo); else renderTable();
     }
 
     function setView(v) {
       state.view = v;
       graph.hidden = v !== 'graph';
+      byId('ct-zoom').hidden = v !== 'graph';
       byId('ct-table').hidden = v === 'graph';
       const b = byId('ct-view');
       b.querySelector('use').setAttribute('href', v === 'graph' ? '#cti-table' : '#cti-graph');
@@ -5952,16 +5970,17 @@
     byId('ct-expand').addEventListener('click', () => { stopPlay(); openTo(MAXD + 1); state.step = -1; render(); });
     byId('ct-collapse').addEventListener('click', () => { stopPlay(); openTo(0); state.step = -1; state.sel = ROOT; render(ROOT); });
 
-    // Full Screen: ย้ายหน้าต่าง BC เข้า <dialog> แบบ modal — Esc ปิดได้ โฟกัสวนอยู่ข้างใน หน้าด้านหลังกดไม่ได้
-    // ปิดแล้วย้ายกลับที่เดิม (จดตำแหน่งด้วย comment) listener ติดไปกับ element เองจึงไม่ต้องผูกใหม่
+    // Full Screen = ปุ่ม Focus mode มุมขวาของหัวเพจแบบ BC: ย้ายหน้าต่างเข้า <dialog> แบบ modal — Esc ปิดได้
+    // โฟกัสวนอยู่ข้างใน หน้าด้านหลังกดไม่ได้ · ปิดแล้วย้ายกลับที่เดิม (จดตำแหน่งด้วย comment) listener ติดไปกับ element เอง
     const bc = graph.closest('.ct-bc'), dlg = byId('ct-dlg'), home = document.createComment(' ct-bc ');
     function setFull(on) {
       if (on) { stopPlay(); bc.before(home); dlg.append(bc); dlg.showModal(); }
       else if (home.parentNode) home.replaceWith(bc);
       document.documentElement.classList.toggle('ct-locked', on);
-      const b = byId('ct-full');
+      const b = byId('ct-full'), lbl = on ? 'Exit full screen' : 'Full screen';
       b.querySelector('use').setAttribute('href', on ? '#cti-exit' : '#cti-full');
-      b.querySelector('span').textContent = on ? 'Exit Full Screen' : 'Full Screen';
+      b.setAttribute('aria-label', lbl);
+      b.title = lbl;
       render(state.sel);
       b.focus({ preventScroll: true });
     }
@@ -5969,6 +5988,94 @@
     byId('ct-full').addEventListener('click', () => { if (dlg.open) dlg.close(); else setFull(true); });
     dlg.addEventListener('close', () => setFull(false));
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // กดพื้นมืดรอบหน้าต่าง = ปิด
+
+    // ซูมแบบแอปจริง: −/+ ทีละ 10% · แถบเลื่อน 30–150% · Fit = ย่อทั้งกราฟให้พอดีกรอบ (ไม่ขยายเกิน 100%)
+    // ย่อด้วย transform ที่ .ct-canvas ตำแหน่งที่วัดจาก DOM จึงยังเป็นหน่วยเดิม · .ct-sizer กันพื้นที่เลื่อนตามขนาดหลังซูม
+    function applyZoom() {
+      const c = byId('ct-canvas'), s = byId('ct-sizer');
+      c.style.transform = zoom === 1 ? '' : 'scale(' + zoom + ')';
+      s.style.width = c.offsetWidth * zoom + 'px';
+      s.style.height = c.offsetHeight * zoom + 'px';
+      byId('ct-zr').value = Math.round(zoom * 100);
+      byId('ct-zp').textContent = Math.round(zoom * 100) + '%';
+    }
+    function setZoom(z) {   // ซูมรอบจุดกลางของกรอบ ภาพไม่กระโดดหนีไปมุมซ้ายบน
+      const cx = (graph.scrollLeft + graph.clientWidth / 2) / zoom, cy = (graph.scrollTop + graph.clientHeight / 2) / zoom;
+      zoom = Math.round(Math.min(ZMAX, Math.max(ZMIN, z)) * 100) / 100;
+      applyZoom();
+      graph.scrollTo({ left: cx * zoom - graph.clientWidth / 2, top: cy * zoom - graph.clientHeight / 2, behavior: 'instant' });
+    }
+    byId('ct-zout').addEventListener('click', () => setZoom(zoom - .1));
+    byId('ct-zin').addEventListener('click', () => setZoom(zoom + .1));
+    byId('ct-zr').addEventListener('input', (e) => setZoom(e.target.value / 100));
+    byId('ct-zfit').addEventListener('click', () => {
+      const c = byId('ct-canvas'), h = dlg.open ? graph.clientHeight : Math.min(660, innerHeight * .7);
+      setZoom(Math.min(1, graph.clientWidth / c.offsetWidth, h / c.offsetHeight));
+      graph.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+    });
+
+    // Export Image: วาดกราฟที่กางอยู่ทั้งหมด (กล่อง เส้น ป้าย ตัวอักษร ตามตำแหน่งจริงใน DOM) เป็นภาพ ไม่พึ่งไลบรารี
+    // ได้ PNG เมื่อเบราว์เซอร์ยอมวาด SVG ลง canvas ไม่งั้นส่งเป็นไฟล์ SVG แทน
+    function exportImage() {
+      if (state.view !== 'graph') { setView('graph'); render(); }
+      const cv = byId('ct-canvas'), W = cv.offsetWidth, H = cv.offsetHeight, o = cv.getBoundingClientRect();
+      const X = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+      const at = (el) => { const b = el.getBoundingClientRect(); return [(b.left - o.left) / zoom, (b.top - o.top) / zoom, b.width / zoom, b.height / zoom]; };
+      const rect = (el, more) => {
+        const [x, y, w, h] = at(el), cs = getComputedStyle(el), bw = parseFloat(cs.borderTopWidth) || 0;
+        return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + Math.min(parseFloat(cs.borderTopLeftRadius) || 0, h / 2)
+          + '" fill="' + cs.backgroundColor + '"' + (bw ? ' stroke="' + cs.borderTopColor + '"' : more || '') + '/>';
+      };
+      const text = (el, mid) => {
+        const [x, y, w, h] = at(el), cs = getComputedStyle(el), fs = parseFloat(cs.fontSize);
+        const fit = !mid && el.scrollWidth > el.clientWidth + 1 ? ' textLength="' + w + '" lengthAdjust="spacingAndGlyphs"' : '';
+        return '<text x="' + (mid ? x + w / 2 : x) + '" y="' + (y + h / 2 + fs * .35) + '" font-size="' + fs + '" font-weight="' + cs.fontWeight
+          + '" fill="' + cs.color + '"' + (mid ? ' text-anchor="middle"' : fit) + '>' + X(el.textContent.trim()) + '</text>';
+      };
+      let s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" font-family="Segoe UI, Arial, sans-serif">'
+        + '<style>path{fill:none;stroke:#8A8886;stroke-width:1.2}path.arw{fill:#8A8886;stroke:none}path.on{stroke:#9C4A16;stroke-width:2.5}path.arw.on{fill:#9C4A16}</style>'
+        + '<rect width="' + W + '" height="' + H + '" fill="#F3F2F1"/>' + cv.querySelector('.ct-lines').innerHTML;
+      cv.querySelectorAll('.ct-colhead').forEach((el) => { s += rect(el) + text(el, true); });
+      cv.querySelectorAll('.ct-card').forEach((c, i) => {
+        const [x, y, w, h] = at(c);
+        s += rect(c, ' stroke="#E0E0E0"')
+          + (c.classList.contains('root') ? '<rect x="' + x + '" y="' + y + '" width="3" height="' + h + '" fill="#0F6CBD"/>' : '')
+          + (c.classList.contains('sel') ? '<rect x="' + (x + 1) + '" y="' + (y + 1) + '" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="2" fill="none" stroke="#9C4A16" stroke-width="2"/>' : '')
+          + '<clipPath id="k' + i + '"><rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/></clipPath><g clip-path="url(#k' + i + ')">';
+        c.querySelectorAll('.ct-title, .ct-item, .ct-detail, .ct-ln > span, .ct-ord-cap, .ct-foot > span, .ct-foot > b').forEach((t) => { s += text(t); });
+        c.querySelectorAll('.ct-box').forEach((b) => { const [bx, by, bw] = at(b); s += '<line x1="' + bx + '" y1="' + by + '" x2="' + (bx + bw) + '" y2="' + by + '" stroke="#E0E0E0"/>'; });
+        const adj = c.querySelector('.ct-adj');
+        if (adj) s += rect(adj) + text(adj, true);
+        s += '</g>';
+      });
+      cv.querySelectorAll('.ct-flow, .ct-badge').forEach((el) => { s += rect(el) + text(el, true); });
+      s += '</svg>';
+
+      const save = (blob, ext) => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'cost-traceability.' + ext;
+        (dlg.open ? dlg : document.body).append(a);   // ตอนเต็มจอ หน้าด้านหลังเป็น inert ต้องกดลิงก์จากใน dialog
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      };
+      const svgBlob = new Blob([s], { type: 'image/svg+xml' }), img = new Image();
+      img.onload = () => {
+        try {
+          const k = Math.min(2, 16000 / Math.max(W, H)), c = document.createElement('canvas');
+          c.width = Math.round(W * k);
+          c.height = Math.round(H * k);
+          const g = c.getContext('2d');
+          g.scale(k, k);
+          g.drawImage(img, 0, 0);
+          c.toBlob((b) => save(b || svgBlob, b ? 'png' : 'svg'), 'image/png');
+        } catch (e) { save(svgBlob, 'svg'); }
+      };
+      img.onerror = () => save(svgBlob, 'svg');
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+    }
+    byId('ct-export').addEventListener('click', () => { stopPlay(); exportImage(); });
 
     addEventListener('resize', () => {
       if (state.view !== 'graph') return;
@@ -5980,7 +6087,7 @@
     document.addEventListener('visibilitychange', () => { if (document.hidden) stopPlay(); });
 
     window.renderCostTrace = (l) => { lang = l; drawStatic(); render(); };
-    openTo(2);   // เปิดหน้ามาเห็น 3 ระดับแรกพอดีกรอบ ลึกกว่านั้นกดเล่นทีละขั้นหรือ Expand All
+    openTo(1);   // เปิดหน้ามาแบบแอปจริง: รายการตั้งต้น + ต้นทางระดับแรก ลึกกว่านั้นกดเล่นทีละขั้น Expand All หรือกดปุ่มตัวเลข
     window.renderCostTrace('th');
   })();
 
