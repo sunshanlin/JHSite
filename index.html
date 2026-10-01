@@ -3237,6 +3237,30 @@
     font-size: .76rem; white-space: nowrap; transition: border-color .25s ease, color .25s ease;
   }
   .ct-flow.on { border-color: var(--ct-thread); color: var(--ct-thread); font-weight: 700; }
+  /* กล่องนอกเส้นทางที่เลือก = แถวย่อสองบรรทัด (ชื่อ + ยอด / สินค้า) ทั้งเส้นจึงพอดีกรอบ ไม่ต้องเลื่อนผ่านพื้นที่ว่าง */
+  .ct-card.mini { padding: 6px 10px 7px; }
+  .ct-card.mini .ct-open { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 10px; }
+  .ct-mini-t, .ct-mini-i { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .ct-mini-t, .ct-mini-v { font-weight: 700; }
+  .ct-mini-i { grid-column: 1 / -1; color: var(--bc-sub); }
+  .ct-card.cap .ct-mini-t { color: var(--bc-cap-ink); }
+  .ct-open:hover .ct-mini-t { text-decoration: underline; text-underline-offset: 3px; }
+  .ct-card.mini .ct-badge, .ct-card.mini .ct-flow { top: 11px; }
+
+  /* Full Screen: <dialog> เด้งขึ้นเหนือหน้า เว้นขอบให้รู้ว่ายังอยู่หน้าเดิม · มือถือเต็มจอ */
+  .ct-act.ct-full-btn { margin-left: auto; }
+  .ct-act[hidden] { display: none; }
+  .ct-dlg {
+    width: calc(100vw - 48px); height: calc(100vh - 48px); height: calc(100dvh - 48px);
+    max-width: 1600px; max-height: none; margin: auto; padding: 0; overflow: hidden;
+    background: #fff; border: 0; border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
+  }
+  .ct-dlg::backdrop { background: rgba(1,47,42,.45); }
+  .ct-dlg .ct-bc { display: flex; flex-direction: column; height: 100%; margin: 0; border: 0; border-radius: 0; }
+  .ct-dlg .ct-scroll, .ct-dlg .ct-table-wrap { flex: 1 1 auto; max-height: none; }
+  /* จอกว้าง: ช่อง Traced Entry เรียง 4 คอลัมน์ เหลือ 2 แถว คืนความสูงให้กราฟ */
+  @media (min-width: 1100px) { .ct-dlg .ct-fields { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px 28px; } }
+  html.ct-locked { overflow: hidden; }
 
   .ct-table-wrap { background: #fff; }
   .ct-tbl { width: 100%; min-width: 860px; border-collapse: collapse; }
@@ -3273,6 +3297,9 @@
     .ct-bc { margin: 0 12px 12px; }
     .ct-fast { padding: 12px 14px 14px; }
     .ct-fld { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+    .ct-dlg { width: 100vw; height: 100vh; height: 100dvh; max-width: none; border-radius: 0; }
+    /* มือถือเต็มจอ: ช่อง Traced Entry ซ้ำกับกล่องที่เลือกอยู่แล้ว ซ่อนไว้ให้กราฟได้ทั้งจอ */
+    .ct-dlg .ct-fast { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ct-card.ct-new { animation: none; }
@@ -4136,6 +4163,8 @@
       <symbol id="cti-graph" viewBox="0 0 16 16"><rect x="1" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="9.5" width="5" height="4" rx=".8"/><path d="M6 4.5h4M8 4.5v7h2"/></symbol>
       <symbol id="cti-expand" viewBox="0 0 16 16"><path d="M3.5 3.5 8 8l4.5-4.5M3.5 8.5 8 13l4.5-4.5"/></symbol>
       <symbol id="cti-collapse" viewBox="0 0 16 16"><path d="M3.5 12.5 8 8l4.5 4.5M3.5 7.5 8 3l4.5 4.5"/></symbol>
+      <symbol id="cti-full" viewBox="0 0 16 16"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></symbol>
+      <symbol id="cti-exit" viewBox="0 0 16 16"><path d="M6 2.5V6H2.5M13.5 6H10V2.5M10 13.5V10h3.5M2.5 10H6v3.5"/></symbol>
     </defs></svg>
 
     <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="ct-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
@@ -4157,6 +4186,7 @@
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
           <button class="ct-act" id="ct-expand" type="button"><svg class="ct-ic"><use href="#cti-expand"/></svg><span>Expand All</span></button>
           <button class="ct-act" id="ct-collapse" type="button"><svg class="ct-ic"><use href="#cti-collapse"/></svg><span>Collapse All</span></button>
+          <button class="ct-act ct-full-btn" id="ct-full" type="button"><svg class="ct-ic"><use href="#cti-full"/></svg><span>Full Screen</span></button>
         </div>
         <div class="ct-fast">
           <h4 id="ct-fast-title">Traced Entry</h4>
@@ -4166,6 +4196,8 @@
         <div class="ct-scroll" id="ct-graph" aria-describedby="ct-graph-desc"><div class="ct-canvas" id="ct-canvas"></div></div>
         <div class="ct-table-wrap" id="ct-table" hidden></div>
       </div>
+      <!-- Full Screen: สคริปต์ย้ายหน้าต่าง .ct-bc เข้ามาตอนเปิด แล้วย้ายกลับที่เดิมตอนปิด -->
+      <dialog class="ct-dlg" id="ct-dlg" aria-label="Cost Traceability"></dialog>
     </div>
     </div>
   </div>
@@ -5627,22 +5659,23 @@
     })(ROOT, 0, null);
 
     const STEPS = [
-      { focus: 's', nm: { th: 'จัดส่งขาย', en: 'Sales shipment' },
+      // open = กิ่งที่กางในขั้นนั้น — เฉพาะที่คำบรรยายพูดถึง กราฟจึงไม่บานจนต้องเลื่อนหา
+      { focus: 's', open: [], nm: { th: 'จัดส่งขาย', en: 'Sales shipment' },
         tx: { th: 'ใบจัดส่งขาย SS-0912 ส่งถุงมือ 1,200 กล่องจาก Lot NGM-260915 ให้ลูกค้า และลงต้นทุนขายไว้ 98,403.92 บาท รายการนี้แหละคือจุดที่คุณเริ่มไล่ย้อนกลับ',
               en: 'Sales shipment SS-0912 sends 1,200 boxes from lot NGM-260915 to a customer, at a cost of goods sold of 98,403.92 baht. This is where you start tracing back.' } },
-      { focus: 'op', nm: { th: 'บรรจุกล่อง', en: 'Packing' },
+      { focus: 'op', open: ['s'], nm: { th: 'บรรจุกล่อง', en: 'Packing' },
         tx: { th: 'ใบสั่งผลิต PCK-093 บรรจุถุงมือได้ 2,000 กล่อง ต้นทุนรวม 164,006.54 บาท ตกกล่องละ 82.00 บาท ในยอดนี้มี Indirect cost 6,307.94 บาทที่ระบบลงไว้บน Output ด้วย',
               en: 'Production order PCK-093 packs 2,000 boxes for 164,006.54 baht in total, 82.00 a box. That total includes 6,307.94 of indirect cost, which Business Central posts on the Output.' } },
-      { focus: 'cb', nm: { th: 'เบิกเข้าไลน์บรรจุ', en: 'Packing-line issues' },
+      { focus: 'cb', open: ['s', 'op'], nm: { th: 'เบิกเข้าไลน์บรรจุ', en: 'Packing-line issues' },
         tx: { th: 'ใบสั่งผลิต PCK-093 เบิกถุงมือ bulk 200,000 ชิ้นจาก Lot DL3-260910 กล่อง dispenser 2,000 ใบ กับลังอีก 200 ใบ แล้วใช้ Capacity ของไลน์ตรวจและบรรจุไป 16 ชั่วโมง',
               en: 'Production order PCK-093 consumes 200,000 bulk gloves from lot DL3-260910, 2,000 dispenser boxes and 200 cartons, then uses 16 hours of inspection-and-packing line capacity.' } },
-      { focus: 'od', nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
+      { focus: 'od', open: ['s', 'op', 'cb', 'cx', 'cc'], nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
         tx: { th: 'ถุงมือ bulk ชุดนี้มาจากใบสั่งผลิต DIP-091 ของไลน์จุ่มที่ 3 ต้นทุน 142,898.60 บาท ตกชิ้นละ 0.71449 บาท กล่อง Output ยังแยก Actual Cost ของทั้งใบสั่งผลิตไว้ให้ตรงกับหน้า Statistics ด้วย ส่วนกล่อง dispenser กับลังซื้อมาจากผู้ขายในประเทศ',
               en: "These bulk gloves come from production order DIP-091 on dipping line 3: 142,898.60 baht, or 0.71449 a glove. The Output box also breaks down the whole order's actual cost, matching its Statistics page. The boxes and cartons were bought from local vendors." } },
-      { focus: 'cl1', nm: { th: 'เบิกน้ำยางและสารเคมี', en: 'Latex and chemicals' },
+      { focus: 'cl1', open: ['s', 'op', 'cb', 'od'], nm: { th: 'เบิกน้ำยางและสารเคมี', en: 'Latex and chemicals' },
         tx: { th: 'ไลน์จุ่มเบิกน้ำยาง NBR ไป 1,560 กก. ตาม FIFO น้ำยางชุดนี้มาจาก 2 Lot คือ Lot เดือนสิงหาคม 1,000 กก. กับ Lot เดือนกันยายนอีก 560 กก. ระบบจึงแยกเป็น 2 รายการ นอกจากน้ำยางแล้ว ยังมีซิงก์ออกไซด์ สารเร่ง และ Capacity ของไลน์อีก 40 ชั่วโมงด้วย',
               en: 'The dipping line draws 1,560 kg of NBR latex under FIFO. It comes from two lots, 1,000 kg from the August lot and 560 kg from the September lot, so Business Central posts two entries. Zinc oxide, an accelerator and 40 hours of line capacity go in as well.' } },
-      { focus: 'pn1', nm: { th: 'รับน้ำยางนำเข้า', en: 'Imported latex' },
+      { focus: 'pn1', open: ['s', 'op', 'cb', 'od', 'cl1', 'cl2'], nm: { th: 'รับน้ำยางนำเข้า', en: 'Imported latex' },
         tx: { th: 'ปลายทางคือใบรับน้ำยาง NBR ที่นำเข้าจากเกาหลี 2 ครั้ง ราคา USD แปลงเป็นบาทตามอัตราของแต่ละใบ แล้วบวก Item Charge ค่าขนส่ง อากร และค่าเคลียร์เข้าไป ต้นทุนจริงจึงออกมาที่กิโลกรัมละ 45.00 และ 46.00 บาท',
               en: 'The trail ends at two receipts of NBR latex imported from Korea. Each USD price is converted at its own rate, then the freight, duty and clearance Item Charges are added, so the real cost comes to 45.00 and 46.00 baht a kilogram.' } }
     ];
@@ -5678,7 +5711,7 @@
     let lang = 'th';
     const L = (o) => o[lang] || o.th;
 
-    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18;
+    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18, VGAP_MINI = 8;
     const state = { open: {}, sel: ROOT, view: 'graph', step: -1, timer: null };
     let pending = true, shown = null, rt = 0;
 
@@ -5708,20 +5741,27 @@
         + '<span class="ct-narr-x">' + L(s ? s.tx : T.introTx) + '</span>';
     };
 
+    // กล่องบนเส้นทางที่เลือก = กล่องเต็ม · กล่องอื่น = แถวย่อสองบรรทัด (ชื่อ + ยอด / สินค้า) กดแล้วขึ้นมาเป็นกล่องเต็ม
     function cardHTML(n, o) {
-      let h = '<div class="ct-card' + (n.kind ? ' ' + n.kind : '') + (o.sel ? ' sel' : '') + (o.fresh ? ' ct-new' : '') + '" data-id="' + n.id + '">'
-        + '<button class="ct-open" type="button" data-sel="' + n.id + '"' + (o.sel ? ' aria-current="true"' : '') + '>'
-        + '<span class="ct-title">' + esc(n.t) + '</span>';
-      if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
-      h += '<span class="ct-detail" title="' + esc(n.d + ' · ' + n.det) + '">' + esc(n.d + ' · ' + n.det) + '</span></button>';
-      h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
-      if (n.ord) {
-        h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
-          + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
+      let h = '<div class="ct-card' + (n.kind ? ' ' + n.kind : '') + (o.mini ? ' mini' : '') + (o.sel ? ' sel' : '') + (o.fresh ? ' ct-new' : '') + '" data-id="' + n.id + '">'
+        + '<button class="ct-open" type="button" data-sel="' + n.id + '"' + (o.sel ? ' aria-current="true"' : '') + '>';
+      if (o.mini) {
+        const sub = n.kind === 'cap' ? n.det : itemText(n);
+        h += '<span class="ct-mini-t">' + esc(n.t) + '</span><b class="ct-mini-v">' + money(n.total) + '</b>'
+          + '<span class="ct-mini-i" title="' + esc(sub) + '">' + esc(sub) + '</span></button>';
+      } else {
+        h += '<span class="ct-title">' + esc(n.t) + '</span>';
+        if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
+        h += '<span class="ct-detail" title="' + esc(n.d + ' · ' + n.det) + '">' + esc(n.d + ' · ' + n.det) + '</span></button>';
+        h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
+        if (n.ord) {
+          h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
+            + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
+        }
+        const uc = unitCost(n);
+        h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span class="ct-unit" title="Unit Cost (LCY)"> @ ' + uc + '</span>' : '') + '</span><b>' + money(n.total) + '</b></div>'
+          + '<span class="ct-adj">Adjusted</span>';
       }
-      const uc = unitCost(n);
-      h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span class="ct-unit" title="Unit Cost (LCY)"> @ ' + uc + '</span>' : '') + '</span><b>' + money(n.total) + '</b></div>'
-        + '<span class="ct-adj">Adjusted</span>';
       if (n.flow) h += '<span class="ct-flow' + (o.on ? ' on' : '') + '">' + esc(n.flow) + '</span>';
       if (n.src.length) {
         h += '<button class="ct-badge" type="button" data-tog="' + n.id + '" aria-expanded="' + !!o.open + '" aria-label="'
@@ -5744,7 +5784,7 @@
       }
       vis.forEach((id) => {
         const n = N[id];
-        html += cardHTML(n, { sel: id === state.sel, on: on[id] && n.parent && on[n.parent], open: state.open[id],
+        html += cardHTML(n, { sel: id === state.sel, on: on[id] && n.parent && on[n.parent], open: state.open[id], mini: !on[id],
           fresh: !!shown && !shown.has(id) && !slow.matches });
       });
       shown = new Set(vis);
@@ -5755,7 +5795,7 @@
       const pos = {};
       (function place(id, y) {
         pos[id] = { x: PADX + N[id].depth * (COLW + GAP), y };
-        let end = y + el[id].offsetHeight + VGAP;
+        let end = y + el[id].offsetHeight + (el[id].classList.contains('mini') ? VGAP_MINI : VGAP);
         if (state.open[id]) { let cy = y; N[id].src.forEach((c) => { cy = place(c, cy); }); end = Math.max(end, cy); }
         return end;
       })(ROOT, TOP);
@@ -5795,7 +5835,9 @@
       svg.innerHTML = p;
       refocus(keep, canvas);
       if (scrollTo && pos[scrollTo]) {
-        graph.scrollTo({ left: Math.max(0, pos[scrollTo].x - (graph.clientWidth > 900 ? COLW + GAP + 40 : 110)),
+        // จอกว้างเห็นกล่องแม่ด้วย · จอกลางเหลือขอบซ้ายไว้นิดหน่อย · จอแคบกว่ากล่อง+ขอบ ให้กล่องชิดซ้ายเห็นทั้งใบ
+        const w = graph.clientWidth, lead = w > 900 ? COLW + GAP + 40 : w >= COLW + 140 ? 110 : 12;
+        graph.scrollTo({ left: Math.max(0, pos[scrollTo].x - lead),
           top: Math.max(0, pos[scrollTo].y - 90), behavior: slow.matches ? 'auto' : 'smooth' });
       }
     }
@@ -5866,7 +5908,13 @@
       b.querySelector('use').setAttribute('href', v === 'graph' ? '#cti-table' : '#cti-graph');
       b.querySelector('span').textContent = v === 'graph' ? 'Table View' : 'Graphic View';
     }
-    function goStep(i) { state.step = i; openTo(i); state.sel = STEPS[i].focus; render(state.sel); }
+    function goStep(i) {
+      state.step = i;
+      state.open = {};
+      STEPS[i].open.forEach((id) => { state.open[id] = true; });
+      state.sel = STEPS[i].focus;
+      render(state.sel);
+    }
     function stopPlay() { if (!state.timer) return; clearInterval(state.timer); state.timer = null; syncPlay(); }
     // กดกล่องเอง = ออกจากเส้นเรื่อง เว้นแต่เป็นกล่องของขั้นที่กำลังเล่าอยู่
     function select(id) {
@@ -5904,6 +5952,24 @@
     byId('ct-expand').addEventListener('click', () => { stopPlay(); openTo(MAXD + 1); state.step = -1; render(); });
     byId('ct-collapse').addEventListener('click', () => { stopPlay(); openTo(0); state.step = -1; state.sel = ROOT; render(ROOT); });
 
+    // Full Screen: ย้ายหน้าต่าง BC เข้า <dialog> แบบ modal — Esc ปิดได้ โฟกัสวนอยู่ข้างใน หน้าด้านหลังกดไม่ได้
+    // ปิดแล้วย้ายกลับที่เดิม (จดตำแหน่งด้วย comment) listener ติดไปกับ element เองจึงไม่ต้องผูกใหม่
+    const bc = graph.closest('.ct-bc'), dlg = byId('ct-dlg'), home = document.createComment(' ct-bc ');
+    function setFull(on) {
+      if (on) { stopPlay(); bc.before(home); dlg.append(bc); dlg.showModal(); }
+      else if (home.parentNode) home.replaceWith(bc);
+      document.documentElement.classList.toggle('ct-locked', on);
+      const b = byId('ct-full');
+      b.querySelector('use').setAttribute('href', on ? '#cti-exit' : '#cti-full');
+      b.querySelector('span').textContent = on ? 'Exit Full Screen' : 'Full Screen';
+      render(state.sel);
+      b.focus({ preventScroll: true });
+    }
+    if (typeof dlg.showModal !== 'function') byId('ct-full').hidden = true;
+    byId('ct-full').addEventListener('click', () => { if (dlg.open) dlg.close(); else setFull(true); });
+    dlg.addEventListener('close', () => setFull(false));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // กดพื้นมืดรอบหน้าต่าง = ปิด
+
     addEventListener('resize', () => {
       if (state.view !== 'graph') return;
       if (pending && graph.offsetWidth) { renderGraph(); return; }   // เพิ่งกดดูการนำเสนอ: วาดก่อนเฟรมแรก
@@ -5914,7 +5980,7 @@
     document.addEventListener('visibilitychange', () => { if (document.hidden) stopPlay(); });
 
     window.renderCostTrace = (l) => { lang = l; drawStatic(); render(); };
-    openTo(MAXD + 1);
+    openTo(2);   // เปิดหน้ามาเห็น 3 ระดับแรกพอดีกรอบ ลึกกว่านั้นกดเล่นทีละขั้นหรือ Expand All
     window.renderCostTrace('th');
   })();
 
