@@ -3093,17 +3093,13 @@
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .ct-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-  /* นิยาม Cost Trace: ชิปค่าเดียวกับ .vs-chips ของ VAT Service แต่แยกชื่อ ไม่ผูกสองเดโมไว้ด้วยกัน */
+  /* นิยาม Cost Traceability: รายการ ✓ แนวตั้ง บรรทัดละข้อ — ข้อยาวขึ้นบรรทัดใหม่ได้โดยไม่กลายเป็นแคปซูลสูง ๆ */
   #cost-trace .tip { align-items: flex-start; }
-  .ct-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 9px 0 7px; }
-  .ct-chip {
-    display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 10px;
-    border: 1px solid rgba(1,74,65,.2); border-radius: 999px;
-    color: var(--brand-teal); background: rgba(65,119,113,.08);
-    font-size: .88rem; font-weight: 600;
-  }
-  .ct-chip .ct-ic { width: 14px; height: 14px; stroke-width: 2.6; color: var(--brand-jade); }
-  .ct-fine { display: block; font-size: .86rem; line-height: 1.6; }
+  /* หัวกล่องยาวกว่าของ VAT Service — ตอนกล่องเรียงแนวตั้ง (≤720px) ให้ขึ้นบรรทัดใหม่ได้ ไม่ล้นขอบที่จอ 320px */
+  @media (max-width: 720px) { #cost-trace .tip b { white-space: normal; } }
+  .ct-chips { display: grid; gap: 6px; margin: 10px 0 0; }
+  .ct-chip { display: flex; align-items: flex-start; gap: 8px; font-size: .92rem; font-weight: 600; line-height: 1.5; color: var(--brand-teal); }
+  .ct-chip .ct-ic { width: 15px; height: 15px; margin-top: .25em; stroke-width: 2.6; color: var(--brand-jade); }
 
   .ct {
     background: #fff; border: 1px solid var(--ui-line);
@@ -3114,6 +3110,7 @@
   .ct-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 16px; }
   .ct-head h3 { margin: 0 0 4px; font-size: 1.08rem; line-height: 1.4; }
   .ct-head p { margin: 0; max-width: 68ch; font-size: .92rem; line-height: 1.6; color: var(--ui-muted); }
+  .ct-hint p + p { margin-top: 6px; }
   .ct-play {
     display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;
     font: inherit; font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-teal);
@@ -3259,11 +3256,6 @@
   }
   .ct-tlink { min-height: 24px; padding: 3px 0; text-align: left; font: inherit; font-weight: 600; color: var(--brand-teal); background: none; border: 0; cursor: pointer; }
   .ct-tlink:hover { text-decoration: underline; text-underline-offset: 3px; }
-
-  .ct-note {
-    margin: 20px auto 0; max-width: 760px; text-align: center;
-    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
-  }
 
   @media (max-width: 900px) {
     .ct-top { padding: 18px; }
@@ -4128,12 +4120,11 @@
   <div class="wrap">
     <p class="section-kicker">Highlight Feature 3</p>
     <h2>Cost Traceability</h2>
-    <p class="sub" data-ct="sub">ต้นทุนขายทุกบาท ย้อนดูได้ถึงใบรับสินค้า ค่าขนส่ง และอากรขาเข้า แค่เลือก Item Ledger Entry รายการเดียว Cost Trace ก็ไล่ให้เห็นทีละชั้นว่าต้นทุนมาจากไหน ทุกตัวเลขเป็นค่าที่ Business Central Post ไว้แล้ว</p>
-    <!-- นิยามย่อ ใช้กล่อง .tip ชุดเดียวกับ VAT Service — ชิปต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p>
-         Cost Trace เป็นแอปในชุด JHEnhance แยกจากแพ็กเกจ Localization ไม่มีราคาบนหน้าโดยตั้งใจ (PRODUCT.md) -->
+    <p class="sub" data-ct="sub">ตรวจสอบต้นทุนย้อนหลังได้ถึงต้นทาง เพียงเลือกรายการสินค้า ก็สามารถดูได้ว่าต้นทุนประกอบด้วยอะไรบ้าง ตั้งแต่ราคาสินค้า ค่าขนส่ง ไปจนถึงค่าใช้จ่ายในการนำเข้า โดยไม่ต้องไล่เปิดเอกสารทีละรายการ</p>
+    <!-- นิยามย่อ ใช้กล่อง .tip ชุดเดียวกับ VAT Service — รายการ ✓ ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
     <div class="tip reveal">
-      <b data-ct="tipTitle">💡 Cost Trace คืออะไร?</b>
-      <p data-ct="tipBody">แอปในชุด JHEnhance สำหรับ Business Central ที่ช่วยให้คุณย้อนดูได้ว่าต้นทุนแต่ละรายการมาจากไหน<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ต้นทุนนำเข้าทุกบรรทัด</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>การผลิตหลายชั้น</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ครบ 5 Costing Method</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>หน้า Trace Check</span></span><span class="ct-fine">อ่านเฉพาะรายการที่ Post แล้ว ไม่แก้ไขข้อมูลใด ๆ ในระบบ</span></p>
+      <b data-ct="tipTitle">💡 Cost Traceability คืออะไร?</b>
+      <p data-ct="tipBody">Cost Traceability ช่วยให้การตรวจสอบที่มาของต้นทุนสินค้าทำได้ง่ายขึ้น ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต พร้อมดูรายละเอียดต้นทุนที่เกี่ยวข้องได้ในหน้าจอเดียว<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบต้นทุนย้อนหลัง</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ดูต้นทุนแยกตาม Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>รองรับทั้ง FIFO, Average และ Standard Cost</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ</span></span></p>
     </div>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปุ่มใหม่ทุกครั้งที่กด -->
@@ -4153,15 +4144,15 @@
       <div class="ct-top">
         <div class="ct-head">
           <div>
-            <h3 data-ct="demoTitle">ย้อนต้นทุน<span class="nb">ถุงมือไนไตรล์</span> <span class="nb">1,200 กล่อง</span>ที่จัดส่งขาย</h3>
-            <p data-ct="demoHint">ในตัวอย่างนี้ โรงงานถุงมือตรวจโรคใช้น้ำยาง NBR ที่นำเข้าจากเกาหลี ต้นทุนไหลผ่าน 6 ระดับกว่าจะถึงใบจัดส่งขาย ลองกดไล่ทีละขั้น หรือกดกล่องไหนก็ได้เพื่อเปิดรายละเอียด</p>
+            <h3 data-ct="demoTitle">สินค้า <span class="nb">1,200 กล่อง</span> ส่งถึงลูกค้าด้วยต้นทุนเท่าไร?</h3>
+            <div class="ct-hint" data-ct="demoHint"><p>สินค้า Lot นี้ผ่านหลายขั้นตอน ตั้งแต่การบรรจุกล่อง การเบิกจ่ายวัตถุดิบ การผลิต การเบิกใช้บรรจุภัณฑ์ ไปจนถึงการนำเข้าสินค้าบางรายการ ทำให้ต้นทุนเกิดขึ้นจากหลายส่วน</p><p>Cost Traceability ช่วยให้คุณไล่ดูต้นทุนย้อนหลังได้ทีละขั้นตอน ตั้งแต่รายการส่งขายกลับไปจนถึงรายการต้นทาง พร้อมตรวจสอบรายละเอียดของแต่ละรายการได้ทันที</p></div>
           </div>
           <button class="ct-play" type="button" id="ct-play"><svg class="ct-ic"><use href="#cti-play"/></svg><span>เล่นทีละขั้น</span></button>
         </div>
         <ol class="ct-steps" id="ct-steps" aria-label="ขั้นการย้อนต้นทุน"></ol>
       </div>
       <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
-      <div class="ct-bc" role="group" aria-label="Cost Trace">
+      <div class="ct-bc" role="group" aria-label="Cost Traceability">
         <div class="ct-acts">
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
           <button class="ct-act" id="ct-expand" type="button"><svg class="ct-ic"><use href="#cti-expand"/></svg><span>Expand All</span></button>
@@ -4176,8 +4167,6 @@
         <div class="ct-table-wrap" id="ct-table" hidden></div>
       </div>
     </div>
-
-    <p class="ct-note" data-ct="note">ในหน้าจอจำลองด้านบน เลขที่เอกสาร สินค้า ราคา อัตราแลกเปลี่ยน และอากร สมมติขึ้นทั้งหมด แต่ยอดทุกกล่องรวมกันได้จริง ส่วนภาษีซื้อที่จ่ายตอนนำเข้าขอคืนได้ จึงไม่ได้รวมไว้ในต้นทุน</p>
     </div>
   </div>
 </section>
@@ -5660,23 +5649,23 @@
 
     const chips = (a) => '<span class="ct-chips">' + a.map((t) => '<span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>' + t + '</span>').join('') + '</span>';
     const T = {
-      sub: { th: 'ต้นทุนขายทุกบาท ย้อนดูได้ถึงใบรับสินค้า ค่าขนส่ง และอากรขาเข้า แค่เลือก Item Ledger Entry รายการเดียว Cost Trace ก็ไล่ให้เห็นทีละชั้นว่าต้นทุนมาจากไหน ทุกตัวเลขเป็นค่าที่ Business Central Post ไว้แล้ว',
-             en: 'Trace every baht of cost of goods sold back to the vendor receipt, the freight and the import duty. Pick one Item Ledger Entry and Cost Trace shows, level by level, where its cost came from — every figure is one Business Central has already posted.' },
-      tipTitle: { th: '💡 Cost Trace คืออะไร?', en: '💡 What is Cost Trace?' },
-      tipBody: { th: 'แอปในชุด JHEnhance สำหรับ Business Central ที่ช่วยให้คุณย้อนดูได้ว่าต้นทุนแต่ละรายการมาจากไหน'
-                   + chips(['ต้นทุนนำเข้าทุกบรรทัด', 'Lot และ Serial No.', 'การผลิตหลายชั้น', 'ครบ 5 Costing Method', 'หน้า Trace Check'])
-                   + '<span class="ct-fine">อ่านเฉพาะรายการที่ Post แล้ว ไม่แก้ไขข้อมูลใด ๆ ในระบบ</span>',
-                 en: "A JHEnhance app for Business Central that lets you trace where each entry's cost came from"
-                   + chips(['every import cost line', 'lots and serial numbers', 'multi-level production', 'all 5 costing methods', 'the Trace Check page'])
-                   + '<span class="ct-fine">Reads posted entries only and never changes your data</span>' },
-      demoTitle: { th: 'ย้อนต้นทุน<span class="nb">ถุงมือไนไตรล์</span> <span class="nb">1,200 กล่อง</span>ที่จัดส่งขาย',
-                   en: 'Tracing the cost of 1,200 boxes of nitrile gloves shipped to a customer' },
-      demoHint: { th: 'ในตัวอย่างนี้ โรงงานถุงมือตรวจโรคใช้น้ำยาง NBR ที่นำเข้าจากเกาหลี ต้นทุนไหลผ่าน 6 ระดับกว่าจะถึงใบจัดส่งขาย ลองกดไล่ทีละขั้น หรือกดกล่องไหนก็ได้เพื่อเปิดรายละเอียด',
-                  en: 'This sample exam-glove factory imports its NBR latex from Korea, and the cost passes through six levels before it reaches the sales shipment. Step through it, or press any box to see its details.' },
+      sub: { th: 'ตรวจสอบต้นทุนย้อนหลังได้ถึงต้นทาง เพียงเลือกรายการสินค้า ก็สามารถดูได้ว่าต้นทุนประกอบด้วยอะไรบ้าง ตั้งแต่ราคาสินค้า ค่าขนส่ง ไปจนถึงค่าใช้จ่ายในการนำเข้า โดยไม่ต้องไล่เปิดเอกสารทีละรายการ',
+             en: 'Trace any cost back to its source. Pick an item entry and see exactly what its cost is made of, from the purchase price and freight to the cost of importing, without opening documents one by one.' },
+      tipTitle: { th: '💡 Cost Traceability คืออะไร?', en: '💡 What is Cost Traceability?' },
+      tipBody: { th: 'Cost Traceability ช่วยให้การตรวจสอบที่มาของต้นทุนสินค้าทำได้ง่ายขึ้น ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต พร้อมดูรายละเอียดต้นทุนที่เกี่ยวข้องได้ในหน้าจอเดียว'
+                   + chips(['ตรวจสอบต้นทุนย้อนหลัง', 'ดูต้นทุนแยกตาม Lot และ Serial No.', 'ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน',
+                            'รองรับทั้ง FIFO, Average และ Standard Cost', 'ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ']),
+                 en: "Cost Traceability makes it easier to check where an item's cost comes from — purchasing, freight, importing and production — with the related cost details on a single screen."
+                   + chips(['Trace costs back to the source', 'See costs by lot and serial number', 'Follow costs through multi-step production',
+                            'Supports FIFO, Average and Standard costing', 'Review posted entries without changing existing data']) },
+      demoTitle: { th: 'สินค้า <span class="nb">1,200 กล่อง</span> ส่งถึงลูกค้าด้วยต้นทุนเท่าไร?',
+                   en: '1,200 boxes shipped to a customer: what did they cost?' },
+      demoHint: { th: '<p>สินค้า Lot นี้ผ่านหลายขั้นตอน ตั้งแต่การบรรจุกล่อง การเบิกจ่ายวัตถุดิบ การผลิต การเบิกใช้บรรจุภัณฑ์ ไปจนถึงการนำเข้าสินค้าบางรายการ ทำให้ต้นทุนเกิดขึ้นจากหลายส่วน</p>'
+                    + '<p>Cost Traceability ช่วยให้คุณไล่ดูต้นทุนย้อนหลังได้ทีละขั้นตอน ตั้งแต่รายการส่งขายกลับไปจนถึงรายการต้นทาง พร้อมตรวจสอบรายละเอียดของแต่ละรายการได้ทันที</p>',
+                  en: '<p>This lot went through many steps: packing, issuing raw materials, production, packaging and importing some of the materials, so its cost builds up from many parts.</p>'
+                    + '<p>Cost Traceability lets you trace that cost back step by step, from the sales shipment to the original entries, and check the details of each entry right away.</p>' },
       graphSr: { th: 'กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูรายละเอียดที่ Traced Entry ด้านบน ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น',
                  en: "Cost trace graph. The leftmost column is the entry you start from, and each column further right goes one level deeper. Press a box title to show its details under Traced Entry; the number button opens or closes that box's sources." },
-      note: { th: 'ในหน้าจอจำลองด้านบน เลขที่เอกสาร สินค้า ราคา อัตราแลกเปลี่ยน และอากร สมมติขึ้นทั้งหมด แต่ยอดทุกกล่องรวมกันได้จริง ส่วนภาษีซื้อที่จ่ายตอนนำเข้าขอคืนได้ จึงไม่ได้รวมไว้ในต้นทุน',
-              en: 'The simulated screen above runs entirely on made-up data — document numbers, items, prices, exchange rates and duty — but every box adds up. Import VAT is recoverable input tax, so it stays out of cost.' },
       play: { th: 'เล่นทีละขั้น', en: 'Play step by step' },
       stop: { th: 'หยุด', en: 'Stop' },
       introT: { th: 'ห่วงโซ่ต้นทุนทั้งเส้น', en: 'The whole cost chain' },
