@@ -3154,6 +3154,8 @@
   .ct-narr > * { grid-area: 1 / 1; display: grid; grid-template-columns: 7.4em minmax(0, 1fr); column-gap: 14px; align-content: start; }
   .ct-narr-size { visibility: hidden; }
   .ct-narr-lv { grid-row: span 2; padding-top: .45em; color: var(--ct-thread); }
+  /* รูปใหญ่ของขั้นที่กำลังเล่า สีทองแดงตามป้าย LEVEL กับเส้นซ้าย · เส้นบางลงตามขนาดที่ใหญ่ขึ้น */
+  .ct-narr-pic { display: block; width: 64px; height: 64px; margin-top: 12px; stroke-width: 1.25; }
   .ct-narr-t { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
   .ct-narr-x { max-width: 82ch; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
 
@@ -3325,7 +3327,9 @@
     .ct-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .ct-pic { width: 24px; height: 24px; }
     .ct-narr > * { grid-template-columns: minmax(0, 1fr); }
-    .ct-narr-lv { grid-row: auto; padding-top: 0; }
+    /* จอแคบไม่มีคอลัมน์ซ้าย: รูปไปอยู่หน้าป้าย LEVEL ในแถวเดียวกัน */
+    .ct-narr-lv { grid-row: auto; padding-top: 0; display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .ct-narr-pic { order: -1; width: 44px; height: 44px; margin: 0; stroke-width: 1.4; }
     .ct-bc { margin: 0 12px 12px; }
     .ct-hdr { gap: 0 10px; padding: 10px 8px 8px 10px; }
     .ct-page { font-size: 21px; }
@@ -5828,7 +5832,8 @@
     const narrHTML = (i) => {
       const s = STEPS[i];
       // บทเปิด (ยังไม่เลือกขั้น) มีแค่บรรทัดวิธีใช้ ไม่มีหัวเรื่อง
-      return '<span class="ct-narr-lv">' + (s ? lvText(i) : '6 levels') + '</span>'
+      // รูปใหญ่ของขั้นอยู่ใต้ป้าย LEVEL ในคอลัมน์ซ้าย (ภาพเดียวกับปุ่มขั้น) · บทเปิดไม่มีรูป
+      return '<span class="ct-narr-lv">' + (s ? lvText(i) + '<svg class="ct-ic ct-narr-pic" aria-hidden="true"><use href="#cti-' + s.ic + '"/></svg>' : '6 levels') + '</span>'
         + (s ? '<span class="ct-narr-t">' + L(s.nm) + '</span>' : '')
         + '<span class="ct-narr-x">' + L(s ? s.tx : T.introTx) + '</span>';
     };
