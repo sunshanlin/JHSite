@@ -1953,15 +1953,6 @@
       radial-gradient(900px 640px at 100% 100%, var(--glow-sea), transparent 72%),
       var(--ui-page);
   }
-  /* หลักฐาน (ใบ QG000010 ของจริง): ทรายแผ่กว้างกลางขอบ ขนาบด้วยมิ้นต์/น้ำทะเลเล็ก ๆ
-     แถว .wq-note (#516661) อยู่บนแสงตรง ๆ — สีนี้ผ่านทุกสีแสง */
-  #web-quote {
-    background: var(--glow-fade),
-      radial-gradient(1300px 380px at 50% 100%, var(--glow-sand), transparent 72%),
-      radial-gradient(560px 300px at 0% 100%, var(--glow-mint), transparent 72%),
-      radial-gradient(560px 300px at 100% 100%, var(--glow-sea), transparent 72%),
-      var(--ui-page);
-  }
   /* แหล่งข้อมูล: น้ำทะเลซ้าย ชมพูขวา เติมที่ว่างข้างการ์ดใบสุดท้าย (แบบ Get started ของ MS)
      ต่อด้วย footer พื้นเข้ม ไม่ต้องมี --glow-fade */
   #articles {
@@ -3044,179 +3035,8 @@
   }
 
 
-  /* ── #web-quote (Highlight Feature 3) ─────────────────────────────
-     เดโมฝั่งลูกค้า: กดเลือกสินค้าเอง แล้วเห็น Sales Quote ที่ BC สร้างให้
-     คิดเลขในเบราว์เซอร์ล้วน ไม่แตะระบบจริง · โครงการ์ดและสองคอลัมน์ยืมสำนวน .vs
-     ฝั่งขวาพื้นเขียวจาง = ฝั่งที่ระบบทำให้ เหมือน .vs-side.rd */
-  #web-quote > .wrap > .section-kicker,
-  #web-quote > .wrap > h2,
-  #web-quote > .wrap > .sub {
-    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
-  }
-  /* ชื่อเต็มของ LIFF ยาวเกินจะอยู่บรรทัดเดียวกับหัวเรื่อง — ให้ลงบรรทัดใหม่ ตัวเล็กกว่า สีจางกว่า */
-  .wq-h2-note { display: block; margin-top: .2em; font-size: .5em; letter-spacing: 0; color: var(--ui-muted); }
-  .wq-ic { width: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
-    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* แถวสถาปัตยกรรม LINE -> Cloudflare -> Business Central
-     Business Central เป็นไฟล์ทางการจากชุดไอคอน Dynamics 365 ใช้ตามต้นฉบับ ไม่หมุน ไม่ดัด
-     LINE และ Cloudflare เป็นไอคอนเส้นของเว็บเอง (Cloudflare ไม่อนุญาตให้ใช้โลโก้ · LINE เลือกไม่ใช้)
-     ใช้แค่ชื่อกำกับ */
-  .wq-arch {
-    display: grid; align-items: start; max-width: 920px; margin: 34px auto 4px;
-    grid-template-columns: 170px minmax(60px, 1fr) 170px minmax(60px, 1fr) 170px;
-  }
-  .wq-app-node { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
-  .wq-app-icon { width: 88px; height: 88px; margin: 0 0 14px; }
-  .wq-app-tile {
-    display: grid; place-items: center; border-radius: 20px;
-    background: #fff; border: 1px solid var(--ui-line); box-shadow: 0 10px 24px -14px rgba(1,47,42,.45);
-  }
-  .wq-app-tile .wq-ic { width: 56px; height: 56px; color: var(--brand-teal); stroke-width: 1.5; }
-  .wq-app-name { font-size: 1.05rem; font-weight: 700; line-height: 1.35; }
-  .wq-app-role {
-    margin-top: 2px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .82rem; color: var(--ui-muted);
-  }
-  /* สองเส้นต่อช่วง: บน = สินค้า (burgundy) ไหลกลับไปหาลูกค้า (Item Sync)
-                    ล่าง = คำขอใบเสนอราคา (jade) ไหลไปหา Business Central (Quote Fetch)
-     เส้นยื่นเข้าคอลัมน์ไอคอนให้ยาวขึ้น แต่หยุดห่างขอบไอคอน ~20px · อยู่นิ่ง ไม่มีแอนิเมชัน
-     คู่เส้นสูง 28px (2+24+2) จัดกึ่งกลางที่แกนไอคอน (88/2 = 44) → เริ่มที่ 30px */
-  .wq-link { display: flex; flex-direction: column; gap: 24px; margin: 30px -18px 0 -20px; }
-  .wq-flow { position: relative; height: 2px; border-radius: 2px; }
-  .wq-flow::after {
-    content: ""; position: absolute; top: 50%; width: 10px; height: 10px; margin-top: -6px;
-    border-top: 2px solid currentColor; border-right: 2px solid currentColor; border-radius: 0 2px 0 0;
-  }
-  .wq-fwd { color: var(--brand-jade); background: var(--brand-jade); }
-  .wq-fwd::after { right: 1px; transform: rotate(45deg); }
-  .wq-back { color: var(--brand-burgundy); background: var(--brand-burgundy); }
-  .wq-back::after { left: 1px; transform: rotate(-135deg); }
-  .wq-tag {
-    position: absolute; left: 50%; transform: translateX(-50%);
-    white-space: nowrap; font-size: .8rem; font-weight: 600; line-height: 1.2;
-  }
-  .wq-back .wq-tag { bottom: 8px; }
-  .wq-fwd .wq-tag { top: 8px; color: var(--brand-teal); }
-  /* จอแคบ: ป้ายบนเส้นไม่พอที่ — ย้ายมาเป็นคำอธิบายใต้แถวแทน */
-  .wq-legend {
-    display: none; grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; gap: 6px 18px;
-    margin: 18px 0 0; font-size: .8rem; font-weight: 600; color: var(--ui-muted);
-  }
-  .wq-legend > span { display: inline-flex; align-items: center; gap: 8px; }
-  .wq-legend .wq-flow { width: 24px; }
-  .wq-legend .wq-flow::after { width: 7px; height: 7px; margin-top: -4.5px; }
-  .wq-sr {
-    position: absolute; width: 1px; height: 1px; margin: -1px;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; 
-  }
-  .wq {
-    background: #fff; border: 1px solid var(--ui-line);
-    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
-    margin-top: 30px;
-  }
-
-  .wq-stage { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
-  .wq-pick { padding: 20px 24px 22px; min-width: 0; }
-  /* สองฝั่งต้องแยกกันออกด้วยตา: ซ้าย = ลูกค้า พื้นขาว · ขวา = ระบบ พื้น teal ทึบ
-     ใบเสนอราคาเป็นกระดาษขาววางบนพื้นเข้ม — สีตัวหนังสือของฝั่งขวาอยู่ในบล็อก "ฝั่งระบบ" ด้านล่าง */
-  .wq-out { padding: 20px 24px 22px; min-width: 0; background: var(--brand-teal); }
-  .wq-step {
-    display: flex; align-items: baseline; gap: 9px; margin: 0 0 6px;
-    font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; 
-  }
-  .wq-step b {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .8rem; font-weight: 700; color: var(--brand-jade);
-    font-variant-numeric: tabular-nums;
-  }
-  .wq-hint { margin: 0 0 12px; font-size: .84rem; color: var(--ui-muted); }
-
-  .wq-items { margin: 0 0 22px; }
-  .wq-grp {
-    margin: 16px 0 6px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ui-muted);
-  }
-  .wq-grp:first-child { margin-top: 0; }
-  .wq-item:has(+ .wq-grp) { border-bottom: 1px solid var(--ui-line); }
-  .wq-item {
-    display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 13px; align-items: center;
-    padding: 11px 8px 11px 12px; border-top: 1px solid var(--ui-line);
-    transition: background .16s ease;
-  }
-  .wq-item:last-child { border-bottom: 1px solid var(--ui-line); }
-  .wq-item.on { box-shadow: inset 3px 0 0 var(--brand-jade); }
-  .wq-item .wq-ic { width: 26px; height: 26px; color: var(--brand-mint); }
-  .wq-item.on .wq-ic { color: var(--brand-jade); }
-  .wq-name { min-width: 0; }
-  .wq-name b { display: block; font-size: .95rem; font-weight: 600; line-height: 1.4; }
-  .wq-name span {
-    display: block; font-size: .78rem; color: var(--ui-muted);
-    font-variant-numeric: tabular-nums;
-  }
-  .wq-name code {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .78rem; font-weight: 700; letter-spacing: .08em; color: var(--brand-teal);
-  }
-  .wq-qty {
-    display: inline-flex; align-items: center;
-    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn); background: #fff;
-  }
-  .wq-qty button {
-    width: 36px; height: 36px; display: grid; place-items: center;
-    font: inherit; font-size: 1.1rem; font-weight: 700; line-height: 1;
-    color: var(--brand-teal); background: transparent; border: 0; cursor: pointer;
-    transition: background .125s ease, color .125s ease;
-  }
-  .wq-qty button:hover:not(:disabled) { background: var(--bg-soft); }
-  .wq-qty button:disabled { color: var(--brand-mist); cursor: default; }
-  .wq-qty output {
-    min-width: 30px; text-align: center; font-size: .98rem; font-weight: 700;
-    color: var(--ui-ink); font-variant-numeric: tabular-nums;
-  }
-
-  .wq-who { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; }
-  .wq-who button {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: .88rem; font-weight: 500; color: var(--brand-teal); background: #fff;
-    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
-    padding: 10px 15px; cursor: pointer;
-    transition: background .125s ease, border-color .125s ease, color .125s ease;
-  }
-  .wq-who button:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
-  .wq-who button[aria-pressed="true"] { color: #fff; background: var(--brand-teal); border-color: var(--brand-teal); }
-  .wq-send {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-burgundy);
-    border: 1px solid var(--brand-burgundy); border-radius: var(--ui-radius-btn);
-    padding: 0 22px; min-height: 46px; cursor: pointer;
-    transition: background .125s ease, border-color .125s ease;
-  }
-  .wq-send:hover:not(:disabled) { background: var(--brand-burgundy-dark); border-color: var(--brand-burgundy-dark); }
-  .wq-send:disabled { background: var(--brand-mist); border-color: var(--brand-mist); cursor: default; }
-  .wq-send .wq-ic { width: 17px; height: 17px; }
-  .wq-pdpa { margin: 10px 0 0; font-size: .78rem; line-height: 1.55; color: var(--ui-muted); }
-
-  /* ท่อสามโหนด — จุดสว่างไล่ทีละขั้นหลังกดส่ง เส้นต่อระหว่างโหนดคือ ::before */
-  .wq-pipe { margin: 0 0 18px; }
-  .wq-node { position: relative; display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; padding-bottom: 15px; }
-  .wq-node:last-child { padding-bottom: 0; }
-  .wq-node:not(:last-child)::before {
-    content: ""; position: absolute; left: 9px; top: 19px; bottom: 3px; width: 2px;
-    background: var(--brand-pale); transition: background .3s ease;
-  }
-  .wq-node.on:not(:last-child)::before { background: var(--brand-jade); }
-  .wq-dot {
-    width: 14px; height: 14px; margin-top: 4px; border-radius: 50%;
-    border: 2px solid var(--brand-mist); background: #fff;
-    transition: border-color .3s ease, background .3s ease, transform .3s ease;
-  }
-  .wq-node.on .wq-dot { border-color: var(--brand-jade); background: var(--brand-jade); transform: scale(1.14); }
-  .wq-txt { min-width: 0; }
-  .wq-txt b { display: block; font-size: .92rem; font-weight: 600; color: var(--ui-muted); transition: color .3s ease; }
-  .wq-node.on .wq-txt b { color: var(--brand-teal); }
-  .wq-txt > span { display: block; font-size: .84rem; line-height: 1.55; color: var(--ui-muted); min-height: 1.3em; }
-
+  /* การ์ดเอกสาร .wq-doc / .wq-sum / .wq-baht — #billing-flow ใช้ร่วม จึงคงไว้ที่เดิมตามตัวอักษร
+     ส่วนที่เหลือของ #web-quote (LIFF) สำรองไว้ที่ _plans/shelf/web-quote/ */
   .wq-doc {
     position: relative; overflow: hidden;
     background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card);
@@ -3237,14 +3057,6 @@
   }
   .wq-doc-cust { margin: 0 0 11px; font-size: .86rem; line-height: 1.5; color: var(--ui-muted); }
   .wq-doc-cust b { color: var(--ui-ink); font-weight: 600; }
-  .wq-line {
-    display: grid; grid-template-columns: 62px minmax(0, 1fr) 42px 92px; gap: 10px;
-    padding: 7px 0; border-top: 1px solid var(--ui-line);
-    font-size: .85rem; font-variant-numeric: tabular-nums;
-  }
-  .wq-line code { white-space: nowrap; font-weight: 700; color: var(--brand-teal); letter-spacing: .05em; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
-  .wq-line i { font-style: normal; color: var(--ui-muted); text-align: right; }
-  .wq-line em { font-style: normal; text-align: right; }
   .wq-sum {
     display: grid; grid-template-columns: minmax(0, 1fr) 100px; gap: 5px 12px;
     margin: 11px 0 0; padding-top: 10px; border-top: 1px solid var(--ui-line);
@@ -3255,119 +3067,225 @@
   .wq-sum .tot { padding-top: 7px; border-top: 1px solid var(--brand-pale); font-weight: 700; color: var(--brand-teal); }
   .wq-sum dt.tot { color: var(--ui-ink); }
   .wq-baht { margin: 9px 0 0; font-size: .8rem; color: var(--ui-muted); }
-  .wq-empty {
-    display: flex; flex-direction: column; align-items: center; gap: 9px;
-    padding: 52px 16px; text-align: center; color: var(--ui-muted); font-size: .92rem;
-    background: #fff; border: 1px dashed var(--brand-pale); border-radius: var(--ui-radius-card);
-  }
-  .wq-empty .wq-ic { width: 26px; height: 26px; color: var(--brand-mist); }
-
-  /* ── ฝั่งระบบบนพื้น teal: ข้อความสว่าง (#BFD3D0 = 6.5:1, ขาว = 10:1) จุดและเส้นสี mint ── */
-  .wq-out .wq-node:not(:last-child)::before { background: rgba(255,255,255,.2); }
-  .wq-out .wq-node.on:not(:last-child)::before { background: #7CCBC4; }
-  .wq-out .wq-dot { border-color: rgba(255,255,255,.45); background: transparent; }
-  /* จุดของ LINE กับ Cloudflare ใช้สีแบรนด์ของเจ้าของบริการ (อ้างถึงเขาเหมือนโลโก้) ส่วน BC คงมิ้นต์
-     บนพื้น teal: #06C755 ได้ 4.52:1, #F38020 ได้ 3.85:1 ผ่านเกณฑ์ 3:1 ของ graphic
-     ⚠ class wq-node-line/-cf ต่อสตริงใน node() ของสคริปต์ ('wq-node-' + key) — grep หา class เต็มไม่เจอ แต่ไม่ใช่โค้ดตาย ห้ามตัด */
-  .wq-out .wq-node-line { --node: #06C755; }
-  .wq-out .wq-node-cf { --node: #F38020; }
-  .wq-out .wq-node.on .wq-dot { border-color: var(--node, #7CCBC4); background: var(--node, #7CCBC4); }
-  .wq-out .wq-txt b { color: rgba(255,255,255,.75); }
-  .wq-out .wq-node.on .wq-txt b { color: #fff; }
-  .wq-out .wq-txt > span { color: #BFD3D0; }
-  .wq-out .wq-empty { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.32); color: #BFD3D0; }
-  .wq-out .wq-empty .wq-ic { color: rgba(255,255,255,.55); }
   .wq-doc { color: var(--ui-ink); box-shadow: 0 16px 32px -18px rgba(0,0,0,.55); border-color: transparent; }
-
-  /* แถวหลักฐาน: ภาพจากระบบจริง ไม่ใช่เดโม — ปิดท้ายการ์ดให้เห็นว่าที่เล่นอยู่มีของจริงรองรับ */
-  .wq-proof { padding: 22px 24px 18px; background: var(--bg-soft); border-top: 1px solid var(--ui-line); }
-  .wq-proof-head {
-    display: flex; align-items: flex-start; gap: 8px; max-width: 920px; margin: 0 auto 20px;
-    font-size: .95rem; font-weight: 600; 
-  }
-  .wq-proof-head .wq-ic { width: 17px; height: 17px; margin-top: .22em; color: var(--brand-jade); stroke-width: 2.4; }
-  /* 46fr : 100fr = ความกว้างที่ทำให้ภาพมือถือ (828x1792) กับใบเสนอราคา (1522x1492) สูงเท่ากันพอดี
-     รวมกรอบ 6px และขอบกระดาษ 9px แล้ว */
-  .wq-proof-row {
-    display: grid; align-items: start; gap: 0 20px; max-width: 920px; margin: 0 auto;
-    grid-template-columns: minmax(0, 46fr) 36px minmax(0, 100fr);
-  }
-  /* กฎส่วนกลางใส่เงา+ขอบมนให้ figure ทุกอัน — ที่นี่เงาอยู่ที่กรอบมือถือ/กระดาษแทน */
-  .wq-fig { min-width: 0; box-shadow: none; border-radius: 0; }
-  .wq-fig figcaption {
-    display: flex; align-items: baseline; gap: 9px; margin: 0 0 12px;
-    font-size: .92rem; font-weight: 600; line-height: 1.45; 
-  }
-  .wq-fig figcaption b {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .8rem; font-weight: 700; color: var(--brand-jade); font-variant-numeric: tabular-nums;
-  }
-  .wq-fig a { display: block; transition: transform .2s ease; }
-  .wq-fig a:hover { transform: translateY(-2px); }
-  .wq-fig img { display: block; height: auto; }
-  /* กรอบโทรศัพท์บาง ๆ พอให้อ่านออกว่าเป็นหน้าจอมือถือ ไม่ต้องพึ่งภาพ mockup */
-  .wq-phone { padding: 6px; border-radius: 30px; background: #10241F; box-shadow: 0 14px 30px -16px rgba(1,47,42,.55); }
-  .wq-phone img { border-radius: 24px; }
-  .wq-paper {
-    padding: 8px; background: #fff; border: 1px solid var(--ui-line);
-    border-radius: var(--ui-radius-card); box-shadow: 0 14px 30px -18px rgba(1,47,42,.4);
-  }
-  .wq-arrow {
-    align-self: center; width: 36px; height: 36px; display: grid; place-items: center;
-    border-radius: 50%; background: #fff; border: 1px solid var(--ui-line); color: var(--brand-jade);
-  }
-  .wq-arrow .wq-ic { width: 17px; height: 17px; }
-  .wq-proof-zoom { max-width: 920px; margin: 14px auto 0; text-align: right; font-size: .8rem; color: var(--ui-muted); }
-
-  .wq-note {
-    margin: 20px auto 0; max-width: 760px; text-align: center;
-    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
-  }
-  .wq-note a { color: #8E2C46; font-weight: 600; text-decoration: none; }
-  .wq-note a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
-
-  @media (max-width: 900px) {
-    .wq-stage { grid-template-columns: 1fr; }
-    .wq-proof, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
-    .wq-send { width: 100%; }
-  }
-  @media (max-width: 640px) {
-    .wq-proof-row { grid-template-columns: 1fr; gap: 14px; justify-items: center; }
-    .wq-fig { width: 100%; }
-    .wq-fig:first-child { max-width: 270px; }
-    .wq-arrow { transform: rotate(90deg); }
-    .wq-proof-zoom { text-align: center; }
-  }
-  @media (max-width: 640px) {
-    .wq-arch { grid-template-columns: minmax(0, 1fr) minmax(28px, 44px) minmax(0, 1fr) minmax(28px, 44px) minmax(0, 1fr); margin-top: 24px; }
-    .wq-app-icon { width: 56px; height: 56px; margin-bottom: 10px; }
-    .wq-app-tile { border-radius: 13px; }
-    .wq-app-tile img { width: 38px; height: 38px; }
-    .wq-app-tile .wq-ic { width: 36px; height: 36px; }
-    /* จอแคบ: เส้นยื่นเข้าคอลัมน์ไอคอนแค่ 3px ยังเหลือระยะห่างขอบไอคอน ~10px
-       คู่เส้นสูง 18px (2+14+2) กึ่งกลางที่ 28px (56/2) → เริ่มที่ 19px */
-    .wq-link { gap: 14px; margin: 19px -3px 0 -3px; }
-    .wq-flow::after { width: 7px; height: 7px; margin-top: -4.5px; }
-    .wq-tag { display: none; }
-    .wq-legend { display: flex; }
-    .wq-app-name { font-size: .88rem; }
-    .wq-app-role { font-size: .72rem; }
-  }
   @media (max-width: 520px) {
-    .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 9px; padding-right: 2px; }
-    .wq-item .wq-ic { width: 22px; height: 22px; }
-    .wq-qty button { width: 32px; height: 32px; }
-    .wq-qty output { min-width: 24px; }
-    .wq-line { grid-template-columns: 58px minmax(0, 1fr) 20px 82px; gap: 7px; font-size: .8rem; }
-    .wq-line code { letter-spacing: .02em; }
     .wq-doc-no { text-align: left; }
-    .wq-sum { grid-template-columns: minmax(0, 1fr) 86px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .wq-doc.in { animation: none; }
-    .wq-dot, .wq-txt b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item, .wq-fig a { transition: none; }
-    .wq-fig a:hover { transform: none; }
-    .wq-node.on .wq-dot { transform: none; }
+  }
+
+  /* ── #cost-trace (Highlight Feature 3) — JHEnhance Cost Trace ─────────────
+     ยกโครงจาก showcase ใน repo JHEnhance (docs/Site/cost-trace-showcase.html) แล้วแต่งตัวใหม่ตาม DESIGN.md
+     การ์ด .ct ใบเดียวคุมทั้งเดโมแบบ .vs · ปุ่มในส่วนนี้เป็น teal ทั้งหมด ไม่แย่งความดังจาก CTA เบอร์กันดีของหน้า
+     หน้าต่าง .ct-bc = ภาพของ BC web client แบบ .hs-screen ใน hero: เทาของ Fluent อยู่ในหน้าต่างนี้เท่านั้น
+     และสีน้ำเงินของ BC เปลี่ยนเป็นตระกูล teal · --ct-thread ใช้กับทางเดินของต้นทุนอย่างเดียว (The Cost Thread Rule)
+     ชื่อขึ้นต้น ct- ทุกตัว — .step/.steps ของหน้ามีอยู่แล้วเกือบ 80 กฎ ห้ามใช้ชื่อซ้ำ */
+  /* --ct-thread = ทางเดินของต้นทุนจากรายการตั้งต้นถึงกล่องที่เลือกเท่านั้น ไม่ใช่พื้น ไม่ใช่ปุ่ม
+     6.17 บนขาว · 5.78 บน --ui-page · 5.52 บนพื้นกราฟ #F3F2F1 (ทองแดงเดิมของ showcase #B9561A ได้แค่ 4.47) */
+  #cost-trace { --ct-thread: #9C4A16; }
+  #cost-trace > .wrap > .section-kicker,
+  #cost-trace > .wrap > h2,
+  #cost-trace > .wrap > .sub {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .ct-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .ct-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  /* นิยาม Cost Trace: ชิปค่าเดียวกับ .vs-chips ของ VAT Service แต่แยกชื่อ ไม่ผูกสองเดโมไว้ด้วยกัน */
+  #cost-trace .tip { align-items: flex-start; }
+  .ct-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 9px 0 7px; }
+  .ct-chip {
+    display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 10px;
+    border: 1px solid rgba(1,74,65,.2); border-radius: 999px;
+    color: var(--brand-teal); background: rgba(65,119,113,.08);
+    font-size: .88rem; font-weight: 600;
+  }
+  .ct-chip .ct-ic { width: 14px; height: 14px; stroke-width: 2.6; color: var(--brand-jade); }
+  .ct-fine { display: block; font-size: .86rem; line-height: 1.6; }
+
+  .ct {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+  }
+  /* แถบบน: หัวเดโม + ปุ่มเล่น แล้วต่อด้วย 6 ขั้น — พื้น --bg-soft แบบ .vs-bar */
+  .ct-top { background: var(--bg-soft); border-bottom: 1px solid var(--ui-line); padding: 20px 24px; }
+  .ct-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 16px; }
+  .ct-head h3 { margin: 0 0 4px; font-size: 1.08rem; line-height: 1.4; }
+  .ct-head p { margin: 0; max-width: 68ch; font-size: .92rem; line-height: 1.6; color: var(--ui-muted); }
+  .ct-play {
+    display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;
+    font: inherit; font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-teal);
+    border: 1px solid var(--brand-teal); border-radius: var(--ui-radius-btn);
+    padding: 0 20px; min-height: 44px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .ct-play:hover { background: var(--brand-deep); border-color: var(--brand-deep); }
+  .ct-play .ct-ic { width: 14px; height: 14px; fill: currentColor; stroke: none; }
+
+  .ct-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .ct-step {
+    position: relative; display: grid; align-content: start; gap: 2px; width: 100%; height: 100%; text-align: left;
+    font: inherit; color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
+    padding: 9px 11px 11px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .ct-step:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
+  .ct-lv, .ct-narr-lv {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted);
+  }
+  .ct-nm { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .88rem; font-weight: 600; line-height: 1.35; }
+  /* ขั้นปัจจุบัน = ขอบกับเส้นใต้ปุ่มสีทองแดง · ขั้นที่ผ่านแล้วจางลง */
+  .ct-step::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 3px; background: transparent; }
+  .ct-step.on { border-color: var(--ct-thread); }
+  .ct-step.on::after { background: var(--ct-thread); }
+  .ct-step.on .ct-lv { color: var(--ct-thread); }
+  .ct-step.done .ct-nm { color: var(--ui-muted); }
+  .ct-step.done::after { background: var(--brand-pale); }
+
+  /* คำบรรยายทุกบทวางซ้อนในช่องเดียว (บทที่ไม่ได้แสดงซ่อนแบบ visibility) ช่องจึงสูงเท่าบทที่ยาวสุดเสมอ
+     หน้าต่างข้างล่างไม่กระโดดตอนเล่นอัตโนมัติ ทุกความกว้างและทุกภาษา */
+  .ct-narr { display: grid; margin: 20px 24px; padding-left: 16px; border-left: 3px solid var(--ct-thread); }
+  .ct-narr > * { grid-area: 1 / 1; display: grid; grid-template-columns: 7.4em minmax(0, 1fr); column-gap: 14px; align-content: start; }
+  .ct-narr-size { visibility: hidden; }
+  .ct-narr-lv { grid-row: span 2; padding-top: .45em; color: var(--ct-thread); }
+  .ct-narr-t { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
+  .ct-narr-x { max-width: 82ch; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
+
+  /* หน้าต่าง BC — เทาของ Fluent ประกาศบนตัวหน้าต่าง (แบบ --bfj-* ของ #billing-flow) ไม่ขึ้น :root */
+  .ct-bc {
+    --bc-text: #242424; --bc-item: #424242; --bc-sub: #616161; --bc-rule: #E0E0E0;
+    --bc-canvas: #F3F2F1; --bc-field: #EBEBEB; --bc-link: #8A8886; --bc-cap: #EEF6F6; --bc-cap-ink: #0B6A6A;
+    margin: 0 24px 24px; overflow: hidden;
+    background: #fff; color: var(--bc-text); border: 1px solid var(--bc-rule); border-radius: var(--ui-radius-card);
+    font: 500 .84rem/1.4 "Plus Jakarta Sans", "Anuphan", sans-serif; font-variant-numeric: tabular-nums;
+  }
+  .ct-acts { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 8px 12px; border-bottom: 1px solid var(--bc-rule); }
+  .ct-act {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 9px;
+    font: inherit; font-size: .88rem; color: var(--bc-text); background: none; border: 0;
+    border-radius: var(--ui-radius-btn); cursor: pointer; transition: background .125s ease;
+  }
+  .ct-act:hover { background: var(--bc-field); }
+  .ct-act .ct-ic { width: 16px; height: 16px; stroke-width: 1.6; color: var(--brand-jade); }
+  .ct-fast { padding: 14px 20px 18px; border-bottom: 1px solid var(--bc-rule); }
+  #cost-trace .ct-fast h4 {
+    margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1.5px solid var(--bc-text);
+    font-size: 1rem; font-weight: 700; letter-spacing: 0; color: var(--bc-text);
+  }
+  .ct-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 48px; }
+  .ct-fld { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 12px; align-items: center; min-width: 0; }
+  .ct-fld span { display: flex; gap: 6px; overflow: hidden; white-space: nowrap; color: var(--bc-sub); }
+  .ct-fld span::after { content: ""; flex: 1 1 auto; border-bottom: 1.5px dotted var(--bc-link); transform: translateY(-5px); opacity: .7; }
+  .ct-fld output { min-height: 30px; padding: 5px 7px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; background: var(--bc-field); }
+  .ct-fld output.num { text-align: right; }
+
+  /* กราฟ: คอลัมน์ละหนึ่งระดับ ตำแหน่งกล่องวัดจาก DOM ในสคริปต์ */
+  .ct-scroll, .ct-table-wrap {
+    overflow: auto; max-height: min(660px, 70vh); scrollbar-width: thin; scrollbar-color: #C8C6C4 transparent;
+  }
+  .ct-scroll { position: relative; background: var(--bc-canvas); scroll-behavior: smooth; }
+  .ct-scroll[hidden], .ct-table-wrap[hidden] { display: none; }
+  .ct-canvas { position: relative; }
+  .ct-lines { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+  .ct-lines path { fill: none; stroke: var(--bc-link); stroke-width: 1.2; transition: stroke .25s ease; }
+  .ct-lines path.arw { fill: var(--bc-link); stroke: none; }
+  .ct-lines path.on { stroke: var(--ct-thread); stroke-width: 2.5; }
+  .ct-lines path.arw.on { fill: var(--ct-thread); stroke: none; }
+  .ct-colhead {
+    position: absolute; top: 12px; height: 34px; display: flex; align-items: center; justify-content: center;
+    background: var(--bc-field); font-size: .84rem;
+  }
+  .ct-colhead.first { background: var(--brand-deep); color: #fff; }
+  .ct-card {
+    position: absolute; width: 280px; padding: 8px 11px 9px;
+    background: #fff; border-radius: var(--ui-radius-btn); box-shadow: var(--ui-shadow);
+  }
+  /* เข้าใหม่เฉพาะกล่องที่เพิ่งโผล่ (กางกิ่ง/เดินขั้น) ไม่ใช่ทุกกล่องทุกครั้งที่วาด */
+  .ct-card.ct-new { animation: ctRise .35s cubic-bezier(.2,.75,.2,1) both; }
+  @keyframes ctRise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  /* กล่องที่เลือก = วงทองแดงด้านใน — ต่างจากวง focus ของปุ่ม (outline 3px ด้านนอก) */
+  .ct-card.sel { box-shadow: inset 0 0 0 2px var(--ct-thread), var(--ui-shadow); }
+  .ct-card.cap { background: var(--bc-cap); }
+  .ct-card.cap .ct-title { color: var(--bc-cap-ink); }
+  .ct-open { display: block; width: 100%; padding: 0; text-align: left; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  .ct-open:hover .ct-title { text-decoration: underline; text-underline-offset: 3px; }
+  .ct-title, .ct-item, .ct-detail { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .ct-title { font-size: .9rem; font-weight: 700; }
+  .ct-item { margin-top: 1px; color: var(--bc-item); }
+  .ct-detail { margin-top: 1px; color: var(--bc-sub); }
+  .ct-box { display: grid; gap: 2px; margin-top: 7px; padding-top: 5px; border-top: 1px solid var(--bc-rule); }
+  .ct-ln { display: flex; gap: 8px; }
+  .ct-ln > span:first-child { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--bc-sub); }
+  .ct-ord-cap { margin-bottom: 2px; font-weight: 700; color: var(--bc-sub); }
+  .ct-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 7px; }
+  .ct-unit { color: var(--bc-sub); }
+  .ct-adj {
+    display: inline-block; margin-top: 7px; padding: 1px 9px; border-radius: 999px;
+    font-size: .74rem; font-weight: 600; color: var(--brand-teal); background: rgba(65,119,113,.1);
+  }
+  .ct-badge {
+    position: absolute; left: calc(100% + 10px); top: 12px; min-width: 32px; height: 28px; padding: 0 8px;
+    font: inherit; font-size: .82rem; font-weight: 700; color: var(--brand-teal);
+    background: #E6F0EE; border: 1px solid var(--brand-teal); border-radius: var(--ui-radius-btn); cursor: pointer;
+  }
+  .ct-badge::after { content: ""; position: absolute; inset: -8px; }
+  .ct-badge[aria-expanded="false"] { background: #fff; }
+  .ct-flow {
+    position: absolute; right: calc(100% + 6px); top: 12px; height: 28px; display: flex; align-items: center;
+    padding: 0 10px; border-radius: 999px; background: #fff; border: 1px solid var(--bc-link);
+    font-size: .76rem; white-space: nowrap; transition: border-color .25s ease, color .25s ease;
+  }
+  .ct-flow.on { border-color: var(--ct-thread); color: var(--ct-thread); font-weight: 700; }
+
+  .ct-table-wrap { background: #fff; }
+  .ct-tbl { width: 100%; min-width: 860px; border-collapse: collapse; }
+  .ct-tbl th {
+    position: sticky; top: 0; z-index: 1; padding: 9px 12px; text-align: left; white-space: nowrap;
+    font-weight: 500; color: var(--bc-sub); background: #fff; border-bottom: 1px solid var(--bc-rule);
+  }
+  .ct-tbl td { padding: 7px 12px; white-space: nowrap; border-bottom: 1px solid var(--bc-rule); }
+  .ct-tbl tbody tr { cursor: pointer; }
+  .ct-tbl tbody tr:hover td { background: var(--bc-canvas); }
+  .ct-tbl tr.sel td { background: #E6F0EE; }
+  .ct-tbl .num { text-align: right; }
+  .ct-tree { display: inline-block; width: 14px; }
+  .ct-tree.has::before {
+    content: ""; display: inline-block; width: 6px; height: 6px; transform: translateY(-3px) rotate(45deg);
+    border-right: 1.5px solid var(--bc-link); border-bottom: 1.5px solid var(--bc-link);
+  }
+  .ct-tlink { min-height: 24px; padding: 3px 0; text-align: left; font: inherit; font-weight: 600; color: var(--brand-teal); background: none; border: 0; cursor: pointer; }
+  .ct-tlink:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .ct-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
+  }
+
+  @media (max-width: 900px) {
+    .ct-top { padding: 18px; }
+    .ct-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .ct-narr { margin-left: 18px; margin-right: 18px; }
+    .ct-bc { margin: 0 18px 18px; }
+    .ct-fields { grid-template-columns: 1fr; gap: 6px; }
+  }
+  @media (max-width: 600px) {
+    .ct-head { margin-bottom: 14px; }
+    .ct-play { width: 100%; justify-content: center; }
+    .ct-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ct-narr > * { grid-template-columns: minmax(0, 1fr); }
+    .ct-narr-lv { grid-row: auto; padding-top: 0; }
+    .ct-bc { margin: 0 12px 12px; }
+    .ct-fast { padding: 12px 14px 14px; }
+    .ct-fld { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ct-card.ct-new { animation: none; }
+    .ct-scroll { scroll-behavior: auto; }
+    .ct-play, .ct-step, .ct-act, .ct-lines path, .ct-flow { transition: none; }
   }
 
   @media (max-width: 900px) {
@@ -3410,7 +3328,7 @@
     .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
     #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link,
     #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
-    #billing-flow, #vat-service, #web-quote, #faq, #about, #articles,
+    #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
     .footer-menu, #cookie-manage, footer a[href="#contact"], .ci-flyer { display: none !important; }
 
     .topnav { position: static; border-bottom: 1px solid #c9d6d2; }
@@ -4206,100 +4124,60 @@
   </div>
 </section>
 
-<section id="web-quote" class="alt">
+<section id="cost-trace" class="alt">
   <div class="wrap">
-    <p class="section-kicker" data-wq="kicker">Highlight Feature 3</p>
-    <h2 data-wq="h2">ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span></h2>
-    <p class="sub" data-wq="sub">ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ ลองกดเป็นลูกค้าดูได้เลย</p>
+    <p class="section-kicker">Highlight Feature 3</p>
+    <h2>Cost Traceability</h2>
+    <p class="sub" data-ct="sub">ต้นทุนขายทุกบาท ย้อนดูได้ถึงใบรับสินค้า ค่าขนส่ง และอากรขาเข้า แค่เลือก Item Ledger Entry รายการเดียว Cost Trace ก็ไล่ให้เห็นทีละชั้นว่าต้นทุนมาจากไหน ทุกตัวเลขเป็นค่าที่ Business Central Post ไว้แล้ว</p>
+    <!-- นิยามย่อ ใช้กล่อง .tip ชุดเดียวกับ VAT Service — ชิปต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p>
+         Cost Trace เป็นแอปในชุด JHEnhance แยกจากแพ็กเกจ Localization ไม่มีราคาบนหน้าโดยตั้งใจ (PRODUCT.md) -->
+    <div class="tip reveal">
+      <b data-ct="tipTitle">💡 Cost Trace คืออะไร?</b>
+      <p data-ct="tipBody">แอปในชุด JHEnhance สำหรับ Business Central ที่ช่วยให้คุณย้อนดูได้ว่าต้นทุนแต่ละรายการมาจากไหน<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ต้นทุนนำเข้าทุกบรรทัด</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>การผลิตหลายชั้น</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ครบ 5 Costing Method</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>หน้า Trace Check</span></span><span class="ct-fine">อ่านเฉพาะรายการที่ Post แล้ว ไม่แก้ไขข้อมูลใด ๆ ในระบบ</span></p>
+    </div>
 
-    <!-- ไอคอนเก็บเป็น symbol เพราะ JS วาดรายการสินค้า/ท่อ/ใบเสนอราคาใหม่ทุกครั้งที่กด -->
+    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปุ่มใหม่ทุกครั้งที่กด -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="wqi-box" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9.5" x2="13" y2="9.5"/><line x1="7" y1="13.5" x2="11" y2="13.5"/><circle cx="17" cy="14" r="1.5"/></symbol>
-      <symbol id="wqi-send" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7.5 3 3 7.5z"/><path d="M21 3 10.5 13.5"/></symbol>
-      <symbol id="wqi-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="14" x2="9" y2="14"/><line x1="15" y1="17.5" x2="9" y2="17.5"/></symbol>
-      <symbol id="wqi-check" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
-      <symbol id="wqi-chat" viewBox="0 0 48 48"><rect x="13" y="5" width="22" height="38" rx="4"/><path d="M21 38.5h6"/><path d="M18.5 15h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H24l-4 3.5V26h-1.5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/><path d="M20.5 20.5h.01M24 20.5h.01M27.5 20.5h.01" stroke-width="2.6"/></symbol>
-      <symbol id="wqi-cloud" viewBox="0 0 48 48"><path d="M14 36h21a8 8 0 0 0 .9-15.95A12 12 0 0 0 13 18.5 9 9 0 0 0 14 36z"/><path d="M21.5 23.5 18 27l3.5 3.5M26.5 23.5 30 27l-3.5 3.5"/></symbol>
-      <symbol id="wqi-next" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13.5 6.5 19 12 13.5 17.5"/></symbol>
+      <symbol id="cti-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <symbol id="cti-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+      <symbol id="cti-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+      <symbol id="cti-table" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M1.5 6h13M6 6v7.5M10.5 6v7.5"/></symbol>
+      <symbol id="cti-graph" viewBox="0 0 16 16"><rect x="1" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="9.5" width="5" height="4" rx=".8"/><path d="M6 4.5h4M8 4.5v7h2"/></symbol>
+      <symbol id="cti-expand" viewBox="0 0 16 16"><path d="M3.5 3.5 8 8l4.5-4.5M3.5 8.5 8 13l4.5-4.5"/></symbol>
+      <symbol id="cti-collapse" viewBox="0 0 16 16"><path d="M3.5 12.5 8 8l4.5 4.5M3.5 7.5 8 3l4.5 4.5"/></symbol>
     </defs></svg>
 
-    <div class="wq-arch reveal">
-      <p class="wq-sr" data-wq="archSr">ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา</p>
-      <div class="wq-app-node" aria-hidden="true">
-        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-chat"/></svg></span>
-        <span class="wq-app-name">LINE</span>
-        <span class="wq-app-role">(Login&nbsp;+&nbsp;LIFF)</span>
-      </div>
-      <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
-        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-      </span>
-      <div class="wq-app-node" aria-hidden="true">
-        <span class="wq-app-icon wq-app-tile"><svg class="wq-ic"><use href="#wqi-cloud"/></svg></span>
-        <span class="wq-app-name">Middleware</span>
-        <span class="wq-app-role">(Cloudflare®&nbsp;Workers)</span>
-      </div>
-      <span class="wq-link" aria-hidden="true">
-        <span class="wq-flow wq-back"><span class="wq-tag" data-wq="flowItems">สินค้า</span></span>
-        <span class="wq-flow wq-fwd"><span class="wq-tag" data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-      </span>
-      <div class="wq-app-node" aria-hidden="true">
-        <span class="wq-app-icon wq-app-tile"><img src="img/tech/business-central.svg" alt="" width="58" height="58"></span>
-        <span class="wq-app-name">Business Central</span>
-        <span class="wq-app-role">(Item&nbsp;Sync + Quote&nbsp;Fetch)</span>
-      </div>
-      <p class="wq-legend" aria-hidden="true">
-        <span><i class="wq-flow wq-fwd"></i><span data-wq="flowReq">คำขอใบเสนอราคา</span></span>
-        <span><i class="wq-flow wq-back"></i><span data-wq="flowItems">สินค้า</span></span>
-      </p>
-    </div>
-
-    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="wq-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
-    <div class="demo-body" id="wq-demo">
-    <div class="wq reveal">
-      <div class="wq-stage">
-        <div class="wq-pick">
-          <p class="wq-step"><b>01</b><span data-wq="s1">เลือกสินค้า</span></p>
-          <p class="wq-hint" data-wq="s1hint">รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE</p>
-          <div class="wq-items" id="wq-items"></div>
-
-          <p class="wq-step"><b>02</b><span data-wq="s2">คุณเป็น</span></p>
-          <p class="wq-hint" data-wq="s2hint">ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ</p>
-          <div class="wq-who" id="wq-who" role="group" aria-label="ประเภทผู้ซื้อ"></div>
-
-          <button class="wq-send" type="button" id="wq-send"><svg class="wq-ic"><use href="#wqi-send"/></svg><span data-wq="send">ส่งคำขอราคา</span></button>
-          <p class="wq-pdpa" data-wq="pdpa">ข้อมูลที่คุณส่งมาพร้อมคำขอนี้ใช้เพื่อจัดทำใบเสนอราคาและติดต่อกลับเท่านั้น</p>
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="ct-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
+    <div class="demo-body" id="ct-demo">
+    <div class="ct reveal">
+      <div class="ct-top">
+        <div class="ct-head">
+          <div>
+            <h3 data-ct="demoTitle">ย้อนต้นทุน<span class="nb">ถุงมือไนไตรล์</span> <span class="nb">1,200 กล่อง</span>ที่จัดส่งขาย</h3>
+            <p data-ct="demoHint">ในตัวอย่างนี้ โรงงานถุงมือตรวจโรคใช้น้ำยาง NBR ที่นำเข้าจากเกาหลี ต้นทุนไหลผ่าน 6 ระดับกว่าจะถึงใบจัดส่งขาย ลองกดไล่ทีละขั้น หรือกดกล่องไหนก็ได้เพื่อเปิดรายละเอียด</p>
+          </div>
+          <button class="ct-play" type="button" id="ct-play"><svg class="ct-ic"><use href="#cti-play"/></svg><span>เล่นทีละขั้น</span></button>
         </div>
-
-        <div class="wq-out">
-          <div class="wq-pipe" id="wq-pipe"></div>
-          <div id="wq-result" role="status" aria-live="polite"></div>
-        </div>
+        <ol class="ct-steps" id="ct-steps" aria-label="ขั้นการย้อนต้นทุน"></ol>
       </div>
-
-      <div class="wq-proof">
-        <p class="wq-proof-head"><svg class="wq-ic"><use href="#wqi-check"/></svg><span data-wq="proof">ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับที่นำเสนอด้านบนทุกบรรทัด</span></p>
-        <div class="wq-proof-row">
-          <figure class="wq-fig">
-            <figcaption><b>01</b><span data-wq="proof1">ลูกค้ากรอกคำขอใน LINE</span></figcaption>
-            <a class="wq-phone" href="img/bc-liff-form.webp" target="_blank" rel="noopener">
-              <img src="img/bc-liff-form.webp" alt="หน้าจอขอใบเสนอราคาใน LINE จากระบบทดสอบ — วันที่ต้องการรับสินค้า หมายเหตุ เบอร์โทร และผู้ติดต่อที่ลูกค้ากรอก ช่องอีเมลเบลอไว้" loading="lazy" width="828" height="1792">
-            </a>
-          </figure>
-          <span class="wq-arrow" aria-hidden="true"><svg class="wq-ic"><use href="#wqi-next"/></svg></span>
-          <figure class="wq-fig">
-            <figcaption><b>02</b><span data-wq="proof2">Business Central ออกใบเสนอราคาให้เอง</span></figcaption>
-            <!-- ?v= : Pages ตั้ง cache 4 ชม. และชื่อไฟล์นี้เคยเป็นภาพ collage — เปลี่ยนภาพทีไรให้ขยับเลข -->
-            <a class="wq-paper" href="img/bc-liff-quote.webp?v=2" target="_blank" rel="noopener">
-              <img src="img/bc-liff-quote.webp?v=2" alt="ใบเสนอราคา QG000010 ที่ Business Central สร้างจากคำขอนั้น เก้ารายการ ยอดรวมทั้งสิ้น 4,333,928.00 บาท ประทับว่าข้อมูลทดสอบ ช่องอีเมลเบลอไว้" loading="lazy" width="1756" height="1721">
-            </a>
-          </figure>
+      <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
+      <div class="ct-bc" role="group" aria-label="Cost Trace">
+        <div class="ct-acts">
+          <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
+          <button class="ct-act" id="ct-expand" type="button"><svg class="ct-ic"><use href="#cti-expand"/></svg><span>Expand All</span></button>
+          <button class="ct-act" id="ct-collapse" type="button"><svg class="ct-ic"><use href="#cti-collapse"/></svg><span>Collapse All</span></button>
         </div>
-        <p class="wq-proof-zoom" data-wq="proofZoom">คลิกที่ภาพเพื่อดูขนาดเต็ม</p>
+        <div class="ct-fast">
+          <h4 id="ct-fast-title">Traced Entry</h4>
+          <div class="ct-fields" id="ct-fields"></div>
+        </div>
+        <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูรายละเอียดที่ Traced Entry ด้านบน ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
+        <div class="ct-scroll" id="ct-graph" aria-describedby="ct-graph-desc"><div class="ct-canvas" id="ct-canvas"></div></div>
+        <div class="ct-table-wrap" id="ct-table" hidden></div>
       </div>
     </div>
 
-    <p class="wq-note" data-wq="note">ตัวเลขที่นำเสนอด้านบนคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a></p>
+    <p class="ct-note" data-ct="note">ในหน้าจอจำลองด้านบน เลขที่เอกสาร สินค้า ราคา อัตราแลกเปลี่ยน และอากร สมมติขึ้นทั้งหมด แต่ยอดทุกกล่องรวมกันได้จริง ส่วนภาษีซื้อที่จ่ายตอนนำเข้าขอคืนได้ จึงไม่ได้รวมไว้ในต้นทุน</p>
     </div>
   </div>
 </section>
@@ -4977,7 +4855,7 @@
   document.querySelectorAll('.feature-tab').forEach(t => t.addEventListener('click', () => trackSeoEvent('feature_tab', { tab: t.id.replace('feature-tab-', '') })));
   document.querySelectorAll('#faq details').forEach((d, i) => d.addEventListener('toggle', () => { if (d.open) trackSeoEvent('faq_open', { question: i + 1 }); }));
   // เดโม: ยิงครั้งเดียวต่อเดโมต่อการโหลดหน้า ตอนที่คนเริ่มกด/พิมพ์ครั้งแรก
-  ['billing-flow', 'vat-service', 'web-quote'].forEach(id => {
+  ['billing-flow', 'vat-service', 'cost-trace'].forEach(id => {
     const sec = document.getElementById(id); if (!sec) return;
     const once = (e) => { if (e && e.target.closest && e.target.closest('.demo-toggle')) return; trackSeoEvent('demo_use', { demo: id }); sec.removeEventListener('click', once); sec.removeEventListener('input', once); };
     sec.addEventListener('click', once); sec.addEventListener('input', once);
@@ -5715,225 +5593,340 @@
     window.renderBillingFlow('th');
   })();
 
-  /* ---- #web-quote (Highlight Feature 3) --------------------------------
-     เดโมฝั่งลูกค้า: กดเลือกสินค้า แล้วเห็นใบเสนอราคาที่ Business Central สร้างให้
-     คิดเลขในเบราว์เซอร์ล้วน ไม่ยิงระบบจริงสักครั้ง · ผู้ขายในเอกสารเป็นบริษัทสมมติ
-     (ข้อยกเว้นเดียวกับใบกำกับภาษีจำลองใน hero — ไม่ใช่ราคาของ JWIC จึงมี VAT ได้)
-     คำแปลอยู่ในตัวเองเหมือน #vat-service เพราะ applyLang() เขียนทับ innerHTML
-     แล้วจำนวนที่ผู้ใช้กดค้างไว้จะหายหมด — applyLang เรียก window.renderWebQuote แทน */
+  /* ---- #cost-trace (Highlight Feature 3) --------------------------------
+     เดโม JHEnhance Cost Trace: ย้อนต้นทุนของรายการขายหนึ่งรายการกลับไปถึงใบรับสินค้า
+     ข้อมูลโรงงานถุงมือสมมติ ยอดทุกกล่องรวมกันได้จริง — ชุดเดียวกับ showcase ใน repo JHEnhance
+     ข้อห้ามของข้อความ: แอปแสดงค่าที่ BC Post ไว้ ไม่ได้คำนวณต้นทุนเอง (ดู PRODUCT.md)
+     คำแปลอยู่ในตัวเองเหมือน #vat-service เพราะ applyLang() เขียนทับ innerHTML แล้วสถานะที่ผู้ใช้กดค้างไว้จะหาย
+     กราฟวัดขนาดจาก DOM จึงวาดได้เฉพาะตอนมองเห็น — ตอนซ่อนอยู่ (มือถือที่ยังไม่กดดูการนำเสนอ) จดไว้ก่อน
+     แล้ววาดทันทีใน resize ที่ปุ่มดูการนำเสนอยิงตอนเปิด ซึ่งเกิดก่อนเฟรมแรก จึงไม่กระพริบ */
   (() => {
-    const itemBox = document.getElementById('wq-items');
-    if (!itemBox) return;
+    const graph = document.getElementById('ct-graph');
+    if (!graph) return;
+    const byId = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+    const slow = matchMedia('(prefers-reduced-motion: reduce)');
 
-    /* แคตตาล็อก ราคา และจำนวนตั้งต้นชุดเดียวกับใบเสนอราคาจริง QG000010 ที่ออกจากระบบทดสอบ
-       at = ลำดับที่ลูกค้ากดเพิ่มลงตะกร้า ใบเสนอราคาเรียงบรรทัดตามนี้เหมือนของจริง
-       เปิดมากดส่งเลยโดยไม่แตะอะไร = ได้ใบเดียวกับภาพหลักฐานทุกบรรทัด */
-    const GROUPS = ['Laboratory Analyzers', 'Medical Devices'];
-    const ITEMS = [
-      { g: 0, code: 'LA-001', name: 'Hematology Analyzer', price: 850000, qty: 2, at: 1 },
-      { g: 0, code: 'LA-002', name: 'Chemistry Analyzer', price: 1200000, qty: 1, at: 9 },
-      { g: 0, code: 'LA-003', name: 'Immunoassay Analyzer', price: 1500000, qty: 1, at: 2 },
-      { g: 0, code: 'LA-004', name: 'Electrolyte Analyzer', price: 350000, qty: 1, at: 8 },
-      { g: 1, code: 'MD-001', name: 'Patient Monitor', price: 95000, qty: 1, at: 3 },
-      { g: 1, code: 'MD-002', name: 'Infusion Pump', price: 45000, qty: 1, at: 4 },
-      { g: 1, code: 'MD-003', name: 'ECG Machine', price: 110000, qty: 1, at: 5 },
-      { g: 1, code: 'MD-004', name: 'Examination Light', price: 28000, qty: 1, at: 6 },
-      { g: 1, code: 'MD-005', name: 'Medical Suction Unit', price: 35000, qty: 1, at: 7 }
-    ];
-
-    const WHO = [
-      { tab: { th: 'ลูกค้าเดิม', en: 'Existing customer' },
-        cust: { th: 'โรงพยาบาลเมดิคอลพาร์ค กรุงเทพฯ', en: 'Medical Park Hospital Bangkok' },
-        sub: { th: 'ลูกค้ารหัส C00123 · ผู้ติดต่อ คุณวาริณ', en: 'Customer C00123 · contact: Khun Warin' },
-        bc: { th: 'เจอเลขผู้เสียภาษีในระบบ ใช้ลูกค้า C00123 ที่อยู่ เครดิต และเงื่อนไขชำระเดิม',
-              en: 'Tax ID matched — customer C00123 is reused with its address, credit limit and terms' } },
-      { tab: { th: 'นิติบุคคลใหม่', en: 'New company' },
-        cust: { th: 'บริษัท พรีเมียร์แล็บ จำกัด', en: 'Premier Lab Co., Ltd.' },
-        sub: { th: 'ลูกค้าใหม่ · สร้างเป็น Contact', en: 'New buyer · created as a Contact' },
-        bc: { th: 'ไม่เคยมีเลขนี้ในระบบ สร้าง Contact ใหม่จากข้อมูลที่ลูกค้ากรอก',
-              en: 'Tax ID not on file — a Contact is created from what the buyer typed' } },
-      { tab: { th: 'บุคคลธรรมดา', en: 'Individual' },
-        cust: { th: 'คุณมุก ศรีสุวรรณ', en: 'Ms. Mook Srisuwan' },
-        sub: { th: 'ลูกค้าใหม่ · ไม่มีเลขนิติบุคคล', en: 'New buyer · no company tax ID' },
-        bc: { th: 'สร้าง Contact แบบบุคคลธรรมดา ไม่บังคับเลขผู้เสียภาษี 13 หลัก ใบเสนอราคายังออกได้',
-              en: 'An individual Contact is created — no 13-digit company ID required, the quote still goes out' } }
-    ];
-
-    const SELLER = { th: 'บริษัท ตัวอย่างการค้า จำกัด', en: 'Sample Trading Co., Ltd.' };
-    const DISCOUNT = 0.20, VAT = 0.07;
-
-    const T = {
-      kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
-      h2: { th: 'ขอใบเสนอราคาผ่าน LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>', en: 'Quote Requests via LIFF <span class="wq-h2-note">(LINE Front-end Framework)</span>' },
-      sub: { th: 'ลูกค้าเลือกสินค้าเองใน LINE แล้ว Business Central สร้างใบเสนอราคาตามคำขอ ไม่มีใครต้องคีย์ซ้ำ ลองกดเป็นลูกค้าดูได้เลย',
-             en: 'Buyers pick their items inside LINE, and Business Central creates the quote from the request — nobody retypes a thing. Try it below as the buyer.' },
-      archSr: { th: 'ลำดับการทำงาน: Business Central ส่งข้อมูลสินค้าไปไว้ที่ Cloudflare Workers ให้ลูกค้าเห็นใน LINE (LIFF) ลูกค้าเข้าสู่ระบบแล้วส่งคำขอใบเสนอราคา คำขอไปพักที่ Cloudflare Workers จน Business Central ดึงไปสร้างใบเสนอราคา',
-                en: 'How it flows: Business Central syncs item data to Cloudflare Workers so the buyer sees them in LINE (LIFF); the buyer signs in and sends a quote request, which waits on Cloudflare Workers until Business Central fetches it and creates the quote' },
-      flowReq: { th: 'คำขอใบเสนอราคา', en: 'Quote request' },
-      flowItems: { th: 'สินค้า', en: 'Items' },
-      s1: { th: 'เลือกสินค้า', en: 'Pick the items' },
-      s1hint: { th: 'รายการสินค้าชุดเดียวกับที่ลูกค้าเห็นบน LINE', en: 'The same item list the buyer sees in LINE' },
-      s2: { th: 'คุณเป็น', en: 'You are' },
-      s2hint: { th: 'ตัวเลือกนี้เปลี่ยนสิ่งที่ Business Central ทำกับคำขอ', en: 'This changes what Business Central does with the request' },
-      send: { th: 'ส่งคำขอราคา', en: 'Send the request' },
-      pdpa: { th: 'ข้อมูลที่คุณส่งมาพร้อมคำขอนี้ใช้เพื่อจัดทำใบเสนอราคาและติดต่อกลับเท่านั้น',
-              en: 'Details sent with this request are used only to prepare the quote and get back to you' },
-      sendAgain: { th: 'ส่งคำขออีกครั้ง', en: 'Send another request' },
-      plus: { th: 'เพิ่มจำนวน', en: 'Add one' },
-      minus: { th: 'ลดจำนวน', en: 'Remove one' },
-      qtyNow: { th: 'ขณะนี้', en: 'now' },
-      nodeLine: { th: 'LINE (LIFF)', en: 'LINE (LIFF)' },
-      nodeWorker: { th: 'Cloudflare Worker', en: 'Cloudflare Worker' },
-      nodeBc: { th: 'Business Central', en: 'Business Central' },
-      idleLine: { th: 'รอคำขอจากลูกค้า', en: 'Waiting for a request' },
-      idleWorker: { th: 'ไม่มีเซิร์ฟเวอร์ให้ดูแล ทำงานเมื่อมีคำขอเท่านั้น', en: 'No server to babysit — it runs only when a request arrives' },
-      idleBc: { th: 'ยังไม่มีเอกสารใหม่', en: 'No new document yet' },
-      doneLine: { th: 'รับคำขอ {n} รายการ พร้อมข้อมูลผู้ซื้อ', en: 'Request received — {n} line(s) plus the buyer details' },
-      doneWorker: { th: 'ตรวจข้อมูล จับคู่รหัสสินค้า แล้วเก็บคำขอไว้รอ Business Central มาดึง', en: 'Validated, item codes matched, and held for Business Central to fetch' },
-      bcFetch: { th: 'ดึงคำขอใหม่เข้าระบบ', en: 'Fetched the new request' },
-      bcIssue: { th: 'ออกใบเสนอราคา', en: 'issued quote' },
-      empty: { th: 'กด “ส่งคำขอราคา” เพื่อดูใบเสนอราคาที่ Business Central สร้างให้', en: 'Press “Send the request” to see the quote Business Central writes' },
-      emptyNone: { th: 'เลือกอย่างน้อยหนึ่งรายการก่อนส่งคำขอ', en: 'Pick at least one item before sending' },
-      docTitle: { th: 'ใบเสนอราคา', en: 'Sales Quote' },
-      docBy: { th: 'ออกโดย', en: 'Issued by' },
-      docDate: { th: 'วันที่เอกสาร', en: 'Document date' },
-      colQty: { th: 'จำนวน', en: 'Qty' },
-      sumNet: { th: 'รวมเป็นเงิน', en: 'Subtotal' },
-      sumDisc: { th: 'ส่วนลด 20%', en: 'Discount 20%' },
-      sumAfter: { th: 'จำนวนเงินหลังหักส่วนลด', en: 'After discount' },
-      sumVat: { th: 'ภาษีมูลค่าเพิ่ม 7%', en: 'VAT 7%' },
-      sumTotal: { th: 'จำนวนเงินรวมทั้งสิ้น (THB)', en: 'Grand total (THB)' },
-      baht: { th: '', en: 'Thai baht text, written by the system: ' },
-      proof: { th: 'ของจริงทำงานแล้ว ใบ QG000010 จากระบบทดสอบตรงกับที่นำเสนอด้านบนทุกบรรทัด',
-               en: 'Already running — quote QG000010 from the test system, line for line the same as the demo above' },
-      proof1: { th: 'ลูกค้ากรอกคำขอใน LINE', en: 'The buyer fills in the request on LINE' },
-      proof2: { th: 'Business Central ออกใบเสนอราคาให้เอง', en: 'Business Central writes the quote' },
-      proofZoom: { th: 'คลิกที่ภาพเพื่อดูขนาดเต็ม', en: 'Click an image for full size' },
-      note: { th: 'ตัวเลขที่นำเสนอด้านบนคำนวณในเบราว์เซอร์ ไม่ได้ต่อระบบจริง · ผู้ขายในเอกสารเป็นบริษัทสมมติ · ขอบเขตและราคาประเมินแยกเป็นโครงการตาม Requirement · เทคโนโลยีที่ใช้ <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> และ <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>',
-              en: 'The demo does its arithmetic in the browser and touches nothing live · the seller on the document is a fictional company · scope and pricing are quoted per project against your Requirement · built with <a href="https://developers.line.biz/en/docs/liff/overview/" target="_blank" rel="noopener">LIFF</a> and <a href="https://www.cloudflare.com/products/workers/" target="_blank" rel="noopener">Cloudflare Worker</a>' }
+    /* src = ต้นทางระดับถัดไป · flow = Applied Quantity ที่ส่งให้กล่องแม่ · ino/idesc = Item No./Item Description
+       det = บรรทัดรองตามที่แอปสร้าง · ln = Value Entry ทีละบรรทัด (ยอดกล่อง = ผลรวม) · ord = Actual Cost ทั้งใบสั่งผลิต */
+    const N = {
+      s:   { t: 'Sale SS-0912', d: '24/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'RAYONG · Lot NGM-260915 · ILE 3390', m: 'FIFO', ln: [['Direct cost · SI-0907', -98403.92]], q: -1200, u: 'BOX', src: ['op'] },
+      op:  { t: 'Output PCK-093', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'RAYONG · Lot NGM-260915 · ILE 3304', m: 'FIFO', ln: [['Direct cost · PCK-093', 157698.60], ['Indirect cost · PCK-093', 6307.94]], q: 2000, u: 'BOX', flow: '1,200 BOX', ord: [['Material Cost', 150498.60], ['Capacity Cost', 7200.00], ['Manufacturing Overhead', 6307.94]], src: ['cb', 'cx', 'cc', 'kp'] },
+      cb:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910 · ILE 3301', m: 'FIFO', ln: [['Direct cost · PCK-093', -142898.60]], q: -200000, flow: '200,000 PCS', src: ['od'] },
+      cx:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608 · ILE 3302', m: 'FIFO', ln: [['Direct cost · PCK-093', -4800.00]], q: -2000, flow: '2,000 PCS', src: ['px'] },
+      cc:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608 · ILE 3303', m: 'FIFO', ln: [['Direct cost · PCK-093', -2800.00]], q: -200, flow: '200 PCS', src: ['pc'] },
+      kp:  { kind: 'cap', t: 'Work Center PCK-01', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'PCK-093 · Capacity Ledger Entry 540', m: '—', ln: [['Direct cost · PCK-093', 7200.00]], q: 16, u: 'HOURS', flow: '16 HOURS' },
+      od:  { t: 'Output DIP-091', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910 · ILE 3244', m: 'FIFO', ln: [['Direct cost · DIP-091', 134810.00], ['Indirect cost · DIP-091', 8088.60]], q: 200000, flow: '200,000 PCS', ord: [['Material Cost', 74810.00], ['Capacity Cost', 60000.00], ['Manufacturing Overhead', 8088.60]], src: ['cl1', 'cl2', 'cz', 'ca', 'kd'] },
+      px:  { t: 'Purchase PR-0402', d: '28/08/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608 · ILE 3150', m: 'FIFO', ln: [['Direct cost · PI-0399', 24000.00]], q: 10000, flow: '2,000 PCS' },
+      pc:  { t: 'Purchase PR-0403', d: '28/08/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608 · ILE 3151', m: 'FIFO', ln: [['Direct cost · PI-0399', 14000.00]], q: 1000, flow: '200 PCS' },
+      cl1: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608 · ILE 3240', m: 'FIFO', ln: [['Direct cost · DIP-091', -45000.00]], q: -1000, u: 'KG', flow: '1,000 KG', src: ['pn1'] },
+      cl2: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609 · ILE 3241', m: 'FIFO', ln: [['Direct cost · DIP-091', -25760.00]], q: -560, u: 'KG', flow: '560 KG', src: ['pn2'] },
+      cz:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607 · ILE 3242', m: 'FIFO', ln: [['Direct cost · DIP-091', -1710.00]], q: -18, u: 'KG', flow: '18 KG', src: ['pz'] },
+      ca:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608 · ILE 3243', m: 'FIFO', ln: [['Direct cost · DIP-091', -2340.00]], q: -9, u: 'KG', flow: '9 KG', src: ['pa'] },
+      kd:  { kind: 'cap', t: 'Work Center DIP-L3', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'DIP-091 · Capacity Ledger Entry 512', m: '—', ln: [['Direct cost · DIP-091', 60000.00]], q: 40, u: 'HOURS', flow: '40 HOURS' },
+      pn1: { t: 'Purchase PR-0388', d: '18/08/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608 · ILE 3104', m: 'FIFO', ln: [['Direct cost · PI-0388', 734400.00], ['Item charge FREIGHT · PI-0391', 45000.00], ['Item charge DUTY · PI-0392', 26000.00], ['Item charge CLEARANCE · PI-0392', 4600.00]], q: 18000, u: 'KG', flow: '1,000 KG' },
+      pn2: { t: 'Purchase PR-0418', d: '03/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609 · ILE 3188', m: 'FIFO', ln: [['Direct cost · PI-0415', 756000.00], ['Item charge FREIGHT · PI-0421', 45000.00], ['Item charge DUTY · PI-0422', 23000.00], ['Item charge CLEARANCE · PI-0422', 4000.00]], q: 18000, u: 'KG', flow: '560 KG' },
+      pz:  { t: 'Purchase PR-0301', d: '22/07/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607 · ILE 3011', m: 'FIFO', ln: [['Direct cost · PI-0301', 47500.00]], q: 500, u: 'KG', flow: '18 KG' },
+      pa:  { t: 'Purchase PR-0377', d: '12/08/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608 · ILE 3090', m: 'FIFO', ln: [['Direct cost · PI-0377', 52000.00]], q: 200, u: 'KG', flow: '9 KG' }
     };
+    const ROOT = 's', MAXD = 5;
+    (function link(id, depth, parent) {
+      const n = N[id];
+      n.id = id; n.depth = depth; n.parent = parent; n.src = n.src || []; n.u = n.u || 'PCS';
+      n.total = Math.round(n.ln.reduce((s, l) => s + l[1], 0) * 100) / 100;
+      n.src.forEach((c) => link(c, depth + 1, id));
+    })(ROOT, 0, null);
+
+    const STEPS = [
+      { focus: 's', nm: { th: 'จัดส่งขาย', en: 'Sales shipment' },
+        tx: { th: 'ใบจัดส่งขาย SS-0912 ส่งถุงมือ 1,200 กล่องจาก Lot NGM-260915 ให้ลูกค้า และลงต้นทุนขายไว้ 98,403.92 บาท รายการนี้แหละคือจุดที่คุณเริ่มไล่ย้อนกลับ',
+              en: 'Sales shipment SS-0912 sends 1,200 boxes from lot NGM-260915 to a customer, at a cost of goods sold of 98,403.92 baht. This is where you start tracing back.' } },
+      { focus: 'op', nm: { th: 'บรรจุกล่อง', en: 'Packing' },
+        tx: { th: 'ใบสั่งผลิต PCK-093 บรรจุถุงมือได้ 2,000 กล่อง ต้นทุนรวม 164,006.54 บาท ตกกล่องละ 82.00 บาท ในยอดนี้มี Indirect cost 6,307.94 บาทที่ระบบลงไว้บน Output ด้วย',
+              en: 'Production order PCK-093 packs 2,000 boxes for 164,006.54 baht in total, 82.00 a box. That total includes 6,307.94 of indirect cost, which Business Central posts on the Output.' } },
+      { focus: 'cb', nm: { th: 'เบิกเข้าไลน์บรรจุ', en: 'Packing-line issues' },
+        tx: { th: 'ใบสั่งผลิต PCK-093 เบิกถุงมือ bulk 200,000 ชิ้นจาก Lot DL3-260910 กล่อง dispenser 2,000 ใบ กับลังอีก 200 ใบ แล้วใช้ Capacity ของไลน์ตรวจและบรรจุไป 16 ชั่วโมง',
+              en: 'Production order PCK-093 consumes 200,000 bulk gloves from lot DL3-260910, 2,000 dispenser boxes and 200 cartons, then uses 16 hours of inspection-and-packing line capacity.' } },
+      { focus: 'od', nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
+        tx: { th: 'ถุงมือ bulk ชุดนี้มาจากใบสั่งผลิต DIP-091 ของไลน์จุ่มที่ 3 ต้นทุน 142,898.60 บาท ตกชิ้นละ 0.71449 บาท กล่อง Output ยังแยก Actual Cost ของทั้งใบสั่งผลิตไว้ให้ตรงกับหน้า Statistics ด้วย ส่วนกล่อง dispenser กับลังซื้อมาจากผู้ขายในประเทศ',
+              en: "These bulk gloves come from production order DIP-091 on dipping line 3: 142,898.60 baht, or 0.71449 a glove. The Output box also breaks down the whole order's actual cost, matching its Statistics page. The boxes and cartons were bought from local vendors." } },
+      { focus: 'cl1', nm: { th: 'เบิกน้ำยางและสารเคมี', en: 'Latex and chemicals' },
+        tx: { th: 'ไลน์จุ่มเบิกน้ำยาง NBR ไป 1,560 กก. ตาม FIFO น้ำยางชุดนี้มาจาก 2 Lot คือ Lot เดือนสิงหาคม 1,000 กก. กับ Lot เดือนกันยายนอีก 560 กก. ระบบจึงแยกเป็น 2 รายการ นอกจากน้ำยางแล้ว ยังมีซิงก์ออกไซด์ สารเร่ง และ Capacity ของไลน์อีก 40 ชั่วโมงด้วย',
+              en: 'The dipping line draws 1,560 kg of NBR latex under FIFO. It comes from two lots, 1,000 kg from the August lot and 560 kg from the September lot, so Business Central posts two entries. Zinc oxide, an accelerator and 40 hours of line capacity go in as well.' } },
+      { focus: 'pn1', nm: { th: 'รับน้ำยางนำเข้า', en: 'Imported latex' },
+        tx: { th: 'ปลายทางคือใบรับน้ำยาง NBR ที่นำเข้าจากเกาหลี 2 ครั้ง ราคา USD แปลงเป็นบาทตามอัตราของแต่ละใบ แล้วบวก Item Charge ค่าขนส่ง อากร และค่าเคลียร์เข้าไป ต้นทุนจริงจึงออกมาที่กิโลกรัมละ 45.00 และ 46.00 บาท',
+              en: 'The trail ends at two receipts of NBR latex imported from Korea. Each USD price is converted at its own rate, then the freight, duty and clearance Item Charges are added, so the real cost comes to 45.00 and 46.00 baht a kilogram.' } }
+    ];
+
+    const chips = (a) => '<span class="ct-chips">' + a.map((t) => '<span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>' + t + '</span>').join('') + '</span>';
+    const T = {
+      sub: { th: 'ต้นทุนขายทุกบาท ย้อนดูได้ถึงใบรับสินค้า ค่าขนส่ง และอากรขาเข้า แค่เลือก Item Ledger Entry รายการเดียว Cost Trace ก็ไล่ให้เห็นทีละชั้นว่าต้นทุนมาจากไหน ทุกตัวเลขเป็นค่าที่ Business Central Post ไว้แล้ว',
+             en: 'Trace every baht of cost of goods sold back to the vendor receipt, the freight and the import duty. Pick one Item Ledger Entry and Cost Trace shows, level by level, where its cost came from — every figure is one Business Central has already posted.' },
+      tipTitle: { th: '💡 Cost Trace คืออะไร?', en: '💡 What is Cost Trace?' },
+      tipBody: { th: 'แอปในชุด JHEnhance สำหรับ Business Central ที่ช่วยให้คุณย้อนดูได้ว่าต้นทุนแต่ละรายการมาจากไหน'
+                   + chips(['ต้นทุนนำเข้าทุกบรรทัด', 'Lot และ Serial No.', 'การผลิตหลายชั้น', 'ครบ 5 Costing Method', 'หน้า Trace Check'])
+                   + '<span class="ct-fine">อ่านเฉพาะรายการที่ Post แล้ว ไม่แก้ไขข้อมูลใด ๆ ในระบบ</span>',
+                 en: "A JHEnhance app for Business Central that lets you trace where each entry's cost came from"
+                   + chips(['every import cost line', 'lots and serial numbers', 'multi-level production', 'all 5 costing methods', 'the Trace Check page'])
+                   + '<span class="ct-fine">Reads posted entries only and never changes your data</span>' },
+      demoTitle: { th: 'ย้อนต้นทุน<span class="nb">ถุงมือไนไตรล์</span> <span class="nb">1,200 กล่อง</span>ที่จัดส่งขาย',
+                   en: 'Tracing the cost of 1,200 boxes of nitrile gloves shipped to a customer' },
+      demoHint: { th: 'ในตัวอย่างนี้ โรงงานถุงมือตรวจโรคใช้น้ำยาง NBR ที่นำเข้าจากเกาหลี ต้นทุนไหลผ่าน 6 ระดับกว่าจะถึงใบจัดส่งขาย ลองกดไล่ทีละขั้น หรือกดกล่องไหนก็ได้เพื่อเปิดรายละเอียด',
+                  en: 'This sample exam-glove factory imports its NBR latex from Korea, and the cost passes through six levels before it reaches the sales shipment. Step through it, or press any box to see its details.' },
+      graphSr: { th: 'กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูรายละเอียดที่ Traced Entry ด้านบน ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น',
+                 en: "Cost trace graph. The leftmost column is the entry you start from, and each column further right goes one level deeper. Press a box title to show its details under Traced Entry; the number button opens or closes that box's sources." },
+      note: { th: 'ในหน้าจอจำลองด้านบน เลขที่เอกสาร สินค้า ราคา อัตราแลกเปลี่ยน และอากร สมมติขึ้นทั้งหมด แต่ยอดทุกกล่องรวมกันได้จริง ส่วนภาษีซื้อที่จ่ายตอนนำเข้าขอคืนได้ จึงไม่ได้รวมไว้ในต้นทุน',
+              en: 'The simulated screen above runs entirely on made-up data — document numbers, items, prices, exchange rates and duty — but every box adds up. Import VAT is recoverable input tax, so it stays out of cost.' },
+      play: { th: 'เล่นทีละขั้น', en: 'Play step by step' },
+      stop: { th: 'หยุด', en: 'Stop' },
+      introT: { th: 'ห่วงโซ่ต้นทุนทั้งเส้น', en: 'The whole cost chain' },
+      introTx: { th: 'เริ่มจากใบจัดส่งขาย 1 ใบ ย้อนผ่านงานบรรจุกับไลน์จุ่มขึ้นรูป ไปจนถึงใบรับน้ำยางนำเข้า 2 ใบ และใบรับของจากผู้ขายในประเทศอีก 4 ใบ กด <b>เล่นทีละขั้น</b> แล้วไล่ดูไปทีละระดับได้เลย',
+                 en: 'It starts from one sales shipment and runs back through packing and the dipping line to two imported latex receipts and four local purchases. Press <b>Play step by step</b> to follow it level by level.' },
+      srcs: { th: 'ต้นทาง {n} รายการ', en: '{n} cost sources' },
+      ordTip: { th: 'ต้นทุนจริงของทั้งใบสั่งผลิตแยกตามประเภท แบบเดียวกับหน้า Production Order Statistics หรือ Posted Assembly Order Statistics ไม่ใช่ส่วนของ Output กล่องนี้',
+                en: "The actual cost of the whole order by kind, as its Statistics page shows it: Production Order Statistics or Posted Assembly Order Statistics. Not this output's share." }
+    };
+    let lang = 'th';
+    const L = (o) => o[lang] || o.th;
+
+    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18;
+    const state = { open: {}, sel: ROOT, view: 'graph', step: -1, timer: null };
+    let pending = true, shown = null, rt = 0;
 
     const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const qty = (v) => v.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    const unitCost = (n) => {
+      if (n.kind === 'cap' || !n.q) return '';
+      const u = Math.round(Math.abs(n.total / n.q) * 100000) / 100000;
+      return u.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 5 });
+    };
+    const itemText = (n) => n.ino + ' ' + n.idesc;
+    const openTo = (depth) => { Object.keys(N).forEach((id) => { state.open[id] = N[id].depth < depth; }); };
+    const pathSet = (id) => { const s = {}; while (id) { s[id] = true; id = N[id].parent; } return s; };
+    // ปุ่มที่ focus อยู่ในกราฟหรือตาราง — วาดใหม่แล้วคืน focus ให้ปุ่มตัวใหม่ที่ตรงกัน (ข้ามมุมมองได้ด้วย)
+    const focusKey = () => {
+      const a = document.activeElement;
+      if (!a || !a.closest || !a.closest('#ct-canvas, #ct-table')) return '';
+      if (a.dataset.tog) return 'button[data-tog="' + a.dataset.tog + '"]';
+      return a.dataset.sel ? 'button[data-sel="' + a.dataset.sel + '"]' : '';
+    };
+    const refocus = (key, box) => { const el = key && box.querySelector(key); if (el) el.focus({ preventScroll: true }); };
 
-    const byId = (id) => document.getElementById(id);
-    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-    const ico = (id) => '<svg class="wq-ic"><use href="#' + id + '"/></svg>';
-    const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const narrHTML = (i) => {
+      const s = STEPS[i];
+      return '<span class="ct-narr-lv">' + (s ? (i ? 'Level ' + i : 'Traced entry') : '6 levels') + '</span>'
+        + '<span class="ct-narr-t">' + L(s ? s.nm : T.introT) + '</span>'
+        + '<span class="ct-narr-x">' + L(s ? s.tx : T.introTx) + '</span>';
+    };
 
-    let lang = 'th', who = 0, sent = false, step = 0, quoteNo = 10, seq = ITEMS.length;
-    let timers = [];
-
-    const lines = () => ITEMS.filter((it) => it.qty > 0).sort((a, b) => a.at - b.at);
-    const stop = () => { timers.forEach(clearTimeout); timers = []; };
-    /* แตะอะไรก็ตามหลังส่งแล้ว = กลับไปสถานะยังไม่ส่ง ผู้ดูจะได้เห็นว่าเอกสารมาจากการกดส่ง ไม่ใช่โผล่เอง */
-    const reset = () => { stop(); sent = false; step = 0; };
-
-    function drawItems() {
-      let last = -1;
-      itemBox.innerHTML = ITEMS.map((it, i) => {
-        const head = it.g !== last ? '<p class="wq-grp">' + GROUPS[it.g] + '</p>' : '';
-        last = it.g;
-        return head + '<div class="wq-item' + (it.qty ? ' on' : '') + '">' + ico('wqi-box')
-        + '<span class="wq-name"><b>' + esc(it.name) + '</b><span><code>' + it.code + '</code> · '
-        + 'EA</span></span>'
-        + '<span class="wq-qty">'
-        + '<button type="button" data-i="' + i + '" data-d="-1" aria-label="' + T.minus[lang] + ' ' + it.code
-        + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '"' + (it.qty ? '' : ' disabled') + '>&minus;</button>'
-        + '<output>' + it.qty + '</output>'
-        + '<button type="button" data-i="' + i + '" data-d="1" aria-label="' + T.plus[lang] + ' ' + it.code
-        + ' · ' + T.qtyNow[lang] + ' ' + it.qty + '">+</button>'
-        + '</span></div>';
-      }).join('');
-      itemBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
-        const i = b.dataset.i, d = b.dataset.d, it = ITEMS[+i], was = it.qty;
-        it.qty = Math.max(0, Math.min(99, it.qty + (+d)));
-        if (!was && it.qty) it.at = ++seq;
-        reset(); render();
-        const same = itemBox.querySelector('button[data-i="' + i + '"][data-d="' + d + '"]');
-        (same && !same.disabled ? same : itemBox.querySelector('button[data-i="' + i + '"][data-d="1"]')).focus();
-      }));
-    }
-
-    function drawWho() {
-      const bar = byId('wq-who');
-      bar.innerHTML = WHO.map((w, i) =>
-        '<button type="button" data-i="' + i + '" aria-pressed="' + (i === who) + '">' + esc(w.tab[lang]) + '</button>').join('');
-      bar.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
-        who = +b.dataset.i; reset(); render();
-        bar.querySelector('button[data-i="' + who + '"]').focus();
-      }));
-    }
-
-    function node(key, on, name, text) {
-      return '<div class="wq-node wq-node-' + key + (on ? ' on' : '') + '"><span class="wq-dot"></span>'
-        + '<span class="wq-txt"><b>' + name + '</b><span>' + text + '</span></span></div>';
-    }
-
-    function drawPipe() {
-      byId('wq-pipe').innerHTML =
-        node('line', step >= 1, T.nodeLine[lang], step >= 1 ? T.doneLine[lang].replace('{n}', lines().length) : T.idleLine[lang])
-        + node('cf', step >= 2, T.nodeWorker[lang], step >= 2 ? T.doneWorker[lang] : T.idleWorker[lang])
-        + node('bc', step >= 3, T.nodeBc[lang], step >= 3
-            ? T.bcFetch[lang] + ' · ' + WHO[who].bc[lang] + ' · ' + T.bcIssue[lang] + ' ' + quoteId()
-            : T.idleBc[lang]);
-    }
-
-    const quoteId = () => 'QG' + String(quoteNo).padStart(6, '0');
-
-    function drawResult() {
-      const el = byId('wq-result');
-      if (!sent || step < 3) {
-        el.innerHTML = '<div class="wq-empty">' + ico('wqi-doc') + '<span>'
-          + (lines().length ? T.empty[lang] : T.emptyNone[lang]) + '</span></div>';
-        return;
+    function cardHTML(n, o) {
+      let h = '<div class="ct-card' + (n.kind ? ' ' + n.kind : '') + (o.sel ? ' sel' : '') + (o.fresh ? ' ct-new' : '') + '" data-id="' + n.id + '">'
+        + '<button class="ct-open" type="button" data-sel="' + n.id + '"' + (o.sel ? ' aria-current="true"' : '') + '>'
+        + '<span class="ct-title">' + esc(n.t) + '</span>';
+      if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
+      h += '<span class="ct-detail" title="' + esc(n.d + ' · ' + n.det) + '">' + esc(n.d + ' · ' + n.det) + '</span></button>';
+      h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
+      if (n.ord) {
+        h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
+          + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
       }
-      const sub = lines().reduce((a, it) => a + it.price * it.qty, 0);
-      const disc = sub * DISCOUNT, after = sub - disc, vat = after * VAT, tot = after + vat;
-      const d = new Date();
-      const date = String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
-      el.innerHTML = '<div class="wq-doc in">'
-        + '<div class="wq-doc-head"><span><b>' + T.docTitle[lang] + '</b>'
-        + '<span>' + T.docBy[lang] + ' ' + esc(SELLER[lang]) + '</span></span>'
-        + '<span class="wq-doc-no">' + quoteId() + '<span>' + T.docDate[lang] + ' ' + date + '</span></span></div>'
-        + '<p class="wq-doc-cust"><b>' + esc(WHO[who].cust[lang]) + '</b><br>' + esc(WHO[who].sub[lang]) + '</p>'
-        + lines().map((it) => '<div class="wq-line"><code>' + it.code + '</code><span>' + esc(it.name) + '</span>'
-            + '<i>' + it.qty + '</i><em>' + money(it.price * it.qty) + '</em></div>').join('')
-        + '<dl class="wq-sum">'
-        + '<dt>' + T.sumNet[lang] + '</dt><dd>' + money(sub) + '</dd>'
-        + '<dt>' + T.sumDisc[lang] + '</dt><dd>' + money(disc) + '</dd>'
-        + '<dt>' + T.sumAfter[lang] + '</dt><dd>' + money(after) + '</dd>'
-        + '<dt>' + T.sumVat[lang] + '</dt><dd>' + money(vat) + '</dd>'
-        + '<dt class="tot">' + T.sumTotal[lang] + '</dt><dd class="tot">' + money(tot) + '</dd>'
-        + '</dl>'
-        + '<p class="wq-baht">' + T.baht[lang] + '(' + bahtText(tot) + ')</p>'
-        + '</div>';
+      const uc = unitCost(n);
+      h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span class="ct-unit" title="Unit Cost (LCY)"> @ ' + uc + '</span>' : '') + '</span><b>' + money(n.total) + '</b></div>'
+        + '<span class="ct-adj">Adjusted</span>';
+      if (n.flow) h += '<span class="ct-flow' + (o.on ? ' on' : '') + '">' + esc(n.flow) + '</span>';
+      if (n.src.length) {
+        h += '<button class="ct-badge" type="button" data-tog="' + n.id + '" aria-expanded="' + !!o.open + '" aria-label="'
+          + esc(L(T.srcs).replace('{n}', n.src.length)) + '">' + n.src.length + '</button>';
+      }
+      return h + '</div>';
     }
 
-    function render() {
-      document.querySelectorAll('[data-wq]').forEach((el) => { el.innerHTML = T[el.dataset.wq][lang]; });
-      drawItems();
-      drawWho();
-      drawPipe();
-      drawResult();
-      const btn = byId('wq-send');
-      btn.disabled = !lines().length;
-      btn.querySelector('[data-wq="send"]').innerHTML = sent && step >= 3 ? T.sendAgain[lang] : T.send[lang];
+    function renderGraph(scrollTo) {
+      if (!graph.offsetWidth) { pending = true; return; }
+      pending = false;
+      const canvas = byId('ct-canvas'), keep = focusKey(), vis = [];
+      (function walk(id) { vis.push(id); if (state.open[id]) N[id].src.forEach(walk); })(ROOT);
+      const on = pathSet(state.sel);
+      const maxD = Math.max(...vis.map((id) => N[id].depth));
+      let html = '<svg class="ct-lines" aria-hidden="true"></svg>';
+      for (let d = 0; d <= maxD; d++) {
+        html += '<div class="ct-colhead' + (d ? '' : ' first') + '" style="left:' + (PADX + d * (COLW + GAP)) + 'px;width:' + COLW + 'px">'
+          + (d ? 'Cost sources: Level ' + d : 'Traced entry') + '</div>';
+      }
+      vis.forEach((id) => {
+        const n = N[id];
+        html += cardHTML(n, { sel: id === state.sel, on: on[id] && n.parent && on[n.parent], open: state.open[id],
+          fresh: !!shown && !shown.has(id) && !slow.matches });
+      });
+      shown = new Set(vis);
+      canvas.innerHTML = html;
+
+      const el = {};
+      canvas.querySelectorAll('.ct-card').forEach((c) => { el[c.dataset.id] = c; });
+      const pos = {};
+      (function place(id, y) {
+        pos[id] = { x: PADX + N[id].depth * (COLW + GAP), y };
+        let end = y + el[id].offsetHeight + VGAP;
+        if (state.open[id]) { let cy = y; N[id].src.forEach((c) => { cy = place(c, cy); }); end = Math.max(end, cy); }
+        return end;
+      })(ROOT, TOP);
+      let maxY = 0;
+      vis.forEach((id) => {
+        el[id].style.left = pos[id].x + 'px';
+        el[id].style.top = pos[id].y + 'px';
+        maxY = Math.max(maxY, pos[id].y + el[id].offsetHeight);
+      });
+      const W = PADX * 2 + (maxD + 1) * COLW + maxD * GAP + 50, H = maxY + 28;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+
+      // เส้นต่อวัดจากกึ่งกลางปุ่มตัวเลขกับป้ายบนเส้นจริง ไม่ฝังเลขไว้ — ขนาดสองตัวนี้ขึ้นกับฟอนต์
+      let p = '';
+      vis.forEach((id) => {
+        const n = N[id], a = pos[id];
+        if (!n.src.length) return;
+        const badge = el[id].querySelector('.ct-badge');
+        const y1 = a.y + badge.offsetTop + badge.offsetHeight / 2;
+        const stub = state.open[id] && n.src.some((c) => on[c]) ? ' class="on"' : '';
+        p += '<path' + stub + ' d="M' + (a.x + COLW) + ' ' + y1 + 'H' + (a.x + COLW + 10) + '"/>';
+        if (!state.open[id]) return;
+        const x1 = a.x + COLW + 10 + badge.offsetWidth, xm = x1 + 14;
+        n.src.forEach((c) => {
+          const b = pos[c], pill = el[c].querySelector('.ct-flow');
+          const y2 = b.y + pill.offsetTop + pill.offsetHeight / 2, x2 = b.x - 6 - pill.offsetWidth, ax = (xm + x2) / 2;
+          const hot = on[c] && on[id] ? ' on' : '';
+          p += '<path class="ln' + hot + '" d="M' + x1 + ' ' + y1 + 'H' + xm + 'V' + y2 + 'H' + x2 + '"/>'
+            + '<path class="arw' + hot + '" d="M' + (ax - 4) + ' ' + y2 + 'L' + (ax + 4) + ' ' + (y2 - 4) + 'L' + (ax + 4) + ' ' + (y2 + 4) + 'Z"/>'
+            + '<path class="ln' + hot + '" d="M' + (b.x - 6) + ' ' + y2 + 'H' + b.x + '"/>';
+        });
+      });
+      const svg = canvas.querySelector('.ct-lines');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.innerHTML = p;
+      refocus(keep, canvas);
+      if (scrollTo && pos[scrollTo]) {
+        graph.scrollTo({ left: Math.max(0, pos[scrollTo].x - (graph.clientWidth > 900 ? COLW + GAP + 40 : 110)),
+          top: Math.max(0, pos[scrollTo].y - 90), behavior: slow.matches ? 'auto' : 'smooth' });
+      }
     }
 
-    function send() {
-      if (!lines().length) return;
-      stop();
-      quoteNo++;
-      sent = true;
-      if (slow) { step = 3; render(); return; }
-      step = 1; render();
-      timers.push(setTimeout(() => { step = 2; render(); }, 480));
-      timers.push(setTimeout(() => { step = 3; render(); }, 980));
+    function renderTable() {
+      const box = byId('ct-table'), keep = focusKey();
+      let rows = '';
+      (function walk(id) {
+        const n = N[id], sel = id === state.sel;
+        rows += '<tr data-sel="' + id + '"' + (sel ? ' class="sel"' : '') + '>'
+          + '<td style="padding-left:' + (12 + n.depth * 18) + 'px"><span class="ct-tree' + (n.src.length ? ' has' : '') + '"></span>'
+          + '<button class="ct-tlink" type="button" data-sel="' + id + '"' + (sel ? ' aria-current="true"' : '') + '>' + esc(n.t) + '</button></td>'
+          + '<td>' + esc(itemText(n)) + '</td><td>' + esc(n.det) + '</td><td>' + n.d + '</td><td>' + n.m + '</td>'
+          + '<td class="num">' + qty(n.q) + '</td><td class="num">' + unitCost(n) + '</td><td class="num">' + money(n.total) + '</td>'
+          + '<td class="num">' + (n.flow ? esc(n.flow) : '') + '</td><td>Adjusted</td></tr>';
+        n.src.forEach(walk);
+      })(ROOT);
+      box.innerHTML = '<table class="ct-tbl"><thead><tr><th>Entry</th><th>Item</th><th>Detail</th><th>Posting Date</th><th>Costing Method</th>'
+        + '<th class="num">Quantity</th><th class="num">Unit Cost (LCY)</th><th class="num">Cost Amount (Actual)</th>'
+        + '<th class="num">Applied Quantity</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      refocus(keep, box);
     }
 
-    byId('wq-send').addEventListener('click', send);
-    window.renderWebQuote = (l) => { lang = l; render(); };
-    render();
+    function renderFields() {
+      const n = N[state.sel];
+      const f = [
+        ['Item No.', n.ino], ['Quantity', qty(n.q) + ' ' + n.u, 1],
+        ['Item Description', n.idesc], ['Unit Cost (LCY)', unitCost(n) || '0.00', 1],
+        ['Location Code', n.kind === 'cap' ? '' : 'RAYONG'], ['Cost Amount (Actual)', money(n.total), 1],
+        ['Posting Date', n.d], ['Status', 'Adjusted']
+      ];
+      byId('ct-fast-title').textContent = state.sel === ROOT ? 'Traced Entry' : 'Traced Entry · Level ' + n.depth;
+      byId('ct-fields').innerHTML = f.map((x) => '<div class="ct-fld"><span>' + x[0] + '</span><output' + (x[2] ? ' class="num"' : '') + '>' + esc(x[1]) + '</output></div>').join('');
+    }
+
+    // ปุ่มขั้นสร้างครั้งเดียวต่อภาษา ระหว่างเล่นอัตโนมัติแค่สลับคลาส ปุ่มที่ focus อยู่จึงไม่หาย
+    function syncSteps() {
+      byId('ct-steps').querySelectorAll('button').forEach((b, i) => {
+        b.classList.toggle('on', i === state.step);
+        b.classList.toggle('done', state.step > i);
+        if (i === state.step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      });
+      byId('ct-narr-now').innerHTML = narrHTML(state.step);
+    }
+    function syncPlay() {
+      byId('ct-play').innerHTML = '<svg class="ct-ic"><use href="#cti-' + (state.timer ? 'stop' : 'play') + '"/></svg><span>' + L(state.timer ? T.stop : T.play) + '</span>';
+    }
+    function drawStatic() {
+      document.querySelectorAll('[data-ct]').forEach((el) => { el.innerHTML = L(T[el.dataset.ct]); });
+      byId('ct-steps').innerHTML = STEPS.map((s, i) => '<li><button class="ct-step" type="button" data-i="' + i + '">'
+        + '<span class="ct-lv">' + (i ? 'Level ' + i : 'Traced entry') + '</span><span class="ct-nm">' + L(s.nm) + '</span></button></li>').join('');
+      const box = byId('ct-narr');
+      box.querySelectorAll('.ct-narr-size').forEach((el) => el.remove());
+      box.insertAdjacentHTML('beforeend', [-1, ...STEPS.keys()].map((i) => '<div class="ct-narr-size" aria-hidden="true">' + narrHTML(i) + '</div>').join(''));
+      syncPlay();
+    }
+    function render(scrollTo) {
+      syncSteps();
+      renderFields();
+      if (state.view === 'graph') renderGraph(scrollTo); else renderTable();
+    }
+
+    function setView(v) {
+      state.view = v;
+      graph.hidden = v !== 'graph';
+      byId('ct-table').hidden = v === 'graph';
+      const b = byId('ct-view');
+      b.querySelector('use').setAttribute('href', v === 'graph' ? '#cti-table' : '#cti-graph');
+      b.querySelector('span').textContent = v === 'graph' ? 'Table View' : 'Graphic View';
+    }
+    function goStep(i) { state.step = i; openTo(i); state.sel = STEPS[i].focus; render(state.sel); }
+    function stopPlay() { if (!state.timer) return; clearInterval(state.timer); state.timer = null; syncPlay(); }
+    // กดกล่องเอง = ออกจากเส้นเรื่อง เว้นแต่เป็นกล่องของขั้นที่กำลังเล่าอยู่
+    function select(id) {
+      stopPlay();
+      if (STEPS[state.step] && STEPS[state.step].focus !== id) state.step = -1;
+      state.sel = id;
+      render();
+    }
+
+    byId('ct-play').addEventListener('click', () => {
+      if (state.timer) { stopPlay(); return; }
+      if (state.view !== 'graph') setView('graph');
+      state.timer = setInterval(() => {
+        if (state.step >= STEPS.length - 1 || !graph.offsetWidth || document.hidden) { stopPlay(); return; }
+        goStep(state.step + 1);
+      }, 2800);
+      syncPlay();
+      goStep(0);
+    });
+    byId('ct-steps').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-i]');
+      if (!b) return;
+      stopPlay();
+      if (state.view !== 'graph') setView('graph');
+      goStep(+b.dataset.i);
+    });
+    byId('ct-canvas').addEventListener('click', (e) => {
+      const t = e.target.closest('[data-tog]');
+      if (t) { stopPlay(); state.open[t.dataset.tog] = !state.open[t.dataset.tog]; state.step = -1; render(); return; }
+      const s = e.target.closest('[data-sel]');
+      if (s) select(s.dataset.sel);
+    });
+    byId('ct-table').addEventListener('click', (e) => { const r = e.target.closest('[data-sel]'); if (r) select(r.dataset.sel); });
+    byId('ct-view').addEventListener('click', () => { stopPlay(); setView(state.view === 'graph' ? 'table' : 'graph'); render(); });
+    byId('ct-expand').addEventListener('click', () => { stopPlay(); openTo(MAXD + 1); state.step = -1; render(); });
+    byId('ct-collapse').addEventListener('click', () => { stopPlay(); openTo(0); state.step = -1; state.sel = ROOT; render(ROOT); });
+
+    addEventListener('resize', () => {
+      if (state.view !== 'graph') return;
+      if (pending && graph.offsetWidth) { renderGraph(); return; }   // เพิ่งกดดูการนำเสนอ: วาดก่อนเฟรมแรก
+      clearTimeout(rt);
+      rt = setTimeout(() => renderGraph(), 150);
+    });
+    if (document.fonts) document.fonts.ready.then(() => { if (state.view === 'graph') renderGraph(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stopPlay(); });
+
+    window.renderCostTrace = (l) => { lang = l; drawStatic(); render(); };
+    openTo(MAXD + 1);
+    window.renderCostTrace('th');
   })();
 
   // ── Bilingual TH/EN ─────────────────────────────────────────────
@@ -6132,7 +6125,7 @@
     ['.steps', 'aria-label', 'Implementation phases'],
     ['.feature-tablist', 'aria-label', 'JWIC Localization features'],
     ['#vs-cases', 'aria-label', 'Example scenarios'],
-    ['#wq-who', 'aria-label', 'Buyer type'],
+    ['#ct-steps', 'aria-label', 'Trace steps'],
     ['.bento-shot img[src$="bc-power-automate.webp"]', 'alt', 'Power Automate flow that sends an approval request automatically when a new document is created in Business Central'],
     ['.bento-shot img[src$="bc-excel-pivot.webp"]', 'alt', 'Aged receivables report opened in Excel as a PivotTable, with slicers filtering by department and customer group'],
     ['.bento-shot img[src$="bc-home.webp"]', 'alt', 'Business Central home page in the cloud, showing the company name and the task menus the user has rights to'],
@@ -6159,8 +6152,6 @@
     ['.slider figure img[src$="po.webp"]', 'alt', 'Purchase Order'],
     ['.slider figure img[src$="credit-note.webp"]', 'alt', 'Credit Note'],
     ['.ci-photo', 'alt', 'Consultant walking clients through the work at a meeting table'],
-    ['img[src*="bc-liff-form"]', 'alt', 'Quote request screen in LINE from the test system — delivery date, note, phone number and contact person entered by the customer; the email field is blurred'],
-    ['img[src*="bc-liff-quote"]', 'alt', 'Quote QG000010 created by Business Central from that request — nine lines, grand total THB 4,333,928.00, stamped as test data; the email field is blurred'],
     ['.footer-menu', 'aria-label', 'Footer menu'],
     ['#cookie-bar', 'aria-label', 'Cookie consent'],
     ['.topnav .dbd', 'aria-label', 'DBD Registered — e-commerce registration mark, Department of Business Development, Thailand'],
@@ -6189,7 +6180,7 @@
     // #vat-service วาดตัวเองใหม่จาก state ไม่ผ่าน I18N — ไม่งั้นสถานะที่ผู้ใช้กดค้างไว้หาย
     if (window.renderVatService) window.renderVatService(lang);
     if (window.renderBillingFlow) window.renderBillingFlow(lang);
-    if (window.renderWebQuote) window.renderWebQuote(lang);
+    if (window.renderCostTrace) window.renderCostTrace(lang);
     if (window.syncSlidePlay) window.syncSlidePlay();
     if (window.syncMenuLabel) window.syncMenuLabel();
     document.querySelectorAll('.lang button').forEach(b => {

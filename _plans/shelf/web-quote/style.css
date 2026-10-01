@@ -1,0 +1,343 @@
+/* #web-quote — CSS ยกจาก index.html คอมมิต 3eb9201 ตามตัวอักษร (อ่าน README.md ก่อนกู้)
+   ส่วนที่ 1 → บล็อก "Horizon glow:" ต่อจากกฎ #features
+   ส่วนที่ 2 → ที่เดิม ระหว่าง .vs-note กับ @media (max-width: 900px) ของ #vat-service
+   ⚠ .wq-doc / .wq-doc-head / .wq-doc-no / .wq-doc-cust / .wq-sum / .wq-baht / @keyframes wqDoc
+     ยังอยู่ใน index.html ที่เดิมตามตัวอักษร (#billing-flow ใช้ร่วม) — ตอนกู้ให้วางส่วนที่ 2 ทับบล็อกเล็กนั้น ไม่ใช่วางซ้ำ */
+
+/* ---- ส่วนที่ 1: Horizon glow ---- */
+  /* หลักฐาน (ใบ QG000010 ของจริง): ทรายแผ่กว้างกลางขอบ ขนาบด้วยมิ้นต์/น้ำทะเลเล็ก ๆ
+     แถว .wq-note (#516661) อยู่บนแสงตรง ๆ — สีนี้ผ่านทุกสีแสง */
+  #web-quote {
+    background: var(--glow-fade),
+      radial-gradient(1300px 380px at 50% 100%, var(--glow-sand), transparent 72%),
+      radial-gradient(560px 300px at 0% 100%, var(--glow-mint), transparent 72%),
+      radial-gradient(560px 300px at 100% 100%, var(--glow-sea), transparent 72%),
+      var(--ui-page);
+  }
+
+/* ---- ส่วนที่ 2: บล็อกหลัก ---- */
+  /* ── #web-quote (Highlight Feature 3) ─────────────────────────────
+     เดโมฝั่งลูกค้า: กดเลือกสินค้าเอง แล้วเห็น Sales Quote ที่ BC สร้างให้
+     คิดเลขในเบราว์เซอร์ล้วน ไม่แตะระบบจริง · โครงการ์ดและสองคอลัมน์ยืมสำนวน .vs
+     ฝั่งขวาพื้นเขียวจาง = ฝั่งที่ระบบทำให้ เหมือน .vs-side.rd */
+  #web-quote > .wrap > .section-kicker,
+  #web-quote > .wrap > h2,
+  #web-quote > .wrap > .sub {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  /* ชื่อเต็มของ LIFF ยาวเกินจะอยู่บรรทัดเดียวกับหัวเรื่อง — ให้ลงบรรทัดใหม่ ตัวเล็กกว่า สีจางกว่า */
+  .wq-h2-note { display: block; margin-top: .2em; font-size: .5em; letter-spacing: 0; color: var(--ui-muted); }
+  .wq-ic { width: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* แถวสถาปัตยกรรม LINE -> Cloudflare -> Business Central
+     Business Central เป็นไฟล์ทางการจากชุดไอคอน Dynamics 365 ใช้ตามต้นฉบับ ไม่หมุน ไม่ดัด
+     LINE และ Cloudflare เป็นไอคอนเส้นของเว็บเอง (Cloudflare ไม่อนุญาตให้ใช้โลโก้ · LINE เลือกไม่ใช้)
+     ใช้แค่ชื่อกำกับ */
+  .wq-arch {
+    display: grid; align-items: start; max-width: 920px; margin: 34px auto 4px;
+    grid-template-columns: 170px minmax(60px, 1fr) 170px minmax(60px, 1fr) 170px;
+  }
+  .wq-app-node { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+  .wq-app-icon { width: 88px; height: 88px; margin: 0 0 14px; }
+  .wq-app-tile {
+    display: grid; place-items: center; border-radius: 20px;
+    background: #fff; border: 1px solid var(--ui-line); box-shadow: 0 10px 24px -14px rgba(1,47,42,.45);
+  }
+  .wq-app-tile .wq-ic { width: 56px; height: 56px; color: var(--brand-teal); stroke-width: 1.5; }
+  .wq-app-name { font-size: 1.05rem; font-weight: 700; line-height: 1.35; }
+  .wq-app-role {
+    margin-top: 2px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .82rem; color: var(--ui-muted);
+  }
+  /* สองเส้นต่อช่วง: บน = สินค้า (burgundy) ไหลกลับไปหาลูกค้า (Item Sync)
+                    ล่าง = คำขอใบเสนอราคา (jade) ไหลไปหา Business Central (Quote Fetch)
+     เส้นยื่นเข้าคอลัมน์ไอคอนให้ยาวขึ้น แต่หยุดห่างขอบไอคอน ~20px · อยู่นิ่ง ไม่มีแอนิเมชัน
+     คู่เส้นสูง 28px (2+24+2) จัดกึ่งกลางที่แกนไอคอน (88/2 = 44) → เริ่มที่ 30px */
+  .wq-link { display: flex; flex-direction: column; gap: 24px; margin: 30px -18px 0 -20px; }
+  .wq-flow { position: relative; height: 2px; border-radius: 2px; }
+  .wq-flow::after {
+    content: ""; position: absolute; top: 50%; width: 10px; height: 10px; margin-top: -6px;
+    border-top: 2px solid currentColor; border-right: 2px solid currentColor; border-radius: 0 2px 0 0;
+  }
+  .wq-fwd { color: var(--brand-jade); background: var(--brand-jade); }
+  .wq-fwd::after { right: 1px; transform: rotate(45deg); }
+  .wq-back { color: var(--brand-burgundy); background: var(--brand-burgundy); }
+  .wq-back::after { left: 1px; transform: rotate(-135deg); }
+  .wq-tag {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; font-size: .8rem; font-weight: 600; line-height: 1.2;
+  }
+  .wq-back .wq-tag { bottom: 8px; }
+  .wq-fwd .wq-tag { top: 8px; color: var(--brand-teal); }
+  /* จอแคบ: ป้ายบนเส้นไม่พอที่ — ย้ายมาเป็นคำอธิบายใต้แถวแทน */
+  .wq-legend {
+    display: none; grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; gap: 6px 18px;
+    margin: 18px 0 0; font-size: .8rem; font-weight: 600; color: var(--ui-muted);
+  }
+  .wq-legend > span { display: inline-flex; align-items: center; gap: 8px; }
+  .wq-legend .wq-flow { width: 24px; }
+  .wq-legend .wq-flow::after { width: 7px; height: 7px; margin-top: -4.5px; }
+  .wq-sr {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; 
+  }
+  .wq {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+    margin-top: 30px;
+  }
+
+  .wq-stage { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
+  .wq-pick { padding: 20px 24px 22px; min-width: 0; }
+  /* สองฝั่งต้องแยกกันออกด้วยตา: ซ้าย = ลูกค้า พื้นขาว · ขวา = ระบบ พื้น teal ทึบ
+     ใบเสนอราคาเป็นกระดาษขาววางบนพื้นเข้ม — สีตัวหนังสือของฝั่งขวาอยู่ในบล็อก "ฝั่งระบบ" ด้านล่าง */
+  .wq-out { padding: 20px 24px 22px; min-width: 0; background: var(--brand-teal); }
+  .wq-step {
+    display: flex; align-items: baseline; gap: 9px; margin: 0 0 6px;
+    font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; 
+  }
+  .wq-step b {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .8rem; font-weight: 700; color: var(--brand-jade);
+    font-variant-numeric: tabular-nums;
+  }
+  .wq-hint { margin: 0 0 12px; font-size: .84rem; color: var(--ui-muted); }
+
+  .wq-items { margin: 0 0 22px; }
+  .wq-grp {
+    margin: 16px 0 6px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ui-muted);
+  }
+  .wq-grp:first-child { margin-top: 0; }
+  .wq-item:has(+ .wq-grp) { border-bottom: 1px solid var(--ui-line); }
+  .wq-item {
+    display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 13px; align-items: center;
+    padding: 11px 8px 11px 12px; border-top: 1px solid var(--ui-line);
+    transition: background .16s ease;
+  }
+  .wq-item:last-child { border-bottom: 1px solid var(--ui-line); }
+  .wq-item.on { box-shadow: inset 3px 0 0 var(--brand-jade); }
+  .wq-item .wq-ic { width: 26px; height: 26px; color: var(--brand-mint); }
+  .wq-item.on .wq-ic { color: var(--brand-jade); }
+  .wq-name { min-width: 0; }
+  .wq-name b { display: block; font-size: .95rem; font-weight: 600; line-height: 1.4; }
+  .wq-name span {
+    display: block; font-size: .78rem; color: var(--ui-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .wq-name code {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .78rem; font-weight: 700; letter-spacing: .08em; color: var(--brand-teal);
+  }
+  .wq-qty {
+    display: inline-flex; align-items: center;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn); background: #fff;
+  }
+  .wq-qty button {
+    width: 36px; height: 36px; display: grid; place-items: center;
+    font: inherit; font-size: 1.1rem; font-weight: 700; line-height: 1;
+    color: var(--brand-teal); background: transparent; border: 0; cursor: pointer;
+    transition: background .125s ease, color .125s ease;
+  }
+  .wq-qty button:hover:not(:disabled) { background: var(--bg-soft); }
+  .wq-qty button:disabled { color: var(--brand-mist); cursor: default; }
+  .wq-qty output {
+    min-width: 30px; text-align: center; font-size: .98rem; font-weight: 700;
+    color: var(--ui-ink); font-variant-numeric: tabular-nums;
+  }
+
+  .wq-who { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; }
+  .wq-who button {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .88rem; font-weight: 500; color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
+    padding: 10px 15px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease, color .125s ease;
+  }
+  .wq-who button:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
+  .wq-who button[aria-pressed="true"] { color: #fff; background: var(--brand-teal); border-color: var(--brand-teal); }
+  .wq-send {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-burgundy);
+    border: 1px solid var(--brand-burgundy); border-radius: var(--ui-radius-btn);
+    padding: 0 22px; min-height: 46px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .wq-send:hover:not(:disabled) { background: var(--brand-burgundy-dark); border-color: var(--brand-burgundy-dark); }
+  .wq-send:disabled { background: var(--brand-mist); border-color: var(--brand-mist); cursor: default; }
+  .wq-send .wq-ic { width: 17px; height: 17px; }
+  .wq-pdpa { margin: 10px 0 0; font-size: .78rem; line-height: 1.55; color: var(--ui-muted); }
+
+  /* ท่อสามโหนด — จุดสว่างไล่ทีละขั้นหลังกดส่ง เส้นต่อระหว่างโหนดคือ ::before */
+  .wq-pipe { margin: 0 0 18px; }
+  .wq-node { position: relative; display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; padding-bottom: 15px; }
+  .wq-node:last-child { padding-bottom: 0; }
+  .wq-node:not(:last-child)::before {
+    content: ""; position: absolute; left: 9px; top: 19px; bottom: 3px; width: 2px;
+    background: var(--brand-pale); transition: background .3s ease;
+  }
+  .wq-node.on:not(:last-child)::before { background: var(--brand-jade); }
+  .wq-dot {
+    width: 14px; height: 14px; margin-top: 4px; border-radius: 50%;
+    border: 2px solid var(--brand-mist); background: #fff;
+    transition: border-color .3s ease, background .3s ease, transform .3s ease;
+  }
+  .wq-node.on .wq-dot { border-color: var(--brand-jade); background: var(--brand-jade); transform: scale(1.14); }
+  .wq-txt { min-width: 0; }
+  .wq-txt b { display: block; font-size: .92rem; font-weight: 600; color: var(--ui-muted); transition: color .3s ease; }
+  .wq-node.on .wq-txt b { color: var(--brand-teal); }
+  .wq-txt > span { display: block; font-size: .84rem; line-height: 1.55; color: var(--ui-muted); min-height: 1.3em; }
+
+  .wq-doc {
+    position: relative; overflow: hidden;
+    background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card);
+    padding: 15px 17px 16px;
+  }
+  .wq-doc.in { animation: wqDoc .4s cubic-bezier(.2,.75,.2,1) both; }
+  @keyframes wqDoc { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+  .wq-doc-head {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 9px; margin-bottom: 11px; border-bottom: 2px solid var(--brand-pale);
+  }
+  .wq-doc-head b { font-size: 1rem; font-weight: 700; color: var(--ui-ink); }
+  .wq-doc-head span span { display: block; font-size: .78rem; font-weight: 500; letter-spacing: normal; color: var(--ui-muted); }
+  .wq-doc-no {
+    text-align: right; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .88rem; font-weight: 700; color: var(--brand-teal);
+    letter-spacing: .06em; font-variant-numeric: tabular-nums;
+  }
+  .wq-doc-cust { margin: 0 0 11px; font-size: .86rem; line-height: 1.5; color: var(--ui-muted); }
+  .wq-doc-cust b { color: var(--ui-ink); font-weight: 600; }
+  .wq-line {
+    display: grid; grid-template-columns: 62px minmax(0, 1fr) 42px 92px; gap: 10px;
+    padding: 7px 0; border-top: 1px solid var(--ui-line);
+    font-size: .85rem; font-variant-numeric: tabular-nums;
+  }
+  .wq-line code { white-space: nowrap; font-weight: 700; color: var(--brand-teal); letter-spacing: .05em; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .wq-line i { font-style: normal; color: var(--ui-muted); text-align: right; }
+  .wq-line em { font-style: normal; text-align: right; }
+  .wq-sum {
+    display: grid; grid-template-columns: minmax(0, 1fr) 100px; gap: 5px 12px;
+    margin: 11px 0 0; padding-top: 10px; border-top: 1px solid var(--ui-line);
+    font-size: .85rem; font-variant-numeric: tabular-nums;
+  }
+  .wq-sum dt { color: var(--ui-muted); }
+  .wq-sum dd { margin: 0; text-align: right; }
+  .wq-sum .tot { padding-top: 7px; border-top: 1px solid var(--brand-pale); font-weight: 700; color: var(--brand-teal); }
+  .wq-sum dt.tot { color: var(--ui-ink); }
+  .wq-baht { margin: 9px 0 0; font-size: .8rem; color: var(--ui-muted); }
+  .wq-empty {
+    display: flex; flex-direction: column; align-items: center; gap: 9px;
+    padding: 52px 16px; text-align: center; color: var(--ui-muted); font-size: .92rem;
+    background: #fff; border: 1px dashed var(--brand-pale); border-radius: var(--ui-radius-card);
+  }
+  .wq-empty .wq-ic { width: 26px; height: 26px; color: var(--brand-mist); }
+
+  /* ── ฝั่งระบบบนพื้น teal: ข้อความสว่าง (#BFD3D0 = 6.5:1, ขาว = 10:1) จุดและเส้นสี mint ── */
+  .wq-out .wq-node:not(:last-child)::before { background: rgba(255,255,255,.2); }
+  .wq-out .wq-node.on:not(:last-child)::before { background: #7CCBC4; }
+  .wq-out .wq-dot { border-color: rgba(255,255,255,.45); background: transparent; }
+  /* จุดของ LINE กับ Cloudflare ใช้สีแบรนด์ของเจ้าของบริการ (อ้างถึงเขาเหมือนโลโก้) ส่วน BC คงมิ้นต์
+     บนพื้น teal: #06C755 ได้ 4.52:1, #F38020 ได้ 3.85:1 ผ่านเกณฑ์ 3:1 ของ graphic
+     ⚠ class wq-node-line/-cf ต่อสตริงใน node() ของสคริปต์ ('wq-node-' + key) — grep หา class เต็มไม่เจอ แต่ไม่ใช่โค้ดตาย ห้ามตัด */
+  .wq-out .wq-node-line { --node: #06C755; }
+  .wq-out .wq-node-cf { --node: #F38020; }
+  .wq-out .wq-node.on .wq-dot { border-color: var(--node, #7CCBC4); background: var(--node, #7CCBC4); }
+  .wq-out .wq-txt b { color: rgba(255,255,255,.75); }
+  .wq-out .wq-node.on .wq-txt b { color: #fff; }
+  .wq-out .wq-txt > span { color: #BFD3D0; }
+  .wq-out .wq-empty { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.32); color: #BFD3D0; }
+  .wq-out .wq-empty .wq-ic { color: rgba(255,255,255,.55); }
+  .wq-doc { color: var(--ui-ink); box-shadow: 0 16px 32px -18px rgba(0,0,0,.55); border-color: transparent; }
+
+  /* แถวหลักฐาน: ภาพจากระบบจริง ไม่ใช่เดโม — ปิดท้ายการ์ดให้เห็นว่าที่เล่นอยู่มีของจริงรองรับ */
+  .wq-proof { padding: 22px 24px 18px; background: var(--bg-soft); border-top: 1px solid var(--ui-line); }
+  .wq-proof-head {
+    display: flex; align-items: flex-start; gap: 8px; max-width: 920px; margin: 0 auto 20px;
+    font-size: .95rem; font-weight: 600; 
+  }
+  .wq-proof-head .wq-ic { width: 17px; height: 17px; margin-top: .22em; color: var(--brand-jade); stroke-width: 2.4; }
+  /* 46fr : 100fr = ความกว้างที่ทำให้ภาพมือถือ (828x1792) กับใบเสนอราคา (1522x1492) สูงเท่ากันพอดี
+     รวมกรอบ 6px และขอบกระดาษ 9px แล้ว */
+  .wq-proof-row {
+    display: grid; align-items: start; gap: 0 20px; max-width: 920px; margin: 0 auto;
+    grid-template-columns: minmax(0, 46fr) 36px minmax(0, 100fr);
+  }
+  /* กฎส่วนกลางใส่เงา+ขอบมนให้ figure ทุกอัน — ที่นี่เงาอยู่ที่กรอบมือถือ/กระดาษแทน */
+  .wq-fig { min-width: 0; box-shadow: none; border-radius: 0; }
+  .wq-fig figcaption {
+    display: flex; align-items: baseline; gap: 9px; margin: 0 0 12px;
+    font-size: .92rem; font-weight: 600; line-height: 1.45; 
+  }
+  .wq-fig figcaption b {
+    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-size: .8rem; font-weight: 700; color: var(--brand-jade); font-variant-numeric: tabular-nums;
+  }
+  .wq-fig a { display: block; transition: transform .2s ease; }
+  .wq-fig a:hover { transform: translateY(-2px); }
+  .wq-fig img { display: block; height: auto; }
+  /* กรอบโทรศัพท์บาง ๆ พอให้อ่านออกว่าเป็นหน้าจอมือถือ ไม่ต้องพึ่งภาพ mockup */
+  .wq-phone { padding: 6px; border-radius: 30px; background: #10241F; box-shadow: 0 14px 30px -16px rgba(1,47,42,.55); }
+  .wq-phone img { border-radius: 24px; }
+  .wq-paper {
+    padding: 8px; background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: 0 14px 30px -18px rgba(1,47,42,.4);
+  }
+  .wq-arrow {
+    align-self: center; width: 36px; height: 36px; display: grid; place-items: center;
+    border-radius: 50%; background: #fff; border: 1px solid var(--ui-line); color: var(--brand-jade);
+  }
+  .wq-arrow .wq-ic { width: 17px; height: 17px; }
+  .wq-proof-zoom { max-width: 920px; margin: 14px auto 0; text-align: right; font-size: .8rem; color: var(--ui-muted); }
+
+  .wq-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
+  }
+  .wq-note a { color: #8E2C46; font-weight: 600; text-decoration: none; }
+  .wq-note a:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 900px) {
+    .wq-stage { grid-template-columns: 1fr; }
+    .wq-proof, .wq-pick, .wq-out { padding-left: 18px; padding-right: 18px; }
+    .wq-send { width: 100%; }
+  }
+  @media (max-width: 640px) {
+    .wq-proof-row { grid-template-columns: 1fr; gap: 14px; justify-items: center; }
+    .wq-fig { width: 100%; }
+    .wq-fig:first-child { max-width: 270px; }
+    .wq-arrow { transform: rotate(90deg); }
+    .wq-proof-zoom { text-align: center; }
+  }
+  @media (max-width: 640px) {
+    .wq-arch { grid-template-columns: minmax(0, 1fr) minmax(28px, 44px) minmax(0, 1fr) minmax(28px, 44px) minmax(0, 1fr); margin-top: 24px; }
+    .wq-app-icon { width: 56px; height: 56px; margin-bottom: 10px; }
+    .wq-app-tile { border-radius: 13px; }
+    .wq-app-tile img { width: 38px; height: 38px; }
+    .wq-app-tile .wq-ic { width: 36px; height: 36px; }
+    /* จอแคบ: เส้นยื่นเข้าคอลัมน์ไอคอนแค่ 3px ยังเหลือระยะห่างขอบไอคอน ~10px
+       คู่เส้นสูง 18px (2+14+2) กึ่งกลางที่ 28px (56/2) → เริ่มที่ 19px */
+    .wq-link { gap: 14px; margin: 19px -3px 0 -3px; }
+    .wq-flow::after { width: 7px; height: 7px; margin-top: -4.5px; }
+    .wq-tag { display: none; }
+    .wq-legend { display: flex; }
+    .wq-app-name { font-size: .88rem; }
+    .wq-app-role { font-size: .72rem; }
+  }
+  @media (max-width: 520px) {
+    .wq-item { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding-left: 9px; padding-right: 2px; }
+    .wq-item .wq-ic { width: 22px; height: 22px; }
+    .wq-qty button { width: 32px; height: 32px; }
+    .wq-qty output { min-width: 24px; }
+    .wq-line { grid-template-columns: 58px minmax(0, 1fr) 20px 82px; gap: 7px; font-size: .8rem; }
+    .wq-line code { letter-spacing: .02em; }
+    .wq-doc-no { text-align: left; }
+    .wq-sum { grid-template-columns: minmax(0, 1fr) 86px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wq-doc.in { animation: none; }
+    .wq-dot, .wq-txt b, .wq-node::before, .wq-qty button, .wq-who button, .wq-send, .wq-item, .wq-fig a { transition: none; }
+    .wq-fig a:hover { transform: none; }
+    .wq-node.on .wq-dot { transform: none; }
+  }
