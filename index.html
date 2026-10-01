@@ -3172,21 +3172,16 @@
     font: 400 13px/1.4 "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", "Anuphan", sans-serif;
     font-variant-numeric: tabular-nums;
   }
-  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ · ไอคอนกลาง (ภาพประกอบ) · open in new window + Focus mode */
-  /* ไอคอนกลางอยู่กลางหัวเพจแบบ BC: คอลัมน์ 4 เป็นที่ว่างถ่วงกับชื่อรายการ */
-  .ct-hdr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr) auto; align-items: center; gap: 0 18px; padding: 12px 14px 10px 12px; }
-  .ct-hr { grid-column: 5; }
+  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ · Focus mode (ปุ่มเดียวที่กดได้) */
+  .ct-hdr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0 18px; padding: 12px 14px 10px 12px; }
   .ct-back { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--bc-item); background: rgba(15,108,189,.08); }
   .ct-back .ct-ic { width: 18px; height: 18px; }
   .ct-crumb, .ct-page { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .ct-crumb { font-size: 12px; color: var(--bc-sub); }
   .ct-page { margin-top: 2px; font-size: 26px; font-weight: 300; line-height: 1.25; }
-  .ct-hico, .ct-hr { display: flex; align-items: center; color: var(--bc-blue); }
-  .ct-hico { gap: 26px; }
-  .ct-hr { gap: 4px; }
-  .ct-hico .ct-ic, .ct-hr .ct-ic { width: 17px; height: 17px; stroke-width: 1.4; }
-  .ct-pop, .ct-focus { display: grid; place-items: center; width: 32px; height: 32px; }
-  .ct-focus { padding: 0; color: inherit; background: none; border: 0; border-radius: var(--ui-radius-btn); cursor: pointer; }
+  .ct-hr { display: flex; align-items: center; color: var(--bc-blue); }
+  .ct-hr .ct-ic { width: 17px; height: 17px; stroke-width: 1.4; }
+  .ct-focus { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; color: inherit; background: none; border: 0; border-radius: var(--ui-radius-btn); cursor: pointer; }
   .ct-focus:hover { background: var(--bc-field); }
 
   .ct-acts { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 6px 12px; border-top: 1px solid var(--bc-rule); border-bottom: 1px solid var(--bc-rule); }
@@ -3317,9 +3312,6 @@
     .ct-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .ct-narr { margin-left: 18px; margin-right: 18px; }
     .ct-bc { margin: 0 18px 18px; }
-    .ct-hico { display: none; }
-    .ct-hdr { grid-template-columns: auto minmax(0, 1fr) auto; }
-    .ct-hr { grid-column: 3; }
   }
   @media (max-width: 600px) {
     .ct-head { margin-bottom: 14px; }
@@ -3333,7 +3325,6 @@
     .ct-bc { margin: 0 12px 12px; }
     .ct-hdr { gap: 0 10px; padding: 10px 8px 8px 10px; }
     .ct-page { font-size: 21px; }
-    .ct-pop { display: none; }
     .ct-zr { width: 64px; }
     .ct-dlg { inset: 0; border-radius: 0; }
   }
@@ -4209,11 +4200,6 @@
       <symbol id="cti-full" viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M13.5 2.5 9 7M6.5 13.5h-4v-4M2.5 13.5 7 9"/></symbol>
       <symbol id="cti-exit" viewBox="0 0 16 16"><path d="M13.5 2.5 9 7M9 3.5V7h3.5M2.5 13.5 7 9M7 12.5V9H3.5"/></symbol>
       <symbol id="cti-back" viewBox="0 0 16 16"><path d="M13 8H3.5M7.5 4 3.5 8l4 4"/></symbol>
-      <symbol id="cti-edit" viewBox="0 0 16 16"><path d="M11 2.5 13.5 5 6 12.5H3.5V10z"/></symbol>
-      <symbol id="cti-share" viewBox="0 0 16 16"><path d="M6 9.5c1-3 3.5-4.5 7.5-4.5M10.5 2.5l3 2.5-3 2.5M12.5 10v3.5h-10v-9H6"/></symbol>
-      <symbol id="cti-new" viewBox="0 0 16 16"><path d="M8 2.5v11M2.5 8h11"/></symbol>
-      <symbol id="cti-del" viewBox="0 0 16 16"><path d="M2.5 4h11M6 4V2.5h4V4M4 4l.7 9.5h6.6L12 4M6.8 6.5v4.5M9.2 6.5v4.5"/></symbol>
-      <symbol id="cti-pop" viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M13.5 2.5 8 8M11.5 9.5v4h-9v-9h4"/></symbol>
       <symbol id="cti-export" viewBox="0 0 16 16"><path d="M9 2.5H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6.5zM9 2.5v4h4M8 8.5v3.5M6.5 10.5 8 12l1.5-1.5"/></symbol>
       <symbol id="cti-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
       <symbol id="cti-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
@@ -4234,16 +4220,15 @@
       </div>
       <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
       <div class="ct-bc" role="group" aria-label="Cost Traceability">
-        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับ ไอคอนกลาง และ open in new window เป็นภาพประกอบ (aria-hidden)
-             ปุ่มที่กดได้จริงคือ Focus mode มุมขวา = เต็มจอ -->
+        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ปุ่มเดียวที่กดได้คือ Focus mode มุมขวา = เต็มจอ
+             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ และ open in new window เอาออกแล้ว เพราะกดไม่ได้จริง -->
         <div class="ct-hdr">
           <span class="ct-back" aria-hidden="true"><svg class="ct-ic"><use href="#cti-back"/></svg></span>
           <div class="ct-hdr-t">
             <p class="ct-crumb">Cost Traceability | Work Date: 30/09/2026</p>
             <p class="ct-page">Sale SS-0912</p>
           </div>
-          <span class="ct-hico" aria-hidden="true"><svg class="ct-ic"><use href="#cti-edit"/></svg><svg class="ct-ic"><use href="#cti-share"/></svg><svg class="ct-ic"><use href="#cti-new"/></svg><svg class="ct-ic"><use href="#cti-del"/></svg></span>
-          <span class="ct-hr"><span class="ct-pop" aria-hidden="true"><svg class="ct-ic"><use href="#cti-pop"/></svg></span><button class="ct-focus" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button></span>
+          <span class="ct-hr"><button class="ct-focus" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button></span>
         </div>
         <div class="ct-acts">
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
