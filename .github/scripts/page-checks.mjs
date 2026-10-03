@@ -12,6 +12,7 @@
 //   7. homepage length on a 390px phone over budget (the demos un-collapsed → 25,000px again)
 //   8. articles without the LINE/phone CTA (except those in NO_CTA) or with fewer than two related links
 //   9. print (A4) longer than the page budget
+//  10. an article in articles/ that #articles on the homepage doesn't link to
 //
 // Run locally:  npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs
 import http from 'node:http';
@@ -63,6 +64,14 @@ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const i18nBlock = (html.match(/const I18N = \[([\s\S]*?)\n  \];/) || [])[1] || '';
 const i18nSelectors = [...i18nBlock.matchAll(/^\s*\['((?:[^'\\]|\\.)*)'/gm)].map(m => m[1].replace(/\\'/g, "'"));
 if (!i18nSelectors.length) fail('index.html', 'could not find the I18N dictionary');
+
+// ---- 10: every article is linked from #articles (cost-traceability went live unlinked once, Oct 2026)
+{
+  const sec = (html.match(/<section id="articles"[\s\S]*?<\/section>/) || [''])[0];
+  const linked = new Set([...sec.matchAll(/href="articles\/([^"#?]+\.html)"/g)].map(m => m[1]));
+  const orphans = fs.readdirSync(path.join(ROOT, 'articles')).filter(f => f.endsWith('.html') && !linked.has(f));
+  if (orphans.length) fail('index.html #articles', `articles not linked from the homepage: ${orphans.join(', ')}`);
+}
 
 const thaiLeftInEn = () => {
   const out = []; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;

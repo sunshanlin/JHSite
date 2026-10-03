@@ -1290,8 +1290,10 @@
 
   /* ── บทความ: 3 กลุ่มตามคนอ่าน แต่ละบทความเป็นแถวในการ์ดขาว (ต.ค. 2026) ──
      ตัวหนังสือทุกบรรทัดใต้หัวข้อ section ยังอยู่ในการ์ดขาว Horizon Glow ข้างหลังจึงไม่กระทบ contrast
-     ≥981px วาง 3 กลุ่มเป็น 3 คอลัมน์ · จอเล็กเรียงลงมา มีปุ่มลัดไปแต่ละกลุ่ม (id ใช้ส่งลิงก์ใน LINE ได้)
-     เพิ่มบทความใหม่ = เพิ่ม <li> ในกลุ่มที่ตรงกับคนอ่าน ไม่ต้องแตะ CSS */
+     ≥981px วางกลุ่มเป็นคอลัมน์ (auto-fit: 3 กลุ่ม = 3 คอลัมน์ · 4 กลุ่ม = 4) · จอเล็กเรียงลงมา มีปุ่มลัดไปแต่ละกลุ่ม (id ใช้ส่งลิงก์ใน LINE ได้)
+     เพิ่มบทความใหม่ = เพิ่ม <li> ในกลุ่มที่ตรงกับคนอ่าน ไม่ต้องแตะ CSS/JS — เกิน data-cap (4) แถว สคริปต์พับที่เหลือไว้หลังปุ่ม "ดูอีก N บทความ" ให้เอง
+     กลุ่มใหม่ = div.article-group ที่มี id ของตัวเอง + ปุ่มลัด 1 อัน · ไม่ใส่สีก็ได้ แถบหัวการ์ดใช้สีตั้งต้นด้านล่าง
+     CI (page-checks) ตรวจว่าทุกไฟล์ใน articles/ มีลิงก์จากที่นี่ */
   .article-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: -20px 0 22px; }
   .article-jump a {
     padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
@@ -1301,7 +1303,7 @@
   .article-groups { display: grid; gap: 16px; }
   @media (min-width: 981px) {
     .article-jump { display: none; }
-    .article-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .article-groups { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
   }
   #articles .article-group { position: relative; overflow: hidden; padding: 26px 24px 8px; }
   #articles .article-group:hover { transform: none; box-shadow: none; }
@@ -1311,6 +1313,7 @@
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
     background: var(--topic); opacity: 1;
   }
+  .article-group { --topic: linear-gradient(90deg, #0D5257, #35AF9E); }
   #articles-erp  { --topic: linear-gradient(90deg, #1F4E79, #4A90C2); }
   #articles-tax  { --topic: linear-gradient(90deg, #3B3F8C, #6E74C9); }
   #articles-cost { --topic: linear-gradient(90deg, #4D5A1E, #8FA33B); }
@@ -1327,6 +1330,16 @@
   }
   .row-title { font-weight: 500; line-height: 1.5; color: var(--ui-ink); transition: color .18s ease; }
   .article-row:hover .row-title { color: #8E2C46; }
+  /* ปุ่มพับแถวที่เกิน data-cap — สคริปต์สร้างเอง ไม่มี JS ก็เห็นครบทุกแถว · ปุ่มรองแบบเดียวกับ .demo-toggle ไม่ใช่ burgundy */
+  .article-more {
+    display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; margin: 0 0 6px; padding: 0;
+    border: 0; border-top: 1px solid var(--line); background: none; color: var(--ui-primary); cursor: pointer;
+    font: 600 .95rem/1.3 "Plus Jakarta Sans", "Anuphan", sans-serif;
+  }
+  .article-more::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+  .article-more[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
+  .article-more:hover { color: #8E2C46; }
+  .article-more:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
 
   .steps .step { min-height: 0; }
 
@@ -4381,7 +4394,7 @@
       <a href="#articles-tax">ภาษีไทยบน BC</a>
       <a href="#articles-cost">ต้นทุนและสต็อก</a>
     </nav>
-    <div class="article-groups">
+    <div class="article-groups" data-cap="4">
       <div class="card reveal article-group" id="articles-erp">
         <h3>กำลังเลือก ERP</h3>
         <ul class="article-list">
@@ -4865,6 +4878,29 @@
   });
   document.querySelectorAll('.feature-tab').forEach(t => t.addEventListener('click', () => trackSeoEvent('feature_tab', { tab: t.id.replace('feature-tab-', '') })));
   document.querySelectorAll('#faq details').forEach((d, i) => d.addEventListener('toggle', () => { if (d.open) trackSeoEvent('faq_open', { question: i + 1 }); }));
+  // บทความ: แต่ละกลุ่มโชว์ไม่เกิน data-cap แถว ที่เหลือพับไว้หลังปุ่ม ดูอีก N บทความ
+  // ไม่มี JS ก็เห็นครบทุกแถว · เพิ่มบทความ = เพิ่ม <li> อย่างเดียว ปุ่มโผล่เองเมื่อเกิน
+  const articleCap = Number(document.querySelector('.article-groups')?.dataset.cap) || 4;
+  document.querySelectorAll('.article-group').forEach(group => {
+    const list = group.querySelector('.article-list');
+    const extra = list ? [...list.children].slice(articleCap) : [];
+    if (!extra.length) return;
+    if (!list.id) list.id = group.id + '-list';
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'article-more'; btn.setAttribute('aria-controls', list.id);
+    const set = open => {
+      extra.forEach(li => { li.hidden = !open; });
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'ย่อรายการ' : `ดูอีก ${extra.length} บทความ`;
+    };
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      set(open);
+      if (open) trackSeoEvent('article_more', { group: group.id });
+    });
+    set(false);
+    group.append(btn);
+  });
   // เดโม: ยิงครั้งเดียวต่อเดโมต่อการโหลดหน้า ตอนที่คนเริ่มกด/พิมพ์ครั้งแรก
   ['billing-flow', 'vat-service', 'cost-trace'].forEach(id => {
     const sec = document.getElementById(id); if (!sec) return;
