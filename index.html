@@ -3170,8 +3170,10 @@
      สีทั้งหมดประกาศบนตัวหน้าต่าง (แบบ --bfj-* ของ #billing-flow) ไม่ขึ้น :root และไม่หลุดออกนอกหน้าต่างนี้ */
   .ct-bc {
     --bc-text: #242424; --bc-item: #424242; --bc-sub: #616161; --bc-rule: #E0E0E0;
-    --bc-canvas: #F3F2F1; --bc-field: #EBEBEB; --bc-link: #8A8886; --bc-cap: #EEF6F6; --bc-cap-ink: #0B6A6A;
-    --bc-pool: #F5EFFA; --bc-pool-ink: #5C2E91; --bc-formula: #605E5C;
+    --bc-canvas: #F3F2F1; --bc-field: #EBEBEB; --bc-link: #8A8886; --bc-formula: #605E5C;
+    /* บล็อกในกล่องแบบแอปจริง: Production Order สีเขียวอมฟ้า · Average Cost Pool สีม่วง (ป้ายบนเส้นของต้นทางใช้ชุดเดียวกัน) */
+    --bc-ord: #E9F4F4; --bc-ord-ink: #0B6A6A; --bc-ord-edge: #6FA8A8;
+    --bc-avg: #F5EFFA; --bc-avg-ink: #5C2E91; --bc-avg-edge: #A58BC9;
     --bc-blue: #0F6CBD; --bc-blue-soft: #EBF3FC; --bc-ok: #0E700E; --bc-ok-bg: #F1FAF1;
     --bc-depth: 0 1.6px 3.6px rgba(0,0,0,.13), 0 .3px .9px rgba(0,0,0,.11);
     margin: 0 24px 24px; overflow: hidden;
@@ -3240,11 +3242,7 @@
      กล่องตั้งต้นมีแถบน้ำเงินซ้ายอยู่แล้ว ไม่ใส่วงซ้ำ (หน้าจริงของ BC ไม่มีวง) */
   .ct-card.sel { box-shadow: inset 0 0 0 2px var(--bc-blue), var(--bc-depth); }
   .ct-card.root.sel { box-shadow: var(--bc-depth); }
-  .ct-card.cap { background: var(--bc-cap); }
-  .ct-card.cap .ct-title { color: var(--bc-cap-ink); }
-  /* Average cost pool = พื้นม่วงอ่อนแบบแอปจริง · Opening value เป็นกล่องขาวธรรมดา */
-  .ct-card.pool { background: var(--bc-pool); }
-  .ct-card.pool .ct-title { color: var(--bc-pool-ink); }
+  /* ทุกกล่องพื้นขาวเหมือนกันแบบแอปจริง — สีแยกประเภทอยู่ที่บล็อก Production Order / Average Cost Pool ในกล่อง */
   .ct-open { display: block; width: 100%; padding: 0; text-align: left; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
   .ct-open:hover .ct-title { text-decoration: underline; text-underline-offset: 3px; }
   .ct-title, .ct-item, .ct-detail { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -3256,9 +3254,17 @@
   .ct-box { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin-top: 7px; padding-top: 5px; border-top: 1px solid var(--bc-rule); }
   .ct-ln { display: flex; gap: 8px; }
   .ct-ln > span:first-child { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--bc-sub); }
-  .ct-ord-cap { margin-bottom: 2px; font-weight: 600; color: var(--bc-sub); }
-  .ct-ln .ct-q { color: var(--bc-sub); white-space: nowrap; }
-  .ct-ln .ct-q b { color: var(--bc-text); }
+  /* ชื่อกล่องกับ Costing Method แถวเดียวกัน — ชื่อหดเป็น … ได้ ส่วน Method ไม่หด */
+  .ct-trow { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+  .ct-trow .ct-title { flex: 0 1 auto; min-width: 0; }
+  .ct-meth { flex: none; font-size: 11.5px; color: var(--bc-sub); }
+  .ct-blk { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin-top: 7px; padding: 5px 7px 6px; border-radius: var(--ui-radius-btn); }
+  .ct-blk.ord { background: var(--bc-ord); }
+  .ct-blk.avg { background: var(--bc-avg); }
+  .ct-blk-cap { font-weight: 600; }
+  .ct-blk.ord .ct-blk-cap { color: var(--bc-ord-ink); }
+  .ct-blk.avg .ct-blk-cap { color: var(--bc-avg-ink); }
+  .ct-blk .ct-detail { margin: 0 0 2px; }
   /* ค่าเฉลี่ยของ pool / Opening value บอกที่มาของ Unit Cost เป็นการหารด้วยตัวเลขของ BC เอง วางเหนือบรรทัดล่าง */
   .ct-avg { margin-top: 7px; color: var(--bc-formula); }
   .ct-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 7px; }
@@ -3278,6 +3284,8 @@
     padding: 0 10px; border-radius: 999px; background: #fff; border: 1px solid var(--bc-link);
     font-size: 12px; white-space: nowrap; transition: border-color .25s ease, color .25s ease;
   }
+  .ct-flow.tord { background: var(--bc-ord); border-color: var(--bc-ord-edge); color: var(--bc-ord-ink); }
+  .ct-flow.tavg { background: var(--bc-avg); border-color: var(--bc-avg-edge); color: var(--bc-avg-ink); }
   .ct-flow.on { border-color: var(--bc-blue); color: var(--bc-blue); font-weight: 600; }
 
 
@@ -3299,6 +3307,8 @@
   }
   .ct-tlink { min-height: 24px; padding: 3px 0; text-align: left; font: inherit; color: var(--bc-blue); background: none; border: 0; cursor: pointer; }
   .ct-tlink:hover { text-decoration: underline; text-underline-offset: 3px; }
+  /* Cost From ยาว — ตัดเป็น … แล้วดูเต็มที่ tooltip */
+  .ct-cf { display: block; max-width: 24em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
   @media (max-width: 900px) {
     .ct-top { padding: 18px; }
@@ -5628,30 +5638,29 @@
     const N = {
       s:   { t: 'Sale SS-0912', d: '24/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'RAYONG · Lot NGM-260915', m: 'FIFO', ln: [['Direct cost · SI-0907', -98403.92]], q: -1200, u: 'BOX', src: ['op'] },
       op:  { t: 'Output PCK-093', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'RAYONG · Lot NGM-260915', m: 'FIFO', ln: [['Direct cost · PCK-093', 157698.60], ['Indirect cost · PCK-093', 6307.94]], q: 2000, u: 'BOX', flow: '1,200 BOX', ord: [['Material Cost', 150498.60], ['Capacity Cost', 7200.00], ['Manufacturing Overhead', 6307.94]], src: ['cb', 'cx', 'cc', 'kp'] },
-      cb:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910', m: 'FIFO', ln: [['Direct cost · PCK-093', -142898.60]], q: -200000, src: ['od'] },
-      cx:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608', m: 'FIFO', ln: [['Direct cost · PCK-093', -4800.00]], q: -2000, src: ['px'] },
-      cc:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608', m: 'Average', ln: [['Direct cost · PCK-093', -2800.00]], q: -200, src: ['ap9'] },
-      kp:  { kind: 'cap', t: 'Work Center PCK-01', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'PCK-093 · Capacity Ledger Entry 540', m: '—', ln: [['Direct cost · PCK-093', 7200.00]], q: 16, u: 'HOURS' },
+      cb:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910', m: 'FIFO', ln: [['Direct cost · PCK-093', -142898.60]], q: -200000, share: 'Material Cost', src: ['od'] },
+      cx:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608', m: 'FIFO', ln: [['Direct cost · PCK-093', -4800.00]], q: -2000, share: 'Material Cost', src: ['px'] },
+      cc:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608', m: 'Average', ln: [['Direct cost · PCK-093', -2800.00]], q: -200, share: 'Material Cost', avg: { per: '01/09/26..30/09/26', q: 1200, amt: 16800.00 }, src: ['ov8', 'pc9'] },
+      kp:  { kind: 'cap', t: 'Work Center PCK-01', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'PCK-093 · Capacity Ledger Entry 540', m: '—', ln: [['Direct cost · PCK-093', 7200.00]], q: 16, u: 'HOURS', share: 'Capacity Cost' },
       od:  { t: 'Output DIP-091', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910', m: 'FIFO', ln: [['Direct cost · DIP-091', 134810.00], ['Indirect cost · DIP-091', 8088.60]], q: 200000, flow: '200,000 PCS', ord: [['Material Cost', 74810.00], ['Capacity Cost', 60000.00], ['Manufacturing Overhead', 8088.60]], src: ['cl1', 'cl2', 'cz', 'ca', 'kd'] },
       px:  { t: 'Purchase PR-0402', d: '28/08/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608', m: 'FIFO', ln: [['Direct cost · PI-0399', 24000.00]], q: 10000, flow: '2,000 PCS' },
-      ap9: { kind: 'pool', t: 'Average cost pool 01/09/26..30/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'All locations', m: 'Average', ov: [400, 5400.00], q: 1200, amt: 16800.00, flow: '-200 PCS', src: ['ov8', 'pc9'] },
-      ov8: { kind: 'open', t: 'Opening value 01/08/26..31/08/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'All locations', m: 'Average', q: 400, amt: 5400.00, flow: '400 PCS', src: ['ap8'] },
+      ov8: { kind: 'open', t: 'Opening value 01/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'From 01/08/26..31/08/26 · All locations', m: 'Average', q: 400, amt: 5400.00, flow: '400 PCS', src: ['pc'] },
       pc9: { t: 'Purchase PR-0436', d: '05/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2609', m: 'Average', ln: [['Direct cost · PI-0433', 14200.00]], q: 1000, flow: '1,000 PCS' },
-      ap8: { kind: 'pool', t: 'Average cost pool 01/08/26..31/08/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'All locations', m: 'Average', q: 400, amt: 5400.00, flow: '400 PCS', src: ['pc'] },
       pc:  { t: 'Purchase PR-0403', d: '28/08/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608', m: 'Average', ln: [['Direct cost · PI-0399', 13500.00]], q: 1000, flow: '1,000 PCS' },
-      cl1: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -45000.00]], q: -1000, u: 'KG', src: ['pn1'] },
-      cl2: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609', m: 'FIFO', ln: [['Direct cost · DIP-091', -25760.00]], q: -560, u: 'KG', src: ['pn2'] },
-      cz:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607', m: 'FIFO', ln: [['Direct cost · DIP-091', -1710.00]], q: -18, u: 'KG', src: ['pz'] },
-      ca:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -2340.00]], q: -9, u: 'KG', src: ['pa'] },
-      kd:  { kind: 'cap', t: 'Work Center DIP-L3', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'DIP-091 · Capacity Ledger Entry 512', m: '—', ln: [['Direct cost · DIP-091', 60000.00]], q: 40, u: 'HOURS' },
+      cl1: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -45000.00]], q: -1000, u: 'KG', share: 'Material Cost', src: ['pn1'] },
+      cl2: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609', m: 'FIFO', ln: [['Direct cost · DIP-091', -25760.00]], q: -560, u: 'KG', share: 'Material Cost', src: ['pn2'] },
+      cz:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607', m: 'FIFO', ln: [['Direct cost · DIP-091', -1710.00]], q: -18, u: 'KG', share: 'Material Cost', src: ['pz'] },
+      ca:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -2340.00]], q: -9, u: 'KG', share: 'Material Cost', src: ['pa'] },
+      kd:  { kind: 'cap', t: 'Work Center DIP-L3', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'DIP-091 · Capacity Ledger Entry 512', m: '—', ln: [['Direct cost · DIP-091', 60000.00]], q: 40, u: 'HOURS', share: 'Capacity Cost' },
       pn1: { t: 'Purchase PR-0388', d: '18/08/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608', m: 'FIFO', ln: [['Direct cost · PI-0388', 734400.00], ['Item charge FREIGHT · PI-0391', 45000.00], ['Item charge DUTY · PI-0392', 26000.00], ['Item charge CLEARANCE · PI-0392', 4600.00]], q: 18000, u: 'KG', flow: '1,000 KG' },
       pn2: { t: 'Purchase PR-0418', d: '03/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609', m: 'FIFO', ln: [['Direct cost · PI-0415', 756000.00], ['Item charge FREIGHT · PI-0421', 45000.00], ['Item charge DUTY · PI-0422', 23000.00], ['Item charge CLEARANCE · PI-0422', 4000.00]], q: 18000, u: 'KG', flow: '560 KG' },
       pz:  { t: 'Purchase PR-0301', d: '22/07/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607', m: 'FIFO', ln: [['Direct cost · PI-0301', 47500.00]], q: 500, u: 'KG', flow: '18 KG' },
       pa:  { t: 'Purchase PR-0377', d: '12/08/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608', m: 'FIFO', ln: [['Direct cost · PI-0377', 52000.00]], q: 200, u: 'KG', flow: '9 KG' }
     };
     const ROOT = 's', MAXD = 5;
-    // กล่องค่าเฉลี่ย (pool / Opening value): ไม่มีวันที่ ไม่มีชิป Adjusted และมีบรรทัดหารที่มาของ Unit Cost
-    const AVG = { pool: true, open: true };
+    // Opening value: ไม่มีวันที่ ไม่มีชิป Adjusted และมีบรรทัดหารที่มาของ Unit Cost
+    // Production Order (ord) กับ Average Cost Pool (avg) ไม่ใช่กล่อง แต่เป็นบล็อกในกล่องของ Output / รายการขาออกที่ใช้ค่าเฉลี่ย
+    const isOpen = (n) => n.kind === 'open';
     (function link(id, depth, parent) {
       const n = N[id];
       n.id = id; n.depth = depth; n.parent = parent; n.src = n.src || []; n.u = n.u || 'PCS'; n.ln = n.ln || [];
@@ -5668,10 +5677,10 @@
         tx: { th: 'ใบสั่งผลิต PCK-093 บรรจุถุงมือได้ 2,000 กล่อง ต้นทุนรวม 164,006.54 บาท ตกกล่องละ 82.00 บาท ในยอดนี้มี Indirect cost 6,307.94 บาทที่ระบบลงไว้บน Output ด้วย',
               en: 'Production order PCK-093 packs 2,000 boxes for 164,006.54 baht in total, 82.00 a box. That total includes 6,307.94 of indirect cost, which Business Central posts on the Output.' } },
       { focus: 'cb', ic: 'line', open: ['s', 'op'], nm: { th: 'เบิกเข้าไลน์บรรจุ', en: 'Packing-line issues' },
-        tx: { th: 'ใบสั่งผลิต PCK-093 เบิกถุงมือ bulk 200,000 ชิ้นจาก Lot DL3-260910 กล่อง dispenser 2,000 ใบ กับลังอีก 200 ใบ แล้วใช้ Capacity ของไลน์ตรวจและบรรจุไป 16 ชั่วโมง',
-              en: 'Production order PCK-093 consumes 200,000 bulk gloves from lot DL3-260910, 2,000 dispenser boxes and 200 cartons, then uses 16 hours of inspection-and-packing line capacity.' } },
-      // กิ่งข้างที่ระดับเดียวกับไลน์จุ่ม: ลังใช้ Average ต้นทุนมาจาก pool ของงวด ไม่ใช่ใบรับใบเดียว
-      { focus: 'ap9', ic: 'pool', open: ['s', 'op', 'cc', 'ap9'], nm: { th: 'ต้นทุนเฉลี่ยของลัง', en: 'Carton average cost' },
+        tx: { th: 'ใบสั่งผลิต PCK-093 เบิกถุงมือ bulk 200,000 ชิ้นจาก Lot DL3-260910 กล่อง dispenser 2,000 ใบ กับลังอีก 200 ใบ แล้วใช้ Capacity ของไลน์ตรวจและบรรจุไป 16 ชั่วโมง ป้ายบนเส้นบอกว่าต้นทุนของแต่ละรายการเข้าไปอยู่บรรทัดไหนของ Actual Cost บนกล่อง Output',
+              en: 'Production order PCK-093 consumes 200,000 bulk gloves from lot DL3-260910, 2,000 dispenser boxes and 200 cartons, then uses 16 hours of inspection-and-packing line capacity. Each link names the line of Actual Cost on the Output box that its cost goes into.' } },
+      // กิ่งข้าง: ลังใช้ Average ต้นทุนมาจาก pool ของงวด (บล็อกในกล่อง Consumption ของลัง) ไม่ใช่ใบรับใบเดียว
+      { focus: 'cc', ic: 'pool', open: ['s', 'op', 'cc'], nm: { th: 'ต้นทุนเฉลี่ยของลัง', en: 'Carton average cost' },
         tx: { th: 'ลังใช้ Costing Method แบบ Average ต้นทุนจึงไม่ได้ผูกกับใบรับใบใดใบหนึ่ง แต่มาจาก Average Cost Pool ของเดือนกันยายน ที่รวมยอดยกมา 400 ใบกับของที่รับเข้าในเดือนอีก 1,000 ใบ เฉลี่ยแล้วใบละ 14.00 บาท ตรงกับหน้า Average Cost Calc. Overview ของ Business Central อยากดูที่มาของยอดยกมา กด Previous period ย้อนไปเดือนสิงหาคมได้เลย',
               en: "Cartons use the Average costing method, so their cost is not tied to any one receipt. It comes from the September Average Cost Pool: 400 cartons carried over plus 1,000 received during the month, averaging 14.00 baht each, exactly as Business Central's Average Cost Calc. Overview shows. To see where the carried-over value came from, press Previous period to go back to August." } },
       { focus: 'od', ic: 'glove', open: ['s', 'op', 'cb', 'cx'], nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
@@ -5707,8 +5716,10 @@
       introTx: { th: 'กด <b>เล่นทีละขั้น</b> เพื่อไล่ดูต้นทุนย้อนกลับทีละระดับ',
                  en: 'Press <b>Play step by step</b> to trace the cost back one level at a time.' },
       srcs: { th: 'ต้นทาง {n} รายการ', en: '{n} cost sources' },
-      ordTip: { th: 'ต้นทุนจริงของทั้งใบสั่งผลิตแยกตามประเภท แบบเดียวกับหน้า Production Order Statistics หรือ Posted Assembly Order Statistics ไม่ใช่ส่วนของ Output กล่องนี้',
-                en: "The actual cost of the whole order by kind, as its Statistics page shows it: Production Order Statistics or Posted Assembly Order Statistics. Not this output's share." },
+      ordTip: { th: 'ต้นทุนจริงของทั้งบรรทัดใบสั่งผลิตแยกตามประเภท แบบเดียวกับหน้า Production Order Statistics หรือ Posted Assembly Order Statistics ไม่ใช่ส่วนของ Output กล่องนี้ กล่องใน Level ถัดไปคือของที่ใบสั่งเบิกไปใช้ และป้ายบนเส้นบอกว่าต้นทุนของแต่ละรายการเข้าไปอยู่บรรทัดไหน',
+                en: "The actual cost of the whole order line by kind, as its Statistics page shows it: Production Order Statistics or Posted Assembly Order Statistics. Not this output's share. The boxes on the next Level are what the order consumed; each link names the line its cost goes into." },
+      poolTip: { th: 'บรรทัดปิดงวดของหน้า Average Cost Calc. Overview คือยอดที่เหลือหลังหักรายการขาออกทั้งงวดแล้ว (รวมรายการนี้ด้วย) พร้อม Unit Cost ของงวด กล่องใน Level ถัดไปคือที่มาของค่าเฉลี่ยนี้ ได้แก่ยอดยกมาและรายการรับเข้าในงวด',
+                 en: "The closing line of Business Central's Average Cost Calc. Overview for the period: what is left after every decrease in it, this one too, and its Unit Cost. The boxes on the next Level are what the average is made of: the opening value and the entries of the period." },
       avgTip: { th: 'Unit Cost ตามหน้า Average Cost Calc. Overview ณ วันสิ้นงวด คือต้นทุนถึงวันนั้นหารด้วยจำนวนคงเหลือ ปัดเศษตาม Amount Rounding Precision รายการขาออกที่ใช้ค่าเฉลี่ยนี้ตัดทั้งมูลค่าและจำนวนออกไปที่ต้นทุนต่อหน่วยเดียวกัน ค่าเฉลี่ยจึงไม่เปลี่ยน',
                 en: "The Unit Cost of Business Central's Average Cost Calc. Overview at the end of the period: the cost amount up to that date divided by the quantity, rounded to the Amount Rounding Precision. Decreases valued at this average take out cost and quantity at the same unit cost, so they do not change it." }
     };
@@ -5728,9 +5739,9 @@
       return money(Math.round(Math.abs(n.total / n.q) * 100) / 100);
     };
     const itemText = (n) => n.ino + ' ' + n.idesc;
-    // บรรทัดรองแบบแอปจริง: รายการ = วันที่ · Location · Lot · Costing Method · Capacity = วันที่ · ใบสั่งผลิต · เลข Capacity Ledger Entry
-    // pool / Opening value = ขอบเขตของค่าเฉลี่ยอย่างเดียว (งวดอยู่ในชื่อกล่องแล้ว)
-    const detailText = (n) => AVG[n.kind] ? n.det : n.d + ' · ' + n.det + (n.kind === 'cap' ? '' : ' · ' + n.m);
+    // บรรทัดรองแบบแอปจริง: รายการ = วันที่ · Location · Lot · Capacity = วันที่ · ใบสั่งผลิต · Capacity Ledger Entry
+    // Opening value = งวดที่ยกมา · ขอบเขตของค่าเฉลี่ย · Costing Method อยู่ข้างชื่อกล่อง ไม่อยู่ในบรรทัดนี้แล้ว
+    const detailText = (n) => isOpen(n) ? n.det : n.d + ' · ' + n.det;
     // Expand All ไม่เปิด Opening value — ย้อนงวดก่อนทีละกล่องตามที่ผู้ใช้กด แบบแอปจริง
     const openTo = (depth) => {
       state.open = {};
@@ -5761,33 +5772,42 @@
         + '<span class="ct-narr-x">' + L(s ? s.tx : T.introTx) + '</span>';
     };
 
+    // บล็อกในกล่องแบบแอปจริง (Production Order สีเขียวอมฟ้า · Average Cost Pool สีม่วง): หัวบล็อกมี tooltip บอกที่มา
+    // บรรทัดรองบอกขอบเขต แล้วเป็นตัวเลขของ BC ทีละบรรทัด ไม่มีบรรทัดรวม — rows เป็นข้อความที่จัดรูปแบบแล้ว
+    const blockHTML = (cls, cap, tip, det, rows) => '<div class="ct-blk ' + cls + '"><span class="ct-blk-cap" title="' + esc(tip) + '">' + esc(cap) + '</span>'
+      + '<span class="ct-detail" title="' + esc(det) + '">' + esc(det) + '</span>'
+      + rows.map((r) => '<div class="ct-ln"><span>' + esc(r[0]) + '</span><span>' + r[1] + '</span></div>').join('') + '</div>';
+
     function cardHTML(n, o) {
       let h = '<div class="ct-card' + (n.id === ROOT ? ' root' : '') + (n.kind ? ' ' + n.kind : '') + (o.sel ? ' sel' : '') + (o.fresh ? ' ct-new' : '') + '" data-id="' + n.id + '">'
         + '<button class="ct-open" type="button" data-sel="' + n.id + '"' + (o.sel ? ' aria-current="true"' : '') + '>'
-        + '<span class="ct-title">' + esc(n.t) + '</span>';
+        // Costing Method อยู่ข้างชื่อกล่อง เฉพาะกล่อง Item Ledger Entry
+        + '<span class="ct-trow"><span class="ct-title">' + esc(n.t) + '</span>' + (n.kind ? '' : '<span class="ct-meth">' + esc(n.m) + '</span>') + '</span>';
       if (n.kind !== 'cap') h += '<span class="ct-item" title="' + esc(itemText(n)) + '">' + esc(itemText(n)) + '</span>';
       h += '<span class="ct-detail" title="' + esc(detailText(n)) + '">' + esc(detailText(n)) + '</span></button>';
       if (n.ln.length) h += '<div class="ct-box">' + n.ln.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
-      // pool มีบรรทัด Opening value บรรทัดเดียว: จำนวน หน่วย @ Unit Cost ของยอดยกมา (ตัวหนาแบบบรรทัดล่าง) กับยอดเงิน
-      if (n.ov) h += '<div class="ct-box"><div class="ct-ln"><span>Opening value</span><span class="ct-q">' + qty(n.ov[0]) + ' ' + n.u
-        + '<span title="Unit Cost (LCY)"><span class="ct-unit"> @ </span><b>' + money(Math.round(n.ov[1] / n.ov[0] * 100) / 100) + '</b></span></span>'
-        + '<span>' + money(n.ov[1]) + '</span></div></div>';
-      if (n.ord) {
-        h += '<div class="ct-box"><div class="ct-ord-cap" title="' + esc(L(T.ordTip)) + '">Actual Cost · ' + esc(n.t.split(' ')[1]) + '</div>'
-          + n.ord.map((l) => '<div class="ct-ln"><span>' + esc(l[0]) + '</span><span>' + money(l[1]) + '</span></div>').join('') + '</div>';
-      }
-      if (AVG[n.kind]) h += '<div class="ct-avg" title="' + esc(L(T.avgTip)) + '">Unit Cost (LCY) = ' + money(n.total) + ' ÷ ' + qty(n.q) + ' ' + n.u + '</div>';
-      // ทุกกล่องมีบรรทัดล่างแบบเดียวกัน: จำนวน @ Unit Cost (ตัวหนา) ทางซ้าย ยอดเงินทางขวา
+      // Actual Cost ของทั้งบรรทัดใบสั่งผลิตตามหน้า Production Order Statistics — ไม่ใช่ส่วนของ Output กล่องนี้
+      if (n.ord) h += blockHTML('ord', 'Actual Cost · ' + n.t.split(' ')[1], L(T.ordTip), 'Whole order line · ' + qty(n.q) + ' ' + n.u + ' output',
+        n.ord.map((l) => [l[0], money(l[1])]));
+      // บรรทัดปิดงวดของ Average Cost Calc. Overview: เหลือหลังหักรายการขาออกทั้งงวด รวมรายการนี้ด้วย
+      if (n.avg) h += blockHTML('avg', 'Average Cost · ' + n.avg.per, L(T.poolTip), 'All locations · Closing, after decreases',
+        [['Quantity', qty(n.avg.q) + ' ' + n.u], ['Cost Amount (Actual)', money(n.avg.amt)], ['Unit Cost (LCY)', money(Math.round(n.avg.amt / n.avg.q * 100) / 100)]]);
+      if (isOpen(n)) h += '<div class="ct-avg" title="' + esc(L(T.avgTip)) + '">Unit Cost (LCY) = ' + money(n.total) + ' ÷ ' + qty(n.q) + ' ' + n.u + '</div>';
+      // ทุกกล่องมีบรรทัดล่างแบบเดียวกัน: จำนวน @ Unit Cost (ตัวหนา) ทางซ้าย ยอดเงินทางขวา · Capacity บอกว่าเป็น Direct Cost
       const uc = unitCost(n);
-      h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span title="Unit Cost (LCY)"><span class="ct-unit"> @ </span><b>' + uc + '</b></span>' : '') + '</span><b>' + money(n.total) + '</b></div>';
-      if (!AVG[n.kind]) h += '<span class="ct-adj">Adjusted</span>';
-      if (n.flow) h += '<span class="ct-flow' + (o.on ? ' on' : '') + '">' + esc(n.flow) + '</span>';
+      h += '<div class="ct-foot"><span>' + qty(n.q) + ' ' + n.u + (uc ? '<span title="Unit Cost (LCY)"><span class="ct-unit"> @ </span><b>' + uc + '</b></span>' : '') + '</span>'
+        + (n.kind === 'cap' ? '<span><span class="ct-unit">Direct Cost </span><b>' + money(n.total) + '</b></span>' : '<b>' + money(n.total) + '</b>') + '</div>';
+      if (!isOpen(n)) h += '<span class="ct-adj">Adjusted</span>';
+      // ป้ายบนเส้น: Applied Quantity · ใต้บล็อก Production Order เป็นชื่อบรรทัดของ Actual Cost (Cost Share) สีเขียวอมฟ้า
+      // ต้นทางของค่าเฉลี่ย (ยอดยกมาและรายการในงวด) เป็นสีม่วง
+      const p = n.parent && N[n.parent], tag = n.flow || n.share;
+      const tint = p && p.ord && n.share ? ' tord' : p && (p.avg || isOpen(p)) ? ' tavg' : '';
+      if (tag) h += '<span class="ct-flow' + tint + (o.on ? ' on' : '') + '">' + esc(tag) + '</span>';
       if (n.src.length) {
-        // ปุ่มต้นทางแบบแอปจริง: pool ที่ยังไม่กางเป็น + · Opening value ที่ยังไม่กางเป็น Previous period · นอกนั้นเป็นจำนวนต้นทาง
-        const prev = n.kind === 'open' && !o.open;
-        const label = prev ? 'Previous period' : n.kind === 'pool' && !o.open ? '+' : n.src.length;
+        // ปุ่มต้นทางแบบแอปจริง: Opening value ที่ยังไม่กางเป็น Previous period · นอกนั้นเป็นจำนวนต้นทาง
+        const prev = isOpen(n) && !o.open;
         h += '<button class="ct-badge' + (prev ? ' prev' : '') + '" type="button" data-tog="' + n.id + '" aria-expanded="' + !!o.open + '"'
-          + (prev ? '' : ' aria-label="' + esc(L(T.srcs).replace('{n}', n.src.length)) + '"') + '>' + label + '</button>';
+          + (prev ? '' : ' aria-label="' + esc(L(T.srcs).replace('{n}', n.src.length)) + '"') + '>' + (prev ? 'Previous period' : n.src.length) + '</button>';
       }
       return h + '</div>';
     }
@@ -5866,23 +5886,31 @@
       }
     }
 
+    // Cost From แบบตารางของแอปจริง: "หัวบล็อก (บรรทัดรอง): บรรทัด ยอด; บรรทัด ยอด" ของ Production Order หรือ Average Cost Pool
+    const costFrom = (n) => n.ord ? 'Actual Cost · ' + n.t.split(' ')[1] + ' (Whole order line · ' + qty(n.q) + ' ' + n.u + ' output): '
+        + n.ord.map((l) => l[0] + ' ' + money(l[1])).join('; ')
+      : n.avg ? 'Average Cost · ' + n.avg.per + ' (All locations · Closing, after decreases): Quantity ' + qty(n.avg.q) + ' ' + n.u
+        + '; Cost Amount (Actual) ' + money(n.avg.amt) + '; Unit Cost (LCY) ' + money(Math.round(n.avg.amt / n.avg.q * 100) / 100)
+      : '';
+
     function renderTable() {
       const box = byId('ct-table'), keep = focusKey();
       let rows = '';
       (function walk(id) {
-        const n = N[id], sel = id === state.sel;
+        const n = N[id], sel = id === state.sel, cf = costFrom(n);
         rows += '<tr data-sel="' + id + '"' + (sel ? ' class="sel"' : '') + '>'
           + '<td style="padding-left:' + (12 + n.depth * 18) + 'px"><span class="ct-tree' + (n.src.length ? ' has' : '') + '"></span>'
           + '<button class="ct-tlink" type="button" data-sel="' + id + '"' + (sel ? ' aria-current="true"' : '') + '>' + esc(n.t) + '</button></td>'
-          + '<td>' + esc(itemText(n)) + '</td><td>' + esc(n.det) + '</td><td>' + (AVG[n.kind] ? '' : n.d) + '</td><td>' + n.m + '</td>'
+          + '<td>' + esc(itemText(n)) + '</td><td>' + esc(n.det) + '</td><td>' + (isOpen(n) ? '' : n.d) + '</td>'
           + '<td class="num">' + qty(n.q) + '</td><td class="num">' + unitCost(n) + '</td><td class="num">' + money(n.total) + '</td>'
-          + '<td class="num">' + (n.flow ? esc(n.flow) : '') + '</td><td>' + (AVG[n.kind] ? '' : 'Adjusted') + '</td></tr>';
+          + '<td>' + (cf ? '<span class="ct-cf" title="' + esc(cf) + '">' + esc(cf) + '</span>' : '') + '</td>'
+          + '<td class="num">' + (n.flow ? esc(n.flow) : '') + '</td><td>' + (n.share ? esc(n.share) : '') + '</td><td>' + (isOpen(n) ? '' : 'Adjusted') + '</td></tr>';
         // งวดก่อนของ Opening value มีในตารางเฉพาะตอนเปิดไว้แล้ว — แอปจริงยังไม่ดึงจนกว่าผู้ใช้จะกด
-        if (n.kind !== 'open' || state.open[id]) n.src.forEach(walk);
+        if (!isOpen(n) || state.open[id]) n.src.forEach(walk);
       })(ROOT);
-      box.innerHTML = '<table class="ct-tbl"><thead><tr><th>Entry</th><th>Item</th><th>Detail</th><th>Posting Date</th><th>Costing Method</th>'
-        + '<th class="num">Quantity</th><th class="num">Unit Cost (LCY)</th><th class="num">Cost Amount (Actual)</th>'
-        + '<th class="num">Applied Quantity</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      box.innerHTML = '<table class="ct-tbl"><thead><tr><th>Entry</th><th>Item</th><th>Detail</th><th>Posting Date</th>'
+        + '<th class="num">Quantity</th><th class="num">Unit Cost (LCY)</th><th class="num">Cost Amount (Actual)</th><th>Cost From</th>'
+        + '<th class="num">Applied Quantity</th><th>Cost Share</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
       refocus(keep, box);
     }
 
@@ -6019,7 +6047,8 @@
           + (c.classList.contains('root') ? '<rect x="' + x + '" y="' + y + '" width="3" height="' + h + '" fill="#0F6CBD"/>' : '')
           + (c.classList.contains('sel') && !c.classList.contains('root') ? '<rect x="' + (x + 1) + '" y="' + (y + 1) + '" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="2" fill="none" stroke="#0F6CBD" stroke-width="2"/>' : '')
           + '<clipPath id="k' + i + '"><rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/></clipPath><g clip-path="url(#k' + i + ')">';
-        c.querySelectorAll('.ct-title, .ct-item, .ct-detail, .ct-ln > span, .ct-ord-cap, .ct-avg, .ct-foot > span, .ct-foot > b').forEach((t) => { s += text(t); });
+        c.querySelectorAll('.ct-blk').forEach((b) => { s += rect(b); });
+        c.querySelectorAll('.ct-title, .ct-meth, .ct-item, .ct-detail, .ct-ln > span, .ct-blk-cap, .ct-avg, .ct-foot > span, .ct-foot > b').forEach((t) => { s += text(t); });
         c.querySelectorAll('.ct-box').forEach((b) => { const [bx, by, bw] = at(b); s += '<line x1="' + bx + '" y1="' + by + '" x2="' + (bx + bw) + '" y2="' + by + '" stroke="#E0E0E0"/>'; });
         const adj = c.querySelector('.ct-adj');
         if (adj) s += rect(adj) + text(adj, true);
