@@ -50,9 +50,9 @@ typography:
     lineHeight: 1.4
     letterSpacing: "-0.025em"
   body:
-    fontFamily: "Plus Jakarta Sans, Niramit, Anuphan, Segoe UI, Leelawadee UI, Tahoma, sans-serif"
+    fontFamily: "Sarabun, Anuphan, Segoe UI, Leelawadee UI, Tahoma, sans-serif"
     fontSize: "18px"
-    fontWeight: 500
+    fontWeight: 400
     lineHeight: 1.7
     letterSpacing: "normal"
   label:
@@ -126,7 +126,7 @@ Warmth comes from two places only. The ivory paper of the hero (`#EFEFE9`) and t
 - One cool-page ground warmed by a sand-to-sea Horizon Glow, never blue-white dashboard ground
 - One action color (burgundy) against one institutional family (deep teal)
 - Headings at weight 500, tight tracking (-0.025em) — Fluent, not marketing
-- Thai body copy set at 18px/500 for sustained reading, never smaller
+- Thai body copy set at 18px in Sarabun 400 for sustained reading, never smaller
 - Microsoft's own brand hues appear only where Microsoft's own framework is being cited
 
 ## Colors
@@ -174,24 +174,24 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 ## Typography
 
 **Display Font:** Plus Jakarta Sans (Latin) with **Anuphan** (Thai, loopless) — all headings, kickers, buttons, numerals
-**Body Font:** Plus Jakarta Sans (Latin) with **Niramit** (Thai, looped) — all running copy
+**Body Font:** **Sarabun** (Thai, looped, and its own Latin) — all running copy, on the home page and in the body of every article. Replaced Niramit + Plus Jakarta Sans in October 2026; the owner picked it from a reference page set in Sarabun 400
 **Fallbacks:** Segoe UI, Leelawadee UI, Tahoma
-**Delivery:** self-hosted in `css/fonts/` since September 2026 — the same woff2 files Google Fonts serves, Thai/Latin/Latin-ext subsets only, weights 500–800 (400 was measured unused on every page and dropped). The `@font-face` rules open the `<style>` block of `index.html` and the top of `css/article.css`; keep the two in step. The print pages (`poster.html`, `banner.html`, the flyers) still load Google Fonts
+**Delivery:** self-hosted in `css/fonts/` since September 2026 — the same woff2 files Google Fonts serves, Thai/Latin/Latin-ext subsets only. Anuphan and Plus Jakarta Sans are variable (500–800). Sarabun ships only the weights measured in use: 400 running copy, 500 buttons and tabs that set it themselves, 600/700 bold; articles declare 400/700 only. The `@font-face` rules open the `<style>` block of `index.html` and the top of `css/article.css`; keep the two in step. The print pages (`poster.html`, `banner.html`, the flyers) still load Google Fonts
 
-**Character:** The pairing runs a deliberate Thai contrast that has no Latin equivalent: headings are loopless (Anuphan, ไม่มีหัว) and body is looped (Niramit, มีหัว). To a Thai reader this separates voice from statement as clearly as a serif/sans pairing does in English, and it happens without changing weight or size. The Latin faces stay in one family across both roles so the bilingual page does not fracture when the visitor flips to English.
+**Character:** The pairing runs a deliberate Thai contrast that has no Latin equivalent: headings are loopless (Anuphan, ไม่มีหัว) and body is looped (Sarabun, มีหัว). To a Thai reader this separates voice from statement as clearly as a serif/sans pairing does in English. Body copy takes Sarabun for its Latin too, so an English term inside a Thai sentence (Business Central, VAT) matches the Thai around it instead of standing out wider and heavier; headings keep Plus Jakarta Sans.
 
 ### Hierarchy
 - **Display** (500, `clamp(2.2rem, 3.4vw, 2.75rem)`, 1.22, -0.025em): the single `h1` in the hero.
 - **Headline** (500, `clamp(1.9rem, 2.6vw, 2.5rem)`, 1.2, -0.025em): every section `h2`. Four sections (`#services`, `#features`, `#reports`, `#pricing`) center their heading block at `max-width: 720px`; the rest are left-aligned.
 - **Title** (500, 1.08rem, -0.025em): card and feature-panel `h3`.
-- **Body** (500, 18px, 1.7): all running copy, Thai and English. Descriptions inside cards drop to 0.95rem but keep weight 500.
+- **Body** (400, 18px, 1.7, Sarabun): all running copy, Thai and English. Descriptions inside cards drop to 0.95rem and keep weight 400. Buttons, tabs and article-list titles that inherit the body face set 500 themselves.
 - **Label** (600, 12px, 0.08em): `.section-kicker` above every `h2`, in Slate Sage on light grounds, Mist or Soft Pink on dark.
 
 ### Named Rules
 
-**The Thai Weight Floor Rule.** Thai body text never goes below 18px/500. Thai glyphs at weight 400 read thin and tiring at the sizes Latin tolerates; the whole page was raised to 18/500 for this reason. A redesign that "cleans up" the type by dropping to 16px/400 has made the page worse for its actual readers.
+**The Thai Weight Floor Rule.** Thai body text never goes below 18px, and the weight is set per typeface. Niramit at 400 read thin and tiring, so the page ran at 500 while Niramit was the body face. Sarabun runs at 400 by the owner's choice (October 2026), the weight of the reference they picked. A redesign that "cleans up" the type by dropping to 16px, or below 400, has made the page worse for its actual readers.
 
-**The Loop Contrast Rule.** Headings are loopless (Anuphan), body is looped (Niramit). Never set a Thai heading in Niramit or Thai body copy in Anuphan — the hierarchy is carried by loop, not by size.
+**The Loop Contrast Rule.** Headings are loopless (Anuphan), body is looped (Sarabun). Never set a Thai heading in Sarabun or Thai body copy in Anuphan — the hierarchy is carried by loop, not by size. Articles follow it too: `article` and the header `.lead` are Sarabun, while `article h2/h3`, the CTA buttons and the other-articles list stay in the heading face.
 
 **The No-Break Rule.** Thai has no inter-word spaces, so browsers break compound words mid-term (`ครบ|วงจร`). Wrap any term that must not split in `.nb`.
 
@@ -317,9 +317,10 @@ One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine time
 
 ### Do:
 - **Do** put new tokens in the one `:root` block at the top of `<style>`. Group them with their family (brand, Microsoft quotation, legacy aliases, Fluent `--ui-*`, glow).
+- **Do** size reading measures in `em`, not `ch`: `ch` follows the first face in the stack, so a font change silently narrows or widens every column set in it.
 - **Do** use `var(--ui-radius-btn)` (3px) or `var(--ui-radius-card)` (8px) for every new corner.
 - **Do** give every new surface the Hairline shadow, and reach for a soft shadow only inside the hero scene.
-- **Do** keep Thai body copy at 18px/500 and Thai headings in Anuphan.
+- **Do** keep Thai body copy at 18px in Sarabun 400 and Thai headings in Anuphan.
 - **Do** wrap unbreakable Thai compounds in `.nb`.
 - **Do** update the `I18N` dictionary at the end of `<script>` whenever page text moves — especially `nth-child` selectors, which silently mistranslate when a sibling is inserted.
 - **Do** add a `prefers-reduced-motion: reduce` rule alongside any new animation.

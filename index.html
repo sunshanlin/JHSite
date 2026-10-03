@@ -243,23 +243,26 @@
 }
 </script>
 <style>
-  /* ฟอนต์ self-host ใน css/fonts/ (D3 ก.ย. 2026) — ไฟล์ woff2 ชุดเดียวกับที่ Google Fonts เสิร์ฟ (Anuphan v6, Niramit, Plus Jakarta Sans)
+  /* ฟอนต์ self-host ใน css/fonts/ (D3 ก.ย. 2026) — ไฟล์ woff2 ชุดเดียวกับที่ Google Fonts เสิร์ฟ (Anuphan v6, Sarabun, Plus Jakarta Sans)
      เลิกโหลด stylesheet ของ Google ที่บล็อกการวาดหน้าแรก และไม่ส่ง IP ผู้เข้าชมไปที่ fonts.googleapis.com
-     ตัดน้ำหนัก 400 (วัดแล้วไม่มีตัวไหนใช้) กับ subset เวียดนาม/ซีริลลิก · Anuphan กับ Plus Jakarta Sans เป็น variable font
-     ไฟล์เดียวต่อ subset จึงประกาศเป็นช่วงน้ำหนัก · Niramit เป็นไฟล์แยกต่อน้ำหนัก · สัญญาอนุญาต OFL อยู่ที่ css/fonts/OFL.txt
-     บทความใช้ชุดเดียวกัน (เฉพาะ Anuphan + Plus Jakarta Sans) ที่ต้น css/article.css — แก้ที่นี่ต้องแก้ที่นั่นด้วย */
+     ตัด subset เวียดนาม/ซีริลลิก · Anuphan กับ Plus Jakarta Sans เป็น variable font ไฟล์เดียวต่อ subset จึงประกาศเป็นช่วงน้ำหนัก
+     Sarabun (เนื้อความ แทน Niramit ต.ค. 2026) เป็นไฟล์แยกต่อน้ำหนัก เอาเฉพาะที่วัดแล้วมีใช้: 400 เนื้อความ · 500 ปุ่ม/แท็บ · 600/700 ตัวหนา · สัญญาอนุญาต OFL อยู่ที่ css/fonts/OFL.txt
+     บทความใช้ชุดเดียวกัน (Sarabun เฉพาะ 400/700) ที่ต้น css/article.css — แก้ที่นี่ต้องแก้ที่นั่นด้วย */
   @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
   @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
   @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/niramit-thai-500.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/niramit-thai-600.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/niramit-thai-700.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/niramit-latin-ext-500.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/niramit-latin-ext-600.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/niramit-latin-ext-700.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/niramit-latin-500.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/niramit-latin-600.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-  @font-face { font-family: 'Niramit'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/niramit-latin-700.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-thai-400.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/sarabun-thai-500.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/sarabun-thai-600.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/sarabun-thai-700.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-ext-400.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/sarabun-latin-ext-500.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/sarabun-latin-ext-600.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/sarabun-latin-ext-700.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-400.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 500; font-display: swap; src: url(/css/fonts/sarabun-latin-500.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/sarabun-latin-600.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/sarabun-latin-700.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
   @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   /* ============================================================
@@ -333,13 +336,14 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    /* เนื้อความ: ไทยใช้ Niramit (มีหัว ทรงโมเดิร์น อ่านยาวสบายตา), อังกฤษ Plus Jakarta Sans
+    /* เนื้อความ: Sarabun ทั้งไทยและอังกฤษ (ไทยมีหัว อ่านยาวสบายตา คำอังกฤษที่ปนกลืนกับตัวไทย) — แทน Niramit + Plus Jakarta Sans ต.ค. 2026
        หัวข้อใช้ Anuphan (ไม่มีหัว) — ดูกฎถัดไป */
-    font-family: "Plus Jakarta Sans", "Niramit", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
+    font-family: "Sarabun", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
     line-height: 1.7;
-    /* ตัวหนังสือไทยน้ำหนัก 400 บางเกินไป อ่านแล้วเหนื่อย — ขยับเป็น 18px/500 ทั้งหน้า */
+    /* 18px/400 แบบที่ผู้ใช้เลือกจาก Sarabun (ต.ค. 2026) — เดิม Niramit ใช้ 500 เพราะ 400 ของ Niramit บางเกินไป
+       ปุ่ม/แท็บที่ตั้ง 500 ไว้เองยังเป็น 500 */
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
   }
   /* หัวข้อทุกระดับ = Anuphan (ไทยไม่มีหัว) ตัดกับเนื้อความที่มีหัว */
   h1, h2, h3, h4, h5, h6, summary, .brand .wordmark {
@@ -1706,7 +1710,7 @@
     padding: 12px 22px;
     font-size: .82rem; letter-spacing: .02em;
   }
-  /* ป้ายสั้น/ตัวหนา ใช้ฟอนต์ไม่มีหัวแบบเดียวกับหัวข้อ ไม่ใช่ Niramit ของเนื้อความยาว */
+  /* ป้ายสั้น/ตัวหนา ใช้ฟอนต์ไม่มีหัวแบบเดียวกับหัวข้อ ไม่ใช่ Sarabun ของเนื้อความยาว */
   .plan-banner-text { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
   .plan-body { display: flex; flex-direction: column; flex: 1; padding: 26px 24px 28px; }
   .plan-icon {
@@ -2550,7 +2554,8 @@
 
   /* ---- 5. #faq: หัวข้อชิดซ้าย แต่บล็อกคำถามจัดกึ่งกลาง → ขอบสองข้างไม่ตรงกัน ---- */
   .faq-list { max-width: none; margin: 0; }
-  .faq-list details > p { max-width: 80ch; }
+  /* ความกว้างบรรทัดเป็น em (เดิม 80ch ของ Plus Jakarta Sans) — ch อิงเลข 0 ของฟอนต์ตัวแรก เปลี่ยนฟอนต์แล้วคอลัมน์หด */
+  .faq-list details > p { max-width: 58em; }
 
 
   /* ---- 7. hero บนมือถือ ----
@@ -2591,7 +2596,7 @@
   /* fine print: น้ำหนักเดียว สีเดียวกับ tagline (--brand-mint 5.55:1 ผ่าน AA) บรรทัดเดียวคั่นด้วย ·
      สองบรรทัดตัวหนา+สีสว่างเท่าเมนูทำให้แถวล่างลายตา — ข้อมูลตามกฎหมายไม่ต้องแย่งสายตา */
   .footer-legal {
-    max-width: 76ch;
+    max-width: 55em;   /* เดิม 76ch ของ Plus Jakarta Sans */
     color: var(--brand-mint); font-size: .8rem; line-height: 1.75;
     font-variant-numeric: tabular-nums;
   }
@@ -3117,7 +3122,7 @@
   .ct-top { background: var(--bg-soft); border-bottom: 1px solid var(--ui-line); padding: 20px 24px; }
   .ct-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 16px; }
   .ct-head h3 { margin: 0 0 4px; font-size: 1.08rem; line-height: 1.4; }
-  .ct-head p { margin: 0; max-width: 68ch; font-size: .92rem; line-height: 1.6; color: var(--ui-muted); }
+  .ct-head p { margin: 0; max-width: 49.2em; font-size: .92rem; line-height: 1.6; color: var(--ui-muted); }
   .ct-hint p + p { margin-top: 6px; }
   .ct-play {
     display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;
@@ -3164,7 +3169,7 @@
   /* รูปใหญ่ของขั้นที่กำลังเล่า สีทองแดงตามป้าย LEVEL กับเส้นซ้าย · เส้นบางลงตามขนาดที่ใหญ่ขึ้น */
   .ct-narr-pic { display: block; width: 64px; height: 64px; margin-top: 12px; stroke-width: 1.25; }
   .ct-narr-t { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
-  .ct-narr-x { max-width: 82ch; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
+  .ct-narr-x { max-width: 59.3em; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
 
   /* หน้าต่าง BC — ยกหน้าตาจากหน้า Cost Traceability ของจริงใน BC: หัวเพจ แถบคำสั่ง แถบซูม สีน้ำเงินของ BC ฟอนต์ Segoe UI
      สีทั้งหมดประกาศบนตัวหน้าต่าง (แบบ --bfj-* ของ #billing-flow) ไม่ขึ้น :root และไม่หลุดออกนอกหน้าต่างนี้ */
