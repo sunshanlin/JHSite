@@ -1318,21 +1318,15 @@
   .article-list { list-style: none; margin: 0; padding: 0; }
   .article-list li + li { border-top: 1px solid var(--line); }
   .article-row {
-    position: relative; display: flex; flex-direction: column;
-    padding: 14px 26px 14px 0; color: inherit; text-decoration: none;
+    display: flex; flex-direction: column;
+    padding: 13px 0; color: inherit; text-decoration: none;
   }
   .start-here {
     align-self: flex-start; margin-bottom: 6px; padding: 3px 9px; border-radius: 999px;
     font-size: .74rem; font-weight: 700; color: var(--brand-burgundy-dark); background: rgba(224,140,162,.13);
   }
   .row-title { font-weight: 500; line-height: 1.5; color: var(--ui-ink); transition: color .18s ease; }
-  .row-sub { margin-top: 4px; font-size: .9rem; line-height: 1.6; color: var(--ui-muted); }
-  .row-arrow {
-    position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
-    color: #8E2C46; font-weight: 700; transition: transform .18s ease;
-  }
   .article-row:hover .row-title { color: #8E2C46; }
-  .article-row:hover .row-arrow { transform: translate(3px, -50%); }
 
   .steps .step { min-height: 0; }
 
@@ -4395,29 +4389,21 @@
             <a class="article-row" href="articles/accounting-to-erp.html">
               <span class="start-here">เริ่มที่นี่</span>
               <span class="row-title">ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และ<span class="nb">ต้องเตรียม</span>อะไรบ้าง</span>
-              <span class="row-sub">สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/business-central-vs-accounting-software.html">
               <span class="row-title">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</span>
-              <span class="row-sub">เทียบ 15 หัวข้อที่นักบัญชีต้องทำจริงทุกเดือน ตั้งแต่ออกใบกำกับภาษีและยื่นภาษี ไปจนถึงปิดงบและตรวจย้อนกลับ</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/business-central-cost-thailand.html">
               <span class="row-title">งบวางระบบ Business Central ในไทยมีอะไรบ้าง</span>
-              <span class="row-sub">ค่า License ค่า Thai Localization ค่าวางระบบตามขอบเขต และเวลาของทีมภายใน ไล่ทีละก้อนพร้อมราคาอ้างอิง</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/success-by-design.html">
               <span class="row-title">Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365 เป็นพัน</span>
-              <span class="row-sub">5 ช่วงของโครงการ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
         </ul>
@@ -4429,29 +4415,21 @@
             <a class="article-row" href="articles/localization-thailand.html">
               <span class="start-here">เริ่มที่นี่</span>
               <span class="row-title">Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</span>
-              <span class="row-sub">ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี ใบกำกับภาษี WHT และใบวางบิล</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/pp30-branch-filing.html">
               <span class="row-title">ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้</span>
-              <span class="row-sub">แยกยื่นหรือยื่นรวม รายงานภาษีซื้อ-ขายรายสถานประกอบการ และข้อมูลที่ Business Central ต้องเก็บตั้งแต่ตอนบันทึก</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/wht-50tawi-rdprep.html">
               <span class="row-title">ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</span>
-              <span class="row-sub">ใช้ข้อมูลการจ่ายชุดเดียวเพื่อออกหนังสือรับรอง รวบรวมรายการ ภ.ง.ด. และสร้างไฟล์โอนย้ายเข้า RD Prep</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/billing-note-billing-day.html">
               <span class="row-title">ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</span>
-              <span class="row-sub">เก็บรอบวางบิล คำนวณวัน ป้องกันเอกสารซ้ำ และติดตามสถานะการส่งเอกสารให้ครบทุกใบ</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
         </ul>
@@ -4462,22 +4440,16 @@
           <li>
             <a class="article-row" href="articles/cost-traceability.html">
               <span class="row-title">ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้<span class="nb">ทีละขั้น</span></span>
-              <span class="row-sub">ไล่ต้นทุนถุงมือกล่องละ 82 บาทย้อนกลับไปถึงน้ำยางนำเข้า และดูทั้งเส้นทางได้ในหน้าเดียว</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/fixed-asset-register-stock-card.html">
               <span class="row-title">ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central</span>
-              <span class="row-sub">ทะเบียนทรัพย์สิน ค่าเสื่อมทางบัญชีกับภาษี และ Stock Card ที่ไล่รับ-จ่ายได้ทีละเอกสาร</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li>
             <a class="article-row" href="articles/bot-exchange-rate-api.html">
-              <span class="row-title">รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</span>
-              <span class="row-sub">รู้จัก BOT API สองชุดข้อมูล แต่ละบริการมีข้อมูลอะไร ต้องระวังเรื่องใด และนำไปต่อยอดกับ Business Central ได้อย่างไร</span>
-              <span class="row-arrow" aria-hidden="true">→</span>
+              <span class="row-title">รู้จักกับบริการข้อมูลจาก ธปท. อัตรา<span class="nb">แลกเปลี่ยน</span>และวันหยุดธนาคาร</span>
             </a>
           </li>
         </ul>
