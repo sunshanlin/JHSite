@@ -5,6 +5,7 @@
 Key facts:
 - JWIC Localization is an extension package for Business Central covering Thai tax and documents: purchase–sales VAT reports and PP30 (ภ.พ.30) with head office / branch support including separate branch filing, withholding tax with 50 Bis (50 ทวิ) certificates, PND (ภ.ง.ด.) 2/3/53/54 filings, RD Prep import files, billing notes (ใบวางบิล) with billing-day calendar, Thai-format fixed asset register, stock cards, and a complete set of Thai-language document forms (quotations, tax invoices, receipts, credit–debit notes).
 - Automatic exchange rates and bank holidays from the Bank of Thailand (BOT) API.
+- Cost Traceability: traces an item's cost back from any posted item ledger entry through purchases, item charges (freight, duty), average-cost periods and multi-level production. Read-only — it shows Business Central's posted figures and recalculates nothing.
 - Delivery follows Microsoft's Success by Design framework (Discover, Initiate, Implement, Prepare, Operate).
 - Consultant: Jirapat Wichayapong (Sun) — Business Central Functional Consultant and AL Developer, accounting degree, Microsoft-certified (Business Central, Finance, Supply Chain Management).
 

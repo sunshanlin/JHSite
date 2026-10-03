@@ -3185,10 +3185,6 @@
   .ct-crumb, .ct-page { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .ct-crumb { font-size: 12px; color: var(--bc-sub); }
   .ct-page { margin-top: 2px; font-size: 26px; font-weight: 300; line-height: 1.25; }
-  .ct-hr { display: flex; align-items: center; color: var(--bc-blue); }
-  .ct-hr .ct-ic { width: 17px; height: 17px; stroke-width: 1.4; }
-  .ct-focus { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; color: inherit; background: none; border: 0; border-radius: var(--ui-radius-btn); cursor: pointer; }
-  .ct-focus:hover { background: var(--bc-field); }
 
   .ct-acts { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 6px 12px; border-top: 1px solid var(--bc-rule); border-bottom: 1px solid var(--bc-rule); }
   .ct-act {
@@ -3283,17 +3279,6 @@
   }
   .ct-flow.on { border-color: var(--bc-blue); color: var(--bc-blue); font-weight: 600; }
 
-  /* Full Screen (Focus mode): <dialog> เด้งขึ้นเหนือหน้า เว้นขอบให้รู้ว่ายังอยู่หน้าเดิม · มือถือเต็มจอ
-     ขนาดอิง inset ของ dialog เอง ไม่ใช้ 100vw (100vw นับแถบเลื่อนของหน้าด้วย จอที่มีแถบเลื่อนจะล้นขวา) */
-  .ct-dlg {
-    position: fixed; inset: 24px; width: auto; height: auto; max-width: none; max-height: none;
-    margin: 0; padding: 0; overflow: hidden;
-    background: #fff; border: 0; border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
-  }
-  .ct-dlg::backdrop { background: rgba(1,47,42,.45); }
-  .ct-dlg .ct-bc { display: flex; flex-direction: column; height: 100%; margin: 0; border: 0; border-radius: 0; }
-  .ct-dlg .ct-scroll, .ct-dlg .ct-table-wrap { flex: 1 1 auto; min-height: 0; max-height: none; }
-  html.ct-locked { overflow: hidden; }
 
   .ct-table-wrap { background: #fff; }
   .ct-tbl { width: 100%; min-width: 860px; border-collapse: collapse; }
@@ -3333,7 +3318,6 @@
     .ct-hdr { gap: 0 10px; padding: 10px 8px 8px 10px; }
     .ct-page { font-size: 21px; }
     .ct-zr { width: 64px; }
-    .ct-dlg { inset: 0; border-radius: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ct-card.ct-new { animation: none; }
@@ -4166,8 +4150,6 @@
       <symbol id="cti-graph" viewBox="0 0 16 16"><rect x="1" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="2.5" width="5" height="4" rx=".8"/><rect x="10" y="9.5" width="5" height="4" rx=".8"/><path d="M6 4.5h4M8 4.5v7h2"/></symbol>
       <symbol id="cti-expand" viewBox="0 0 16 16"><path d="M3.5 3.5 8 8l4.5-4.5M3.5 8.5 8 13l4.5-4.5"/></symbol>
       <symbol id="cti-collapse" viewBox="0 0 16 16"><path d="M3.5 12.5 8 8l4.5 4.5M3.5 7.5 8 3l4.5 4.5"/></symbol>
-      <symbol id="cti-full" viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M13.5 2.5 9 7M6.5 13.5h-4v-4M2.5 13.5 7 9"/></symbol>
-      <symbol id="cti-exit" viewBox="0 0 16 16"><path d="M13.5 2.5 9 7M9 3.5V7h3.5M2.5 13.5 7 9M7 12.5V9H3.5"/></symbol>
       <symbol id="cti-back" viewBox="0 0 16 16"><path d="M13 8H3.5M7.5 4 3.5 8l4 4"/></symbol>
       <symbol id="cti-export" viewBox="0 0 16 16"><path d="M9 2.5H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6.5zM9 2.5v4h4M8 8.5v3.5M6.5 10.5 8 12l1.5-1.5"/></symbol>
       <symbol id="cti-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
@@ -4189,15 +4171,14 @@
       </div>
       <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
       <div class="ct-bc" role="group" aria-label="Cost Traceability">
-        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ปุ่มเดียวที่กดได้คือ Focus mode มุมขวา = เต็มจอ
-             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ และ open in new window เอาออกแล้ว เพราะกดไม่ได้จริง -->
+        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ไม่มีปุ่มในหัวเพจ
+             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ, open in new window และ Full screen เอาออกแล้ว — แอปจริงไม่มี/กดไม่ได้ (ต.ค. 2026) -->
         <div class="ct-hdr">
           <span class="ct-back" aria-hidden="true"><svg class="ct-ic"><use href="#cti-back"/></svg></span>
           <div class="ct-hdr-t">
             <p class="ct-crumb">Cost Traceability | Work Date: 30/09/2026</p>
             <p class="ct-page">Sale SS-0912</p>
           </div>
-          <span class="ct-hr"><button class="ct-focus" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button></span>
         </div>
         <div class="ct-acts">
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
@@ -4205,10 +4186,10 @@
           <button class="ct-act" id="ct-collapse" type="button"><svg class="ct-ic"><use href="#cti-collapse"/></svg><span>Collapse All</span></button>
           <button class="ct-act" id="ct-export" type="button"><svg class="ct-ic"><use href="#cti-export"/></svg><span>Export Image</span></button>
         </div>
-        <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูเส้นทางต้นทุนของกล่องนั้น ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
+        <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ ปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
         <div class="ct-zoom" id="ct-zoom">
           <button class="ct-zb" id="ct-zout" type="button" aria-label="Zoom out"><svg class="ct-ic"><use href="#cti-minus"/></svg></button>
-          <input class="ct-zr" id="ct-zr" type="range" min="30" max="150" step="10" value="100" aria-label="Zoom">
+          <input class="ct-zr" id="ct-zr" type="range" min="20" max="180" step="10" value="100" aria-label="Zoom">
           <button class="ct-zb" id="ct-zin" type="button" aria-label="Zoom in"><svg class="ct-ic"><use href="#cti-plus"/></svg></button>
           <output class="ct-zp" id="ct-zp" for="ct-zr">100%</output>
           <button class="ct-zb ct-zfit" id="ct-zfit" type="button">Fit</button>
@@ -4216,8 +4197,6 @@
         <div class="ct-scroll" id="ct-graph" aria-describedby="ct-graph-desc"><div class="ct-sizer" id="ct-sizer"><div class="ct-canvas" id="ct-canvas"></div></div></div>
         <div class="ct-table-wrap" id="ct-table" hidden></div>
       </div>
-      <!-- Full Screen: สคริปต์ย้ายหน้าต่าง .ct-bc เข้ามาตอนเปิด แล้วย้ายกลับที่เดิมตอนปิด -->
-      <dialog class="ct-dlg" id="ct-dlg" aria-label="Cost Traceability"></dialog>
     </div>
     </div>
   </div>
@@ -4976,10 +4955,10 @@
           { code: '00000', name: 'สำนักงานใหญ่', row: HQ },
           { code: '00001', name: 'คลังสินค้าสมุทรปราการ',
             row: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 199 หมู่ 6 ซอยวัดศรีวารีน้อย',
-                  'ตำบลศีรษะจรเข้ใหญ่ อำเภอบางเสาธง', 'สมุทรปราการ', '10570', '00001 คลังสินค้าสมุทรปราการ'] },
+                  'ตำบลศีรษะจรเข้ใหญ่ อำเภอบางเสาธง', 'สมุทรปราการ', '10570', 'สาขา 00001'] },
           { code: '00002', name: 'คลังสินค้าบางปะกง',
             row: ['บริษัท สมชายค้าวัสดุก่อสร้าง จำกัด', 'เลขที่ 55 หมู่ 4 ถนนบางนา-ตราด',
-                  'ตำบลบางวัว อำเภอบางปะกง', 'ฉะเชิงเทรา', '24180', '00002 คลังสินค้าบางปะกง'] }
+                  'ตำบลบางวัว อำเภอบางปะกง', 'ฉะเชิงเทรา', '24180', 'สาขา 00002'] }
         ],
         hint: { th: 'เลขเดียวกันมี 3 สาขาจดทะเบียนไว้ เลือกสาขาที่ออกเอกสาร',
                 en: 'Three branches under this ID — pick the one issuing the document.' },
@@ -4992,25 +4971,10 @@
         man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
         bad: [0, 1, 2, 3, 4],
         mode: 'stop', icon: 'vsi-warn',
-        msg: { th: '<b>ไม่พบเลขนี้ในทะเบียน</b> สองหลักท้ายสลับกัน (…123 ไม่ใช่ …132) ระบบไม่เปิดลูกค้าให้',
-               en: '<b>No taxpayer is registered under this ID.</b> The last two digits are transposed — …123, not …132 — and no record is opened.' },
+        msg: { th: '<b>ไม่พบเลขนี้ในทะเบียน</b> สองหลักท้ายสลับกัน (…123 ไม่ใช่ …132) ระบบแจ้งว่าไม่พบข้อมูล และไม่เติมอะไรลงการ์ดลูกค้า',
+               en: '<b>No taxpayer is registered under this ID.</b> The last two digits are transposed — …123, not …132 — so the system reports nothing found and leaves the customer card untouched.' },
         cost: { th: 'เลขสลับหลักมักมาเจอตอนยื่นสิ้นเดือน แล้วต้องไล่แก้ย้อนทั้งงวด',
                 en: 'A transposed ID normally surfaces at month-end filing, when the whole period has to be corrected.' }
-      },
-      {
-        tax: '0105558000123', branch: '00000',
-        tab: { th: 'มีลูกค้ารายนี้แล้ว', en: 'Already on file' }, tabIcon: 'vsi-copy',
-        man: ['Somchai Materials Co., Ltd.', '88/12 Rama 3 Rd.', '', 'Bangkok', '10120', 'สำนักงานใหญ่'],
-        bad: [0, 1, 2, 3],
-        manSub: { th: 'กำลังจะเปิดเป็นรหัส C00871', en: 'About to be opened as C00871' },
-        rdSub: { th: 'ลูกค้าเดิม C00123 หลังอัปเดตตามทะเบียน', en: 'Existing customer C00123, updated from the registry' },
-        mode: 'ask', icon: 'vsi-copy',
-        msg: { th: '<b>เลขนี้เป็นของลูกค้ารหัส C00123 อยู่แล้ว</b> ระบบถามก่อนที่รหัสที่สองจะเกิดขึ้น',
-               en: '<b>This ID already belongs to customer C00123.</b> You are asked before a second code exists.' },
-        pick: { th: 'อัปเดตรายเดิมให้ตรงทะเบียน', en: 'Update the existing record' },
-        rd: HQ,
-        cost: { th: 'ลูกค้ารายเดียวสองรหัส = ยอดลูกหนี้แตกสองก้อน อายุหนี้ผิด วงเงินเครดิตไม่จริง',
-                en: 'One customer under two codes splits the receivable, breaks the ageing and the credit limit.' }
       }
     ];
 
@@ -5034,8 +4998,8 @@
       lblCost: { th: 'ราคาที่จ่ายจริง', en: 'What it costs' },
       noteDemo: { th: 'ข้อมูลบริษัทสมมติ ส่วนระบบจริงเรียก VAT Service จากในหน้าจอ Business Central ตอนเปิดลูกค้า เปิดผู้ขาย และอัปเดตรายเดิม',
                   en: 'A fictional company — the real system calls the VAT Service from inside Business Central when opening customers and vendors and updating existing ones.' },
-      note: { th: 'ปุ่มตัวอย่างทั้ง 4 ใช้ข้อมูลบริษัทสมมติ แต่ถ้า<b>พิมพ์เลขประจำตัวผู้เสียภาษีของบริษัทจริงแล้วกดค้นหา ก็จะได้ข้อมูลจริงจาก<span class="nb">กรมสรรพากร</span></b> ผ่าน VAT Service ตัวเดียวกับที่ Business Central ใช้ตอนสร้างลูกค้าและผู้ขาย',
-              en: 'The four sample buttons use fictional companies, but <b>type a real company\'s tax ID and press Search to get live data from the Revenue Department</b>, through the same VAT Service Business Central uses when you create customers and vendors.' },
+      note: { th: 'ปุ่มตัวอย่างทั้ง 3 ใช้ข้อมูลบริษัทสมมติ แต่ถ้า<b>พิมพ์เลขประจำตัวผู้เสียภาษีของบริษัทจริงแล้วกดค้นหา ก็จะได้ข้อมูลจริงจาก<span class="nb">กรมสรรพากร</span></b> ผ่าน VAT Service ตัวเดียวกับที่ Business Central ใช้ตอนสร้างลูกค้าและผู้ขาย',
+              en: 'The three sample buttons use fictional companies, but <b>type a real company\'s tax ID and press Search to get live data from the Revenue Department</b>, through the same VAT Service Business Central uses when you create customers and vendors.' },
       wait: { th: 'เลือกสาขาจากรายการ', en: 'Pick a branch from the list' },
       manLive: { th: 'ไม่มี ค้นจากเลขที่กรอกเอง', en: 'Nothing — searched by the ID you typed' },
       manLiveSub: { th: 'โหมดค้นจริง', en: 'Live lookup' },
@@ -5045,12 +5009,13 @@
       liveOk: { th: '<b>ข้อมูลจริงจากทะเบียนภาษีมูลค่าเพิ่ม</b>', en: '<b>Live from the VAT registry</b>' },
       liveVat: { th: 'จด VAT เมื่อ', en: 'VAT registered' },
       liveHq: { th: 'สำนักงานใหญ่', en: 'Head office' },
-      liveCost: { th: 'ชุดนี้คือสิ่งที่ Business Central เติมให้เองตอนเปิดลูกค้า ไม่มีใครต้องคีย์',
-                  en: 'This is what Business Central fills in on its own when the record is opened — nobody types it.' },
+      liveBranch: { th: 'สาขา', en: 'Branch' },
+      liveCost: { th: 'กดปุ่ม VAT Service บนการ์ดลูกค้า เลือกสาขา แล้วกดยืนยัน ระบบก็เติมชุดนี้ลงการ์ดให้ ไม่ต้องคีย์เอง',
+                  en: 'Press VAT Service on the customer card, pick the branch and confirm — Business Central fills in this set, with nothing typed by hand.' },
       liveErr: { th: 'ต่อกับกรมสรรพากรไม่ได้ในตอนนี้ ลองใหม่อีกครั้ง', en: 'The Revenue Department could not be reached — try again.' },
       liveBadTin: { th: '<b>เลขประจำตัวผู้เสียภาษีต้องเป็นตัวเลข 13 หลัก</b>', en: '<b>A tax ID is 13 digits.</b>' },
-      liveCostErr: { th: 'เลขที่ค้นไม่เจอ ระบบจริงจะไม่เปิดเป็นลูกค้าให้ตั้งแต่แรก',
-                     en: 'An ID that cannot be found never becomes a customer record in the first place.' },
+      liveCostErr: { th: 'ค้นไม่เจอ ระบบจริงก็แจ้งว่าไม่พบข้อมูลและไม่แตะการ์ดลูกค้า ให้ตรวจเลขกับเอกสารอีกครั้ง',
+                     en: 'Nothing found — the real system says so and leaves the customer card untouched. Check the ID against the document.' },
       held: { th: 'หยุดไว้ก่อน รอการตัดสินใจ', en: 'Held, awaiting your decision' },
       none: { th: 'ไม่มีข้อมูลให้เติม', en: 'Nothing to fill' },
       anyBranch: { th: 'ทุกสาขา', en: 'all' }
@@ -5190,7 +5155,7 @@
       res.innerHTML = '<div class="vs-msg ask">' + ico('vsi-check') + '<p>' + T.liveOk[vsLang]
         + (d.vatFrom ? ' — ' + T.liveVat[vsLang] + ' ' + esc(vatDate(d.vatFrom)) : '') + '</p></div>';
       rd.innerHTML = rows([d.name, d.line1, d.line2, d.province, d.post,
-        d.branchNumber === '00000' ? T.liveHq[vsLang] : d.branchNumber + ' ' + d.branchName], null, !slow);
+        d.branchNumber === '00000' ? T.liveHq[vsLang] : T.liveBranch[vsLang] + ' ' + d.branchNumber], null, !slow);
       byId('vs-cost').textContent = T.liveCost[vsLang];
     }
 
@@ -5664,10 +5629,10 @@
     const N = {
       s:   { t: 'Sale SS-0912', d: '24/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'RAYONG · Lot NGM-260915', m: 'FIFO', ln: [['Direct cost · SI-0907', -98403.92]], q: -1200, u: 'BOX', src: ['op'] },
       op:  { t: 'Output PCK-093', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'RAYONG · Lot NGM-260915', m: 'FIFO', ln: [['Direct cost · PCK-093', 157698.60], ['Indirect cost · PCK-093', 6307.94]], q: 2000, u: 'BOX', flow: '1,200 BOX', ord: [['Material Cost', 150498.60], ['Capacity Cost', 7200.00], ['Manufacturing Overhead', 6307.94]], src: ['cb', 'cx', 'cc', 'kp'] },
-      cb:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910', m: 'FIFO', ln: [['Direct cost · PCK-093', -142898.60]], q: -200000, flow: '200,000 PCS', src: ['od'] },
-      cx:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608', m: 'FIFO', ln: [['Direct cost · PCK-093', -4800.00]], q: -2000, flow: '2,000 PCS', src: ['px'] },
-      cc:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608', m: 'Average', ln: [['Direct cost · PCK-093', -2800.00]], q: -200, flow: '200 PCS', src: ['ap9'] },
-      kp:  { kind: 'cap', t: 'Work Center PCK-01', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'PCK-093 · Capacity Ledger Entry 540', m: '—', ln: [['Direct cost · PCK-093', 7200.00]], q: 16, u: 'HOURS', flow: '16 HOURS' },
+      cb:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910', m: 'FIFO', ln: [['Direct cost · PCK-093', -142898.60]], q: -200000, src: ['od'] },
+      cx:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608', m: 'FIFO', ln: [['Direct cost · PCK-093', -4800.00]], q: -2000, src: ['px'] },
+      cc:  { t: 'Consumption PCK-093', d: '15/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608', m: 'Average', ln: [['Direct cost · PCK-093', -2800.00]], q: -200, src: ['ap9'] },
+      kp:  { kind: 'cap', t: 'Work Center PCK-01', d: '15/09/26', ino: 'FG-NGM', idesc: 'Nitrile Exam Glove M', det: 'PCK-093 · Capacity Ledger Entry 540', m: '—', ln: [['Direct cost · PCK-093', 7200.00]], q: 16, u: 'HOURS' },
       od:  { t: 'Output DIP-091', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'RAYONG · Lot DL3-260910', m: 'FIFO', ln: [['Direct cost · DIP-091', 134810.00], ['Indirect cost · DIP-091', 8088.60]], q: 200000, flow: '200,000 PCS', ord: [['Material Cost', 74810.00], ['Capacity Cost', 60000.00], ['Manufacturing Overhead', 8088.60]], src: ['cl1', 'cl2', 'cz', 'ca', 'kd'] },
       px:  { t: 'Purchase PR-0402', d: '28/08/26', ino: 'PK-BOX', idesc: 'Dispenser box 100', det: 'RAYONG · Lot BX-2608', m: 'FIFO', ln: [['Direct cost · PI-0399', 24000.00]], q: 10000, flow: '2,000 PCS' },
       ap9: { kind: 'pool', t: 'Average cost pool 01/09/26..30/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'All locations', m: 'Average', ov: [400, 5400.00], q: 1200, amt: 16800.00, flow: '-200 PCS', src: ['ov8', 'pc9'] },
@@ -5675,11 +5640,11 @@
       pc9: { t: 'Purchase PR-0436', d: '05/09/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2609', m: 'Average', ln: [['Direct cost · PI-0433', 14200.00]], q: 1000, flow: '1,000 PCS' },
       ap8: { kind: 'pool', t: 'Average cost pool 01/08/26..31/08/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'All locations', m: 'Average', q: 400, amt: 5400.00, flow: '400 PCS', src: ['pc'] },
       pc:  { t: 'Purchase PR-0403', d: '28/08/26', ino: 'PK-CTN', idesc: 'Shipping carton 10 boxes', det: 'RAYONG · Lot CT-2608', m: 'Average', ln: [['Direct cost · PI-0399', 13500.00]], q: 1000, flow: '1,000 PCS' },
-      cl1: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -45000.00]], q: -1000, u: 'KG', flow: '1,000 KG', src: ['pn1'] },
-      cl2: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609', m: 'FIFO', ln: [['Direct cost · DIP-091', -25760.00]], q: -560, u: 'KG', flow: '560 KG', src: ['pn2'] },
-      cz:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607', m: 'FIFO', ln: [['Direct cost · DIP-091', -1710.00]], q: -18, u: 'KG', flow: '18 KG', src: ['pz'] },
-      ca:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -2340.00]], q: -9, u: 'KG', flow: '9 KG', src: ['pa'] },
-      kd:  { kind: 'cap', t: 'Work Center DIP-L3', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'DIP-091 · Capacity Ledger Entry 512', m: '—', ln: [['Direct cost · DIP-091', 60000.00]], q: 40, u: 'HOURS', flow: '40 HOURS' },
+      cl1: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -45000.00]], q: -1000, u: 'KG', src: ['pn1'] },
+      cl2: { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609', m: 'FIFO', ln: [['Direct cost · DIP-091', -25760.00]], q: -560, u: 'KG', src: ['pn2'] },
+      cz:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607', m: 'FIFO', ln: [['Direct cost · DIP-091', -1710.00]], q: -18, u: 'KG', src: ['pz'] },
+      ca:  { t: 'Consumption DIP-091', d: '10/09/26', ino: 'RM-ACC', idesc: 'Accelerator ZDBC', det: 'RAYONG · Lot AC-2608', m: 'FIFO', ln: [['Direct cost · DIP-091', -2340.00]], q: -9, u: 'KG', src: ['pa'] },
+      kd:  { kind: 'cap', t: 'Work Center DIP-L3', d: '10/09/26', ino: 'BLK-NGM', idesc: 'Bulk glove M', det: 'DIP-091 · Capacity Ledger Entry 512', m: '—', ln: [['Direct cost · DIP-091', 60000.00]], q: 40, u: 'HOURS' },
       pn1: { t: 'Purchase PR-0388', d: '18/08/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2608', m: 'FIFO', ln: [['Direct cost · PI-0388', 734400.00], ['Item charge FREIGHT · PI-0391', 45000.00], ['Item charge DUTY · PI-0392', 26000.00], ['Item charge CLEARANCE · PI-0392', 4600.00]], q: 18000, u: 'KG', flow: '1,000 KG' },
       pn2: { t: 'Purchase PR-0418', d: '03/09/26', ino: 'RM-NBR', idesc: 'NBR latex 45%', det: 'RAYONG · Lot LX-KR-2609', m: 'FIFO', ln: [['Direct cost · PI-0415', 756000.00], ['Item charge FREIGHT · PI-0421', 45000.00], ['Item charge DUTY · PI-0422', 23000.00], ['Item charge CLEARANCE · PI-0422', 4000.00]], q: 18000, u: 'KG', flow: '560 KG' },
       pz:  { t: 'Purchase PR-0301', d: '22/07/26', ino: 'RM-ZNO', idesc: 'Zinc oxide', det: 'RAYONG · Lot ZN-2607', m: 'FIFO', ln: [['Direct cost · PI-0301', 47500.00]], q: 500, u: 'KG', flow: '18 KG' },
@@ -5725,10 +5690,10 @@
     const T = {
       tipTitle: { th: '💡 Cost Traceability คืออะไร?', en: '💡 What is Cost Traceability?' },
       tipBody: { th: 'ความสามารถตรวจสอบย้อนหลังได้ว่าต้นทุนสินค้ามีที่มาจากอะไร ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต เพื่อให้เห็นที่มาของต้นทุนได้อย่างชัดเจน'
-                   + chips(['ตรวจสอบต้นทุนย้อนหลัง', 'ดูต้นทุนแยกตาม Lot และ Serial No.', 'ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน',
+                   + chips(['ตรวจสอบต้นทุนย้อนหลัง', 'เห็น Lot และ Serial No. ของทุกรายการ', 'ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน',
                             'รองรับทั้ง FIFO, Average และ Standard Cost', 'ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ']),
                  en: "The ability to trace an item's cost back to where it came from — purchasing, freight, importing and production — so every source of cost is plain to see."
-                   + chips(['Trace costs back to the source', 'See costs by lot and serial number', 'Follow costs through multi-step production',
+                   + chips(['Trace costs back to the source', 'Shows the lot and serial number of every entry', 'Follow costs through multi-step production',
                             'Supports FIFO, Average and Standard costing', 'Review posted entries without changing existing data']) },
       demoTitle: { th: 'สินค้า <span class="nb">1,200 กล่อง</span> ส่งถึงลูกค้าด้วยต้นทุนเท่าไร?',
                    en: '1,200 boxes shipped to a customer: what did they cost?' },
@@ -5736,8 +5701,8 @@
                     + '<p>Cost Traceability ช่วยให้คุณไล่ดูต้นทุนย้อนหลังได้ทีละขั้นตอน ตั้งแต่รายการส่งขายกลับไปจนถึงรายการต้นทาง พร้อมตรวจสอบรายละเอียดของแต่ละรายการได้ทันที</p>',
                   en: '<p>This lot went through many steps: packing, issuing raw materials, production, packaging and importing some of the materials, so its cost builds up from many parts.</p>'
                     + '<p>Cost Traceability lets you trace that cost back step by step, from the sales shipment to the original entries, and check the details of each entry right away.</p>' },
-      graphSr: { th: 'กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ กดหัวกล่องเพื่อดูรายละเอียดที่ Traced Entry ด้านบน ส่วนปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น',
-                 en: "Cost trace graph. The leftmost column is the entry you start from, and each column further right goes one level deeper. Press a box title to show its details under Traced Entry; the number button opens or closes that box's sources." },
+      graphSr: { th: 'กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ ปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น',
+                 en: "Cost trace graph. The leftmost column is the entry you start from, and each column further right goes one level deeper. The number button opens or closes that box's sources." },
       play: { th: 'เล่นทีละขั้น', en: 'Play step by step' },
       stop: { th: 'หยุด', en: 'Stop' },
       introTx: { th: 'กด <b>เล่นทีละขั้น</b> เพื่อไล่ดูต้นทุนย้อนกลับทีละระดับ',
@@ -5751,7 +5716,7 @@
     let lang = 'th';
     const L = (o) => o[lang] || o.th;
 
-    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18, ZMIN = .3, ZMAX = 1.5;
+    const COLW = 280, GAP = 180, PADX = 22, TOP = 64, VGAP = 18, ZMIN = .2, ZMAX = 1.8;
     const state = { open: {}, sel: ROOT, view: 'graph', step: -1, timer: null };
     let pending = true, shown = null, rt = 0, zoom = 1;
 
@@ -5880,8 +5845,9 @@
         if (!state.open[id]) return;
         const x1 = a.x + COLW + 10 + badge.offsetWidth, xm = x1 + 14;
         n.src.forEach((c) => {
+          // ลิงก์ Consumption/Capacity → Output ไม่มีจำนวนกำกับ (แอปจริงเว้นว่าง เพราะต้นทางป้อนทั้งใบสั่งผลิต) — เส้นเข้าที่ระดับเดียวกับป้าย
           const b = pos[c], pill = el[c].querySelector('.ct-flow');
-          const y2 = b.y + pill.offsetTop + pill.offsetHeight / 2, x2 = b.x - 6 - pill.offsetWidth, ax = (xm + x2) / 2;
+          const y2 = b.y + (pill ? pill.offsetTop + pill.offsetHeight / 2 : 26), x2 = b.x - 6 - (pill ? pill.offsetWidth : 0), ax = (xm + x2) / 2;
           const hot = on[c] && on[id] ? ' on' : '';
           p += '<path class="ln' + hot + '" d="M' + x1 + ' ' + y1 + 'H' + xm + 'V' + y2 + 'H' + x2 + '"/>'
             + '<path class="arw' + hot + '" d="M' + (ax - 4) + ' ' + y2 + 'L' + (ax + 4) + ' ' + (y2 - 4) + 'L' + (ax + 4) + ' ' + (y2 + 4) + 'Z"/>'
@@ -6001,26 +5967,7 @@
     byId('ct-expand').addEventListener('click', () => { stopPlay(); openTo(MAXD + 1); state.step = -1; render(); });
     byId('ct-collapse').addEventListener('click', () => { stopPlay(); openTo(0); state.step = -1; state.sel = ROOT; render(ROOT); });
 
-    // Full Screen = ปุ่ม Focus mode มุมขวาของหัวเพจแบบ BC: ย้ายหน้าต่างเข้า <dialog> แบบ modal — Esc ปิดได้
-    // โฟกัสวนอยู่ข้างใน หน้าด้านหลังกดไม่ได้ · ปิดแล้วย้ายกลับที่เดิม (จดตำแหน่งด้วย comment) listener ติดไปกับ element เอง
-    const bc = graph.closest('.ct-bc'), dlg = byId('ct-dlg'), home = document.createComment(' ct-bc ');
-    function setFull(on) {
-      if (on) { stopPlay(); bc.before(home); dlg.append(bc); dlg.showModal(); }
-      else if (home.parentNode) home.replaceWith(bc);
-      document.documentElement.classList.toggle('ct-locked', on);
-      const b = byId('ct-full'), lbl = on ? 'Exit full screen' : 'Full screen';
-      b.querySelector('use').setAttribute('href', on ? '#cti-exit' : '#cti-full');
-      b.setAttribute('aria-label', lbl);
-      b.title = lbl;
-      render(state.sel);
-      b.focus({ preventScroll: true });
-    }
-    if (typeof dlg.showModal !== 'function') byId('ct-full').hidden = true;
-    byId('ct-full').addEventListener('click', () => { if (dlg.open) dlg.close(); else setFull(true); });
-    dlg.addEventListener('close', () => setFull(false));
-    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // กดพื้นมืดรอบหน้าต่าง = ปิด
-
-    // ซูมแบบแอปจริง: −/+ ทีละ 10% · แถบเลื่อน 30–150% · Fit = ย่อทั้งกราฟให้พอดีกรอบ (ไม่ขยายเกิน 100%)
+    // ซูมแบบแอปจริง: −/+ ทีละ 10% · แถบเลื่อน 20–180% · Fit = ย่อทั้งกราฟให้พอดีกรอบ (ไม่ขยายเกิน 100%)
     // ย่อด้วย transform ที่ .ct-canvas ตำแหน่งที่วัดจาก DOM จึงยังเป็นหน่วยเดิม · .ct-sizer กันพื้นที่เลื่อนตามขนาดหลังซูม
     function applyZoom() {
       const c = byId('ct-canvas'), s = byId('ct-sizer');
@@ -6040,7 +5987,7 @@
     byId('ct-zin').addEventListener('click', () => setZoom(zoom + .1));
     byId('ct-zr').addEventListener('input', (e) => setZoom(e.target.value / 100));
     byId('ct-zfit').addEventListener('click', () => {
-      const c = byId('ct-canvas'), h = dlg.open ? graph.clientHeight : Math.min(660, innerHeight * .7);
+      const c = byId('ct-canvas'), h = Math.min(660, innerHeight * .7);
       setZoom(Math.min(1, graph.clientWidth / c.offsetWidth, h / c.offsetHeight));
       graph.scrollTo({ left: 0, top: 0, behavior: 'instant' });
     });
@@ -6086,7 +6033,7 @@
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'cost-traceability.' + ext;
-        (dlg.open ? dlg : document.body).append(a);   // ตอนเต็มจอ หน้าด้านหลังเป็น inert ต้องกดลิงก์จากใน dialog
+        document.body.append(a);
         a.click();
         a.remove();
         setTimeout(() => URL.revokeObjectURL(a.href), 4000);
