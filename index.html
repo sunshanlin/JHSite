@@ -3181,13 +3181,17 @@
     font: 400 13px/1.4 "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", "Anuphan", sans-serif;
     font-variant-numeric: tabular-nums;
   }
-  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ · Focus mode (ปุ่มเดียวที่กดได้) */
+  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ · ปุ่มขยาย [ ] (ปุ่มเดียวที่กดได้) */
   .ct-hdr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0 18px; padding: 12px 14px 10px 12px; }
   .ct-back { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--bc-item); background: rgba(15,108,189,.08); }
   .ct-back .ct-ic { width: 18px; height: 18px; }
   .ct-crumb, .ct-page { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .ct-crumb { font-size: 12px; color: var(--bc-sub); }
   .ct-page { margin-top: 2px; font-size: 26px; font-weight: 300; line-height: 1.25; }
+  /* ปุ่มขยาย (ไอคอน [ ]) มุมขวาของหัวเพจ: เปิดหน้าต่างเป็นกล่องใหญ่เหนือหน้า แล้วย่อกราฟให้เห็นทั้งรูป */
+  .ct-full { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: var(--bc-blue); background: none; border: 0; border-radius: var(--ui-radius-btn); cursor: pointer; }
+  .ct-full:hover { background: var(--bc-field); }
+  .ct-full .ct-ic { width: 18px; height: 18px; stroke-width: 1.5; }
 
   .ct-acts { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 6px 12px; border-top: 1px solid var(--bc-rule); border-bottom: 1px solid var(--bc-rule); }
   .ct-act {
@@ -3288,6 +3292,17 @@
   .ct-flow.tavg { background: var(--bc-avg); border-color: var(--bc-avg-edge); color: var(--bc-avg-ink); }
   .ct-flow.on { border-color: var(--bc-blue); color: var(--bc-blue); font-weight: 600; }
 
+  /* กล่องขยาย: <dialog> เด้งขึ้นเหนือหน้า เว้นขอบให้รู้ว่ายังอยู่หน้าเดิม · มือถือเต็มจอ
+     ขนาดอิง inset ของ dialog เอง ไม่ใช้ 100vw (100vw นับแถบเลื่อนของหน้าด้วย จอที่มีแถบเลื่อนจะล้นขวา) */
+  .ct-dlg {
+    position: fixed; inset: 24px; width: auto; height: auto; max-width: none; max-height: none;
+    margin: 0; padding: 0; overflow: hidden;
+    background: #fff; border: 0; border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow);
+  }
+  .ct-dlg::backdrop { background: rgba(1,47,42,.45); }
+  .ct-dlg .ct-bc { display: flex; flex-direction: column; height: 100%; margin: 0; border: 0; border-radius: 0; }
+  .ct-dlg .ct-scroll, .ct-dlg .ct-table-wrap { flex: 1 1 auto; min-height: 0; max-height: none; }
+  html.ct-locked { overflow: hidden; }
 
   .ct-table-wrap { background: #fff; }
   .ct-tbl { width: 100%; min-width: 860px; border-collapse: collapse; }
@@ -3329,6 +3344,7 @@
     .ct-hdr { gap: 0 10px; padding: 10px 8px 8px 10px; }
     .ct-page { font-size: 21px; }
     .ct-zr { width: 64px; }
+    .ct-dlg { inset: 0; border-radius: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ct-card.ct-new { animation: none; }
@@ -4161,7 +4177,9 @@
       <symbol id="cti-expand" viewBox="0 0 16 16"><path d="M3.5 3.5 8 8l4.5-4.5M3.5 8.5 8 13l4.5-4.5"/></symbol>
       <symbol id="cti-collapse" viewBox="0 0 16 16"><path d="M3.5 12.5 8 8l4.5 4.5M3.5 7.5 8 3l4.5 4.5"/></symbol>
       <symbol id="cti-back" viewBox="0 0 16 16"><path d="M13 8H3.5M7.5 4 3.5 8l4 4"/></symbol>
-      <symbol id="cti-export" viewBox="0 0 16 16"><path d="M9 2.5H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6.5zM9 2.5v4h4M8 8.5v3.5M6.5 10.5 8 12l1.5-1.5"/></symbol>
+      <!-- ปุ่มขยาย: มุม [ ] ชี้ออก = ขยาย · ชี้เข้า = ย่อกลับ -->
+      <symbol id="cti-full" viewBox="0 0 16 16"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></symbol>
+      <symbol id="cti-exit" viewBox="0 0 16 16"><path d="M6 2.5V6H2.5M10 2.5V6h3.5M13.5 10H10v3.5M2.5 10H6v3.5"/></symbol>
       <symbol id="cti-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
       <symbol id="cti-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
     </defs></svg>
@@ -4181,20 +4199,20 @@
       </div>
       <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
       <div class="ct-bc" role="group" aria-label="Cost Traceability">
-        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ไม่มีปุ่มในหัวเพจ
-             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ, open in new window และ Full screen เอาออกแล้ว — แอปจริงไม่มี/กดไม่ได้ (ต.ค. 2026) -->
+        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ปุ่มเดียวที่กดได้คือปุ่มขยาย [ ] มุมขวา (ผู้ใช้ขอ 4 ต.ค. 2026)
+             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ กับ open in new window เอาออกแล้ว — แอปจริงไม่มี/กดไม่ได้ · Export Image เอาออกตามที่ผู้ใช้ขอ -->
         <div class="ct-hdr">
           <span class="ct-back" aria-hidden="true"><svg class="ct-ic"><use href="#cti-back"/></svg></span>
           <div class="ct-hdr-t">
             <p class="ct-crumb">Cost Traceability | Work Date: 30/09/2026</p>
             <p class="ct-page">Sale SS-0912</p>
           </div>
+          <button class="ct-full" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button>
         </div>
         <div class="ct-acts">
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
           <button class="ct-act" id="ct-expand" type="button"><svg class="ct-ic"><use href="#cti-expand"/></svg><span>Expand All</span></button>
           <button class="ct-act" id="ct-collapse" type="button"><svg class="ct-ic"><use href="#cti-collapse"/></svg><span>Collapse All</span></button>
-          <button class="ct-act" id="ct-export" type="button"><svg class="ct-ic"><use href="#cti-export"/></svg><span>Export Image</span></button>
         </div>
         <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ ปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
         <div class="ct-zoom" id="ct-zoom">
@@ -4207,6 +4225,8 @@
         <div class="ct-scroll" id="ct-graph" aria-describedby="ct-graph-desc"><div class="ct-sizer" id="ct-sizer"><div class="ct-canvas" id="ct-canvas"></div></div></div>
         <div class="ct-table-wrap" id="ct-table" hidden></div>
       </div>
+      <!-- กล่องขยาย: สคริปต์ย้ายหน้าต่าง .ct-bc เข้ามาตอนเปิด แล้วย้ายกลับที่เดิมตอนปิด -->
+      <dialog class="ct-dlg" id="ct-dlg" aria-label="Cost Traceability"></dialog>
     </div>
     </div>
   </div>
@@ -6017,75 +6037,36 @@
     byId('ct-zout').addEventListener('click', () => setZoom(zoom - .1));
     byId('ct-zin').addEventListener('click', () => setZoom(zoom + .1));
     byId('ct-zr').addEventListener('input', (e) => setZoom(e.target.value / 100));
-    byId('ct-zfit').addEventListener('click', () => {
-      const c = byId('ct-canvas'), h = Math.min(660, innerHeight * .7);
-      setZoom(Math.min(1, graph.clientWidth / c.offsetWidth, h / c.offsetHeight));
+    // Fit: ในกล่องขยายใช้ความสูงจริงของกรอบ · บนหน้าใช้เพดานเดียวกับ max-height ของ .ct-scroll
+    // ปัดลงก่อน setZoom ปัดเป็น 2 หลัก — ปัดขึ้นแล้วกราฟกว้างเกินกรอบ 1–2px จนขึ้นแถบเลื่อน
+    function fit() {
+      const c = byId('ct-canvas'), h = dlg.open ? graph.clientHeight : Math.min(660, innerHeight * .7);
+      setZoom(Math.floor(Math.min(1, graph.clientWidth / c.offsetWidth, h / c.offsetHeight) * 100) / 100);
       graph.scrollTo({ left: 0, top: 0, behavior: 'instant' });
-    });
-
-    // Export Image: วาดกราฟที่กางอยู่ทั้งหมด (กล่อง เส้น ป้าย ตัวอักษร ตามตำแหน่งจริงใน DOM) เป็นภาพ ไม่พึ่งไลบรารี
-    // ได้ PNG เมื่อเบราว์เซอร์ยอมวาด SVG ลง canvas ไม่งั้นส่งเป็นไฟล์ SVG แทน
-    function exportImage() {
-      if (state.view !== 'graph') { setView('graph'); render(); }
-      const cv = byId('ct-canvas'), W = cv.offsetWidth, H = cv.offsetHeight, o = cv.getBoundingClientRect();
-      const X = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-      const at = (el) => { const b = el.getBoundingClientRect(); return [(b.left - o.left) / zoom, (b.top - o.top) / zoom, b.width / zoom, b.height / zoom]; };
-      const rect = (el, more) => {
-        const [x, y, w, h] = at(el), cs = getComputedStyle(el), bw = parseFloat(cs.borderTopWidth) || 0;
-        return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + Math.min(parseFloat(cs.borderTopLeftRadius) || 0, h / 2)
-          + '" fill="' + cs.backgroundColor + '"' + (bw ? ' stroke="' + cs.borderTopColor + '"' : more || '') + '/>';
-      };
-      const text = (el, mid) => {
-        const [x, y, w, h] = at(el), cs = getComputedStyle(el), fs = parseFloat(cs.fontSize);
-        const fit = !mid && el.scrollWidth > el.clientWidth + 1 ? ' textLength="' + w + '" lengthAdjust="spacingAndGlyphs"' : '';
-        return '<text x="' + (mid ? x + w / 2 : x) + '" y="' + (y + h / 2 + fs * .35) + '" font-size="' + fs + '" font-weight="' + cs.fontWeight
-          + '" fill="' + cs.color + '"' + (mid ? ' text-anchor="middle"' : fit) + '>' + X(el.textContent.trim()) + '</text>';
-      };
-      let s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" font-family="Segoe UI, Arial, sans-serif">'
-        + '<style>path{fill:none;stroke:#8A8886;stroke-width:1.2}path.arw{fill:#8A8886;stroke:none}path.on{stroke:#0F6CBD;stroke-width:2.5}path.arw.on{fill:#0F6CBD}</style>'
-        + '<rect width="' + W + '" height="' + H + '" fill="#F3F2F1"/>' + cv.querySelector('.ct-lines').innerHTML;
-      cv.querySelectorAll('.ct-colhead').forEach((el) => { s += rect(el) + text(el, true); });
-      cv.querySelectorAll('.ct-card').forEach((c, i) => {
-        const [x, y, w, h] = at(c);
-        s += rect(c, ' stroke="#E0E0E0"')
-          + (c.classList.contains('root') ? '<rect x="' + x + '" y="' + y + '" width="3" height="' + h + '" fill="#0F6CBD"/>' : '')
-          + (c.classList.contains('sel') && !c.classList.contains('root') ? '<rect x="' + (x + 1) + '" y="' + (y + 1) + '" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="2" fill="none" stroke="#0F6CBD" stroke-width="2"/>' : '')
-          + '<clipPath id="k' + i + '"><rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/></clipPath><g clip-path="url(#k' + i + ')">';
-        c.querySelectorAll('.ct-blk').forEach((b) => { s += rect(b); });
-        c.querySelectorAll('.ct-title, .ct-meth, .ct-item, .ct-detail, .ct-ln > span, .ct-blk-cap, .ct-avg, .ct-foot > span, .ct-foot > b').forEach((t) => { s += text(t); });
-        c.querySelectorAll('.ct-box').forEach((b) => { const [bx, by, bw] = at(b); s += '<line x1="' + bx + '" y1="' + by + '" x2="' + (bx + bw) + '" y2="' + by + '" stroke="#E0E0E0"/>'; });
-        const adj = c.querySelector('.ct-adj');
-        if (adj) s += rect(adj) + text(adj, true);
-        s += '</g>';
-      });
-      cv.querySelectorAll('.ct-flow, .ct-badge').forEach((el) => { s += rect(el) + text(el, true); });
-      s += '</svg>';
-
-      const save = (blob, ext) => {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'cost-traceability.' + ext;
-        document.body.append(a);
-        a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-      };
-      const svgBlob = new Blob([s], { type: 'image/svg+xml' }), img = new Image();
-      img.onload = () => {
-        try {
-          const k = Math.min(2, 16000 / Math.max(W, H)), c = document.createElement('canvas');
-          c.width = Math.round(W * k);
-          c.height = Math.round(H * k);
-          const g = c.getContext('2d');
-          g.scale(k, k);
-          g.drawImage(img, 0, 0);
-          c.toBlob((b) => save(b || svgBlob, b ? 'png' : 'svg'), 'image/png');
-        } catch (e) { save(svgBlob, 'svg'); }
-      };
-      img.onerror = () => save(svgBlob, 'svg');
-      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
     }
-    byId('ct-export').addEventListener('click', () => { stopPlay(); exportImage(); });
+    byId('ct-zfit').addEventListener('click', fit);
+
+    // ปุ่มขยาย [ ] มุมขวาของหัวเพจ: ย้ายหน้าต่างเข้า <dialog> แบบ modal แล้ว Fit ให้เห็นกราฟทั้งรูป
+    // Esc / กดพื้นมืดรอบกล่อง / กดปุ่มเดิมซ้ำ = ปิด · ปิดแล้วย้ายกลับที่เดิม (จดตำแหน่งด้วย comment) และคืนซูมก่อนเปิด
+    // listener ติดไปกับ element เอง · ปุ่มขั้นกับคำบรรยายไม่ได้เข้าไปในกล่อง จึงหยุดเล่นอัตโนมัติก่อนเปิด
+    const bc = graph.closest('.ct-bc'), dlg = byId('ct-dlg'), home = document.createComment(' ct-bc ');
+    let zoomBefore = 1;
+    function setFull(on) {
+      if (on) { stopPlay(); zoomBefore = zoom; bc.before(home); dlg.append(bc); dlg.showModal(); }
+      else if (home.parentNode) { home.replaceWith(bc); zoom = zoomBefore; }
+      document.documentElement.classList.toggle('ct-locked', on);
+      const b = byId('ct-full'), lbl = on ? 'Exit full screen' : 'Full screen';
+      b.querySelector('use').setAttribute('href', on ? '#cti-exit' : '#cti-full');
+      b.setAttribute('aria-label', lbl);
+      b.title = lbl;
+      render(state.sel);
+      if (on && state.view === 'graph') fit();
+      b.focus({ preventScroll: true });
+    }
+    if (typeof dlg.showModal !== 'function') byId('ct-full').hidden = true;
+    byId('ct-full').addEventListener('click', () => { if (dlg.open) dlg.close(); else setFull(true); });
+    dlg.addEventListener('close', () => setFull(false));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
 
     addEventListener('resize', () => {
       if (state.view !== 'graph') return;
