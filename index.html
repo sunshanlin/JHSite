@@ -3473,7 +3473,6 @@
     <div class="links" id="primary-nav">
       <a href="#services">บริการ</a>
       <a href="#features">ฟังก์ชัน</a>
-      <a href="#reports">ตัวอย่างรายงาน</a>
       <a href="#pricing">แพ็กเกจ</a>
       <a href="#billing-flow">นำเสนอ</a>
       <a href="#faq">FAQ</a>
@@ -4771,17 +4770,20 @@
   // scrollspy: ไฮไลต์เมนูตาม section ที่กำลังดู
   const navLinkById = new Map();
   document.querySelectorAll('.topnav .links a[href^="#"]').forEach(a => navLinkById.set(a.getAttribute('href').slice(1), a));
+  // ตัวอย่างรายงานไม่มีเมนูของตัวเอง อยู่ใต้เมนูฟังก์ชัน
+  const navAlias = { reports: 'features' };
   const spy = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (!en.isIntersecting) return;
+      const cur = navAlias[en.target.id] || en.target.id;
       navLinkById.forEach((a, id) => {
-        const on = id === en.target.id;
+        const on = id === cur;
         a.classList.toggle('is-active', on);
         if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
       });
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  navLinkById.forEach((a, id) => {
+  [...navLinkById.keys(), ...Object.keys(navAlias)].forEach(id => {
     const s = document.getElementById(id);
     if (s) spy.observe(s);
   });
@@ -6106,7 +6108,6 @@
     ['.skip-link', 'Skip to main content'],
     ['.topnav .links a[href="#services"]', 'Services'],
     ['.topnav .links a[href="#features"]', 'Features'],
-    ['.topnav .links a[href="#reports"]', 'Reports'],
     ['.topnav .links a[href="#articles"]', 'Articles'],
     ['.topnav .links a[href="#pricing"]', 'Pricing'],
     ['.hero-actions .cta.ghost', 'See package pricing'],
