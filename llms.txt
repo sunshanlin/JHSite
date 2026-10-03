@@ -24,6 +24,7 @@ Key facts:
 - [ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้](https://www.jwicconsulting.com/articles/pp30-branch-filing.html)
 - [ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central](https://www.jwicconsulting.com/articles/fixed-asset-register-stock-card.html)
 - [งบวางระบบ Business Central ในไทยมีอะไรบ้าง](https://www.jwicconsulting.com/articles/business-central-cost-thailand.html)
+- [ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้ทีละขั้น](https://www.jwicconsulting.com/articles/cost-traceability.html)
 
 ## Contact
 
