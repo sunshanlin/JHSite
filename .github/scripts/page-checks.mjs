@@ -10,7 +10,7 @@
 //   5. #pricing text that needed the .wrap-rescue safety net (someone forgot <wbr>) or still overflows
 //   6. interactive targets smaller than 24×24 CSS px (WCAG 2.2 SC 2.5.8)
 //   7. homepage length on a 390px phone over budget (the demos un-collapsed → 25,000px again)
-//   8. articles without the LINE/phone CTA or with fewer than two related links
+//   8. articles without the LINE/phone CTA (except those in NO_CTA) or with fewer than two related links
 //   9. print (A4) longer than the page budget
 //
 // Run locally:  npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs
@@ -147,6 +147,9 @@ for (const width of [320, 360, 390, 414, 768, 1024, 1280, 1440]) {
 }
 
 // ---- 1, 2, 8: articles
+// Purely educational articles that leave out the CTA block on purpose (decided 2026-10-03).
+// Their footer still carries the LINE and phone links.
+const NO_CTA = new Set(['cost-traceability.html']);
 for (const file of fs.readdirSync(path.join(ROOT, 'articles')).filter(f => f.endsWith('.html')).sort()) {
   for (const width of [390, 1400]) {
     const where = `articles/${file} ${width}px`;
@@ -161,7 +164,7 @@ for (const file of fs.readdirSync(path.join(ROOT, 'articles')).filter(f => f.end
     }));
     if (a.sw > a.iw) fail(where, `page scrolls sideways (${a.sw}px wide in a ${a.iw}px viewport)`);
     if (width === 390) {
-      if (!a.line || !a.tel) fail(where, 'CTA block is missing the LINE or phone link');
+      if (!NO_CTA.has(file) && (!a.line || !a.tel)) fail(where, 'CTA block is missing the LINE or phone link');
       if (a.related < 2) fail(where, `only ${a.related} related article link(s), need 2`);
       const og = a.og.replace('https://www.jwicconsulting.com', '');
       if (!og.startsWith('/') || !fs.existsSync(path.join(ROOT, og))) fail(where, `og:image ${a.og} is not a file in the repo`);

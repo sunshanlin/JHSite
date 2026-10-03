@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้ทีละขั้น | JWIC Consulting</title>
+<meta name="description" content="ตัวอย่างถุงมือ 1 กล่องต้นทุน 82 บาท ไล่ย้อนตั้งแต่ใบจัดส่งขายถึงน้ำยางนำเข้า ทำไมต้นทุนในระบบถึงซับซ้อน และดูทั้งเส้นทางใน Business Central ได้ในหน้าเดียว">
+<link rel="canonical" href="https://www.jwicconsulting.com/articles/cost-traceability.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/brand/jwic-icon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้ทีละขั้น">
+<meta property="og:description" content="ไล่ต้นทุนถุงมือกล่องละ 82 บาทย้อนกลับถึงน้ำยางนำเข้า และดูที่มาของต้นทุนใน Business Central ได้ในหน้าเดียว">
+<meta property="og:url" content="https://www.jwicconsulting.com/articles/cost-traceability.html">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/og/cost-traceability.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.jwicconsulting.com/img/og/cost-traceability.png">
+<link rel="stylesheet" href="/css/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้ทีละขั้น",
+  "description": "ไล่ต้นทุนถุงมือกล่องละ 82 บาทย้อนกลับถึงน้ำยางนำเข้า และดูที่มาของต้นทุนใน Business Central ได้ในหน้าเดียว",
+  "image": "https://www.jwicconsulting.com/img/og/cost-traceability.png",
+  "inLanguage": "th",
+  "mainEntityOfPage": "https://www.jwicconsulting.com/articles/cost-traceability.html",
+  "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "JWIC Consulting",
+    "logo": { "@type": "ImageObject", "url": "https://www.jwicconsulting.com/img/brand/jwic-icon.png" }
+  },
+  "datePublished": "2026-10-03",
+  "dateModified": "2026-10-03"
+}
+</script>
+<script src="/js/article.js" defer></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="bar" data-nosnippet>
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" role="img" aria-label="JWIC Consulting">
+        <defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#lg)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <span class="wordmark">JWIC <i>Consulting</i></span>
+    </a>
+    <a class="back" href="/#articles">← บทความทั้งหมด</a>
+  </div>
+</nav>
+
+<header class="article-head">
+  <div class="wrap">
+    <span class="tag">ต้นทุนสินค้า</span>
+    <h1>ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้ทีละขั้น</h1>
+    <p class="lead">ผู้บริหารถามว่าต้นทุนถุงมือกล่องละ 82 บาทมาจากไหน คุณตอบได้ทันทีไหม? ตัวเลขทุกตัวมีอยู่ใน Business Central ครบแล้ว แต่กระจายอยู่หลายหน้าจอ บทความนี้ใช้ตัวอย่างเดียวไล่ให้ดูตั้งแต่ใบจัดส่งขายไปจนถึงวัตถุดิบที่นำเข้ามา</p>
+    <p class="meta">โดย Jirapat Wichayapong · ที่ปรึกษาและนักพัฒนา Business Central · ตุลาคม 2026</p>
+  </div>
+</header>
+
+<div class="wrap">
+<article>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>ทำไมต้นทุนในระบบถึงซับซ้อน?</h2>
+  <p>ต้นทุนของสินค้าหนึ่งหน่วยไม่ได้มาจากเอกสารใบเดียว แต่สะสมมาจากหลายใบ หลายขั้น และหลายช่วงเวลา</p>
+  <ul>
+    <li><strong>ค่าใช้จ่ายที่ตามมาทีหลัง</strong> ค่าขนส่ง อากรขาเข้า และค่าเคลียร์สินค้ามักมาเป็นใบแจ้งหนี้แยกจากค่าสินค้า แต่ต้องนับเป็นต้นทุนของสินค้าล็อตนั้นด้วย</li>
+    <li><strong>ค่าผลิต</strong> พอแปรรูปวัตถุดิบเป็นสินค้า ค่าเครื่องจักร ค่าแรง และค่าโสหุ้ยการผลิตก็บวกเข้าไปในต้นทุน</li>
+    <li><strong>ต้นทุนเฉลี่ย</strong> สินค้าที่ใช้วิธี Average ระบบจะเอาราคาที่ซื้อรอบนี้ไปเฉลี่ยกับต้นทุนของที่ยังเหลือจากรอบก่อน</li>
+  </ul>
+  <p>สินค้าผ่านกี่ขั้น ต้นทุนก็ซ้อนกันกี่ชั้น ยิ่งซ้อนหลายชั้น คำถามว่าตัวเลขสุดท้ายมาจากไหนก็ยิ่งตอบยาก</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>ตัวอย่าง: ถุงมือ 1 กล่อง ต้นทุน 82 บาท</h2>
+  <p>โรงงานถุงมือแห่งหนึ่ง (ข้อมูลสมมติ) ส่งถุงมือไนไตรล์ให้ลูกค้า 1,200 กล่อง ระบบลงต้นทุนขายไว้ 98,403.92 บาท ตกกล่องละ 82 บาท พอไล่ย้อนกลับไปก็จะเจอเส้นทางแบบนี้</p>
+  <div class="steps-box">
+    <h3>จากใบจัดส่งขายย้อนไปถึงน้ำยางนำเข้า</h3>
+    <ol>
+      <li><strong>ใบจัดส่งขาย</strong> ส่งถุงมือ 1,200 กล่อง ต้นทุนกล่องละ 82 บาท</li>
+      <li><strong>งานบรรจุกล่อง</strong> บรรจุได้ 2,000 กล่อง ใช้ถุงมือที่ผลิตเสร็จแล้ว กล่องใส่ถุงมือ ลังกระดาษ และเวลาของไลน์บรรจุ 16 ชั่วโมง</li>
+      <li><strong>ลังกระดาษ</strong> ใช้ต้นทุนเฉลี่ยของเดือนกันยายน ใบละ 14 บาท มาจากลัง 400 ใบที่เหลือจากเดือนสิงหาคม (ใบละ 13.50 บาท) รวมกับที่ซื้อเข้ามาในเดือนนี้อีก 1,000 ใบ (ใบละ 14.20 บาท)</li>
+      <li><strong>ไลน์ผลิตถุงมือ</strong> ผลิตได้ 200,000 ชิ้น จากน้ำยาง สารเคมี และเวลาเครื่อง 40 ชั่วโมง ตกชิ้นละประมาณ 0.71 บาท</li>
+      <li><strong>น้ำยางนำเข้า</strong> ซื้อมาสองล็อต ราคาซื้อคิดเป็นเงินบาทได้กิโลกรัมละ 40.80 และ 42 บาท พอบวกค่าขนส่ง อากร และค่าเคลียร์สินค้าแล้ว ต้นทุนจริงกลายเป็นกิโลกรัมละ 45 และ 46 บาท</li>
+    </ol>
+  </div>
+  <p>พอแยกต้นทุนกล่องละ 82 บาทออกเป็นส่วน ๆ ก็เห็นว่าก้อนใหญ่ที่สุดคือถุงมือข้างในกล่อง ที่เหลือรวมกันยังไม่ถึง 11 บาท</p>
+  <table>
+    <tr><th>ส่วนประกอบของถุงมือ 1 กล่อง</th><th>บาท</th></tr>
+    <tr><td>ถุงมือ 100 ชิ้น</td><td>71.45</td></tr>
+    <tr><td>กล่องใส่ถุงมือ</td><td>2.40</td></tr>
+    <tr><td>ลังกระดาษ (1 ลังใส่ 10 กล่อง)</td><td>1.40</td></tr>
+    <tr><td>ค่าไลน์บรรจุ</td><td>3.60</td></tr>
+    <tr><td>ค่าโสหุ้ยการผลิต</td><td>3.15</td></tr>
+    <tr><td><strong>รวม</strong></td><td><strong>82.00</strong></td></tr>
+  </table>
+  <p>ตารางนี้คิดเป็นต่อกล่องให้อ่านง่าย ในระบบจริงแต่ละขั้นจะแสดงเป็นยอดรวมตามที่ Post ไว้</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>ใน Business Central มาตรฐาน ต้องเปิดดูกี่หน้าจอ?</h2>
+  <p>ข้อมูลในตัวอย่างนี้ Business Central มาตรฐานเก็บไว้ครบแล้ว แต่แยกกันอยู่คนละที่ แค่จะตอบคำถามเดียว คุณก็ต้องเปิดต่อกันหลายหน้า</p>
+  <ul>
+    <li><strong>Item Ledger Entries</strong> กับ <strong>Applied Entries</strong> ดูว่าของที่ขายหรือเบิกไป จับคู่กับของที่รับเข้ามาใบไหน</li>
+    <li><strong>Value Entries</strong> ดูค่าขนส่งและอากรที่บวกเข้ามาทีหลัง</li>
+    <li><strong>Production Order Statistics</strong> ดูวัตถุดิบ ค่าเครื่อง และค่าโสหุ้ยของแต่ละใบสั่งผลิต</li>
+    <li><strong>Average Cost Calc. Overview</strong> ดูว่าต้นทุนเฉลี่ยของเดือนมาจากของยกมาและของที่รับเข้าเท่าไร</li>
+  </ul>
+  <p>แล้วยังต้องจดตัวเลขจากแต่ละหน้ามาต่อกันเองทีละขั้น สินค้าที่ผ่านการผลิตสองสามขั้นก็ต้องวนเปิดหน้าเดิมซ้ำอีกหลายรอบ</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></span>Cost Traceability: เห็นทั้งเส้นทางในหน้าเดียว</h2>
+  <p>Cost Traceability เป็นหน้าจอหนึ่งใน JWIC Localization พอเลือกรายการในหน้า Item Ledger Entries แล้วกดปุ่ม Cost Traceability ระบบก็วาดเส้นทางของต้นทุนให้ดูทันที รายการที่เลือกอยู่ซ้ายสุด ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละขั้น จนถึงใบรับสินค้าต้นทาง</p>
+  <ul>
+    <li>แต่ละรายการในแผนภาพบอกจำนวน ต้นทุนต่อหน่วย และค่าใช้จ่ายที่บวกเข้ามา เช่น ค่าขนส่งหรืออากรที่ลงเป็น Item Charge</li>
+    <li>ใช้ได้กับ Costing Method แบบ FIFO, Average, Standard และ Specific</li>
+    <li>สินค้าที่ใช้ Average จะมีรายการต้นทุนเฉลี่ยของงวด แยกยอดยกมากับของที่รับเข้า ตัวเลขตรงกับหน้า Average Cost Calc. Overview</li>
+    <li>เห็น Lot No. และ Serial No. ของทุกรายการตลอดเส้นทาง</li>
+    <li>ไล่ผ่านใบสั่งผลิตหลายขั้นได้ จนถึงวัตถุดิบที่ซื้อเข้ามา</li>
+    <li>กดที่รายการเพื่อเปิดหน้ามาตรฐานของ Business Central ที่อยู่เบื้องหลังตัวเลขนั้นได้ หรือจะบันทึกทั้งแผนภาพเป็นรูปส่งให้ผู้บริหารก็ได้</li>
+  </ul>
+  <p>หน้าจอนี้อ่านข้อมูลอย่างเดียว ไม่คำนวณต้นทุนใหม่และไม่แตะรายการที่ Post แล้ว ตัวเลขทุกตัวคือยอดที่ Business Central บันทึกไว้เอง เปิดหน้ามาตรฐานมาเทียบก็ตรงกัน</p>
+  <p>ก่อนปิดงวด ยังมีหน้า Cost Traceability Check ไว้ตรวจรายการที่ต้นทุนยังไม่นิ่งด้วย เช่น ของที่รับเข้าคลังแล้วแต่ผู้ขายยังไม่ส่งใบแจ้งหนี้ หรือรายการที่ยังไม่ได้รัน Adjust Cost – Item Entries (เหตุผลที่ต้นทุนขยับหลังปิดงวด อ่านต่อได้ในบทความ<a href="/articles/fixed-asset-register-stock-card.html">ทะเบียนทรัพย์สินและ Stock Card</a>)</p>
+  <p>ถ้าอยากเห็นหน้าตาก่อน ลองเล่นตัวอย่างถุงมือชุดนี้ได้ที่<a href="/#cost-trace">ส่วนนำเสนอบนหน้าแรก</a></p>
+
+  <div class="note">
+    <b>ค่าขนส่งกับอากรต้องลงเป็น Item Charge</b>
+    <p>ถ้าบันทึกค่าขนส่งหรืออากรขาเข้าเป็นค่าใช้จ่ายเข้าบัญชีตรง ๆ ยอดนั้นจะไม่ไปอยู่ในต้นทุนสินค้า ทั้งในมูลค่าสินค้าคงเหลือและในเส้นทางของ Cost Traceability ตอนบันทึกใบแจ้งหนี้ค่าขนส่ง ควรผูกกับใบรับสินค้าล็อตนั้นผ่าน Item Charge ตั้งแต่แรก</p>
+  </div>
+
+  <p class="source-note">อ้างอิง (Microsoft Learn): <a href="https://learn.microsoft.com/dynamics365/business-central/payables-how-assign-item-charges">Use item charges to account for extra trade costs</a> · <a href="https://learn.microsoft.com/dynamics365/business-central/design-details-average-cost">Design details: Average cost</a> · <a href="https://learn.microsoft.com/dynamics365/business-central/design-details-costing-methods">Design details: Costing methods</a></p>
+
+  <div class="more">
+    <h2>บทความอื่น</h2>
+    <ul>
+      <li><a href="/articles/fixed-asset-register-stock-card.html">ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central</a></li>
+      <li><a href="/articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></li>
+      <li><a href="/articles/accounting-to-erp.html">ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง</a></li>
+    </ul>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
+    <div class="foot-reach"><a href="tel:0841487480">084-148-7480</a> · <a href="https://line.me/ti/p/~0841487480" rel="noopener">LINE 0841487480</a> · <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a></div>
+    <div><a href="/">jwicconsulting.com</a><button type="button" class="cookie-manage" hidden>จัดการคุกกี้</button></div>
+  </div>
+</footer>
+
+</body>
+</html>
