@@ -2913,6 +2913,7 @@
   .vs-tip-ar { width: 26px; height: 30px; flex: 0 0 auto; fill: none; stroke: var(--brand-pink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .vs-tip span { padding-bottom: 4px; }
 
+  .vs-cost:has(#vs-cost:empty) { display: none; }   /* สถานการณ์ที่ไม่มีบรรทัดราคาที่จ่ายจริง */
   .vs-cases {
     display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
     padding: 16px 24px; border-bottom: 1px solid var(--ui-line);
@@ -4940,9 +4941,7 @@
         tab: { th: 'เลขถูก', en: 'Valid ID' }, tabIcon: 'vsi-check',
         man: ['บจก.สมชายค้าวัสดุ', '88/12 พระราม3', '', 'กทม.', '', 'สำนักงานใหญ่'],
         bad: [0, 1, 2, 3, 4],
-        rd: HQ,
-        cost: { th: 'ชื่อหรือที่อยู่ไม่ตรงหนังสือรับรอง = ลูกค้าใช้เป็นภาษีซื้อไม่ได้',
-                en: 'A name or address that misses the registration makes the invoice unusable as input VAT.' }
+        rd: HQ
       },
       {
         tax: '0105558000123', branch: '',
@@ -5107,7 +5106,7 @@
       } else {
         byId('vs-rd').innerHTML = rows(cur.rd, null, !slow);
       }
-      byId('vs-cost').textContent = cur.cost[vsLang];
+      byId('vs-cost').textContent = cur.cost ? cur.cost[vsLang] : '';
     }
 
     /* ── โหมดค้นจริง ────────────────────────────────────────────────
