@@ -3181,18 +3181,13 @@
     font: 400 13px/1.4 "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", "Anuphan", sans-serif;
     font-variant-numeric: tabular-nums;
   }
-  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ · ปุ่มขยาย [ ] (ปุ่มเดียวที่กดได้) */
-  .ct-hdr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0 18px; padding: 12px 14px 10px 12px; }
+  /* หัวเพจ: ลูกศรย้อนกลับ · breadcrumb + ชื่อรายการ — ไม่มีปุ่มที่กดได้ (ปุ่มขยายอยู่แถวคำสั่งข้างล่าง) */
+  .ct-hdr { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0 18px; padding: 12px 14px 10px 12px; }
   .ct-back { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--bc-item); background: rgba(15,108,189,.08); }
   .ct-back .ct-ic { width: 18px; height: 18px; }
   .ct-crumb, .ct-page { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .ct-crumb { font-size: 12px; color: var(--bc-sub); }
   .ct-page { margin-top: 2px; font-size: 26px; font-weight: 300; line-height: 1.25; }
-  /* ปุ่มขยาย (ไอคอน [ ]) มุมขวาของหัวเพจ: เปิดหน้าต่างเป็นกล่องใหญ่เหนือหน้า แล้วย่อกราฟให้เห็นทั้งรูป */
-  .ct-full { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: var(--bc-blue); background: none; border: 0; border-radius: var(--ui-radius-btn); cursor: pointer; }
-  .ct-full:hover { background: var(--bc-field); }
-  .ct-full .ct-ic { width: 18px; height: 18px; stroke-width: 1.5; }
-
   .ct-acts { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 6px 12px; border-top: 1px solid var(--bc-rule); border-bottom: 1px solid var(--bc-rule); }
   .ct-act {
     display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 8px;
@@ -3201,6 +3196,9 @@
   }
   .ct-act:hover { background: var(--bc-field); }
   .ct-act .ct-ic { width: 16px; height: 16px; stroke-width: 1.6; color: var(--bc-blue); }
+  /* ปุ่มขยาย [ ]: แถวเดียวกับ Expand All / Collapse All แต่ชิดขวา — แยกปุ่มที่ทำกับหน้าต่างออกจากปุ่มที่ทำกับกราฟ
+     และตรงแนวกับปุ่ม Fit ข้างล่าง · เปิดหน้าต่างเป็นกล่องใหญ่เหนือหน้า แล้วย่อกราฟให้เห็นทั้งรูป */
+  .ct-full { margin-left: auto; width: 32px; padding: 0; justify-content: center; }
 
   /* แถบซูมมุมขวาบนของพื้นกราฟ แบบแอปจริง: −  แถบเลื่อน  +  เปอร์เซ็นต์  Fit */
   .ct-zoom { display: flex; justify-content: flex-end; align-items: center; gap: 6px; padding: 10px 12px 0; background: var(--bc-canvas); }
@@ -4199,20 +4197,21 @@
       </div>
       <div class="ct-narr" id="ct-narr"><div class="ct-narr-now" id="ct-narr-now" aria-live="polite"></div></div>
       <div class="ct-bc" role="group" aria-label="Cost Traceability">
-        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ปุ่มเดียวที่กดได้คือปุ่มขยาย [ ] มุมขวา (ผู้ใช้ขอ 4 ต.ค. 2026)
-             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ กับ open in new window เอาออกแล้ว — แอปจริงไม่มี/กดไม่ได้ · Export Image เอาออกตามที่ผู้ใช้ขอ -->
+        <!-- หัวเพจแบบ BC: ลูกศรย้อนกลับเป็นภาพประกอบ (aria-hidden) · ไม่มีปุ่มในหัวเพจ
+             ไอคอนแก้ไข/แชร์/เพิ่ม/ลบ กับ open in new window เอาออกแล้ว — แอปจริงไม่มี/กดไม่ได้
+             แถวคำสั่ง: Export Image เอาออก · ปุ่มขยาย [ ] ชิดขวาสุด (ผู้ใช้ขอ 4 ต.ค. 2026) -->
         <div class="ct-hdr">
           <span class="ct-back" aria-hidden="true"><svg class="ct-ic"><use href="#cti-back"/></svg></span>
           <div class="ct-hdr-t">
             <p class="ct-crumb">Cost Traceability | Work Date: 30/09/2026</p>
             <p class="ct-page">Sale SS-0912</p>
           </div>
-          <button class="ct-full" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button>
         </div>
         <div class="ct-acts">
           <button class="ct-act" id="ct-view" type="button"><svg class="ct-ic"><use href="#cti-table"/></svg><span>Table View</span></button>
           <button class="ct-act" id="ct-expand" type="button"><svg class="ct-ic"><use href="#cti-expand"/></svg><span>Expand All</span></button>
           <button class="ct-act" id="ct-collapse" type="button"><svg class="ct-ic"><use href="#cti-collapse"/></svg><span>Collapse All</span></button>
+          <button class="ct-act ct-full" id="ct-full" type="button" aria-label="Full screen" title="Full screen"><svg class="ct-ic"><use href="#cti-full"/></svg></button>
         </div>
         <p class="ct-sr" id="ct-graph-desc" data-ct="graphSr">กราฟย้อนต้นทุน คอลัมน์ซ้ายสุดคือรายการที่เริ่มตรวจ ยิ่งไปทางขวาก็ยิ่งย้อนลึกลงไปทีละระดับ ปุ่มตัวเลขใช้กางหรือพับต้นทางของกล่องนั้น</p>
         <div class="ct-zoom" id="ct-zoom">
@@ -6046,7 +6045,7 @@
     }
     byId('ct-zfit').addEventListener('click', fit);
 
-    // ปุ่มขยาย [ ] มุมขวาของหัวเพจ: ย้ายหน้าต่างเข้า <dialog> แบบ modal แล้ว Fit ให้เห็นกราฟทั้งรูป
+    // ปุ่มขยาย [ ] ชิดขวาของแถวคำสั่ง: ย้ายหน้าต่างเข้า <dialog> แบบ modal แล้ว Fit ให้เห็นกราฟทั้งรูป
     // Esc / กดพื้นมืดรอบกล่อง / กดปุ่มเดิมซ้ำ = ปิด · ปิดแล้วย้ายกลับที่เดิม (จดตำแหน่งด้วย comment) และคืนซูมก่อนเปิด
     // listener ติดไปกับ element เอง · ปุ่มขั้นกับคำบรรยายไม่ได้เข้าไปในกล่อง จึงหยุดเล่นอัตโนมัติก่อนเปิด
     const bc = graph.closest('.ct-bc'), dlg = byId('ct-dlg'), home = document.createComment(' ct-bc ');
