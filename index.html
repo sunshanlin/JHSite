@@ -640,10 +640,6 @@
     .bento-item { padding: 17px 2px 17px 18px; }
   }
 
-  .article-tag {
-    margin-bottom: 10px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .68rem; text-transform: uppercase; letter-spacing: .13em; 
-  }
   .slider-wrap { position: relative; }
   .slider {
     position: relative;
@@ -997,10 +993,6 @@
   .slider figcaption { min-height: 64px; padding: 17px 20px; }
   .snav { width: 48px; height: 48px; }
   .slider-hint { text-align: center; }
-  #articles .card { min-height: 250px; }
-  #articles .article-tag {
-    width: fit-content; padding: 5px 9px; border-radius: 999px;
-  }
 
   #about { position: relative; overflow: hidden; }
   #about::before {
@@ -1296,38 +1288,51 @@
   }
 
 
-  /* ── บทความ: การ์ดแนว editorial มีแถบสีหัวการ์ด ── */
-  #articles .grid { gap: 20px; }
-  .article-link {
-    display: flex; flex-direction: column; text-decoration: none; color: inherit;
-    overflow: hidden; padding-top: 26px; position: relative;
-    transition: transform .2s ease, box-shadow .2s ease;
+  /* ── บทความ: 3 กลุ่มตามคนอ่าน แต่ละบทความเป็นแถวในการ์ดขาว (ต.ค. 2026) ──
+     ตัวหนังสือทุกบรรทัดใต้หัวข้อ section ยังอยู่ในการ์ดขาว Horizon Glow ข้างหลังจึงไม่กระทบ contrast
+     ≥981px วาง 3 กลุ่มเป็น 3 คอลัมน์ · จอเล็กเรียงลงมา มีปุ่มลัดไปแต่ละกลุ่ม (id ใช้ส่งลิงก์ใน LINE ได้)
+     เพิ่มบทความใหม่ = เพิ่ม <li> ในกลุ่มที่ตรงกับคนอ่าน ไม่ต้องแตะ CSS */
+  .article-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: -20px 0 22px; }
+  .article-jump a {
+    padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
+    color: var(--ui-primary); font-size: .92rem; font-weight: 600; text-decoration: none;
   }
-  /* #articles นำหน้าเพื่อชนะกฎ .card::before ที่ตั้ง opacity:0 ไว้สำหรับ hover */
-  #articles .article-link::before {
+  .article-jump a:hover { border-color: rgba(53,175,158,.5); }
+  .article-groups { display: grid; gap: 16px; }
+  @media (min-width: 981px) {
+    .article-jump { display: none; }
+    .article-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  }
+  #articles .article-group { position: relative; overflow: hidden; padding: 26px 24px 8px; }
+  #articles .article-group:hover { transform: none; box-shadow: none; }
+  /* แถบสีหัวการ์ดของแต่ละกลุ่ม ใช้สีชุดเดิมของการ์ดบทความ ไม่เพิ่มสีใหม่
+     #articles นำหน้าเพื่อชนะกฎ .card::before ที่ตั้ง opacity:0 ไว้สำหรับ hover */
+  #articles .article-group::before {
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
     background: var(--topic); opacity: 1;
   }
-  /* สีแถบผูกกับตัวบทความ ไม่ใช่ตำแหน่ง จะได้สลับลำดับการ์ดได้โดยสีไม่เพี้ยน
-     เพิ่มบทความใหม่ = เพิ่มบรรทัดใหม่ตรงนี้ 1 บรรทัด */
-  #articles .article-link[href*="billing-note"]        { --topic: linear-gradient(90deg, #0D5257, #35AF9E); }
-  #articles .article-link[href*="wht-50tawi"]          { --topic: linear-gradient(90deg, #5C4B72, #8B5697); }
-  #articles .article-link[href*="bot-exchange"]        { --topic: linear-gradient(90deg, #7C3960, #A63A56); }
-  #articles .article-link[href*="success-by-design"]   { --topic: linear-gradient(90deg, #1c4a3c, #4E8F6E); }
-  #articles .article-link[href*="localization"]        { --topic: linear-gradient(90deg, #6B4423, #A6763F); }
-  #articles .article-link[href*="accounting-to-erp"]   { --topic: linear-gradient(90deg, #1F4E79, #4A90C2); }
-  #articles .article-link[href*="vs-accounting"]       { --topic: linear-gradient(90deg, #34495E, #6C8A9E); }
-  #articles .article-link[href*="pp30-branch"]         { --topic: linear-gradient(90deg, #3B3F8C, #6E74C9); }
-  #articles .article-link[href*="fixed-asset"]         { --topic: linear-gradient(90deg, #4D5A1E, #8FA33B); }
-  #articles .article-link[href*="cost-thailand"]       { --topic: linear-gradient(90deg, #8A5A12, #C9962E); }
-  .article-link:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -24px rgba(13,82,87,.5); }
-  .article-link h3 { font-size: 1.16rem; line-height: 1.45; }
-  .article-link p { flex: 1; }
-  .article-link .read-more {
-    margin-top: 16px; padding-top: 14px;
-    border-top: 1px solid var(--line);
-    color: #8E2C46; font-weight: 700; font-size: .92rem;
+  #articles-erp  { --topic: linear-gradient(90deg, #1F4E79, #4A90C2); }
+  #articles-tax  { --topic: linear-gradient(90deg, #3B3F8C, #6E74C9); }
+  #articles-cost { --topic: linear-gradient(90deg, #4D5A1E, #8FA33B); }
+  #articles .article-group h3 { font-size: 1.08rem; font-weight: 700; line-height: 1.45; margin-bottom: 2px; color: var(--ui-primary); }
+  .article-list { list-style: none; margin: 0; padding: 0; }
+  .article-list li + li { border-top: 1px solid var(--line); }
+  .article-row {
+    position: relative; display: flex; flex-direction: column;
+    padding: 14px 26px 14px 0; color: inherit; text-decoration: none;
   }
+  .start-here {
+    align-self: flex-start; margin-bottom: 6px; padding: 3px 9px; border-radius: 999px;
+    font-size: .74rem; font-weight: 700; color: var(--brand-burgundy-dark); background: rgba(224,140,162,.13);
+  }
+  .row-title { font-weight: 500; line-height: 1.5; color: var(--ui-ink); transition: color .18s ease; }
+  .row-sub { margin-top: 4px; font-size: .9rem; line-height: 1.6; color: var(--ui-muted); }
+  .row-arrow {
+    position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+    color: #8E2C46; font-weight: 700; transition: transform .18s ease;
+  }
+  .article-row:hover .row-title { color: #8E2C46; }
+  .article-row:hover .row-arrow { transform: translate(3px, -50%); }
 
   .steps .step { min-height: 0; }
 
@@ -1438,7 +1443,6 @@
       linear-gradient(145deg, var(--brand-ivory) 0%, #EAF2F0 100%);
   }
 
-  #articles .article-tag { color: var(--brand-burgundy-dark); background: rgba(224,140,162,.13); }
 
   /* About คงฐาน Deep Teal แล้วเติม Pink อย่างพอดี — Contact แยกเป็น charcoal ของตัวเอง ดูย่อหน้า #contact ด้านบน */
   footer { background: #01211D; }
@@ -2541,10 +2545,6 @@
   .faq-list { max-width: none; margin: 0; }
   .faq-list details > p { max-width: 80ch; }
 
-  /* ---- 6. #articles: 6 บทความบนกริด 4 คอลัมน์ → แถวท้ายเหลือ 2 ใบ ว่างครึ่งแถว ---- */
-  @media (min-width: 981px) {
-    #articles .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
 
   /* ---- 7. hero บนมือถือ ----
      ชั้น --ui-* นี้ตั้ง header{min-height:640px;padding:120px 0 72px} ไว้แบบไม่มี media query
@@ -4382,67 +4382,106 @@
     <p class="section-kicker">Knowledge from real projects</p>
     <h2>บทความ</h2>
     <p class="sub">เกร็ดการตั้งค่าและแนวทางทำ Thai Localization บน Business Central จากงานจริง</p>
-    <div class="grid">
-      <a class="card reveal article-link" href="articles/localization-thailand.html">
-        <span class="article-tag">Localization</span>
-        <h3>Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</h3>
-        <p>ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี ใบกำกับภาษี WHT และใบวางบิล</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/billing-note-billing-day.html">
-        <span class="article-tag">Billing</span>
-        <h3>ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</h3>
-        <p>เก็บรอบวางบิล คำนวณวัน ป้องกันเอกสารซ้ำ และติดตามสถานะการส่งเอกสารให้ครบทุกใบ</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/wht-50tawi-rdprep.html">
-        <span class="article-tag">WHT</span>
-        <h3>ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</h3>
-        <p>ใช้ข้อมูลการจ่ายชุดเดียวเพื่อออกหนังสือรับรอง รวบรวมรายการ ภ.ง.ด. และสร้างไฟล์โอนย้ายเข้า RD Prep</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/pp30-branch-filing.html">
-        <span class="article-tag">VAT</span>
-        <h3>ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้</h3>
-        <p>แยกยื่นหรือยื่นรวม รายงานภาษีซื้อ-ขายรายสถานประกอบการ และข้อมูลที่ Business Central ต้องเก็บตั้งแต่ตอนบันทึก</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/fixed-asset-register-stock-card.html">
-        <span class="article-tag">Asset &amp; Stock</span>
-        <h3>ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central</h3>
-        <p>ทะเบียนทรัพย์สิน ค่าเสื่อมทางบัญชีกับภาษี และ Stock Card ที่ไล่รับ-จ่ายได้ทีละเอกสาร</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/bot-exchange-rate-api.html">
-        <span class="article-tag">API / Integration</span>
-        <h3>รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</h3>
-        <p>รู้จัก BOT API สองชุดข้อมูล แต่ละบริการมีข้อมูลอะไร ต้องระวังเรื่องใด และนำไปต่อยอดกับ Business Central ได้อย่างไร</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/success-by-design.html">
-        <span class="article-tag">Success by Design</span>
-        <h3>Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365 เป็นพัน</h3>
-        <p>5 ช่วงของโครงการ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/business-central-vs-accounting-software.html">
-        <span class="article-tag">เทียบระบบ</span>
-        <h3>Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</h3>
-        <p>เทียบ 15 หัวข้อที่นักบัญชีต้องทำจริงทุกเดือน ตั้งแต่ออกใบกำกับภาษีและยื่นภาษี ไปจนถึงปิดงบและตรวจย้อนกลับ</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/accounting-to-erp.html">
-        <span class="article-tag">ERP</span>
-        <h3>ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และต้องเตรียมอะไรบ้าง</h3>
-        <p>สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="card reveal article-link" href="articles/business-central-cost-thailand.html">
-        <span class="article-tag">งบประมาณ</span>
-        <h3>งบวางระบบ Business Central ในไทยมีอะไรบ้าง</h3>
-        <p>ค่า License ค่า Thai Localization ค่าวางระบบตามขอบเขต และเวลาของทีมภายใน ไล่ทีละก้อนพร้อมราคาอ้างอิง</p>
-        <span class="read-more">อ่านบทความ <span aria-hidden="true">→</span></span>
-      </a>
+    <nav class="article-jump" aria-label="กลุ่มบทความ">
+      <a href="#articles-erp">เลือก ERP</a>
+      <a href="#articles-tax">ภาษีไทยบน BC</a>
+      <a href="#articles-cost">ต้นทุนและสต็อก</a>
+    </nav>
+    <div class="article-groups">
+      <div class="card reveal article-group" id="articles-erp">
+        <h3>กำลังเลือก ERP</h3>
+        <ul class="article-list">
+          <li>
+            <a class="article-row" href="articles/accounting-to-erp.html">
+              <span class="start-here">เริ่มที่นี่</span>
+              <span class="row-title">ย้ายจากโปรแกรมบัญชีไป ERP : ดูจากอะไรว่าถึงเวลา และ<span class="nb">ต้องเตรียม</span>อะไรบ้าง</span>
+              <span class="row-sub">สัญญาณที่บอกว่าโตเกินโปรแกรมบัญชีสำเร็จรูป สิ่งที่ต้องย้ายและไม่ต้องย้าย และการวางช่วงเปลี่ยนระบบให้ตรงรอบบัญชี</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/business-central-vs-accounting-software.html">
+              <span class="row-title">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</span>
+              <span class="row-sub">เทียบ 15 หัวข้อที่นักบัญชีต้องทำจริงทุกเดือน ตั้งแต่ออกใบกำกับภาษีและยื่นภาษี ไปจนถึงปิดงบและตรวจย้อนกลับ</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/business-central-cost-thailand.html">
+              <span class="row-title">งบวางระบบ Business Central ในไทยมีอะไรบ้าง</span>
+              <span class="row-sub">ค่า License ค่า Thai Localization ค่าวางระบบตามขอบเขต และเวลาของทีมภายใน ไล่ทีละก้อนพร้อมราคาอ้างอิง</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/success-by-design.html">
+              <span class="row-title">Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365 เป็นพัน</span>
+              <span class="row-sub">5 ช่วงของโครงการ review 3 แบบ findings 3 ประเภท และส่วนใหม่ปี 2026 เรื่อง AI พร้อมมุมมองสำหรับทีมเล็กในไทย</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="card reveal article-group" id="articles-tax">
+        <h3>ใช้ BC อยู่ อยากให้งานภาษีไทยครบ</h3>
+        <ul class="article-list">
+          <li>
+            <a class="article-row" href="articles/localization-thailand.html">
+              <span class="start-here">เริ่มที่นี่</span>
+              <span class="row-title">Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</span>
+              <span class="row-sub">ใช้การแบ่งหมวด localization ของ Microsoft จำแนกงานของไทย ทั้ง VAT สาขาภาษี ใบกำกับภาษี WHT และใบวางบิล</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/pp30-branch-filing.html">
+              <span class="row-title">ภ.พ.30 เมื่อกิจการมีหลายสาขา: แยกยื่นหรือยื่นรวม และระบบต้องเก็บอะไรไว้</span>
+              <span class="row-sub">แยกยื่นหรือยื่นรวม รายงานภาษีซื้อ-ขายรายสถานประกอบการ และข้อมูลที่ Business Central ต้องเก็บตั้งแต่ตอนบันทึก</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/wht-50tawi-rdprep.html">
+              <span class="row-title">ออก 50 ทวิ และเตรียมไฟล์ RD Prep จาก BC โดยไม่คีย์ซ้ำ</span>
+              <span class="row-sub">ใช้ข้อมูลการจ่ายชุดเดียวเพื่อออกหนังสือรับรอง รวบรวมรายการ ภ.ง.ด. และสร้างไฟล์โอนย้ายเข้า RD Prep</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/billing-note-billing-day.html">
+              <span class="row-title">ใบวางบิลและวันวางบิล: ช่องว่างของ BC มาตรฐาน</span>
+              <span class="row-sub">เก็บรอบวางบิล คำนวณวัน ป้องกันเอกสารซ้ำ และติดตามสถานะการส่งเอกสารให้ครบทุกใบ</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="card reveal article-group" id="articles-cost">
+        <h3>ต้นทุน สต็อก และข้อมูลเชื่อมต่อ</h3>
+        <ul class="article-list">
+          <li>
+            <a class="article-row" href="articles/cost-traceability.html">
+              <span class="row-title">ต้นทุนสินค้า 1 กล่องมาจากไหน: ไล่ย้อนใน Business Central ได้<span class="nb">ทีละขั้น</span></span>
+              <span class="row-sub">ไล่ต้นทุนถุงมือกล่องละ 82 บาทย้อนกลับไปถึงน้ำยางนำเข้า และดูทั้งเส้นทางได้ในหน้าเดียว</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/fixed-asset-register-stock-card.html">
+              <span class="row-title">ทะเบียนทรัพย์สินและ Stock Card แบบไทยบน Business Central</span>
+              <span class="row-sub">ทะเบียนทรัพย์สิน ค่าเสื่อมทางบัญชีกับภาษี และ Stock Card ที่ไล่รับ-จ่ายได้ทีละเอกสาร</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="article-row" href="articles/bot-exchange-rate-api.html">
+              <span class="row-title">รู้จักกับบริการข้อมูลจาก ธปท. อัตราแลกเปลี่ยนและวันหยุดธนาคาร</span>
+              <span class="row-sub">รู้จัก BOT API สองชุดข้อมูล แต่ละบริการมีข้อมูลอะไร ต้องระวังเรื่องใด และนำไปต่อยอดกับ Business Central ได้อย่างไร</span>
+              <span class="row-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
