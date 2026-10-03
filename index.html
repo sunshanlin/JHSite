@@ -5744,7 +5744,15 @@
       poolTip: { th: 'บรรทัดปิดงวดของหน้า Average Cost Calc. Overview คือยอดที่เหลือหลังหักรายการขาออกทั้งงวดแล้ว (รวมรายการนี้ด้วย) พร้อม Unit Cost ของงวด กล่องใน Level ถัดไปคือที่มาของค่าเฉลี่ยนี้ ได้แก่ยอดยกมาและรายการรับเข้าในงวด',
                  en: "The closing line of Business Central's Average Cost Calc. Overview for the period: what is left after every decrease in it, this one too, and its Unit Cost. The boxes on the next Level are what the average is made of: the opening value and the entries of the period." },
       avgTip: { th: 'Unit Cost ตามหน้า Average Cost Calc. Overview ณ วันสิ้นงวด คือต้นทุนถึงวันนั้นหารด้วยจำนวนคงเหลือ ปัดเศษตาม Amount Rounding Precision รายการขาออกที่ใช้ค่าเฉลี่ยนี้ตัดทั้งมูลค่าและจำนวนออกไปที่ต้นทุนต่อหน่วยเดียวกัน ค่าเฉลี่ยจึงไม่เปลี่ยน',
-                en: "The Unit Cost of Business Central's Average Cost Calc. Overview at the end of the period: the cost amount up to that date divided by the quantity, rounded to the Amount Rounding Precision. Decreases valued at this average take out cost and quantity at the same unit cost, so they do not change it." }
+                en: "The Unit Cost of Business Central's Average Cost Calc. Overview at the end of the period: the cost amount up to that date divided by the quantity, rounded to the Amount Rounding Precision. Decreases valued at this average take out cost and quantity at the same unit cost, so they do not change it." },
+      // tooltip ของป้ายบนเส้น ตาม AppliedTip ของแอปจริง (AppliedQtyTipLbl / AverageQtyTipLbl / CostShareTipLbl)
+      // ตัวเลขสองแบบหน้าตาเหมือนกันแต่ความหมายไม่เหมือนกัน: 400 PCS ใต้ค่าเฉลี่ยไม่ได้แปลว่าลังถูกเบิกไป 400 ใบ
+      appliedTip: { th: 'Applied Quantity คือจำนวนที่ BC จับคู่จากรายการนี้ไปให้กล่องทางซ้าย',
+                    en: 'Applied Quantity: what Business Central applied from this entry to the box on the left.' },
+      avgQtyTip: { th: 'จำนวนของรายการนี้ในค่าเฉลี่ยของงวด กล่องทางซ้ายใช้ต้นทุนตามค่าเฉลี่ยนั้น จึงไม่ได้ตัดจากรายการนี้เป็นจำนวนตายตัว',
+                   en: "This entry's quantity in the average of the period. The box on the left was valued at that average, so it took no set part of this entry." },
+      shareTip: { th: 'บรรทัดของ Actual Cost ในใบสั่งผลิตที่ต้นทุนของรายการนี้เข้าไปรวมอยู่ ตามที่ BC แยกต้นทุนของใบสั่ง',
+                  en: "The line of the order's Actual Cost this entry's cost goes into, as Business Central splits the order's cost." }
     };
     let lang = 'th';
     const L = (o) => o[lang] || o.th;
@@ -5825,7 +5833,8 @@
       // ต้นทางของค่าเฉลี่ย (ยอดยกมาและรายการในงวด) เป็นสีม่วง
       const p = n.parent && N[n.parent], tag = n.flow || n.share;
       const tint = p && p.ord && n.share ? ' tord' : p && (p.avg || isOpen(p)) ? ' tavg' : '';
-      if (tag) h += '<span class="ct-flow' + tint + (o.on ? ' on' : '') + '">' + esc(tag) + '</span>';
+      const tip = tint === ' tord' ? T.shareTip : tint === ' tavg' ? T.avgQtyTip : T.appliedTip;
+      if (tag) h += '<span class="ct-flow' + tint + (o.on ? ' on' : '') + '" title="' + esc(L(tip)) + '">' + esc(tag) + '</span>';
       if (n.src.length) {
         // ปุ่มต้นทางแบบแอปจริง: Opening value ที่ยังไม่กางเป็น Previous period · นอกนั้นเป็นจำนวนต้นทาง
         const prev = isOpen(n) && !o.open;
@@ -6014,8 +6023,10 @@
     });
     byId('ct-table').addEventListener('click', (e) => { const r = e.target.closest('[data-sel]'); if (r) select(r.dataset.sel); });
     byId('ct-view').addEventListener('click', () => { stopPlay(); setView(state.view === 'graph' ? 'table' : 'graph'); render(); });
-    byId('ct-expand').addEventListener('click', () => { stopPlay(); openTo(MAXD + 1); state.step = -1; render(); });
-    byId('ct-collapse').addEventListener('click', () => { stopPlay(); openTo(0); state.step = -1; state.sel = ROOT; render(ROOT); });
+    // ในกล่องขยาย Expand All / Collapse All แล้ว Fit ให้ด้วย จะได้เห็นทั้งรูปเสมอ · บนหน้าคงซูมเดิม
+    const refit = () => { if (dlg.open && state.view === 'graph') fit(); };
+    byId('ct-expand').addEventListener('click', () => { stopPlay(); openTo(MAXD + 1); state.step = -1; render(); refit(); });
+    byId('ct-collapse').addEventListener('click', () => { stopPlay(); openTo(0); state.step = -1; state.sel = ROOT; render(ROOT); refit(); });
 
     // ซูมแบบแอปจริง: −/+ ทีละ 10% · แถบเลื่อน 20–180% · Fit = ย่อทั้งกราฟให้พอดีกรอบ (ไม่ขยายเกิน 100%)
     // ย่อด้วย transform ที่ .ct-canvas ตำแหน่งที่วัดจาก DOM จึงยังเป็นหน่วยเดิม · .ct-sizer กันพื้นที่เลื่อนตามขนาดหลังซูม
