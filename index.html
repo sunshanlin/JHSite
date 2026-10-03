@@ -345,6 +345,11 @@
   h1, h2, h3, h4, h5, h6, summary, .brand .wordmark {
     font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
   }
+  /* ปุ่มและช่องกรอกไม่รับฟอนต์จาก body เอง — Chrome ใช้ Arial 13.33px (ผู้ใช้ไม่เอา Arial ต.ค. 2026)
+     ตั้งฟอนต์ป้ายเป็นค่าตั้งต้นที่ระดับ element: กฎของคลาสที่ตั้งฟอนต์หรือ font: inherit ไว้ยังชนะ · ขนาดเดิมไม่แตะ */
+  button, input, select, textarea {
+    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+  }
   /* ปุ่ม แท็บ ชิป ป้าย ชื่อ/ตำแหน่ง ลิงก์เมนู ข้อมูลติดต่อ และหน่วยราคา = ฟอนต์ไม่มีหัวแบบหัวข้อ ไม่ใช่ Sarabun ของเนื้อความ
      ตัวพวกนี้ไม่ได้ตั้งฟอนต์เอง เลยเคยรับฟอนต์เนื้อความ (Niramit) มาจาก body — รวบไว้ที่เดียว (ต.ค. 2026)
      เอกสารจำลองในเดโม (ใบวางบิล การ์ดลูกค้า VAT Service) กับคำบรรยายภาพยังเป็น Sarabun เพราะเป็นเนื้อความ/เอกสารไทย */

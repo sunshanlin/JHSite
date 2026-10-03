@@ -317,6 +317,7 @@ One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine time
 
 ### Do:
 - **Do** put new tokens in the one `:root` block at the top of `<style>`. Group them with their family (brand, Microsoft quotation, legacy aliases, Fluent `--ui-*`, glow).
+- **Do** keep every `button`, `input`, `select` and `textarea` in a site face. Chrome gives form controls Arial 13.33px unless told otherwise; one element-level rule after `h1–h6` sets the heading face as their default, and class rules still override it. The owner does not want Arial anywhere on the site.
 - **Do** size reading measures in `em`, not `ch`: `ch` follows the first face in the stack, so a font change silently narrows or widens every column set in it.
 - **Do** use `var(--ui-radius-btn)` (3px) or `var(--ui-radius-card)` (8px) for every new corner.
 - **Do** give every new surface the Hairline shadow, and reach for a soft shadow only inside the hero scene.
