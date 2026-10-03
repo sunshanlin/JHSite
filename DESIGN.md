@@ -32,19 +32,19 @@ colors:
   ms-gold: "#9A6700"
 typography:
   display:
-    fontFamily: "Plus Jakarta Sans, Anuphan, Segoe UI, sans-serif"
+    fontFamily: "Anuphan, Segoe UI, sans-serif"
     fontSize: "clamp(2.2rem, 3.4vw, 2.75rem)"
     fontWeight: 500
     lineHeight: 1.22
     letterSpacing: "-0.025em"
   headline:
-    fontFamily: "Plus Jakarta Sans, Anuphan, Segoe UI, sans-serif"
+    fontFamily: "Anuphan, Segoe UI, sans-serif"
     fontSize: "clamp(1.9rem, 2.6vw, 2.5rem)"
     fontWeight: 500
     lineHeight: 1.2
     letterSpacing: "-0.025em"
   title:
-    fontFamily: "Plus Jakarta Sans, Anuphan, Segoe UI, sans-serif"
+    fontFamily: "Anuphan, Segoe UI, sans-serif"
     fontSize: "1.08rem"
     fontWeight: 500
     lineHeight: 1.4
@@ -56,7 +56,7 @@ typography:
     lineHeight: 1.7
     letterSpacing: "normal"
   label:
-    fontFamily: "Plus Jakarta Sans, Anuphan, sans-serif"
+    fontFamily: "Anuphan, sans-serif"
     fontSize: "12px"
     fontWeight: 600
     lineHeight: 1.4
@@ -173,12 +173,12 @@ A deep-teal institutional family carried on warm ivory paper, interrupted by a s
 
 ## Typography
 
-**Display Font:** Plus Jakarta Sans (Latin) with **Anuphan** (Thai, loopless) — all headings, kickers, buttons, numerals
+**Display Font:** **Anuphan** (Thai, loopless, and its own Latin) — all headings, kickers, buttons, labels, numerals and the wordmark. Plus Jakarta Sans was retired in October 2026 so the site runs on two faces only: Anuphan's Latin is drawn with its Thai (it descends from IBM Plex Sans), so a mixed heading reads as one face. Anuphan stops at 700; the old 800s were set to 700
 **Body Font:** **Sarabun** (Thai, looped, and its own Latin) — all running copy, on the home page and in the body of every article. Replaced Niramit + Plus Jakarta Sans in October 2026; the owner picked it from a reference page set in Sarabun 400
 **Fallbacks:** Segoe UI, Leelawadee UI, Tahoma
-**Delivery:** self-hosted in `css/fonts/` since September 2026 — the same woff2 files Google Fonts serves, Thai/Latin/Latin-ext subsets only. Anuphan and Plus Jakarta Sans are variable (500–800). Sarabun ships only the weights measured in use: 400 running copy and 600/700 bold; articles declare 400/700 only. The `@font-face` rules open the `<style>` block of `index.html` and the top of `css/article.css`; keep the two in step. The print pages (`poster.html`, `banner.html`, the flyers) still load Google Fonts
+**Delivery:** self-hosted in `css/fonts/` since September 2026 — the same woff2 files Google Fonts serves, Thai/Latin/Latin-ext subsets only. Anuphan is variable and declared 500–700. Sarabun ships only the weights measured in use: 400 running copy and 600/700 bold; articles declare 400/700 only. The `@font-face` rules open the `<style>` block of `index.html` and the top of `css/article.css`; keep the two in step. The print pages (`poster.html`, `banner.html`) still load Anuphan from Google Fonts; the two flyers are set in Kanit, a print-only exception. The og:image template (`.claude/skills/run-promote-site/og-template.html`) loads Anuphan from `css/fonts/`
 
-**Character:** The pairing runs a deliberate Thai contrast that has no Latin equivalent: headings are loopless (Anuphan, ไม่มีหัว) and body is looped (Sarabun, มีหัว). To a Thai reader this separates voice from statement as clearly as a serif/sans pairing does in English. Body copy takes Sarabun for its Latin too, so an English term inside a Thai sentence (Business Central, VAT) matches the Thai around it instead of standing out wider and heavier; headings keep Plus Jakarta Sans.
+**Character:** The pairing runs a deliberate Thai contrast that has no Latin equivalent: headings are loopless (Anuphan, ไม่มีหัว) and body is looped (Sarabun, มีหัว). To a Thai reader this separates voice from statement as clearly as a serif/sans pairing does in English. Body copy takes Sarabun for its Latin too, so an English term inside a Thai sentence (Business Central, VAT) matches the Thai around it instead of standing out wider and heavier; headings set their Latin in Anuphan for the same reason. **Two faces only: Anuphan and Sarabun.** Do not add a third web font; a control or label that needs a face takes Anuphan.
 
 ### Hierarchy
 - **Display** (500, `clamp(2.2rem, 3.4vw, 2.75rem)`, 1.22, -0.025em): the single `h1` in the hero.

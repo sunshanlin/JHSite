@@ -1,10 +1,8 @@
-/* ฟอนต์ self-host ชุดเดียวกับ index.html (Anuphan + Plus Jakarta Sans + Sarabun เฉพาะ 400/700 ที่เนื้อความใช้)
+/* ฟอนต์ self-host ชุดเดียวกับ index.html (Anuphan + Sarabun เฉพาะ 400/700 ที่เนื้อความใช้ · เลิกใช้ Plus Jakarta Sans ต.ค. 2026)
    ไฟล์อยู่ css/fonts/ · ที่มาและเหตุผลดูคอมเมนต์ต้น <style> ใน index.html */
 @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
 @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-thai-400.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
 @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/sarabun-thai-700.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
 @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-ext-400.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
@@ -25,15 +23,15 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
+  font-family: "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
   font-size: 18px; font-weight: 500; line-height: 1.75;
   color: var(--text); background: #fff;
   -webkit-font-smoothing: antialiased;
 }
 /* เนื้อความบทความ = Sarabun (ไทยมีหัว) ชุดเดียวกับเนื้อความหน้าแรก · หัวข้อ ปุ่ม CTA รายชื่อบทความอื่น
-   หัวกล่องหมายเหตุ และหัวตาราง ยังเป็น Plus Jakarta Sans + Anuphan (ไม่มีหัว) แบบ body เหมือนเดิม */
+   หัวกล่องหมายเหตุ และหัวตาราง ยังเป็น Anuphan (ไม่มีหัว) แบบ body เหมือนเดิม */
 article, .article-head .lead { font-family: "Sarabun", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif; font-weight: 400; }
-article h2, article h3, .article-cta a, .more a, .note b, th { font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif; }
+article h2, article h3, .article-cta a, .more a, .note b, th { font-family: "Anuphan", "Segoe UI", sans-serif; }
 .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
 
 /* nav — ให้เหมือนหน้าหลัก */
@@ -145,7 +143,7 @@ th { background: var(--bg-soft); color: var(--h1); font-weight: 700; }
 .article-cta p { color: #cfe6e4; margin-bottom: 20px; font-size: .98rem; }
 .article-cta a {
   display: inline-block; padding: 13px 26px; border-radius: 12px; text-decoration: none;
-  color: #fff; font-weight: 800;
+  color: #fff; font-weight: 700;
   background: linear-gradient(135deg, var(--wine-2), var(--wine));
   box-shadow: 0 16px 32px -16px rgba(166,58,86,.7);
 }

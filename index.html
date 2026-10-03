@@ -243,9 +243,11 @@
 }
 </script>
 <style>
-  /* ฟอนต์ self-host ใน css/fonts/ (D3 ก.ย. 2026) — ไฟล์ woff2 ชุดเดียวกับที่ Google Fonts เสิร์ฟ (Anuphan v6, Sarabun, Plus Jakarta Sans)
+  /* ฟอนต์ self-host ใน css/fonts/ (D3 ก.ย. 2026) — ไฟล์ woff2 ชุดเดียวกับที่ Google Fonts เสิร์ฟ (Anuphan v6, Sarabun)
      เลิกโหลด stylesheet ของ Google ที่บล็อกการวาดหน้าแรก และไม่ส่ง IP ผู้เข้าชมไปที่ fonts.googleapis.com
-     ตัด subset เวียดนาม/ซีริลลิก · Anuphan กับ Plus Jakarta Sans เป็น variable font ไฟล์เดียวต่อ subset จึงประกาศเป็นช่วงน้ำหนัก
+     เหลือ 2 ฟอนต์ (ต.ค. 2026 ผู้ใช้เลือก): ไม่มีหัว = Anuphan ทั้งไทยและอังกฤษ (หัวข้อ ปุ่ม ป้าย ตัวเลข) · มีหัว = Sarabun (เนื้อความ)
+     เลิกใช้ Plus Jakarta Sans — ตัวอังกฤษของ Anuphan ออกแบบคู่กับตัวไทยของมันเอง · Anuphan หนาสุด 700 คำสั่ง 800 เดิมจึงเปลี่ยนเป็น 700
+     ตัด subset เวียดนาม/ซีริลลิก · Anuphan เป็น variable font ไฟล์เดียวต่อ subset จึงประกาศเป็นช่วงน้ำหนัก
      Sarabun (เนื้อความ แทน Niramit ต.ค. 2026) เป็นไฟล์แยกต่อน้ำหนัก เอาเฉพาะที่วัดแล้วมีใช้: 400 เนื้อความ · 600/700 ตัวหนา (ปุ่ม/แท็บ/ป้ายเป็น Anuphan) · สัญญาอนุญาต OFL อยู่ที่ css/fonts/OFL.txt
      บทความใช้ชุดเดียวกัน (Sarabun เฉพาะ 400/700) ที่ต้น css/article.css — แก้ที่นี่ต้องแก้ที่นั่นด้วย */
   @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
@@ -260,8 +262,6 @@
   @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-400.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/sarabun-latin-600.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/sarabun-latin-700.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/css/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   /* ============================================================
      Design tokens — :root บล็อกเดียวของทั้งไฟล์ (รวมจาก 6 บล็อกเดิม 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว)
      ค่าอ้างอิงอยู่ที่ DESIGN.md · token ใหม่เพิ่มในบล็อกนี้ ห้ามเปิด :root บล็อกใหม่
@@ -343,12 +343,12 @@
   }
   /* หัวข้อทุกระดับ = Anuphan (ไทยไม่มีหัว) ตัดกับเนื้อความที่มีหัว */
   h1, h2, h3, h4, h5, h6, summary, .brand .wordmark {
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+    font-family: "Anuphan", "Segoe UI", sans-serif;
   }
   /* ปุ่มและช่องกรอกไม่รับฟอนต์จาก body เอง — Chrome ใช้ Arial 13.33px (ผู้ใช้ไม่เอา Arial ต.ค. 2026)
      ตั้งฟอนต์ป้ายเป็นค่าตั้งต้นที่ระดับ element: กฎของคลาสที่ตั้งฟอนต์หรือ font: inherit ไว้ยังชนะ · ขนาดเดิมไม่แตะ */
   button, input, select, textarea {
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+    font-family: "Anuphan", "Segoe UI", sans-serif;
   }
   /* ปุ่ม แท็บ ชิป ป้าย ชื่อ/ตำแหน่ง ลิงก์เมนู ข้อมูลติดต่อ และหน่วยราคา = ฟอนต์ไม่มีหัวแบบหัวข้อ ไม่ใช่ Sarabun ของเนื้อความ
      ตัวพวกนี้ไม่ได้ตั้งฟอนต์เอง เลยเคยรับฟอนต์เนื้อความ (Niramit) มาจาก body — รวบไว้ที่เดียว (ต.ค. 2026)
@@ -359,7 +359,7 @@
   .start-here, .row-title, .tip > b, .ci-name, .ci-list, .profile-role, .footer-brand strong,
   .footer-reach a, .footer-menu a, .article-jump a, .cookie-actions button, .lang button,
   .linkedin-link, .credential-badge figcaption, .credential-verification, .bf-chip, .bf-keys, .bf-due, .bf-foot) {
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+    font-family: "Anuphan", "Segoe UI", sans-serif;
   }
   .wrap { margin: 0 auto; }
   html { scroll-behavior: smooth; }
@@ -368,7 +368,7 @@
   .topnav .wrap { display: flex; align-items: center; }
   .topnav .brand { margin-bottom: 0; gap: 9px; text-decoration: none; }
   .topnav .links { margin-left: auto; display: flex; align-items: center; }
-  .topnav .links a { text-decoration: none; font-size: .9rem; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .topnav .links a { text-decoration: none; font-size: .9rem; font-family: "Anuphan", sans-serif; }
   .topnav .links a:hover { color: #fff; }
   .topnav .social { display: flex; gap: 8px; }
   .topnav .social a {
@@ -414,7 +414,7 @@
   header .wrap { z-index: 1; }
   header h1 { font-weight: 700; }
   header .tagline {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-weight: 700;
+    font-family: "Anuphan", sans-serif; font-weight: 700;
     text-transform: uppercase; 
   }
   .brand { display: flex; align-items: center; }
@@ -424,7 +424,7 @@
   .badge {
     display: inline-flex; align-items: center; gap: 8px;
     border-radius: 999px; 
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif;
+    font-family: "Anuphan", "Segoe UI", sans-serif;
     font-size: .8rem; letter-spacing: .02em;
     font-weight: 600;
   }
@@ -524,7 +524,7 @@
     counter-increment: step;
   }
   .step::before {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: .95rem; font-weight: 700; 
   }
   .step h3 span { display: block; }
@@ -608,7 +608,7 @@
   }
   .bento-item[aria-pressed="true"]::after { opacity: 1; }
   .bento-num {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-weight: 700;
+    font-family: "Anuphan", sans-serif; font-weight: 700;
     font-size: .82rem; line-height: 1; letter-spacing: .1em;
     font-variant-numeric: tabular-nums; 
     opacity: .55; transition: opacity .22s ease;
@@ -619,7 +619,7 @@
      และโปรแกรมอ่านจออ่านลูกของปุ่มเป็นข้อความเรียบอยู่แล้ว ไม่ได้ประกาศว่าเป็นหัวข้อ · ฟอนต์/น้ำหนัก/สีเดิมมาจากกฎ h3 กลาง ยกมาไว้ตรงนี้ */
   .bento-item .bento-h {
     display: flex; align-items: center; gap: 14px; margin-top: 8px;
-    font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif; font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
+    font-family: "Anuphan", "Segoe UI", sans-serif; font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
     font-size: 1.1rem; line-height: 1.45; transition: color .22s ease;
   }
   .bento-item .bento-h::after {
@@ -686,7 +686,7 @@
     display: grid; grid-template-columns: 1fr 1.15fr; 
   }
   .ci-name { font-weight: 600; margin-bottom: 2px; }
-  .ci-role { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px; }
+  .ci-role { font-family: "Anuphan", sans-serif; font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px; }
   .ci-list { list-style: none; display: grid; }
   .ci-list li { display: flex; align-items: center; gap: 12px; }
   .ci-list svg { width: 20px; height: 20px; flex-shrink: 0; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -862,7 +862,7 @@
 
   section { padding: 96px 0; }
   .section-kicker {
-    margin-bottom: 8px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    margin-bottom: 8px; font-family: "Anuphan", sans-serif;
     text-transform: uppercase;
   }
   h2 { max-width: 780px; margin-bottom: 12px; text-wrap: balance; }
@@ -966,7 +966,7 @@
   .feature-points li { position: relative; padding-left: 28px; color: var(--muted); line-height: 1.72; text-wrap: pretty; }
   .feature-points li::before {
     content: "✓"; position: absolute; left: 0; top: 2px;
-    color: var(--brand-teal); font-size: .88rem; font-weight: 800;
+    color: var(--brand-teal); font-size: .88rem; font-weight: 700;
   }
   .feature-points li strong { color: var(--text); }
   .feature-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 20px 0 22px; list-style: none; }
@@ -1049,7 +1049,7 @@
   .credentials-overview .cert-title { margin-bottom: 6px; }
   .credential-kicker {
     display: block; margin-bottom: 7px; color: var(--brand-mist);
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .67rem;
+    font-family: "Anuphan", sans-serif; font-size: .67rem;
     font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
   }
   .credential-overview-copy { max-width: 420px; margin-bottom: 9px; color: #dce8e5; font-size: .9rem; line-height: 1.55; }
@@ -1106,7 +1106,7 @@
   }
   .credential-card:focus-visible { outline: 3px solid var(--brand-mint); outline-offset: 3px; }
   .credential-index {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: .68rem; font-weight: 700; letter-spacing: .1em;
   }
   .credential-card-body {
@@ -1115,8 +1115,8 @@
   .credential-level {
     display: inline-flex; justify-content: center; min-width: 82px; padding: 4px 9px;
     border: 1px solid rgba(124,203,196,.28); border-radius: 999px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: .57rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+    font-family: "Anuphan", sans-serif;
+    font-size: .57rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
   }
   /* สีล้อกับ badge จริงของ Microsoft: โล่ #002050 + ริบบิ้น #0064b5, ส่วน AI ใช้แดง-ส้ม #F4364C/#FF5C39 จาก badge ตัวเอง */
   .credential-level.is-expert {
@@ -1159,7 +1159,7 @@
   footer .wrap { align-items: center; justify-content: space-between; gap: 24px; }
   footer .wrap > div { align-items: baseline; gap: 12px; }
   footer strong { font-size: 1.05rem; }
-  footer span { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; }
+  footer span { font-family: "Anuphan", sans-serif; font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; }
 
   .cookie-bar {
     left: auto; right: 24px; bottom: 24px; width: calc(100% - 48px); max-width: 760px; margin: 0;
@@ -1350,7 +1350,7 @@
   .article-more {
     display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; margin: 0 0 6px; padding: 0;
     border: 0; border-top: 1px solid var(--line); background: none; color: var(--ui-primary); cursor: pointer;
-    font: 600 .95rem/1.3 "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font: 600 .95rem/1.3 "Anuphan", sans-serif;
   }
   .article-more::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
   .article-more[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
@@ -1415,7 +1415,7 @@
   .feature-link:hover { color: var(--brand-burgundy-dark); text-decoration: underline; text-underline-offset: 4px; }
   .topnav .links a:last-child:hover { color: #fff; background: linear-gradient(135deg, #B84A66, #8E2C46); }
   .topnav .links a::after { background: linear-gradient(90deg, var(--brand-plum-light), var(--brand-burgundy)); }
-  .topnav .brand .wordmark b { font-weight: 800; }
+  .topnav .brand .wordmark b { font-weight: 700; }
   .topnav .brand .wordmark i { color: inherit; font-weight: 600; }
 
 
@@ -1538,7 +1538,7 @@
     position: relative; z-index: 1; width: 86%; overflow: hidden;
     border-radius: var(--ui-radius-card); background: #fff; color: #242424;
     box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 18px 38px -18px rgba(1,47,42,.55);
-    font: 500 calc(9 * var(--u))/1.4 "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font: 500 calc(9 * var(--u))/1.4 "Anuphan", sans-serif;
   }
   .hs-bar {
     display: flex; align-items: center; gap: calc(7 * var(--u)); height: calc(25 * var(--u)); padding: 0 calc(9 * var(--u));
@@ -1556,7 +1556,7 @@
   .hs-acts { display: flex; gap: calc(6 * var(--u)); margin-top: calc(8 * var(--u)); }
   .hs-acts > span { display: flex; align-items: center; gap: calc(5 * var(--u)); padding: calc(4 * var(--u)) calc(7 * var(--u)); border-radius: var(--ui-radius-btn); color: #424242; white-space: nowrap; }
   .hs-acts .on { background: #E6F0EE; color: var(--brand-deep); font-weight: 700; box-shadow: inset 0 0 0 1px rgba(65,119,113,.35); }
-  .hs-acts em { padding: calc(1 * var(--u)) calc(4 * var(--u)); border-radius: var(--ui-radius-btn); background: var(--brand-deep); color: #fff; font: 700 calc(7 * var(--u))/1.3 "Plus Jakarta Sans", sans-serif; letter-spacing: .06em; }
+  .hs-acts em { padding: calc(1 * var(--u)) calc(4 * var(--u)); border-radius: var(--ui-radius-btn); background: var(--brand-deep); color: #fff; font: 700 calc(7 * var(--u))/1.3 "Anuphan", sans-serif; letter-spacing: .06em; }
   .hs-acts svg { flex: none; width: calc(10 * var(--u)); height: calc(10 * var(--u)); fill: none; stroke: currentColor; stroke-width: 1.6; }
   .hs-fast { margin-top: calc(9 * var(--u)); font-size: calc(9.5 * var(--u)); font-weight: 700; }
   .hs-fields, .hs-totals { display: grid; grid-template-columns: auto 1fr; gap: calc(3 * var(--u)) calc(10 * var(--u)); }
@@ -1565,7 +1565,7 @@
   .hs-fields span:nth-child(odd) { color: #616161; }
   .hs-totals span:nth-child(odd) { color: #424242; }
   .hs-fields span:nth-child(even), .hs-totals span:nth-child(even) { text-align: right; font-weight: 600; }
-  .hs-totals span.g { font-weight: 800; color: #242424; }
+  .hs-totals span.g { font-weight: 700; color: #242424; }
 
   /* รอยต่อ: แตะขอบล่างหน้าจอและขอบบนกระดาษพร้อมกัน */
   .hs-hinge {
@@ -1574,9 +1574,9 @@
     padding: calc(5 * var(--u)) calc(10 * var(--u)) calc(5 * var(--u)) calc(6 * var(--u));
     border-radius: 999px; background: #fff;
     box-shadow: 0 0 0 1px rgba(1,47,42,.08), 0 8px 18px -8px rgba(1,47,42,.55);
-    font: 700 calc(10 * var(--u))/1 "Plus Jakarta Sans", sans-serif; letter-spacing: .01em; color: var(--brand-deep);
+    font: 700 calc(10 * var(--u))/1 "Anuphan", sans-serif; letter-spacing: .01em; color: var(--brand-deep);
   }
-  .hs-hinge i { width: calc(15 * var(--u)); height: calc(15 * var(--u)); display: grid; place-items: center; border-radius: 50%; background: var(--brand-pink); font-style: normal; font-size: calc(9 * var(--u)); font-weight: 800; }
+  .hs-hinge i { width: calc(15 * var(--u)); height: calc(15 * var(--u)); display: grid; place-items: center; border-radius: 50%; background: var(--brand-pink); font-style: normal; font-size: calc(9 * var(--u)); font-weight: 700; }
 
   /* กระดาษ: ฟอร์มจริงแบบย่อ — เงายาวคือ Document Lift ของฉาก hero */
   .hs-paper {
@@ -1584,7 +1584,7 @@
     padding: calc(14 * var(--u)) calc(15 * var(--u)) calc(15 * var(--u));
     border-radius: var(--ui-radius-card); background: #fff; color: var(--ui-ink); transform: rotate(1.6deg);
     box-shadow: 0 1px 2px rgba(1,47,42,.16), 0 12px 22px -10px rgba(1,47,42,.3), 0 44px 80px -30px rgba(1,47,42,.66);
-    font: 500 calc(8 * var(--u))/1.55 "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font: 500 calc(8 * var(--u))/1.55 "Anuphan", sans-serif;
   }
   .hs-ph { display: grid; grid-template-columns: 1fr auto; gap: calc(10 * var(--u)); align-items: start; }
   .hs-seller { display: flex; gap: calc(7 * var(--u)); align-items: flex-start; min-width: 0; }
@@ -1723,7 +1723,7 @@
     font-size: .82rem; letter-spacing: .02em;
   }
   /* ป้ายสั้น/ตัวหนา ใช้ฟอนต์ไม่มีหัวแบบเดียวกับหัวข้อ ไม่ใช่ Sarabun ของเนื้อความยาว */
-  .plan-banner-text { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+  .plan-banner-text { font-family: "Anuphan", sans-serif; }
   .plan-body { display: flex; flex-direction: column; flex: 1; padding: 26px 24px 28px; }
   .plan-icon {
     display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px;
@@ -1749,15 +1749,15 @@
   .plan-price-prefix { display: block; margin-bottom: 3px; color: var(--brand-teal); font-size: .88rem; font-weight: 700; }
   .plan-price-was {
     display: block; margin-bottom: 2px; 
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 1.5rem; font-weight: 600; letter-spacing: -.04em;
     font-variant-numeric: tabular-nums; text-decoration-thickness: 2px;
   }
   .plan-price-line { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; min-width: 0; }
   .plan-price-line strong {
-    color: var(--brand-deep); font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    color: var(--brand-deep); font-family: "Anuphan", sans-serif;
     /* ขนาดตายตัว ไม่ใช้ vw — การ์ดกว้างคงที่บนเดสก์ท็อป และความสูงบล็อกราคาต้องนิ่งให้ CTA เสมอกันทุกความกว้างจอ */
-    font-size: 3.1rem; font-weight: 800; line-height: 1;
+    font-size: 3.1rem; font-weight: 700; line-height: 1;
     letter-spacing: -.055em; font-variant-numeric: tabular-nums;
   }
   .plan-price-line strong sup {
@@ -1809,7 +1809,7 @@
   .plan-features li { position: relative; padding-left: 28px; color: var(--muted); font-size: .93rem; line-height: 1.55; }
   .plan-features li::before {
     content: "✓"; position: absolute; left: 0; top: 1px;
-    color: var(--brand-teal); font-size: .88rem; font-weight: 800;
+    color: var(--brand-teal); font-size: .88rem; font-weight: 700;
   }
   .plan-assurance {
     margin-top: 18px; padding: 14px 16px;
@@ -1823,8 +1823,8 @@
      — ถ้าเปลี่ยนฟอนต์/ขนาดราคา ต้องวัดใหม่ */
   .plan-full .plan-price { display: flex; align-items: flex-start; }
   .plan-full .plan-price-quote {
-    display: block; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
-    font-size: 1.75rem; font-weight: 800; line-height: 1.35;
+    display: block; font-family: "Anuphan", sans-serif;
+    font-size: 1.75rem; font-weight: 700; line-height: 1.35;
     letter-spacing: -.02em;
   }
   .plan-full .plan-price-quote sup { margin-left: .12em; font-size: .55em; vertical-align: top; }
@@ -1904,7 +1904,7 @@
   .faq-list summary::before {
     content: counter(faq); flex: 0 0 auto;
     display: grid; place-items: center; width: 26px; height: 26px; 
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .82rem; line-height: 1;
+    font-family: "Anuphan", sans-serif; font-size: .82rem; line-height: 1;
     font-variant-numeric: tabular-nums;
     color: var(--brand-teal); background: var(--brand-pale);
     border: 1px solid var(--brand-pale);
@@ -1953,7 +1953,7 @@
      เลเยอร์ Fluent — โครง/จังหวะแบบหน้า Dynamics 365 สีของ JWIC ล้วน
      ค่าตัวเลข (44px/500, kicker 12px/600/.08em, radius 3px, 125ms)
      วัดมาจาก microsoft.com/dynamics-365/products/business-central
-     ฟอนต์ยังเป็นของเดิม (Plus Jakarta Sans + Anuphan) เปลี่ยนแค่น้ำหนัก
+     ฟอนต์ยังเป็นของเดิม (Anuphan · เดิมคู่กับ Plus Jakarta Sans) เปลี่ยนแค่น้ำหนัก
      ============================================================ */
 
   .nb { white-space: nowrap; }   /* กันเบราว์เซอร์ตัดกลางคำไทย เช่น ครบ|วงจร */
@@ -2154,7 +2154,7 @@
      รูปทรงป้ายตรงกับคำอธิบายสัญลักษณ์ใต้ผัง: ทึบ = JWIC · เส้นประ = นอกระบบ · ข้าวหลามตัด = ตัดสินใจ · ขอบเข้ม = ส่งต่อ
      ทางวนกลับเป็นเส้นประสีกุหลาบ · สี teal สว่างอยู่ในโทเคน --bfj-* ของ .bf เท่านั้น */
   /* ฟอนต์ไม่มีหัว (Anuphan) ทั้งผัง · คำอ่านแบ่งบรรทัดไว้ในข้อมูล ห้ามตัดคำเอง — คอลัมน์กว้างตามบรรทัดที่ยาวสุด */
-  .bfj, .bfj-v { font-family: "Anuphan", "Plus Jakarta Sans", sans-serif; }
+  .bfj, .bfj-v { font-family: "Anuphan", sans-serif; }
   .bfj-l { display: block; white-space: nowrap; }
   .bfj { position: relative; display: grid; min-width: 1080px;
     grid-template-columns: 78px repeat(9, minmax(max-content, 1fr)); column-gap: 14px;
@@ -2164,14 +2164,14 @@
   .bfj-band.c { grid-row: 3; background: var(--bfj-lane-c); }
   .bfj-lane { grid-column: 1; z-index: 2; display: grid; place-items: center;
     writing-mode: vertical-rl; transform: rotate(180deg);
-    font: 600 13px "Anuphan", "Plus Jakarta Sans", sans-serif; color: var(--bfj-lane-t); }
+    font: 600 13px "Anuphan", sans-serif; color: var(--bfj-lane-t); }
   .bfj-lane.a { grid-row: 2; } .bfj-lane.c { grid-row: 3; }
   .bfj-wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
   .bfj-wires path { fill: none; stroke: var(--bfj-track); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
   .bfj-wires path.d { stroke: var(--bfj-orchid-ink); stroke-dasharray: 6 5; opacity: .7; }
   .bfj-stop { z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 22px 0 20px; }
   .bfj-t { font-size: .875rem; font-weight: 600; line-height: 1.35; color: var(--ui-ink); }
-  .bfj-n { font: 800 11px/1 "Plus Jakarta Sans", sans-serif; letter-spacing: .06em; color: var(--ui-muted); }
+  .bfj-n { font: 700 11px/1 "Anuphan", sans-serif; letter-spacing: .06em; color: var(--ui-muted); }
   .bfj-note { font-size: .75rem; line-height: 1.4; color: var(--bfj-orchid-ink); }
   .bfj-detour { z-index: 3; align-self: center; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
     background: #fff; border: 1px solid var(--bfj-orchid); border-radius: 12px; padding: 7px 12px 7px 7px;
@@ -2180,7 +2180,7 @@
   .bfj-detour > span { white-space: nowrap; }
   .bfj-detour small { display: block; font-size: .75rem; color: var(--ui-muted); }
   .bfj-tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); white-space: nowrap;
-    font: 700 11px/1 "Anuphan", "Plus Jakarta Sans", sans-serif; color: var(--bfj-glyph);
+    font: 700 11px/1 "Anuphan", sans-serif; color: var(--bfj-glyph);
     background: #fff; border: 1px solid var(--ui-line); border-radius: 999px; padding: 4px 8px; }
   .bfj-sign { width: 56px; height: 56px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
     border-radius: 16px; background: var(--bfj-sign); }
@@ -2194,7 +2194,7 @@
   .bfj-sign.gate svg { width: 24px; height: 24px; }
   .bfj-sign.mini { width: 34px; height: 34px; border-radius: 10px; background: var(--bfj-orchid); }
   .bfj-sign.mini svg { width: 20px; height: 20px; stroke: var(--bfj-orchid-ink); }
-  .bfj-q { font: 800 24px "Plus Jakarta Sans", sans-serif; fill: var(--bfj-glyph); stroke: none; }
+  .bfj-q { font: 700 24px "Anuphan", sans-serif; fill: var(--bfj-glyph); stroke: none; }
   .bfj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* จอแคบ: ข้อมูลชุดเดียวกันเรียงลงแนวตั้ง ไม่ต้องปัดข้าง */
   .bfj-v { display: none; padding: 22px 18px 4px; }
@@ -2220,7 +2220,7 @@
   .bf-head {
     display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
     padding: 16px 24px; border-bottom: 1px solid var(--ui-line);
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em;
     text-transform: uppercase; color: var(--ui-muted);
   }
@@ -2276,7 +2276,7 @@
   .bf-cal-scroll { overflow-x: auto; padding: 14px 16px; }
   .bf-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; min-width: 560px; }
   .bf-dow {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em;
     text-transform: uppercase; color: var(--ui-muted); text-align: center; padding-bottom: 3px;
   }
@@ -2291,7 +2291,7 @@
   .bf-day.blank { background: none; border-color: transparent; }
   .bf-dn {
     display: flex; align-items: center; gap: 6px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: .8rem; font-weight: 600; color: var(--ui-ink); font-variant-numeric: tabular-nums;
   }
   .bf-day.off .bf-dn { color: var(--ui-muted); }
@@ -2304,7 +2304,7 @@
   }
   .bf-tot {
     margin-top: auto; text-align: right; font-variant-numeric: tabular-nums;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: .76rem; font-weight: 700; color: var(--ui-ink);
   }
   .bf-day.over { background: var(--cal-tint); border-color: var(--cal-blue); }
@@ -2326,7 +2326,7 @@
     font-size: .72rem; font-weight: 600; line-height: 1.35; }
   .bf-chip.cur { box-shadow: 0 0 0 2px var(--cal-blue); }
   .bf-cm {
-    display: block; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    display: block; font-family: "Anuphan", sans-serif;
     font-size: .68rem; font-weight: 600; color: var(--ui-muted); font-variant-numeric: tabular-nums;
   }
 
@@ -2342,7 +2342,7 @@
   /* เงื่อนไขวางบิลของลูกค้า — รอบในปฏิทินต้องตรงกับเงื่อนไขนี้ ลากไปวันอื่นแล้วขึ้นว่านอกรอบ */
   .bf-rule { margin: 0; padding: 12px 15px; background: var(--bfj-sand);
     border: 1px solid #EEDDB4; border-radius: var(--ui-radius-card); }
-  .bf-rule-k { margin: 0 0 4px; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+  .bf-rule-k { margin: 0 0 4px; font-family: "Anuphan", sans-serif;
     font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted); }
   .bf-rule-m { margin: 0; font-size: .98rem; font-weight: 700; color: var(--brand-teal); }
   .bf-rule ul { margin: 6px 0 0; padding-left: 1.1em; font-size: .8rem; line-height: 1.5; color: var(--ui-muted); }
@@ -2360,7 +2360,7 @@
     font-size: .8rem; font-variant-numeric: tabular-nums; }
   .bf-dl.h { font-size: .7rem; font-weight: 600; color: var(--ui-muted); border-top: 2px solid var(--brand-pale); }
   .bf-dl code { white-space: nowrap; font-weight: 700; color: var(--brand-teal); letter-spacing: .04em;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; }
+    font-family: "Anuphan", sans-serif; }
   .bf-dl > :nth-child(n+2) { text-align: right; white-space: nowrap; }
   .bf-dl > :nth-child(2), .bf-dl > :nth-child(3) { color: var(--ui-muted); }
   .bf-doc .wq-sum { grid-template-columns: minmax(0, 1fr) auto; }
@@ -2406,7 +2406,7 @@
   .bf-foot > span:nth-child(2) { background: linear-gradient(to top, var(--glow-sea), #fff 78%); border-color: #BFE0D7; }
   .bf-foot > span:nth-child(3) { background: linear-gradient(to top, #D6E8F7, #fff 78%); border-color: var(--cal-line); }
   .bf-foot b {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.45rem; line-height: 1.2;
+    font-family: "Anuphan", sans-serif; font-size: 1.45rem; line-height: 1.2;
     color: var(--ui-ink); font-variant-numeric: tabular-nums;
   }
 
@@ -2527,7 +2527,7 @@
      เดิมชื่อเฟสอังกฤษ 1.06rem เด่นกว่าคำอธิบายไทย .85rem ทั้งที่คนอ่านเป็นคนไทย
      สลับให้ อังกฤษ = label ตัวเล็ก (คงสี --ms-* ตาม Quotation Rule), ไทย = หัวข้อจริง */
   #services .steps .step h3 {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 20px; font-weight: 600; letter-spacing: .03em; color: var(--stage-text);
   }
   #services .steps .step h3 span {
@@ -2591,7 +2591,7 @@
   .footer-col { display: grid; justify-items: start; align-content: start; gap: 2px; }
   .footer-head {
     margin: 0 0 6px; 
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
   }
   /* min-height 32px = เป้าหมายกดขั้นต่ำ ลิงก์ท้ายหน้าบนมือถืออยู่ชิดกันมาก */
@@ -2665,7 +2665,7 @@
     min-height: 36px; padding: 7px 16px; cursor: pointer;
     border: 1px solid rgba(255,255,255,.28); border-radius: var(--ui-radius-btn);
     color: var(--brand-mist); background: transparent;
-    font: inherit; font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif; font-size: .85rem; font-weight: 500;
+    font: inherit; font-family: "Anuphan", "Segoe UI", sans-serif; font-size: .85rem; font-weight: 500;
     transition: background .125s ease, color .125s ease, border-color .125s ease;
   }
   #cookie-manage:hover { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.08); }
@@ -2829,7 +2829,7 @@
     width: 100%; min-height: 48px; margin: 8px 0 20px; padding: 10px 22px;
     border: 1px solid var(--ui-ink); border-radius: var(--ui-radius-btn);
     background: #fff; color: var(--ui-ink); cursor: pointer;
-    font: 500 1rem/1.3 "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font: 500 1rem/1.3 "Anuphan", sans-serif;
   }
   .demo-toggle[hidden] { display: none; }
   .demo-toggle::after { content: ""; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
@@ -2894,7 +2894,7 @@
   .vs-bar { background: var(--bg-soft); border-bottom: 1px solid var(--ui-line); padding: 18px 24px 20px; }
   .vs-app {
     display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
     color: var(--ui-muted);
   }
@@ -2905,7 +2905,7 @@
   .vs-box {
     min-width: 232px; padding: 10px 14px;
     border: 1px solid var(--brand-mist); border-radius: var(--ui-radius-btn); 
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 1.02rem; font-weight: 700; color: var(--ui-ink);
     letter-spacing: .12em; font-variant-numeric: tabular-nums;
   }
@@ -2964,7 +2964,7 @@
   .vs-row:hover { background: rgba(1,47,42,.035); }
   .vs-row[aria-pressed="true"] { background: rgba(65,119,113,.09); }
   .vs-row code {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-weight: 700; font-size: .9rem; letter-spacing: .1em;
     color: var(--brand-teal); font-variant-numeric: tabular-nums;
   }
@@ -3048,7 +3048,7 @@
   }
   .vs-cost .vs-lbl {
     display: inline-flex; align-items: center; gap: 7px;
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 12px; font-weight: 600; letter-spacing: .08em;
     color: var(--brand-burgundy); white-space: nowrap;
   }
@@ -3075,7 +3075,7 @@
   .wq-doc-head b { font-size: 1rem; font-weight: 700; color: var(--ui-ink); }
   .wq-doc-head span span { display: block; font-size: .78rem; font-weight: 400; letter-spacing: normal; color: var(--ui-muted); }
   .wq-doc-no {
-    text-align: right; font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    text-align: right; font-family: "Anuphan", sans-serif;
     font-size: .88rem; font-weight: 700; color: var(--brand-teal);
     letter-spacing: .06em; font-variant-numeric: tabular-nums;
   }
@@ -3156,10 +3156,10 @@
   }
   .ct-step:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
   .ct-lv, .ct-narr-lv {
-    font-family: "Plus Jakarta Sans", "Anuphan", sans-serif;
+    font-family: "Anuphan", sans-serif;
     font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted);
   }
-  .ct-nm { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: .88rem; font-weight: 600; line-height: 1.35; }
+  .ct-nm { font-family: "Anuphan", sans-serif; font-size: .88rem; font-weight: 600; line-height: 1.35; }
   /* ขั้นปัจจุบัน = ขอบกับเส้นใต้ปุ่มสีทองแดง · ขั้นที่ผ่านแล้วจางลง */
   .ct-step::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 3px; background: transparent; }
   .ct-step.on { border-color: var(--ct-thread); }
@@ -3180,7 +3180,7 @@
   .ct-narr-lv { grid-row: span 2; padding-top: .45em; color: var(--ct-thread); }
   /* รูปใหญ่ของขั้นที่กำลังเล่า สีทองแดงตามป้าย LEVEL กับเส้นซ้าย · เส้นบางลงตามขนาดที่ใหญ่ขึ้น */
   .ct-narr-pic { display: block; width: 64px; height: 64px; margin-top: 12px; stroke-width: 1.25; }
-  .ct-narr-t { font-family: "Plus Jakarta Sans", "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
+  .ct-narr-t { font-family: "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
   .ct-narr-x { max-width: 59.3em; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
 
   /* หน้าต่าง BC — ยกหน้าตาจากหน้า Cost Traceability ของจริงใน BC: หัวเพจ แถบคำสั่ง แถบซูม สีน้ำเงินของ BC ฟอนต์ Segoe UI
@@ -3493,7 +3493,7 @@
           <rect width="64" height="64" fill="#1c4a3c"/>
           <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
           <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
-          <text x="32" y="43" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+          <text x="32" y="43" text-anchor="middle" font-family="'Anuphan', 'Segoe UI', sans-serif" font-size="27" font-weight="700" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
         </g>
       </svg>
       <span class="wordmark"><b>JWIC</b> <i>Consulting</i></span>

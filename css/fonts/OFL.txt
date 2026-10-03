@@ -1,12 +1,10 @@
 Fonts in this folder (woff2 subsets as served by Google Fonts, self-hosted since Sep 2026):
   anuphan-*.woff2            Anuphan
   sarabun-*.woff2            Sarabun (body text since Oct 2026, replacing Niramit)
-  plus-jakarta-sans-*.woff2  Plus Jakarta Sans
-All three are licensed under the SIL Open Font License, Version 1.1 (full text below).
+Both are licensed under the SIL Open Font License, Version 1.1 (full text below).
 
 Copyright 2019 The Anuphan Project Authors (https://github.com/cadsondemak/Anuphan)
 Copyright 2018 The Sarabun Project Authors (https://github.com/cadsondemak/Sarabun)
-Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

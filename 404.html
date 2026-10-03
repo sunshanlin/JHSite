@@ -8,9 +8,16 @@
   <title>ไม่พบหน้าที่ต้องการ | JWIC Consulting</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <style>
+    /* ฟอนต์ชุดเดียวกับหน้าเว็บ (css/fonts/): ตัวเลข หัวข้อ ปุ่ม = Anuphan · ประโยคอธิบาย = Sarabun 400 */
+    @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+    @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(/css/fonts/anuphan-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-thai-400.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-ext-400.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-400.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
     :root {
       color-scheme: light;
-      font-family: "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
+      font-family: "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif;
       color: #122e33;
       background: #f2f9f7;
     }
@@ -35,11 +42,12 @@
       margin: 0;
       color: #1f7a87;
       font-size: clamp(64px, 18vw, 112px);
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1;
     }
     h1 { margin: 18px 0 10px; color: #0d5257; }
     p { line-height: 1.7; }
+    p:not(:first-child) { font-family: "Sarabun", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif; font-size: 18px; }
     a {
       display: inline-block;
       margin-top: 16px;
