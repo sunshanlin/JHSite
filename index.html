@@ -5675,8 +5675,8 @@
         tx: { th: 'ลังใช้ Costing Method แบบ Average ต้นทุนจึงไม่ได้ผูกกับใบรับใบใดใบหนึ่ง แต่มาจาก Average Cost Pool ของเดือนกันยายน ที่รวมยอดยกมา 400 ใบกับของที่รับเข้าในเดือนอีก 1,000 ใบ เฉลี่ยแล้วใบละ 14.00 บาท ตรงกับหน้า Average Cost Calc. Overview ของ Business Central อยากดูที่มาของยอดยกมา กด Previous period ย้อนไปเดือนสิงหาคมได้เลย',
               en: "Cartons use the Average costing method, so their cost is not tied to any one receipt. It comes from the September Average Cost Pool: 400 cartons carried over plus 1,000 received during the month, averaging 14.00 baht each, exactly as Business Central's Average Cost Calc. Overview shows. To see where the carried-over value came from, press Previous period to go back to August." } },
       { focus: 'od', ic: 'glove', open: ['s', 'op', 'cb', 'cx'], nm: { th: 'ไลน์จุ่มขึ้นรูป', en: 'Dipping line' },
-        tx: { th: 'ถุงมือ bulk ชุดนี้มาจากใบสั่งผลิต DIP-091 ของไลน์จุ่มที่ 3 ต้นทุน 142,898.60 บาท ตกชิ้นละ 0.71449 บาท กล่อง Output ยังแยก Actual Cost ของทั้งใบสั่งผลิตไว้ให้ตรงกับหน้า Statistics ด้วย ส่วนกล่อง dispenser ซื้อมาจากผู้ขายในประเทศ',
-              en: "These bulk gloves come from production order DIP-091 on dipping line 3: 142,898.60 baht, or 0.71449 a glove. The Output box also breaks down the whole order's actual cost, matching its Statistics page. The dispenser boxes were bought from a local vendor." } },
+        tx: { th: 'ถุงมือ bulk ชุดนี้มาจากใบสั่งผลิต DIP-091 ของไลน์จุ่มที่ 3 ต้นทุน 142,898.60 บาท ตกชิ้นละ 0.71 บาท กล่อง Output ยังแยก Actual Cost ของทั้งใบสั่งผลิตไว้ให้ตรงกับหน้า Statistics ด้วย ส่วนกล่อง dispenser ซื้อมาจากผู้ขายในประเทศ',
+              en: "These bulk gloves come from production order DIP-091 on dipping line 3: 142,898.60 baht, or 0.71 a glove. The Output box also breaks down the whole order's actual cost, matching its Statistics page. The dispenser boxes were bought from a local vendor." } },
       { focus: 'cl1', ic: 'drum', open: ['s', 'op', 'cb', 'od'], nm: { th: 'เบิกน้ำยางและสารเคมี', en: 'Latex and chemicals' },
         tx: { th: 'ไลน์จุ่มเบิกน้ำยาง NBR ไป 1,560 กก. ตาม FIFO น้ำยางชุดนี้มาจาก 2 Lot คือ Lot เดือนสิงหาคม 1,000 กก. กับ Lot เดือนกันยายนอีก 560 กก. ระบบจึงแยกเป็น 2 รายการ นอกจากน้ำยางแล้ว ยังมีซิงก์ออกไซด์ สารเร่ง และ Capacity ของไลน์อีก 40 ชั่วโมงด้วย',
               en: 'The dipping line draws 1,560 kg of NBR latex under FIFO. It comes from two lots, 1,000 kg from the August lot and 560 kg from the September lot, so Business Central posts two entries. Zinc oxide, an accelerator and 40 hours of line capacity go in as well.' } },
@@ -5721,11 +5721,11 @@
 
     const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const qty = (v) => v.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    // Unit Cost แบบแอปจริง (FormatUnitCost ของ JHCore): ใช้ Unit-Amount Decimal Places ของ General Ledger Setup
+    // บริษัทตัวอย่างตั้งไว้ 2 หลัก — ค่าเฉลี่ยของ pool / Opening value ปัดตาม Amount Rounding Precision ก็ได้ 2 หลักเท่ากัน
     const unitCost = (n) => {
       if (n.kind === 'cap' || !n.q) return '';
-      if (AVG[n.kind]) return money(Math.round(n.total / n.q * 100) / 100);   // ค่าเฉลี่ยปัดตาม Amount Rounding Precision แบบ CalculateAverageCost
-      const u = Math.round(Math.abs(n.total / n.q) * 100000) / 100000;
-      return u.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 5 });
+      return money(Math.round(Math.abs(n.total / n.q) * 100) / 100);
     };
     const itemText = (n) => n.ino + ' ' + n.idesc;
     // บรรทัดรองแบบแอปจริง: รายการ = วันที่ · Location · Lot · Costing Method · Capacity = วันที่ · ใบสั่งผลิต · เลข Capacity Ledger Entry
