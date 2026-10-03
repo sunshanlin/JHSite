@@ -30,10 +30,10 @@ body {
   color: var(--text); background: #fff;
   -webkit-font-smoothing: antialiased;
 }
-/* เนื้อความบทความ = Sarabun (ไทยมีหัว) ชุดเดียวกับเนื้อความหน้าแรก · หัวข้อ ปุ่ม CTA และรายชื่อบทความอื่น
-   ยังเป็น Plus Jakarta Sans + Anuphan (ไม่มีหัว) แบบ body เหมือนเดิม */
+/* เนื้อความบทความ = Sarabun (ไทยมีหัว) ชุดเดียวกับเนื้อความหน้าแรก · หัวข้อ ปุ่ม CTA รายชื่อบทความอื่น
+   หัวกล่องหมายเหตุ และหัวตาราง ยังเป็น Plus Jakarta Sans + Anuphan (ไม่มีหัว) แบบ body เหมือนเดิม */
 article, .article-head .lead { font-family: "Sarabun", "Anuphan", "Segoe UI", "Leelawadee UI", Tahoma, sans-serif; font-weight: 400; }
-article h2, article h3, .article-cta a, .more a { font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif; }
+article h2, article h3, .article-cta a, .more a, .note b, th { font-family: "Plus Jakarta Sans", "Anuphan", "Segoe UI", sans-serif; }
 .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
 
 /* nav — ให้เหมือนหน้าหลัก */
