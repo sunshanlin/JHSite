@@ -1879,6 +1879,8 @@
   }
 
   /* การ์ดขาวบนพื้นสว่าง (ผิวเดียวกับการ์ดทั้งหน้า) · ป้ายเลขข้อ + ไถเปิดแบบ .plan-more */
+  /* ไม่มี .sub ใต้หัวข้อ (ผู้ใช้ตัดออก 5 ต.ค. 2026) — เว้นก่อนรายการคำถามเท่าที่ .sub เว้น แบบ #pp36 / #cost-trace */
+  #faq > .wrap > h2 { margin-bottom: 44px; }
   .faq-list { display: grid; gap: 12px; counter-reset: faq; }
   .faq-list details {
     position: relative; overflow: hidden; counter-increment: faq;
@@ -1972,7 +1974,7 @@
      - แต่ละจุดจัดไม่ซ้ำกัน รวมไว้ที่นี่ที่เดียว และต้องอยู่หลังกฎ #pricing เก่าที่มี radial เบอร์กันดี */
   section.alt, #pricing { background: var(--ui-page); }
   /* #faq ต่อจาก #cost-trace (.alt) ที่เป็น --ui-page เหมือน body → พื้นขาวให้แยกจาก Highlight Feature
-     ขาวไม่ใช่ ivory: .sub #57746F บน ivory ได้ 4.40 ไม่ผ่าน AA · บนขาว 5.08 */
+     ขาวไม่ใช่ ivory: ตอนเลือก (5 ต.ค. 2026) ยังมี .sub #57746F ซึ่งบน ivory ได้ 4.40 ไม่ผ่าน AA · บนขาว 5.08 */
   #faq { background: #fff; }
   /* showcase: ทราย → มิ้นต์ → น้ำทะเล สูงขึ้นมาหลังแผงฟีเจอร์ครึ่งล่าง (แบบ Industries ของ MS) */
   #features {
@@ -4466,7 +4468,6 @@
   <div class="wrap">
     <p class="section-kicker">Frequently asked questions</p>
     <h2>คำถามที่พบบ่อย</h2>
-    <p class="sub">คำตอบสั้น ๆ สำหรับคำถามที่ลูกค้าถามเราบ่อยที่สุด</p>
     <div class="faq-list">
       <details class="reveal" open>
         <summary>Business Central รองรับภาษีและเอกสารไทยหรือไม่?</summary>
@@ -6612,7 +6613,6 @@
     ['.ci-flyer a', 'One-page flyer to share with your team (Thai)'],
     ['.demo-toggle .dt-close', 'Hide the demo'],
     ['#faq h2', 'Frequently Asked Questions'],
-    ['#faq > .wrap > .sub', 'Short answers to the questions clients ask us most.'],
     ['#faq details:nth-of-type(1) summary', 'Does Business Central support Thai tax and documents?'],
     ['#faq details:nth-of-type(1) > p:nth-of-type(1)', 'Standard Business Central does not cover Thai tax directly, so we built JWIC Localization to fill the gap — purchase–sales VAT reports and PP30, for head office and branches, including separate branch filing.'],
     ['#faq details:nth-of-type(1) > p:nth-of-type(2)', 'It also covers withholding tax with 50 Bis certificates, RD Prep import files, billing notes, and a complete set of Thai document forms.'],
