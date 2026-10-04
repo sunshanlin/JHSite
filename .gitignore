@@ -1,6 +1,9 @@
 # ต้นฉบับรูปไม่มีลายน้ำ — ห้ามขึ้นโฮสต์
 img/originals/
 
+# คลิปดิบจาก OBS (120 fps หลายร้อย MB) — ขึ้นเว็บเฉพาะไฟล์ที่ตัดแล้วใน video/
+video/raw/
+
 # Browser automation artifacts
 .playwright-cli/
 

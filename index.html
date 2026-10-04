@@ -358,7 +358,7 @@
   .plan-price-prefix, .plan-currency, .plan-price-unit, .ct-play, .ct-chip, .vs-chip, .vs-lbl,
   .start-here, .row-title, .tip > b, .ci-name, .ci-list, .profile-role, .footer-brand strong,
   .footer-reach a, .footer-menu a, .article-jump a, .cookie-actions button, .lang button,
-  .linkedin-link, .credential-badge figcaption, .credential-verification, .bf-chip, .bf-keys, .bf-due, .bf-foot) {
+  .linkedin-link, .credential-badge figcaption, .credential-verification, .bf-chip, .bf-due, .bf-foot) {
     font-family: "Anuphan", "Segoe UI", sans-serif;
   }
   .wrap { margin: 0 auto; }
@@ -2137,116 +2137,31 @@
   }
   #contact h2 { color: #fff; }
 
-  /* ---- #billing-flow: ผังกระบวนการวางบิล + Billing Board ที่ลากได้ ----
+  /* ---- #billing-flow: Billing Board ที่ลากได้ (ผังกระบวนการเดิมถอดออก 4 ต.ค. 2026 ผู้ใช้: เยิ่นเย้อ) ----
      การ์ดใบเดียวของทั้ง section เหมือน .vs ของ #vat-service — ข้างในแบ่งน้ำหนัก
-     ด้วยพื้นอ่อนกับเส้น 1px ไม่มีการ์ดซ้อนการ์ด
-     ผังวาดบนกระดาษตาม The Paper Rule ไม่ใช่แถบสีเข้ม: ป้ายของ JWIC เป็น teal อ่อนทึบ
-     ป้ายที่เหลือเป็นขาวมีขอบ — ความต่างอ่านได้โดยไม่ต้องพึ่งพื้นเข้ม */
+     ด้วยพื้นอ่อนกับเส้น 1px ไม่มีการ์ดซ้อนการ์ด */
   #billing-flow > .wrap > .section-kicker,
   #billing-flow > .wrap > h2,
   #billing-flow > .wrap > .sub {
     text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
   }
-  .bf-ic { flex: 0 0 auto; fill: none; stroke: currentColor;
-    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ผังแบบ journey — ป้ายสัญลักษณ์เดินซ้ายไปขวา สองเลน เส้นวาดด้วย SVG ตามตำแหน่งจริงของป้าย
-     รูปทรงป้ายตรงกับคำอธิบายสัญลักษณ์ใต้ผัง: ทึบ = JWIC · เส้นประ = นอกระบบ · ข้าวหลามตัด = ตัดสินใจ · ขอบเข้ม = ส่งต่อ
-     ทางวนกลับเป็นเส้นประสีกุหลาบ · สี teal สว่างอยู่ในโทเคน --bfj-* ของ .bf เท่านั้น */
-  /* ฟอนต์ไม่มีหัว (Anuphan) ทั้งผัง · คำอ่านแบ่งบรรทัดไว้ในข้อมูล ห้ามตัดคำเอง — คอลัมน์กว้างตามบรรทัดที่ยาวสุด */
-  .bfj, .bfj-v { font-family: "Anuphan", sans-serif; }
-  .bfj-l { display: block; white-space: nowrap; }
-  .bfj { position: relative; display: grid; min-width: 1080px;
-    grid-template-columns: 78px repeat(9, minmax(max-content, 1fr)); column-gap: 14px;
-    grid-template-rows: 74px auto auto 74px; padding-right: 18px; }
-  .bfj-band { grid-column: 1 / -1; }
-  .bfj-band.a { grid-row: 2; background: var(--bfj-lane-a); }
-  .bfj-band.c { grid-row: 3; background: var(--bfj-lane-c); }
-  .bfj-lane { grid-column: 1; z-index: 2; display: grid; place-items: center;
-    writing-mode: vertical-rl; transform: rotate(180deg);
-    font: 600 13px "Anuphan", sans-serif; color: var(--bfj-lane-t); }
-  .bfj-lane.a { grid-row: 2; } .bfj-lane.c { grid-row: 3; }
-  .bfj-wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
-  .bfj-wires path { fill: none; stroke: var(--bfj-track); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
-  .bfj-wires path.d { stroke: var(--bfj-orchid-ink); stroke-dasharray: 6 5; opacity: .7; }
-  .bfj-stop { z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 22px 0 20px; }
-  .bfj-t { font-size: .875rem; font-weight: 600; line-height: 1.35; color: var(--ui-ink); }
-  .bfj-n { font: 700 11px/1 "Anuphan", sans-serif; letter-spacing: .06em; color: var(--ui-muted); }
-  .bfj-note { font-size: .75rem; line-height: 1.4; color: var(--bfj-orchid-ink); }
-  .bfj-detour { z-index: 3; align-self: center; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
-    background: #fff; border: 1px solid var(--bfj-orchid); border-radius: 12px; padding: 7px 12px 7px 7px;
-    font-size: .8125rem; line-height: 1.35; color: var(--ui-ink); }
-  .bfj-detour b { font-weight: 700; color: var(--bfj-orchid-ink); }
-  .bfj-detour > span { white-space: nowrap; }
-  .bfj-detour small { display: block; font-size: .75rem; color: var(--ui-muted); }
-  .bfj-tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); white-space: nowrap;
-    font: 700 11px/1 "Anuphan", sans-serif; color: var(--bfj-glyph);
-    background: #fff; border: 1px solid var(--ui-line); border-radius: 999px; padding: 4px 8px; }
-  .bfj-sign { width: 56px; height: 56px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
-    border-radius: 16px; background: var(--bfj-sign); }
-  .bfj-sign svg { position: relative; width: 32px; height: 32px; fill: none; stroke: var(--bfj-glyph);
-    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-  .bfj-sign.out { background: #fff; border: 2px dashed var(--bfj-edge); }
-  .bfj-sign.hand { background: #fff; border: 2.5px solid var(--bfj-glyph); }
-  .bfj-sign.gate { background: transparent; }
-  .bfj-sign.gate::before { content: ""; position: absolute; inset: 8px; transform: rotate(45deg);
-    background: var(--bfj-sand); border: 2px solid var(--bfj-edge); border-radius: 7px; }
-  .bfj-sign.gate svg { width: 24px; height: 24px; }
-  .bfj-sign.mini { width: 34px; height: 34px; border-radius: 10px; background: var(--bfj-orchid); }
-  .bfj-sign.mini svg { width: 20px; height: 20px; stroke: var(--bfj-orchid-ink); }
-  .bfj-q { font: 700 24px "Anuphan", sans-serif; fill: var(--bfj-glyph); stroke: none; }
-  .bfj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  /* จอแคบ: ข้อมูลชุดเดียวกันเรียงลงแนวตั้ง ไม่ต้องปัดข้าง */
-  .bfj-v { display: none; padding: 22px 18px 4px; }
-  .bfj-vst { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 14px; padding-bottom: 22px; }
-  .bfj-vst:not(:last-child)::before { content: ""; position: absolute; left: 26px; top: 54px; bottom: 0;
-    width: 3px; border-radius: 2px; background: var(--bfj-track); }
-  .bfj-vst .bfj-t { font-size: .95rem; padding-top: 4px; }
-  /* จอแคบ: ตัดบรรทัดได้เฉพาะระหว่างท่อนที่แบ่งไว้ */
-  .bfj-vst .bfj-l { display: inline-block; margin-right: .3em; }
-  .bfj-v .bfj-detour > span { white-space: normal; }
-  .bfj-who { display: inline-block; margin-left: 6px; font-size: .75rem; font-weight: 500; color: var(--bfj-lane-t); }
-  .bfj-vst .bfj-detour { margin-top: 8px; }
+  /* นิยามใบวางบิล: หัวข้อย่อย + 3 ข้อ — ชื่อข้อตัวหนา teal แบบ .ct-chip ของ #cost-trace คำอธิบายสีเดิมของกล่อง */
+  .bf-uses-h { display: block; margin: 14px 0 6px; font-weight: 600; color: var(--ui-ink); }
+  .bf-uses { display: grid; gap: 8px; margin: 0; padding-left: 1.5em; }
+  .bf-uses li::marker { font-weight: 600; color: var(--brand-teal); }
+  .bf-use-t { display: block; font-weight: 600; color: var(--brand-teal); }
+  .bf-uses-h, .bf-use-t { font-family: "Anuphan", "Segoe UI", sans-serif; }
 
   .bf {
-    --bfj-lane-a: #E2F6F5; --bfj-lane-c: #F6EEF8; --bfj-lane-t: #3F8E8C;
-    --bfj-sign: #C4EEEB; --bfj-glyph: #0B7B79; --bfj-edge: #6FCBC6; --bfj-track: #86D6D1;
-    --bfj-orchid: #EADCF1; --bfj-orchid-ink: #74509E; --bfj-sand: #FDF4E0;
-    /* เลนลูกค้า + ทางวนกลับ เดิมชมพู/แดง → ม่วงกล้วยไม้เฉดเดียวกับแผง "ที่ VAT Service เติมให้"
-       หมึก #74509E: บนขาว 6.21 · เลนฟ้า 5.54 · เลนม่วง 5.47 */
+    --bfj-lane-a: #E2F6F5; --bfj-sand: #FDF4E0;
     background: #fff; border: 1px solid var(--ui-line);
     border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
   }
-  .bf-head {
-    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    padding: 16px 24px; border-bottom: 1px solid var(--ui-line);
-    font-family: "Anuphan", sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ui-muted);
-  }
-  .bf-head .bf-ic { width: 15px; height: 15px; color: var(--brand-jade); }
-
-  /* ผังกว้างกว่าจอแคบ — เลื่อนในกล่องตัวเอง ไม่ให้หน้าเลื่อนแนวนอน */
-  .bf-scroll { overflow-x: auto; overflow-y: hidden; padding: 8px 0 18px; }
-
-  .bf-keys {
-    display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center;
-    padding: 14px 24px; border-top: 1px solid var(--ui-line);
-    font-size: .84rem; color: var(--ui-muted);
-  }
-  .bf-keys span { display: flex; align-items: center; gap: 9px; }
-  .bf-keys i { flex: 0 0 auto; }
-  .bf-keys i { width: 18px; height: 18px; border-radius: 5px; }
-  .bf-k-j { background: var(--bfj-sign); }
-  .bf-k-m { border: 2px dashed var(--bfj-edge); }
-  .bf-keys .bf-k-g { width: 13px; height: 13px; border-radius: 3px; margin: 0 2px; background: var(--bfj-sand);
-    border: 2px solid var(--bfj-edge); transform: rotate(45deg); }
-  .bf-k-c { border: 2px solid var(--bfj-glyph); }
-  .bf-k-r { background: var(--bfj-orchid); }
 
   /* ---- Billing Board ---- */
   .bf-board {
-    border-top: 1px solid var(--ui-line); background: var(--bg-soft);
+    background: var(--bg-soft);
     --cal-blue: var(--ms-blue); --cal-tint: #EFF6FC; --cal-line: #C3DFF2; --cal-ink: #0B5A8C;
   }
   .bf-bar {
@@ -2263,7 +2178,7 @@
 
   /* ปฏิทินซ้าย ใบวางบิลขวา — ปฏิทินย่อลงให้พรีวิวมีที่ */
   /* bento: ปฏิทิน · เงื่อนไขลูกค้า · ใบวางบิล · ตัวเลขท้ายบอร์ด เป็นกล่องแยกบนพื้น --bg-soft สีไม่ซ้ำกัน
-     พื้นกล่องใช้สีชุด --bfj-* ของผังด้านบน + Horizon glow ส่วนใบวางบิลคงเป็นกระดาษขาว
+     พื้นกล่องใช้สีชุด --bfj-* ของ .bf + Horizon glow ส่วนใบวางบิลคงเป็นกระดาษขาว
      สีสถานะในปฏิทิน (burgundy / น้ำเงิน / jade) ไม่เอามาเป็นพื้นกล่อง ความหมายจะได้ไม่ปน */
   .bf-work {
     display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(330px, 1fr);
@@ -2423,12 +2338,8 @@
 
   @media (max-width: 900px) {
     .bf-work { grid-template-columns: 1fr; }
-    .bf-head, .bf-bar, .bf-keys { padding-left: 18px; padding-right: 18px; }
+    .bf-bar { padding-left: 18px; padding-right: 18px; }
     .bf-cal-scroll { padding: 12px; }
-  }
-  @media (max-width: 760px) {
-    .bf-scroll { display: none; }
-    .bfj-v { display: block; }
   }
 
   /* มือถือ: ปฏิทินเปลี่ยนเป็นรายการวันเรียงลง เหลือเฉพาะวันที่มีกลุ่มวางบิล
@@ -2873,6 +2784,48 @@
   }
   .vs-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* คลิปจากหน้าจอจริง (_plans/2026-10-feature-clips.md)
+     ในกล่องนิยาม (.tip.has-clip): เดสก์ท็อปหัว+คำอธิบายเดิมซ้อนกันทางซ้าย คลิปทางขวา · ≤900px คลิปต่อใต้คำอธิบาย เหนือปุ่ม "ดูการนำเสนอ" */
+  /* align-items: start ทับ center ของ .tip ตัวตั้งต้น — ไม่งั้นนิยามสั้น ๆ ลอยไปกลางแถวที่ยืดตามความสูงคลิป */
+  .tip.has-clip {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); grid-template-rows: auto 1fr;
+    grid-template-areas: "t clip" "p clip"; column-gap: 28px; row-gap: 6px; align-items: start;
+  }
+  .tip.has-clip > b { grid-area: t; }
+  .tip.has-clip > p, .tip.has-clip > .tip-body { grid-area: p; }
+  /* .tip-body = เนื้อนิยามที่มีรายการ (ใส่ใน <p> ไม่ได้) สีเดียวกับ .tip p */
+  .tip-body { color: var(--muted); text-wrap: pretty; }  /* pretty: ไม่ให้เหลือคำเดียวโดดบรรทัดท้าย (ตกลง/กัน) */
+  .tip.has-clip > .clip { grid-area: clip; align-self: start; }
+  @media (max-width: 900px) {
+    .tip.has-clip { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "t" "p" "clip"; }
+    .tip.has-clip > .clip { width: 100%; max-width: 560px; margin-top: 8px; }
+  }
+  /* กรอบเดียวครอบคลิป + แถบปุ่มใต้คลิป — ปุ่มอยู่นอกภาพ ไม่บังยอดเงิน/ตัวเลขที่คลิปซูมไปโชว์ตรงมุมขวาล่าง
+     (ไม่ต้องมีกฎ print — บล็อกพิมพ์ซ่อนทั้ง 3 section และ .feature-visual อยู่แล้ว) */
+  .clip { overflow: hidden; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card); background: #fff; }
+  /* คลิกที่คลิป = ขยายเต็มจอ (เมาส์) · ปุ่ม ⤢ ทำแบบเดียวกันสำหรับคีย์บอร์ด */
+  .clip video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; cursor: zoom-in; }
+  .clip-ctrl { display: flex; justify-content: flex-end; gap: 8px; padding: 4px 8px; border-top: 1px solid var(--ui-line); }
+  /* วงปุ่ม 36px พื้นที่กด 44×44 ด้วย ::after โปร่งใส (แบบเดียวกับปุ่มเมนู รอบ 2.5.5) แถบจะได้ไม่สูงเกิน */
+  .clip-btn {
+    position: relative; width: 36px; height: 36px; display: grid; place-items: center; border: 0; border-radius: 50%;
+    background: var(--brand-deep); color: #fff; font-size: .72rem; line-height: 1; cursor: pointer;
+  }
+  .clip-btn::after { content: ""; position: absolute; inset: -4px; }
+  .clip-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .clip-btn:hover { background: var(--brand-teal); }
+  .clip-btn:focus-visible { outline: 2px solid var(--brand-pink-deep); outline-offset: 2px; }
+  /* เต็มจอ: พื้นดำ คลิปกินที่ที่เหลือ แถบปุ่มชิดล่าง · ปุ่ม Jade บนดำได้ 4.1:1 (Deep Teal บนดำแทบมองไม่เห็น)
+     Safari ก่อน 16.4 ใช้ :-webkit-full-screen — แยกกฎ เพราะรวมในกฎเดียว เบราว์เซอร์ที่ไม่รู้จักจะทิ้งทั้งกฎ */
+  .clip:fullscreen { display: flex; flex-direction: column; border: 0; border-radius: 0; background: #000; }
+  .clip:fullscreen video { flex: 1 1 auto; min-height: 0; aspect-ratio: auto; object-fit: contain; cursor: auto; }
+  .clip:fullscreen .clip-ctrl { border-top-color: #333; }
+  .clip:fullscreen .clip-btn { background: var(--brand-jade); }
+  .clip:-webkit-full-screen { display: flex; flex-direction: column; border: 0; border-radius: 0; background: #000; }
+  .clip:-webkit-full-screen video { flex: 1 1 auto; min-height: 0; aspect-ratio: auto; object-fit: contain; cursor: auto; }
+  .clip:-webkit-full-screen .clip-ctrl { border-top-color: #333; }
+  .clip:-webkit-full-screen .clip-btn { background: var(--brand-jade); }
 
   /* นิยาม VAT Service: สามข้อที่บริการนี้ตรวจให้ แทนย่อหน้าเดียวยาว ๆ
      ค่าสี/ขอบ/มุม ชุดเดียวกับ .feature-chips li ของ #features — ไม่ได้คิดสไตล์ใหม่ */
@@ -4025,43 +3978,22 @@
     <h2 data-bf="h2">ระบบวางบิล</h2>
     <p class="sub" data-bf="sub">งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ</p>
 
-    <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปฏิทินใหม่ทุกครั้งที่ย้ายกลุ่ม -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <symbol id="bfi-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></symbol>
-    </defs></svg>
+    <!-- นิยาม ใช้กล่อง .tip ชุดเดียวกับ VAT Service — ข้อความของผู้ใช้ตามตัวอักษร (4 ต.ค. 2026)
+         ตัวครอบเป็น <div> ไม่ใช่ <p> เพราะมีรายการ <ol> และไม่ให้ I18N ['.tip p', …] ของกล่อง Localization มาเขียนทับ
+         คลิปจากหน้าจอจริงอยู่ขวา (เลขบัญชีบนใบวางบิลถูกปิดไว้ในคลิป) -->
+    <div class="tip has-clip reveal">
+      <b data-bf="tipTitle">💡 ใบวางบิลคืออะไร?</b>
+      <div class="tip-body" data-bf="tipBody">คือเอกสารที่ผู้ขายหรือผู้ให้บริการนำส่งให้ลูกค้า เพื่อแจ้งยอดเงินที่ต้องชำระ และขอเรียกเก็บเงินตามกำหนด เช่น หลังส่งสินค้า หลังให้บริการ หรือเมื่อถึงรอบวางบิลตามที่ตกลงกัน<span class="bf-uses-h">ใบวางบิลใช้ทำอะไร?</span><ol class="bf-uses"><li><span class="bf-use-t">แจ้งยอดที่ต้องชำระ</span>สรุปยอดจากใบแจ้งหนี้หลายใบ หรือรายการที่ถึงกำหนดชำระในรอบนั้น</li><li><span class="bf-use-t">ยื่นเอกสารตามรอบวางบิล</span>เช่น ลูกค้ากำหนดให้ผู้ขายส่งเอกสารทุกวันที่ 25 ของเดือน และชำระเงินภายใน 30 วัน</li><li><span class="bf-use-t">ให้ลูกค้าตรวจสอบและรับรองยอด</span>ฝ่ายบัญชีลูกค้าตรวจสอบเอกสาร และอาจลงชื่อหรือประทับตรารับวางบิลเพื่อเป็นหลักฐาน</li></ol></div>
+      <div class="clip" data-clip="billing-flow">
+        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-billing.webp" aria-hidden="true">
+          <source src="video/hl-billing.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
 
     <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="bf-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
     <div class="demo-body" id="bf-demo">
     <div class="bf reveal">
-      <p class="bf-head">
-        <svg class="bf-ic"><use href="#bfi-flow"/></svg><span data-bf="flowHead">กระบวนการออกใบวางบิล</span>
-      </p>
-
-      <p class="bfj-sr" id="bfTitle" data-bf="svgTitle"></p>
-      <div class="bf-scroll">
-        <div class="bfj" id="bfJourney" aria-describedby="bfTitle">
-          <div class="bfj-band a"></div><div class="bfj-band c"></div>
-          <div class="bfj-lane a" data-bf="lane1">บัญชีลูกหนี้</div><div class="bfj-lane c" data-bf="lane2">ลูกค้า *</div>
-          <svg class="bfj-wires" aria-hidden="true">
-            <defs>
-              <marker id="bfAr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ah" d="M0 0 10 5 0 10z"/></marker>
-              <marker id="bfArD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="bfj-ahd" d="M0 0 10 5 0 10z"/></marker>
-            </defs>
-            <g id="bfWires"></g>
-          </svg>
-        </div>
-      </div>
-      <div class="bfj-v" id="bfVline"></div>
-
-      <p class="bf-keys">
-        <span><i class="bf-k-j"></i><span data-bf="keyJ">ฟังก์ชันที่ JWIC เขียนเพิ่ม</span></span>
-        <span><i class="bf-k-m"></i><span data-bf="keyM">ทำนอกระบบ</span></span>
-        <span><i class="bf-k-g"></i><span data-bf="keyG">ทางแยกตัดสินใจ</span></span>
-        <span><i class="bf-k-c"></i><span data-bf="keyC">ส่งต่อกระบวนการอื่น</span></span>
-        <span><i class="bf-k-r"></i><span data-bf="keyR">ทางวนกลับ</span></span>
-        <span data-bf="keyX">* เลนของคู่ค้าภายนอกบริษัท</span>
-      </p>
-
       <div class="bf-board">
         <!-- วิธีใช้อยู่เหนือปฏิทิน ไม่ใช่ใต้ — ต้องอ่านเจอก่อนลอง ไม่ใช่หลังเลื่อนผ่าน
              บรรทัดเดียวกันนี้รายงานผลตอนย้ายเสร็จด้วย -->
@@ -4090,7 +4022,7 @@
       </div>
     </div>
 
-    <p class="bf-note" data-bf="note">ผังนี้เป็น Flow มาตรฐานชุดหนึ่งที่เขียนไว้ครบทุกสายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></p>
+    <p class="bf-note" data-bf="note">ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a></p>
     </div>
   </div>
 </section>
@@ -4102,9 +4034,15 @@
     <p class="sub" data-vs="sub">สร้างข้อมูลลูกค้าและผู้ขายจากเลขประจำตัวผู้เสียภาษี ระบุชื่อ ที่อยู่ สาขา อัตโนมัติ<br>ลดข้อผิดพลาด ถูกต้อง รวดเร็ว</p>
     <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?"
          เนื้อในเป็นชิปสามอันแทนย่อหน้า — ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
-    <div class="tip reveal">
+    <div class="tip has-clip reveal">
       <b data-vs="defTitle">💡 VAT Service คืออะไร?</b>
       <p data-vs="defBody">บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class="vs-chips"><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>มีตัวตนจริง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>จดทะเบียนถูกต้อง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class="vs-fine">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></span></p>
+      <!-- คลิปจากหน้าจอจริง (_plans/2026-10-feature-clips.md) — สคริปต์สั่งเล่นเองตอนเห็นเกินครึ่ง ไม่ใส่ autoplay · ปุ่มเล่น/เต็มจอสคริปต์สร้างเอง -->
+      <div class="clip" data-clip="vat-service">
+        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-vat.webp" aria-hidden="true">
+          <source src="video/hl-vat.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดใหม่ทุกครั้งที่เปลี่ยนสถานการณ์ -->
@@ -4169,9 +4107,15 @@
     <p class="section-kicker">Highlight Feature 3</p>
     <h2>Cost Traceability</h2>
     <!-- นิยามย่อ ใช้กล่อง .tip ชุดเดียวกับ VAT Service — รายการ ✓ ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
-    <div class="tip reveal">
+    <div class="tip has-clip reveal">
       <b data-ct="tipTitle">💡 Cost Traceability คืออะไร?</b>
       <p data-ct="tipBody">ความสามารถตรวจสอบย้อนหลังได้ว่าต้นทุนสินค้ามีที่มาจากอะไร ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต เพื่อให้เห็นที่มาของต้นทุนได้อย่างชัดเจน<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบต้นทุนย้อนหลัง</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ดูต้นทุนแยกตาม Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>รองรับทั้ง FIFO, Average และ Standard Cost</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ</span></span></p>
+      <!-- คลิปจากหน้าจอจริง — ชุดเดียวกับ #vat-service -->
+      <div class="clip" data-clip="cost-trace">
+        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-cost.webp" aria-hidden="true">
+          <source src="video/hl-cost.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
 
     <!-- ไอคอนของส่วนนี้เก็บเป็น symbol เพราะ JS วาดปุ่มใหม่ทุกครั้งที่กด -->
@@ -4803,6 +4747,69 @@
     }, 3500);
   }
 
+  // คลิปจากหน้าจอจริง (.clip): เล่นเองเมื่อเห็นเกินครึ่ง หยุดเมื่อเห็นไม่ถึงครึ่ง
+  // ไม่เล่นเองเมื่อ reduced-motion / Save-Data / เบราว์เซอร์ห้าม (iPhone โหมดประหยัดแบต) — ค้างที่ภาพปก รอกด ▶
+  // ปุ่มสร้างที่นี่ (ไม่มี JS = เห็นภาพปกเฉย ๆ ไม่มีปุ่มที่กดไม่ได้) · ป้ายปุ่มตามภาษาของหน้า — applyLang เรียกผ่าน window.syncClips
+  const clips = [...document.querySelectorAll('.clip')];
+  if (clips.length) {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true;
+    const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;   // Safari ก่อน 16.4 มีแต่แบบ webkit
+    // ชื่อคลิปในป้ายปุ่ม = หัวข้อ section (เปลี่ยนภาษาตามหน้าอยู่แล้ว) — ปุ่มหลายชุดจะได้ไม่ชื่อซ้ำกัน
+    const nameOf = (clip) => clip.closest('section').querySelector('h2').textContent.trim();
+    function syncClip(clip) {
+      const v = clip.querySelector('video'), en = document.documentElement.lang === 'en', name = nameOf(clip);
+      const play = clip.querySelector('.clip-play'), full = clip.querySelector('.clip-full');
+      play.textContent = v.paused ? '▶' : '❚❚';
+      play.setAttribute('aria-label', v.paused ? (en ? `Play clip: ${name}` : `เล่นคลิป ${name}`) : (en ? `Pause clip: ${name}` : `หยุดคลิป ${name}`));
+      full.setAttribute('aria-label', fsEl() === clip ? (en ? 'Exit full screen' : 'ออกจากเต็มจอ') : (en ? `View ${name} clip full screen` : `ดูคลิป ${name} เต็มจอ`));
+    }
+    window.syncClips = () => clips.forEach(syncClip);
+    // เบราว์เซอร์ห้ามเล่นเอง = เลิกเล่นเองจนกว่าจะกด ▶ · AbortError (pause() ตัดกลางตอนกำลังโหลด) ไม่นับ
+    const blocked = (clip) => (err) => { if (err.name === 'NotAllowedError') { clip.dataset.auto = 'off'; syncClip(clip); } };
+    // จอเล็กอ่านตัวหนังสือใน BC ไม่ออก — ขยายแล้วเล่นทันที
+    function toggleFull(clip) {
+      const v = clip.querySelector('video');
+      if (fsEl()) { if (document.exitFullscreen) document.exitFullscreen().catch(() => {}); else document.webkitExitFullscreen(); return; }
+      clip.dataset.auto = 'on';
+      v.play().catch(() => {});
+      if (document.fullscreenEnabled) clip.requestFullscreen().catch(() => {});
+      else if (document.webkitFullscreenEnabled) clip.webkitRequestFullscreen();
+      else if (v.webkitEnterFullscreen) {
+        // iPhone ขยายได้เฉพาะ <video> (เครื่องเล่นของระบบ) และต้องมีเมทาดาทาก่อน — ยังไม่โหลดก็รอโหลดเสร็จแล้วลองอีกที
+        const enter = () => { try { v.webkitEnterFullscreen(); return true; } catch { return false; } };
+        if (!enter()) v.addEventListener('loadedmetadata', enter, { once: true });
+      }
+      trackSeoEvent('clip_fullscreen', { clip: clip.dataset.clip });
+    }
+    ['fullscreenchange', 'webkitfullscreenchange'].forEach((t) => document.addEventListener(t, window.syncClips));
+    // ดู intersectionRatio ไม่ใช่ isIntersecting — ตอนเลื่อนจนเหลือไม่ถึงครึ่ง isIntersecting ยังเป็น true
+    // หน่วง 300ms ก่อนเล่น: เลื่อนผ่านเร็ว ๆ (กดเมนูแล้ว smooth scroll) จะไม่เริ่มโหลดคลิป
+    const wait = new Map();
+    const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const clip = e.target, v = clip.querySelector('video');
+      clearTimeout(wait.get(clip));
+      if (e.intersectionRatio < 0.5) { v.pause(); return; }
+      wait.set(clip, setTimeout(() => { if (clip.dataset.auto !== 'off') v.play().catch(blocked(clip)); }, 300));
+    }), { threshold: 0.5 });
+    clips.forEach((clip) => {
+      const v = clip.querySelector('video');
+      clip.insertAdjacentHTML('beforeend', '<div class="clip-ctrl"><button class="clip-btn clip-play" type="button"></button>'
+        + '<button class="clip-btn clip-full" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></div>');
+      if (still) clip.dataset.auto = 'off';
+      v.addEventListener('play', () => syncClip(clip));
+      v.addEventListener('pause', () => syncClip(clip));
+      v.addEventListener('playing', () => trackSeoEvent('clip_play', { clip: clip.dataset.clip }), { once: true });
+      // กดหยุดเอง = ไม่เล่นเองอีกจนกว่าจะกด ▶
+      clip.querySelector('.clip-play').addEventListener('click', () => {
+        if (v.paused) { clip.dataset.auto = 'on'; v.play().catch(() => {}); } else { clip.dataset.auto = 'off'; v.pause(); }
+      });
+      clip.querySelector('.clip-full').addEventListener('click', () => toggleFull(clip));
+      v.addEventListener('click', () => { if (fsEl() !== clip) toggleFull(clip); });
+      syncClip(clip);
+      seen.observe(clip);
+    });
+  }
+
   // scrollspy: ไฮไลต์เมนูตาม section ที่กำลังดู
   const navLinkById = new Map();
   document.querySelectorAll('.topnav .links a[href^="#"]').forEach(a => navLinkById.set(a.getAttribute('href').slice(1), a));
@@ -5280,25 +5287,24 @@
   /* ---- #billing-flow ----------------------------------------------------
      คำแปลอยู่ในตัวมันเองเหมือน #vat-service ไม่ได้อยู่ใน I18N เพราะ applyLang()
      เขียนทับ innerHTML แล้วกลุ่มที่ผู้ใช้ลากไว้บนปฏิทินจะเด้งกลับที่เดิม
-     applyLang เรียก window.renderBillingFlow(lang) แทน
-
-     ขั้นของผังกับคำอ่านอยู่ในตารางเดียวกัน (STEPS/DETOURS) เพื่อไม่ให้ป้ายกับคำแปลหลุดจากกัน
-     ตัวเลขทุกตัวอ้างอิง docs/BusinessProcess-BC/flows.json กระบวนการ AR6 */
+     applyLang เรียก window.renderBillingFlow(lang) แทน */
   (() => {
     const T = {
       kicker: { th: 'Highlight Feature 1', en: 'Highlight Feature 1' },
       h2: { th: 'ระบบวางบิล', en: 'Billing &amp; Receipt' },
       sub: { th: 'งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ',
             en: 'The whole billing run on one line inside Business Central — set each customer’s billing date, plan the notes by cycle, record the collection appointment, and close with the receipt, without re-keying anything.' },
-      flowHead: { th: 'กระบวนการออกใบวางบิล', en: 'Billing note process' },
-      svgTitle: { th: 'ผังกระบวนการออกใบวางบิล แบ่งเป็นเลนบัญชีลูกหนี้กับเลนลูกค้า เริ่มจากเปิด Billing Worklist หรือ Billing Board ตรวจว่าถึงรอบวางบิลหรือยัง กลุ่มที่ยังไม่พร้อมเลื่อนไปรอบถัดไปแล้ววนกลับ กลุ่มที่ถึงรอบสร้างใบวางบิลร่าง ตรวจรายการและยอด แล้ว Release พร้อมพิมพ์ใบวางบิล จากนั้นวางบิลกับลูกค้า ถ้าลูกค้ารับให้ระบุวันนัดรับชำระ แล้วส่งต่อกระบวนการรับชำระ ถ้าไม่รับให้ยกเลิกด้วย Cancel แล้ววนกลับเข้า Worklist',
-                  en: 'Billing note process across an accounts receivable lane and a customer lane. Open the Billing Worklist or Billing Board, check whether the group is due, move groups that are not ready to the next date and loop back, create draft billing notes for the ones that are due, check the lines and totals, release and print the billing note, then place it with the customer. If the customer accepts, record the collection date and hand over to cash receipts; if not, cancel the note and loop back to the worklist.' },
-      keyJ: { th: 'ฟังก์ชันที่ JWIC เขียนเพิ่ม', en: 'Added by JWIC' },
-      keyM: { th: 'ทำนอกระบบ', en: 'Done outside the system' },
-      keyG: { th: 'ทางแยกตัดสินใจ', en: 'Decision' },
-      keyC: { th: 'ส่งต่อกระบวนการอื่น', en: 'Handover to another process' },
-      keyR: { th: 'ทางวนกลับ', en: 'Loops back' },
-      keyX: { th: '* เลนของคู่ค้าภายนอกบริษัท', en: '* lane belongs to a party outside the company' },
+      tipTitle: { th: '💡 ใบวางบิลคืออะไร?', en: '💡 What is a billing note?' },
+      tipBody: { th: 'คือเอกสารที่ผู้ขายหรือผู้ให้บริการนำส่งให้ลูกค้า เพื่อแจ้งยอดเงินที่ต้องชำระ และขอเรียกเก็บเงินตามกำหนด เช่น หลังส่งสินค้า หลังให้บริการ หรือเมื่อถึงรอบวางบิลตามที่ตกลงกัน'
+                   + '<span class="bf-uses-h">ใบวางบิลใช้ทำอะไร?</span><ol class="bf-uses">'
+                   + '<li><span class="bf-use-t">แจ้งยอดที่ต้องชำระ</span>สรุปยอดจากใบแจ้งหนี้หลายใบ หรือรายการที่ถึงกำหนดชำระในรอบนั้น</li>'
+                   + '<li><span class="bf-use-t">ยื่นเอกสารตามรอบวางบิล</span>เช่น ลูกค้ากำหนดให้ผู้ขายส่งเอกสารทุกวันที่ 25 ของเดือน และชำระเงินภายใน 30 วัน</li>'
+                   + '<li><span class="bf-use-t">ให้ลูกค้าตรวจสอบและรับรองยอด</span>ฝ่ายบัญชีลูกค้าตรวจสอบเอกสาร และอาจลงชื่อหรือประทับตรารับวางบิลเพื่อเป็นหลักฐาน</li></ol>',
+                 en: 'A document the seller or service provider sends to the customer to state the amount due and request payment on schedule — for example after delivering goods, after providing a service, or when the agreed billing cycle comes round.'
+                   + '<span class="bf-uses-h">What is a billing note for?</span><ol class="bf-uses">'
+                   + '<li><span class="bf-use-t">Stating the amount due</span>It totals several invoices, or the items that fall due in that cycle.</li>'
+                   + '<li><span class="bf-use-t">Submitting on the billing cycle</span>For example, the customer asks for documents on the 25th of each month and pays within 30 days.</li>'
+                   + '<li><span class="bf-use-t">Letting the customer check and confirm the total</span>The customer’s accounts team checks the documents and may sign or stamp the billing note as proof of receipt.</li></ol>' },
       reset: { th: 'คืนค่าเดิม', en: 'Reset' },
       footAmt: { th: 'ยอดที่ต้องวางบิลเดือนนี้', en: 'due to be billed this month' },
       footInv: { th: 'ใบแจ้งหนี้', en: 'invoices' },
@@ -5330,146 +5336,13 @@
       didReset: { th: 'คืนค่ารอบวางบิลกลับเป็นค่าเดิมแล้ว', en: 'Billing cycles restored to their original dates' },
       moved: { th: (n, a, b, i, m) => 'เลื่อน <b>' + n + '</b> จาก ' + a + ' ก.ย. ไป <b>' + b + ' ก.ย.</b> · ' + i + ' ใบ ' + m,
                en: (n, a, b, i, m) => 'Moved <b>' + n + '</b> from 10 Sep… '.slice(0, 0) + 'Sep ' + a + ' to <b>Sep ' + b + '</b> — ' + i + ' invoices, ' + m },
-      lane1: { th: 'บัญชีลูกหนี้', en: 'Accounts Receivable' },
-      lane2: { th: 'ลูกค้า *', en: 'Customer *' },
-      eDue: { th: 'ถึงรอบ', en: 'Due' },
-      eNot: { th: 'ยังไม่พร้อม', en: 'Not yet' },
-      eYes: { th: 'รับ', en: 'Accepts' },
-      eNo: { th: 'ไม่รับ', en: 'Rejects' },
-      back: { th: '↩ กลับไปขั้น 1', en: '↩ back to step 1' },
-      note: { th: 'ผังนี้เป็น Flow มาตรฐานชุดหนึ่งที่เขียนไว้ครบทุกสายงาน ทุกขั้นอ้างอิงคู่มือผู้ใช้ที่ลูกค้าได้รับจริง · ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a>',
-             en: 'One of the standard process flows written for every area, every step traceable to the user manual the customer receives · the calendar above runs on a fictional company; the real system pulls each customer’s open invoices on the cycle you set · <a href="articles/business-central-vs-accounting-software.html">How Business Central differs from ordinary accounting software</a>' }
+      note: { th: 'ปฏิทินด้านบนเป็นข้อมูลบริษัทสมมติ ระบบจริงดึงใบแจ้งหนี้ค้างชำระของลูกค้าเองตามรอบที่ตั้งไว้ · <a href="articles/business-central-vs-accounting-software.html">Business Central ต่างจากโปรแกรมบัญชีทั่วไปอย่างไร</a>',
+             en: 'The calendar above runs on a fictional company; the real system pulls each customer’s open invoices on the cycle you set · <a href="articles/business-central-vs-accounting-software.html">How Business Central differs from ordinary accounting software</a>' }
     };
-
-    /* ขั้นของผังเรียงตามทางหลัก — lane a = บัญชีลูกหนี้, c = ลูกค้า · kind: gate/out/hand ตามคำอธิบายสัญลักษณ์ */
-    const STEPS = [
-      { k: 'open', lane: 'a', th: ['เปิด Billing', 'Worklist หรือ', 'Billing Board'], en: ['Open the', 'Billing Worklist', 'or Billing Board'] },
-      { k: 'due', lane: 'a', kind: 'gate', yes: 'eDue', th: ['ถึงรอบวางบิล', 'หรือยัง?'], en: ['Is the group', 'due?'],
-        note: { th: ['ทุกวันที่ 25', 'ศุกร์สุดท้าย', 'หรือตามตกลง'], en: ['The 25th,', 'last Friday,', 'or as agreed'] } },
-      { k: 'draft', lane: 'a', th: ['สร้าง', 'ใบวางบิลร่าง'], en: ['Create draft', 'billing notes'] },
-      { k: 'check', lane: 'a', th: ['ตรวจรายการ', 'และยอดบนใบร่าง'], en: ['Check lines', 'and totals'] },
-      { k: 'release', lane: 'a', th: ['Release และพิมพ์', 'ใบวางบิล'], en: ['Release and', 'print the note'],
-        note: { th: ['กันวางบิลซ้ำ', 'รอบถัดไป'], en: ['Blocks duplicate', 'billing next cycle'] } },
-      { k: 'hand', lane: 'a', kind: 'out', th: ['วางบิล', 'กับลูกค้า'], en: ['Place it with', 'the customer'] },
-      { k: 'accept', lane: 'c', kind: 'gate', yes: 'eYes', th: ['ลูกค้ารับ', 'วางบิลไหม?'], en: ['Customer', 'accepts?'] },
-      { k: 'date', lane: 'a', th: ['ระบุวันนัดรับชำระ', 'Collection Date'], en: ['Set the', 'collection date'] },
-      { k: 'pay', lane: 'a', kind: 'hand', th: ['รับชำระ', 'และออกใบเสร็จ'], en: ['Collect and', 'issue the receipt'] }
-    ];
-    /* ทางวนกลับ — row 1 = เหนือเลน, row 4 = ใต้เลน · cols คือช่วงคอลัมน์ของการ์ดอธิบาย */
-    const DETOURS = [
-      { from: 1, k: 'postpone', q: 'eNot', row: 1, cols: '4 / 8',
-        th: 'เลื่อนไปรอบถัดไป', en: 'Move to the next cycle' },
-      { from: 6, k: 'cancel', q: 'eNo', row: 4, cols: '3 / 8',
-        th: 'ยกเลิกใบวางบิลด้วย Cancel', en: 'Cancel the billing note',
-        sub: { th: 'ใบแจ้งหนี้กลับเข้ารอบถัดไป', en: 'Its invoices return to the next cycle' } }
-    ];
-    const GLYPH = {
-      open: '<rect x="7" y="9" width="34" height="23" rx="3"/><path d="M3 38h42M13 17h16M13 24h10"/>',
-      due: '<text class="bfj-q" x="24" y="33" text-anchor="middle">?</text>',
-      postpone: '<rect x="6" y="9" width="36" height="32" rx="4"/><path d="M6 18h36M15 5v8M33 5v8M15 30h16m-5-5 5 5-5 5"/>',
-      draft: '<path d="M11 5h18l9 9v29H11z" stroke-dasharray="5 4"/><path d="M17 22h14M17 29h9"/>',
-      check: '<path d="M10 5h17l7 7v8M10 5v36h14"/><circle cx="31" cy="30" r="8"/><path d="M37 36l6 6"/>',
-      release: '<path d="M14 17V5h20v12"/><rect x="5" y="17" width="38" height="16" rx="3"/><path d="M14 28h20v15H14zM19 34h10"/>',
-      hand: '<circle cx="12" cy="10" r="4.5"/><circle cx="36" cy="10" r="4.5"/><path d="M5 44V27a7 7 0 0 1 14 0M29 27a7 7 0 0 1 14 0v17"/><path d="M19 30h10"/><rect x="20" y="20" width="8" height="10" rx="1"/>',
-      cancel: '<path d="M10 5h19l9 9v29H10z"/><path d="M17 20l14 14M31 20 17 34"/>',
-      date: '<rect x="5" y="9" width="30" height="28" rx="4"/><path d="M5 17h30M13 5v8M27 5v8"/><circle cx="36" cy="36" r="8"/><path d="M36 32v8"/>',
-      pay: '<path d="M11 4h26v40l-4.3-3-4.4 3-4.3-3-4.3 3-4.4-3L11 44z"/><path d="M17 15h14M17 22h14M17 29l4 4 8-8"/>'
-    };
-    GLYPH.accept = GLYPH.due;
 
     const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const byId = (id) => document.getElementById(id);
     let lang = 'th';
-    const L = (o) => o[lang] || o.th;
-    const lines = (a) => a.map((t) => '<span class="bfj-l">' + esc(t) + '</span>').join('');
-    const sign = (k, cls) => '<span class="bfj-sign ' + (cls || '') + '"><svg viewBox="0 0 48 48" aria-hidden="true">' + GLYPH[k] + '</svg></span>';
-    const detour = (d) => sign(d.k, 'mini') + '<span><b>' + esc(L(T[d.q])) + '</b> → ' + esc(L(d))
-      + (d.sub ? '<small>' + esc(L(d.sub)) + '</small>' : '') + '<small>' + esc(L(T.back)) + '</small></span>';
-
-    const J = byId('bfJourney');
-    let stops = [], chips = [], tags = [];
-
-    /* เส้นมุมมนตั้งฉาก ผ่านจุดตามลำดับ */
-    function route(p, r = 12) {
-      let d = 'M' + p[0][0] + ' ' + p[0][1];
-      for (let i = 1; i < p.length - 1; i++) {
-        const [x0, y0] = p[i - 1], [x, y] = p[i], [x1, y1] = p[i + 1];
-        const a = Math.min(r, Math.hypot(x - x0, y - y0) / 2), b = Math.min(r, Math.hypot(x1 - x, y1 - y) / 2);
-        const ux = Math.sign(x - x0), uy = Math.sign(y - y0), vx = Math.sign(x1 - x), vy = Math.sign(y1 - y);
-        d += ' L' + (x - ux * a) + ' ' + (y - uy * a) + ' Q' + x + ' ' + y + ' ' + (x + vx * b) + ' ' + (y + vy * b);
-      }
-      const e = p[p.length - 1];
-      return d + ' L' + e[0] + ' ' + e[1];
-    }
-
-    /* วาดเส้นตามตำแหน่งจริงของป้าย — เรียกใหม่ทุกครั้งที่ขนาดเปลี่ยน */
-    function drawWires() {
-      if (!J.offsetParent || !stops.length) return;
-      const R = J.getBoundingClientRect();
-      const box = (el) => { const b = el.getBoundingClientRect();
-        return { l: b.left - R.left, r: b.right - R.left, t: b.top - R.top, b: b.bottom - R.top,
-          x: (b.left + b.right) / 2 - R.left, y: (b.top + b.bottom) / 2 - R.top }; };
-      const sg = stops.map((el) => box(el.firstElementChild));
-      const cell = stops.map(box);
-      const gap = 5, P = [];
-      let ti = 0;
-      for (let i = 0; i < sg.length - 1; i++) {
-        const a = sg[i], b = sg[i + 1], mx = (cell[i].r + cell[i + 1].l) / 2;
-        let pts, tx, ty;
-        if (Math.abs(a.y - b.y) < 2) { pts = [[a.r + gap, a.y], [b.l - gap - 2, b.y]]; tx = (a.r + b.l) / 2; ty = a.y - 16; }
-        else if (b.y > a.y) { pts = [[a.r + gap, a.y], [b.x, a.y], [b.x, b.t - gap - 2]]; tx = b.x; ty = (a.y + b.t) / 2; }
-        else { pts = [[a.r + gap, a.y], [mx, a.y], [mx, b.y], [b.l - gap - 2, b.y]]; tx = mx; ty = (a.y + b.y) / 2; }
-        P.push('<path d="' + route(pts) + '" marker-end="url(#bfAr)"/>');
-        if (STEPS[i].yes) { tags[ti].style.left = tx + 'px'; tags[ti].style.top = ty + 'px'; ti++; }
-      }
-      const s1 = sg[0];
-      const c1 = box(chips[0]), g1 = sg[DETOURS[0].from];
-      P.push('<path class="d" d="' + route([[g1.x, g1.t + 4], [g1.x, c1.y], [s1.x, c1.y], [s1.x, s1.t - gap - 2]]) + '" marker-end="url(#bfArD)"/>');
-      const c2 = box(chips[1]), g2 = sg[DETOURS[1].from], ex = sg[DETOURS[1].from - 1].x, x0 = cell[0].l - 6;
-      P.push('<path class="d" d="' + route([[g2.l + 4, g2.y], [ex, g2.y], [ex, c2.y], [x0, c2.y], [x0, s1.y], [s1.l - gap - 2, s1.y]]) + '" marker-end="url(#bfArD)"/>');
-      byId('bfWires').innerHTML = P.join('');
-    }
-
-    function drawFlow() {
-      [...stops, ...chips, ...tags].forEach((el) => el.remove());
-      stops = STEPS.map((st, i) => {
-        const el = document.createElement('div');
-        el.className = 'bfj-stop';
-        el.style.gridColumn = i + 2;
-        el.style.gridRow = st.lane === 'a' ? 2 : 3;
-        el.innerHTML = sign(st.k, st.kind) + '<span class="bfj-n">' + String(i + 1).padStart(2, '0') + '</span>'
-          + '<span class="bfj-t">' + lines(L(st)) + '</span>' + (st.note ? '<span class="bfj-note">' + lines(L(st.note)) + '</span>' : '');
-        J.appendChild(el);
-        return el;
-      });
-      chips = DETOURS.map((d) => {
-        const el = document.createElement('div');
-        el.className = 'bfj-detour';
-        el.style.gridRow = d.row;
-        el.style.gridColumn = d.cols;
-        el.style.justifySelf = d.row === 1 ? 'start' : 'end';
-        el.innerHTML = detour(d);
-        J.appendChild(el);
-        return el;
-      });
-      tags = STEPS.filter((st) => st.yes).map((st) => {
-        const el = document.createElement('span');
-        el.className = 'bfj-tag';
-        el.textContent = L(T[st.yes]);
-        J.appendChild(el);
-        return el;
-      });
-      byId('bfVline').innerHTML = STEPS.map((st, i) => {
-        const d = DETOURS.find((x) => x.from === i);
-        return '<div class="bfj-vst">' + sign(st.k, st.kind) + '<div><p class="bfj-t">' + (i + 1) + '. ' + lines(L(st))
-          + '<span class="bfj-who">' + esc(L(T[st.lane === 'a' ? 'lane1' : 'lane2']).replace(' *', '')) + '</span></p>'
-          + (st.note ? '<p class="bfj-note">' + lines(L(st.note)) + '</p>' : '')
-          + (d ? '<div class="bfj-detour">' + detour(d) + '</div>' : '') + '</div></div>';
-      }).join('');
-      drawWires();
-    }
-    new ResizeObserver(drawWires).observe(J);
-    if (document.fonts) document.fonts.ready.then(drawWires);
 
     /* ---- Billing Board — กันยายน 2569 วันที่ 1 ตรงวันอังคาร 30 วัน ----
        สัปดาห์เริ่มวันอาทิตย์ อังคารจึงเป็นคอลัมน์ที่ 2 (นับจาก 0) */
@@ -5645,7 +5518,6 @@
     window.renderBillingFlow = (l) => {
       lang = l;
       document.querySelectorAll('[data-bf]').forEach((el) => { el.innerHTML = T[el.dataset.bf][lang]; });
-      drawFlow();
       drawCal();
       say(T.hint[lang]);
     };
@@ -6335,6 +6207,7 @@
     if (window.renderBillingFlow) window.renderBillingFlow(lang);
     if (window.renderCostTrace) window.renderCostTrace(lang);
     if (window.syncSlidePlay) window.syncSlidePlay();
+    if (window.syncClips) window.syncClips();
     if (window.syncMenuLabel) window.syncMenuLabel();
     document.querySelectorAll('.lang button').forEach(b => {
       const on = b.dataset.lang === lang;
