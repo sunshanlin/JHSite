@@ -355,7 +355,7 @@
      เอกสารจำลองในเดโม (ใบวางบิล การ์ดลูกค้า VAT Service) กับคำบรรยายภาพยังเป็น Sarabun เพราะเป็นเนื้อความ/เอกสารไทย */
   /* body :is(...) ให้ชนะ font: inherit ที่ปุ่มหลายตัวตั้งไว้ในกฎของตัวเองท้ายไฟล์ (เช่น .feature-tab, .ct-play, .lang button) */
   body :is(.skip-link, .cta, .hero-learn-link, .feature-tab, .feature-link, .feature-chips li, .pricing-cta,
-  .plan-price-prefix, .plan-currency, .plan-price-unit, .ct-play, .ct-chip, .vs-chip, .vs-lbl,
+  .plan-price-prefix, .plan-currency, .plan-price-unit, .ct-play, .ct-chip, .vs-chip, .vs-lbl, .p36-play, .p36-step,
   .start-here, .row-title, .tip > b, .ci-name, .ci-list, .profile-role, .footer-brand strong,
   .footer-reach a, .footer-menu a, .article-jump a, .cookie-actions button, .lang button,
   .linkedin-link, .credential-badge figcaption, .credential-verification, .bf-chip, .bf-due, .bf-foot) {
@@ -3052,6 +3052,218 @@
     .wq-doc.in { animation: none; }
   }
 
+  /* ── #pp36 (Highlight Feature 1) — ภ.พ.36 ของ JHCore ─────────────────────
+     ปุ่มขั้น + คำบรรยายแบบ #cost-trace แต่ไม่มีหน้าต่าง BC: ใต้คำบรรยายเป็นฉาก pictograph (เอกสารของขั้นนั้น + ตารางยอด 3 แถว)
+     เทาของ Fluent ไม่ใช้ในส่วนนี้ · ของที่ระบบทำให้ (แบบ ภ.พ.36 รายการใน General Journal และแถวตอนได้ใบเสร็จ) เป็นสีม่วงตาม DESIGN.md
+     ชื่อขึ้นต้น p36- ทุกตัว · ขั้นปัจจุบันใช้ Signing Teal (9.9 บนขาว) ไม่ใช้เบอร์กันดีซึ่งเป็นของปุ่มที่ขอให้กด */
+  #pp36 { --p36-on: var(--brand-teal); }
+  #pp36 > .wrap > .section-kicker,
+  #pp36 > .wrap > h2 {
+    text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  /* ไม่มี .sub ใต้หัวข้อ (ผู้ใช้ตัดออก 4 ต.ค. 2026) — เว้นก่อนกล่องนิยามเท่าที่ .sub เว้นใน section อื่น แบบ #cost-trace */
+  #pp36 > .wrap > h2 { margin-bottom: 44px; }
+  /* กล่องนิยามมีคลิป (.tip.has-clip) แบบ #cost-trace / #vat-service · ห้ามใส่ display/gap/flex-direction ที่นี่ ไม่งั้นทับ grid ของ .tip.has-clip */
+  #pp36 .tip { align-items: flex-start; }
+  /* หัวกล่องภาษาอังกฤษ (What is a VAT Remittance Return?) ยาวกว่าจอ 320px — ตอนกล่องเรียงแนวตั้งให้ขึ้นบรรทัดใหม่ได้ แบบ #cost-trace */
+  @media (max-width: 720px) { #pp36 .tip b { white-space: normal; } }
+  .p36-rules-h { display: block; margin: 14px 0 6px; font-weight: 600; color: var(--ui-ink); }
+  .p36-rules { display: grid; gap: 8px; margin: 0; padding-left: 1.5em; }
+  .p36-rules li::marker { font-weight: 600; color: var(--brand-teal); }
+  .p36-rule-t { display: block; font-weight: 600; color: var(--brand-teal); }
+  .p36-rules-h, .p36-rule-t { font-family: "Anuphan", "Segoe UI", sans-serif; }
+  .p36-src { display: block; margin-top: 10px; font-size: .86rem; line-height: 1.6; }
+  /* ลิงก์อยู่ใน span ไม่ใช่ p — page-checks วัดเป้ากด 24px กับลิงก์ที่ไม่ได้อยู่ในย่อหน้า */
+  .p36-src a { display: inline-block; min-height: 24px; }
+  .p36-ic { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .p36 {
+    background: #fff; border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-card); box-shadow: var(--ui-shadow); overflow: hidden;
+  }
+  .p36-top { background: var(--bg-soft); border-bottom: 1px solid var(--ui-line); padding: 20px 24px; }
+  .p36-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 16px; }
+  .p36-head h3 { margin: 0 0 4px; font-size: 1.08rem; line-height: 1.4; }
+  .p36-hint p { margin: 0; max-width: 49.2em; font-size: .92rem; line-height: 1.6; color: var(--ui-muted); text-wrap: balance; }
+  .p36-hint p + p { margin-top: 6px; }
+  .p36-play {
+    display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;
+    font: inherit; font-size: .95rem; font-weight: 500; color: #fff; background: var(--brand-teal);
+    border: 1px solid var(--brand-teal); border-radius: var(--ui-radius-btn);
+    padding: 0 20px; min-height: 44px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .p36-play:hover { background: var(--brand-deep); border-color: var(--brand-deep); }
+  .p36-play .p36-ic { width: 14px; height: 14px; fill: currentColor; stroke: none; }
+
+  .p36-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+  .p36-step {
+    position: relative; display: grid; align-content: start; gap: 2px; width: 100%; height: 100%; min-height: 44px; text-align: left;
+    font: inherit; color: var(--brand-teal); background: #fff;
+    border: 1px solid var(--brand-pale); border-radius: var(--ui-radius-btn);
+    padding: 9px 11px 11px; cursor: pointer;
+    transition: background .125s ease, border-color .125s ease;
+  }
+  .p36-step:hover { border-color: var(--brand-jade); background: var(--bg-soft); }
+  .p36-lv, .p36-narr-lv {
+    font-family: "Anuphan", sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted);
+  }
+  .p36-nm { font-family: "Anuphan", sans-serif; font-size: .88rem; font-weight: 600; line-height: 1.35; }
+  .p36-step::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 3px; background: transparent; }
+  .p36-step.on { border-color: var(--p36-on); }
+  .p36-step.on::after { background: var(--p36-on); }
+  .p36-step.on .p36-lv { color: var(--p36-on); }
+  .p36-step.done .p36-nm { color: var(--ui-muted); }
+  .p36-step.done::after { background: var(--brand-pale); }
+  .p36-pic { width: 28px; height: 28px; margin-bottom: 4px; stroke-width: 1.6; color: var(--brand-jade); }
+  .p36-step.on .p36-pic { color: var(--p36-on); }
+  .p36-step.done .p36-pic { color: var(--ui-muted); }
+
+  /* คำบรรยายทุกบทซ้อนในช่องเดียว (บทที่ไม่ได้แสดงซ่อนแบบ visibility) ช่องจึงสูงเท่าบทที่ยาวสุด ฉากข้างล่างไม่กระโดดตอนเล่น */
+  .p36-narr { display: grid; margin: 20px 24px; }
+  .p36-narr > * { grid-area: 1 / 1; display: grid; grid-template-columns: 7.4em minmax(0, 1fr); column-gap: 14px; align-content: start; }
+  .p36-narr-size { visibility: hidden; }
+  .p36-narr-lv { grid-row: span 2; padding-top: .45em; color: var(--p36-on); }
+  .p36-narr-pic { display: block; width: 56px; height: 56px; margin-top: 10px; stroke-width: 1.3; }
+  .p36-narr-t { font-family: "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
+  .p36-narr-x { max-width: 59.3em; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
+
+  /* ฉาก: ซ้ายคือเอกสารของขั้น (ทุกใบซ้อนในช่องเดียว สูงเท่าใบที่ยาวสุด) · ขวาคือตารางยอด */
+  .p36-scene {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; align-items: start;
+    margin: 0 24px 24px; padding-top: 20px; border-top: 1px solid var(--ui-line);
+  }
+  .p36-docs { display: grid; }
+  .p36-doc {
+    grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(6px);
+    transition: opacity .35s cubic-bezier(.2,.75,.2,1), transform .35s cubic-bezier(.2,.75,.2,1), visibility 0s linear .35s;
+  }
+  .p36-doc.on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .p36-num { font-family: "Anuphan", sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .p36-doc-h { font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ui-muted); }
+  .p36-paper {
+    display: grid; gap: 10px; padding: 18px 20px; color: var(--ui-ink);
+    background: #fff; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-btn); box-shadow: var(--ui-shadow);
+  }
+  /* ใบแจ้งหนี้ของผู้ขายต่างประเทศ: เอกสารขาวแบบกระดาษ ภาษาอังกฤษทั้งสองโหมด */
+  .p36-paper { font-size: .86rem; line-height: 1.5; }
+  .p36-paper-h { font-family: "Anuphan", sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: .12em; }
+  .p36-paper-from { display: grid; color: var(--ui-muted); }
+  .p36-paper-co { font-weight: 600; color: var(--ui-ink); }
+  .p36-paper-ln, .p36-paper-ft { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 12px; padding-top: 8px; border-top: 1px solid var(--ui-line); }
+  .p36-paper-ln > :last-child, .p36-paper-ft > :last-child { margin-left: auto; white-space: nowrap; }
+  .p36-paper-ft { font-size: .82rem; color: var(--ui-muted); }
+  .p36-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .p36-chip {
+    font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; line-height: 1.4; padding: 3px 10px;
+    color: var(--brand-teal); background: var(--bg-soft); border: 1px solid var(--brand-pale); border-radius: 999px;
+  }
+  .p36-chip-ok { background: var(--glow-mint); border-color: var(--glow-mint); }
+  /* แบบ ภ.พ.36 และรายการใน General Journal = ของที่ระบบทำให้: ลาเวนเดอร์แบบใบวางบิล · หมึก #74509E (6.21 บนขาว) */
+  .p36-form, .p36-jnl {
+    display: grid; gap: 8px; padding: 16px 18px; color: var(--ui-ink);
+    background: #F3F0FC; border: 1px solid #DCD5F3; border-radius: var(--ui-radius-btn); box-shadow: var(--ui-shadow);
+  }
+  .p36-form { font-size: .84rem; line-height: 1.5; }
+  .p36-form-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-bottom: 8px; border-bottom: 1px solid #DCD5F3; }
+  .p36-form-no { font-family: "Anuphan", sans-serif; font-size: 1.15rem; font-weight: 600; color: #74509E; }
+  .p36-form-f { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; }
+  .p36-form-l { font-size: .76rem; color: var(--ui-muted); }
+  .p36-form-t { display: flex; align-items: flex-start; gap: 6px; }
+  .p36-form-t .p36-ic { width: 15px; height: 15px; margin-top: .2em; stroke-width: 2.6; color: #74509E; }
+  .p36-form-b {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 6px 10px;
+    background: #fff; border: 1px solid #DCD5F3; border-radius: var(--ui-radius-btn);
+  }
+  .p36-form-w { font-size: .8rem; color: var(--ui-muted); text-align: right; }
+  .p36-jnl { font-size: .86rem; }
+  /* ป้ายยาว (ชื่อบริษัทที่ห้ามตัด) + ตัวเลข: จอแคบให้ตัวเลขลงบรรทัดใหม่ชิดขวา แทนที่จะล้นแล้วโดนการ์ดตัด */
+  .p36-jnl-ln { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 12px; padding-top: 6px; border-top: 1px solid #DCD5F3; }
+  .p36-jnl-ln > .p36-num { margin-left: auto; }
+  /* ใบจ่ายเงินกับใบกรมสรรพากร = ของที่คุณทำเอง ไม่ใช่ของที่ระบบทำให้: พื้นขาว เส้น Hairline */
+  .p36-jnl-plain { background: #fff; border-color: var(--ui-line); }
+  .p36-jnl-plain .p36-jnl-ln { border-top-color: var(--ui-line); }
+
+  /* แถบตัวเลข: ฐานกับภาษีชุดเดียวกันตั้งแต่ใบแจ้งหนี้ถึง ภ.พ.30 แถวตอนได้ใบเสร็จ (ภาษีซื้อที่ระบบลงให้) เป็นพื้นม่วงอ่อน
+     ตัวเลขที่ขั้นปัจจุบันพูดถึงได้กรอบม่วง 1px บนพื้นขาว · ทุกช่องวางตำแหน่งเอง (แถวที่ 1) เพราะป้ายรอ ("ยังไม่จ่าย" "รอใบเสร็จ") ทับช่องของแถวที่ยังไม่ถึง */
+  .p36-led { display: grid; font-size: .95rem; }
+  .p36-led-cap { margin-bottom: 8px; font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ui-muted); }
+  .p36-row {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, .85fr);
+    column-gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--ui-line);
+  }
+  .p36-row > * { grid-row: 1; }
+  .p36-rl { grid-column: 1; font-family: "Anuphan", sans-serif; font-weight: 600; line-height: 1.4; color: var(--ui-ink); }
+  /* วันที่ของแถวอยู่บรรทัดของตัวเองใต้ชื่อแถว แถวที่เทียบกันจึงสูงเท่ากัน */
+  .p36-rdate { display: block; font-size: .86em; font-weight: 400; color: var(--ui-muted); }
+  .p36-rc { grid-column: 2; color: var(--ui-muted); font-variant-numeric: tabular-nums; }
+  .p36-rb { grid-column: 3; }
+  .p36-rv { grid-column: 4; }
+  .p36-rb, .p36-rv {
+    justify-self: end; margin-right: -6px; padding: 2px 6px; border-radius: var(--ui-radius-btn);
+    font-family: "Anuphan", sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ui-ink);
+    transition: background .25s ease, box-shadow .25s ease;
+  }
+  .p36-lhead { padding: 0 0 6px; border-top: 0; }
+  .p36-lhead > * { font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ui-muted); }
+  .p36-r3 { margin: 0 -10px; padding-left: 10px; padding-right: 10px; background: #F6EEF8; border-top-color: #E6D8EC; }
+  .p36-r3 > .p36-rl, .p36-r3 > .p36-rb, .p36-r3 > .p36-rv { color: #74509E; }
+  /* จุดเด่นของทั้ง section: ภาษีซื้อที่กลับมาใน ภ.พ.30 ตัวใหญ่หนึ่งขั้นจากตัวเลขอื่น */
+  .p36-r3 > .p36-rv { font-size: 1.05rem; font-weight: 700; }
+  .p36-row > .hi { background: #fff; box-shadow: inset 0 0 0 1px #8E6DB5; }
+  .p36-rp { grid-column: 2 / -1; justify-self: start; color: var(--ui-muted); visibility: hidden; }
+  .p36-row > :is(.p36-rc, .p36-rb, .p36-rv) { transition: opacity .45s cubic-bezier(.2,.75,.2,1), background .25s ease, box-shadow .25s ease; }
+  .p36-r3 { transition: background .45s cubic-bezier(.2,.75,.2,1); }
+  .p36-row.pend > :is(.p36-rc, .p36-rb, .p36-rv) { visibility: hidden; opacity: 0; }
+  .p36-row.pend > .p36-rp { visibility: visible; }
+  /* แถวตอนได้ใบเสร็จยังเป็นแถวธรรมดาจนถึงขั้นบันทึกใบเสร็จ แล้วค่อยกลายเป็นสีม่วง
+     ระหว่างรอต้องกว้างเท่าแถวอื่นด้วย ไม่งั้นเส้นคั่นข้างบนยื่นเลยตารางข้างละ 10px (ตัวหนังสืออยู่ที่เดิม เพราะ margin กับ padding หักกันพอดี) */
+  .p36-r3.pend { margin: 0; padding-left: 0; padding-right: 0; background: transparent; border-top-color: var(--ui-line); }
+  .p36-r3.pend > .p36-rl { color: var(--ui-ink); }
+  .p36-note {
+    margin: 20px auto 0; max-width: 760px; text-align: center;
+    font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
+  }
+  @media (max-width: 900px) {
+    .p36-top { padding: 18px; }
+    .p36-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .p36-narr { margin-left: 18px; margin-right: 18px; }
+    .p36-scene { margin: 0 18px 18px; }
+  }
+  @media (max-width: 760px) {
+    .p36-scene { grid-template-columns: minmax(0, 1fr); }
+    /* จอแคบฉากเรียงลงล่าง: ตารางยอดขึ้นก่อน แล้วตามด้วยเอกสารเฉพาะใบของขั้นนี้
+       ไม่กันความสูงเท่าใบที่ยาวสุด ไม่งั้นมีช่องโล่งกลางการ์ด (ส่วนที่เปลี่ยนสูงอยู่ท้ายการ์ด ข้างบนไม่ขยับ) */
+    .p36-led { order: -1; }
+    .p36-doc:not(.on) { display: none; }
+  }
+  @media (max-width: 600px) {
+    .p36-head { margin-bottom: 14px; }
+    .p36-play { width: 100%; justify-content: center; }
+    .p36-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .p36-pic { width: 24px; height: 24px; }
+    .p36-narr > * { grid-template-columns: minmax(0, 1fr); }
+    /* จอแคบไม่มีคอลัมน์ซ้าย: รูปไปอยู่หน้าป้ายขั้นในแถวเดียวกัน แบบ #cost-trace */
+    .p36-narr-lv { grid-row: auto; padding-top: 0; display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .p36-narr-pic { order: -1; width: 44px; height: 44px; margin: 0; stroke-width: 1.4; }
+    .p36-scene { margin: 0 12px 12px; }
+    /* ตารางยอด: ชื่อแถว แล้ว "ลงที่ไหน" ใต้ชื่อ ฐานกับภาษีได้ครึ่งแถวเต็ม ๆ บรรทัดล่าง */
+    .p36-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 2px; }
+    .p36-rl, .p36-rc, .p36-rp { grid-column: 1 / -1; }
+    .p36-rc, .p36-rp { grid-row: 2; }
+    .p36-rb, .p36-rv { grid-row: 3; }
+    .p36-rb { grid-column: 1; }
+    .p36-rv { grid-column: 2; }
+    .p36-lhead > :is(.p36-rl, .p36-rc) { display: none; }
+    .p36-lhead > :is(.p36-rb, .p36-rv) { grid-row: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .p36-play, .p36-step, .p36-doc, .p36-rb, .p36-rv, .p36-row > :is(.p36-rc, .p36-rb, .p36-rv), .p36-r3 { transition: none; }
+    .p36-doc { transform: none; }
+  }
+
   /* ── #cost-trace (Highlight Feature 3) — JHEnhance Cost Trace ─────────────
      ยกโครงจาก showcase ใน repo JHEnhance (docs/Site/cost-trace-showcase.html) แล้วแต่งตัวใหม่ตาม DESIGN.md
      การ์ด .ct ใบเดียวคุมทั้งเดโมแบบ .vs · ปุ่มในส่วนนี้เป็น teal ทั้งหมด ไม่แย่งความดังจาก CTA เบอร์กันดีของหน้า
@@ -3360,7 +3572,7 @@
     .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
     #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link,
     #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
-    #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
+    #pp36, #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
     .footer-menu, #cookie-manage, footer a[href="#contact"], .ci-flyer { display: none !important; }
 
     .topnav { position: static; border-bottom: 1px solid #c9d6d2; }
@@ -3458,7 +3670,7 @@
       <a href="#services">บริการ</a>
       <a href="#features">ฟังก์ชัน</a>
       <a href="#pricing">แพ็กเกจ</a>
-      <a href="#billing-flow">นำเสนอ</a>
+      <a href="#pp36">นำเสนอ</a>
       <a href="#faq">FAQ</a>
       <a href="#about">เกี่ยวกับเรา</a>
       <a href="#articles">บทความ</a>
@@ -3972,9 +4184,61 @@
   </div>
 </section>
 
+<!-- Highlight Feature 1 — ภ.พ.36 (หน้า PP36 Report ของ JHCore) · เดโมปุ่มขั้นแบบ #cost-trace แต่ฉากเป็น pictograph ไม่ใช่ภาพหน้าจอ (ผู้ใช้สั่ง 4 ต.ค. 2026)
+     ข้อความไทยผ่าน jhthai + /kode-thai · ตัวเลขและข้อความในเดโมวาดจากสคริปต์ #pp36 ข้อความใน HTML ต้องตรงกับ T.th ทุกตัวอักษร
+     คลิปจากหน้าจอจริงอยู่ขวากล่องนิยาม แบบ #billing-flow (เลขประจำตัวผู้เสียภาษีบนแบบ ภ.พ.36 ถูกปิดไว้ในคลิป) -->
+<section id="pp36">
+  <div class="wrap">
+    <p class="section-kicker" data-p36="kicker">Highlight Feature 1</p>
+    <h2 data-p36="h2"><span class="nb">ภ.พ.36</span></h2>
+
+    <!-- นิยาม: ตัวครอบเป็น <div> และข้างในเป็น span ทั้งหมด เพราะ I18N ['.tip b'] / ['.tip p'] ของกล่อง Localization เขียนทับทุก b/p ใน .tip -->
+    <div class="tip has-clip reveal">
+      <b data-p36="tipTitle">💡 <span class="nb">ภ.พ.36</span> คืออะไร?</b>
+      <div class="tip-body" data-p36="tipBody">คือแบบ<span class="nb">นำส่ง</span><span class="nb">ภาษีมูลค่าเพิ่ม</span>ที่คุณยื่นแทน<span class="nb">ผู้ให้บริการ</span><span class="nb">ต่างประเทศ</span> สำหรับบริการที่ทำใน<span class="nb">ต่างประเทศ</span>แต่ใช้ในประเทศไทย เช่น <span class="nb">เช่าเครื่องจักร</span> หรือจ้างที่ปรึกษา<span class="p36-rules-h">หลัก 3 ข้อของ <span class="nb">ภ.พ.36</span></span><ol class="p36-rules"><li><span class="p36-rule-t"><span class="nb">ผู้จ่ายเงิน</span>เป็นคนยื่น</span><span class="nb">ผู้ให้บริการ</span>อยู่<span class="nb">ต่างประเทศ</span> คุณจึงต้องยื่นแบบและ<span class="nb">นำส่ง</span>ภาษีแทน</li><li><span class="p36-rule-t">นับจากเดือนที่<span class="nb">จ่ายเงิน</span></span>ยื่นภายใน 7 วันนับจาก<span class="nb">สิ้นเดือน</span>ที่<span class="nb">จ่ายเงิน</span> <span class="nb">วันที่</span>ใน<span class="nb">ใบแจ้งหนี้</span>ไม่ได้ใช้นับ</li><li><span class="p36-rule-t">ใช้เป็น<span class="nb">ภาษีซื้อ</span>ได้</span>ถ้าคุณจดทะเบียน<span class="nb">ภาษีมูลค่าเพิ่ม</span> ภาษีที่<span class="nb">นำส่ง</span>แล้วก็ลงเป็น<span class="nb">ภาษีซื้อ</span>ใน <span class="nb">ภ.พ.30</span> ได้</li></ol><span class="p36-src"><a href="https://www.rd.go.th/3549.html" target="_blank" rel="noopener noreferrer">ที่มา: <span class="nb">กรมสรรพากร</span> (คำสั่งที่ ป.104/2544)</a></span></div>
+      <div class="clip" data-clip="pp36">
+        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-pp36.webp" aria-hidden="true">
+          <source src="video/hl-pp36.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <symbol id="p36i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+      <symbol id="p36i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+      <symbol id="p36i-tick" viewBox="0 0 24 24"><polyline points="4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+      <!-- ภาพประจำขั้น (วาดเอง เส้นชุดเดียวกับ cti-*): ใบแจ้งหนี้ต่างประเทศ · จ่ายเงิน · แบบ ภ.พ.36 · กรมสรรพากร · ใบเสร็จ · สมุดบัญชี ภ.พ.30 -->
+      <symbol id="p36i-invoice" viewBox="0 0 24 24"><path d="M14 3.5H6.5v17H12"/><path d="M14 3.5 18 7.5V12"/><path d="M14 3.5v4h4"/><path d="M9 11h6M9 14h3.5"/><circle cx="17.5" cy="17.5" r="3.5"/><path d="M14 17.5h7M17.5 14c1.3 1.2 1.3 5.8 0 7M17.5 14c-1.3 1.2-1.3 5.8 0 7"/></symbol>
+      <symbol id="p36i-pay" viewBox="0 0 24 24"><ellipse cx="8.5" cy="7" rx="5" ry="2.2"/><path d="M3.5 7v3.6c0 1.2 2.2 2.2 5 2.2s5-1 5-2.2V7"/><path d="M3.5 10.6v3.6c0 1.2 2.2 2.2 5 2.2"/><path d="M13.5 18.5h7M17.5 15.5l3 3-3 3"/></symbol>
+      <symbol id="p36i-form" viewBox="0 0 24 24"><rect x="4.5" y="3" width="15" height="18" rx="1.2"/><path d="M8 7.5h8"/><rect x="8" y="10.75" width="2.5" height="2.5" rx=".4"/><path d="M12.75 12h3.25"/><rect x="8" y="15.25" width="2.5" height="2.5" rx=".4"/><path d="M12.75 16.5h3.25"/></symbol>
+      <symbol id="p36i-rd" viewBox="0 0 24 24"><path d="M3.5 9 12 4.5 20.5 9z"/><path d="M5.5 11.5v6M9.8 11.5v6M14.2 11.5v6M18.5 11.5v6"/><path d="M4 20h16M4.5 17.5h15"/></symbol>
+      <symbol id="p36i-remit" viewBox="0 0 24 24"><path d="M6 3.5h12v17l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3z"/><path d="M9 11.8l2.2 2.2 4-4.3"/></symbol>
+    </defs></svg>
+
+    <button class="demo-toggle" type="button" aria-expanded="false" aria-controls="p36-demo" hidden><span class="dt-open">ดูการนำเสนอ</span><span class="dt-close">ซ่อนการนำเสนอ</span></button>
+    <div class="demo-body" id="p36-demo">
+    <div class="p36 reveal">
+      <div class="p36-top">
+        <div class="p36-head">
+          <div>
+            <h3 data-p36="demoTitle">จ้างที่ปรึกษา<span class="nb">ต่างประเทศ</span> <span class="nb">150,000 บาท</span> ต้อง<span class="nb">นำส่ง</span>ภาษีเท่าไร?</h3>
+            <div class="p36-hint" data-p36="demoHint"><p><span class="nb">ใบแจ้งหนี้</span>ค่าที่ปรึกษาจาก <span class="nb">Overseas Supplier Pte. Ltd.</span> ที่สิงคโปร์ <span class="nb">150,000 บาท</span> ลงบัญชี<span class="nb">วันที่</span> <span class="nb">15 ก.ย. 2569</span> แล้วจ่ายครั้งเดียว<span class="nb">วันที่</span> <span class="nb">30 ก.ย. 2569</span></p><p>ตัวเลขทุกตัวคิดด้วยสูตรเดียวกับระบบ</p></div>
+          </div>
+          <button class="p36-play" type="button" id="p36-play"><svg class="p36-ic" aria-hidden="true"><use href="#p36i-play"/></svg><span>เล่นทีละขั้น</span></button>
+        </div>
+        <ol class="p36-steps" id="p36-steps" aria-label="ขั้นการยื่น ภ.พ.36"></ol>
+      </div>
+      <div class="p36-narr" id="p36-narr"><div class="p36-narr-now" id="p36-narr-now" aria-live="polite"></div></div>
+      <div class="p36-scene" id="p36-scene" aria-hidden="true"></div>
+    </div>
+    <p class="p36-note" data-p36="note">ตัวเลขในเดโมเป็นตัวอย่าง คิดด้วยสูตรเดียวกับระบบ ชื่อบริษัทและ<span class="nb">ผู้ให้บริการ</span>เป็นชื่อสมมติ</p>
+    </div>
+  </div>
+</section>
+
 <section id="billing-flow" class="alt">
   <div class="wrap">
-    <p class="section-kicker" data-bf="kicker">Highlight Feature 1</p>
+    <p class="section-kicker" data-bf="kicker">Highlight Feature 2</p>
     <h2 data-bf="h2">ระบบวางบิล</h2>
     <p class="sub" data-bf="sub">งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ</p>
 
@@ -4029,7 +4293,7 @@
 
 <section id="vat-service">
   <div class="wrap">
-    <p class="section-kicker" data-vs="kicker">Highlight Feature 2</p>
+    <p class="section-kicker" data-vs="kicker">Highlight Feature 3</p>
     <h2 data-vs="h2">ระบบ VAT Service</h2>
     <p class="sub" data-vs="sub">สร้างข้อมูลลูกค้าและผู้ขายจากเลขประจำตัวผู้เสียภาษี ระบุชื่อ ที่อยู่ สาขา อัตโนมัติ<br>ลดข้อผิดพลาด ถูกต้อง รวดเร็ว</p>
     <!-- นิยามย่อจากหน้าบริการของกรมสรรพากรเอง ใช้กล่อง .tip ชุดเดียวกับ "Localization คืออะไร?"
@@ -4104,7 +4368,7 @@
 
 <section id="cost-trace" class="alt">
   <div class="wrap">
-    <p class="section-kicker">Highlight Feature 3</p>
+    <p class="section-kicker">Highlight Feature 4</p>
     <h2>Cost Traceability</h2>
     <!-- นิยามย่อ ใช้กล่อง .tip ชุดเดียวกับ VAT Service — รายการ ✓ ต้องเป็น <span> เท่านั้น เพราะพ่อเป็น <p> -->
     <div class="tip has-clip reveal">
@@ -4813,8 +5077,8 @@
   // scrollspy: ไฮไลต์เมนูตาม section ที่กำลังดู
   const navLinkById = new Map();
   document.querySelectorAll('.topnav .links a[href^="#"]').forEach(a => navLinkById.set(a.getAttribute('href').slice(1), a));
-  // ตัวอย่างรายงานไม่มีเมนูของตัวเอง อยู่ใต้เมนูฟังก์ชัน
-  const navAlias = { reports: 'features' };
+  // ตัวอย่างรายงานไม่มีเมนูของตัวเอง อยู่ใต้เมนูฟังก์ชัน · ระบบวางบิลอยู่ใต้เมนูนำเสนอ (ชี้ #pp36 ที่เป็นเดโมแรก)
+  const navAlias = { reports: 'features', 'billing-flow': 'pp36' };
   const spy = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (!en.isIntersecting) return;
@@ -4937,7 +5201,7 @@
     group.append(btn);
   });
   // เดโม: ยิงครั้งเดียวต่อเดโมต่อการโหลดหน้า ตอนที่คนเริ่มกด/พิมพ์ครั้งแรก
-  ['billing-flow', 'vat-service', 'cost-trace'].forEach(id => {
+  ['pp36', 'billing-flow', 'vat-service', 'cost-trace'].forEach(id => {
     const sec = document.getElementById(id); if (!sec) return;
     const once = (e) => { if (e && e.target.closest && e.target.closest('.demo-toggle')) return; trackSeoEvent('demo_use', { demo: id }); sec.removeEventListener('click', once); sec.removeEventListener('input', once); };
     sec.addEventListener('click', once); sec.addEventListener('input', once);
@@ -5033,7 +5297,7 @@
     ];
 
     const T = {
-      kicker: { th: 'Highlight Feature 2', en: 'Highlight Feature 2' },
+      kicker: { th: 'Highlight Feature 3', en: 'Highlight Feature 3' },
       h2: { th: 'ระบบ VAT Service', en: 'VAT Service' },
       defTitle: { th: '💡 VAT Service คืออะไร?', en: '💡 What is the VAT Service?' },
       defBody: { th: "บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class=\"vs-chips\"><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>มีตัวตนจริง</span><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>จดทะเบียนถูกต้อง</span><span class=\"vs-chip\"><svg class=\"vs-ic\"><use href=\"#vsi-tick\"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class=\"vs-fine\">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href=\"https://www.rd.go.th/42535.html\" target=\"_blank\" rel=\"noopener noreferrer\">ที่มา: กรมสรรพากร</a></span>",
@@ -5290,7 +5554,7 @@
      applyLang เรียก window.renderBillingFlow(lang) แทน */
   (() => {
     const T = {
-      kicker: { th: 'Highlight Feature 1', en: 'Highlight Feature 1' },
+      kicker: { th: 'Highlight Feature 2', en: 'Highlight Feature 2' },
       h2: { th: 'ระบบวางบิล', en: 'Billing &amp; Receipt' },
       sub: { th: 'งานวางบิลจบในเส้นเดียวบน Business Central ตั้งแต่ตั้งวันวางบิลรายลูกค้า วางแผนออกใบวางบิลตามรอบ ระบุวันนัดเก็บเงิน ไปจนปิดจบด้วยใบเสร็จรับเงิน โดยไม่ต้องคีย์ซ้ำ',
             en: 'The whole billing run on one line inside Business Central — set each customer’s billing date, plan the notes by cycle, record the collection appointment, and close with the receipt, without re-keying anything.' },
@@ -5981,6 +6245,220 @@
     window.renderCostTrace('th');
   })();
 
+  /* ---- #pp36 (Highlight Feature 1) — ภ.พ.36 ของ JHCore ------------------------------------
+     ปุ่มขั้นแบบ #cost-trace แต่ไม่วาดหน้า BC: ใต้ปุ่มเป็นฉาก pictograph ของขั้นนั้น (ผู้ใช้สั่ง 4 ต.ค. 2026)
+     ตัวอย่างเป็นใบแจ้งหนี้เงินบาท 150,000 บาท (ผู้ใช้เปลี่ยนจาก USD 4 ต.ค. 2026) = ฉากที่ 26 ของ JHCoreTests (ใบแจ้งหนี้เงินบาท 100/7) คูณ 1,500
+     เงินบาทไม่มีส่วนต่างอัตราแลกเปลี่ยน: ภาษีในแบบเท่ากับภาษีที่ลงไว้ตอนรับใบแจ้งหนี้ และ Remit PP36 เตรียมรายการบรรทัดเดียว (JHUnrealVATRealizeMgt)
+     ตัวเลขทุกตัวคิดจาก CASE ก้อนเดียว · บริษัทและผู้ให้บริการเป็นชื่อสมมติ
+     อยู่หลัง bahtText() เพราะ TH_D/TH_P เป็น const · ฉากเป็นภาพประกอบคำบรรยาย (aria-hidden) ตัวเลขทุกตัวอยู่ในคำบรรยายด้วย */
+  (() => {
+    const stepsEl = document.getElementById('p36-steps');
+    if (!stepsEl) return;
+    const byId = (id) => document.getElementById(id);
+    const card = stepsEl.closest('.p36');
+    let lang = 'th';
+    const L = (o) => (o && typeof o === 'object' && 'th' in o ? o[lang] : o);
+
+    const CASE = { amount: 150000, vat: 7 };
+    const r2 = (n) => Math.round(n * 100) / 100;
+    const money = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const base = r2(CASE.amount);                    // ฐาน = ยอดที่จ่าย: ช่อง 1 ของแบบ · ช่อง 6 ของ ภ.พ.30
+    const vat = r2(base * CASE.vat / 100);           // ภาษีซื้อยังไม่ถึงกำหนด = ช่อง 2 ของแบบ = ที่นำส่ง = ช่อง 7 ของ ภ.พ.30
+    const nb = (s) => '<span class="nb">' + s + '</span>';   // วันที่และจำนวนเงินห้ามตัดบรรทัดกลาง "ก.ย. | 2569"
+    const FIG = {
+      base: money(base), vat: money(vat), words: bahtText(vat),
+      baht: { th: nb(money(base) + ' บาท'), en: nb(money(base) + ' baht') },
+      dInv: { th: nb('15 ก.ย. 2569'), en: nb('15 Sep 2026') }, dPay: { th: nb('30 ก.ย. 2569'), en: nb('30 Sep 2026') },
+      dDue: { th: nb('7 ต.ค. 2569'), en: nb('7 Oct 2026') }, dRcpt: { th: nb('5 ต.ค. 2569'), en: nb('5 Oct 2026') },
+      mPP30: { th: nb('ตุลาคม 2569'), en: nb('October 2026') }
+    };
+    // คำไทยที่เบราว์เซอร์ชอบตัดกลางคำบนมือถือ (นำ|ส่ง ราช|อาณาจักร) — ห่อ .nb ตอนวาด รายการเดียวใช้ทั้งข้อความและเอกสาร
+    // ข้อความ HTML ตั้งต้นใน section ต้องห่อคำชุดเดียวกันไว้ด้วย ไม่งั้นไม่ตรงกับ T.th
+    const NB_TH = /(ผู้จ่ายเงิน|ผู้ให้บริการ|อัตราแลกเปลี่ยน|ราชอาณาจักร|เช่าเครื่องจักร|ภาษีมูลค่าเพิ่ม|กรมสรรพากร|ต่างประเทศ|ใบแจ้งหนี้|สิ้นเดือน|ตัวอักษร|ใบเสร็จ|ภาษีซื้อ|จ่ายเงิน|วันที่|นำส่ง|ภ\.พ\.3[06])/g;
+    const nbw = (s) => s.replace(NB_TH, '<span class="nb">$1</span>');
+    const fill = (s) => nbw(s.replace(/\{(\w+)\}/g, (m, k) => (k in FIG ? L(FIG[k]) : m)));
+    const tx = (o) => fill(L(o));
+
+    const T = {
+      kicker: { th: 'Highlight Feature 1', en: 'Highlight Feature 1' },
+      h2: { th: 'ภ.พ.36', en: 'VAT Remittance Return' },
+      tipTitle: { th: '💡 ภ.พ.36 คืออะไร?', en: '💡 What is a VAT Remittance Return?' },
+      tipBody: { th: 'คือแบบนำส่งภาษีมูลค่าเพิ่มที่คุณยื่นแทนผู้ให้บริการต่างประเทศ สำหรับบริการที่ทำในต่างประเทศแต่ใช้ในประเทศไทย เช่น เช่าเครื่องจักร หรือจ้างที่ปรึกษา'
+                   + '<span class="p36-rules-h">หลัก 3 ข้อของ ภ.พ.36</span><ol class="p36-rules">'
+                   + '<li><span class="p36-rule-t">ผู้จ่ายเงินเป็นคนยื่น</span>ผู้ให้บริการอยู่ต่างประเทศ คุณจึงต้องยื่นแบบและนำส่งภาษีแทน</li>'
+                   + '<li><span class="p36-rule-t">นับจากเดือนที่จ่ายเงิน</span>ยื่นภายใน 7 วันนับจากสิ้นเดือนที่จ่ายเงิน วันที่ในใบแจ้งหนี้ไม่ได้ใช้นับ</li>'
+                   + '<li><span class="p36-rule-t">ใช้เป็นภาษีซื้อได้</span>ถ้าคุณจดทะเบียนภาษีมูลค่าเพิ่ม ภาษีที่นำส่งแล้วก็ลงเป็นภาษีซื้อใน ภ.พ.30 ได้</li></ol>'
+                   + '<span class="p36-src"><a href="https://www.rd.go.th/3549.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร (คำสั่งที่ ป.104/2544)</a></span>',
+                 en: 'Known as PP36, it is the return you file to remit VAT on behalf of a foreign service provider, for services performed abroad but used in Thailand: renting machinery or hiring a consultant, for example.'
+                   + '<span class="p36-rules-h">The return in three rules</span><ol class="p36-rules">'
+                   + '<li><span class="p36-rule-t">The payer files</span>The provider is abroad, so you file the return and remit the VAT for them.</li>'
+                   + "<li><span class=\"p36-rule-t\">It counts from the month you pay</span>File within 7 days after the end of the month you paid. The invoice date doesn't count.</li>"
+                   + '<li><span class="p36-rule-t">It becomes input VAT</span>If you are VAT-registered, the VAT you remit goes on your PP30 as input VAT.</li></ol>'
+                   + '<span class="p36-src"><a href="https://www.rd.go.th/3549.html" target="_blank" rel="noopener noreferrer">Source: Revenue Department Order No. Por. 104/2544</a></span>' },
+      demoTitle: { th: 'จ้างที่ปรึกษาต่างประเทศ <span class="nb">150,000 บาท</span> ต้องนำส่งภาษีเท่าไร?',
+                   en: 'A 150,000-baht overseas consultant: how much VAT do you remit?' },
+      demoHint: { th: '<p>ใบแจ้งหนี้ค่าที่ปรึกษาจาก <span class="nb">Overseas Supplier Pte. Ltd.</span> ที่สิงคโปร์ <span class="nb">150,000 บาท</span> ลงบัญชีวันที่ <span class="nb">15 ก.ย. 2569</span> แล้วจ่ายครั้งเดียววันที่ <span class="nb">30 ก.ย. 2569</span></p><p>ตัวเลขทุกตัวคิดด้วยสูตรเดียวกับระบบ</p>',
+                  en: "<p>A consulting invoice from <span class=\"nb\">Overseas Supplier Pte. Ltd.</span>, Singapore, for <span class=\"nb\">150,000 baht</span>: posted on <span class=\"nb\">15 Sep 2026</span> and paid in one payment on <span class=\"nb\">30 Sep 2026</span>.</p><p>Every figure uses the system's own formulas.</p>" },
+      note: { th: 'ตัวเลขในเดโมเป็นตัวอย่าง คิดด้วยสูตรเดียวกับระบบ ชื่อบริษัทและผู้ให้บริการเป็นชื่อสมมติ',
+              en: "The figures are an example calculated with the system's own formulas. The company and provider names are fictional." },
+      play: { th: 'เล่นทีละขั้น', en: 'Play step by step' },
+      stop: { th: 'หยุด', en: 'Stop' },
+      step: { th: 'ขั้น', en: 'Step' },
+      introLv: { th: '5 ขั้น', en: '5 steps' },
+      introTx: { th: 'กด <b>เล่นทีละขั้น</b> เพื่อไล่ดูตั้งแต่รับใบแจ้งหนี้จนภาษีซื้อเข้า ภ.พ.30',
+                 en: 'Press <b>Play step by step</b> to follow it from the invoice to the input VAT on your PP30.' },
+      ledCap: { th: 'ตัวเลขชุดเดียวกันตั้งแต่ใบแจ้งหนี้จนถึง ภ.พ.30', en: 'One set of figures, from the invoice to the PP30' },
+      colWhere: { th: 'อยู่ที่', en: 'Where' },
+      colBase: { th: 'ฐาน', en: 'Base' },
+      colVat: { th: 'ภาษี 7%', en: 'VAT 7%' },
+      r1: { th: 'ตอนรับใบแจ้งหนี้<span class="p36-rdate">{dInv}</span>', en: 'At invoice<span class="p36-rdate">{dInv}</span>' },
+      r2: { th: 'ตอนจ่ายเงิน<span class="p36-rdate">{dPay}</span>', en: 'At payment<span class="p36-rdate">{dPay}</span>' },
+      r3: { th: 'ตอนได้ใบเสร็จ<span class="p36-rdate">{dRcpt}</span>', en: 'At the receipt<span class="p36-rdate">{dRcpt}</span>' },
+      w1: { th: 'ภาษีซื้อยังไม่ถึงกำหนด', en: 'Input VAT not yet due' },
+      w2: { th: 'แบบ ภ.พ.36 ช่อง 1 และ 2', en: 'Return, boxes 1 and 2' },
+      w3: { th: 'ภ.พ.30 ช่อง 6 และ 7', en: 'PP30, boxes 6 and 7' },
+      pend2: { th: 'ยังไม่จ่าย', en: 'Not paid yet' },
+      pend3: { th: 'รอใบเสร็จ', en: 'Awaiting the receipt' },
+      payTo: { th: '<span class="nb">Overseas Supplier Pte. Ltd.</span><span class="p36-rdate">{dPay}</span>',
+               en: '<span class="nb">Overseas Supplier Pte. Ltd.</span><span class="p36-rdate">{dPay}</span>' },
+      rdH: { th: 'กรมสรรพากร', en: 'Revenue Department' },
+      rdPaid: { th: 'ยื่นแบบ ภ.พ.36 และจ่ายภาษี', en: 'Return filed and VAT paid' },
+      rdDue: { th: 'ครบกำหนด {dDue}', en: 'Due {dDue}' },
+      rdRcpt: { th: 'ได้ใบเสร็จ {dRcpt}', en: 'Receipt {dRcpt}' }
+    };
+
+    // hi = ช่องในตารางยอดที่ขั้นนั้นพูดถึง (r1 ตอนรับใบแจ้งหนี้ · r2 ตอนจ่ายเงิน · r3 ตอนได้ใบเสร็จ · b ฐาน · v ภาษี)
+    const STEPS = [
+      { ic: 'invoice', doc: 'inv', ms: 7000, hi: ['r1b', 'r1v'], nm: { th: 'ใบแจ้งหนี้', en: 'Invoice' },
+        tx: { th: 'ลง Purchase Invoice ค่าที่ปรึกษา {baht} ได้ภาษีซื้อ {vat} บาทที่ยังไม่ถึงกำหนด ระบบจึงพักไว้ก่อน PP36 Report ยังไม่ขึ้นบรรทัดนี้ เพราะยังไม่ได้จ่ายเงิน',
+              en: 'Post the Purchase Invoice for {baht}: {vat} baht of input VAT is not yet due, so the system holds it back. The PP36 Report shows no line for it yet, because nothing has been paid.' } },
+      { ic: 'pay', doc: 'pay', ms: 8000, hi: ['r2b', 'r2v'], nm: { th: 'จ่ายเงิน', en: 'Payment' },
+        tx: { th: 'จ่าย {baht} วันที่ {dPay} ยอดนี้คือฐาน ภ.พ.36 คิดภาษีได้ {vat} บาท เพราะจ่ายเป็นเงินบาท ภาษีจึงเท่ากับที่ลงไว้ตอนรับใบแจ้งหนี้ PP36 Report ขึ้นบรรทัดนี้ในสถานะ To Remit',
+              en: 'Pay {baht} on {dPay}: that amount is the PP36 base, with {vat} baht of VAT. Paid in baht, so the VAT matches what was booked with the invoice. The PP36 Report now lists the line as To Remit.' } },
+      { ic: 'form', doc: 'form', ms: 9000, hi: ['r2b', 'r2v'], nm: { th: 'แบบ ภ.พ.36', en: 'VAT Remittance Return' },
+        tx: { th: 'เลือก PP36 Payment Type จากนั้นกด Download PP36 ระบบก็เติมแบบของกรมสรรพากรให้ ช่อง 1 จำนวนเงินที่จ่าย {base} ช่อง 2 ภาษีที่ต้องนำส่ง {vat} พร้อมจำนวนเงินตัวอักษร',
+              en: 'Select the PP36 Payment Type, then press Download PP36. The system fills in the VAT Remittance Return: box 1, amount paid, {base}; box 2, VAT to remit, {vat}, with the amount in words.' } },
+      { ic: 'rd', doc: 'rd', ms: 8000, hi: ['r2v'], nm: { th: 'นำส่งภาษี', en: 'Remit to RD' },
+        tx: { th: 'ยื่นแบบและจ่ายภาษี {vat} บาทให้กรมสรรพากรภายในวันที่ {dDue} ซึ่งครบ 7 วันนับจากสิ้นเดือนที่จ่ายเงิน แล้วบันทึกการจ่ายใน Payment Journal ตามปกติ ตัวอย่างนี้ได้ใบเสร็จวันที่ {dRcpt}',
+              en: 'File the return and pay {vat} baht to the Revenue Department by {dDue}, 7 days after the end of the month you paid, then record the payment in the Payment Journal as usual. In this example the receipt is dated {dRcpt}.' } },
+      // Remit PP36 กับภาษีซื้อใน ภ.พ.30 คือขั้นเดียวกัน: Post แล้วภาษีซื้อเข้า ภ.พ.30 เอง ไม่มีงานให้ทำเพิ่ม (ผู้ใช้สั่งรวม 4 ต.ค. 2026)
+      { ic: 'remit', doc: 'jnl', ms: 9000, hi: ['r1v', 'r3v'], nm: { th: 'บันทึกใบเสร็จ', en: 'Record receipt' },
+        tx: { th: 'ได้ใบเสร็จแล้ว กด Remit PP36 แล้วกรอกเลขที่ใบเสร็จ ระบบเตรียมรายการลงภาษีซื้อ {vat} ใน General Journal ให้ ตรวจแล้ว Post สถานะก็เปลี่ยนเป็น Remitted และภาษีซื้อเข้า ภ.พ.30 เดือน{mPP30} ตามวันที่ในใบเสร็จ',
+              en: 'With the receipt in hand, press Remit PP36 and enter its number. The system prepares the General Journal line that books {vat} of input VAT. Check it and post: the status turns to Remitted and the input VAT goes into your PP30 for {mPP30}, by the receipt date.' } }
+    ];
+
+    const ic = (name, cls) => '<svg class="p36-ic' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><use href="#p36i-' + name + '"/></svg>';
+    const stepText = (i) => L(T.step) + ' ' + (i + 1);
+    const narrHTML = (i) => {
+      const s = STEPS[i];
+      // บทเปิด (ยังไม่เลือกขั้น) มีแค่บรรทัดวิธีใช้ ไม่มีหัวเรื่องและรูป แบบ narrHTML ของ #cost-trace
+      return '<span class="p36-narr-lv">' + (s ? stepText(i) + ic(s.ic, 'p36-narr-pic') : L(T.introLv)) + '</span>'
+        + (s ? '<span class="p36-narr-t">' + tx(s.nm) + '</span>' : '')
+        + '<span class="p36-narr-x">' + (s ? tx(s.tx) : L(T.introTx)) + '</span>';
+    };
+
+    // เอกสารประจำขั้น: ใบแจ้งหนี้ของผู้ขายเป็นภาษาอังกฤษทั้งสองโหมด · แบบ ภ.พ.36 เป็นแบบไทย (lang="th")
+    // ของที่ระบบทำให้ (แบบ ภ.พ.36 และรายการใน General Journal) เป็นสีม่วงตาม DESIGN.md
+    function docHTML(d) {
+      const tick = ic('tick');
+      if (d === 'inv') return '<div class="p36-paper" lang="en"><span class="p36-paper-h">INVOICE</span>'
+        + '<span class="p36-paper-from"><span class="p36-paper-co">Overseas Supplier Pte. Ltd.</span>Singapore</span>'
+        + '<span class="p36-paper-ln"><span>Consulting services</span><span>THB ' + FIG.base + '</span></span>'
+        + '<span class="p36-paper-ft"><span>Date 15 Sep 2026</span><span>Total THB ' + FIG.base + '</span></span></div>';
+      // ใบจ่ายเงินกับใบกรมสรรพากรเป็นของที่คุณทำเอง: พื้นขาว ตัวเลขขนาดบรรทัด ไม่แย่งจุดเด่น (แถวตอนได้ใบเสร็จในแถบตัวเลข)
+      if (d === 'pay') return '<div class="p36-jnl p36-jnl-plain"><span class="p36-doc-h">Payment Journal</span>'
+        + '<span class="p36-jnl-ln"><span>' + tx(T.payTo) + '</span><span class="p36-num">' + FIG.base + '</span></span>'
+        + '<span class="p36-chips"><span class="p36-chip">PP36 Report · To Remit</span></span></div>';
+      // ข้อความในหัวแบบกับบรรทัดติ๊ก (flex) ห่อ span ไว้ทั้งก้อน ไม่งั้น .nb ที่ nbw() ใส่กลายเป็นชิ้น flex แยกออกมา
+      if (d === 'form') return nbw('<div class="p36-form" lang="th"><span class="p36-form-h"><span class="p36-form-no">ภ.พ.36</span><span>แบบนำส่งภาษีมูลค่าเพิ่ม</span></span>'
+        + '<span class="p36-form-f"><span class="p36-form-l">ชื่อผู้ประกอบการซึ่งเป็นผู้รับเงิน</span>Overseas Supplier Pte. Ltd. · สิงคโปร์</span>'
+        + '<span class="p36-form-f"><span class="p36-form-l">วัน เดือน ปี ที่จ่ายเงิน</span>30 กันยายน 2569</span>'
+        + '<span class="p36-form-t">' + tick + '<span>ให้บริการในต่างประเทศและใช้บริการในราชอาณาจักร</span></span>'
+        + '<span class="p36-form-t">' + tick + '<span>จ่ายเงินชำระราคาสำหรับ ม.40(2)</span></span>'
+        + '<span class="p36-form-b"><span>1. จำนวนเงินที่จ่าย</span><span class="p36-num">' + FIG.base + '</span></span>'
+        + '<span class="p36-form-b"><span>2. จำนวนเงินภาษีมูลค่าเพิ่มที่ต้องนำส่ง</span><span class="p36-num">' + FIG.vat + '</span></span>'
+        + '<span class="p36-form-w">(' + FIG.words + ')</span></div>');
+      if (d === 'rd') return '<div class="p36-jnl p36-jnl-plain"><span class="p36-doc-h">' + tx(T.rdH) + '</span>'
+        + '<span class="p36-jnl-ln"><span>' + tx(T.rdPaid) + '</span><span class="p36-num">' + FIG.vat + '</span></span>'
+        + '<span class="p36-chips"><span class="p36-chip">' + tx(T.rdDue) + '</span><span class="p36-chip p36-chip-ok">' + tx(T.rdRcpt) + '</span></span></div>';
+      // ใบแจ้งหนี้เงินบาท: Remit PP36 ได้รายการบรรทัดเดียว (ไม่มีบรรทัดส่วนต่างอัตราแลกเปลี่ยน)
+      return '<div class="p36-jnl"><span class="p36-doc-h">General Journal</span>'
+        + '<span class="p36-jnl-ln"><span>Input VAT</span><span class="p36-num">' + FIG.vat + '</span></span>'
+        + '<span class="p36-chips"><span class="p36-chip p36-chip-ok">Status · Remitted</span></span></div>';
+    }
+
+    // แถบตัวเลข: ฐานกับภาษีชุดเดียวกันไหลจากใบแจ้งหนี้ → แบบ ภ.พ.36 → ภ.พ.30 · แถวไหนยังไม่ถึงขั้นของมันโชว์ป้ายรอ (from = ขั้นที่แถวขึ้น)
+    // แถวตอนได้ใบเสร็จคือภาษีซื้อที่ระบบลงให้ (สีม่วง) — จุดเด่นของ section อยู่ที่ขั้นบันทึกใบเสร็จ
+    function ledgerHTML() {
+      const row = (k, from, label, where, pend) => '<div class="p36-row p36-' + k + '" data-from="' + from + '"><span class="p36-rl">' + tx(label) + '</span>'
+        + '<span class="p36-rc">' + tx(where) + '</span><span class="p36-rb" data-k="' + k + 'b">' + FIG.base + '</span>'
+        + '<span class="p36-rv" data-k="' + k + 'v">' + FIG.vat + '</span>'
+        + (pend ? '<span class="p36-rp">' + tx(pend) + '</span>' : '') + '</div>';
+      return '<span class="p36-led-cap">' + tx(T.ledCap) + '</span>'
+        + '<div class="p36-row p36-lhead"><span class="p36-rl"></span><span class="p36-rc">' + tx(T.colWhere) + '</span><span class="p36-rb">' + tx(T.colBase) + '</span><span class="p36-rv">' + tx(T.colVat) + '</span></div>'
+        + row('r1', -1, T.r1, T.w1) + row('r2', 1, T.r2, T.w2, T.pend2) + row('r3', 4, T.r3, T.w3, T.pend3);
+    }
+
+    let cur = -1, timer = 0;
+    function show(i) {
+      cur = i;
+      stepsEl.querySelectorAll('button').forEach((b, k) => {
+        b.classList.toggle('on', k === i);
+        b.classList.toggle('done', k < i);
+        if (k === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      });
+      byId('p36-narr-now').innerHTML = narrHTML(i);
+      const s = STEPS[i];
+      const scene = byId('p36-scene');
+      scene.querySelectorAll('.p36-doc').forEach((el) => el.classList.toggle('on', el.dataset.doc === (s ? s.doc : 'inv')));
+      const led = scene.querySelector('.p36-led');
+      led.querySelectorAll('.p36-row[data-from]').forEach((r) => r.classList.toggle('pend', i < +r.dataset.from));
+      led.querySelectorAll('[data-k]').forEach((el) => el.classList.toggle('hi', !!s && s.hi.includes(el.dataset.k)));
+    }
+    function syncPlay() {
+      byId('p36-play').innerHTML = ic(timer ? 'stop' : 'play') + '<span>' + L(timer ? T.stop : T.play) + '</span>';
+    }
+    function stopPlay() { if (!timer) return; clearTimeout(timer); timer = 0; syncPlay(); }
+    function next() {
+      if (cur >= STEPS.length - 1 || !card.offsetWidth || document.hidden) { stopPlay(); return; }
+      show(cur + 1);
+      timer = setTimeout(next, STEPS[cur].ms);
+    }
+    // ปุ่มขั้นสร้างครั้งเดียวต่อภาษา ระหว่างเล่นแค่สลับคลาส · สลับภาษาแล้วคืน focus ให้ปุ่มขั้นเดิม
+    function drawStatic() {
+      const f = document.activeElement;
+      const keep = f && f.closest && f.closest('#p36-steps button') ? f.dataset.i : null;
+      document.querySelectorAll('[data-p36]').forEach((el) => { el.innerHTML = tx(T[el.dataset.p36]); });
+      stepsEl.innerHTML = STEPS.map((s, i) => '<li><button class="p36-step" type="button" data-i="' + i + '">'
+        + ic(s.ic, 'p36-pic') + '<span class="p36-lv">' + stepText(i) + '</span><span class="p36-nm">' + tx(s.nm) + '</span></button></li>').join('');
+      const box = byId('p36-narr');
+      box.querySelectorAll('.p36-narr-size').forEach((el) => el.remove());
+      box.insertAdjacentHTML('beforeend', [-1, ...STEPS.keys()].map((i) => '<div class="p36-narr-size" aria-hidden="true">' + narrHTML(i) + '</div>').join(''));
+      byId('p36-scene').innerHTML = '<div class="p36-docs">'
+        + ['inv', 'pay', 'form', 'rd', 'jnl'].map((d) => '<div class="p36-doc" data-doc="' + d + '">' + docHTML(d) + '</div>').join('')
+        + '</div><div class="p36-led">' + ledgerHTML() + '</div>';
+      syncPlay();
+      if (keep !== null) stepsEl.querySelector('[data-i="' + keep + '"]').focus();
+    }
+
+    byId('p36-play').addEventListener('click', () => {
+      if (timer) { stopPlay(); return; }
+      show(0);
+      timer = setTimeout(next, STEPS[0].ms);
+      syncPlay();
+    });
+    stepsEl.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-i]');
+      if (!b) return;
+      stopPlay();
+      show(+b.dataset.i);
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stopPlay(); });
+
+    window.renderPP36 = (l) => { lang = l; drawStatic(); show(cur); };
+    window.renderPP36('th');
+  })();
+
   // ── Bilingual TH/EN ─────────────────────────────────────────────
   // ponytail: selector-keyed dictionary in one place, no markup annotations.
   // ข้อแลกเปลี่ยน: ถ้าย้ายลำดับ element ที่อ้างด้วย nth-child ต้องอัปเดตที่นี่ด้วย
@@ -5993,7 +6471,7 @@
     ['.topnav .links a[href="#articles"]', 'Articles'],
     ['.topnav .links a[href="#pricing"]', 'Pricing'],
     ['.hero-actions .cta.ghost', 'See package pricing'],
-    ['.topnav .links a[href="#billing-flow"]', 'Demos'],
+    ['.topnav .links a[href="#pp36"]', 'Demos'],
     ['.topnav .links a[href="#about"]', 'About'],
     ['.topnav .links a[href="#contact"]', 'Contact'],
     ['header h1', 'Business Central implementation<br> with complete <span class="hero-accent">Thai Localization</span>'],
@@ -6151,6 +6629,7 @@
     ['.feature-tablist', 'aria-label', 'JWIC Localization features'],
     ['#vs-cases', 'aria-label', 'Example scenarios'],
     ['#ct-steps', 'aria-label', 'Trace steps'],
+    ['#p36-steps', 'aria-label', 'PP36 steps'],
     ['.bento-shot img[src$="bc-power-automate.webp"]', 'alt', 'Power Automate flow that sends an approval request automatically when a new document is created in Business Central'],
     ['.bento-shot img[src$="bc-excel-pivot.webp"]', 'alt', 'Aged receivables report opened in Excel as a PivotTable, with slicers filtering by department and customer group'],
     ['.bento-shot img[src$="bc-home.webp"]', 'alt', 'Business Central home page in the cloud, showing the company name and the task menus the user has rights to'],
@@ -6206,6 +6685,7 @@
     if (window.renderVatService) window.renderVatService(lang);
     if (window.renderBillingFlow) window.renderBillingFlow(lang);
     if (window.renderCostTrace) window.renderCostTrace(lang);
+    if (window.renderPP36) window.renderPP36(lang);
     if (window.syncSlidePlay) window.syncSlidePlay();
     if (window.syncClips) window.syncClips();
     if (window.syncMenuLabel) window.syncMenuLabel();
