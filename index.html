@@ -3053,8 +3053,8 @@
   }
 
   /* ── #pp36 (Highlight Feature 1) — ภ.พ.36 ของ JHCore ─────────────────────
-     ปุ่มขั้น + คำบรรยายแบบ #cost-trace แต่ไม่มีหน้าต่าง BC: ใต้คำบรรยายเป็นฉาก pictograph (เอกสารของขั้นนั้น + ตารางยอด 3 แถว)
-     เทาของ Fluent ไม่ใช้ในส่วนนี้ · ของที่ระบบทำให้ (แบบ ภ.พ.36 รายการใน General Journal และแถวตอนได้ใบเสร็จ) เป็นสีม่วงตาม DESIGN.md
+     ปุ่มขั้น + คำบรรยายแบบ #cost-trace แต่ไม่มีหน้าต่าง BC: ใต้คำบรรยายเป็นฉาก pictograph (เอกสารของขั้นนั้น + สมุดรายวัน 4 ช่วง)
+     เทาของ Fluent ไม่ใช้ในส่วนนี้ · ของที่ระบบทำให้ (แบบ ภ.พ.36 รายการใน General Journal และช่วงตอนได้ใบเสร็จในสมุดรายวัน) เป็นสีม่วงตาม DESIGN.md
      ชื่อขึ้นต้น p36- ทุกตัว · ขั้นปัจจุบันใช้ Signing Teal (9.9 บนขาว) ไม่ใช้เบอร์กันดีซึ่งเป็นของปุ่มที่ขอให้กด */
   #pp36 { --p36-on: var(--brand-teal); }
   #pp36 > .wrap > .section-kicker,
@@ -3130,7 +3130,7 @@
   .p36-narr-t { font-family: "Anuphan", sans-serif; font-size: 1.02rem; font-weight: 600; line-height: 1.5; }
   .p36-narr-x { max-width: 59.3em; font-size: .95rem; line-height: 1.65; color: var(--ui-muted); }
 
-  /* ฉาก: ซ้ายคือเอกสารของขั้น (ทุกใบซ้อนในช่องเดียว สูงเท่าใบที่ยาวสุด) · ขวาคือตารางยอด */
+  /* ฉาก: ซ้ายคือเอกสารของขั้น (ทุกใบซ้อนในช่องเดียว สูงเท่าใบที่ยาวสุด) · ขวาคือสมุดรายวัน */
   .p36-scene {
     display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; align-items: start;
     margin: 0 24px 24px; padding-top: 20px; border-top: 1px solid var(--ui-line);
@@ -3186,42 +3186,44 @@
   .p36-jnl-plain { background: #fff; border-color: var(--ui-line); }
   .p36-jnl-plain .p36-jnl-ln { border-top-color: var(--ui-line); }
 
-  /* แถบตัวเลข: ฐานกับภาษีชุดเดียวกันตั้งแต่ใบแจ้งหนี้ถึง ภ.พ.30 แถวตอนได้ใบเสร็จ (ภาษีซื้อที่ระบบลงให้) เป็นพื้นม่วงอ่อน
-     ตัวเลขที่ขั้นปัจจุบันพูดถึงได้กรอบม่วง 1px บนพื้นขาว · ทุกช่องวางตำแหน่งเอง (แถวที่ 1) เพราะป้ายรอ ("ยังไม่จ่าย" "รอใบเสร็จ") ทับช่องของแถวที่ยังไม่ถึง */
+  /* สมุดรายวันของตัวอย่าง (ผู้ใช้สั่ง 4 ต.ค. 2026 แทนตารางฐาน/ภาษี): 4 ช่วงตามการลงบัญชีจริงของ JHCore
+     บรรทัดเครดิตเยื้องเข้าแบบสมุดรายวันทั่วไป · ยอดที่ขั้นปัจจุบันพูดถึงได้กรอบม่วง 1px บนพื้นขาว
+     ช่วงที่ยังไม่ถึงซ่อนบรรทัดแต่จองที่ไว้ (visibility) แล้วโชว์ป้ายรอในหัวช่วง ฉากจึงไม่กระโดดตอนเล่น
+     ยอดเดบิต/เครดิตกว้างคงที่ทุกบรรทัด (em) — แต่ละบรรทัดเป็น grid ของตัวเอง ถ้าใช้ auto ตัวเลขจะไม่ตรงคอลัมน์ */
   .p36-led { display: grid; font-size: .95rem; }
   .p36-led-cap { margin-bottom: 8px; font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ui-muted); }
-  .p36-row {
-    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, .85fr);
-    column-gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--ui-line);
-  }
-  .p36-row > * { grid-row: 1; }
-  .p36-rl { grid-column: 1; font-family: "Anuphan", sans-serif; font-weight: 600; line-height: 1.4; color: var(--ui-ink); }
-  /* วันที่ของแถวอยู่บรรทัดของตัวเองใต้ชื่อแถว แถวที่เทียบกันจึงสูงเท่ากัน */
   .p36-rdate { display: block; font-size: .86em; font-weight: 400; color: var(--ui-muted); }
-  .p36-rc { grid-column: 2; color: var(--ui-muted); font-variant-numeric: tabular-nums; }
-  .p36-rb { grid-column: 3; }
-  .p36-rv { grid-column: 4; }
-  .p36-rb, .p36-rv {
-    justify-self: end; margin-right: -6px; padding: 2px 6px; border-radius: var(--ui-radius-btn);
+  .p36-ln { display: grid; grid-template-columns: minmax(0, 1fr) 7em 7em; column-gap: 12px; align-items: baseline; padding: 2px 0; line-height: 1.4; }
+  .p36-jhead { padding: 0 0 6px; }
+  .p36-jhead > * { font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ui-muted); }
+  .p36-jhead > :not(:first-child) { text-align: right; }
+  .p36-grp { padding: 9px 0 10px; border-top: 1px solid var(--ui-line); }
+  .p36-gh { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; margin-bottom: 4px; }
+  .p36-gl { font-family: "Anuphan", sans-serif; font-weight: 600; line-height: 1.4; color: var(--ui-ink); }
+  .p36-gd { font-size: .86em; color: var(--ui-muted); }
+  /* ป้ายรอจองที่ไว้เสมอ (visibility) — ถ้าสลับ display หัวช่วงที่มีป้ายสูงกว่า 1px ฉากจะขยับทุกขั้นตอนเล่น */
+  .p36-gp { visibility: hidden; font-size: .9em; color: var(--ui-muted); }
+  .p36-acc { color: var(--ui-ink); }
+  .p36-ln-cr .p36-acc { padding-left: 1.6em; }
+  .p36-dr, .p36-cr {
+    justify-self: end; margin-right: -6px; padding: 1px 6px; border-radius: var(--ui-radius-btn);
     font-family: "Anuphan", sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ui-ink);
     transition: background .25s ease, box-shadow .25s ease;
   }
-  .p36-lhead { padding: 0 0 6px; border-top: 0; }
-  .p36-lhead > * { font-family: "Anuphan", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ui-muted); }
-  .p36-r3 { margin: 0 -10px; padding-left: 10px; padding-right: 10px; background: #F6EEF8; border-top-color: #E6D8EC; }
-  .p36-r3 > .p36-rl, .p36-r3 > .p36-rb, .p36-r3 > .p36-rv { color: #74509E; }
-  /* จุดเด่นของทั้ง section: ภาษีซื้อที่กลับมาใน ภ.พ.30 ตัวใหญ่หนึ่งขั้นจากตัวเลขอื่น */
-  .p36-r3 > .p36-rv { font-size: 1.05rem; font-weight: 700; }
-  .p36-row > .hi { background: #fff; box-shadow: inset 0 0 0 1px #8E6DB5; }
-  .p36-rp { grid-column: 2 / -1; justify-self: start; color: var(--ui-muted); visibility: hidden; }
-  .p36-row > :is(.p36-rc, .p36-rb, .p36-rv) { transition: opacity .45s cubic-bezier(.2,.75,.2,1), background .25s ease, box-shadow .25s ease; }
-  .p36-r3 { transition: background .45s cubic-bezier(.2,.75,.2,1); }
-  .p36-row.pend > :is(.p36-rc, .p36-rb, .p36-rv) { visibility: hidden; opacity: 0; }
-  .p36-row.pend > .p36-rp { visibility: visible; }
-  /* แถวตอนได้ใบเสร็จยังเป็นแถวธรรมดาจนถึงขั้นบันทึกใบเสร็จ แล้วค่อยกลายเป็นสีม่วง
-     ระหว่างรอต้องกว้างเท่าแถวอื่นด้วย ไม่งั้นเส้นคั่นข้างบนยื่นเลยตารางข้างละ 10px (ตัวหนังสืออยู่ที่เดิม เพราะ margin กับ padding หักกันพอดี) */
-  .p36-r3.pend { margin: 0; padding-left: 0; padding-right: 0; background: transparent; border-top-color: var(--ui-line); }
-  .p36-r3.pend > .p36-rl { color: var(--ui-ink); }
+  .p36-ln.hi > :is(.p36-dr, .p36-cr):not(:empty) { background: #fff; box-shadow: inset 0 0 0 1px #8E6DB5; }
+  /* คำอธิบายรายการใต้บรรทัด Dr/Cr ในวงเล็บ แบบสมุดรายวันทั่วไป (ตอนได้ใบเสร็จ: "บันทึกเป็นภาษีซื้อ" ผู้ใช้สั่ง) */
+  .p36-gn { display: block; margin-top: 2px; font-size: .9em; color: var(--ui-muted); }
+  .p36-grp > :is(.p36-ln, .p36-gn) { transition: opacity .45s cubic-bezier(.2,.75,.2,1); }
+  .p36-grp.pend > :is(.p36-ln, .p36-gn) { visibility: hidden; opacity: 0; }
+  .p36-grp.pend .p36-gp { visibility: visible; }
+  /* จุดเด่นของทั้ง section: ช่วงตอนได้ใบเสร็จ = ภาษีซื้อที่ Remit PP36 เตรียมให้ — พื้นม่วงอ่อนยื่นออกข้างละ 10px ยอดภาษีซื้อตัวใหญ่หนึ่งขั้น */
+  .p36-g4 { margin: 0 -10px; padding-left: 10px; padding-right: 10px; background: #F6EEF8; border-top-color: #E6D8EC; transition: background .45s cubic-bezier(.2,.75,.2,1); }
+  .p36-g4 :is(.p36-gl, .p36-acc, .p36-dr, .p36-cr, .p36-gn) { color: #74509E; }
+  .p36-g4 [data-k="g4a"] .p36-dr { font-size: 1.05rem; font-weight: 700; }
+  /* ระหว่างรอ ช่วงตอนได้ใบเสร็จเป็นช่วงธรรมดา กว้างเท่าช่วงอื่น ไม่งั้นเส้นคั่นข้างบนยื่นเลยตารางข้างละ 10px
+     (ตัวหนังสืออยู่ที่เดิม เพราะ margin กับ padding หักกันพอดี) */
+  .p36-g4.pend { margin: 0; padding-left: 0; padding-right: 0; background: transparent; border-top-color: var(--ui-line); }
+  .p36-g4.pend .p36-gl { color: var(--ui-ink); }
   .p36-note {
     margin: 20px auto 0; max-width: 760px; text-align: center;
     font-size: .84rem; line-height: 1.65; color: var(--ui-muted);
@@ -3234,7 +3236,7 @@
   }
   @media (max-width: 760px) {
     .p36-scene { grid-template-columns: minmax(0, 1fr); }
-    /* จอแคบฉากเรียงลงล่าง: ตารางยอดขึ้นก่อน แล้วตามด้วยเอกสารเฉพาะใบของขั้นนี้
+    /* จอแคบฉากเรียงลงล่าง: สมุดรายวันขึ้นก่อน แล้วตามด้วยเอกสารเฉพาะใบของขั้นนี้
        ไม่กันความสูงเท่าใบที่ยาวสุด ไม่งั้นมีช่องโล่งกลางการ์ด (ส่วนที่เปลี่ยนสูงอยู่ท้ายการ์ด ข้างบนไม่ขยับ) */
     .p36-led { order: -1; }
     .p36-doc:not(.on) { display: none; }
@@ -3249,18 +3251,19 @@
     .p36-narr-lv { grid-row: auto; padding-top: 0; display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
     .p36-narr-pic { order: -1; width: 44px; height: 44px; margin: 0; stroke-width: 1.4; }
     .p36-scene { margin: 0 12px 12px; }
-    /* ตารางยอด: ชื่อแถว แล้ว "ลงที่ไหน" ใต้ชื่อ ฐานกับภาษีได้ครึ่งแถวเต็ม ๆ บรรทัดล่าง */
-    .p36-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 2px; }
-    .p36-rl, .p36-rc, .p36-rp { grid-column: 1 / -1; }
-    .p36-rc, .p36-rp { grid-row: 2; }
-    .p36-rb, .p36-rv { grid-row: 3; }
-    .p36-rb { grid-column: 1; }
-    .p36-rv { grid-column: 2; }
-    .p36-lhead > :is(.p36-rl, .p36-rc) { display: none; }
-    .p36-lhead > :is(.p36-rb, .p36-rv) { grid-row: 1; }
+    /* สมุดรายวัน: คอลัมน์ยอดแคบลงพอดี 150,000.00 ชื่อบัญชีได้ที่ที่เหลือและขึ้นบรรทัดใหม่ได้ */
+    .p36-led { font-size: .88rem; }
+    .p36-ln { grid-template-columns: minmax(0, 1fr) 5.8em 5.8em; column-gap: 8px; }
+    .p36-ln-cr .p36-acc { padding-left: 1em; }
+  }
+  @media (max-width: 360px) {
+    /* จอ 320: ตัวเลขเล็กลงอีกนิดให้ชื่อบัญชีวางได้ทีละคำ (ชื่อบัญชีห่อ .nb เป็นคำ ๆ ใน T ตัดกลางคำไม่ได้ เช่น เจ้าหนี้การ|ค้า) */
+    .p36-led { font-size: .82rem; }
+    .p36-ln { grid-template-columns: minmax(0, 1fr) 5.4em 5.4em; column-gap: 6px; }
+    .p36-ln-cr .p36-acc { padding-left: .6em; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .p36-play, .p36-step, .p36-doc, .p36-rb, .p36-rv, .p36-row > :is(.p36-rc, .p36-rb, .p36-rv), .p36-r3 { transition: none; }
+    .p36-play, .p36-step, .p36-doc, .p36-dr, .p36-cr, .p36-grp > :is(.p36-ln, .p36-gn), .p36-g4 { transition: none; }
     .p36-doc { transform: none; }
   }
 
@@ -6307,18 +6310,25 @@
       introLv: { th: '5 ขั้น', en: '5 steps' },
       introTx: { th: 'กด <b>เล่นทีละขั้น</b> เพื่อไล่ดูตั้งแต่รับใบแจ้งหนี้จนภาษีซื้อเข้า ภ.พ.30',
                  en: 'Press <b>Play step by step</b> to follow it from the invoice to the input VAT on your PP30.' },
-      ledCap: { th: 'ตัวเลขชุดเดียวกันตั้งแต่ใบแจ้งหนี้จนถึง ภ.พ.30', en: 'One set of figures, from the invoice to the PP30' },
-      colWhere: { th: 'อยู่ที่', en: 'Where' },
-      colBase: { th: 'ฐาน', en: 'Base' },
-      colVat: { th: 'ภาษี 7%', en: 'VAT 7%' },
-      r1: { th: 'ตอนรับใบแจ้งหนี้<span class="p36-rdate">{dInv}</span>', en: 'At invoice<span class="p36-rdate">{dInv}</span>' },
-      r2: { th: 'ตอนจ่ายเงิน<span class="p36-rdate">{dPay}</span>', en: 'At payment<span class="p36-rdate">{dPay}</span>' },
-      r3: { th: 'ตอนได้ใบเสร็จ<span class="p36-rdate">{dRcpt}</span>', en: 'At the receipt<span class="p36-rdate">{dRcpt}</span>' },
-      w1: { th: 'ภาษีซื้อยังไม่ถึงกำหนด', en: 'Input VAT not yet due' },
-      w2: { th: 'แบบ ภ.พ.36 ช่อง 1 และ 2', en: 'Return, boxes 1 and 2' },
-      w3: { th: 'ภ.พ.30 ช่อง 6 และ 7', en: 'PP30, boxes 6 and 7' },
-      pend2: { th: 'ยังไม่จ่าย', en: 'Not paid yet' },
-      pend3: { th: 'รอใบเสร็จ', en: 'Awaiting the receipt' },
+      ledCap: { th: 'บันทึกบัญชีตั้งแต่ใบแจ้งหนี้จนถึงใบเสร็จ', en: 'Journal entries, from the invoice to the receipt' },
+      colAcc: { th: 'บัญชี', en: 'Account' },
+      colDr: { th: 'เดบิต', en: 'Debit' },
+      colCr: { th: 'เครดิต', en: 'Credit' },
+      g1: { th: 'รับใบแจ้งหนี้', en: 'Invoice' },
+      g2: { th: 'จ่ายเงิน', en: 'Payment' },
+      g3: { th: 'นำส่งภาษี', en: 'Remittance' },
+      g4: { th: 'ได้ใบเสร็จ', en: 'Receipt' },
+      p2: { th: 'ยังไม่จ่าย', en: 'Not paid yet' },
+      p3: { th: 'ยังไม่นำส่ง', en: 'Not remitted yet' },
+      p4: { th: 'รอใบเสร็จ', en: 'Awaiting the receipt' },
+      n4: { th: 'บันทึกเป็นภาษีซื้อ', en: 'Recorded as input VAT' },
+      // ชื่อบัญชีห่อ .nb ทีละคำ: คอลัมน์ชื่อบนจอ 320 แคบ เบราว์เซอร์จะตัดได้แค่ระหว่างคำ ไม่ตัดกลางคำแบบ เจ้าหนี้การ|ค้า
+      aFee: { th: '<span class="nb">ค่าที่ปรึกษา</span>', en: 'Consulting fees' },
+      aAP: { th: '<span class="nb">เจ้าหนี้</span><span class="nb">การค้า</span>', en: 'Accounts payable' },
+      aBank: { th: '<span class="nb">เงินฝาก</span><span class="nb">ธนาคาร</span>', en: 'Bank' },
+      aUndue: { th: '<span class="nb">ภาษีซื้อ</span><span class="nb">ยังไม่ถึงกำหนด</span>', en: 'Input VAT not yet due' },
+      aPP36: { th: '<span class="nb">ภ.พ.36</span> <span class="nb">ค้างจ่าย</span>', en: 'PP36 VAT payable' },
+      aVat: { th: 'ภาษีซื้อ', en: 'Input VAT' },
       payTo: { th: '<span class="nb">Overseas Supplier Pte. Ltd.</span><span class="p36-rdate">{dPay}</span>',
                en: '<span class="nb">Overseas Supplier Pte. Ltd.</span><span class="p36-rdate">{dPay}</span>' },
       rdH: { th: 'กรมสรรพากร', en: 'Revenue Department' },
@@ -6327,22 +6337,23 @@
       rdRcpt: { th: 'ได้ใบเสร็จ {dRcpt}', en: 'Receipt {dRcpt}' }
     };
 
-    // hi = ช่องในตารางยอดที่ขั้นนั้นพูดถึง (r1 ตอนรับใบแจ้งหนี้ · r2 ตอนจ่ายเงิน · r3 ตอนได้ใบเสร็จ · b ฐาน · v ภาษี)
+    // hi = บรรทัดในสมุดรายวัน (JNL ข้างล่าง) ที่คำบรรยายของขั้นนั้นพูดถึง · ขั้นแบบ ภ.พ.36 ไม่มีรายการบัญชีของตัวเอง
+    // จึงชี้ยอดที่แบบดึงไป: จ่ายจริง 150,000 (ช่อง 1) กับ ภ.พ.36 ค้างจ่าย 10,500 (ช่อง 2)
     const STEPS = [
-      { ic: 'invoice', doc: 'inv', ms: 7000, hi: ['r1b', 'r1v'], nm: { th: 'ใบแจ้งหนี้', en: 'Invoice' },
+      { ic: 'invoice', doc: 'inv', ms: 7000, hi: ['g1a', 'g1c'], nm: { th: 'ใบแจ้งหนี้', en: 'Invoice' },
         tx: { th: 'ลง Purchase Invoice ค่าที่ปรึกษา {baht} ได้ภาษีซื้อ {vat} บาทที่ยังไม่ถึงกำหนด ระบบจึงพักไว้ก่อน PP36 Report ยังไม่ขึ้นบรรทัดนี้ เพราะยังไม่ได้จ่ายเงิน',
               en: 'Post the Purchase Invoice for {baht}: {vat} baht of input VAT is not yet due, so the system holds it back. The PP36 Report shows no line for it yet, because nothing has been paid.' } },
-      { ic: 'pay', doc: 'pay', ms: 8000, hi: ['r2b', 'r2v'], nm: { th: 'จ่ายเงิน', en: 'Payment' },
+      { ic: 'pay', doc: 'pay', ms: 8000, hi: ['g2a', 'g2b'], nm: { th: 'จ่ายเงิน', en: 'Payment' },
         tx: { th: 'จ่าย {baht} วันที่ {dPay} ยอดนี้คือฐาน ภ.พ.36 คิดภาษีได้ {vat} บาท เพราะจ่ายเป็นเงินบาท ภาษีจึงเท่ากับที่ลงไว้ตอนรับใบแจ้งหนี้ PP36 Report ขึ้นบรรทัดนี้ในสถานะ To Remit',
               en: 'Pay {baht} on {dPay}: that amount is the PP36 base, with {vat} baht of VAT. Paid in baht, so the VAT matches what was booked with the invoice. The PP36 Report now lists the line as To Remit.' } },
-      { ic: 'form', doc: 'form', ms: 9000, hi: ['r2b', 'r2v'], nm: { th: 'แบบ ภ.พ.36', en: 'VAT Remittance Return' },
+      { ic: 'form', doc: 'form', ms: 9000, hi: ['g2b', 'g1d'], nm: { th: 'แบบ ภ.พ.36', en: 'VAT Remittance Return' },
         tx: { th: 'เลือก PP36 Payment Type จากนั้นกด Download PP36 ระบบก็เติมแบบของกรมสรรพากรให้ ช่อง 1 จำนวนเงินที่จ่าย {base} ช่อง 2 ภาษีที่ต้องนำส่ง {vat} พร้อมจำนวนเงินตัวอักษร',
               en: 'Select the PP36 Payment Type, then press Download PP36. The system fills in the VAT Remittance Return: box 1, amount paid, {base}; box 2, VAT to remit, {vat}, with the amount in words.' } },
-      { ic: 'rd', doc: 'rd', ms: 8000, hi: ['r2v'], nm: { th: 'นำส่งภาษี', en: 'Remit to RD' },
+      { ic: 'rd', doc: 'rd', ms: 8000, hi: ['g3a', 'g3b'], nm: { th: 'นำส่งภาษี', en: 'Remit to RD' },
         tx: { th: 'ยื่นแบบและจ่ายภาษี {vat} บาทให้กรมสรรพากรภายในวันที่ {dDue} ซึ่งครบ 7 วันนับจากสิ้นเดือนที่จ่ายเงิน แล้วบันทึกการจ่ายใน Payment Journal ตามปกติ ตัวอย่างนี้ได้ใบเสร็จวันที่ {dRcpt}',
               en: 'File the return and pay {vat} baht to the Revenue Department by {dDue}, 7 days after the end of the month you paid, then record the payment in the Payment Journal as usual. In this example the receipt is dated {dRcpt}.' } },
       // Remit PP36 กับภาษีซื้อใน ภ.พ.30 คือขั้นเดียวกัน: Post แล้วภาษีซื้อเข้า ภ.พ.30 เอง ไม่มีงานให้ทำเพิ่ม (ผู้ใช้สั่งรวม 4 ต.ค. 2026)
-      { ic: 'remit', doc: 'jnl', ms: 9000, hi: ['r1v', 'r3v'], nm: { th: 'บันทึกใบเสร็จ', en: 'Record receipt' },
+      { ic: 'remit', doc: 'jnl', ms: 9000, hi: ['g4a', 'g4b'], nm: { th: 'บันทึกใบเสร็จ', en: 'Record receipt' },
         tx: { th: 'ได้ใบเสร็จแล้ว กด Remit PP36 แล้วกรอกเลขที่ใบเสร็จ ระบบเตรียมรายการลงภาษีซื้อ {vat} ใน General Journal ให้ ตรวจแล้ว Post สถานะก็เปลี่ยนเป็น Remitted และภาษีซื้อเข้า ภ.พ.30 เดือน{mPP30} ตามวันที่ในใบเสร็จ',
               en: 'With the receipt in hand, press Remit PP36 and enter its number. The system prepares the General Journal line that books {vat} of input VAT. Check it and post: the status turns to Remitted and the input VAT goes into your PP30 for {mPP30}, by the receipt date.' } }
     ];
@@ -6365,7 +6376,7 @@
         + '<span class="p36-paper-from"><span class="p36-paper-co">Overseas Supplier Pte. Ltd.</span>Singapore</span>'
         + '<span class="p36-paper-ln"><span>Consulting services</span><span>THB ' + FIG.base + '</span></span>'
         + '<span class="p36-paper-ft"><span>Date 15 Sep 2026</span><span>Total THB ' + FIG.base + '</span></span></div>';
-      // ใบจ่ายเงินกับใบกรมสรรพากรเป็นของที่คุณทำเอง: พื้นขาว ตัวเลขขนาดบรรทัด ไม่แย่งจุดเด่น (แถวตอนได้ใบเสร็จในแถบตัวเลข)
+      // ใบจ่ายเงินกับใบกรมสรรพากรเป็นของที่คุณทำเอง: พื้นขาว ตัวเลขขนาดบรรทัด ไม่แย่งจุดเด่น (ช่วงตอนได้ใบเสร็จในสมุดรายวัน)
       if (d === 'pay') return '<div class="p36-jnl p36-jnl-plain"><span class="p36-doc-h">Payment Journal</span>'
         + '<span class="p36-jnl-ln"><span>' + tx(T.payTo) + '</span><span class="p36-num">' + FIG.base + '</span></span>'
         + '<span class="p36-chips"><span class="p36-chip">PP36 Report · To Remit</span></span></div>';
@@ -6387,16 +6398,26 @@
         + '<span class="p36-chips"><span class="p36-chip p36-chip-ok">Status · Remitted</span></span></div>';
     }
 
-    // แถบตัวเลข: ฐานกับภาษีชุดเดียวกันไหลจากใบแจ้งหนี้ → แบบ ภ.พ.36 → ภ.พ.30 · แถวไหนยังไม่ถึงขั้นของมันโชว์ป้ายรอ (from = ขั้นที่แถวขึ้น)
-    // แถวตอนได้ใบเสร็จคือภาษีซื้อที่ระบบลงให้ (สีม่วง) — จุดเด่นของ section อยู่ที่ขั้นบันทึกใบเสร็จ
+    // สมุดรายวันของตัวอย่าง ตามการลงบัญชีจริงของ JHCore (ผู้ใช้สั่งให้แสดงเป็น Debit/Credit 4 ต.ค. 2026)
+    // ผังบัญชีตามคู่มือ (JHCoreTests JHVATSettleScenarios): Purch. VAT Unreal. = ภาษีซื้อยังไม่ถึงกำหนด · Reverse Chrg. VAT Unreal. = ภ.พ.36 ค้างจ่าย
+    // · Purchase VAT = ภาษีซื้อ · จ่ายผู้ให้บริการแล้ว VAT ยังไม่ขยับ (JH VAT Subscribers กันไว้จนได้ใบเสร็จ)
+    // · ค้างจ่ายล้างตอนจ่ายกรมสรรพากรใน Payment Journal · Remit PP36 = Dr ภาษีซื้อ / Cr ภาษีซื้อยังไม่ถึงกำหนด (JH Gen. Journal Line)
+    // from = ขั้นที่ช่วงนั้นเกิด (ก่อนถึงโชว์ป้ายรอ) · บรรทัด = [คีย์ให้ STEPS.hi ชี้, บัญชี, ยอด, 1 = เครดิต]
+    const JNL = [
+      { k: 'g1', from: -1, date: 'dInv', lines: [['g1a', 'aFee', 'base', 0], ['g1b', 'aAP', 'base', 1], ['g1c', 'aUndue', 'vat', 0], ['g1d', 'aPP36', 'vat', 1]] },
+      { k: 'g2', from: 1, date: 'dPay', pend: 'p2', lines: [['g2a', 'aAP', 'base', 0], ['g2b', 'aBank', 'base', 1]] },
+      { k: 'g3', from: 3, date: 'dRcpt', pend: 'p3', lines: [['g3a', 'aPP36', 'vat', 0], ['g3b', 'aBank', 'vat', 1]] },
+      { k: 'g4', from: 4, date: 'dRcpt', pend: 'p4', note: 'n4', lines: [['g4a', 'aVat', 'vat', 0], ['g4b', 'aUndue', 'vat', 1]] }
+    ];
+    // ช่วงตอนได้ใบเสร็จคือภาษีซื้อที่ระบบเตรียมให้ (สีม่วง) — จุดเด่นของ section อยู่ที่ขั้นบันทึกใบเสร็จ
     function ledgerHTML() {
-      const row = (k, from, label, where, pend) => '<div class="p36-row p36-' + k + '" data-from="' + from + '"><span class="p36-rl">' + tx(label) + '</span>'
-        + '<span class="p36-rc">' + tx(where) + '</span><span class="p36-rb" data-k="' + k + 'b">' + FIG.base + '</span>'
-        + '<span class="p36-rv" data-k="' + k + 'v">' + FIG.vat + '</span>'
-        + (pend ? '<span class="p36-rp">' + tx(pend) + '</span>' : '') + '</div>';
+      const line = ([k, acc, amt, cr]) => '<div class="p36-ln' + (cr ? ' p36-ln-cr' : '') + '" data-k="' + k + '"><span class="p36-acc">' + tx(T[acc]) + '</span>'
+        + '<span class="p36-dr">' + (cr ? '' : FIG[amt]) + '</span><span class="p36-cr">' + (cr ? FIG[amt] : '') + '</span></div>';
       return '<span class="p36-led-cap">' + tx(T.ledCap) + '</span>'
-        + '<div class="p36-row p36-lhead"><span class="p36-rl"></span><span class="p36-rc">' + tx(T.colWhere) + '</span><span class="p36-rb">' + tx(T.colBase) + '</span><span class="p36-rv">' + tx(T.colVat) + '</span></div>'
-        + row('r1', -1, T.r1, T.w1) + row('r2', 1, T.r2, T.w2, T.pend2) + row('r3', 4, T.r3, T.w3, T.pend3);
+        + '<div class="p36-ln p36-jhead"><span>' + tx(T.colAcc) + '</span><span>' + tx(T.colDr) + '</span><span>' + tx(T.colCr) + '</span></div>'
+        + JNL.map((g) => '<div class="p36-grp p36-' + g.k + '" data-from="' + g.from + '"><div class="p36-gh"><span class="p36-gl">' + tx(T[g.k]) + '</span>'
+          + '<span class="p36-gd">' + L(FIG[g.date]) + '</span>' + (g.pend ? '<span class="p36-gp">' + tx(T[g.pend]) + '</span>' : '') + '</div>'
+          + g.lines.map(line).join('') + (g.note ? '<span class="p36-gn">(' + tx(T[g.note]) + ')</span>' : '') + '</div>').join('');
     }
 
     let cur = -1, timer = 0;
@@ -6412,7 +6433,7 @@
       const scene = byId('p36-scene');
       scene.querySelectorAll('.p36-doc').forEach((el) => el.classList.toggle('on', el.dataset.doc === (s ? s.doc : 'inv')));
       const led = scene.querySelector('.p36-led');
-      led.querySelectorAll('.p36-row[data-from]').forEach((r) => r.classList.toggle('pend', i < +r.dataset.from));
+      led.querySelectorAll('.p36-grp[data-from]').forEach((g) => g.classList.toggle('pend', i < +g.dataset.from));
       led.querySelectorAll('[data-k]').forEach((el) => el.classList.toggle('hi', !!s && s.hi.includes(el.dataset.k)));
     }
     function syncPlay() {
