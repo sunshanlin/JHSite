@@ -1971,6 +1971,9 @@
      - ใช้แค่ --glow-* 4 สี ไม่มีเบอร์กันดี (สีของปุ่ม) หรือสีของ Microsoft ในแสง
      - แต่ละจุดจัดไม่ซ้ำกัน รวมไว้ที่นี่ที่เดียว และต้องอยู่หลังกฎ #pricing เก่าที่มี radial เบอร์กันดี */
   section.alt, #pricing { background: var(--ui-page); }
+  /* #faq ต่อจาก #cost-trace (.alt) ที่เป็น --ui-page เหมือน body → พื้นขาวให้แยกจาก Highlight Feature
+     ขาวไม่ใช่ ivory: .sub #57746F บน ivory ได้ 4.40 ไม่ผ่าน AA · บนขาว 5.08 */
+  #faq { background: #fff; }
   /* showcase: ทราย → มิ้นต์ → น้ำทะเล สูงขึ้นมาหลังแผงฟีเจอร์ครึ่งล่าง (แบบ Industries ของ MS) */
   #features {
     background: var(--glow-fade),
