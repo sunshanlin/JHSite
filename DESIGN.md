@@ -309,7 +309,7 @@ The rule that makes it evidence rather than decoration: **every figure is identi
 This is the single most product-specific element on the site. It is the localization package, shown working. Do not replace it with stock imagery or a generic dashboard screenshot.
 
 ### Success by Design Stepper (signature)
-**Removed from `#services` on 1 Oct 2026** (commit `3bddfce`). Its CSS (`.step`, `.steps-progress`, `stepPulse`) is still in `index.html` but matches nothing on the page. The description below is kept for if it returns.
+**Removed from `#services` on 1 Oct 2026** (commit `3bddfce`), and its CSS (`.step`, `.steps-progress`, `.step-icon`, `stepPulse`, print rules included) was deleted on 6 Oct 2026. To bring it back, take the markup from `3bddfce^` and the CSS from `e3d3da7`. `--ms-green`, `--ms-teal`, `--ms-cyan` and `--ms-gold` stay in `:root` but nothing uses them now; `--ms-blue` still feeds the calendar's `--cal-blue`. The description below is kept for if it returns.
 
 Five `.step` items in `#services`, each carrying a `--phase` token from the teal ramp and a `--stage-text` token from the Microsoft hues. A `.steps-progress` bar fills across them in flat Jade on a Pale Edge track; the current step pulses on a 1.8s `stepPulse`. The English stage name is set as a Label (12px/600/0.08em) in its Microsoft hue and the Thai line under it is the Title — the Thai reader's sentence carries the hierarchy, not the borrowed English word.
 

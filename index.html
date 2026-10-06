@@ -518,17 +518,6 @@
   .tip b { white-space: nowrap; }
   .tip p { color: var(--muted); }
 
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); counter-reset: step; }
-  .step {
-    border: 1px solid var(--line); 
-    counter-increment: step;
-  }
-  .step::before {
-    font-family: "Anuphan", sans-serif;
-    font-size: .95rem; font-weight: 700; 
-  }
-  .step h3 span { display: block; }
-
   /* Business Central overview — one desktop viewport with animated, readable tiles */
   /* อยู่ใน #services (แถว 5 เฟส Success by Design ตัดออกแล้ว 1 ต.ค. 2026 — เหลือบล็อกนี้บล็อกเดียว)
      ห่อ div ไว้อีกชั้นโดยตั้งใจ: .wrap ที่เป็นลูกตรงของ #services จะโดน #services > .wrap > .sub (จัดกลาง + nowrap) */
@@ -869,46 +858,6 @@
   h2::after { display: none; }
   .sub { max-width: 780px; margin-bottom: 44px; line-height: 1.8; text-wrap: pretty; }
 
-  .steps {
-    --step-progress: 0;
-    position: relative; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px;
-  }
-  .steps-progress {
-    position: absolute; z-index: 0; top: 41px; left: 7%; right: 7%; height: 3px;
-    overflow: hidden; border-radius: 999px; pointer-events: none;
-  }
-  .steps-progress span {
-    display: block; width: 100%; height: 100%; transform: scaleX(var(--step-progress)); transform-origin: 0 50%;
-    border-radius: inherit; 
-    transition: transform .48s cubic-bezier(.2,.75,.2,1);
-  }
-  .step {
-    position: relative; z-index: 1; padding: 24px 20px 22px; overflow: hidden;
-    border-color: rgba(190,227,223,.72); 
-    transition: transform .38s cubic-bezier(.2,.75,.2,1), border-color .3s ease, box-shadow .3s ease, opacity .3s ease;
-  }
-  .step:hover { transform: translateY(-4px); border-color: rgba(53,175,158,.4); box-shadow: var(--shadow); }
-  .step::before {
-    width: 36px; height: 36px; align-items: center; justify-content: center;
-    margin-bottom: 20px; border-radius: 50%; 
-    background: var(--phase, var(--accent));
-    box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--phase, var(--accent)) 65%, transparent);
-  }
-  .step::after {
-    content: ""; position: absolute; top: 0; right: 0; width: 72px; height: 72px;
-    border-radius: 0 0 0 100%; 
-  }
-  .step.is-current {
-    opacity: 1; transform: translateY(-7px); border-color: rgba(53,175,158,.52);
-    box-shadow: 0 24px 48px -30px rgba(31,122,135,.5);
-  }
-  .step.is-current::before { animation: stepPulse 1.8s ease-in-out infinite; }
-  .step.is-complete { opacity: 1; }
-  @keyframes stepPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(53,175,158,.2); }
-    50% { box-shadow: 0 0 0 8px rgba(53,175,158,0); }
-  }
-
   .tip {
     align-items: center; margin-bottom: 48px; padding: 18px 22px;
     border: 1px solid rgba(53,175,158,.2); 
@@ -1168,10 +1117,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     .hero-doc { opacity: 1; transform: none; transition: none; animation: none; }
-    .step.is-current::before,
     .feature-panel.is-active .feature-panel-copy,
     .feature-panel.is-active .feature-photo { animation: none; }
-    .feature-panel, .feature-tab, .steps-progress span, .step, .credential-card { transition: none; }
+    .feature-panel, .feature-tab, .credential-card { transition: none; }
   }
 
   @media (max-width: 1100px) {
@@ -1190,8 +1138,6 @@
     .topnav .links a:last-child { margin: 5px 0 2px; padding: 10px 14px; text-align: center; }
     .topnav .social { margin-left: auto; }
     .menu-toggle { display: inline-flex; }
-    .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .steps-progress { display: none; }
   }
 
   @media (max-width: 900px) {
@@ -1214,7 +1160,6 @@
   @media (max-width: 720px) {
     .wrap { padding-left: 20px; padding-right: 20px; }
     section { padding: 76px 0; }
-    .steps { grid-template-columns: 1fr; }
     .tip { align-items: flex-start; flex-direction: column; gap: 6px; }
     .feature-tab-scroll { margin-left: -4px; margin-right: -4px; }
     .feature-tablist { min-width: max-content; }
@@ -1357,8 +1302,6 @@
   .article-more:hover { color: #8E2C46; }
   .article-more:focus-visible { outline: 2px solid var(--brand-burgundy); outline-offset: 2px; }
 
-  .steps .step { min-height: 0; }
-
   /* บรรทัดเดียวเฉพาะภาษาไทย — ประโยค EN ยาวกว่าจอ (1,300px) เลยล้นขวาจนตัวหนังสือโดนตัดและหน้าเลื่อนข้างได้ (พบ ก.ย. 2026)
      EN ตัดบรรทัดปกติในกรอบ 720px · ฝั่งไทยยาว ~920px เกินกรอบ 720px ที่ใช้จัดกลาง ข้อความจึงเริ่มที่ขอบซ้ายของกรอบ
      แล้วเยื้องขวาจากหัวข้อ ~100px (และล้นจอที่ 1101px) — ปลด max-width ให้บรรทัดจัดกลางในความกว้างเต็มของ .wrap */
@@ -1368,7 +1311,7 @@
   }
 
 
-  /* Success by Design: compact vertical timeline on mobile */
+  /* #services: compact section header on mobile */
   @media (max-width: 720px) {
     #services { padding-top: 58px; padding-bottom: 64px; }
     #services > .wrap > .section-kicker { margin-bottom: 4px; }
@@ -1376,22 +1319,6 @@
     #services > .wrap > .sub {
       margin-bottom: 24px; font-size: .92rem; line-height: 1.65;
     }
-    #services .steps { gap: 8px; }
-    #services .steps .step {
-      padding: 13px 14px 13px 54px; overflow: visible;
-      border-top-width: 1px; border-left: 3px solid var(--phase, var(--line)); border-radius: 13px;
-    }
-    #services .steps .step::before {
-      position: absolute; left: 13px; top: 50%; width: 28px; height: 28px; margin: 0;
-      font-size: .74rem; 
-    }
-    #services .steps .step h3 {
-      line-height: 1.35; 
-    }
-    #services .steps .step h3 span {
-      display: inline; margin: 0 0 0 6px; 
-    }
-    #services .step:hover, #services .step.is-current { transform: none; }
   }
 
 
@@ -1420,25 +1347,6 @@
 
 
   #services > .wrap > h2 { color: var(--brand-teal); }
-  #services .step[data-step="1"] { --stage-text: var(--ms-blue); }
-  #services .step[data-step="2"] { --stage-text: var(--ms-green); }
-  #services .step[data-step="3"] { --stage-text: var(--ms-teal); }
-  #services .step[data-step="4"] { --stage-text: var(--ms-cyan); }
-  #services .step[data-step="5"] { --stage-text: var(--ms-gold); }
-
-  .step[data-step="1"] { --phase: var(--brand-deep); } .step[data-step="2"] { --phase: var(--brand-teal); }
-  .step[data-step="3"] { --phase: var(--brand-ocean); } .step[data-step="4"] { --phase: var(--brand-jade); }
-  .step[data-step="5"] { --phase: var(--brand-mint); }
-  .step[data-step="1"]::before, .step[data-step="2"]::before,
-  .step[data-step="3"]::before, .step[data-step="4"]::before { color: #fff; }
-  .step[data-step="5"]::before { color: var(--brand-deep); }
-  .steps .step::after {
-    background: linear-gradient(145deg, color-mix(in srgb, var(--phase) 13%, transparent), transparent);
-  }
-  .step.is-current {
-    border-color: color-mix(in srgb, var(--phase) 52%, #fff);
-    box-shadow: 0 24px 48px -30px color-mix(in srgb, var(--phase) 55%, transparent);
-  }
 
   /* Localization UI: เชื่อม Ivory/Pink เข้ากับ Deep Teal controls */
   .tip {
@@ -1497,8 +1405,6 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 38px 80px -58px rgba(0,0,0,.72);
   }
   header p.lead, #about .sub, #about .education-list span { color: #DCE8E5; }
-  .step:hover { border-color: rgba(65,119,113,.42); }
-  .step.is-current { border-color: color-mix(in srgb, var(--phase) 52%, #fff); }
   .feature-chips li {
     border-color: rgba(1,74,65,.2); color: var(--brand-teal); background: rgba(65,119,113,.08);
   }
@@ -1643,36 +1549,6 @@
   /* กระดาษแคบ (มือถือ 360px และคอลัมน์ hero 901–1000px): ตรายางตัวเต็มชนป้าย "จำนวนเงินรวมทั้งสิ้น" — ย่อเฉพาะตรา */
   @media (max-width: 380px), (min-width: 901px) and (max-width: 1000px) {
     .hs-stamp { padding: calc(4 * var(--u)) calc(7 * var(--u)) calc(3 * var(--u)); font-size: calc(8 * var(--u)); }
-  }
-
-  .steps .step::before { content: none; display: none; }
-  .step-icon {
-    width: 36px; height: 36px; display: grid; place-items: center; 
-    color: var(--stage-text, var(--phase, var(--accent)));
-    border: 1px solid color-mix(in srgb, var(--stage-text, var(--phase, var(--accent))) 32%, #fff);
-    background: color-mix(in srgb, var(--stage-text, var(--phase, var(--accent))) 10%, #fff);
-    box-shadow: 0 12px 24px -18px color-mix(in srgb, var(--stage-text, var(--phase, var(--accent))) 58%, transparent);
-  }
-  .step-icon svg {
-    width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.75;
-    stroke-linecap: round; stroke-linejoin: round;
-  }
-  .steps .step > .step-icon {
-    position: relative; z-index: 2; margin-bottom: 18px;
-  }
-  .steps .step-heading h3 {
-    margin: 0; 
-    line-height: 1.15; 
-  }
-  .steps .step-heading h3 span { line-height: 1.45; overflow-wrap: anywhere; }
-  .step.is-current > .step-icon { animation: stepPulse 1.8s ease-in-out infinite; }
-
-  @media (max-width: 720px) {
-    #services .steps .step > .step-icon {
-      position: absolute; left: 13px; top: 50%; margin: 0; transform: translateY(-50%);
-    }
-    #services .step-icon { width: 28px; height: 28px; border-radius: 8px; }
-    #services .step-icon svg { width: 17px; height: 17px; stroke-width: 1.9; }
   }
 
   /* Transparent pricing — a clear starting point without overpromising scope. */
@@ -1993,7 +1869,7 @@
       var(--ui-page);
   }
 
-  h1, h2, h3, .feature-panel h3, .step-heading {
+  h1, h2, h3, .feature-panel h3 {
     font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
   }
   h2 { font-size: clamp(1.9rem, 2.6vw, 2.5rem); line-height: 1.2; }
@@ -2377,7 +2253,6 @@
      ก่อนแก้หน้ามี radius 17 ค่า (6/9/10/11/12/14/16/17/18/20/22/24/28px …)
      ระบบมีแค่ 3px = ปุ่ม, 8px = การ์ด (50% avatar / 999px badge ยังใช้ได้) */
   .tip,
-  .step,
   .feature-tablist,
   .feature-panel,
   .feature-panel-icon,
@@ -2407,7 +2282,7 @@
   /* เงาฟุ้งนอก hero — DESIGN.md สงวนเงานุ่มกว้างไว้ให้ฉากเอกสารใน hero เท่านั้น */
   .bento-shot a { box-shadow: var(--ui-shadow); }
 
-  .skip-link, .menu-toggle, .step-icon, .heading-icon,
+  .skip-link, .menu-toggle, .heading-icon,
   .linkedin-link, .credential-sample,
   .cookie-bar button { border-radius: var(--ui-radius-btn); }
 
@@ -2438,33 +2313,6 @@
   .feature-panel-icon { background: var(--brand-teal); background-image: none; box-shadow: none; }
   /* เดิมสูง 16px — ต่ำกว่าเป้าหมายกดขั้นต่ำ 24px (WCAG 2.5.8) · ก.ย. 2026 ขยายเป็น 44 ตาม 2.5.5 */
   .feature-link { display: inline-flex; align-items: center; min-height: 44px; }
-
-  /* ---- 3. #services: ลำดับความสำคัญของ 5 เฟสกลับด้าน ----
-     เดิมชื่อเฟสอังกฤษ 1.06rem เด่นกว่าคำอธิบายไทย .85rem ทั้งที่คนอ่านเป็นคนไทย
-     สลับให้ อังกฤษ = label ตัวเล็ก (คงสี --ms-* ตาม Quotation Rule), ไทย = หัวข้อจริง */
-  #services .steps .step h3 {
-    font-family: "Anuphan", sans-serif;
-    font-size: 20px; font-weight: 600; letter-spacing: .03em; color: var(--stage-text);
-  }
-  #services .steps .step h3 span {
-    margin-top: 9px; color: var(--ui-ink);
-    font-size: 1.1rem; font-weight: 500; letter-spacing: -.03em;
-  }
-  /* เฟสที่ยังไม่ถึงถูกหรี่ opacity .82 — อ่านเป็น "ใช้ไม่ได้" ทั้งที่ทั้ง 5 เฟสคือของที่ขาย */
-  .step, .step.is-current, .step.is-complete { opacity: 1; }
-  /* .steps .step (บรรทัด 1485) specificity สูงกว่า .step เปล่า — ต้องเขียนคู่กันถึงจะทับพื้นไล่สีได้ */
-  .steps .step { background: #fff; background-image: none; }
-  .step {
-    box-shadow: var(--ui-shadow);
-    border-color: var(--ui-line);
-    /* border-top สีเฟสที่ตั้งไว้บรรทัด 434 ถูก border-color บรรทัด 944 ทับตายไป — คืนกลับมา */
-    border-top: 3px solid var(--phase);
-  }
-  .step::after { display: none; }                       /* มุมขวาบนไล่สี — decorative ล้วน */
-  .step:hover { transform: none; box-shadow: var(--ui-shadow); border-color: var(--ui-line); border-top-color: var(--phase); }
-  .step.is-current { transform: none; box-shadow: var(--ui-shadow); border-color: var(--brand-jade); border-top-color: var(--phase); }
-  .steps-progress { background: var(--brand-pale); }
-  .steps-progress span { background: var(--brand-jade); background-image: none; box-shadow: none; }
 
   /* ---- 4. #reports: ปุ่มเลื่อนทับเนื้อสไลด์ และสไลด์ถูกตัดขอบซ้าย–ขวา ---- */
   .slider { padding: 0 40px 14px; scroll-padding-inline: 40px; }
@@ -3277,7 +3125,7 @@
      การ์ด .ct ใบเดียวคุมทั้งเดโมแบบ .vs · ปุ่มในส่วนนี้เป็น teal ทั้งหมด ไม่แย่งความดังจาก CTA เบอร์กันดีของหน้า
      หน้าต่าง .ct-bc = ภาพของ BC web client แบบ .hs-screen ใน hero: เทาของ Fluent อยู่ในหน้าต่างนี้เท่านั้น
      น้ำเงินของ BC (--bc-blue) ก็เช่นกัน · --ct-thread ทองแดงใช้นอกหน้าต่างเท่านั้น (ดูข้างล่าง)
-     ชื่อขึ้นต้น ct- ทุกตัว — .step/.steps ของหน้ามีอยู่แล้วเกือบ 80 กฎ ห้ามใช้ชื่อซ้ำ */
+     ชื่อขึ้นต้น ct- ทุกตัว กันชนกับ class ของส่วนอื่นในไฟล์เดียวกัน */
   /* --ct-thread = ขั้นปัจจุบันของ stepper กับเส้นข้างคำบรรยาย ไม่ใช่พื้น ไม่ใช่ปุ่ม — ในหน้าต่าง BC ทางเดินของต้นทุนกับกล่องที่เลือกใช้ --bc-blue แบบแอปจริง
      6.17 บนขาว · 5.78 บน --ui-page (ทองแดงเดิมของ showcase #B9561A ได้แค่ 4.47) */
   #cost-trace { --ct-thread: #9C4A16; }
@@ -3594,11 +3442,6 @@
     .section-kicker { margin-bottom: 4px; }
     .sub { font-size: 13px; margin-bottom: 10px; }
 
-    /* ขั้นตอน Success by Design: 5 ขั้นเรียงแถวเดียว */
-    .steps { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
-    .steps-progress, .step-icon { display: none; }
-    .step { min-height: 0 !important; padding: 8px !important; break-inside: avoid; }
-    .step h3 { font-size: 12px !important; }
     #business-central { padding-top: 12px !important; }
     #business-central h3 { font-size: 16px; }
 
