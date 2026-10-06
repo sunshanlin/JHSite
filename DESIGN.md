@@ -309,10 +309,12 @@ The rule that makes it evidence rather than decoration: **every figure is identi
 This is the single most product-specific element on the site. It is the localization package, shown working. Do not replace it with stock imagery or a generic dashboard screenshot.
 
 ### Success by Design Stepper (signature)
+**Removed from `#services` on 1 Oct 2026** (commit `3bddfce`). Its CSS (`.step`, `.steps-progress`, `stepPulse`) is still in `index.html` but matches nothing on the page. The description below is kept for if it returns.
+
 Five `.step` items in `#services`, each carrying a `--phase` token from the teal ramp and a `--stage-text` token from the Microsoft hues. A `.steps-progress` bar fills across them in flat Jade on a Pale Edge track; the current step pulses on a 1.8s `stepPulse`. The English stage name is set as a Label (12px/600/0.08em) in its Microsoft hue and the Thai line under it is the Title — the Thai reader's sentence carries the hierarchy, not the borrowed English word.
 
 ### Motion
-One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used nine times for entrances and reveals. State changes are faster and linear-ish (125–250ms `ease`). Six `prefers-reduced-motion: reduce` blocks disable animation and transitions — this coverage is a system commitment, not an optional extra. (The hero's float loops — `docCardFloat`, `docMiniFloat`, `stampPop` — were retired with the old document scene in September 2026.)
+One easing curve carries the system: `cubic-bezier(.2,.75,.2,1)`, used for every entrance and reveal, the scroll `.reveal` included (opacity alongside it stays plain `ease`). State changes are faster and linear-ish (125–250ms `ease`). Every animation has a `prefers-reduced-motion: reduce` rule that disables it, placed after the rule it overrides so it wins the cascade — this coverage is a system commitment, not an optional extra. No CSS animation loops any more: the last one, the stepper's `stepPulse`, left with the stepper. What still repeats is driven by script, and each script checks `prefers-reduced-motion` itself: the looping clips show their poster and a ▶ button instead of autoplaying, and the `#reports` slider starts paused, as it already does on phones. (The hero's float loops — `docCardFloat`, `docMiniFloat`, `stampPop` — were retired with the old document scene in September 2026.)
 
 ## Do's and Don'ts
 
