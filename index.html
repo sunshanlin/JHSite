@@ -4868,11 +4868,10 @@
   }
 
   // คลิปจากหน้าจอจริง (.clip): เล่นเองเมื่อเห็นเกินครึ่ง หยุดเมื่อเห็นไม่ถึงครึ่ง
-  // เล่นเองแม้ตั้ง reduced-motion (ผู้ใช้สั่ง ต.ค. 2026) · ไม่เล่นเองเมื่อ Save-Data / เบราว์เซอร์ห้าม (iPhone โหมดประหยัดแบต) — ค้างที่ภาพปก รอกด ▶
+  // เล่นเองเสมอ ไม่ดู reduced-motion / Save-Data (ผู้ใช้สั่ง ต.ค. 2026) · เบราว์เซอร์ห้าม (iPhone โหมดประหยัดแบต) หรือกดหยุดเอง = ค้างที่ภาพปก รอกด ▶
   // ปุ่มสร้างที่นี่ (ไม่มี JS = เห็นภาพปกเฉย ๆ ไม่มีปุ่มที่กดไม่ได้) · ป้ายปุ่มตามภาษาของหน้า — applyLang เรียกผ่าน window.syncClips
   const clips = [...document.querySelectorAll('.clip')];
   if (clips.length) {
-    const still = navigator.connection?.saveData === true;
     const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;   // Safari ก่อน 16.4 มีแต่แบบ webkit
     // ชื่อคลิปในป้ายปุ่ม = หัวข้อ section (เปลี่ยนภาษาตามหน้าอยู่แล้ว) — ปุ่มหลายชุดจะได้ไม่ชื่อซ้ำกัน
     const nameOf = (clip) => clip.closest('section').querySelector('h2').textContent.trim();
@@ -4915,7 +4914,6 @@
       const v = clip.querySelector('video');
       clip.insertAdjacentHTML('beforeend', '<div class="clip-ctrl"><button class="clip-btn clip-play" type="button"></button>'
         + '<button class="clip-btn clip-full" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></div>');
-      if (still) clip.dataset.auto = 'off';
       v.addEventListener('play', () => syncClip(clip));
       v.addEventListener('pause', () => syncClip(clip));
       v.addEventListener('playing', () => trackSeoEvent('clip_play', { clip: clip.dataset.clip }), { once: true });
