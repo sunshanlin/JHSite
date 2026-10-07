@@ -2327,6 +2327,12 @@
   /* object-fit: cover + object-position: top ตัดภาพทั้งซ้ายและขวา — ชื่อบริษัท/เมนูซ้ายหายไป
      ยึดมุมซ้ายบนแทน ส่วนที่อ่านแล้วได้ความหมายจะอยู่ครบเสมอ */
   .slider img { object-position: left top; }
+  /* สไลด์เป็นหน้าเอกสารเต็มแผ่น ปุ่มลอยทับแล้วกลืนกับตัวหนังสือ — ย้ายปุ่มไปอยู่ในช่องว่างนอกกรอบสไลด์ (จอเล็กซ่อนปุ่มอยู่แล้ว) */
+  @media (min-width: 721px) {
+    .slider-wrap { padding-inline: 60px; }
+    .snav.prev { left: 0; }
+    .snav.next { right: 0; }
+  }
 
   /* ---- 5. #faq: หัวข้อชิดซ้าย แต่บล็อกคำถามจัดกึ่งกลาง → ขอบสองข้างไม่ตรงกัน ---- */
   .faq-list { max-width: none; margin: 0; }
@@ -4862,11 +4868,11 @@
   }
 
   // คลิปจากหน้าจอจริง (.clip): เล่นเองเมื่อเห็นเกินครึ่ง หยุดเมื่อเห็นไม่ถึงครึ่ง
-  // ไม่เล่นเองเมื่อ reduced-motion / Save-Data / เบราว์เซอร์ห้าม (iPhone โหมดประหยัดแบต) — ค้างที่ภาพปก รอกด ▶
+  // เล่นเองแม้ตั้ง reduced-motion (ผู้ใช้สั่ง ต.ค. 2026) · ไม่เล่นเองเมื่อ Save-Data / เบราว์เซอร์ห้าม (iPhone โหมดประหยัดแบต) — ค้างที่ภาพปก รอกด ▶
   // ปุ่มสร้างที่นี่ (ไม่มี JS = เห็นภาพปกเฉย ๆ ไม่มีปุ่มที่กดไม่ได้) · ป้ายปุ่มตามภาษาของหน้า — applyLang เรียกผ่าน window.syncClips
   const clips = [...document.querySelectorAll('.clip')];
   if (clips.length) {
-    const still = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true;
+    const still = navigator.connection?.saveData === true;
     const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;   // Safari ก่อน 16.4 มีแต่แบบ webkit
     // ชื่อคลิปในป้ายปุ่ม = หัวข้อ section (เปลี่ยนภาษาตามหน้าอยู่แล้ว) — ปุ่มหลายชุดจะได้ไม่ชื่อซ้ำกัน
     const nameOf = (clip) => clip.closest('section').querySelector('h2').textContent.trim();
