@@ -1464,13 +1464,16 @@
   .film-close:hover { background: var(--brand-teal); }
   .film-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
-  /* จอแคบ: ก้อนสีชุดเดียวกับจอกว้างย้ายมารองใต้ภาพคลิป ผูกกับ .hero-doc จึงไม่ขึ้นไปทับหัวเรื่อง
-     .hero-doc อยู่กึ่งกลาง แถบจึงเต็มจอด้วย 50% - 50vw · ขอบล่างชนขอบ header พอดี (= padding ล่างของ header) */
+  /* จอแคบ: คลิปขึ้นก่อนหัวเรื่อง แบบหน้า BC ของ Microsoft บนมือถือ (ผู้ใช้เลือก 13 ต.ค. 2026)
+     ย้ายด้วย order ไม่ย้าย DOM — จอกว้างยังเป็นคอลัมน์ขวา และ h1 ยังมาก่อนคลิปสำหรับ screen reader/Tab
+     ก้อนสีชุดเดียวกับจอกว้างย้ายมารองครึ่งล่างของภาพคลิป ผูกกับ .hero-doc จึงไม่ขึ้นไปทับหัวเรื่อง
+     .hero-doc อยู่กึ่งกลาง แถบจึงเต็มจอด้วย 50% - 50vw · ยื่นใต้กรอบ 32px แล้วเว้นพื้นงาช้าง 40px ก่อน badge (gap 72px) */
   @media (max-width: 900px) {
-    .hero-doc { width: 100%; max-width: 560px; margin-inline: auto; padding: 16px 0 10px; }
+    .hero-grid { gap: 72px; }
+    .hero-doc { order: -1; width: 100%; max-width: 560px; margin-inline: auto; padding: 0; animation-delay: 0s; }
     .hero-doc::before, .hero-doc::after { content: ""; position: absolute; z-index: -1; top: 45%; pointer-events: none; }
     .hero-doc::before {
-      bottom: -72px; left: calc(50% - 50vw); width: 100vw;
+      bottom: -32px; left: calc(50% - 50vw); width: 100vw;
       background:
         linear-gradient(#A63A56 0 0) 0      100% / 34% 30% no-repeat,
         linear-gradient(#E08CA2 0 0) 38.64% 100% / 12% 30% no-repeat,
@@ -1480,7 +1483,6 @@
     .hero-doc::after { right: calc(50% - 50vw); width: min(40vw, 220px); height: 96px; background: var(--brand-deep); border-bottom-left-radius: 96px; }
   }
   @media (max-width: 600px) {
-    .hero-doc::before { bottom: -56px; }
     .hero-film { padding: 8px; border-radius: 18px; }
     .hero-film img { border-radius: 11px; }
     .hero-play { width: 52px; height: 52px; border-radius: 13px; }
@@ -2277,9 +2279,10 @@
 
   /* ---- 7. hero บนมือถือ ----
      ชั้น --ui-* นี้ตั้ง header{min-height:640px;padding:120px 0 72px} ไว้แบบไม่มี media query
-     จึงไปทับกฎมือถือที่บรรทัด 1316/1359 (มาก่อนในไฟล์) — เกิดที่ว่างเปล่า ~230px เหนือหัวเรื่อง */
-  @media (max-width: 900px) { header { min-height: 0; padding: 56px 0 72px; } }
-  @media (max-width: 560px) { header { padding: 40px 0 56px; } }
+     จึงไปทับกฎมือถือที่บรรทัด 1316/1359 (มาก่อนในไฟล์) — เกิดที่ว่างเปล่า ~230px เหนือหัวเรื่อง
+     ขอบบนบางกว่าขอบล่าง เพราะจอแคบคลิปขึ้นก่อนหัวเรื่อง (ดู "คลิปขึ้นก่อนหัวเรื่อง" ใน hero clip) */
+  @media (max-width: 900px) { header { min-height: 0; padding: 32px 0 72px; } }
+  @media (max-width: 560px) { header { padding: 24px 0 56px; } }
 
   /* ---- 10. footer ----
      เดิมมีแค่โลโก้กับบรรทัด copyright — ไม่มีทางไปต่อ ไม่มีช่องทางติดต่อ และไม่มีทาง
