@@ -1,6 +1,6 @@
 ---
 name: jhthai
-description: "กฎภาษาไทยของ JWIC สำหรับข้อความที่ลงไฟล์และมีคนอื่นอ่าน — 7 frame ของโครงประโยคไทย + กฎบ้านเรา (register ของแต่ละงาน, ทับศัพท์ที่ห้ามแปล, คำที่ห้ามใช้ในเอกสารที่ลูกค้าเซ็น). TRIGGER ONLY when Thai prose is written, edited, translated or reviewed INTO A FILE that ships — เนื้อหน้าเว็บใน index.html, บทความใน articles/, สคริปต์เด็คและบท TTS ใน _presales/, เอกสาร Word, เมลเสนอราคา. Invoke it BEFORE the first Thai sentence of such a file. NEVER TRIGGER for Thai in the conversation itself — answers, explanations, plans, summaries, status reports, questions to the user — however long they run, and never for commit messages, PR or issue text, code comments, UI strings, button labels, alt text, file names, or single words and phrases."
+description: "กฎภาษาไทยของ JWIC สำหรับข้อความที่ลงไฟล์และมีคนอื่นอ่าน — 7 frame ของโครงประโยคไทย + กฎบ้านเรา (register ของแต่ละงาน, ทับศัพท์ที่ห้ามแปล, คำที่ห้ามใช้ในเอกสารที่ลูกค้าเซ็น). TRIGGER ONLY when Thai prose is written, edited, translated or reviewed INTO A FILE that ships — เนื้อหน้าเว็บใน index.html, บทความใน articles/, เอกสาร Word, เมลเสนอราคา. Invoke it BEFORE the first Thai sentence of such a file. NEVER TRIGGER for Thai in the conversation itself — answers, explanations, plans, summaries, status reports, questions to the user — however long they run, and never for commit messages, PR or issue text, code comments, UI strings, button labels, alt text, file names, or single words and phrases."
 ---
 
 # jhthai — ภาษาไทยของบ้านเรา
@@ -20,8 +20,6 @@ description: "กฎภาษาไทยของ JWIC สำหรับข้
 |---|---|---|
 | `index.html` เนื้อหน้าเว็บ | Marketing — SaaS-SME | คนอ่านคือเจ้าของกิจการ/ฝ่ายบัญชี SMB ที่กำลังตัดสินใจซื้อ ERP |
 | `articles/*.html` | Explainer | ตั้งปัญหาก่อน ไม่มีคำลงท้าย ไม่มี ครับ/ค่ะ ในเนื้อ |
-| `_presales/` สคริปต์พูดประกอบเด็ค | Explainer แบบพูด | เขียนให้คนพูดออกเสียงได้ ประโยคสั้นกว่าเนื้อบทความ |
-| `_presales/voice/` บทให้ TTS อ่าน | **ดูข้อยกเว้น TTS ข้างล่าง** | กฎ TTS ชนะ kien-thai ทุกข้อที่ขัดกัน |
 | `poster.html` `banner.html` | Marketing — หัวข้อสั้น | เป็นป้าย ไม่ใช่ prose skill แทบไม่ต้องยุ่ง |
 
 ## คำเรียกผู้อ่าน — ยึด `คุณ` ทั้งหน้า
@@ -49,15 +47,6 @@ Business Central · Microsoft Dynamics 365 · ชื่อ page/field/report/mod
 
 ห้ามเปลี่ยนเป็น withholding tax / tax invoice ในข้อความไทย และห้ามสลับ ภ.ง.ด. เป็น PND
 (ฝั่ง EN ของ I18N ใช้คำอังกฤษได้ตามเดิม)
-
-## ข้อยกเว้น TTS — `_presales/voice/README.md` ชนะ
-
-บทที่เอาไปให้เครื่องอ่านออกเสียง กฎกลับด้านกับถัง 3:
-
-- ศัพท์อังกฤษต้องเขียนเป็นคำอ่านไทย `Purchase and Payables` → `เพอร์เชส แอนด์ เพเยเบิลส์`
-  (ไม่งั้นอ่านออกมาเป็น "ปล่อย และ ปล่อย") คำอ่าน ERP ทั้งชุดอยู่ `_presales/voice/tts-test-script-thai.txt`
-- ห้ามไล่รายการคั่นด้วยจุลภาคล้วน ต้องมีคำไทยคั่นทุกตัว ไม่งั้นโมเดลเข้าลูปพ่นคำซ้ำ
-  ข้อนี้ไปทางเดียวกับ f6 (ก็) กับ f2 (ขึ้นต้นด้วยเงื่อนไข) อยู่แล้ว ใช้ทั้งคู่ได้เลย
 
 ## แก้ข้อความไทยบนหน้าเว็บ = ต้องแตะคู่แปลด้วย
 

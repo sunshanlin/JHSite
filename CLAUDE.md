@@ -24,8 +24,8 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | JS ที่ใช้ร่วมหลายหน้า (ตอนนี้มีแค่ `js/article.js` = แถบคุกกี้ + GA ของบทความ) | `js/` |
 | ภาพแชร์ og:image ของบทความ 1200×630 | `img/og/` — สร้างด้วย `node .claude/skills/run-promote-site/og.mjs` |
 | หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html` `flyer-overview.html` `flyer-implementation.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
-| งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | `_presales/` — ไม่ขึ้นเว็บ อ่าน `_presales/README.md` |
-| แผนงาน/บันทึกประเมินหน้าเว็บ (ไม่ขึ้นเว็บ) | `_plans/` — ขึ้นต้นด้วย `_` เหตุผลเดียวกับ `_presales/` ล่าสุด `_plans/2026-09-improvement-plan.md` |
+| งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | **ไม่อยู่ใน repo นี้แล้ว** — ย้ายไป `D:\BC\Project\JHCore\docs\Presentation` (9 ต.ค. 2026) |
+| แผนงาน/บันทึกประเมินหน้าเว็บ (ไม่ขึ้นเว็บ) | `_plans/` — ขึ้นต้นด้วย `_` เพราะ Jekyll ไม่เสิร์ฟ (ดูหัวข้อ `.nojekyll` ข้างล่าง) ล่าสุด `_plans/2026-09-improvement-plan.md` |
 | ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
 
 ## เครดิตรูปถ่าย
@@ -50,11 +50,11 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 
 `img/credentials/dbd-registered.png` = สำเนาป้าย DBD ใช้ในสไลด์ และเป็น**ตัวสำรองตอนเซิร์ฟเวอร์ DBD ล่ม** (`onerror` บน `<img>` ของ `.dbd`) — **หน้าเว็บต้อง hotlink จาก `dbdregistered.dbd.go.th` เป็นตัวหลักต่อไป** ห้ามสลับให้สำเนาเป็นตัวหลัก ลิงก์ของป้ายต้องชี้หน้าตรวจสอบของ DBD เสมอ
 
-## _presales/ — งาน presales ที่รวมมาจาก repo JHPresales (4 ก.ย. 2026)
+## โฟลเดอร์ขึ้นต้นด้วย `_` — ไม่ขึ้นเว็บ
 
-โฟลเดอร์ขึ้นต้นด้วย `_` **เพราะ Jekyll ของ GitHub Pages ไม่เสิร์ฟโฟลเดอร์แบบนี้** — สคริปต์/JSON เนื้อหาสไลด์จึงไม่กลายเป็น URL สาธารณะ
-⚠ **ห้ามเพิ่มไฟล์ `.nojekyll` ที่ root** มันปิด Jekyll ทั้งตัว แล้ว `_presales/` ทั้งโฟลเดอร์จะโหลดได้จาก jwicconsulting.com ทันที
-`decks/` (ตัว .pptx 292MB) กับไฟล์เสียง gitignore ไว้ที่ `_presales/.gitignore` เหมือนเดิม · path ต้นแบบอยู่ที่ `_presales/build/deck-core.json` คีย์ `master`/`out`
+**Jekyll ของ GitHub Pages ไม่เสิร์ฟโฟลเดอร์ที่ขึ้นต้นด้วย `_`** — ของใน `_plans/` จึงไม่กลายเป็น URL สาธารณะ
+⚠ **ห้ามเพิ่มไฟล์ `.nojekyll` ที่ root** มันปิด Jekyll ทั้งตัว แล้วโฟลเดอร์ `_` ทั้งหมดจะโหลดได้จาก jwicconsulting.com ทันที
+งาน presales (`_presales/` เดิม) ย้ายไป `D:\BC\Project\JHCore\docs\Presentation` แล้ว (9 ต.ค. 2026) — สคริปต์ที่นั่นยังอ่านรูปจาก `img/` ของ repo นี้ (`imgRoot` ใน `build/deck-core.json`) ย้ายหรือเปลี่ยนชื่อรูปใน `img/` ต้องตามไปแก้ด้วย
 
 ## worker/ — ตัวกลางเรียก VAT Service ของกรมสรรพากร (Cloudflare Worker `jwic-vat`)
 
