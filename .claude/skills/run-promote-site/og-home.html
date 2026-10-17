@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- ภาพ og:image ของหน้าแรก 1200×630 → img/og/home.png — ไม่ขึ้นเว็บ (.claude/ ไม่ถูกเสิร์ฟ)
+     ใช้: node .claude/skills/run-promote-site/driver.mjs img/og/home.png --url .claude/skills/run-promote-site/og-home.html --width 1200 --height 630 --dpr 1
+     โครงเดียวกับ og-template.html ของบทความ (บล็อกสีขอบขวา + โลโก้ JW) -->
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>OG home</title>
+<style>
+  @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: block; src: url(/css/fonts/anuphan-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
+  @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: block; src: url(/css/fonts/anuphan-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Anuphan'; font-style: normal; font-weight: 500 700; font-display: block; src: url(/css/fonts/anuphan-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: #012F2A; color: #fff; font-family: "Anuphan", sans-serif; }
+  .blk { position: absolute; }
+  .b1 { left: 896px; top: 0; width: 304px; height: 630px; background: #014A41; border-bottom-left-radius: 170px; }
+  .b2 { left: 896px; top: 0; width: 150px; height: 300px; background: #417771; }
+  .b3 { left: 1046px; top: 0; width: 154px; height: 140px; background: #739B97; }
+  .b4 { left: 896px; top: 470px; width: 104px; height: 160px; background: #A63A56; }
+  .b5 { left: 1000px; top: 470px; width: 46px; height: 160px; background: #E08CA2; }
+  .brand { position: absolute; left: 72px; top: 60px; display: flex; align-items: center; gap: 16px; }
+  .brand svg { width: 58px; height: 58px; border-radius: 9px; }
+  .brand span { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .kicker { position: absolute; left: 72px; top: 168px; color: #EFA9BB; font-size: 24px; font-weight: 600; letter-spacing: .02em; }
+  h1 { position: absolute; left: 72px; top: 206px; width: 780px; margin: 0; font-weight: 700; font-size: 66px; line-height: 1.22; letter-spacing: -.02em; }
+  h1 .nb { white-space: nowrap; }
+  /* โลโก้ Business Central ตัวเล็กต่อท้ายชื่อ สูงราวตัวพิมพ์ใหญ่ กึ่งกลางตรงกับความสูงตัวอักษร */
+  h1 .bc { width: .78em; height: .78em; margin-left: .2em; vertical-align: -.06em; }
+  .chips { position: absolute; left: 72px; top: 396px; width: 790px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .chips span { padding: 8px 18px; border-radius: 999px; background: rgba(166,192,189,.14); border: 1px solid rgba(166,192,189,.35);
+                font-size: 22px; font-weight: 500; color: #D9E4E3; }
+  .foot { position: absolute; left: 72px; bottom: 54px; font-size: 24px; font-weight: 500; color: #A6C0BD; }
+  .foot b { color: #fff; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="blk b1"></div><div class="blk b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+  <div class="brand">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs><g clip-path="url(#lg)"><rect width="64" height="64" fill="#1c4a3c"/><polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/><polygon points="64,0 42,0 64,22" fill="#c07f8b"/><text x="32" y="43" text-anchor="middle" font-family="'Anuphan', sans-serif" font-size="27" font-weight="700" letter-spacing="-1.5" fill="#f5f1ea">JW</text></g></svg>
+    <span>JWIC Consulting</span>
+  </div>
+  <div class="kicker">Microsoft Dynamics 365</div>
+  <!-- สีโลโก้ตามไอคอนทางการ (img/tech/business-central.svg) ไม่ใช่ชุดที่ปรับโทนใน hero ของ index.html -->
+  <h1><span class="nb">Business Central<svg class="bc" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Business Central">
+      <path d="M34 33.9998C41.732 41.7317 54.268 41.7318 62 33.9999C69.732 26.2679 69.732 13.7318 62 5.99986C54.268 -1.73209 41.732 -1.73214 34 5.99979C26.268 13.7318 26.2681 26.2678 34 33.9998Z" fill="url(#bc0)"/>
+      <path d="M62 62.0002C54.268 54.2683 41.732 54.2682 34 62.0001C26.268 69.7321 26.268 82.2682 34 90.0001C41.732 97.7321 54.268 97.7321 62 90.0002C69.732 82.2682 69.7319 69.7322 62 62.0002Z" fill="url(#bc3)"/>
+      <path d="M34 62C41.732 69.732 54.268 69.732 62 62C69.732 54.268 69.732 41.732 62 34C54.268 26.268 41.732 26.268 34 34C26.268 41.732 26.268 54.268 34 62Z" fill="url(#bc6)"/>
+      <path d="M6.00002 34L34 5.99998C26.2681 13.732 26.268 26.2681 34 34.0001C41.732 41.7321 41.732 54.2681 34 62.0001C26.268 69.732 13.732 69.732 6.00004 62C-1.73195 54.268 -1.73198 41.732 6.00002 34Z" fill="url(#bc9)"/>
+      <path d="M90 62L62 90C69.7319 82.268 69.732 69.7319 62 61.9999C54.268 54.2679 54.268 41.7319 62 33.9999C69.732 26.268 82.268 26.268 90 34C97.732 41.732 97.732 54.268 90 62Z" fill="url(#bc11)"/>
+      <defs>
+        <linearGradient id="bc0" x1="30" y1="9.5" x2="67" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#0C74A1"/><stop offset=".468" stop-color="#1384B1"/><stop offset="1" stop-color="#16BBDA"/></linearGradient>
+        <linearGradient id="bc3" x1="68.5" y1="79.5" x2="29" y2="71" gradientUnits="userSpaceOnUse"><stop stop-color="#06517B"/><stop offset=".508" stop-color="#09638E"/><stop offset="1" stop-color="#0C74A1"/></linearGradient>
+        <linearGradient id="bc6" x1="44.5" y1="29.5" x2="45" y2="68.5" gradientUnits="userSpaceOnUse"><stop stop-color="#43E5CA"/><stop offset=".371" stop-color="#26CFE8"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
+        <linearGradient id="bc9" x1="14.5" y1="26" x2="43.5" y2="55" gradientUnits="userSpaceOnUse"><stop stop-color="#B6F6C7"/><stop offset=".277" stop-color="#43E5CA"/><stop offset="1" stop-color="#26CFE8"/></linearGradient>
+        <linearGradient id="bc11" x1="63" y1="30" x2="92.5" y2="59.5" gradientUnits="userSpaceOnUse"><stop stop-color="#9FF2E4"/><stop offset=".266" stop-color="#2BDABE"/><stop offset=".620" stop-color="#16BBDA"/><stop offset="1" stop-color="#1384B1"/></linearGradient>
+      </defs>
+    </svg></span><br>สำหรับธุรกิจไทย</h1>
+  <div class="chips">
+    <span>วางระบบครบวงจร</span><span>ภาษีซื้อ-ขาย · ภ.พ.30</span><span>หัก ณ ที่จ่าย · 50 ทวิ</span><span>RD Prep</span><span>ย้ายข้อมูล + อบรม</span>
+  </div>
+  <div class="foot"><b>jwicconsulting.com</b> · โทร/LINE 084-148-7480</div>
+<script>document.fonts.ready.then(() => { document.body.dataset.ready = '1'; });</script>
+</body>
+</html>

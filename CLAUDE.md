@@ -23,6 +23,7 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 | ฟอนต์ (woff2 self-host + `OFL.txt`) | `css/fonts/` — ชุดเดียวกับที่ Google Fonts เสิร์ฟ ประกาศ `@font-face` ต้น `<style>` ของ index.html และต้น `css/article.css` |
 | JS ที่ใช้ร่วมหลายหน้า (ตอนนี้มีแค่ `js/article.js` = แถบคุกกี้ + GA ของบทความ) | `js/` |
 | ภาพแชร์ og:image ของบทความ 1200×630 | `img/og/` — สร้างด้วย `node .claude/skills/run-promote-site/og.mjs` |
+| ภาพแชร์ og:image ของหน้าแรก 1200×630 | `img/og/home.png` — เรนเดอร์จาก `.claude/skills/run-promote-site/og-home.html` (คำสั่งอยู่หัวไฟล์) og.mjs ไม่แตะไฟล์นี้ · `img/jh-poster.png` เลิกเป็นภาพแชร์แล้ว แต่ห้ามลบ (ลิงก์เก่ายังชี้อยู่) |
 | หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html` `flyer-overview.html` `flyer-implementation.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
 | งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | **ไม่อยู่ใน repo นี้แล้ว** — ย้ายไป `D:\BC\Project\JHCore\docs\Presentation` (9 ต.ค. 2026) |
 | แผนงาน/บันทึกประเมินหน้าเว็บ (ไม่ขึ้นเว็บ) | `_plans/` — ขึ้นต้นด้วย `_` เพราะ Jekyll ไม่เสิร์ฟ (ดูหัวข้อ `.nojekyll` ข้างล่าง) ล่าสุด `_plans/2026-09-improvement-plan.md` |
