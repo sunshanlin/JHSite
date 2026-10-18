@@ -1,0 +1,8 @@
+node_modules/
+out/
+# BC captures and unwatermarked document rasters — never host (same rule as img/originals/)
+capture/
+public/docs/
+public/screens/
+public/hero-src.mp4
+tools/pp30bake/node_modules/

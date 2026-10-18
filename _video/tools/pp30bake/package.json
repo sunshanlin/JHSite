@@ -1,0 +1,15 @@
+{
+  "name": "pp30bake",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bake Adobe-like appearance streams into a filled RD AcroForm (PP30) and render page 1 to PNG",
+  "type": "module",
+  "scripts": {
+    "render": "node bake-render.mjs"
+  },
+  "dependencies": {
+    "@pdf-lib/fontkit": "1.1.1",
+    "mupdf": "1.28.1",
+    "pdf-lib": "1.17.1"
+  }
+}

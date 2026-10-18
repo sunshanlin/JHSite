@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64">
+
+<defs><clipPath id="x0"><rect width="64" height="64" rx="4"></rect></clipPath></defs>
+<g clip-path="url(#x0)">
+<rect width="64" height="64" fill="#1c4a3c"></rect>
+<polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"></polygon>
+<polygon points="64,0 42,0 64,22" fill="#c07f8b"></polygon>
+<text x="32" y="43" text-anchor="middle" font-size="27" font-weight="800" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+</g></svg>

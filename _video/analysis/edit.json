@@ -1,0 +1,105 @@
+{
+  "source": "public/audio/bgm-stay-with-me.mp3 (Mixkit 'Stay With Me', 127.50 s)",
+  "grid": {
+    "bpm": 114.996,
+    "t0": 0.2163,
+    "T": 0.52176,
+    "residMaxMs": 18,
+    "residMeanMs": 6.5,
+    "chosen": "1x (115 BPM); 0.5x matched 97.5 % vs 97.1 % but halves every cut point — kept 1x, verify kick parity after render"
+  },
+  "splice": {
+    "cutA_src": 62.8275,
+    "joinB_src": 96.2201,
+    "barA": 30,
+    "barB": 46,
+    "score": 0.9914,
+    "crossfade_s": 0.26,
+    "why": "owner 2026-10-13: ~90 s so viewers can follow each step; best chroma/MFCC match among 14–20-bar gaps (16 bars)",
+    "previous": [
+      {
+        "joinB_src": 100.394,
+        "barB": 48,
+        "cutA_src": 44.044,
+        "length_s": 70
+      },
+      {
+        "joinB_src": 110.83,
+        "barB": 53,
+        "cutA_src": 44.044,
+        "length_s": 60
+      }
+    ]
+  },
+  "video": {
+    "videoBeat_n_at": "t0 + n*T (continuous across the splice)",
+    "spliceVideoBeat": 120,
+    "finalHitSrcBeat": 232,
+    "finalHitVideoBeat": 168,
+    "totalFrames": 2790
+  },
+  "slams": [
+    {
+      "beat": 16,
+      "why": "groove entry"
+    },
+    {
+      "beat": 168,
+      "why": "song's final hit = logo bloom"
+    }
+  ],
+
+  "demo": {
+    "label": "in-game product demo (second clip, 60-90 s): real BC screens operated, Thai captions, light music bed, no voice-over. Separate edit; the keys above stay the trailer's record.",
+    "source": "analysis/source-stay-with-me.mp3 (Mixkit 'Stay With Me', 127.504 s) — same track as the trailer. It is the only music bed on disk; nothing was downloaded.",
+    "out": "public/audio/bgm-demo.wav (48 kHz PCM_16 stereo, 77.4147 s, 14.9 MB)",
+    "command": "python tools/render_edit.py analysis/source-stay-with-me.mp3 public/audio/bgm-demo.wav 62.8275 112.9165 0.26",
+    "grid": {
+      "bpm": 114.996,
+      "t0": 0.2163,
+      "T": 0.52176,
+      "note": "identical to the trailer's grid — same source, bar-aligned splice, so video beat n is at t0 + n*T continuously. A new timeline module can reuse SOURCE_BEAT0 / BEAT_INT verbatim."
+    },
+    "splice": {
+      "cutA_src": 62.8275,
+      "joinB_src": 112.9165,
+      "barA": 30,
+      "barB": 54,
+      "gap_bars": 24,
+      "beatShift": 96,
+      "score": 0.9907,
+      "crossfade_s": 0.26,
+      "why": "tools/splice2.py over gaps 21-27 (the only gaps that land 70-85 s: length = 127.504 - gap*2.08702). 0.9907 is the best score at >=75 s and matches the trailer's own accepted 0.9914; same cut point as the trailer (bar 30), shorter tail, so the two clips share the song's opening and its ending.",
+      "rejected": [
+        { "barA": 18, "barB": 45, "gap_bars": 27, "score": 0.9976, "length_s": 71.15, "why": "highest score, but 71 s leaves no reading room; the whole gap-27 family (0.9976/0.9972/0.9971) is the project's old 70 s edit" },
+        { "barA": 22, "barB": 45, "gap_bars": 23, "score": 0.9885, "length_s": 79.5, "why": "longer, lower score" },
+        { "barA": 35, "barB": 57, "gap_bars": 22, "score": 0.9876, "length_s": 81.59, "why": "longest in range, lowest score, and it drops the song's opening bars (the only low-density passage)" }
+      ]
+    },
+    "video": {
+      "videoBeat_n_at": "t0 + n*T (continuous across the splice)",
+      "srcBeat_of_videoBeat": "n for n <= 120, n + 96 for n >= 120",
+      "spliceVideoBeat": 120,
+      "spliceFrame": 1886,
+      "finalHitSrcBeat": 232,
+      "finalHitVideoBeat": 136,
+      "finalHitFrame": 2137,
+      "lastBarDownbeat": { "videoBeat": 144, "frame": 2262, "note": "beats 140/144 are ring-out, kick ~0" },
+      "totalFrames": 2285,
+      "why_total": "beat 145.5; the 100 ms RMS falls below -70 dB at 76.167 s = f2285, and the bed runs to 77.415 s (2322 f) so the file never hard-cuts (same rule as the trailer's 2790 vs 94.11 s)"
+    },
+    "level": {
+      "bgm": 0.24,
+      "bgm_dB": -12.4,
+      "why": "the trailer's 0.4 (-8 dB) over Thai captions that must be read would compete; -12.4 dB puts the bed ~4.4 dB under the trailer. The track has no quiet section to hide in (per-bar RMS is -15 dB +/-1.5 across all 59 bars), so level, not section, is what makes it read differently.",
+      "fade_in_frames": 24,
+      "fade_out": "none — the song's own ring-out"
+    },
+    "notes": [
+      "Peak of the written wav is 0.00 dBFS with 2135 samples at full scale — inherited from the source mp3 (decoded peak +1.06 dBFS at 74.5 s); the trailer's bgm-edit.wav has the same 2702. The crossfade window itself peaks -0.14 dBFS. At bgm 0.24 it is 12 dB down and inaudible; do not re-gain the source.",
+      "Drum drops (quiet bars, good for a caption to be read against): video beats 32 (f509, kick 0.30) and 64 (f1010, kick 0.84). Loud bars to avoid putting a caption's first frame on: video beats 12 (f196), 96-100 (f1510-1573), 136 (f2137, the final hit).",
+      "Output audio offset 42.3 ms (AAC priming) is unchanged — same encoder. Re-verify with tools/backtest2.py after the first render.",
+      "venv for the tools (librosa 1.0.0 / soundfile / scipy) was built outside the project; nothing was installed into _video."
+    ]
+  }
+}
