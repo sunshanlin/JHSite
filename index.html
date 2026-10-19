@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://api.jwicconsulting.com https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -5189,14 +5189,14 @@
     /* ── โหมดค้นจริง ────────────────────────────────────────────────
        ปลายทางคือ worker/vat-proxy.js ที่ยิง SOAP ไปกรมสรรพากรแทนเบราว์เซอร์
        ค่าว่าง = ปิดโหมดนี้ เหลือแค่สี่สถานการณ์ตัวอย่างเหมือนเดิม */
-    /* /api/vat = route ของ worker บนโดเมนเดียวกัน (worker/wrangler.toml) — same-origin
-       ไม่ต้องพึ่ง CORS · ตอนรันในเครื่องไม่มี route นี้ จึงชี้ไป workers.dev ให้เลย
-       ส่วน ?vat= ไว้ทดสอบ worker ที่กำลังแก้อยู่ด้วย wrangler dev
-       CSP เปิด jwic-vat.jwic.workers.dev ไว้ให้ตอนรันในเครื่องใช้ได้ด้วย — บนเว็บจริง
-       ไม่ได้เรียกโฮสต์นั้นเลย เพราะ /api/vat เป็น same-origin */
+    /* api.jwicconsulting.com = custom domain ของ worker (worker/wrangler.toml) — ข้ามโดเมน
+       จึงพึ่ง CORS ที่ worker แปะให้ · ห้ามย้ายกลับไปเป็น route /api/vat บน www เพราะต้องเปิด
+       เมฆส้มให้ www แล้ว GitHub Pages ต่อ cert ไม่ได้ (เคยหมดอายุจนเว็บขึ้น 526 เมื่อ 18 ต.ค. 2026)
+       ตอนรันในเครื่องชี้ไป workers.dev · ?vat= ไว้ทดสอบ worker ที่กำลังแก้อยู่ด้วย wrangler dev
+       CSP connect-src ต้องมีทั้งสองโฮสต์ */
     const VAT_API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
       ? (new URLSearchParams(location.search).get('vat') || 'https://jwic-vat.jwic.workers.dev')
-      : '/api/vat';
+      : 'https://api.jwicconsulting.com/vat';
     const dig = (v) => String(v || '').replace(/\D/g, '');
     const vatDate = (iso) => {
       const t = Date.parse(iso);
