@@ -15,8 +15,9 @@ type = "ratelimit"
 namespace_id = "1001"
 simple = { limit = 20, period = 60 }
 
-# ผูกกับโดเมนตัวเอง — หน้าเว็บเรียก /api/vat แบบ same-origin ไม่ต้องพึ่ง CORS
-# ต้องเปิด proxy (เมฆส้ม) ให้ record www ก่อน route ถึงจะทำงาน
+# custom domain ของ worker — deploy แล้ว Cloudflare สร้าง DNS record + cert ของ api ให้เอง
+# เดิมผูก route www.jwicconsulting.com/api/vat* ซึ่งต้องเปิดเมฆส้มให้ www
+# แล้ว GitHub Pages ต่อ cert ของ www ไม่ได้ (หมดอายุ 18 ต.ค. 2026 เว็บขึ้น 526) — www ต้องเป็นเมฆเทาเสมอ
 [[routes]]
-pattern = "www.jwicconsulting.com/api/vat*"
-zone_name = "jwicconsulting.com"
+pattern = "api.jwicconsulting.com"
+custom_domain = true
