@@ -59,9 +59,9 @@ Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Lo
 
 ## worker/ — ตัวกลางเรียก VAT Service ของกรมสรรพากร (Cloudflare Worker `jwic-vat`)
 
-- `#vat-service` บนเว็บจริงเรียก `/api/vat` แบบ same-origin · รันในเครื่อง (localhost) เรียก `https://jwic-vat.jwic.workers.dev` แทน (หรือ `?vat=<url>`)
-- route `www.jwicconsulting.com/api/vat*` ใน `worker/wrangler.toml` ทำงานเฉพาะตอน record `www` เปิด proxy (เมฆส้ม) ใน Cloudflare — ถ้า DNS ชี้ตรงไป GitHub Pages `/api/vat` จะได้หน้า 404 HTML แทน JSON แล้วช่องค้นเลขจริงในเดโมขึ้นข้อความผิดพลาด (ปุ่มตัวอย่าง 4 ปุ่มยังใช้ได้ เพราะใช้ข้อมูลในหน้า)
-- ยังไม่ได้ยืนยันบน production (23 ก.ย. 2026 — เครื่องที่ทำงานรอบนั้นออกเน็ตไป jwicconsulting.com / workers.dev ไม่ได้) · วิธีเช็ก: `curl -s "https://www.jwicconsulting.com/api/vat?tin=0105558000123"` ได้ JSON ขึ้นต้น `{"ok"` = route ทำงาน · ได้ HTML = route ไม่ทำงาน
+- `#vat-service` บนเว็บจริงเรียก `https://api.jwicconsulting.com/vat` (custom domain ของ worker ใน `worker/wrangler.toml`) แบบข้ามโดเมน พึ่ง CORS ใน `vat-proxy.js` · รันในเครื่อง (localhost) เรียก `https://jwic-vat.jwic.workers.dev` แทน (หรือ `?vat=<url>`) · CSP `connect-src` ต้องมีทั้งสองโฮสต์
+- ⚠ **record `www` และ apex ใน Cloudflare ต้องเป็นเมฆเทา (DNS only) เสมอ** — GitHub Pages ต่อ cert Let's Encrypt ได้ก็ต่อเมื่อ DNS ชี้ตรงมาที่มัน · เดิมผูก route `www.jwicconsulting.com/api/vat*` ซึ่งต้องเปิดเมฆส้มให้ www ผลคือ cert ต่ออายุไม่ได้ (สถานะ `bad_authz`) หมดอายุ 18 ต.ค. 2026 แล้ว Cloudflare Full (strict) ตอบ 526 ทั้งเว็บ จึงย้ายมาใช้ subdomain `api` แทน
+- เช็กสถานะ cert ฝั่ง GitHub: `gh api repos/sunshanlin/JHSite/pages --jq .https_certificate` · เช็ก worker: `curl -s "https://api.jwicconsulting.com/vat?tin=0105558000123"` ได้ JSON ขึ้นต้น `{"ok"` = ทำงาน
 - จำกัด 20 ครั้ง/นาที/IP (`[[unsafe.bindings]]` ชื่อ RL) · บัญชีกรมสรรพากรใส่ผ่าน `npx wrangler secret put RD_USER` ห้ามเขียนลงโค้ด — ทุกไฟล์ใน `worker/` เป็น URL สาธารณะ
 
 ## CI
