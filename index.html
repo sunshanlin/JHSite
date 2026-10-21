@@ -1446,8 +1446,8 @@
     box-shadow: 0 12px 26px -10px rgba(0,0,0,.55); transition: background .2s ease, transform .2s ease;
   }
   .hero-play svg { width: 26px; height: 26px; margin-left: 3px; fill: currentColor; }
-  .hero-film:hover .hero-play { background: var(--brand-burgundy); transform: translate(-50%, -50%) scale(1.06); }
-  .hero-film:focus-visible { outline: 3px solid var(--brand-pink-deep); outline-offset: 4px; }
+  .hero-film:hover .hero-play, .tip-film:hover .hero-play { background: var(--brand-burgundy); transform: translate(-50%, -50%) scale(1.06); }
+  .hero-film:focus-visible, .tip-film:focus-visible { outline: 3px solid var(--brand-pink-deep); outline-offset: 4px; }
   /* คลิปเต็มซ้อนหน้า: กว้างสุด 1100px และไม่สูงเกินจอ (มือถือแนวนอน) · ปุ่มปิดลอยเหนือมุมขวาบนของคลิป
      width บรรทัดแรกคือตัวสำรองของเบราว์เซอร์ที่ยังไม่รู้จัก dvh · margin: auto คืนค่าที่ reset ของหน้าลบไป (dialog จัดกลางจอด้วยค่านี้) */
   .film {
@@ -2595,11 +2595,16 @@
   .tip.has-clip > p, .tip.has-clip > .tip-body { grid-area: p; }
   /* .tip-body = เนื้อนิยามที่มีรายการ (ใส่ใน <p> ไม่ได้) สีเดียวกับ .tip p */
   .tip-body { color: var(--muted); text-wrap: pretty; }  /* pretty: ไม่ให้เหลือคำเดียวโดดบรรทัดท้าย (ตกลง/กัน) */
-  .tip.has-clip > .clip { grid-area: clip; align-self: start; }
+  .tip.has-clip > .clip, .tip.has-clip > .tip-film { grid-area: clip; align-self: start; }
   @media (max-width: 900px) {
     .tip.has-clip { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "t" "p" "clip"; }
-    .tip.has-clip > .clip { width: 100%; max-width: 560px; margin-top: 8px; }
+    .tip.has-clip > .clip, .tip.has-clip > .tip-film { width: 100%; max-width: 560px; margin-top: 8px; }
   }
+  /* คลิปมีเสียงในกล่องนิยาม (.tip-film): "Localization คืออะไร" ใน #features — ภาพปก + ▶ เปิด dialog แบบคลิป hero
+     กรอบ hairline มุม 8px ชุดเดียวกับ .clip ไม่ใช้กรอบกระจก/เงาฟุ้งของ hero (DESIGN.md: Hero-Only Lift)
+     ปุ่ม ▶ คือ .hero-play ตัวเดียวกับ hero — hover/focus อยู่กฎเดียวกับ .hero-film */
+  .tip-film { position: relative; display: block; overflow: hidden; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card); background: #fff; }
+  .tip-film img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
   /* กรอบเดียวครอบคลิป + แถบปุ่มใต้คลิป — ปุ่มอยู่นอกภาพ ไม่บังยอดเงิน/ตัวเลขที่คลิปซูมไปโชว์ตรงมุมขวาล่าง
      (ไม่ต้องมีกฎ print — บล็อกพิมพ์ซ่อนทั้ง 3 section และ .feature-visual อยู่แล้ว) */
   .clip { overflow: hidden; border: 1px solid var(--ui-line); border-radius: var(--ui-radius-card); background: #fff; }
@@ -3372,7 +3377,7 @@
     .skip-link, .cookie-bar, .demo-toggle,
     .topnav .links, .topnav .social, .topnav .lang, .menu-toggle,
     .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
-    #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link,
+    #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link, .tip-film,
     #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
     #pp36, #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
     .footer-menu, #cookie-manage, footer a[href="#contact"], .ci-flyer { display: none !important; }
@@ -3393,6 +3398,8 @@
 
     /* ฟังก์ชัน: แท็บพิมพ์ไม่ได้ — กางทุกแผงเรียงลงมา ตัดรูปประกอบ */
     .tip { padding: 10px 12px; margin-bottom: 8px; }
+    /* กล่อง Localization คืออะไร: คลิปซ่อนแล้ว กลับเป็น flex แบบกล่องไม่มีคลิป — grid จะเหลือแถว clip ว่างพร้อม row-gap */
+    .tip.has-clip { display: flex; }
     .feature-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; min-height: 0; margin-top: 8px; }
     .feature-panel {
       grid-area: auto; display: block; min-height: 0; padding: 10px 12px; overflow: visible;
@@ -3533,7 +3540,7 @@
          ภาพปกในกรอบกระจก + ปุ่ม ▶ กลางภาพ ไม่มีอะไรเล่นเอง · กดแล้วสคริปต์เปิด dialog#film และเล่นทันที
          ไม่มี JS = ลิงก์เปิดไฟล์คลิปตรง ๆ · ภาพปกคือภาพใหญ่สุดของจอแรก (LCP) จึงขอโหลดก่อนด้วย fetchpriority -->
     <div class="hero-doc">
-      <a class="hero-film" href="video/month.mp4" aria-label="เล่นคลิป ครบทั้งเดือน ในระบบเดียว (1 นาที 33 วินาที)">
+      <a class="hero-film" href="video/month.mp4" data-film="film" aria-label="เล่นคลิป ครบทั้งเดือน ในระบบเดียว (1 นาที 33 วินาที)">
         <img src="video/month.webp" width="1920" height="1080" alt="" fetchpriority="high">
         <span class="hero-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg></span>
       </a>
@@ -3618,10 +3625,24 @@
     <p class="section-kicker">Built for Thai business</p>
     <h2>JWIC Thai Localization for Business Central</h2>
     <p class="sub">Extension สำหรับ Business Central ที่พัฒนาเพื่อธุรกิจไทยโดยเฉพาะ ครอบคลุมภาษี เอกสาร และงานบัญชีที่ใช้จริงทุกวัน</p>
-    <!-- คำนิยาม Localization ย้ายมาไว้ใต้หัวข้อ — เดิมลอยอยู่เหนือ kicker ผู้อ่านยังไม่รู้ว่ากำลังอยู่ section ไหน -->
-    <div class="tip reveal">
+    <!-- คำนิยาม Localization ย้ายมาไว้ใต้หัวข้อ — เดิมลอยอยู่เหนือ kicker ผู้อ่านยังไม่รู้ว่ากำลังอยู่ section ไหน
+         คลิป "Localization คืออะไร" (มีเสียงพากย์ ผู้ใช้เลือกช่องนี้ 21 ต.ค. 2026) ทำแบบคลิป hero: ภาพปก + ปุ่ม ▶ ไม่เล่นเอง กดแล้วเปิด dialog#film-loc
+         ไม่ใช้ .clip วนเงียบแบบกล่องนิยามอื่น เพราะคลิปนี้ต้องฟังเสียง · ข้างในห้ามมี b/p เพิ่ม — I18N ['.tip b'] / ['.tip p'] เขียนทับทุกตัวใน .tip
+         ไฟล์เว็บ = NVENC re-encode ของ _video/out/jwic-localization.mp4 ที่ 60 fps เท่า master (ผู้ใช้ย้ำ 21 ต.ค.) · คลิปเปลี่ยน: encode ใหม่แบบเดิม แล้วแก้ความยาวใน aria-label ทั้งไทย (ตรงนี้) และ I18N_ATTR -->
+    <div class="tip has-clip reveal">
       <b>💡 Localization คืออะไร?</b>
       <p>การปรับระบบการทำงานมาตรฐานให้รองรับกฎหมาย ภาษา เอกสาร และวิธีการทำงานที่แตกต่างกันไปในแต่ละประเทศ</p>
+      <a class="tip-film" href="video/localization.mp4" data-film="film-loc" aria-label="เล่นคลิป Localization คืออะไร (2 นาที 24 วินาที)">
+        <img src="video/localization.webp" width="1280" height="720" alt="" loading="lazy">
+        <span class="hero-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg></span>
+      </a>
+      <!-- <video> ไม่มี poster: poster โหลดทันทีตอนเปิดหน้าแม้ dialog ยังปิด (ทับ loading="lazy" ของภาพปก) — สคริปต์ยืมภาพปกมาใส่ตอนกด -->
+      <dialog class="film" id="film-loc" aria-label="คลิป Localization คืออะไร">
+        <video controls playsinline preload="none" width="1920" height="1080">
+          <source src="video/localization.mp4" type="video/mp4">
+        </video>
+        <button class="film-close" type="button" aria-label="ปิดคลิป">×</button>
+      </dialog>
     </div>
     <div class="feature-tabs reveal">
       <div class="feature-tab-scroll">
@@ -3967,7 +3988,7 @@
       <b data-p36="tipTitle">💡 <span class="nb">ภ.พ.36</span> คืออะไร?</b>
       <div class="tip-body" data-p36="tipBody">คือแบบ<span class="nb">นำส่ง</span><span class="nb">ภาษีมูลค่าเพิ่ม</span>ที่คุณยื่นแทน<span class="nb">ผู้ให้บริการ</span><span class="nb">ต่างประเทศ</span> สำหรับบริการที่ทำใน<span class="nb">ต่างประเทศ</span>แต่ใช้ในประเทศไทย เช่น <span class="nb">เช่าเครื่องจักร</span> หรือจ้างที่ปรึกษา<span class="p36-rules-h">หลัก 3 ข้อของ <span class="nb">ภ.พ.36</span></span><ol class="p36-rules"><li><span class="p36-rule-t"><span class="nb">ผู้จ่ายเงิน</span>เป็นคนยื่น</span><span class="nb">ผู้ให้บริการ</span>อยู่<span class="nb">ต่างประเทศ</span> คุณจึงต้องยื่นแบบและ<span class="nb">นำส่ง</span>ภาษีแทน</li><li><span class="p36-rule-t">นับจากเดือนที่<span class="nb">จ่ายเงิน</span></span>ยื่นภายใน 7 วันนับจาก<span class="nb">สิ้นเดือน</span>ที่<span class="nb">จ่ายเงิน</span> <span class="nb">วันที่</span>ใน<span class="nb">ใบแจ้งหนี้</span>ไม่ได้ใช้นับ</li><li><span class="p36-rule-t">ใช้เป็น<span class="nb">ภาษีซื้อ</span>ได้</span>ถ้าคุณจดทะเบียน<span class="nb">ภาษีมูลค่าเพิ่ม</span> ภาษีที่<span class="nb">นำส่ง</span>แล้วก็ลงเป็น<span class="nb">ภาษีซื้อ</span>ใน <span class="nb">ภ.พ.30</span> ได้</li></ol><span class="p36-src"><a href="https://www.rd.go.th/3549.html" target="_blank" rel="noopener noreferrer">ที่มา: <span class="nb">กรมสรรพากร</span> (คำสั่งที่ ป.104/2544)</a></span></div>
       <div class="clip" data-clip="pp36">
-        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-pp36.webp" aria-hidden="true">
+        <video muted loop playsinline preload="none" width="1280" height="720" data-poster="video/hl-pp36.webp" aria-hidden="true">
           <source src="video/hl-pp36.mp4" type="video/mp4">
         </video>
       </div>
@@ -4019,7 +4040,7 @@
       <b data-bf="tipTitle">💡 ใบวางบิลคืออะไร?</b>
       <div class="tip-body" data-bf="tipBody">คือเอกสารที่ผู้ขายหรือผู้ให้บริการนำส่งให้ลูกค้า เพื่อแจ้งยอดเงินที่ต้องชำระ และขอเรียกเก็บเงินตามกำหนด เช่น หลังส่งสินค้า หลังให้บริการ หรือเมื่อถึงรอบวางบิลตามที่ตกลงกัน<span class="bf-uses-h">ใบวางบิลใช้ทำอะไร?</span><ol class="bf-uses"><li><span class="bf-use-t">แจ้งยอดที่ต้องชำระ</span>สรุปยอดจากใบแจ้งหนี้หลายใบ หรือรายการที่ถึงกำหนดชำระในรอบนั้น</li><li><span class="bf-use-t">ยื่นเอกสารตามรอบวางบิล</span>เช่น ลูกค้ากำหนดให้ผู้ขายส่งเอกสารทุกวันที่ 25 ของเดือน และชำระเงินภายใน 30 วัน</li><li><span class="bf-use-t">ให้ลูกค้าตรวจสอบและรับรองยอด</span>ฝ่ายบัญชีลูกค้าตรวจสอบเอกสาร และอาจลงชื่อหรือประทับตรารับวางบิลเพื่อเป็นหลักฐาน</li></ol></div>
       <div class="clip" data-clip="billing-flow">
-        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-billing.webp" aria-hidden="true">
+        <video muted loop playsinline preload="none" width="1280" height="720" data-poster="video/hl-billing.webp" aria-hidden="true">
           <source src="video/hl-billing.mp4" type="video/mp4">
         </video>
       </div>
@@ -4073,7 +4094,7 @@
       <p data-vs="defBody">บริการของกรมสรรพากร ใช้ตรวจคู่ค้าก่อนรับใบกำกับภาษีว่า<span class="vs-chips"><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>มีตัวตนจริง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>จดทะเบียนถูกต้อง</span><span class="vs-chip"><svg class="vs-ic"><use href="#vsi-tick"/></svg>ยังออกใบกำกับภาษีได้</span></span><span class="vs-fine">ทั้งสามข้อเปลี่ยนได้ตลอดเวลา การตรวจก่อนจึงกันการแอบอ้าง · <a href="https://www.rd.go.th/42535.html" target="_blank" rel="noopener noreferrer">ที่มา: กรมสรรพากร</a></span></p>
       <!-- คลิปจากหน้าจอจริง (_plans/2026-10-feature-clips.md) — สคริปต์สั่งเล่นเองตอนเห็นเกินครึ่ง ไม่ใส่ autoplay · ปุ่มเล่น/เต็มจอสคริปต์สร้างเอง -->
       <div class="clip" data-clip="vat-service">
-        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-vat.webp" aria-hidden="true">
+        <video muted loop playsinline preload="none" width="1280" height="720" data-poster="video/hl-vat.webp" aria-hidden="true">
           <source src="video/hl-vat.mp4" type="video/mp4">
         </video>
       </div>
@@ -4146,7 +4167,7 @@
       <p data-ct="tipBody">ความสามารถตรวจสอบย้อนหลังได้ว่าต้นทุนสินค้ามีที่มาจากอะไร ตั้งแต่การซื้อ การขนส่ง การนำเข้า ไปจนถึงกระบวนการผลิต เพื่อให้เห็นที่มาของต้นทุนได้อย่างชัดเจน<span class="ct-chips"><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบต้นทุนย้อนหลัง</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ดูต้นทุนแยกตาม Lot และ Serial No.</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ติดตามต้นทุนผ่านกระบวนการผลิตหลายขั้นตอน</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>รองรับทั้ง FIFO, Average และ Standard Cost</span><span class="ct-chip"><svg class="ct-ic"><use href="#cti-tick"/></svg>ตรวจสอบรายการที่ผ่านการ Post แล้วได้ โดยไม่ต้องแก้ไขข้อมูลเดิมในระบบ</span></span></p>
       <!-- คลิปจากหน้าจอจริง — ชุดเดียวกับ #vat-service -->
       <div class="clip" data-clip="cost-trace">
-        <video muted loop playsinline preload="none" width="1280" height="720" poster="video/hl-cost.webp" aria-hidden="true">
+        <video muted loop playsinline preload="none" width="1280" height="720" data-poster="video/hl-cost.webp" aria-hidden="true">
           <source src="video/hl-cost.mp4" type="video/mp4">
         </video>
       </div>
@@ -4752,7 +4773,7 @@
 
   // คลิปจากหน้าจอจริง (.clip): เล่นเองเมื่อเห็นเกินครึ่ง หยุดเมื่อเห็นไม่ถึงครึ่ง
   // เล่นเองเสมอ ไม่ดู reduced-motion / Save-Data (ผู้ใช้สั่ง ต.ค. 2026) · เบราว์เซอร์ห้าม (iPhone โหมดประหยัดแบต) หรือกดหยุดเอง = ค้างที่ภาพปก รอกด ▶
-  // ปุ่มสร้างที่นี่ (ไม่มี JS = เห็นภาพปกเฉย ๆ ไม่มีปุ่มที่กดไม่ได้) · ป้ายปุ่มตามภาษาของหน้า — applyLang เรียกผ่าน window.syncClips
+  // ปุ่มสร้างที่นี่ (ไม่มี JS = ไม่มีปุ่มที่กดไม่ได้ · ภาพปกก็ตั้งที่นี่ แต่ไม่มี JS กล่อง .reveal ก็ไม่ขึ้นอยู่แล้ว) · ป้ายปุ่มตามภาษาของหน้า — applyLang เรียกผ่าน window.syncClips
   const clips = [...document.querySelectorAll('.clip')];
   if (clips.length) {
     const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;   // Safari ก่อน 16.4 มีแต่แบบ webkit
@@ -4793,6 +4814,15 @@
       if (e.intersectionRatio < 0.5) { v.pause(); return; }
       wait.set(clip, setTimeout(() => { if (clip.dataset.auto !== 'off') v.play().catch(blocked(clip)); }, 300));
     }), { threshold: 0.5 });
+    // ภาพปกอยู่ใน data-poster ตั้งให้ตอนคลิปเข้าใกล้จอ 2500px (ระยะที่ Chrome ใช้กับ loading="lazy" ตอนเน็ตช้า)
+    // poster ใน markup โหลดพร้อมหน้าทุกตัว แม้คลิปอยู่ท้ายหน้า — 4 คลิปรวม 162 KB บนมือถือ (วัด 21 ต.ค. 2026)
+    // 1250px บนมือถือ Slow 4G ภาพปกเสร็จก่อนคลิปเข้าจอแค่ 0.1–0.4 วิ
+    const near = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const v = e.target.querySelector('video');
+      v.poster = v.dataset.poster;
+      near.unobserve(e.target);
+    }), { rootMargin: '2500px 0px' });
     clips.forEach((clip) => {
       const v = clip.querySelector('video');
       clip.insertAdjacentHTML('beforeend', '<div class="clip-ctrl"><button class="clip-btn clip-play" type="button"></button>'
@@ -4807,18 +4837,23 @@
       clip.querySelector('.clip-full').addEventListener('click', () => toggleFull(clip));
       v.addEventListener('click', () => { if (fsEl() !== clip) toggleFull(clip); });
       syncClip(clip);
+      near.observe(clip);
       seen.observe(clip);
     });
   }
 
-  // คลิปใน hero แบบหน้า Business Central ของ Microsoft: ภาพปก + ปุ่ม ▶ ไม่มีอะไรเล่นเอง
+  // คลิปมีเสียงแบบหน้า Business Central ของ Microsoft: ภาพปก + ปุ่ม ▶ ไม่มีอะไรเล่นเอง
+  // ลิงก์ a[data-film] ชี้ id ของ dialog ตัวเอง: คลิป hero (#film) · คลิป Localization คืออะไร ในกล่อง 💡 ของ #features (#film-loc)
   // กดแล้วเปิดคลิปเต็มซ้อนหน้าและเล่นทันที (ผู้ชมกดเอง) · ไม่มี JS / เบราว์เซอร์ไม่มี <dialog> = ลิงก์เปิดไฟล์คลิปตรง ๆ
   // ปิดด้วยปุ่ม × / Esc / คลิกพื้นหลัง = หยุดคลิป
-  const film = document.getElementById('film'), filmLink = document.querySelector('.hero-film');
-  if (film && filmLink && film.showModal) {
+  document.querySelectorAll('a[data-film]').forEach((filmLink) => {
+    const film = document.getElementById(filmLink.dataset.film);
+    if (!film || !film.showModal) return;
     const fv = film.querySelector('video');
     filmLink.addEventListener('click', (e) => {
       e.preventDefault();
+      // คลิปที่อยู่ลึกในหน้าไม่ใส่ poster ไว้ใน markup (โหลดตั้งแต่เปิดหน้า) — ใช้ภาพปกที่ผู้ชมเห็นอยู่แล้ว ไม่โหลดซ้ำ
+      if (!fv.poster) fv.poster = filmLink.querySelector('img').currentSrc;
       film.showModal();
       fv.play().catch(() => {});
     });
@@ -4828,8 +4863,9 @@
     film.addEventListener('pointerdown', (e) => { downOnBackdrop = e.target === film; });
     film.addEventListener('click', (e) => { if (downOnBackdrop && e.target === film) film.close(); });
     film.addEventListener('close', () => fv.pause());
-    fv.addEventListener('playing', () => trackSeoEvent('clip_play', { clip: 'film' }), { once: true });
-  }
+    // ชื่อคลิปใน event = id ของ dialog — คลิป hero ยังส่ง 'film' เหมือนเดิม สถิติเก่าต่อกันได้
+    fv.addEventListener('playing', () => trackSeoEvent('clip_play', { clip: film.id }), { once: true });
+  });
 
   // scrollspy: ไฮไลต์เมนูตาม section ที่กำลังดู
   const navLinkById = new Map();
@@ -6400,6 +6436,9 @@
     ['.hero-film', 'aria-label', 'Play clip: the whole month in one system (1 min 33 s)'],
     ['#film', 'aria-label', 'Clip: the whole month in one system'],
     ['#film .film-close', 'aria-label', 'Close clip'],
+    ['.tip-film', 'aria-label', 'Play clip: what is Localization? (2 min 24 s)'],
+    ['#film-loc', 'aria-label', 'Clip: what is Localization?'],
+    ['#film-loc .film-close', 'aria-label', 'Close clip'],
     ['.feature-tablist', 'aria-label', 'JWIC Localization features'],
     ['#vs-cases', 'aria-label', 'Example scenarios'],
     ['#ct-steps', 'aria-label', 'Trace steps'],
