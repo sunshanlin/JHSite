@@ -1,7 +1,7 @@
 /* หน้าบทความ: แถบขอความยินยอมคุกกี้ + GA4 + event ของปุ่มติดต่อ
    - ค่า ga_consent ใน localStorage ใช้ร่วมกับหน้าแรก (origin เดียวกัน) กดยอมรับ/ปฏิเสธที่หน้าไหนก็มีผลทั้งเว็บ
    - GA โหลดหลังยินยอมเท่านั้น เหมือน index.html · GA_ID ต้องตรงกับใน index.html
-   - CSP ของบทความต้องมี script-src 'self' https://www.googletagmanager.com และ connect-src ของ GA */
+   - CSP ของบทความต้องมี script-src 'self' 'inline-speculation-rules' https://www.googletagmanager.com และ connect-src ของ GA */
 (function () {
   var GA_ID = 'G-NGDPEC4BZ1';
   var KEY = 'ga_consent';
@@ -30,8 +30,13 @@
     + '<div class="cookie-actions"><button type="button" class="accept">ยอมรับ</button><button type="button" class="decline">ปฏิเสธ</button></div>';
   document.body.appendChild(bar);
 
+  // หน้าที่ Chrome prerender ไว้ล่วงหน้ายังไม่มีคนเห็น — นับ GA ตอนเปิดดูจริง
+  function whenShown(fn) {
+    if (document.prerendering) document.addEventListener('prerenderingchange', fn, { once: true });
+    else fn();
+  }
   var consent = getConsent();
-  if (consent === 'granted') loadGA();
+  if (consent === 'granted') whenShown(loadGA);
   else if (!consent) bar.hidden = false;
 
   bar.querySelector('.accept').addEventListener('click', function () { setConsent('granted'); bar.hidden = true; loadGA(); });
@@ -45,6 +50,18 @@
   if (manage) {
     manage.hidden = false;
     manage.addEventListener('click', function () { bar.hidden = false; bar.querySelector('.accept').focus(); });
+  }
+
+  // เปิดบทความถัดไปได้ทันที: Chrome/Edge prerender บทความเมื่อชี้ลิงก์ค้าง ~200ms · หน้าแรกหนักกว่า เริ่มตอนกดลงเท่านั้น
+  // ใส่ด้วยสคริปต์ไฟล์นี้ บทความใหม่จะได้ตามไปเอง · CSP ต้องมี 'inline-speculation-rules'
+  if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) {
+    var rules = document.createElement('script');
+    rules.type = 'speculationrules';
+    rules.textContent = JSON.stringify({ prerender: [
+      { where: { href_matches: '/articles/*' }, eagerness: 'moderate' },
+      { where: { href_matches: '/#*' }, eagerness: 'conservative' }
+    ] });
+    document.head.appendChild(rules);
   }
 
   var slug = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');

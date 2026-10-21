@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://api.jwicconsulting.com https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- ภาพปกคลิป hero = LCP: แท็ก <img> อยู่หลัง CSS ในหน้า ~250 KB เบราว์เซอร์เลยเจอช้า จึงขอโหลดตั้งแต่ต้นหน้า (srcset/sizes ต้องตรงกับ <img> ไม่งั้นโหลดซ้ำ) -->
+<link rel="preload" as="image" href="video/month.webp" imagesrcset="video/month-640.webp 640w, video/month-1080.webp 1080w, video/month.webp 1920w" imagesizes="(max-width: 600px) calc(100vw - 72px), (max-width: 900px) 530px, (max-width: 1100px) 41vw, 504px" fetchpriority="high">
 <title>Dynamics 365 Business Central + Thai Localization | JWIC Consulting</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/jwic-icon.svg">
@@ -244,6 +246,19 @@
   ]
 }
 </script>
+<!-- เปิดบทความได้ทันที: Chrome/Edge prerender บทความเมื่อชี้ลิงก์ค้าง ~200ms (มือถือ: ลิงก์ที่อยู่ในจอหลังหยุดเลื่อน) · เบราว์เซอร์อื่นข้ามไป -->
+<script type="speculationrules">
+{ "prerender": [{ "where": { "href_matches": "/articles/*" }, "eagerness": "moderate" }] }
+</script>
+<script>
+  // มาจากลิงก์ /#pricing, /#contact (บทความ, LINE): ลงที่ section ทันที ไม่ไถยาวจากหัวหน้าตาม scroll-behavior: smooth
+  // และข้ามเฟดเปลี่ยนหน้า (เฟดจะพาเข้าหัวหน้าก่อนกระโดด) · คืน smooth ให้ปุ่มเมนูหลังโหลดเสร็จ — ต้องอยู่ใน <head> ก่อนวาดจอแรก
+  if (location.hash) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    addEventListener('pagereveal', (e) => { if (e.viewTransition) { e.viewTransition.ready.catch(() => {}); e.viewTransition.skipTransition(); } });
+    addEventListener('load', () => setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }), { once: true });
+  }
+</script>
 <style>
   /* ฟอนต์ self-host ใน css/fonts/ (D3 ก.ย. 2026) — ไฟล์ woff2 ชุดเดียวกับที่ Google Fonts เสิร์ฟ (Anuphan v6, Sarabun)
      เลิกโหลด stylesheet ของ Google ที่บล็อกการวาดหน้าแรก และไม่ส่ง IP ผู้เข้าชมไปที่ fonts.googleapis.com
@@ -264,6 +279,15 @@
   @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url(/css/fonts/sarabun-latin-400.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url(/css/fonts/sarabun-latin-600.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url(/css/fonts/sarabun-latin-700.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  /* ตัวสำรองของ Anuphan เฉพาะตัวละติน ขยายให้กว้างเท่า Anuphan (Arial = Windows/Mac/iPhone, Roboto = Android): ระหว่างรอ anuphan-latin.woff2
+     หัวข้อ hero ตัดบรรทัดเหมือนฟอนต์จริง ไม่กระโดดตอนสลับ (เดิมตกไป Segoe UI/Roboto ที่แคบกว่า h1 บนมือถือ 3 → 4 บรรทัด CLS 0.057)
+     ใช้เฉพาะ #top (จอแรก): ใส่ทั้งหน้าแล้ว Chrome ต้องจัดหน้าใหม่ทั้งหน้าตอนหาฟอนต์ local() เจอ LCP ช้าลง 0.3 วิ (วัด 22 ต.ค. 2026)
+     ค่าวัดจากตัวละตินทุกตัวที่หน้านี้ตั้งด้วย Anuphan ทั้งโหมดไทยและอังกฤษ · ตัวไทยไม่อยู่ใน unicode-range จึงใช้ฟอนต์ไทยของเครื่องเหมือนเดิม */
+  @font-face { font-family: 'Anuphan FB A'; font-style: normal; font-weight: 100 599; src: local('Arial'), local('ArialMT'); size-adjust: 101.92%; ascent-override: 101.06%; descent-override: 27.47%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Anuphan FB A'; font-style: normal; font-weight: 600 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 98%; ascent-override: 105.1%; descent-override: 28.57%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Anuphan FB R'; font-style: normal; font-weight: 100 599; src: local('Roboto'), local('Roboto-Regular'); size-adjust: 102.45%; ascent-override: 100.54%; descent-override: 27.33%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Anuphan FB R'; font-style: normal; font-weight: 600 900; src: local('Roboto Bold'), local('Roboto-Bold'); size-adjust: 103.25%; ascent-override: 99.76%; descent-override: 27.12%; line-gap-override: 0%; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  #top :is(h1, .tagline, .badge, .cta, .hero-learn-link) { font-family: "Anuphan", "Anuphan FB A", "Anuphan FB R", "Segoe UI", sans-serif; }
   /* ============================================================
      Design tokens — :root บล็อกเดียวของทั้งไฟล์ (รวมจาก 6 บล็อกเดิม 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว)
      ค่าอ้างอิงอยู่ที่ DESIGN.md · token ใหม่เพิ่มในบล็อกนี้ ห้ามเปิด :root บล็อกใหม่
@@ -365,6 +389,10 @@
   }
   .wrap { margin: 0 auto; }
   html { scroll-behavior: smooth; }
+  /* เปลี่ยนหน้าระหว่างหน้าแรกกับบทความแบบเฟด (Chrome/Edge 126+, Safari 18.2+ · Firefox เปลี่ยนหน้าแบบเดิม) — คู่กับ css/article.css */
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition { navigation: auto; }
+  }
 
   .topnav { position: sticky; top: 0; z-index: 50; }
   .topnav .wrap { display: flex; align-items: center; }
@@ -562,7 +590,8 @@
     transition: opacity .32s ease .06s, transform .5s cubic-bezier(.2,.75,.2,1), visibility 0s;
   }
   .bento-shot a {
-    position: relative; max-width: 100%; 
+    /* width 100%: ลิงก์หดตามขนาดตั้งต้นของรูป ซึ่งกับ srcset คือค่า sizes ไม่ใช่ 1600px — ไม่ตั้งไว้รูปบนมือถือแคบลง */
+    position: relative; width: 100%; max-width: 100%;
     transition: transform .35s cubic-bezier(.2,.75,.2,1), box-shadow .35s ease;
   }
   .bento-shot a::after {
@@ -3538,14 +3567,15 @@
     </div>
     <!-- คลิป "ครบทั้งเดือน ในระบบเดียว" 1:33 มีเพลง แบบหน้า Business Central ของ Microsoft (ผู้ใช้เลือก ต.ค. 2026)
          ภาพปกในกรอบกระจก + ปุ่ม ▶ กลางภาพ ไม่มีอะไรเล่นเอง · กดแล้วสคริปต์เปิด dialog#film และเล่นทันที
-         ไม่มี JS = ลิงก์เปิดไฟล์คลิปตรง ๆ · ภาพปกคือภาพใหญ่สุดของจอแรก (LCP) จึงขอโหลดก่อนด้วย fetchpriority -->
+         ไม่มี JS = ลิงก์เปิดไฟล์คลิปตรง ๆ · ภาพปกคือภาพใหญ่สุดของจอแรก (LCP) จึงขอโหลดก่อนด้วย fetchpriority · srcset ให้มือถือได้ไฟล์ 640/1080px -->
     <div class="hero-doc">
       <a class="hero-film" href="video/month.mp4" data-film="film" aria-label="เล่นคลิป ครบทั้งเดือน ในระบบเดียว (1 นาที 33 วินาที)">
-        <img src="video/month.webp" width="1920" height="1080" alt="" fetchpriority="high">
+        <img src="video/month.webp" srcset="video/month-640.webp 640w, video/month-1080.webp 1080w, video/month.webp 1920w" sizes="(max-width: 600px) calc(100vw - 72px), (max-width: 900px) 530px, (max-width: 1100px) 41vw, 504px" width="1920" height="1080" alt="" fetchpriority="high">
         <span class="hero-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg></span>
       </a>
+      <!-- <video> ไม่มี poster: poster ดึงไฟล์ 1920px ตั้งแต่เปิดหน้าแม้ dialog ยังปิด ส่วนภาพปกเลือกไฟล์ตามจอ — สคริปต์ยืม currentSrc ของภาพปกตอนกดเล่น -->
       <dialog class="film" id="film" aria-label="คลิป ครบทั้งเดือน ในระบบเดียว">
-        <video controls playsinline preload="none" width="1920" height="1080" poster="video/month.webp">
+        <video controls playsinline preload="none" width="1920" height="1080">
           <source src="video/month.mp4" type="video/mp4">
         </video>
         <button class="film-close" type="button" aria-label="ปิดคลิป">×</button>
@@ -3564,27 +3594,27 @@
         <div class="bento-shot">
           <figure class="is-active" id="bc-shot-1">
             <a href="img/bc-power-automate.webp" target="_blank" rel="noopener">
-              <img src="img/bc-power-automate.webp" alt="Power Automate flow ที่ส่งคำขออนุมัติอัตโนมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989">
+              <img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="Power Automate flow ที่ส่งคำขออนุมัติอัตโนมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async">
             </a>
           </figure>
           <figure id="bc-shot-2" aria-hidden="true" inert>
             <a href="img/bc-excel-pivot.webp" target="_blank" rel="noopener">
-              <img src="img/bc-excel-pivot.webp" alt="รายงานลูกหนี้แยกตามอายุหนี้ เปิดต่อใน Excel เป็น PivotTable พร้อม Slicer กรองตามแผนกและกลุ่มลูกค้า" loading="lazy" width="1600" height="931">
+              <img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="รายงานลูกหนี้แยกตามอายุหนี้ เปิดต่อใน Excel เป็น PivotTable พร้อม Slicer กรองตามแผนกและกลุ่มลูกค้า" loading="lazy" width="1600" height="931">
             </a>
           </figure>
           <figure id="bc-shot-3" aria-hidden="true" inert>
             <a href="img/bc-home.webp" target="_blank" rel="noopener">
-              <img src="img/bc-home.webp" alt="หน้าจอเริ่มต้นของ Business Central บนคลาวด์ แสดงชื่อบริษัทและเมนูงานตามสิทธิ์ของผู้ใช้" loading="lazy" width="1911" height="793">
+              <img src="img/bc-home.webp" srcset="img/bc-home-800.webp 800w, img/bc-home-1080.webp 1080w, img/bc-home.webp 1911w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="หน้าจอเริ่มต้นของ Business Central บนคลาวด์ แสดงชื่อบริษัทและเมนูงานตามสิทธิ์ของผู้ใช้" loading="lazy" width="1911" height="793">
             </a>
           </figure>
           <figure id="bc-shot-4" aria-hidden="true" inert>
             <a href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener">
-              <img src="img/bc-powerbi-overview.webp" alt="Dashboard Power BI สรุปรายได้ กำไรสุทธิ ROA และอันดับลูกค้ารายใหญ่จากข้อมูล Business Central" loading="lazy" width="1600" height="906">
+              <img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="Dashboard Power BI สรุปรายได้ กำไรสุทธิ ROA และอันดับลูกค้ารายใหญ่จากข้อมูล Business Central" loading="lazy" width="1600" height="906">
             </a>
           </figure>
           <figure id="bc-shot-5" aria-hidden="true" inert>
             <a href="img/bc-dashboard.webp" target="_blank" rel="noopener">
-              <img src="img/bc-dashboard.webp" alt="หน้าวิเคราะห์ธุรกิจใน Business Central แสดงลูกค้าที่ทำยอดขายสูงสุดและงบทดลอง" loading="lazy" width="1649" height="869">
+              <img src="img/bc-dashboard.webp" srcset="img/bc-dashboard-800.webp 800w, img/bc-dashboard-1080.webp 1080w, img/bc-dashboard.webp 1649w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="หน้าวิเคราะห์ธุรกิจใน Business Central แสดงลูกค้าที่ทำยอดขายสูงสุดและงบทดลอง" loading="lazy" width="1649" height="869">
             </a>
           </figure>
         </div>
@@ -3664,7 +3694,7 @@
             <ul class="feature-chips"><li>ภ.พ.30</li><li>ภ.พ.36</li><li>Unrealized VAT</li><li>Tax Branch</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-vat.webp" width="1400" height="933" alt="แบบแสดงรายการภาษีและเครื่องคิดเลขบนโต๊ะทำงาน" loading="lazy" decoding="async"></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-vat.webp" srcset="img/feat-vat-900.webp 900w, img/feat-vat.webp 1400w" sizes="(max-width: 760px) calc(100vw - 36px), 740px" width="1400" height="933" alt="แบบแสดงรายการภาษีและเครื่องคิดเลขบนโต๊ะทำงาน" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-wht" role="tabpanel" aria-labelledby="feature-tab-wht" tabindex="0" aria-hidden="true" inert>
@@ -3675,7 +3705,7 @@
             <ul class="feature-chips"><li>50 ทวิ</li><li>ภ.ง.ด.3/53</li><li>RD Prep</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-wht.webp" width="1400" height="935" alt="พนักงานบัญชีกำลังตรวจเอกสารหักภาษี ณ ที่จ่ายที่โต๊ะทำงาน" loading="lazy" decoding="async"></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-wht.webp" srcset="img/feat-wht-900.webp 900w, img/feat-wht.webp 1400w" sizes="(max-width: 760px) calc(100vw - 36px), 740px" width="1400" height="935" alt="พนักงานบัญชีกำลังตรวจเอกสารหักภาษี ณ ที่จ่ายที่โต๊ะทำงาน" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-billing" role="tabpanel" aria-labelledby="feature-tab-billing" tabindex="0" aria-hidden="true" inert>
@@ -3697,7 +3727,7 @@
             <ul class="feature-chips"><li>Fixed Asset</li><li>Stock Card</li><li>Depreciation</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-stock.webp" width="1400" height="933" alt="พนักงานคลังสินค้าตรวจนับสต็อกด้วยแท็บเล็ต" loading="lazy" decoding="async"></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-stock.webp" srcset="img/feat-stock-900.webp 900w, img/feat-stock.webp 1400w" sizes="(max-width: 760px) calc(100vw - 36px), 740px" width="1400" height="933" alt="พนักงานคลังสินค้าตรวจนับสต็อกด้วยแท็บเล็ต" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-docs" role="tabpanel" aria-labelledby="feature-tab-docs" tabindex="0" aria-hidden="true" inert>
@@ -3713,7 +3743,7 @@
             <ul class="feature-chips"><li>20+ Forms</li><li>Professional Layout</li><li>Tax Invoice</li><li>Credit Note</li><li>TH / EN</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/pricing-consultation.webp" width="1125" height="750" alt="เพื่อนร่วมงานสี่คนกำลังดูข้อมูลบนโน้ตบุ๊กร่วมกัน" loading="lazy" decoding="async"></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/pricing-consultation.webp" srcset="img/pricing-consultation-900.webp 900w, img/pricing-consultation.webp 1125w" sizes="(max-width: 760px) calc(100vw - 36px), 740px" width="1125" height="750" alt="เพื่อนร่วมงานสี่คนกำลังดูข้อมูลบนโน้ตบุ๊กร่วมกัน" loading="lazy" decoding="async"></div>
         </article>
 
         <article class="feature-panel" id="feature-panel-api" role="tabpanel" aria-labelledby="feature-tab-api" tabindex="0" aria-hidden="true" inert>
@@ -3724,7 +3754,7 @@
             <ul class="feature-chips"><li>BOT API</li><li>Exchange Rate</li><li>Integration</li></ul>
             <a class="feature-link" href="#contact">ปรึกษาฟังก์ชันนี้ <span aria-hidden="true">→</span></a>
           </div>
-          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-api.webp" width="1400" height="1050" alt="นักพัฒนากำลังเขียนโปรแกรมเชื่อมต่อ API ในออฟฟิศ" loading="lazy" decoding="async"></div>
+          <div class="feature-visual" aria-hidden="true"><img class="feature-photo" src="img/feat-api.webp" srcset="img/feat-api-900.webp 900w, img/feat-api.webp 1400w" sizes="(max-width: 760px) calc(100vw - 36px), 740px" width="1400" height="1050" alt="นักพัฒนากำลังเขียนโปรแกรมเชื่อมต่อ API ในออฟฟิศ" loading="lazy" decoding="async"></div>
         </article>
       </div>
     </div>
@@ -3739,59 +3769,59 @@
     <div class="slider-wrap reveal">
     <div class="slider">
       <figure>
-        <a href="img/vat-service.webp"><img src="img/vat-service.webp" width="883" height="716" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" loading="lazy"></a>
+        <a href="img/vat-service.webp"><img src="img/vat-service.webp" data-thumb="img/thumbs/vat-service.webp" width="883" height="716" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" loading="lazy"></a>
         <figcaption>ค้นหาเลขประจำตัวผู้เสียภาษีและเลขที่สาขาจาก VAT Service ของกรมสรรพากร ดึงชื่อและที่อยู่มาเติมให้อัตโนมัติ</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-pp30.webp"><img src="img/doc-pp30.webp" width="1241" height="1754" alt="แบบ ภ.พ.30 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
+        <a href="img/doc-pp30.webp"><img src="img/doc-pp30.webp" data-thumb="img/thumbs/doc-pp30.webp" width="1241" height="1754" alt="แบบ ภ.พ.30 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
         <figcaption>แบบ ภ.พ.30 ของกรมสรรพากร ระบบกรอกตัวเลขให้อัตโนมัติ พร้อมยื่น</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-pp36.webp"><img src="img/doc-pp36.webp" width="1241" height="1754" alt="แบบ ภ.พ.36 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
+        <a href="img/doc-pp36.webp"><img src="img/doc-pp36.webp" data-thumb="img/thumbs/doc-pp36.webp" width="1241" height="1754" alt="แบบ ภ.พ.36 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
         <figcaption>แบบ ภ.พ.36 นำส่งภาษีมูลค่าเพิ่มแทนผู้ให้บริการต่างประเทศ ระบบกรอกให้จากรายการจ่ายเงิน</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-pnd53.webp"><img src="img/doc-pnd53.webp" width="1276" height="1790" alt="แบบ ภ.ง.ด.53 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
+        <a href="img/doc-pnd53.webp"><img src="img/doc-pnd53.webp" data-thumb="img/thumbs/doc-pnd53.webp" width="1276" height="1790" alt="แบบ ภ.ง.ด.53 ที่ระบบกรอกให้อัตโนมัติ" loading="lazy"></a>
         <figcaption>แบบ ภ.ง.ด.53 ภาษีหัก ณ ที่จ่ายจากเงินที่จ่ายให้นิติบุคคล สรุปยอดให้ทั้งเดือน</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-atpnd53.webp"><img src="img/doc-atpnd53.webp" width="1754" height="1241" alt="ใบแนบ ภ.ง.ด.53" loading="lazy"></a>
+        <a href="img/doc-atpnd53.webp"><img src="img/doc-atpnd53.webp" data-thumb="img/thumbs/doc-atpnd53.webp" width="1754" height="1241" alt="ใบแนบ ภ.ง.ด.53" loading="lazy"></a>
         <figcaption>ใบแนบ ภ.ง.ด.53 แยกรายผู้รับเงิน พร้อมประเภทเงินได้ อัตราภาษี และยอดที่หัก</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-wht-cert.webp"><img src="img/doc-wht-cert.webp" width="1241" height="1754" alt="หนังสือรับรองการหักภาษี ณ ที่จ่าย (50 ทวิ)" loading="lazy"></a>
+        <a href="img/doc-wht-cert.webp"><img src="img/doc-wht-cert.webp" data-thumb="img/thumbs/doc-wht-cert.webp" width="1241" height="1754" alt="หนังสือรับรองการหักภาษี ณ ที่จ่าย (50 ทวิ)" loading="lazy"></a>
         <figcaption>หนังสือรับรองการหักภาษี ณ ที่จ่าย (50 ทวิ)</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-sales-vat.webp"><img src="img/doc-sales-vat.webp" width="1754" height="1241" alt="รายงานภาษีขาย" loading="lazy"></a>
+        <a href="img/doc-sales-vat.webp"><img src="img/doc-sales-vat.webp" data-thumb="img/thumbs/doc-sales-vat.webp" width="1754" height="1241" alt="รายงานภาษีขาย" loading="lazy"></a>
         <figcaption>รายงานภาษีขาย พร้อมเลขสาขา</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-billing-note.webp"><img src="img/doc-billing-note.webp" width="1241" height="1754" alt="ใบวางบิล (Billing Note)" loading="lazy"></a>
+        <a href="img/doc-billing-note.webp"><img src="img/doc-billing-note.webp" data-thumb="img/thumbs/doc-billing-note.webp" width="1241" height="1754" alt="ใบวางบิล (Billing Note)" loading="lazy"></a>
         <figcaption>ใบวางบิล รวมใบแจ้งหนี้ของลูกค้าที่ถึงรอบวางบิลไว้ในใบเดียว</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-billing-board.webp"><img src="img/doc-billing-board.webp" width="1754" height="1241" alt="Billing Board — ปฏิทินรายเดือนแสดงรายการวางบิลแยกตามวันและลูกค้า" loading="lazy"></a>
+        <a href="img/doc-billing-board.webp"><img src="img/doc-billing-board.webp" data-thumb="img/thumbs/doc-billing-board.webp" width="1754" height="1241" alt="Billing Board — ปฏิทินรายเดือนแสดงรายการวางบิลแยกตามวันและลูกค้า" loading="lazy"></a>
         <figcaption>Billing Board ปฏิทินรายเดือน ใช้สีแยกวันวางบิลและรายการที่เลยกำหนด</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-receipt.webp"><img src="img/doc-receipt.webp" width="1241" height="1754" alt="ใบเสร็จรับเงิน (Receipt)" loading="lazy"></a>
+        <a href="img/doc-receipt.webp"><img src="img/doc-receipt.webp" data-thumb="img/thumbs/doc-receipt.webp" width="1241" height="1754" alt="ใบเสร็จรับเงิน (Receipt)" loading="lazy"></a>
         <figcaption>ใบเสร็จรับเงิน</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-sales-invoice.webp"><img src="img/doc-sales-invoice.webp" width="1241" height="1754" alt="ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)" loading="lazy"></a>
+        <a href="img/doc-sales-invoice.webp"><img src="img/doc-sales-invoice.webp" data-thumb="img/thumbs/doc-sales-invoice.webp" width="1241" height="1754" alt="ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)" loading="lazy"></a>
         <figcaption>ใบแจ้งหนี้ / ใบกำกับภาษี (Sales Invoice)</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-credit-note.webp"><img src="img/doc-credit-note.webp" width="1241" height="1754" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
+        <a href="img/doc-credit-note.webp"><img src="img/doc-credit-note.webp" data-thumb="img/thumbs/doc-credit-note.webp" width="1241" height="1754" alt="ใบลดหนี้ (Credit Note)" loading="lazy"></a>
         <figcaption>ใบลดหนี้ (Credit Note)</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-stock-card.webp"><img src="img/doc-stock-card.webp" width="1754" height="1241" alt="รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card)" loading="lazy"></a>
+        <a href="img/doc-stock-card.webp"><img src="img/doc-stock-card.webp" data-thumb="img/thumbs/doc-stock-card.webp" width="1754" height="1241" alt="รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card)" loading="lazy"></a>
         <figcaption>รายงานเคลื่อนไหวสินค้าคงเหลือ (Stock Card) แสดงรับ–จ่าย ยอดคงเหลือ และมูลค่าต้นทุนรายสินค้า</figcaption>
       </figure>
       <figure>
-        <a href="img/doc-fixed-asset.webp"><img src="img/doc-fixed-asset.webp" width="1754" height="1241" alt="ทะเบียนทรัพย์สิน (Fixed Asset Register)" loading="lazy"></a>
+        <a href="img/doc-fixed-asset.webp"><img src="img/doc-fixed-asset.webp" data-thumb="img/thumbs/doc-fixed-asset.webp" width="1754" height="1241" alt="ทะเบียนทรัพย์สิน (Fixed Asset Register)" loading="lazy"></a>
         <figcaption>ทะเบียนทรัพย์สิน (Fixed Asset Register)</figcaption>
       </figure>
     </div>
@@ -4285,7 +4315,7 @@
     <p class="sub">Business Central consulting built on accounting knowledge, end-to-end process understanding, and hands-on ERP implementation experience.</p>
     <div class="profile-panel reveal">
       <div class="profile-photo-frame">
-        <img class="profile-photo" src="img/jirapat.webp" alt="Jirapat Wichayapong (Sun)" width="800" height="800">
+        <img class="profile-photo" src="img/jirapat.webp" alt="Jirapat Wichayapong (Sun)" width="800" height="800" loading="lazy" decoding="async">
       </div>
       <div>
         <h3 class="profile-name" lang="en">Jirapat Wichayapong (Sun)</h3>
@@ -4328,15 +4358,15 @@
           <!-- badge เป็น WebP 252px (3 เท่าของ 84px) เรนเดอร์จาก .svg ต้นฉบับในโฟลเดอร์เดียวกัน — ใช้ .svg ตรง ๆ แล้ว GPU วาดครั้งแรกค้าง ~200ms ตอนเลื่อนถึง #about (ต.ค. 2026) -->
           <div class="credential-badges" role="group" aria-label="Microsoft Certified badges earned">
             <figure class="credential-badge">
-              <img src="img/credentials/microsoft-certified-expert.webp" alt="Microsoft Certified Expert badge" width="252" height="252">
+              <img src="img/credentials/microsoft-certified-expert.webp" alt="Microsoft Certified Expert badge" width="252" height="252" loading="lazy" decoding="async">
               <figcaption>Expert</figcaption>
             </figure>
             <figure class="credential-badge">
-              <img src="img/credentials/microsoft-certified-associate.webp" alt="Microsoft Certified Associate badge" width="252" height="252">
+              <img src="img/credentials/microsoft-certified-associate.webp" alt="Microsoft Certified Associate badge" width="252" height="252" loading="lazy" decoding="async">
               <figcaption>Associate</figcaption>
             </figure>
             <figure class="credential-badge">
-              <img src="img/credentials/ai-business-professional-badge.webp" alt="Microsoft Certified AI Business Professional badge" width="252" height="252">
+              <img src="img/credentials/ai-business-professional-badge.webp" alt="Microsoft Certified AI Business Professional badge" width="252" height="252" loading="lazy" decoding="async">
               <figcaption>AI Business Professional</figcaption>
             </figure>
           </div>
@@ -4540,8 +4570,31 @@
 <script>
   // ปุ่มจองคิว Cal.com ใน #contact — official embed snippet จาก cal.com/docs
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  Cal("init", "1hour", { origin: "https://cal.com" });
-  Cal.ns["1hour"]("ui", { styles: { branding: { brandColor: "#35AF9E" } }, hideEventTypeDetails: false, layout: "month_view" });
+  // embed.js (25 KB + คุกกี้ __cf_bm ของ cal.com) ไม่โหลดพร้อมหน้า: Cal() ครั้งแรกคือตัวสั่งโหลด จึงเรียกเมื่อปุ่มเข้าใกล้จอ 800px
+  // หรือมีคนชี้/แตะ/โฟกัสปุ่ม · กดก่อน embed.js พร้อม = สั่ง modal เข้าคิวของ stub ไว้ ไม่งั้นคลิกแรกหาย (embed จับคลิกได้หลังโหลดเสร็จ)
+  const calBtn = document.querySelector('[data-cal-link]');
+  let calState = 0, calQueued = false;   // 0 ยังไม่เรียก · 1 กำลังโหลด · 2 embed.js ทำงานแล้ว
+  function loadCal() {
+    if (calState) return;
+    calState = 1;
+    Cal("init", "1hour", { origin: "https://cal.com" });
+    Cal.ns["1hour"]("ui", { styles: { branding: { brandColor: "#35AF9E" } }, hideEventTypeDetails: false, layout: "month_view" });
+    Cal("on", { action: "bookingSuccessful", callback: () => {
+      trackSeoEvent('generate_lead', { method: 'cal_booking' });
+    } });
+    document.querySelector('script[src="https://app.cal.com/embed/embed.js"]').addEventListener('load', () => { calState = 2; });
+  }
+  if (calBtn) {
+    ['pointerenter', 'touchstart', 'focusin'].forEach((t) => calBtn.addEventListener(t, loadCal, { once: true, passive: true }));
+    calBtn.addEventListener('click', () => {
+      if (calState === 2 || calQueued) return;
+      calQueued = true;
+      loadCal();
+      Cal.ns["1hour"]("modal", { calLink: calBtn.dataset.calLink, config: JSON.parse(calBtn.dataset.calConfig || '{}') });
+    });
+    const calIO = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { calIO.disconnect(); loadCal(); } }, { rootMargin: '800px 0px' });
+    calIO.observe(calBtn);
+  }
 
   // เมนูมือถือ
   const menuToggle = document.querySelector('.menu-toggle');
@@ -4714,8 +4767,11 @@
       b.type = 'button';
       b.setAttribute('aria-label', `ไปที่ตัวอย่างที่ ${i + 1}`);
       const img = document.createElement('img');
-      img.src = f.querySelector('img').src;
-      img.alt = ''; img.loading = 'lazy';
+      // loading ต้องตั้งก่อน src ไม่งั้นเบราว์เซอร์โหลดทันที (เคยดึงรูปเต็มทั้ง 14 รูป 1.6 MB ตั้งแต่เปิดหน้า)
+      // ปุ่ม 64×40px ใช้รูปย่อกว้าง 192px ใน img/thumbs/ จาก data-thumb ไม่ใช่รูปเต็ม
+      img.loading = 'lazy'; img.decoding = 'async'; img.alt = '';
+      const full = f.querySelector('img');
+      img.src = full.dataset.thumb || full.src;
       b.appendChild(img);
       b.addEventListener('click', () => {
         idx = i;
@@ -4740,7 +4796,8 @@
         behavior: reducedMotion.matches ? 'auto' : 'smooth'
       });
     }
-    syncDots();
+    // เฟรมถัดไป ไม่ใช่ตอนนี้: อ่าน offsetLeft กลางสคริปต์บังคับจัดหน้าทั้งหน้าก่อนเวลา (Lighthouse วัดได้ 159ms)
+    requestAnimationFrame(syncDots);
     slider.addEventListener('scroll', () => {
       cancelAnimationFrame(dotFrame);
       dotFrame = requestAnimationFrame(syncDots);
@@ -5027,9 +5084,6 @@
   let printOpened = [];
   window.addEventListener('beforeprint', () => { printOpened = [...document.querySelectorAll('#pricing details:not([open])')]; printOpened.forEach(d => { d.open = true; }); });
   window.addEventListener('afterprint', () => { printOpened.forEach(d => { d.open = false; }); printOpened = []; });
-  Cal("on", { action: "bookingSuccessful", callback: () => {
-    trackSeoEvent('generate_lead', { method: 'cal_booking' });
-  } });
 
   // ── #vat-service — เดโมค้นเลขผู้เสียภาษี ─────────────────────────
   // สี่สถานการณ์ตัวอย่างตายตัวในหน้า · พิมพ์เลขเองแล้วกดค้นหา = ยิงถึงกรมสรรพากรจริง
@@ -5436,8 +5490,10 @@
     let groups = SEED.map((g) => ({ ...g }));
     let picked = null;
     let cur = 'g1';
-    const baht = (n) => '฿' + n.toLocaleString('en-US');
-    const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    // ตัวจัดรูปแบบตัวเดียวใช้ซ้ำ — toLocaleString('en-US') สร้างใหม่ทุกครั้งที่เรียก
+    const fmt0 = new Intl.NumberFormat('en-US'), fmt2 = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const baht = (n) => '฿' + fmt0.format(n);
+    const money = (v) => fmt2.format(v);
     /* วันที่คิดแบบ UTC ล้วน ไม่งั้นเวลาไทย +07 เลื่อนวันผิด · แสดง dd/mm/yyyy แบบใบวางบิลจริง */
     const plus = (iso, n) => { const t = new Date(iso + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
     const dmy = (iso) => iso.slice(8, 10) + '/' + iso.slice(5, 7) + '/' + iso.slice(0, 4);
@@ -5812,10 +5868,10 @@
 
       const el = {};
       canvas.querySelectorAll('.ct-card').forEach((c) => { el[c.dataset.id] = c; });
-      const pos = {};
+      const pos = {}, hgt = {};
       (function place(id, y) {
         pos[id] = { x: PADX + N[id].depth * (COLW + GAP), y };
-        let end = y + el[id].offsetHeight + VGAP;
+        let end = y + (hgt[id] = el[id].offsetHeight) + VGAP;
         if (state.open[id]) { let cy = y; N[id].src.forEach((c) => { cy = place(c, cy); }); end = Math.max(end, cy); }
         return end;
       })(ROOT, TOP);
@@ -5823,7 +5879,7 @@
       vis.forEach((id) => {
         el[id].style.left = pos[id].x + 'px';
         el[id].style.top = pos[id].y + 'px';
-        maxY = Math.max(maxY, pos[id].y + el[id].offsetHeight);
+        maxY = Math.max(maxY, pos[id].y + hgt[id]);   // ความสูงที่วัดไว้ใน place — อ่าน offsetHeight หลังเขียน left/top = จัดหน้าใหม่ทุกกล่อง
       });
       const W = PADX * 2 + (maxD + 1) * COLW + maxD * GAP + 50, H = maxY + 28;
       canvas.style.width = W + 'px';
