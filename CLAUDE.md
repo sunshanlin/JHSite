@@ -1,70 +1,71 @@
 # promote-site
 
-Landing page รับพัฒนา Microsoft Dynamics 365 Business Central Localization สำหรับธุรกิจไทย (JWIC Consulting, single-page, TH/EN)
+Landing page selling Microsoft Dynamics 365 Business Central localization for Thai businesses (JWIC Consulting, single page, TH/EN).
 
-- **Live: https://www.jwicconsulting.com/** — deploy อัตโนมัติด้วย GitHub Pages เมื่อ push ขึ้น `main` (repo sunshanlin/JHSite) ห้ามลบไฟล์ `CNAME` ที่ root ไม่งั้น custom domain พัง
-- ไฟล์เดียว: `index.html` — HTML + CSS inline ทั้งหมด ไม่มี build step, ไม่มี dependency (`poster.html` = โปสเตอร์ A4 สั่ง print เป็น PDF)
-- รัน/แคปหน้าจอ/ทดสอบ: ใช้ skill `/run-promote-site` (อย่าใช้ `python -m http.server` — python ในเครื่องนี้เป็น Store stub)
-- ติดต่อ: โทร/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · อีเมล **`jirapat.wi@outlook.co.th`** — ใช้ตัวนี้ในทุกไฟล์ของ repo นี้ (หน้าเว็บ 8 จุด, JSON-LD, บทความ, PRODUCT.md) `@outlook.com` ก็ส่งถึงเหมือนกัน (LinkedIn ใช้ตัวนั้น) แต่หน้าเว็บให้คงเป็น `.co.th` ตัวเดียวทั้งไฟล์ อย่าสลับไปมา — schema กับ Google Business Profile ควรตรงกัน
-- สไตล์: อ่าน DESIGN.md ก่อนแก้ — design token ทั้งหมดอยู่ใน `:root` **บล็อกเดียว**ต้น `<style>` (รวมจาก 6 บล็อกเมื่อ 23 ก.ย. 2026 ค่าเท่าเดิมทุกตัว) token ใหม่เพิ่มในบล็อกนั้น ห้ามเปิด `:root` บล็อกใหม่ · `--ui-muted: #516661` กับ `--brand-pink-soft: #EFA9BB` มาจากรอบไล่ WCAG AA ห้ามย้อน · ชื่อรุ่นเก่า (`--navy` `--accent` `--muted` ฯลฯ) ยังถูกเรียกจาก rule ต้นไฟล์ ชี้เข้าแบรนด์แล้ว
-- Bilingual: dictionary `I18N` (selector → EN/TH) อยู่ท้าย `<script>` ใน index.html — เพิ่ม/ย้าย/แก้ข้อความบนหน้าแล้วต้องอัปเดตคู่แปลด้วย โดยเฉพาะ selector แบบ nth-child; `#articles` ไม่แปลโดยตั้งใจ · `aria-label` / `alt` / `title` ภาษาไทยต้องมีคู่ใน `I18N_ATTR` (ใช้ `querySelector` ตัวแรกตัวเดียว selector ต้องไม่ซ้ำ) ยกเว้นปุ่มที่ป้ายเปลี่ยนตามสถานะ ให้สลับภาษาในสคริปต์ของมันเอง — CI ตรวจให้
+- **Live: https://www.jwicconsulting.com/** — GitHub Pages deploys on every push to `main` (repo sunshanlin/JHSite, **public**). Never delete `CNAME` at the root, or the custom domain breaks.
+- One file: `index.html` — all HTML + CSS inline, no build step, no dependencies (`poster.html` = A4 poster, printed to PDF).
+- Run / screenshot / test: skill `/run-promote-site` (not `python -m http.server` — python on this machine is a Store stub).
+- Contact: phone/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · e-mail **`jirapat.wi@outlook.co.th`** in every file of this repo (8 spots on the page, JSON-LD, articles, PRODUCT.md). `@outlook.com` reaches the same inbox (LinkedIn uses it), but the site keeps `.co.th` only, never mixed — schema and Google Business Profile should match.
+- Style: read DESIGN.md before editing. All design tokens live in **one** `:root` block at the top of `<style>` (merged from 6 blocks on 23 Sep 2026, every value unchanged); add new tokens there, never open a second `:root`. `--ui-muted: #516661` and `--brand-pink-soft: #EFA9BB` came from the WCAG AA pass — don't roll them back. Legacy names (`--navy` `--accent` `--muted` …) are still used by early rules and now point at the brand.
+- Bilingual: the `I18N` dictionary (selector → EN/TH) sits at the end of `<script>` in index.html — adding, moving or editing page copy means updating its pair too, nth-child selectors above all; `#articles` is untranslated on purpose. Thai `aria-label` / `alt` / `title` need a pair in `I18N_ATTR` (it takes the first `querySelector` match only, so the selector must be unique), except buttons whose label changes with state: they switch language in their own script. CI checks this.
 
-## โครงไฟล์ — ไฟล์ใหม่เข้าโฟลเดอร์ไหน
+## File layout — where a new file goes
 
-ทุกไฟล์ที่ commit จะถูกเสิร์ฟเป็น URL จริงบน jwicconsulting.com — **ห้ามย้าย/เปลี่ยนชื่อไฟล์ที่มีอยู่** ไม่งั้นลิงก์ที่แชร์ไปแล้วพัง
+Every committed file is served as a real URL on jwicconsulting.com, except folders starting with `_` or `.` and what `_config.yml` excludes. **Never move or rename an existing file** — links already shared would break.
 
-| ไฟล์แบบไหน | ไปไหน |
+| Kind of file | Goes to |
 |---|---|
-| บทความหน้าใหม่ | `articles/` |
-| รูปที่ขึ้นหน้าเว็บ | `img/` (โลโก้/แบรนด์ → `img/brand/`, badge-ใบเซอร์ → `img/credentials/`) |
-| รูปแม่ไม่มีลายน้ำ | `img/originals/` — gitignore แล้ว ห้าม commit ขึ้นโฮสต์ |
-| PDF ใบเซอร์ตัวจริง | `credentials/` |
-| CSS ที่ใช้ร่วมหลายหน้า | `css/` |
-| ฟอนต์ (woff2 self-host + `OFL.txt`) | `css/fonts/` — ชุดเดียวกับที่ Google Fonts เสิร์ฟ ประกาศ `@font-face` ต้น `<style>` ของ index.html และต้น `css/article.css` |
-| JS ที่ใช้ร่วมหลายหน้า (ตอนนี้มีแค่ `js/article.js` = แถบคุกกี้ + GA ของบทความ) | `js/` |
-| ภาพแชร์ og:image ของบทความ 1200×630 | `img/og/` — สร้างด้วย `node .claude/skills/run-promote-site/og.mjs` |
-| ภาพแชร์ og:image ของหน้าแรก 1200×630 | `img/og/home.png` — เรนเดอร์จาก `.claude/skills/run-promote-site/og-home.html` (คำสั่งอยู่หัวไฟล์) og.mjs ไม่แตะไฟล์นี้ · `img/jh-poster.png` เลิกเป็นภาพแชร์แล้ว แต่ห้ามลบ (ลิงก์เก่ายังชี้อยู่) |
-| หน้าเว็บ + ไฟล์ระบบ Pages (`index.html` `404.html` `CNAME` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css` และหน้า print: `poster.html` `banner.html` `flyer-overview.html` `flyer-implementation.html`) | root — เท่าที่มีอยู่ ห้ามเพิ่มไฟล์ root ใหม่ถ้าไม่ใช่หน้าเว็บจริง |
-| งาน presales (เด็ค PowerPoint + สคริปต์ประกอบ) | **ไม่อยู่ใน repo นี้แล้ว** — ย้ายไป `D:\BC\Project\JHCore\docs\Presentation` (9 ต.ค. 2026) |
-| แผนงาน/บันทึกประเมินหน้าเว็บ (ไม่ขึ้นเว็บ) | `_plans/` — ขึ้นต้นด้วย `_` เพราะ Jekyll ไม่เสิร์ฟ (ดูหัวข้อ `.nojekyll` ข้างล่าง) ล่าสุด `_plans/2026-09-improvement-plan.md` |
-| ของชั่วคราวจากแคปหน้าจอ/ทดสอบ | `output/`, `.playwright-cli/` — gitignore แล้ว ลบทิ้งได้เสมอ |
+| New article | `articles/` |
+| Images on the page | `img/` (logo/brand → `img/brand/`, badges and certificates → `img/credentials/`) |
+| Unwatermarked source images | `img/originals/` — gitignored, never commit them to the host |
+| Original certificate PDFs | `credentials/` |
+| CSS shared by several pages | `css/` |
+| Fonts (self-hosted woff2 + `OFL.txt`) | `css/fonts/` — the same set Google Fonts serves; `@font-face` declared at the top of index.html's `<style>` and of `css/article.css` |
+| JS shared by several pages (only `js/article.js` today = cookie bar + GA for articles) | `js/` |
+| Article share image (og:image) 1200×630 | `img/og/` — made with `node .claude/skills/run-promote-site/og.mjs` |
+| Home page share image (og:image) 1200×630 | `img/og/home.png` — rendered from `.claude/skills/run-promote-site/og-home.html` (command in its header); og.mjs leaves it alone · `img/jh-poster.png` is no longer the share image but must not be deleted (old links still point at it) |
+| Pages + Pages system files (`index.html` `404.html` `CNAME` `_config.yml` `robots.txt` `sitemap.xml` `llms.txt` `favicon.ico` `style.css`, and the print pages `poster.html` `banner.html` `flyer-overview.html` `flyer-implementation.html`) | root — only these; no new root file unless it is a real page |
+| Internal notes at the root (`CLAUDE.md` `DESIGN.md` `PRODUCT.md` `JH-Site.code-workspace`) | listed under `exclude` in `_config.yml` (21 Oct 2026) — without it Pages served them as files and rendered the Markdown ones as `/CLAUDE.html` `/PRODUCT.html` `/DESIGN.html`. A new internal file at the root goes on that list too |
+| Presales (PowerPoint decks + scripts) | **not in this repo any more** — moved to `D:\BC\Project\JHCore\docs\Presentation` (9 Oct 2026) |
+| Plans and site reviews (not published) | `_plans/` — the `_` prefix keeps Jekyll from serving it (see the `.nojekyll` section below); latest `_plans/2026-09-improvement-plan.md` |
+| Temporary screenshot/test output | `output/`, `.playwright-cli/` — gitignored, always safe to delete |
 
-## เครดิตรูปถ่าย
+## Photo credits
 
-รูปถ่ายคนใน `#features` และ `#contact` มาจาก [Pexels](https://www.pexels.com/license/) และ [Unsplash](https://unsplash.com/license) — ทั้งคู่ใช้ฟรีเชิงพาณิชย์ ไม่ต้องให้เครดิต แต่ไล่ที่มาไว้กันลืม
+The people photos in `#features` and `#contact` come from [Pexels](https://www.pexels.com/license/) and [Unsplash](https://unsplash.com/license) — both free for commercial use with no credit required; sources kept here so they aren't lost.
 
-หมายเหตุ: รูป Unsplash ที่เป็น Unsplash+ (Getty) จะโหลดไม่ได้ (403) — ถือเป็นตัวกรองลิขสิทธิ์ในตัว:
+Unsplash+ (Getty) images fail to load (403), which works as a built-in license filter:
 
-| ไฟล์ | ที่มา |
+| File | Source |
 |---|---|
 | `feat-vat.webp` | Pexels 259139 |
 | `feat-wht.webp` | Pexels 8111853 |
 | `feat-stock.webp` | Pexels 4483941 |
 | `feat-docs.webp` | Unsplash `7b_9cHdKgFg` |
-| `feat-messenger.webp` | ผู้ใช้จัดหามาเอง (ยืนยันมีสิทธิ์ใช้แล้ว) |
-| `why-person.webp` | ผู้ใช้จัดหามาเอง (ยืนยันมีสิทธิ์ใช้แล้ว) |
+| `feat-messenger.webp` | supplied by the owner (rights confirmed) |
+| `why-person.webp` | supplied by the owner (rights confirmed) |
 | `feat-api.webp` | Pexels 36706460 |
 | `consult-meeting.webp` | Pexels 7643897 |
-| `pricing-consultation.webp` | (ของเดิมในโปรเจกต์) |
+| `pricing-consultation.webp` | (already in the project) |
 
-ทุกไฟล์ผ่าน `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` ให้สว่าง/สดขึ้นก่อนแปลงเป็น WebP
+Every file went through `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` to brighten it before the WebP conversion.
 
-`img/credentials/dbd-registered.png` = สำเนาป้าย DBD ใช้ในสไลด์ และเป็น**ตัวสำรองตอนเซิร์ฟเวอร์ DBD ล่ม** (`onerror` บน `<img>` ของ `.dbd`) — **หน้าเว็บต้อง hotlink จาก `dbdregistered.dbd.go.th` เป็นตัวหลักต่อไป** ห้ามสลับให้สำเนาเป็นตัวหลัก ลิงก์ของป้ายต้องชี้หน้าตรวจสอบของ DBD เสมอ
+`img/credentials/dbd-registered.png` is a copy of the DBD badge, used in slides and as the **fallback when the DBD server is down** (`onerror` on the `.dbd` `<img>`). **The page must keep hotlinking from `dbdregistered.dbd.go.th` as the primary** — never make the copy primary; the badge link must always point at DBD's verification page.
 
-## โฟลเดอร์ขึ้นต้นด้วย `_` — ไม่ขึ้นเว็บ
+## Folders starting with `_` — not published
 
-**Jekyll ของ GitHub Pages ไม่เสิร์ฟโฟลเดอร์ที่ขึ้นต้นด้วย `_`** — ของใน `_plans/` จึงไม่กลายเป็น URL สาธารณะ
-⚠ **ห้ามเพิ่มไฟล์ `.nojekyll` ที่ root** มันปิด Jekyll ทั้งตัว แล้วโฟลเดอร์ `_` ทั้งหมดจะโหลดได้จาก jwicconsulting.com ทันที
-งาน presales (`_presales/` เดิม) ย้ายไป `D:\BC\Project\JHCore\docs\Presentation` แล้ว (9 ต.ค. 2026) — สคริปต์ที่นั่นยังอ่านรูปจาก `img/` ของ repo นี้ (`imgRoot` ใน `build/deck-core.json`) ย้ายหรือเปลี่ยนชื่อรูปใน `img/` ต้องตามไปแก้ด้วย
+**GitHub Pages' Jekyll does not serve folders starting with `_`**, so nothing in `_plans/` becomes a public URL.
+⚠ **Never add `.nojekyll` at the root**: it turns Jekyll off entirely, and every `_` folder (and every file `_config.yml` excludes) becomes loadable from jwicconsulting.com at once.
+Presales (the former `_presales/`) moved to `D:\BC\Project\JHCore\docs\Presentation` (9 Oct 2026). Its scripts still read images from this repo's `img/` (`imgRoot` in `build/deck-core.json`): moving or renaming an image in `img/` means fixing it there too.
 
-## worker/ — ตัวกลางเรียก VAT Service ของกรมสรรพากร (Cloudflare Worker `jwic-vat`)
+## worker/ — proxy to the Revenue Department VAT Service (Cloudflare Worker `jwic-vat`)
 
-- `#vat-service` บนเว็บจริงเรียก `https://api.jwicconsulting.com/vat` (custom domain ของ worker ใน `worker/wrangler.toml`) แบบข้ามโดเมน พึ่ง CORS ใน `vat-proxy.js` · รันในเครื่อง (localhost) เรียก `https://jwic-vat.jwic.workers.dev` แทน (หรือ `?vat=<url>`) · CSP `connect-src` ต้องมีทั้งสองโฮสต์
-- ⚠ **record `www` และ apex ใน Cloudflare ต้องเป็นเมฆเทา (DNS only) เสมอ** — GitHub Pages ต่อ cert Let's Encrypt ได้ก็ต่อเมื่อ DNS ชี้ตรงมาที่มัน · เดิมผูก route `www.jwicconsulting.com/api/vat*` ซึ่งต้องเปิดเมฆส้มให้ www ผลคือ cert ต่ออายุไม่ได้ (สถานะ `bad_authz`) หมดอายุ 18 ต.ค. 2026 แล้ว Cloudflare Full (strict) ตอบ 526 ทั้งเว็บ จึงย้ายมาใช้ subdomain `api` แทน
-- เช็กสถานะ cert ฝั่ง GitHub: `gh api repos/sunshanlin/JHSite/pages --jq .https_certificate` · เช็ก worker: `curl -s "https://api.jwicconsulting.com/vat?tin=0105558000123"` ได้ JSON ขึ้นต้น `{"ok"` = ทำงาน
-- จำกัด 20 ครั้ง/นาที/IP (`[[unsafe.bindings]]` ชื่อ RL) · บัญชีกรมสรรพากรใส่ผ่าน `npx wrangler secret put RD_USER` ห้ามเขียนลงโค้ด — ทุกไฟล์ใน `worker/` เป็น URL สาธารณะ
+- `#vat-service` on the live site calls `https://api.jwicconsulting.com/vat` (the worker's custom domain in `worker/wrangler.toml`) cross-origin, relying on CORS in `vat-proxy.js` · run locally (localhost) it calls `https://jwic-vat.jwic.workers.dev` instead (or `?vat=<url>`) · CSP `connect-src` must list both hosts.
+- ⚠ **The `www` and apex records in Cloudflare must always be grey-cloud (DNS only)** — GitHub Pages can renew its Let's Encrypt cert only while DNS points straight at it. The old route `www.jwicconsulting.com/api/vat*` needed orange cloud on www, so the cert could not renew (status `bad_authz`), expired on 18 Oct 2026, and Cloudflare Full (strict) answered 526 for the whole site; hence the `api` subdomain.
+- Cert status on GitHub: `gh api repos/sunshanlin/JHSite/pages --jq .https_certificate` · worker check: `curl -s "https://api.jwicconsulting.com/vat?tin=0105558000123"` returning JSON that starts `{"ok"` = working.
+- Limit 20 requests/minute/IP (`[[unsafe.bindings]]` named RL) · the Revenue Department account goes in via `npx wrangler secret put RD_USER`, never in code — every file in `worker/` is a public URL.
 
 ## CI
 
-- `links.yml` — ลิงก์/รูปภายในไม่ 404 (lychee offline) · เพิ่มลิงก์ `/#section` ใหม่ในบทความต้องเติมชื่อ section ใน `--exclude`
-- `page-checks.yml` — html-validate (กฎใน `.github/htmlvalidate.json`) + เปิดหน้าใน Chrome จริงด้วย `.github/scripts/page-checks.mjs`: console/CSP error, หน้าเลื่อนข้าง, แถบเมนูตกสองแถว, I18N selector ตาย, ข้อความไทยหรือ aria-label/alt ไทยค้างในโหมด EN, ข้อความ #pricing ล้นหรือต้องพึ่ง `.wrap-rescue`, ปุ่มเล็กกว่า 24px, ความยาวหน้ามือถือ, CTA/บทความอื่นในทุกบทความ, จำนวนหน้าตอนพิมพ์ — รันในเครื่อง: `npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs`
+- `links.yml` — internal links/images don't 404 (lychee offline) · a new `/#section` link in an article needs that section name added to `--exclude`.
+- `page-checks.yml` — html-validate (rules in `.github/htmlvalidate.json`) + the page opened in real Chrome by `.github/scripts/page-checks.mjs`: console/CSP errors, horizontal scroll, nav bar wrapping to two rows, dead I18N selectors, Thai text or Thai aria-label/alt left in EN mode, `#pricing` copy overflowing or needing `.wrap-rescue`, buttons under 24px, mobile page length, CTA/other articles in every article, printed page count — run locally: `npm i --no-save --prefix .github/scripts playwright-core && node .github/scripts/page-checks.mjs`

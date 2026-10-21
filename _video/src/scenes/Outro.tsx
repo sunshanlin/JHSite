@@ -11,6 +11,9 @@
 //   f 66–98  "JWIC Consulting" is uncovered left → right by a feathered mask sweeping out of the mark (whole on beat 171)
 //   f 111+   tagline + URL, then the Localization line, settle just after the stop; a 2 % push under the ring-out
 // The mark sits at the lockup spot from the start, so nothing slides once it is there.
+// `handOver={false}` (the Localization explainer's ending, src/loc/Loc.tsx) leaves the folder out: that film has no folder to hand
+// over, the rest of the outro runs frame for frame as here. There the owner kept only the mark and the name (2026-10-19,
+// `lines={false}`: no tagline, Localization line or URL), so the name sits on the mark's centre line instead of 30 px above it.
 // Phone legibility (owner 2026-10-13): the URL is 64 px and comes in with the tagline, the Localization line 45 px
 // (about the wordmark's width, so the lockup stays one block). The 4:5 hero draws no stage of its own: its window sat
 // as a lighter band with hard edges on the hero's ground (final review 2026-10-13).
@@ -41,7 +44,7 @@ const LINES = local(beatF(172)) + 2; // 111 — just after the stop
 const OUTLINE = 'M4.5,0.5 H59.5 A4,4 0 0 1 63.5,4.5 V59.5 A4,4 0 0 1 59.5,63.5 H4.5 A4,4 0 0 1 0.5,59.5 V4.5 A4,4 0 0 1 4.5,0.5 Z';
 const WIPE_FEATHER = 18; // % of the name's width
 
-export const Outro: React.FC = () => {
+export const Outro: React.FC<{ handOver?: boolean; lines?: boolean }> = ({ handOver = true, lines = true }) => {
   const frame = useAuthorFrame();
   const hero = useHeroMode();
   const f = frame - 8; // scene lead
@@ -66,7 +69,7 @@ export const Outro: React.FC = () => {
       {/* hold under the song's last chord: only a 2 % push, the lockup itself stays still */}
       <AbsoluteFill style={{ transform: `scale(${(1 + 0.02 * ramp(f, 120, 84, EASE.smooth)).toFixed(5)})`, transformOrigin: '960px 560px' }}>
       <div style={{ position: 'absolute', left: 960 + SHIFT, top: 540, width: 0, height: 0 }}>
-        {fade < 1 && (
+        {handOver && fade < 1 && (
           <div style={{
             ...centred, opacity: 1 - fade, filter: fade > 0.01 ? `blur(${(22 * fade).toFixed(2)}px)` : undefined,
             transform: `translate(-50%, -50%) translateX(${(-SHIFT * (1 - drift)).toFixed(2)}px) scale(${(1 - 0.04 * fade).toFixed(4)})`,
@@ -85,22 +88,26 @@ export const Outro: React.FC = () => {
 
       {/* wordmark, uncovered out of the mark */}
       <div style={{
-        position: 'absolute', left: textLeft, top: 540 - 30, transform: 'translateY(-50%)', fontWeight: 700, fontSize: WORD_SIZE, lineHeight: 1,
+        position: 'absolute', left: textLeft, top: 540 - (lines ? 30 : 0), transform: 'translateY(-50%)', fontWeight: 700, fontSize: WORD_SIZE, lineHeight: 1,
         color: C.ink, letterSpacing: '0.01em', whiteSpace: 'pre', maskImage: wipeMask, WebkitMaskImage: wipeMask,
       }}>{WORD}</div>
-      <div style={{
-        position: 'absolute', left: textLeft + 4, top: 540 + 50, fontWeight: 600, fontSize: 34, letterSpacing: '0.2em', color: C.muted,
-        opacity: tag, transform: `translateY(${((1 - tag) * 14).toFixed(1)}px)`, filter: tag >= 0.999 ? undefined : `blur(${((1 - tag) * 6).toFixed(2)}px)`,
-      }}>HONEST ADVICE, PRACTICAL SOLUTION</div>
-      {/* what the company ships, in one line (owner 2026-10-13: make JWIC Localization explicit) */}
-      <div style={{
-        position: 'absolute', left: textLeft + 4, top: 540 + 108, fontWeight: 600, fontSize: 45, color: C.green, whiteSpace: 'nowrap',
-        opacity: loc, transform: `translateY(${((1 - loc) * 14).toFixed(1)}px)`, filter: loc >= 0.999 ? undefined : `blur(${((1 - loc) * 6).toFixed(2)}px)`,
-      }}>Thai Localization สำหรับ Business Central</div>
-      <div style={{
-        position: 'absolute', left: 0, right: 0, top: 840, textAlign: 'center', fontWeight: 600, fontSize: 64, color: C.green,
-        opacity: url, transform: `translateY(${((1 - url) * 14).toFixed(1)}px)`,
-      }}>www.jwicconsulting.com</div>
+      {lines && (
+        <>
+          <div style={{
+            position: 'absolute', left: textLeft + 4, top: 540 + 50, fontWeight: 600, fontSize: 34, letterSpacing: '0.2em', color: C.muted,
+            opacity: tag, transform: `translateY(${((1 - tag) * 14).toFixed(1)}px)`, filter: tag >= 0.999 ? undefined : `blur(${((1 - tag) * 6).toFixed(2)}px)`,
+          }}>HONEST ADVICE, PRACTICAL SOLUTION</div>
+          {/* what the company ships, in one line (owner 2026-10-13: make JWIC Localization explicit) */}
+          <div style={{
+            position: 'absolute', left: textLeft + 4, top: 540 + 108, fontWeight: 600, fontSize: 45, color: C.green, whiteSpace: 'nowrap',
+            opacity: loc, transform: `translateY(${((1 - loc) * 14).toFixed(1)}px)`, filter: loc >= 0.999 ? undefined : `blur(${((1 - loc) * 6).toFixed(2)}px)`,
+          }}>Thai Localization สำหรับ Business Central</div>
+          <div style={{
+            position: 'absolute', left: 0, right: 0, top: 840, textAlign: 'center', fontWeight: 600, fontSize: 64, color: C.green,
+            opacity: url, transform: `translateY(${((1 - url) * 14).toFixed(1)}px)`,
+          }}>www.jwicconsulting.com</div>
+        </>
+      )}
       </AbsoluteFill>
     </AbsoluteFill>
   );

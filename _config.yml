@@ -1,0 +1,9 @@
+# GitHub Pages (Jekyll) build settings.
+# Keep repo-internal files off www.jwicconsulting.com: without this list Pages serves them as-is
+# (/CLAUDE.md, /PRODUCT.md, /JH-Site.code-workspace) and renders the Markdown ones as pages
+# (/CLAUDE.html, /PRODUCT.html, /DESIGN.html), all open to search engines.
+exclude:
+  - CLAUDE.md
+  - DESIGN.md
+  - PRODUCT.md
+  - JH-Site.code-workspace

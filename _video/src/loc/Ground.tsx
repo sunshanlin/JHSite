@@ -1,12 +1,17 @@
-// The explainer's one ground: the month clip's breath sky (Main.tsx BreathGround), drawn by every scene so a cut
-// between scenes only changes the content on top of it.
+// The ground of every scene: a soft two-stop neutral grey (skin.ts `M.bg`, owner 2026-10-21) with two slow, blurred bokeh blobs (white, grey) — the
+// owner's grey since 2026-10-21. A cut between scenes is an iris reveal of the next scene (Loc.tsx); on one grey the circle shows on the content.
 import React from 'react';
 import { AbsoluteFill } from 'remotion';
-import { C } from '../theme';
+import { useAuthorFrame } from '../rate';
+import { M, type Field } from './skin';
 
-export const Ground: React.FC<{ opacity?: number }> = ({ opacity = 1 }) => (
-  <AbsoluteFill style={{ opacity, background: `linear-gradient(135deg, ${C.sky[0]} 0%, ${C.sky[1]} 35%, ${C.sky[2]} 70%, ${C.sky[3]} 100%)` }}>
-    <div style={{ position: 'absolute', left: 1240, top: -160, width: 640, height: 640, borderRadius: '50%', background: C.bokeh[0], filter: 'blur(70px)', opacity: 0.7 }} />
-    <div style={{ position: 'absolute', left: -160, top: 620, width: 680, height: 680, borderRadius: '50%', background: C.bokeh[1], filter: 'blur(70px)', opacity: 0.7 }} />
-  </AbsoluteFill>
-);
+export const Ground: React.FC<{ field?: Field }> = ({ field = 'peach' }) => {
+  const f = useAuthorFrame();
+  const [a, b] = M.bg[field];
+  return (
+    <AbsoluteFill style={{ background: `linear-gradient(160deg, ${a} 0%, ${b} 100%)` }}>
+      <div style={{ position: 'absolute', left: 1180 + Math.sin(f * 0.012) * 60, top: -220, width: 820, height: 820, borderRadius: '50%', background: M.bokeh[0], opacity: 0.75, filter: 'blur(90px)' }} />
+      <div style={{ position: 'absolute', left: -240, top: 560 + Math.cos(f * 0.011) * 50, width: 760, height: 760, borderRadius: '50%', background: M.bokeh[1], opacity: 0.7, filter: 'blur(100px)' }} />
+    </AbsoluteFill>
+  );
+};

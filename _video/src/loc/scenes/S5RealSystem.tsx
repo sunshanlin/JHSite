@@ -6,18 +6,19 @@
 // face shading by |cos θ| with the narrow edge light sweeping 56° → 124° and peaking at 90°, the mirrored reflection masked to
 // 26 %, the ground shadow scaled by |cos θ|, the back's number springing 1.08 → 1 and its label rising 4 f later, camera
 // 1 → 1.03. Adapted: the three flips are timed to the VO lines (not a fixed 12 f stagger), the cards are light (shade ≤ 0.25)
-// on the sky ground, the back holds two real captures (report → form) with a JWIC Thai Localization tag, and the reflection
-// is faint (0.12) on a light floor.
+// on the ledger paper, the back holds two real captures (report → form) with a JWIC Thai Localization tag. Skin (owner
+// 2026-10-19, skin.ts): paper-slip fronts with an ink border and serif names, hard shadows instead of the reflection and
+// the soft ground shadow.
 import React from 'react';
 import { AbsoluteFill, Img, staticFile } from 'remotion';
-import { EASE, bezier, mix, ramp, softShadow } from '../../fx/Polish';
+import { EASE, bezier, mix, ramp } from '../../fx/Polish';
 import { alpha, springAt } from '../../fx/Look';
-import { C, THAI } from '../../theme';
 import { JwMark } from '../../JwMark';
 import { Ground } from '../Ground';
-import { BuildingPicto, HandshakePicto, INK, JADE } from '../Picto';
+import { BuildingPicto, FlagsPicto, INK } from '../Picto';
+import { FONT, M, soft } from '../skin';
 import { useSceneFrame } from '../frame';
-import { VO_LOCAL, speechFrames } from '../timeline';
+import { cue } from '../timeline';
 
 const CW = 480, CH = 620, GAP = 48;
 const X0 = (1920 - (CW * 3 + GAP * 2)) / 2;
@@ -32,19 +33,19 @@ const angleAt = (f: number, s: number) => {
 };
 
 type Card = {
-  category: string; name: string; Picto: React.FC<{ size?: number }>;
+  category: string; name: string; pal: readonly [string, string]; Picto: React.FC<{ size?: number }>;
   top: { src: string; w: number; h: number; crop?: { y: number; h: number } }; // a 16:9 screen or a landscape report
   bottom: { src: string; w: number; h: number; crop: { y: number; h: number } }; // the top region of an A4 form
   topLabel: string; bottomLabel: string;
 };
 const CARDS: Card[] = [
-  { category: 'Regulatory', name: 'ภ.พ.30', Picto: BuildingPicto,
+  { category: 'Regulatory', name: 'ภ.พ.30', pal: M.badge.doc, Picto: BuildingPicto,
     top: { src: 'docs/sales-vat.png', w: 2573, h: 1819, crop: { y: 0, h: 0.78 } }, topLabel: 'รายงานภาษีขาย · แยกสาขา',
     bottom: { src: 'docs/pp30.png', w: 1819, h: 2573, crop: { y: 0.03, h: 0.32 } }, bottomLabel: 'ภ.พ.30 พร้อมยื่น' },
-  { category: 'Regulatory', name: '50 ทวิ', Picto: BuildingPicto,
+  { category: 'Regulatory', name: '50 ทวิ', pal: M.badge.tax, Picto: BuildingPicto,
     top: { src: 'screens/direct-wht-info.png', w: 3840, h: 2160 }, topLabel: 'จ่ายผู้ขาย · หัก ณ ที่จ่าย',
     bottom: { src: 'docs/wht-cert.png', w: 1819, h: 2573, crop: { y: 0.04, h: 0.32 } }, bottomLabel: 'หนังสือรับรอง 50 ทวิ · ไฟล์ ภ.ง.ด.' },
-  { category: 'National standards', name: 'ใบวางบิล', Picto: HandshakePicto,
+  { category: 'National standards', name: 'ใบวางบิล', pal: M.badge.trade, Picto: FlagsPicto,
     top: { src: 'screens/billing-board.png', w: 3840, h: 2160 }, topLabel: 'Billing Board · รอบวางบิลของลูกค้า',
     bottom: { src: 'docs/billing-note.png', w: 1819, h: 2573, crop: { y: 0.03, h: 0.32 } }, bottomLabel: 'ใบวางบิล' },
 ];
@@ -54,7 +55,7 @@ const Crop: React.FC<{ src: string; iw: number; ih: number; w: number; crop?: { 
   const ph = (w * ih) / iw;
   const y = crop ? crop.y * ph : 0;
   const h = crop ? crop.h * ph : ph;
-  return <div style={{ width: w, height: h, backgroundImage: `url(${staticFile(src)})`, backgroundSize: `${w}px ${ph}px`, backgroundPosition: `0 ${-y}px`, borderRadius: 10, boxShadow: `inset 0 0 0 1px ${alpha(INK, 0.1)}`, ...style }} />;
+  return <div style={{ width: w, height: h, backgroundImage: `url(${staticFile(src)})`, backgroundSize: `${w}px ${ph}px`, backgroundPosition: `0 ${-y}px`, borderRadius: 16, boxShadow: `inset 0 0 0 1px ${alpha(INK, 0.1)}`, ...style }} />;
 };
 
 const FaceLight: React.FC<{ angle: number; max: number }> = ({ angle, max }) => {
@@ -81,26 +82,22 @@ const FlipCard: React.FC<{ i: number; f: number; start: number }> = ({ i, f, sta
   return (
     <div style={{ position: 'absolute', inset: 0, perspective: 1600 }}>
       <div style={{ position: 'absolute', inset: 0, transformStyle: 'preserve-3d', transform: `translateZ(${(lift * 60).toFixed(2)}px) rotateY(${angle.toFixed(3)}deg)` }}>
-        {/* front: the pictogram card */}
-        <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', borderRadius: 34, overflow: 'hidden', background: `linear-gradient(180deg, #ffffff 0%, ${C.sky[1]} 100%)`, boxShadow: `inset 0 0 0 2px ${alpha(JADE, 0.35)}, inset 0 2px 0 #fff`, fontFamily: THAI }}>
-          <div style={{ position: 'absolute', left: 36, top: 32, fontSize: 24, fontWeight: 700, letterSpacing: '0.08em', color: C.muted }}>{c.category}</div>
-          <div style={{ position: 'absolute', left: 0, right: 0, top: 150, display: 'flex', justifyContent: 'center' }}><P size={220} /></div>
-          <div style={{ position: 'absolute', left: 36, right: 36, bottom: 44, fontSize: 64, fontWeight: 800, color: C.green, lineHeight: 1.2 }}>{c.name}</div>
-          <FaceLight angle={angle} max={0.25} />
+        {/* front: a gradient badge with the category's pictogram and the one key word */}
+        <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', borderRadius: 44, overflow: 'hidden', background: '#fff', fontFamily: FONT }}>
+          <div style={{ position: 'absolute', left: '50%', top: 96, width: 300, height: 300, marginLeft: -150, borderRadius: '50%', background: `linear-gradient(155deg, ${c.pal[0]}, ${c.pal[1]})`, boxShadow: `0 30px 44px -16px ${c.pal[1]}aa`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><P size={210} /></div>
+          <div style={{ position: 'absolute', left: 0, right: 0, bottom: 64, textAlign: 'center', fontSize: 60, fontWeight: 800, color: M.ink, lineHeight: 1.2, letterSpacing: '-0.01em' }}>{c.name}</div>
+          <FaceLight angle={angle} max={0.18} />
         </div>
         {/* back: the real thing */}
-        <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', borderRadius: 34, overflow: 'hidden', background: '#fff', boxShadow: `inset 0 0 0 1.5px ${alpha(INK, 0.08)}, inset 0 2px 0 #fff`, fontFamily: THAI }}>
+        <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', borderRadius: 44, overflow: 'hidden', background: '#fff', fontFamily: FONT }}>
           <div style={{ position: 'absolute', left: 20, top: 20, transform: `scale(${mix(1.08, 1, num).toFixed(4)})`, transformOrigin: 'top left' }}>
             <Crop src={c.top.src} iw={c.top.w} ih={c.top.h} w={CW - 40} crop={c.top.crop} />
-            <div style={{ marginTop: 10, fontSize: 24, fontWeight: 600, color: C.muted, opacity: lab }}>{c.topLabel}</div>
           </div>
           <div style={{ position: 'absolute', left: 20, top: 316, transform: `scale(${mix(1.08, 1, num).toFixed(4)})`, transformOrigin: 'top left' }}>
             <Crop src={c.bottom.src} iw={c.bottom.w} ih={c.bottom.h} w={CW - 40} crop={c.bottom.crop} />
-            <div style={{ marginTop: 10, fontSize: 24, fontWeight: 600, color: C.muted, opacity: lab }}>{c.bottomLabel}</div>
           </div>
-          <div style={{ position: 'absolute', left: 20, bottom: 18, height: 40, padding: '0 14px 0 6px', borderRadius: 20, background: C.green, color: '#fff', display: 'flex', alignItems: 'center', gap: 8, fontSize: 22, fontWeight: 600, opacity: lab, transform: `translateY(${(1 - lab) * 10}px)` }}>
-            <JwMark size={26} id={`jw-s5-${i}`} />
-            JWIC Thai Localization
+          <div style={{ position: 'absolute', right: 22, bottom: 20, width: 64, height: 64, borderRadius: 32, background: `linear-gradient(155deg, ${M.badge.doc[0]}, ${M.badge.doc[1]})`, boxShadow: soft(10, 0.25), display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: lab, transform: `scale(${mix(0.6, 1, lab)})` }}>
+            <JwMark size={40} id={`jw-s5-${i}`} />
           </div>
           <FaceLight angle={180 - angle} max={0.2} />
         </div>
@@ -110,30 +107,22 @@ const FlipCard: React.FC<{ i: number; f: number; start: number }> = ({ i, f, sta
 };
 
 export const S5RealSystem: React.FC = () => {
-  const { f, inOp, outOp } = useSceneFrame('s5');
-  const starts = [VO_LOCAL[11] + Math.round(speechFrames(11) * 0.5), VO_LOCAL[12] + Math.round(speechFrames(12) * 0.3), VO_LOCAL[13] + Math.round(speechFrames(13) * 0.3)];
-  const push = 1 + 0.03 * ramp(f, 0, 640, EASE.smooth);
-  const label = ramp(f, 4, 14, EASE.out);
+  const { f, inOp } = useSceneFrame('s5');
+  const starts = [0, 1, 2].map((i) => cue('s5Flips', i)); // แยกตามสาขา · ระบบออกหนังสือรับรอง · วางตามรอบ
+  const push = 1 + 0.02 * ramp(f, 0, 640, EASE.smooth);
   return (
-    <AbsoluteFill style={{ opacity: inOp * outOp }}>
-      <Ground />
-      <div style={{ position: 'absolute', left: 120, top: 84, fontFamily: THAI, fontWeight: 600, fontSize: 36, color: C.muted, opacity: label, transform: `translateY(${(1 - label) * 12}px)` }}>
-        JWIC Thai Localization บน Business Central
-      </div>
-      {/* floor line */}
-      <div style={{ position: 'absolute', left: 0, right: 0, top: Y + CH + 6, height: 1, background: alpha(INK, 0.08) }} />
-      <AbsoluteFill style={{ transform: `scale(${push.toFixed(4)})`, transformOrigin: '50% 60%' }}>
+    <AbsoluteFill style={{ opacity: inOp }}>
+      <Ground field="butter" />
+      <AbsoluteFill style={{ transform: `scale(${push.toFixed(4)})`, transformOrigin: '50% 55%' }}>
         {CARDS.map((_, i) => {
           const p = springAt(f, 2 + i * 6, { damping: 14, stiffness: 120 });
           const x = X0 + i * (CW + GAP);
           const cos = Math.abs(Math.cos((angleAt(f, starts[i]) * Math.PI) / 180));
           return (
             <div key={i} style={{ opacity: Math.min(1, p * 1.5), transform: `translateY(${(1 - p) * 40}px)` }}>
-              <div style={{ position: 'absolute', left: x, top: Y + CH + 8, width: CW, height: CH, transform: 'scaleY(-1)', transformOrigin: 'center', opacity: 0.12, WebkitMaskImage: 'linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 26%)', maskImage: 'linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 26%)' }}>
-                <FlipCard i={i} f={f} start={starts[i]} />
-              </div>
-              <div style={{ position: 'absolute', left: x + 30, width: CW - 60, top: Y + CH - 16, height: 36, borderRadius: '50%', background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${alpha('#0E2E2A', 0.35)}, ${alpha('#0E2E2A', 0)} 70%)`, transform: `scaleX(${Math.max(0.12, cos).toFixed(3)})` }} />
-              <div style={{ position: 'absolute', left: x, top: Y, width: CW, height: CH, boxShadow: softShadow(20, { color: '#0E2E2A', strength: 0.9 }), borderRadius: 34 }}>
+              {/* soft shadow: the card's footprint narrows with |cos θ| as it turns edge-on */}
+              <div style={{ position: 'absolute', left: x + (CW * (1 - cos)) / 2, top: Y + 30, width: CW * cos, height: CH - 20, borderRadius: 44, background: 'rgba(70,76,120,0.32)', filter: 'blur(28px)' }} />
+              <div style={{ position: 'absolute', left: x, top: Y, width: CW, height: CH }}>
                 <FlipCard i={i} f={f} start={starts[i]} />
               </div>
             </div>
