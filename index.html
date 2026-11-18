@@ -548,132 +548,113 @@
   .tip b { white-space: nowrap; }
   .tip p { color: var(--muted); }
 
-  /* Business Central overview — one desktop viewport with animated, readable tiles */
+  /* Business Central overview */
   /* อยู่ใน #services (แถว 5 เฟส Success by Design ตัดออกแล้ว 1 ต.ค. 2026 — เหลือบล็อกนี้บล็อกเดียว)
      ห่อ div ไว้อีกชั้นโดยตั้งใจ: .wrap ที่เป็นลูกตรงของ #services จะโดน #services > .wrap > .sub (จัดกลาง + nowrap) */
   #business-central .section-kicker { margin-bottom: 4px; }
   #business-central > .wrap > h3 { margin-bottom: 6px; font-size: clamp(1.45rem, 2vw, 1.85rem); line-height: 1.25; text-wrap: nowrap; }
   @media (max-width: 1080px) { #business-central > .wrap > h3 { text-wrap: balance; } }
   #business-central > .wrap > .sub {
-    max-width: 1040px; margin-bottom: clamp(14px, 2svh, 22px);
-    font-size: clamp(1.05rem, 1.45vw, 1.18rem); line-height: 1.65;
+    max-width: 1040px; margin-bottom: clamp(22px, 3svh, 32px);
+    font-size: clamp(1.05rem, 1.45vw, 1.18rem); line-height: 1.65; text-wrap: pretty;
   }
-  .bento { display: grid; }
-  .bento-shot { border: 1px solid var(--line); }
-  /* accordion: รายการเปิดทีละข้อ กางเนื้อความออกมา แล้วสลับรูปทางขวา */
-  .bento-tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; align-content: start; }
-  .bento-shot {
-    position: relative; display: grid; grid-column: 1 / -1; padding: 18px 18px 14px; overflow: hidden;
-    border-color: transparent;
-    background:
-      radial-gradient(120% 160% at 85% -20%, rgba(53,175,158,.28), transparent 55%),
-      radial-gradient(90% 130% at 8% 110%, rgba(194,84,112,.16), transparent 55%),
-      linear-gradient(150deg, var(--brand-teal), var(--brand-deep));
+  /* แท็บแคปซูล + accordion + การ์ดรูป — โครงเดียวกับหน้า Business Central ของ Microsoft (th-th, พ.ย. 2026)
+     4 แท็บตามด้านของงาน แต่ละแท็บมี accordion ซ้ายเปิดทีละข้อ รูปของข้อที่เปิดอยู่ในการ์ดขาวด้านขวา
+     ≤900px การ์ดซ่อน รูปไปอยู่ใต้ข้อความของข้อที่เปิด (.bc-m เป็นสำเนารูปเดียวกัน alt คู่กันใน I18N_ATTR) */
+  .bc-pillbar { position: relative; margin-bottom: 34px; }
+  .bc-pills { position: relative; display: flex; gap: 10px; padding: 2px; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; }
+  .bc-pills::-webkit-scrollbar { display: none; }
+  /* แท็บล้นความกว้าง: ขอบฝั่งที่ยังมีแท็บซ่อนอยู่จางลง (สคริปต์ใส่ .more-l / .more-r) */
+  .bc-pillbar.more-r .bc-pills { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent calc(100% - 30px)); mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent calc(100% - 30px)); }
+  .bc-pillbar.more-l .bc-pills { -webkit-mask-image: linear-gradient(90deg, transparent 30px, #000 96px); mask-image: linear-gradient(90deg, transparent 30px, #000 96px); }
+  .bc-pillbar.more-l.more-r .bc-pills { -webkit-mask-image: linear-gradient(90deg, transparent 30px, #000 96px, #000 calc(100% - 96px), transparent calc(100% - 30px)); mask-image: linear-gradient(90deg, transparent 30px, #000 96px, #000 calc(100% - 96px), transparent calc(100% - 30px)); }
+  .bc-pill {
+    flex: 0 0 auto; padding: 9px 22px; border: 0; border-radius: 999px; background: var(--ui-line);
+    font-family: "Anuphan", sans-serif; font-weight: 500; font-size: 1rem; line-height: 1.5; color: var(--ui-ink);
+    white-space: nowrap; cursor: pointer; transition: background-color .125s ease, color .125s ease;
   }
-  .bento-shot::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
-    background-image:
-      linear-gradient(rgba(166,192,189,.09) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(166,192,189,.09) 1px, transparent 1px);
-    background-size: 34px 34px;
-    -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
-            mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
+  .bc-pill:hover { background: var(--brand-pale); }
+  .bc-pill[aria-selected="true"] { background: var(--brand-deep); color: #fff; }
+  .bc-arrow {
+    position: absolute; top: 50%; z-index: 1; display: none; place-items: center; width: 40px; height: 40px; margin-top: -20px;
+    border: 1.5px solid var(--brand-deep); border-radius: 50%; background: #fff; cursor: pointer; transition: background-color .125s ease;
   }
-  .bento-shot figure {
-    grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center;
-    opacity: 0; visibility: hidden; pointer-events: none;
-    transform: translate3d(22px, 0, 0) scale(.988);
-    transition: opacity .24s ease, transform .5s cubic-bezier(.2,.75,.2,1), visibility 0s linear .5s;
+  .bc-arrow:hover { background: var(--ui-page); }
+  .bc-arrow::before { content: ""; width: 9px; height: 9px; margin-left: -3px; border-right: 2px solid var(--brand-deep); border-bottom: 2px solid var(--brand-deep); transform: rotate(-45deg); }
+  .bc-prev { left: 0; }
+  .bc-prev::before { margin: 0 -3px 0 0; transform: rotate(135deg); }
+  .bc-next { right: 0; }
+  .bc-pillbar.more-r .bc-next, .bc-pillbar.more-l .bc-prev { display: grid; }
+  .bc-panel { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
+  .bc-panel[hidden] { display: none; }
+  .bc-list { display: grid; animation: bcPanelIn .3s cubic-bezier(.2,.75,.2,1); }
+  @keyframes bcPanelIn { from { opacity: 0; transform: translate3d(0, 8px, 0); } }
+  /* แต่ละข้อไม่ใช่การ์ด: เส้นคั่นล่าง 1px + แถบ Burgundy 3px ซ้ายตอนเปิด + chevron พลิกตอนเปิด */
+  .bc-item { position: relative; border-bottom: 1px solid var(--ui-line); }
+  .bc-item::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--brand-burgundy); opacity: 0; transition: opacity .22s ease; }
+  .bc-item.is-open::before { opacity: 1; }
+  .bc-head {
+    display: flex; align-items: center; gap: 14px; width: 100%; padding: 22px 6px 22px 24px;
+    border: 0; background: none; color: var(--ui-ink); text-align: left; cursor: pointer; transition: background-color .2s ease;
   }
-  .bento-shot figure.is-active {
-    z-index: 1; opacity: 1; visibility: visible; pointer-events: auto; transform: none;
-    transition: opacity .32s ease .06s, transform .5s cubic-bezier(.2,.75,.2,1), visibility 0s;
-  }
-  .bento-shot a {
-    /* width 100%: ลิงก์หดตามขนาดตั้งต้นของรูป ซึ่งกับ srcset คือค่า sizes ไม่ใช่ 1600px — ไม่ตั้งไว้รูปบนมือถือแคบลง */
-    position: relative; width: 100%; max-width: 100%;
-    transition: transform .35s cubic-bezier(.2,.75,.2,1), box-shadow .35s ease;
-  }
-  .bento-shot a::after {
-    content: "ดูขนาดเต็ม ↗"; position: absolute; right: 10px; bottom: 10px; padding: 5px 11px;
-    font-size: .76rem; letter-spacing: .02em; color: #fff; white-space: nowrap;
-    background: rgba(1,47,42,.82); border-radius: 999px;
-    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
-    opacity: 0; transform: translateY(4px); transition: opacity .25s ease, transform .25s ease;
-  }
-  html[lang="en"] .bento-shot a::after { content: "View full size ↗"; }
-  .bento-shot a:hover, .bento-shot a:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: 0 26px 54px -22px rgba(0,10,9,.75);
-  }
-  .bento-shot a:hover::after, .bento-shot a:focus-visible::after { opacity: 1; transform: none; }
-  .bento-shot img {
-    display: block; 
-    object-fit: contain; background: #fff;
-  }
-  /* แต่ละข้อ = แถวใน accordion: ไม่มีกรอบการ์ด มีแค่เส้นคั่นบน + แถบเน้นซ้ายตอนเปิด */
-  .bento-item {
-    position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 0;
-    padding: 20px 4px 20px 22px; border: 0; border-top: 1px solid var(--ui-line);
-    background: none; 
-    font: inherit; text-align: left; cursor: pointer;
-    transition: background-color .22s ease;
-  }
-  .bento-item:first-child { border-top: 0; }
-  .bento-item:hover { background: rgba(1,47,42,.035); }
-  /* แถบเน้นซ้ายของข้อที่เปิดอยู่ */
-  .bento-item::after {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-    background: var(--brand-burgundy); opacity: 0; transition: opacity .22s ease;
-  }
-  .bento-item[aria-pressed="true"]::after { opacity: 1; }
-  .bento-num {
-    font-family: "Anuphan", sans-serif; font-weight: 700;
-    font-size: .82rem; line-height: 1; letter-spacing: .1em;
-    font-variant-numeric: tabular-nums; 
-    opacity: .55; transition: opacity .22s ease;
-  }
-  .bento-item:hover .bento-num, .bento-item[aria-pressed="true"] .bento-num { opacity: 1; }
-  /* chevron ท้ายหัวข้อ — ใช้สำนวนเดียวกับ .plan-more > summary::after */
-  /* หัวข้อในปุ่มเป็น <span class="bento-h"> ไม่ใช่ <h3> — หัวข้อซ้อนในปุ่มผิด HTML (ปุ่มรับได้แค่ phrasing content)
-     และโปรแกรมอ่านจออ่านลูกของปุ่มเป็นข้อความเรียบอยู่แล้ว ไม่ได้ประกาศว่าเป็นหัวข้อ · ฟอนต์/น้ำหนัก/สีเดิมมาจากกฎ h3 กลาง ยกมาไว้ตรงนี้ */
-  .bento-item .bento-h {
-    display: flex; align-items: center; gap: 14px; margin-top: 8px;
-    font-family: "Anuphan", "Segoe UI", sans-serif; font-weight: 500; letter-spacing: -.025em; color: var(--ui-ink);
-    font-size: 1.1rem; line-height: 1.45; transition: color .22s ease;
-  }
-  .bento-item .bento-h::after {
-    content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin: 0 4px 3px auto;
+  .bc-head:hover { background: rgba(1,47,42,.035); }
+  .bc-head > span { flex: 1; font-family: "Anuphan", sans-serif; font-weight: 500; letter-spacing: -.025em; font-size: 1.16rem; line-height: 1.45; text-wrap: pretty; }
+  .bc-head::after {
+    content: ""; flex: 0 0 auto; width: 9px; height: 9px; margin: 0 6px 4px 0;
     border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
-    transform: rotate(45deg); opacity: .45; transition: transform .22s ease, opacity .22s ease;
+    transform: rotate(45deg); opacity: .5; transition: transform .22s ease;
   }
-  .bento-item[aria-pressed="true"] .bento-h::after { transform: rotate(-135deg); margin-bottom: -3px; opacity: 1; }
-  /* เนื้อความกางเฉพาะข้อที่เปิด */
-  /* ponytail: ไถความสูง 0↔auto ด้วย interpolate-size — เบราว์เซอร์ที่ไม่รองรับได้แค่ fade (เท่าของเดิม) */
-  .bento-tiles { interpolate-size: allow-keywords; }
-  .bento-body {
-    height: 0; overflow: hidden; opacity: 0;
-    padding-right: 18px; color: var(--ui-muted); font-size: .96rem; line-height: 1.62;
-    transition: height .34s cubic-bezier(.2,.75,.2,1), margin-top .34s cubic-bezier(.2,.75,.2,1), opacity .22s ease;
+  .bc-item.is-open .bc-head::after { margin-bottom: -4px; transform: rotate(-135deg); opacity: 1; }
+  .bc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .34s cubic-bezier(.2,.75,.2,1); }
+  .bc-body > div { min-height: 0; overflow: hidden; padding: 0 18px 0 24px; visibility: hidden; transition: visibility 0s .34s; }
+  .bc-item.is-open .bc-body { grid-template-rows: 1fr; }
+  .bc-item.is-open .bc-body > div { padding-bottom: 24px; visibility: visible; transition: none; }
+  .bc-body p { font-size: .98rem; line-height: 1.65; color: var(--ui-muted); text-wrap: pretty; }
+  .bc-loc {
+    display: inline-block; margin-top: 10px; padding: 0 9px; border-radius: 999px; background: var(--brand-pale);
+    font-family: "Anuphan", sans-serif; font-size: .74rem; font-weight: 600; line-height: 1.8; letter-spacing: .02em;
+    color: var(--brand-teal); white-space: nowrap;
   }
-  .bento-item[aria-pressed="true"] .bento-body { height: auto; margin-top: 8px; opacity: 1; }
-  /* จอกว้าง: accordion อยู่ซ้าย รูปอยู่ขวา (DOM ยังเป็น shot ก่อน tiles — สลับด้วย grid-column) */
-  @media (min-width: 1081px) {
-    .bento { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: start; gap: 44px; }
-    .bento-tiles { grid-column: 1; grid-row: 1; }
-    .bento-shot { grid-column: 2; grid-row: 1; }
-    .bento-shot figure { justify-content: center; }
-    .bento-shot img { width: 100%; height: auto; }
+  .bc-m { display: none; }
+  .bc-shot { position: sticky; top: 88px; padding: 14px; border-radius: var(--ui-radius-card); background: #fff; box-shadow: var(--ui-shadow); }
+  /* รูปที่ไม่ได้เปิดลอยซ้อน (absolute) — การ์ดสูงตามรูปที่เปิดอยู่ ไม่เผื่อที่ให้รูปที่สูงที่สุด */
+  .bc-shot figure {
+    position: absolute; left: 14px; right: 14px; top: 14px; margin: 0;
+    opacity: 0; visibility: hidden; transform: translate3d(16px, 0, 0);
+    transition: opacity .22s ease, transform .45s cubic-bezier(.2,.75,.2,1), visibility 0s .45s;
   }
-  @media (max-width: 1080px) {
-    .bento { gap: 20px; }
-    .bento-shot img { width: 100%; height: auto; max-height: 320px; }
+  .bc-shot figure.is-active {
+    position: relative; left: auto; right: auto; top: auto; z-index: 1; opacity: 1; visibility: visible; transform: none;
+    transition: opacity .3s ease .05s, transform .45s cubic-bezier(.2,.75,.2,1), visibility 0s;
+  }
+  .bc-shot a, a.bc-m { position: relative; border: 1px solid var(--ui-line); }
+  .bc-shot a { display: block; }
+  .bc-shot img, .bc-m img { display: block; width: 100%; height: auto; }
+  .bc-shot a::after {
+    content: "ดูขนาดเต็ม ↗"; position: absolute; right: 10px; bottom: 10px; padding: 4px 11px; border-radius: 999px;
+    background: rgba(1,47,42,.84); font-size: .76rem; color: #fff; white-space: nowrap; opacity: 0; transition: opacity .2s ease;
+  }
+  html[lang="en"] .bc-shot a::after { content: "View full size ↗"; }
+  .bc-shot a:hover::after, .bc-shot a:focus-visible::after { opacity: 1; }
+  .bc-bridge { margin-top: 30px; font-size: .98rem; color: var(--ui-muted); text-wrap: pretty; }
+  .bc-bridge a { color: var(--brand-burgundy); font-weight: 600; text-underline-offset: 3px; }
+  .bc-bridge a:hover { color: var(--brand-burgundy-dark); }
+  @media (max-width: 900px) {
+    .bc-panel { grid-template-columns: minmax(0, 1fr); }
+    .bc-shot { display: none; }
+    .bc-m { display: block; margin-top: 14px; }
+    /* แถบแท็บเต็มจอ ปัดข้างได้ ไม่มีปุ่มลูกศร เหลือขอบจางบอกว่ามีแท็บต่อ */
+    .bc-pillbar { margin: 0 -28px 24px; padding: 0 28px; }
+    .bc-pillbar.more-r .bc-next, .bc-pillbar.more-l .bc-prev { display: none; }
+    .bc-head { padding: 18px 4px 18px 18px; }
+    .bc-body > div { padding: 0 6px 0 18px; }
+  }
+  @media (max-width: 720px) {
+    .bc-pillbar { margin-inline: -20px; padding-inline: 20px; }
   }
   @media (max-width: 560px) {
     #business-central { margin-top: 44px; }
-    #business-central > .wrap > .sub { margin-bottom: 10px; line-height: 1.55; }
-    .bento-shot img { max-height: 220px; }
-    .bento-item { padding: 17px 2px 17px 18px; }
+    #business-central > .wrap > .sub { margin-bottom: 20px; line-height: 1.55; }
   }
 
   .slider-wrap { position: relative; }
@@ -750,9 +731,10 @@
     html { scroll-behavior: auto; }
     .topnav .links { transition: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
-    .bento-shot figure, .bento-shot figure.is-active, .bento-shot a, .bento-shot a::after,
-    .bento-item, .bento-item::after, .bento-item .bento-h, .bento-item .bento-h::after, .bento-num { transition: none; }
-    .bento-body { transition: none; }
+    .bc-pill, .bc-arrow, .bc-item::before, .bc-head, .bc-head::after, .bc-body, .bc-body > div,
+    .bc-shot figure, .bc-shot figure.is-active, .bc-shot a::after { transition: none; }
+    .bc-list { animation: none; }
+    .bc-pills { scroll-behavior: auto; }
   }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -1732,7 +1714,7 @@
     padding: 2px 22px; box-shadow: var(--ui-shadow);
     transition: background-color .24s ease, border-color .24s ease;
   }
-  /* แถบเน้นซ้าย โผล่ตอนเปิด — สำนวนเดียวกับ .bento-item */
+  /* แถบเน้นซ้าย โผล่ตอนเปิด — สำนวนเดียวกับ .bc-item */
   .faq-list details::before {
     content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
     background: linear-gradient(var(--brand-pink), var(--brand-pink-deep));
@@ -2237,18 +2219,14 @@
   .faq-list summary::before { border-radius: var(--ui-radius-btn); }
 
   /* รอบสอง: ที่เหลือจากการไล่ครั้งแรก (#about, #contact, cookie bar, hero doc, slider) */
-  .bento-shot,
   .slider figure > a, .slider figure img,
   .profile-panel, .about-block, .credential-gallery,
   .contact-grid,
   .cookie-bar { border-radius: var(--ui-radius-card); }
 
   /* รอบสาม: ตัวที่ specificity สูงกว่าจึงยังไม่ถูกทับ */
-  .bento-shot a, .bento-shot img,
   #about .profile-panel { border-radius: var(--ui-radius-card); }
   .credential-gallery-title .heading-icon { border-radius: var(--ui-radius-btn); }
-  /* เงาฟุ้งนอก hero — DESIGN.md สงวนเงานุ่มกว้างไว้ให้ฉากเอกสารใน hero เท่านั้น */
-  .bento-shot a { box-shadow: var(--ui-shadow); }
 
   .skip-link, .menu-toggle, .heading-icon,
   .linkedin-link, .credential-sample,
@@ -2520,10 +2498,6 @@
      ========================================================================== */
 
   /* ---- 1.4.3 Contrast (Minimum) — ข้อความ AA ต้อง 4.5:1 (ตัวใหญ่ 3:1) ---- */
-
-  /* เลข 01–05 ในแอคคอร์เดียน: Deep Rose ได้ 4.11 — เปลี่ยนเป็น Jade 4.80
-     ตรงกับที่ DESIGN.md กำหนดให้ Jade เป็นสีกลางของระบบอยู่แล้ว */
-  .bento-num { color: var(--brand-jade); }
 
   /* ---- พื้นเข้ม: ตัวหนังสือที่ยังไม่ถึงเกณฑ์ ---- */
   #contact .ci-list, #contact .ci-list a, #contact .ci-list span { color: #BFD3D0; }   /* 6.05 */
@@ -3406,7 +3380,7 @@
     .skip-link, .cookie-bar, .demo-toggle,
     .topnav .links, .topnav .social, .topnav .lang, .menu-toggle,
     .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
-    #business-central .bento, .feature-tab-scroll, .feature-visual, .feature-link, .tip-film,
+    #business-central .bc-tabs, .feature-tab-scroll, .feature-visual, .feature-link, .tip-film,
     #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
     #pp36, #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
     .footer-menu, #cookie-manage, footer a[href="#contact"], .ci-flyer { display: none !important; }
@@ -3589,63 +3563,146 @@
     <div class="wrap">
       <p class="section-kicker">Overview</p>
       <h3>Microsoft Dynamics 365 Business Central คืออะไร</h3>
-      <p class="sub">ระบบ ERP ของ Microsoft ที่ออกแบบมาให้ธุรกิจ SME ใช้ดูแลงานได้ครบ ตั้งแต่การเงิน การผลิต การขาย การจัดส่ง งานโครงการ ไปจนถึงงานบริการ ติดตั้งส่วนเสริมให้รองรับกฎหมายไทยหรืองานเฉพาะทางของธุรกิจได้ ตั้งค่าไม่ยากและขึ้นระบบได้เร็ว</p>
-      <div class="bento reveal">
-        <div class="bento-shot">
-          <figure class="is-active" id="bc-shot-1">
-            <a href="img/bc-power-automate.webp" target="_blank" rel="noopener">
-              <img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="Power Automate flow ที่ส่งคำขออนุมัติอัตโนมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async">
-            </a>
-          </figure>
-          <figure id="bc-shot-2" aria-hidden="true" inert>
-            <a href="img/bc-excel-pivot.webp" target="_blank" rel="noopener">
-              <img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="รายงานลูกหนี้แยกตามอายุหนี้ เปิดต่อใน Excel เป็น PivotTable พร้อม Slicer กรองตามแผนกและกลุ่มลูกค้า" loading="lazy" width="1600" height="931">
-            </a>
-          </figure>
-          <figure id="bc-shot-3" aria-hidden="true" inert>
-            <a href="img/bc-home.webp" target="_blank" rel="noopener">
-              <img src="img/bc-home.webp" srcset="img/bc-home-800.webp 800w, img/bc-home-1080.webp 1080w, img/bc-home.webp 1911w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="หน้าจอเริ่มต้นของ Business Central บนคลาวด์ แสดงชื่อบริษัทและเมนูงานตามสิทธิ์ของผู้ใช้" loading="lazy" width="1911" height="793">
-            </a>
-          </figure>
-          <figure id="bc-shot-4" aria-hidden="true" inert>
-            <a href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener">
-              <img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="Dashboard Power BI สรุปรายได้ กำไรสุทธิ ROA และอันดับลูกค้ารายใหญ่จากข้อมูล Business Central" loading="lazy" width="1600" height="906">
-            </a>
-          </figure>
-          <figure id="bc-shot-5" aria-hidden="true" inert>
-            <a href="img/bc-dashboard.webp" target="_blank" rel="noopener">
-              <img src="img/bc-dashboard.webp" srcset="img/bc-dashboard-800.webp 800w, img/bc-dashboard-1080.webp 1080w, img/bc-dashboard.webp 1649w" sizes="(max-width: 760px) calc(100vw - 78px), 800px" alt="หน้าวิเคราะห์ธุรกิจใน Business Central แสดงลูกค้าที่ทำยอดขายสูงสุดและงบทดลอง" loading="lazy" width="1649" height="869">
-            </a>
-          </figure>
+      <p class="sub">ระบบ ERP ของ Microsoft สำหรับธุรกิจ SME <span class="nb">งานขาย</span> จัดซื้อ คลังสินค้า การผลิต <span class="nb">งานโครงการ</span> <span class="nb">งานบริการ</span> และบัญชี บันทึกลงฐานข้อมูล<span class="nb">ชุดเดียว</span> <span class="nb">ทุกแผนก</span>เห็นตัวเลขเดียวกันโดยไม่ต้องส่งไฟล์<span class="nb">ต่อกัน</span> เข้าใช้ผ่านเบราว์เซอร์ด้วยบัญชี <span class="nb">Microsoft 365</span> ชุดเดียวกับ <span class="nb">Outlook และ Teams</span></p>
+      <div class="bc-tabs reveal">
+        <div class="bc-pillbar">
+          <button type="button" class="bc-arrow bc-prev" aria-label="เลื่อนแท็บไปทางซ้าย"></button>
+          <div class="bc-pills" role="tablist" aria-label="ด้านของงานใน Business Central">
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-1" aria-controls="bc-panel-1" aria-selected="true">การเงินและบัญชี</button>
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-2" aria-controls="bc-panel-2" aria-selected="false" tabindex="-1">การขายและลูกหนี้</button>
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-3" aria-controls="bc-panel-3" aria-selected="false" tabindex="-1">การทำงานร่วมกับ Microsoft 365</button>
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-4" aria-controls="bc-panel-4" aria-selected="false" tabindex="-1">ภาษีและเอกสารไทย</button>
+          </div>
+          <button type="button" class="bc-arrow bc-next" aria-label="เลื่อนแท็บไปทางขวา"></button>
         </div>
-        <div class="bento-tiles">
-        <button type="button" class="bento-item a-p1" aria-pressed="true" aria-controls="bc-shot-1">
-          <span class="bento-num">01</span>
-          <span class="bento-h">ลดงานซ้ำด้วยระบบอัตโนมัติ</span>
-          <span class="bento-body">ตั้ง Workflow อนุมัติแล้วเอกสารใหม่วิ่งเข้าผู้อนุมัติเอง ไม่ต้องเดินกระดาษ</span>
-        </button>
-        <button type="button" class="bento-item a-p2" aria-pressed="false" aria-controls="bc-shot-2">
-          <span class="bento-num">02</span>
-          <span class="bento-h">ใช้งานร่วมกับ Microsoft 365</span>
-          <span class="bento-body">เปิดข้อมูลจากระบบต่อใน Excel ได้ทันที สรุปยอดด้วย PivotTable และกรองดูมุมที่ต้องการได้เอง</span>
-        </button>
-        <button type="button" class="bento-item a-p3" aria-pressed="false" aria-controls="bc-shot-3">
-          <span class="bento-num">03</span>
-          <span class="bento-h">ความปลอดภัยระดับองค์กร</span>
-          <span class="bento-body">ทำงานบนคลาวด์ผ่านเบราว์เซอร์ เข้าใช้ด้วยบัญชี Microsoft 365 และเห็นเฉพาะเมนูที่ได้รับสิทธิ์</span>
-        </button>
-        <button type="button" class="bento-item a-p4" aria-pressed="false" aria-controls="bc-shot-4">
-          <span class="bento-num">04</span>
-          <span class="bento-h">ตัดสินใจจากตัวเลขจริง</span>
-          <span class="bento-body">Dashboard สรุปรายได้ กำไร และ DSO จากข้อมูลจริงในระบบ ไม่ต้องรอปิดงบ</span>
-        </button>
-        <button type="button" class="bento-item a-p5" aria-pressed="false" aria-controls="bc-shot-5">
-          <span class="bento-num">05</span>
-          <span class="bento-h">เพิ่มยอดขายและงานบริการ</span>
-          <span class="bento-body">ภาพรวมการขายบอกได้ว่าลูกค้ารายไหนทำรายได้สูงสุดและยอดค้างรับเหลือเท่าไร เจาะดูรายละเอียดต่อได้ทันที</span>
-        </button>
+        <div class="bc-panel" role="tabpanel" id="bc-panel-1" aria-labelledby="bc-tab-1">
+          <div class="bc-claims">
+            <div class="bc-list">
+              <div class="bc-item bc-i1 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-1"><span>เห็นกำไรโดยไม่ต้องรอปิดงบ</span></button>
+                <div class="bc-body" id="bc-body-1"><div>
+                  <p>รายงาน Financial Overview บน Power BI ดึง<span class="nb">รายได้</span> กำไรสุทธิ อัตรากำไร และ DSO จาก Business Central โดยตรง ผู้บริหารเปิดดูบน<span class="nb">มือถือ</span>ได้ทุกวัน</p>
+                  <a class="bc-m" href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener"><img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Financial Overview บน Power BI แสดงรายได้ กำไรสุทธิ และ DSO" width="1600" height="906" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i2">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-2"><span>งบทดลองเทียบงวดก่อนบนหน้าแรก</span></button>
+                <div class="bc-body" id="bc-body-2"><div>
+                  <p>Role Center ของผู้บริหารแสดงรายได้ ต้นทุน และ Gross Margin ของงวดนี้เทียบงวดก่อน คู่กับลูกค้า 5 รายที่ทำยอดขายสูงสุด กดที่ตัวเลขเพื่อเจาะดูรายการต่อได้</p>
+                  <a class="bc-m" href="img/bc-dashboard.webp" target="_blank" rel="noopener"><img src="img/bc-dashboard.webp" srcset="img/bc-dashboard-800.webp 800w, img/bc-dashboard-1080.webp 1080w, img/bc-dashboard.webp 1649w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center แสดงลูกค้า 5 อันดับแรกและงบทดลองเทียบงวด" width="1649" height="869" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i3">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-3"><span>ทะเบียนทรัพย์สินพร้อมค่าเสื่อมราคา</span></button>
+                <div class="bc-body" id="bc-body-3"><div>
+                  <p>Business Central คิดค่าเสื่อมราคาให้ทุกงวด ทะเบียนทรัพย์สินรูปแบบไทยแยกตามกลุ่ม แสดงวันที่เริ่มคิดค่าเสื่อม มูลค่าตั้งต้น ค่าเสื่อมสะสม และมูลค่าสุทธิ</p>
+                  <span class="bc-loc">Thai Localization</span>
+                  <a class="bc-m" href="img/fixed-asset-register.webp" target="_blank" rel="noopener"><img src="img/fixed-asset-register.webp" srcset="img/fixed-asset-register-800.webp 800w, img/fixed-asset-register-1080.webp 1080w, img/fixed-asset-register.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="ทะเบียนทรัพย์สินรูปแบบไทยแยกตามกลุ่มทรัพย์สิน" width="1919" height="987" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i4">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-4"><span>ความเคลื่อนไหวสินค้าพร้อมต้นทุน<span class="nb">ทุกเอกสาร</span></span></button>
+                <div class="bc-body" id="bc-body-4"><div>
+                  <p>รายงานเคลื่อนไหวสินค้าคงเหลือแสดงยอดยกมา รับ จ่าย คงเหลือ และต้นทุนต่อหน่วยของทุกเอกสาร มูลค่าตรงกับที่ลงบัญชีเพราะมาจากรายการ<span class="nb">ชุดเดียว</span>กัน</p>
+                  <span class="bc-loc">Thai Localization</span>
+                  <a class="bc-m" href="img/stock-card.webp" target="_blank" rel="noopener"><img src="img/stock-card.webp" srcset="img/stock-card-800.webp 800w, img/stock-card-1080.webp 1080w, img/stock-card.webp 1905w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงานเคลื่อนไหวสินค้าคงเหลือแสดงยอดยกมา รับ จ่าย คงเหลือ และต้นทุน" width="1905" height="908" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="bc-shot">
+            <figure class="bc-f1 is-active"><a href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener"><img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Financial Overview บน Power BI แสดงรายได้ กำไรสุทธิ และ DSO" width="1600" height="906" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f2" inert><a href="img/bc-dashboard.webp" target="_blank" rel="noopener"><img src="img/bc-dashboard.webp" srcset="img/bc-dashboard-800.webp 800w, img/bc-dashboard-1080.webp 1080w, img/bc-dashboard.webp 1649w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center แสดงลูกค้า 5 อันดับแรกและงบทดลองเทียบงวด" width="1649" height="869" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f3" inert><a href="img/fixed-asset-register.webp" target="_blank" rel="noopener"><img src="img/fixed-asset-register.webp" srcset="img/fixed-asset-register-800.webp 800w, img/fixed-asset-register-1080.webp 1080w, img/fixed-asset-register.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="ทะเบียนทรัพย์สินรูปแบบไทยแยกตามกลุ่มทรัพย์สิน" width="1919" height="987" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f4" inert><a href="img/stock-card.webp" target="_blank" rel="noopener"><img src="img/stock-card.webp" srcset="img/stock-card-800.webp 800w, img/stock-card-1080.webp 1080w, img/stock-card.webp 1905w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงานเคลื่อนไหวสินค้าคงเหลือแสดงยอดยกมา รับ จ่าย คงเหลือ และต้นทุน" width="1905" height="908" loading="lazy" decoding="async"></a></figure>
+          </div>
+        </div>
+        <div class="bc-panel" role="tabpanel" id="bc-panel-2" aria-labelledby="bc-tab-2" hidden>
+          <div class="bc-claims">
+            <div class="bc-list">
+              <div class="bc-item bc-i5 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-5"><span>ลูกหนี้แยกตามอายุหนี้ใน Excel</span></button>
+                <div class="bc-body" id="bc-body-5"><div>
+                  <p>รายงาน Aged Accounts Receivable เปิดต่อใน Excel จาก Business Central ทำ PivotTable และใช้ Slicer กรองตามแผนกหรือกลุ่มลูกค้าได้ทันที ไม่ต้อง Export แล้วจัดคอลัมน์ใหม่</p>
+                  <a class="bc-m" href="img/bc-excel-pivot.webp" target="_blank" rel="noopener"><img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Aged Accounts Receivable ใน Excel พร้อม PivotTable และ Slicer" width="1600" height="931" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i6">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-6"><span>วางบิลตามรอบของลูกค้าแต่ละราย</span></button>
+                <div class="bc-body" id="bc-body-6"><div>
+                  <p>หน้า Billing Worklist รวมรายการที่ถึงรอบวางบิลตาม Billing Days ของลูกค้าแต่ละราย แล้วสร้างใบวางบิลจากหน้านี้ได้ด้วย Create Billing Notes</p>
+                  <span class="bc-loc">Thai Localization</span>
+                  <a class="bc-m" href="img/billing-worklist.webp" target="_blank" rel="noopener"><img src="img/billing-worklist.webp" srcset="img/billing-worklist-800.webp 800w, img/billing-worklist-1080.webp 1080w, img/billing-worklist.webp 1910w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้า Billing Worklist แสดงลูกค้าที่ถึงรอบวางบิลพร้อมยอดที่วางบิลได้" width="1910" height="768" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i7">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-7"><span>ปฏิทินวางบิลทั้งเดือนในหน้าเดียว</span></button>
+                <div class="bc-body" id="bc-body-7"><div>
+                  <p>Billing Board วางลูกค้าที่ถึงรอบวางบิลลงบนปฏิทิน พร้อมยอดที่วางบิลได้และวันหยุด ฝ่ายการเงินเห็นงานทั้งเดือนก่อนออกไปวางบิล</p>
+                  <span class="bc-loc">Thai Localization</span>
+                  <a class="bc-m" href="img/billing-board.webp" target="_blank" rel="noopener"><img src="img/billing-board.webp" srcset="img/billing-board-800.webp 800w, img/billing-board-1080.webp 1080w, img/billing-board.webp 1718w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Billing Board ปฏิทินรอบวางบิลของลูกค้าทั้งเดือน" width="1718" height="670" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="bc-shot">
+            <figure class="bc-f5 is-active"><a href="img/bc-excel-pivot.webp" target="_blank" rel="noopener"><img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Aged Accounts Receivable ใน Excel พร้อม PivotTable และ Slicer" width="1600" height="931" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f6" inert><a href="img/billing-worklist.webp" target="_blank" rel="noopener"><img src="img/billing-worklist.webp" srcset="img/billing-worklist-800.webp 800w, img/billing-worklist-1080.webp 1080w, img/billing-worklist.webp 1910w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้า Billing Worklist แสดงลูกค้าที่ถึงรอบวางบิลพร้อมยอดที่วางบิลได้" width="1910" height="768" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f7" inert><a href="img/billing-board.webp" target="_blank" rel="noopener"><img src="img/billing-board.webp" srcset="img/billing-board-800.webp 800w, img/billing-board-1080.webp 1080w, img/billing-board.webp 1718w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Billing Board ปฏิทินรอบวางบิลของลูกค้าทั้งเดือน" width="1718" height="670" loading="lazy" decoding="async"></a></figure>
+          </div>
+        </div>
+        <div class="bc-panel" role="tabpanel" id="bc-panel-3" aria-labelledby="bc-tab-3" hidden>
+          <div class="bc-claims">
+            <div class="bc-list">
+              <div class="bc-item bc-i8 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-8"><span>อนุมัติเอกสารผ่าน Power Automate</span></button>
+                <div class="bc-body" id="bc-body-8"><div>
+                  <p>เมื่อมีเอกสารใหม่ในระบบ Power Automate ส่งคำขออนุมัติถึงผู้จัดการทางอีเมลและ Teams เอง กด Approve หรือ Reject จากมือถือได้ทันที ไม่ต้องเดินกระดาษ</p>
+                  <a class="bc-m" href="img/bc-power-automate.webp" target="_blank" rel="noopener"><img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Power Automate flow ส่งคำขออนุมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i9">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-9"><span>เข้าใช้ด้วยบัญชี Microsoft 365</span></button>
+                <div class="bc-body" id="bc-body-9"><div>
+                  <p>ระบบอยู่บนคลาวด์ของ Microsoft เปิดผ่านเบราว์เซอร์ด้วยบัญชีเดียวกับ Outlook และ Teams แต่ละคนเห็นเฉพาะเมนูตามสิทธิ์ พนักงานลาออก ปิดบัญชีเดียวก็เข้าระบบไม่ได้ทันที</p>
+                  <a class="bc-m" href="img/bc-home.webp" target="_blank" rel="noopener"><img src="img/bc-home.webp" srcset="img/bc-home-800.webp 800w, img/bc-home-1080.webp 1080w, img/bc-home.webp 1911w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าแรกของ Business Central แสดงเมนูตามสิทธิ์ของผู้ใช้" width="1911" height="793" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="bc-shot">
+            <figure class="bc-f8 is-active"><a href="img/bc-power-automate.webp" target="_blank" rel="noopener"><img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Power Automate flow ส่งคำขออนุมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f9" inert><a href="img/bc-home.webp" target="_blank" rel="noopener"><img src="img/bc-home.webp" srcset="img/bc-home-800.webp 800w, img/bc-home-1080.webp 1080w, img/bc-home.webp 1911w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าแรกของ Business Central แสดงเมนูตามสิทธิ์ของผู้ใช้" width="1911" height="793" loading="lazy" decoding="async"></a></figure>
+          </div>
+        </div>
+        <div class="bc-panel" role="tabpanel" id="bc-panel-4" aria-labelledby="bc-tab-4" hidden>
+          <div class="bc-claims">
+            <div class="bc-list">
+              <div class="bc-item bc-i10 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-10"><span>ส่งข้อมูลภาษีหัก ณ ที่จ่ายเข้า RD Prep</span></button>
+                <div class="bc-body" id="bc-body-10"><div>
+                  <p>ข้อมูลสำหรับ ภ.ง.ด.3 และ ภ.ง.ด.53 จาก Business Central โอนเข้าโปรแกรม RD Prep ของกรมสรรพากรได้โดยไม่ต้องคีย์ซ้ำ</p>
+                  <span class="bc-loc">Thai Localization</span>
+                  <a class="bc-m" href="img/rdprep-transfer.webp" target="_blank" rel="noopener"><img src="img/rdprep-transfer.webp" srcset="img/rdprep-transfer-800.webp 800w, img/rdprep-transfer-1080.webp 1080w, img/rdprep-transfer.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าโอนย้ายข้อมูลของโปรแกรม RD Prep ของกรมสรรพากร" width="1919" height="820" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i11">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-11"><span>สร้างลูกค้าจากเลขประจำตัวผู้เสียภาษี</span></button>
+                <div class="bc-body" id="bc-body-11"><div>
+                  <p>กรอกเลขประจำตัวผู้เสียภาษี ระบบดึงชื่อ ที่อยู่ และสาขาจาก <span class="nb">VAT Service</span> ของกรมสรรพากรมาสร้างข้อมูลลูกค้าและผู้ขายให้ ชื่อบนใบกำกับภาษีจึงตรงกับที่จดทะเบียนไว้</p>
+                  <span class="bc-loc">Thai Localization</span>
+                  <a class="bc-m" href="img/vat-service.webp" target="_blank" rel="noopener"><img src="img/vat-service.webp" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" width="883" height="716" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="bc-shot">
+            <figure class="bc-f10 is-active"><a href="img/rdprep-transfer.webp" target="_blank" rel="noopener"><img src="img/rdprep-transfer.webp" srcset="img/rdprep-transfer-800.webp 800w, img/rdprep-transfer-1080.webp 1080w, img/rdprep-transfer.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าโอนย้ายข้อมูลของโปรแกรม RD Prep ของกรมสรรพากร" width="1919" height="820" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f11" inert><a href="img/vat-service.webp" target="_blank" rel="noopener"><img src="img/vat-service.webp" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" width="883" height="716" loading="lazy" decoding="async"></a></figure>
+          </div>
         </div>
       </div>
+      <p class="bc-bridge">ภาษีและเอกสารไทย เช่น ภ.พ.30, 50 ทวิ และ<span class="nb">ใบวางบิล</span> Business Central มาตรฐานยังไม่มี <a href="#features"><span class="nb">ดูส่วนที่ JWIC Thai Localization เติมให้ ↓</span></a></p>
     </div>
   </div>
 </section>
@@ -4712,21 +4769,58 @@
     });
   });
 
-  // Business Central overview: กดการ์ดแล้ว crossfade รูปตัวอย่างในกรอบด้านบน
-  const bentoTiles = Array.from(document.querySelectorAll('.bento-item'));
-  const bentoPanels = Array.from(document.querySelectorAll('.bento-shot figure'));
-  bentoTiles.forEach(tile => tile.addEventListener('click', () => {
-    bentoTiles.forEach(other => {
-      const on = other === tile;
-      other.setAttribute('aria-pressed', String(on));
+  // Business Central overview: แท็บแคปซูล (ลูกศรซ้าย/ขวา Home End สลับแท็บ) + accordion เปิดทีละข้อ สลับรูปในการ์ดขวา
+  const bcTabs = document.querySelector('.bc-tabs');
+  if (bcTabs) {
+    const strip = bcTabs.querySelector('.bc-pills');
+    const bar = strip.parentElement;
+    const pills = Array.from(strip.querySelectorAll('.bc-pill'));
+    const selectPill = (pill) => {
+      pills.forEach(p => {
+        const on = p === pill;
+        p.setAttribute('aria-selected', String(on));
+        p.tabIndex = on ? 0 : -1;
+        document.getElementById(p.getAttribute('aria-controls')).hidden = !on;
+      });
+      // เลื่อนแถบแท็บในแนวนอนอย่างเดียว — scrollIntoView จะพาทั้งหน้าเลื่อนขึ้นลงด้วย
+      strip.scrollTo({ left: pill.offsetLeft - (strip.clientWidth - pill.offsetWidth) / 2 });
+    };
+    pills.forEach((pill, i) => {
+      pill.addEventListener('click', () => selectPill(pill));
+      pill.addEventListener('keydown', e => {
+        let next;
+        if (e.key === 'ArrowRight') next = (i + 1) % pills.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + pills.length) % pills.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = pills.length - 1;
+        else return;
+        e.preventDefault();
+        pills[next].focus({ preventScroll: true });
+        selectPill(pills[next]);
+      });
     });
-    bentoPanels.forEach(panel => {
-      const on = panel.id === tile.getAttribute('aria-controls');
-      panel.classList.toggle('is-active', on);
-      panel.setAttribute('aria-hidden', String(!on));
-      panel.inert = !on;
+    bcTabs.querySelectorAll('.bc-panel').forEach(panel => {
+      const items = Array.from(panel.querySelectorAll('.bc-item'));
+      const figs = Array.from(panel.querySelectorAll('.bc-shot figure'));
+      items.forEach((item, i) => item.querySelector('.bc-head').addEventListener('click', () => {
+        items.forEach((x, k) => {
+          x.classList.toggle('is-open', k === i);
+          x.querySelector('.bc-head').setAttribute('aria-expanded', String(k === i));
+        });
+        figs.forEach((f, k) => { f.classList.toggle('is-active', k === i); f.inert = k !== i; });
+      }));
     });
-  }));
+    // แท็บล้นจอ: ขอบจาง + ปุ่มลูกศรฝั่งที่ยังมีแท็บ
+    const syncEdges = () => {
+      bar.classList.toggle('more-l', strip.scrollLeft > 4);
+      bar.classList.toggle('more-r', strip.scrollLeft + strip.clientWidth < strip.scrollWidth - 4);
+    };
+    strip.addEventListener('scroll', syncEdges, { passive: true });
+    new ResizeObserver(syncEdges).observe(strip);
+    if (document.fonts) document.fonts.ready.then(syncEdges);
+    bar.querySelector('.bc-next').addEventListener('click', () => strip.scrollBy({ left: strip.clientWidth * .6 }));
+    bar.querySelector('.bc-prev').addEventListener('click', () => strip.scrollBy({ left: -strip.clientWidth * .6 }));
+  }
 
   // ponytail: slider เลื่อนอัตโนมัติ — vanilla, หยุดเฉพาะตอน hover/แตะ/อยู่นอกจอ
   const slider = document.querySelector('.slider');
@@ -6346,17 +6440,34 @@
     ['.hero-actions .cta:not(.secondary, .ghost)', 'Book a free consultation &amp; demo'],
     ['header .hero-learn-link', 'Learn more about Business Central'],
     ['#business-central > .wrap > h3', 'What is Microsoft Dynamics 365 Business Central?'],
-    ['#business-central > .wrap > .sub', 'Microsoft\'s ERP built for SMEs to run the whole business — finance, manufacturing, sales, shipping, projects and service. Extensions add Thai legal requirements or industry-specific work, and it is easy to set up and quick to go live.'],
-    ['.a-p1 .bento-body', 'Approval workflows run themselves — a new document reaches the approver without paper changing hands'],
-    ['.a-p2 .bento-body', 'Open live data in Excel — summarize with PivotTables and filter it any way you need'],
-    ['.a-p3 .bento-body', 'Cloud access through the browser — sign in with a Microsoft 365 account and see only the menus you are entitled to'],
-    ['.a-p4 .bento-body', 'Revenue, profit, and DSO from live data — no waiting for the books to close'],
-    ['.a-p5 .bento-body', 'Sales overview — top customers by value and outstanding receivables, drillable on the spot'],
-    ['.a-p1 .bento-h', 'Automate the repetitive work'],
-    ['.a-p2 .bento-h', 'Works with Microsoft 365'],
-    ['.a-p3 .bento-h', 'Enterprise-grade security'],
-    ['.a-p4 .bento-h', 'Decide on real numbers'],
-    ['.a-p5 .bento-h', 'Boost sales and service'],
+    ['#business-central > .wrap > .sub', 'Microsoft\'s ERP for SMEs. Sales, purchasing, inventory, manufacturing, projects, service and accounting record into one database, so every department sees the same numbers without passing files around. It opens in the browser with the same Microsoft 365 account you use for Outlook and Teams.'],
+    ['#bc-tab-1', 'Finance and accounting'],
+    ['#bc-tab-2', 'Sales and receivables'],
+    ['#bc-tab-3', 'Working with Microsoft 365'],
+    ['#bc-tab-4', 'Thai tax and documents'],
+    ['.bc-i1 .bc-head > span', 'See profit without waiting for the close'],
+    ['.bc-i1 .bc-body p', 'The Financial Overview report in Power BI pulls revenue, net profit, margin and DSO straight from Business Central, and management can check it on a phone every day.'],
+    ['.bc-i2 .bc-head > span', 'Trial balance against last period on the home page'],
+    ['.bc-i2 .bc-body p', 'The executive Role Center shows this period\'s revenue, costs and gross margin against the last, next to the five customers with the highest sales. Click a figure to drill into the entries.'],
+    ['.bc-i3 .bc-head > span', 'Fixed asset register with depreciation'],
+    ['.bc-i3 .bc-body p', 'Business Central calculates depreciation every period. The Thai-format fixed asset register groups assets by class and shows the depreciation start date, acquisition cost, accumulated depreciation and book value.'],
+    ['.bc-i4 .bc-head > span', 'Inventory movement with the cost of every document'],
+    ['.bc-i4 .bc-body p', 'The stock movement report shows the opening balance, receipts, issues, closing balance and unit cost of every document. Its values match the ledger because both come from the same entries.'],
+    ['.bc-i5 .bc-head > span', 'Receivables by age in Excel'],
+    ['.bc-i5 .bc-body p', 'Open the Aged Accounts Receivable report in Excel straight from Business Central, build a PivotTable and filter by department or customer group with slicers, without exporting and rearranging columns.'],
+    ['.bc-i6 .bc-head > span', 'Bill each customer on their own cycle'],
+    ['.bc-i6 .bc-body p', 'The Billing Worklist gathers the entries due for billing under each customer\'s Billing Days, and Create Billing Notes turns them into billing notes from the same page.'],
+    ['.bc-i7 .bc-head > span', 'The whole month of billing on one calendar'],
+    ['.bc-i7 .bc-body p', 'The Billing Board places the customers due for billing on a calendar, with billable amounts and holidays, so finance sees the whole month before going out to bill.'],
+    ['.bc-i8 .bc-head > span', 'Approvals through Power Automate'],
+    ['.bc-i8 .bc-body p', 'When a new document is created, Power Automate sends the approval request to the manager by email and Teams. They can Approve or Reject from a phone, with no paper changing hands.'],
+    ['.bc-i9 .bc-head > span', 'Sign in with your Microsoft 365 account'],
+    ['.bc-i9 .bc-body p', 'The system runs in Microsoft\'s cloud and opens in the browser with the same account as Outlook and Teams. Each person sees only the menus they have rights to, and when someone leaves, closing that one account locks them out at once.'],
+    ['.bc-i10 .bc-head > span', 'Send withholding tax data to RD Prep'],
+    ['.bc-i10 .bc-body p', 'Data for PND3 and PND53 moves from Business Central into the Revenue Department\'s RD Prep program with no rekeying.'],
+    ['.bc-i11 .bc-head > span', 'Create customers from a tax ID'],
+    ['.bc-i11 .bc-body p', 'Enter a tax ID and the system pulls the name, address and branch from the Revenue Department\'s VAT Service to create the customer or vendor, so the name on the tax invoice matches the registration.'],
+    ['.bc-bridge', 'Thai tax and documents such as PP30, the 50 Tawi certificate and billing notes are not part of standard Business Central. <a href="#features"><span class="nb">See what JWIC Thai Localization adds ↓</span></a>'],
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
     ['#features > .wrap > h2', 'JWIC Thai Localization for Business Central'],
@@ -6499,11 +6610,31 @@
     ['#vs-cases', 'aria-label', 'Example scenarios'],
     ['#ct-steps', 'aria-label', 'Trace steps'],
     ['#p36-steps', 'aria-label', 'PP36 steps'],
-    ['.bento-shot img[src$="bc-power-automate.webp"]', 'alt', 'Power Automate flow that sends an approval request automatically when a new document is created in Business Central'],
-    ['.bento-shot img[src$="bc-excel-pivot.webp"]', 'alt', 'Aged receivables report opened in Excel as a PivotTable, with slicers filtering by department and customer group'],
-    ['.bento-shot img[src$="bc-home.webp"]', 'alt', 'Business Central home page in the cloud, showing the company name and the task menus the user has rights to'],
-    ['.bento-shot img[src$="bc-powerbi-overview.webp"]', 'alt', 'Power BI dashboard summarising revenue, net profit, ROA and the largest customers from Business Central data'],
-    ['.bento-shot img[src$="bc-dashboard.webp"]', 'alt', 'Business analysis page in Business Central showing the top customers by sales and the trial balance'],
+    ['.bc-pills', 'aria-label', 'Business Central by area of work'],
+    ['.bc-prev', 'aria-label', 'Scroll tabs left'],
+    ['.bc-next', 'aria-label', 'Scroll tabs right'],
+    ['.bc-shot .bc-f1 img', 'alt', 'Financial Overview report in Power BI showing revenue, net profit and DSO'],
+    ['.bc-i1 .bc-m img', 'alt', 'Financial Overview report in Power BI showing revenue, net profit and DSO'],
+    ['.bc-shot .bc-f2 img', 'alt', 'Role Center showing the top five customers and a trial balance against the previous period'],
+    ['.bc-i2 .bc-m img', 'alt', 'Role Center showing the top five customers and a trial balance against the previous period'],
+    ['.bc-shot .bc-f3 img', 'alt', 'Thai-format fixed asset register grouped by asset class'],
+    ['.bc-i3 .bc-m img', 'alt', 'Thai-format fixed asset register grouped by asset class'],
+    ['.bc-shot .bc-f4 img', 'alt', 'Stock movement report showing opening balance, receipts, issues, closing balance and cost'],
+    ['.bc-i4 .bc-m img', 'alt', 'Stock movement report showing opening balance, receipts, issues, closing balance and cost'],
+    ['.bc-shot .bc-f5 img', 'alt', 'Aged Accounts Receivable report in Excel with a PivotTable and slicers'],
+    ['.bc-i5 .bc-m img', 'alt', 'Aged Accounts Receivable report in Excel with a PivotTable and slicers'],
+    ['.bc-shot .bc-f6 img', 'alt', 'Billing Worklist page listing customers due for billing with their billable amounts'],
+    ['.bc-i6 .bc-m img', 'alt', 'Billing Worklist page listing customers due for billing with their billable amounts'],
+    ['.bc-shot .bc-f7 img', 'alt', 'Billing Board calendar of every customer\'s billing dates for the month'],
+    ['.bc-i7 .bc-m img', 'alt', 'Billing Board calendar of every customer\'s billing dates for the month'],
+    ['.bc-shot .bc-f8 img', 'alt', 'Power Automate flow that sends an approval request when a new document is created in Business Central'],
+    ['.bc-i8 .bc-m img', 'alt', 'Power Automate flow that sends an approval request when a new document is created in Business Central'],
+    ['.bc-shot .bc-f9 img', 'alt', 'Business Central home page showing the menus the user has rights to'],
+    ['.bc-i9 .bc-m img', 'alt', 'Business Central home page showing the menus the user has rights to'],
+    ['.bc-shot .bc-f10 img', 'alt', 'Data transfer screen of the Revenue Department\'s RD Prep program'],
+    ['.bc-i10 .bc-m img', 'alt', 'Data transfer screen of the Revenue Department\'s RD Prep program'],
+    ['.bc-shot .bc-f11 img', 'alt', 'Tax ID lookup from the Revenue Department VAT Service inside Business Central'],
+    ['.bc-i11 .bc-m img', 'alt', 'Tax ID lookup from the Revenue Department VAT Service inside Business Central'],
     ['img.feature-photo[src$="feat-vat.webp"]', 'alt', 'Tax return forms and a calculator on a desk'],
     ['img.feature-photo[src$="feat-wht.webp"]', 'alt', 'Accountant checking withholding tax documents at a desk'],
     ['img.feature-photo[src$="feat-messenger.webp"]', 'alt', 'Messenger opening an envelope of billing notes outside an office building'],
