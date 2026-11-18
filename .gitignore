@@ -19,3 +19,6 @@ worker/.wrangler/
 
 # playwright-core ของ CI page-checks (ติดตั้งตอนรันเท่านั้น)
 .github/scripts/node_modules/
+
+# โปรเจกต์ Remotion: มีเพลง Mixkit, SFX และเสียงโคลน ห้ามขึ้น repo สาธารณะ (DESIGN.md: _video/ never committed)
+_video/
