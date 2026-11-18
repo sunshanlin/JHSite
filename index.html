@@ -560,6 +560,7 @@
   }
   /* แท็บแคปซูล + accordion + การ์ดรูป — โครงเดียวกับหน้า Business Central ของ Microsoft (th-th, พ.ย. 2026)
      4 แท็บตามด้านของงาน แต่ละแท็บมี accordion ซ้ายเปิดทีละข้อ รูปของข้อที่เปิดอยู่ในการ์ดขาวด้านขวา
+     ทุกรูปเป็น Business Central มาตรฐาน (CRONUS) ไม่ซ้ำกับรูปส่วนอื่นของหน้า ของ Localization อยู่ใน #features
      ≤900px การ์ดซ่อน รูปไปอยู่ใต้ข้อความของข้อที่เปิด (.bc-m เป็นสำเนารูปเดียวกัน alt คู่กันใน I18N_ATTR) */
   .bc-pillbar { position: relative; margin-bottom: 34px; }
   .bc-pills { position: relative; display: flex; gap: 10px; padding: 2px; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; }
@@ -610,11 +611,6 @@
   .bc-item.is-open .bc-body { grid-template-rows: 1fr; }
   .bc-item.is-open .bc-body > div { padding-bottom: 24px; visibility: visible; transition: none; }
   .bc-body p { font-size: .98rem; line-height: 1.65; color: var(--ui-muted); text-wrap: pretty; }
-  .bc-loc {
-    display: inline-block; margin-top: 10px; padding: 0 9px; border-radius: 999px; background: var(--brand-pale);
-    font-family: "Anuphan", sans-serif; font-size: .74rem; font-weight: 600; line-height: 1.8; letter-spacing: .02em;
-    color: var(--brand-teal); white-space: nowrap;
-  }
   .bc-m { display: none; }
   .bc-shot { position: sticky; top: 88px; padding: 14px; border-radius: var(--ui-radius-card); background: #fff; box-shadow: var(--ui-shadow); }
   /* รูปที่ไม่ได้เปิดลอยซ้อน (absolute) — การ์ดสูงตามรูปที่เปิดอยู่ ไม่เผื่อที่ให้รูปที่สูงที่สุด */
@@ -3569,9 +3565,9 @@
           <button type="button" class="bc-arrow bc-prev" aria-label="เลื่อนแท็บไปทางซ้าย"></button>
           <div class="bc-pills" role="tablist" aria-label="ด้านของงานใน Business Central">
             <button type="button" class="bc-pill" role="tab" id="bc-tab-1" aria-controls="bc-panel-1" aria-selected="true">การเงินและบัญชี</button>
-            <button type="button" class="bc-pill" role="tab" id="bc-tab-2" aria-controls="bc-panel-2" aria-selected="false" tabindex="-1">การขายและลูกหนี้</button>
-            <button type="button" class="bc-pill" role="tab" id="bc-tab-3" aria-controls="bc-panel-3" aria-selected="false" tabindex="-1">การทำงานร่วมกับ Microsoft 365</button>
-            <button type="button" class="bc-pill" role="tab" id="bc-tab-4" aria-controls="bc-panel-4" aria-selected="false" tabindex="-1">ภาษีและเอกสารไทย</button>
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-2" aria-controls="bc-panel-2" aria-selected="false" tabindex="-1">การขายและลูกค้า</button>
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-3" aria-controls="bc-panel-3" aria-selected="false" tabindex="-1">สินค้าและคลังสินค้า</button>
+            <button type="button" class="bc-pill" role="tab" id="bc-tab-4" aria-controls="bc-panel-4" aria-selected="false" tabindex="-1">Microsoft 365 และ Power Platform</button>
           </div>
           <button type="button" class="bc-arrow bc-next" aria-label="เลื่อนแท็บไปทางขวา"></button>
         </div>
@@ -3579,126 +3575,112 @@
           <div class="bc-claims">
             <div class="bc-list">
               <div class="bc-item bc-i1 is-open">
-                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-1"><span>เห็นกำไรโดยไม่ต้องรอปิดงบ</span></button>
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-1"><span>ยอดขายและยอดค้างชำระบนหน้าแรก</span></button>
                 <div class="bc-body" id="bc-body-1"><div>
-                  <p>รายงาน Financial Overview บน Power BI ดึง<span class="nb">รายได้</span> กำไรสุทธิ อัตรากำไร และ DSO จาก Business Central โดยตรง ผู้บริหารเปิดดูบน<span class="nb">มือถือ</span>ได้ทุกวัน</p>
-                  <a class="bc-m" href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener"><img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Financial Overview บน Power BI แสดงรายได้ กำไรสุทธิ และ DSO" width="1600" height="906" loading="lazy" decoding="async"></a>
+                  <p>Role Center ของ Business Manager แสดงยอดขายเดือนนี้ ยอดลูกหนี้และเจ้าหนี้ที่เกินกำหนด และจำนวนใบเสนอราคา ใบสั่งขาย และใบสั่งซื้อที่ยังค้างอยู่ กดที่ตัวเลขเพื่อเปิดรายการนั้น<span class="nb">ต่อได้ทันที</span></p>
+                  <a class="bc-m" href="img/bc-activities.webp" target="_blank" rel="noopener"><img src="img/bc-activities.webp" srcset="img/bc-activities-800.webp 800w, img/bc-activities-1080.webp 1080w, img/bc-activities.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center ของ Business Manager แสดงยอดขายเดือนนี้ ยอดค้างชำระ และเอกสารขายและซื้อที่ค้างอยู่" width="1440" height="900" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
               <div class="bc-item bc-i2">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-2"><span>งบทดลองเทียบงวดก่อนบนหน้าแรก</span></button>
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-2"><span>ลูกค้ารายใหญ่คู่กับงบทดลอง</span></button>
                 <div class="bc-body" id="bc-body-2"><div>
-                  <p>Role Center ของผู้บริหารแสดงรายได้ ต้นทุน และ Gross Margin ของงวดนี้เทียบงวดก่อน คู่กับลูกค้า 5 รายที่ทำยอดขายสูงสุด กดที่ตัวเลขเพื่อเจาะดูรายการต่อได้</p>
-                  <a class="bc-m" href="img/bc-dashboard.webp" target="_blank" rel="noopener"><img src="img/bc-dashboard.webp" srcset="img/bc-dashboard-800.webp 800w, img/bc-dashboard-1080.webp 1080w, img/bc-dashboard.webp 1649w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center แสดงลูกค้า 5 อันดับแรกและงบทดลองเทียบงวด" width="1649" height="869" loading="lazy" decoding="async"></a>
-                </div></div>
-              </div>
-              <div class="bc-item bc-i3">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-3"><span>ทะเบียนทรัพย์สินพร้อมค่าเสื่อมราคา</span></button>
-                <div class="bc-body" id="bc-body-3"><div>
-                  <p>Business Central คิดค่าเสื่อมราคาให้ทุกงวด ทะเบียนทรัพย์สินรูปแบบไทยแยกตามกลุ่ม แสดงวันที่เริ่มคิดค่าเสื่อม มูลค่าตั้งต้น ค่าเสื่อมสะสม และมูลค่าสุทธิ</p>
-                  <span class="bc-loc">Thai Localization</span>
-                  <a class="bc-m" href="img/fixed-asset-register.webp" target="_blank" rel="noopener"><img src="img/fixed-asset-register.webp" srcset="img/fixed-asset-register-800.webp 800w, img/fixed-asset-register-1080.webp 1080w, img/fixed-asset-register.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="ทะเบียนทรัพย์สินรูปแบบไทยแยกตามกลุ่มทรัพย์สิน" width="1919" height="987" loading="lazy" decoding="async"></a>
-                </div></div>
-              </div>
-              <div class="bc-item bc-i4">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-4"><span>ความเคลื่อนไหวสินค้าพร้อมต้นทุน<span class="nb">ทุกเอกสาร</span></span></button>
-                <div class="bc-body" id="bc-body-4"><div>
-                  <p>รายงานเคลื่อนไหวสินค้าคงเหลือแสดงยอดยกมา รับ จ่าย คงเหลือ และต้นทุนต่อหน่วยของทุกเอกสาร มูลค่าตรงกับที่ลงบัญชีเพราะมาจากรายการ<span class="nb">ชุดเดียว</span>กัน</p>
-                  <span class="bc-loc">Thai Localization</span>
-                  <a class="bc-m" href="img/stock-card.webp" target="_blank" rel="noopener"><img src="img/stock-card.webp" srcset="img/stock-card-800.webp 800w, img/stock-card-1080.webp 1080w, img/stock-card.webp 1905w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงานเคลื่อนไหวสินค้าคงเหลือแสดงยอดยกมา รับ จ่าย คงเหลือ และต้นทุน" width="1905" height="908" loading="lazy" decoding="async"></a>
+                  <p>ส่วน Insights แสดงลูกค้า 5 รายที่ทำยอดขายสูงสุดเป็นกราฟวงกลม คู่กับงบทดลองย่อที่เทียบรายได้ ต้นทุน และกำไรขั้นต้นของงวดนี้กับงวดก่อน</p>
+                  <a class="bc-m" href="img/bc-insights.webp" target="_blank" rel="noopener"><img src="img/bc-insights.webp" srcset="img/bc-insights-800.webp 800w, img/bc-insights-1080.webp 1080w, img/bc-insights.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="กราฟลูกค้า 5 อันดับแรกตามยอดขาย และงบทดลองเทียบงวด ใน Role Center" width="1440" height="900" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
             </div>
           </div>
           <div class="bc-shot">
-            <figure class="bc-f1 is-active"><a href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener"><img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Financial Overview บน Power BI แสดงรายได้ กำไรสุทธิ และ DSO" width="1600" height="906" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f2" inert><a href="img/bc-dashboard.webp" target="_blank" rel="noopener"><img src="img/bc-dashboard.webp" srcset="img/bc-dashboard-800.webp 800w, img/bc-dashboard-1080.webp 1080w, img/bc-dashboard.webp 1649w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center แสดงลูกค้า 5 อันดับแรกและงบทดลองเทียบงวด" width="1649" height="869" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f3" inert><a href="img/fixed-asset-register.webp" target="_blank" rel="noopener"><img src="img/fixed-asset-register.webp" srcset="img/fixed-asset-register-800.webp 800w, img/fixed-asset-register-1080.webp 1080w, img/fixed-asset-register.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="ทะเบียนทรัพย์สินรูปแบบไทยแยกตามกลุ่มทรัพย์สิน" width="1919" height="987" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f4" inert><a href="img/stock-card.webp" target="_blank" rel="noopener"><img src="img/stock-card.webp" srcset="img/stock-card-800.webp 800w, img/stock-card-1080.webp 1080w, img/stock-card.webp 1905w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงานเคลื่อนไหวสินค้าคงเหลือแสดงยอดยกมา รับ จ่าย คงเหลือ และต้นทุน" width="1905" height="908" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f1 is-active"><a href="img/bc-activities.webp" target="_blank" rel="noopener"><img src="img/bc-activities.webp" srcset="img/bc-activities-800.webp 800w, img/bc-activities-1080.webp 1080w, img/bc-activities.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center ของ Business Manager แสดงยอดขายเดือนนี้ ยอดค้างชำระ และเอกสารขายและซื้อที่ค้างอยู่" width="1440" height="900" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f2" inert><a href="img/bc-insights.webp" target="_blank" rel="noopener"><img src="img/bc-insights.webp" srcset="img/bc-insights-800.webp 800w, img/bc-insights-1080.webp 1080w, img/bc-insights.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="กราฟลูกค้า 5 อันดับแรกตามยอดขาย และงบทดลองเทียบงวด ใน Role Center" width="1440" height="900" loading="lazy" decoding="async"></a></figure>
           </div>
         </div>
         <div class="bc-panel" role="tabpanel" id="bc-panel-2" aria-labelledby="bc-tab-2" hidden>
           <div class="bc-claims">
             <div class="bc-list">
-              <div class="bc-item bc-i5 is-open">
-                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-5"><span>ลูกหนี้แยกตามอายุหนี้ใน Excel</span></button>
+              <div class="bc-item bc-i3 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-3"><span>ใบสั่งขายที่เห็นประวัติลูกค้าในหน้าเดียว</span></button>
+                <div class="bc-body" id="bc-body-3"><div>
+                  <p>ใบสั่งขายเก็บหัวเอกสาร รายการสินค้า และสถานะไว้ในหน้าเดียว FactBox ด้านขวาสรุปใบเสนอราคา ใบสั่งขาย ใบแจ้งหนี้ และการส่งของที่ผ่านมาของลูกค้ารายนี้ แล้วสั่ง Create Warehouse Shipment หรือ Post จากหน้านี้ได้เลย</p>
+                  <a class="bc-m" href="img/bc-sales-order.webp" target="_blank" rel="noopener"><img src="img/bc-sales-order.webp" srcset="img/bc-sales-order-800.webp 800w, img/bc-sales-order-1080.webp 1080w, img/bc-sales-order.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="ใบสั่งขาย 101019 พร้อม FactBox ประวัติการขายของลูกค้า" width="1440" height="1000" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i4">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-4"><span>ใบสั่งขายที่ค้างอยู่พร้อมยอดของลูกค้า</span></button>
+                <div class="bc-body" id="bc-body-4"><div>
+                  <p>หน้ารายการ Sales Orders แสดงใบสั่งขายที่ยังเปิดอยู่ทั้งหมดพร้อมคลังที่จะส่งของ คลิกแถวไหน FactBox Customer Statistics จะแสดงยอดคงค้าง ยอดสั่งที่ยังไม่ส่ง และยอดที่ส่งแล้วแต่ยังไม่ออกใบแจ้งหนี้ของลูกค้ารายนั้น</p>
+                  <a class="bc-m" href="img/bc-sales-orders-list.webp" target="_blank" rel="noopener"><img src="img/bc-sales-orders-list.webp" srcset="img/bc-sales-orders-list-800.webp 800w, img/bc-sales-orders-list-1080.webp 1080w, img/bc-sales-orders-list.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้ารายการ Sales Orders พร้อม FactBox Customer Statistics" width="1440" height="900" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i5">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-5"><span>รายชื่อติดต่อและโอกาสการขายที่ต้องตาม</span></button>
                 <div class="bc-body" id="bc-body-5"><div>
-                  <p>รายงาน Aged Accounts Receivable เปิดต่อใน Excel จาก Business Central ทำ PivotTable และใช้ Slicer กรองตามแผนกหรือกลุ่มลูกค้าได้ทันที ไม่ต้อง Export แล้วจัดคอลัมน์ใหม่</p>
-                  <a class="bc-m" href="img/bc-excel-pivot.webp" target="_blank" rel="noopener"><img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Aged Accounts Receivable ใน Excel พร้อม PivotTable และ Slicer" width="1600" height="931" loading="lazy" decoding="async"></a>
-                </div></div>
-              </div>
-              <div class="bc-item bc-i6">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-6"><span>วางบิลตามรอบของลูกค้าแต่ละราย</span></button>
-                <div class="bc-body" id="bc-body-6"><div>
-                  <p>หน้า Billing Worklist รวมรายการที่ถึงรอบวางบิลตาม Billing Days ของลูกค้าแต่ละราย แล้วสร้างใบวางบิลจากหน้านี้ได้ด้วย Create Billing Notes</p>
-                  <span class="bc-loc">Thai Localization</span>
-                  <a class="bc-m" href="img/billing-worklist.webp" target="_blank" rel="noopener"><img src="img/billing-worklist.webp" srcset="img/billing-worklist-800.webp 800w, img/billing-worklist-1080.webp 1080w, img/billing-worklist.webp 1910w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้า Billing Worklist แสดงลูกค้าที่ถึงรอบวางบิลพร้อมยอดที่วางบิลได้" width="1910" height="768" loading="lazy" decoding="async"></a>
-                </div></div>
-              </div>
-              <div class="bc-item bc-i7">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-7"><span>ปฏิทินวางบิลทั้งเดือนในหน้าเดียว</span></button>
-                <div class="bc-body" id="bc-body-7"><div>
-                  <p>Billing Board วางลูกค้าที่ถึงรอบวางบิลลงบนปฏิทิน พร้อมยอดที่วางบิลได้และวันหยุด ฝ่ายการเงินเห็นงานทั้งเดือนก่อนออกไปวางบิล</p>
-                  <span class="bc-loc">Thai Localization</span>
-                  <a class="bc-m" href="img/billing-board.webp" target="_blank" rel="noopener"><img src="img/billing-board.webp" srcset="img/billing-board-800.webp 800w, img/billing-board-1080.webp 1080w, img/billing-board.webp 1718w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Billing Board ปฏิทินรอบวางบิลของลูกค้าทั้งเดือน" width="1718" height="670" loading="lazy" decoding="async"></a>
+                  <p>Role Center ของ Sales &amp; Relationship Manager นับรายชื่อติดต่อและโอกาสการขายที่เปิดอยู่ โอกาสที่เลยกำหนดขึ้นเป็นช่องสีแดง กดที่ Overdue Opportunities เพื่อเปิดรายการที่ต้องตามต่อ</p>
+                  <a class="bc-m" href="img/bc-opportunities.webp" target="_blank" rel="noopener"><img src="img/bc-opportunities.webp" srcset="img/bc-opportunities-800.webp 800w, img/bc-opportunities-1080.webp 1080w, img/bc-opportunities.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center ของ Sales &amp; Relationship Manager แสดงจำนวนรายชื่อติดต่อและโอกาสการขาย" width="1440" height="900" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
             </div>
           </div>
           <div class="bc-shot">
-            <figure class="bc-f5 is-active"><a href="img/bc-excel-pivot.webp" target="_blank" rel="noopener"><img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Aged Accounts Receivable ใน Excel พร้อม PivotTable และ Slicer" width="1600" height="931" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f6" inert><a href="img/billing-worklist.webp" target="_blank" rel="noopener"><img src="img/billing-worklist.webp" srcset="img/billing-worklist-800.webp 800w, img/billing-worklist-1080.webp 1080w, img/billing-worklist.webp 1910w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้า Billing Worklist แสดงลูกค้าที่ถึงรอบวางบิลพร้อมยอดที่วางบิลได้" width="1910" height="768" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f7" inert><a href="img/billing-board.webp" target="_blank" rel="noopener"><img src="img/billing-board.webp" srcset="img/billing-board-800.webp 800w, img/billing-board-1080.webp 1080w, img/billing-board.webp 1718w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Billing Board ปฏิทินรอบวางบิลของลูกค้าทั้งเดือน" width="1718" height="670" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f3 is-active"><a href="img/bc-sales-order.webp" target="_blank" rel="noopener"><img src="img/bc-sales-order.webp" srcset="img/bc-sales-order-800.webp 800w, img/bc-sales-order-1080.webp 1080w, img/bc-sales-order.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="ใบสั่งขาย 101019 พร้อม FactBox ประวัติการขายของลูกค้า" width="1440" height="1000" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f4" inert><a href="img/bc-sales-orders-list.webp" target="_blank" rel="noopener"><img src="img/bc-sales-orders-list.webp" srcset="img/bc-sales-orders-list-800.webp 800w, img/bc-sales-orders-list-1080.webp 1080w, img/bc-sales-orders-list.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้ารายการ Sales Orders พร้อม FactBox Customer Statistics" width="1440" height="900" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f5" inert><a href="img/bc-opportunities.webp" target="_blank" rel="noopener"><img src="img/bc-opportunities.webp" srcset="img/bc-opportunities-800.webp 800w, img/bc-opportunities-1080.webp 1080w, img/bc-opportunities.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Role Center ของ Sales &amp; Relationship Manager แสดงจำนวนรายชื่อติดต่อและโอกาสการขาย" width="1440" height="900" loading="lazy" decoding="async"></a></figure>
           </div>
         </div>
         <div class="bc-panel" role="tabpanel" id="bc-panel-3" aria-labelledby="bc-tab-3" hidden>
           <div class="bc-claims">
             <div class="bc-list">
-              <div class="bc-item bc-i8 is-open">
-                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-8"><span>อนุมัติเอกสารผ่าน Power Automate</span></button>
-                <div class="bc-body" id="bc-body-8"><div>
-                  <p>เมื่อมีเอกสารใหม่ในระบบ Power Automate ส่งคำขออนุมัติถึงผู้จัดการทางอีเมลและ Teams เอง กด Approve หรือ Reject จากมือถือได้ทันที ไม่ต้องเดินกระดาษ</p>
-                  <a class="bc-m" href="img/bc-power-automate.webp" target="_blank" rel="noopener"><img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Power Automate flow ส่งคำขออนุมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async"></a>
+              <div class="bc-item bc-i6 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-6"><span>จำนวนคงเหลือและต้นทุนของสินค้าทุกตัว</span></button>
+                <div class="bc-body" id="bc-body-6"><div>
+                  <p>หน้ารายการ Items แสดงจำนวนคงเหลือของสินค้าทุกตัว FactBox ด้านขวาบอกวิธีคิดต้นทุน ต้นทุนต่อหน่วย ราคาขาย อัตรากำไร และนโยบายการสั่งซื้อซ้ำของสินค้าที่เลือก</p>
+                  <a class="bc-m" href="img/bc-items.webp" target="_blank" rel="noopener"><img src="img/bc-items.webp" srcset="img/bc-items-800.webp 800w, img/bc-items-1080.webp 1080w, img/bc-items.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้ารายการ Items แสดงจำนวนคงเหลือพร้อม FactBox ต้นทุนและราคาขาย" width="1440" height="900" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
-              <div class="bc-item bc-i9">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-9"><span>เข้าใช้ด้วยบัญชี Microsoft 365</span></button>
-                <div class="bc-body" id="bc-body-9"><div>
-                  <p>ระบบอยู่บนคลาวด์ของ Microsoft เปิดผ่านเบราว์เซอร์ด้วยบัญชีเดียวกับ Outlook และ Teams แต่ละคนเห็นเฉพาะเมนูตามสิทธิ์ พนักงานลาออก ปิดบัญชีเดียวก็เข้าระบบไม่ได้ทันที</p>
-                  <a class="bc-m" href="img/bc-home.webp" target="_blank" rel="noopener"><img src="img/bc-home.webp" srcset="img/bc-home-800.webp 800w, img/bc-home-1080.webp 1080w, img/bc-home.webp 1911w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าแรกของ Business Central แสดงเมนูตามสิทธิ์ของผู้ใช้" width="1911" height="793" loading="lazy" decoding="async"></a>
+              <div class="bc-item bc-i7">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-7"><span>สินค้าพร้อมขายล่วงหน้ารายเดือน</span></button>
+                <div class="bc-body" id="bc-body-7"><div>
+                  <p>หน้า Item Availability by Periods แสดงความต้องการ ของที่จะรับเข้า และยอดคงเหลือที่คาดว่าจะมีของสินค้าแต่ละตัวทีละเดือน ฝ่ายขายจึงรู้ว่ารับคำสั่งซื้อได้อีกเท่าไรในแต่ละเดือน</p>
+                  <a class="bc-m" href="img/bc-item-availability.webp" target="_blank" rel="noopener"><img src="img/bc-item-availability.webp" srcset="img/bc-item-availability-800.webp 800w, img/bc-item-availability-1080.webp 1080w, img/bc-item-availability.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้า Item Availability by Periods ของสินค้า 1000 Bicycle แยกรายเดือน" width="1440" height="900" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
             </div>
           </div>
           <div class="bc-shot">
-            <figure class="bc-f8 is-active"><a href="img/bc-power-automate.webp" target="_blank" rel="noopener"><img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Power Automate flow ส่งคำขออนุมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f9" inert><a href="img/bc-home.webp" target="_blank" rel="noopener"><img src="img/bc-home.webp" srcset="img/bc-home-800.webp 800w, img/bc-home-1080.webp 1080w, img/bc-home.webp 1911w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าแรกของ Business Central แสดงเมนูตามสิทธิ์ของผู้ใช้" width="1911" height="793" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f6 is-active"><a href="img/bc-items.webp" target="_blank" rel="noopener"><img src="img/bc-items.webp" srcset="img/bc-items-800.webp 800w, img/bc-items-1080.webp 1080w, img/bc-items.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้ารายการ Items แสดงจำนวนคงเหลือพร้อม FactBox ต้นทุนและราคาขาย" width="1440" height="900" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f7" inert><a href="img/bc-item-availability.webp" target="_blank" rel="noopener"><img src="img/bc-item-availability.webp" srcset="img/bc-item-availability-800.webp 800w, img/bc-item-availability-1080.webp 1080w, img/bc-item-availability.webp 1440w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้า Item Availability by Periods ของสินค้า 1000 Bicycle แยกรายเดือน" width="1440" height="900" loading="lazy" decoding="async"></a></figure>
           </div>
         </div>
         <div class="bc-panel" role="tabpanel" id="bc-panel-4" aria-labelledby="bc-tab-4" hidden>
           <div class="bc-claims">
             <div class="bc-list">
-              <div class="bc-item bc-i10 is-open">
-                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-10"><span>ส่งข้อมูลภาษีหัก ณ ที่จ่ายเข้า RD Prep</span></button>
-                <div class="bc-body" id="bc-body-10"><div>
-                  <p>ข้อมูลสำหรับ ภ.ง.ด.3 และ ภ.ง.ด.53 จาก Business Central โอนเข้าโปรแกรม RD Prep ของกรมสรรพากรได้โดยไม่ต้องคีย์ซ้ำ</p>
-                  <span class="bc-loc">Thai Localization</span>
-                  <a class="bc-m" href="img/rdprep-transfer.webp" target="_blank" rel="noopener"><img src="img/rdprep-transfer.webp" srcset="img/rdprep-transfer-800.webp 800w, img/rdprep-transfer-1080.webp 1080w, img/rdprep-transfer.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าโอนย้ายข้อมูลของโปรแกรม RD Prep ของกรมสรรพากร" width="1919" height="820" loading="lazy" decoding="async"></a>
+              <div class="bc-item bc-i8 is-open">
+                <button type="button" class="bc-head" aria-expanded="true" aria-controls="bc-body-8"><span>เห็นกำไรโดยไม่ต้องรอปิดงบ</span></button>
+                <div class="bc-body" id="bc-body-8"><div>
+                  <p>รายงาน Financial Overview บน Power BI ดึง<span class="nb">รายได้</span> กำไรสุทธิ อัตรากำไร และ DSO จาก Business Central โดยตรง ผู้บริหารเปิดดูบน<span class="nb">มือถือ</span>ได้ทุกวัน</p>
+                  <a class="bc-m" href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener"><img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Financial Overview บน Power BI แสดงรายได้ กำไรสุทธิ และ DSO" width="1600" height="906" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
-              <div class="bc-item bc-i11">
-                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-11"><span>สร้างลูกค้าจากเลขประจำตัวผู้เสียภาษี</span></button>
-                <div class="bc-body" id="bc-body-11"><div>
-                  <p>กรอกเลขประจำตัวผู้เสียภาษี ระบบดึงชื่อ ที่อยู่ และสาขาจาก <span class="nb">VAT Service</span> ของกรมสรรพากรมาสร้างข้อมูลลูกค้าและผู้ขายให้ ชื่อบนใบกำกับภาษีจึงตรงกับที่จดทะเบียนไว้</p>
-                  <span class="bc-loc">Thai Localization</span>
-                  <a class="bc-m" href="img/vat-service.webp" target="_blank" rel="noopener"><img src="img/vat-service.webp" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" width="883" height="716" loading="lazy" decoding="async"></a>
+              <div class="bc-item bc-i9">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-9"><span>อนุมัติเอกสารผ่าน Power Automate</span></button>
+                <div class="bc-body" id="bc-body-9"><div>
+                  <p>เมื่อมีเอกสารใหม่ในระบบ Power Automate ส่งคำขออนุมัติถึงผู้จัดการทางอีเมลและ Teams เอง กด Approve หรือ Reject จากมือถือได้ทันที ไม่ต้องเดินกระดาษ</p>
+                  <a class="bc-m" href="img/bc-power-automate.webp" target="_blank" rel="noopener"><img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Power Automate flow ส่งคำขออนุมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async"></a>
+                </div></div>
+              </div>
+              <div class="bc-item bc-i10">
+                <button type="button" class="bc-head" aria-expanded="false" aria-controls="bc-body-10"><span>ลูกหนี้แยกตามอายุหนี้ใน Excel</span></button>
+                <div class="bc-body" id="bc-body-10"><div>
+                  <p>รายงาน Aged Accounts Receivable เปิดต่อใน Excel จาก Business Central ทำ PivotTable และใช้ Slicer กรองตามแผนกหรือกลุ่มลูกค้าได้ทันที ไม่ต้อง Export แล้วจัดคอลัมน์ใหม่</p>
+                  <a class="bc-m" href="img/bc-excel-pivot.webp" target="_blank" rel="noopener"><img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Aged Accounts Receivable ใน Excel พร้อม PivotTable และ Slicer" width="1600" height="931" loading="lazy" decoding="async"></a>
                 </div></div>
               </div>
             </div>
           </div>
           <div class="bc-shot">
-            <figure class="bc-f10 is-active"><a href="img/rdprep-transfer.webp" target="_blank" rel="noopener"><img src="img/rdprep-transfer.webp" srcset="img/rdprep-transfer-800.webp 800w, img/rdprep-transfer-1080.webp 1080w, img/rdprep-transfer.webp 1919w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="หน้าโอนย้ายข้อมูลของโปรแกรม RD Prep ของกรมสรรพากร" width="1919" height="820" loading="lazy" decoding="async"></a></figure>
-            <figure class="bc-f11" inert><a href="img/vat-service.webp" target="_blank" rel="noopener"><img src="img/vat-service.webp" alt="หน้าจอค้นหาเลขประจำตัวผู้เสียภาษีจาก VAT Service ของกรมสรรพากร ใน Business Central" width="883" height="716" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f8 is-active"><a href="img/bc-powerbi-overview.webp" target="_blank" rel="noopener"><img src="img/bc-powerbi-overview.webp" srcset="img/bc-powerbi-overview-800.webp 800w, img/bc-powerbi-overview-1080.webp 1080w, img/bc-powerbi-overview.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Financial Overview บน Power BI แสดงรายได้ กำไรสุทธิ และ DSO" width="1600" height="906" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f9" inert><a href="img/bc-power-automate.webp" target="_blank" rel="noopener"><img src="img/bc-power-automate.webp" srcset="img/bc-power-automate-800.webp 800w, img/bc-power-automate-1080.webp 1080w, img/bc-power-automate.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="Power Automate flow ส่งคำขออนุมัติเมื่อมีเอกสารใหม่ใน Business Central" width="1600" height="989" loading="lazy" decoding="async"></a></figure>
+            <figure class="bc-f10" inert><a href="img/bc-excel-pivot.webp" target="_blank" rel="noopener"><img src="img/bc-excel-pivot.webp" srcset="img/bc-excel-pivot-800.webp 800w, img/bc-excel-pivot-1080.webp 1080w, img/bc-excel-pivot.webp 1600w" sizes="(max-width: 900px) calc(100vw - 66px), 620px" alt="รายงาน Aged Accounts Receivable ใน Excel พร้อม PivotTable และ Slicer" width="1600" height="931" loading="lazy" decoding="async"></a></figure>
           </div>
         </div>
       </div>
@@ -6442,31 +6424,29 @@
     ['#business-central > .wrap > h3', 'What is Microsoft Dynamics 365 Business Central?'],
     ['#business-central > .wrap > .sub', 'Microsoft\'s ERP for SMEs. Sales, purchasing, inventory, manufacturing, projects, service and accounting record into one database, so every department sees the same numbers without passing files around. It opens in the browser with the same Microsoft 365 account you use for Outlook and Teams.'],
     ['#bc-tab-1', 'Finance and accounting'],
-    ['#bc-tab-2', 'Sales and receivables'],
-    ['#bc-tab-3', 'Working with Microsoft 365'],
-    ['#bc-tab-4', 'Thai tax and documents'],
-    ['.bc-i1 .bc-head > span', 'See profit without waiting for the close'],
-    ['.bc-i1 .bc-body p', 'The Financial Overview report in Power BI pulls revenue, net profit, margin and DSO straight from Business Central, and management can check it on a phone every day.'],
-    ['.bc-i2 .bc-head > span', 'Trial balance against last period on the home page'],
-    ['.bc-i2 .bc-body p', 'The executive Role Center shows this period\'s revenue, costs and gross margin against the last, next to the five customers with the highest sales. Click a figure to drill into the entries.'],
-    ['.bc-i3 .bc-head > span', 'Fixed asset register with depreciation'],
-    ['.bc-i3 .bc-body p', 'Business Central calculates depreciation every period. The Thai-format fixed asset register groups assets by class and shows the depreciation start date, acquisition cost, accumulated depreciation and book value.'],
-    ['.bc-i4 .bc-head > span', 'Inventory movement with the cost of every document'],
-    ['.bc-i4 .bc-body p', 'The stock movement report shows the opening balance, receipts, issues, closing balance and unit cost of every document. Its values match the ledger because both come from the same entries.'],
-    ['.bc-i5 .bc-head > span', 'Receivables by age in Excel'],
-    ['.bc-i5 .bc-body p', 'Open the Aged Accounts Receivable report in Excel straight from Business Central, build a PivotTable and filter by department or customer group with slicers, without exporting and rearranging columns.'],
-    ['.bc-i6 .bc-head > span', 'Bill each customer on their own cycle'],
-    ['.bc-i6 .bc-body p', 'The Billing Worklist gathers the entries due for billing under each customer\'s Billing Days, and Create Billing Notes turns them into billing notes from the same page.'],
-    ['.bc-i7 .bc-head > span', 'The whole month of billing on one calendar'],
-    ['.bc-i7 .bc-body p', 'The Billing Board places the customers due for billing on a calendar, with billable amounts and holidays, so finance sees the whole month before going out to bill.'],
-    ['.bc-i8 .bc-head > span', 'Approvals through Power Automate'],
-    ['.bc-i8 .bc-body p', 'When a new document is created, Power Automate sends the approval request to the manager by email and Teams. They can Approve or Reject from a phone, with no paper changing hands.'],
-    ['.bc-i9 .bc-head > span', 'Sign in with your Microsoft 365 account'],
-    ['.bc-i9 .bc-body p', 'The system runs in Microsoft\'s cloud and opens in the browser with the same account as Outlook and Teams. Each person sees only the menus they have rights to, and when someone leaves, closing that one account locks them out at once.'],
-    ['.bc-i10 .bc-head > span', 'Send withholding tax data to RD Prep'],
-    ['.bc-i10 .bc-body p', 'Data for PND3 and PND53 moves from Business Central into the Revenue Department\'s RD Prep program with no rekeying.'],
-    ['.bc-i11 .bc-head > span', 'Create customers from a tax ID'],
-    ['.bc-i11 .bc-body p', 'Enter a tax ID and the system pulls the name, address and branch from the Revenue Department\'s VAT Service to create the customer or vendor, so the name on the tax invoice matches the registration.'],
+    ['#bc-tab-2', 'Sales and customers'],
+    ['#bc-tab-3', 'Items and inventory'],
+    ['#bc-tab-4', 'Microsoft 365 and Power Platform'],
+    ['.bc-i1 .bc-head > span', 'Sales and overdue amounts on the home page'],
+    ['.bc-i1 .bc-body p', 'The Business Manager Role Center shows this month\'s sales, overdue receivables and payables, and how many quotes, sales orders and purchase orders are still open. Click a figure to open those records.'],
+    ['.bc-i2 .bc-head > span', 'Top customers next to the trial balance'],
+    ['.bc-i2 .bc-body p', 'The Insights area charts the five customers with the highest sales next to a short trial balance that compares revenue, cost and gross margin for this period and the last.'],
+    ['.bc-i3 .bc-head > span', 'Sales orders with the customer\'s history alongside'],
+    ['.bc-i3 .bc-body p', 'A sales order keeps the header, item lines and status on one page. The FactBox on the right sums up this customer\'s quotes, orders, invoices and past shipments, and Create Warehouse Shipment or Post runs from the same page.'],
+    ['.bc-i4 .bc-head > span', 'Open sales orders with each customer\'s totals'],
+    ['.bc-i4 .bc-body p', 'The Sales Orders list shows every open order with the location it ships from. Select a row and the Customer Statistics FactBox shows that customer\'s balance, outstanding orders, and goods shipped but not yet invoiced.'],
+    ['.bc-i5 .bc-head > span', 'Contacts and the opportunities to follow up'],
+    ['.bc-i5 .bc-body p', 'The Sales &amp; Relationship Manager Role Center counts contacts and open opportunities and turns overdue ones red. Click Overdue Opportunities to open the list to follow up.'],
+    ['.bc-i6 .bc-head > span', 'Stock and cost for every item'],
+    ['.bc-i6 .bc-body p', 'The Items list shows the quantity on hand for every item. The FactBox on the right gives the selected item\'s costing method, unit cost, unit price, profit and reordering policy.'],
+    ['.bc-i7 .bc-head > span', 'Projected availability month by month'],
+    ['.bc-i7 .bc-body p', 'Item Availability by Periods shows an item\'s gross requirement, scheduled receipts and projected available balance month by month, so sales knows how much it can still promise each month.'],
+    ['.bc-i8 .bc-head > span', 'See profit without waiting for the close'],
+    ['.bc-i8 .bc-body p', 'The Financial Overview report in Power BI pulls revenue, net profit, margin and DSO straight from Business Central, and management can check it on a phone every day.'],
+    ['.bc-i9 .bc-head > span', 'Approvals through Power Automate'],
+    ['.bc-i9 .bc-body p', 'When a new document is created, Power Automate sends the approval request to the manager by email and Teams. They can Approve or Reject from a phone, with no paper changing hands.'],
+    ['.bc-i10 .bc-head > span', 'Receivables by age in Excel'],
+    ['.bc-i10 .bc-body p', 'Open the Aged Accounts Receivable report in Excel straight from Business Central, build a PivotTable and filter by department or customer group with slicers, without exporting and rearranging columns.'],
     ['.bc-bridge', 'Thai tax and documents such as PP30, the 50 Tawi certificate and billing notes are not part of standard Business Central. <a href="#features"><span class="nb">See what JWIC Thai Localization adds ↓</span></a>'],
     ['.tip b', '💡 What is Localization?'],
     ['.tip p', 'Adapting a standard system to support the laws, language, documents, and working practices that differ from country to country.'],
@@ -6613,28 +6593,26 @@
     ['.bc-pills', 'aria-label', 'Business Central by area of work'],
     ['.bc-prev', 'aria-label', 'Scroll tabs left'],
     ['.bc-next', 'aria-label', 'Scroll tabs right'],
-    ['.bc-shot .bc-f1 img', 'alt', 'Financial Overview report in Power BI showing revenue, net profit and DSO'],
-    ['.bc-i1 .bc-m img', 'alt', 'Financial Overview report in Power BI showing revenue, net profit and DSO'],
-    ['.bc-shot .bc-f2 img', 'alt', 'Role Center showing the top five customers and a trial balance against the previous period'],
-    ['.bc-i2 .bc-m img', 'alt', 'Role Center showing the top five customers and a trial balance against the previous period'],
-    ['.bc-shot .bc-f3 img', 'alt', 'Thai-format fixed asset register grouped by asset class'],
-    ['.bc-i3 .bc-m img', 'alt', 'Thai-format fixed asset register grouped by asset class'],
-    ['.bc-shot .bc-f4 img', 'alt', 'Stock movement report showing opening balance, receipts, issues, closing balance and cost'],
-    ['.bc-i4 .bc-m img', 'alt', 'Stock movement report showing opening balance, receipts, issues, closing balance and cost'],
-    ['.bc-shot .bc-f5 img', 'alt', 'Aged Accounts Receivable report in Excel with a PivotTable and slicers'],
-    ['.bc-i5 .bc-m img', 'alt', 'Aged Accounts Receivable report in Excel with a PivotTable and slicers'],
-    ['.bc-shot .bc-f6 img', 'alt', 'Billing Worklist page listing customers due for billing with their billable amounts'],
-    ['.bc-i6 .bc-m img', 'alt', 'Billing Worklist page listing customers due for billing with their billable amounts'],
-    ['.bc-shot .bc-f7 img', 'alt', 'Billing Board calendar of every customer\'s billing dates for the month'],
-    ['.bc-i7 .bc-m img', 'alt', 'Billing Board calendar of every customer\'s billing dates for the month'],
-    ['.bc-shot .bc-f8 img', 'alt', 'Power Automate flow that sends an approval request when a new document is created in Business Central'],
-    ['.bc-i8 .bc-m img', 'alt', 'Power Automate flow that sends an approval request when a new document is created in Business Central'],
-    ['.bc-shot .bc-f9 img', 'alt', 'Business Central home page showing the menus the user has rights to'],
-    ['.bc-i9 .bc-m img', 'alt', 'Business Central home page showing the menus the user has rights to'],
-    ['.bc-shot .bc-f10 img', 'alt', 'Data transfer screen of the Revenue Department\'s RD Prep program'],
-    ['.bc-i10 .bc-m img', 'alt', 'Data transfer screen of the Revenue Department\'s RD Prep program'],
-    ['.bc-shot .bc-f11 img', 'alt', 'Tax ID lookup from the Revenue Department VAT Service inside Business Central'],
-    ['.bc-i11 .bc-m img', 'alt', 'Tax ID lookup from the Revenue Department VAT Service inside Business Central'],
+    ['.bc-shot .bc-f1 img', 'alt', 'Business Manager Role Center showing this month\'s sales, overdue amounts, and open sales and purchase documents'],
+    ['.bc-i1 .bc-m img', 'alt', 'Business Manager Role Center showing this month\'s sales, overdue amounts, and open sales and purchase documents'],
+    ['.bc-shot .bc-f2 img', 'alt', 'Chart of the top five customers by sales and a trial balance comparing periods in the Role Center'],
+    ['.bc-i2 .bc-m img', 'alt', 'Chart of the top five customers by sales and a trial balance comparing periods in the Role Center'],
+    ['.bc-shot .bc-f3 img', 'alt', 'Sales order 101019 with the customer\'s sales history FactBox'],
+    ['.bc-i3 .bc-m img', 'alt', 'Sales order 101019 with the customer\'s sales history FactBox'],
+    ['.bc-shot .bc-f4 img', 'alt', 'Sales Orders list with the Customer Statistics FactBox'],
+    ['.bc-i4 .bc-m img', 'alt', 'Sales Orders list with the Customer Statistics FactBox'],
+    ['.bc-shot .bc-f5 img', 'alt', 'Sales & Relationship Manager Role Center showing contact and opportunity counts'],
+    ['.bc-i5 .bc-m img', 'alt', 'Sales & Relationship Manager Role Center showing contact and opportunity counts'],
+    ['.bc-shot .bc-f6 img', 'alt', 'Items list showing inventory with a FactBox of cost and price details'],
+    ['.bc-i6 .bc-m img', 'alt', 'Items list showing inventory with a FactBox of cost and price details'],
+    ['.bc-shot .bc-f7 img', 'alt', 'Item Availability by Periods for item 1000 Bicycle, by month'],
+    ['.bc-i7 .bc-m img', 'alt', 'Item Availability by Periods for item 1000 Bicycle, by month'],
+    ['.bc-shot .bc-f8 img', 'alt', 'Financial Overview report in Power BI showing revenue, net profit and DSO'],
+    ['.bc-i8 .bc-m img', 'alt', 'Financial Overview report in Power BI showing revenue, net profit and DSO'],
+    ['.bc-shot .bc-f9 img', 'alt', 'Power Automate flow that sends an approval request when a new document is created in Business Central'],
+    ['.bc-i9 .bc-m img', 'alt', 'Power Automate flow that sends an approval request when a new document is created in Business Central'],
+    ['.bc-shot .bc-f10 img', 'alt', 'Aged Accounts Receivable report in Excel with a PivotTable and slicers'],
+    ['.bc-i10 .bc-m img', 'alt', 'Aged Accounts Receivable report in Excel with a PivotTable and slicers'],
     ['img.feature-photo[src$="feat-vat.webp"]', 'alt', 'Tax return forms and a calculator on a desk'],
     ['img.feature-photo[src$="feat-wht.webp"]', 'alt', 'Accountant checking withholding tax documents at a desk'],
     ['img.feature-photo[src$="feat-messenger.webp"]', 'alt', 'Messenger opening an envelope of billing notes outside an office building'],
