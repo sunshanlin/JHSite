@@ -50,7 +50,7 @@
       },
       "image": "https://www.jwicconsulting.com/img/jh-poster.png",
       "description": "ที่ปรึกษาและนักพัฒนา Microsoft Dynamics 365 Business Central พร้อม Thai Localization สำหรับธุรกิจไทย",
-      "email": "jirapat.wi@outlook.co.th",
+      "email": "jirapat@jwicconsulting.com",
       "telephone": "+66841487480",
       "address": {
         "@type": "PostalAddress",
@@ -68,7 +68,7 @@
         "@type": "ContactPoint",
         "contactType": "sales",
         "telephone": "+66841487480",
-        "email": "jirapat.wi@outlook.co.th",
+        "email": "jirapat@jwicconsulting.com",
         "availableLanguage": ["Thai", "English"]
       },
       "founder": {
@@ -79,6 +79,16 @@
         "propertyID": "TH-DBD-CommercialRegistration",
         "name": "เลขทะเบียนพาณิชย์อิเล็กทรอนิกส์ กรมพัฒนาธุรกิจการค้า",
         "value": "1101700150933"
+      },
+      "memberOf": {
+        "@type": "ProgramMembership",
+        "programName": "Microsoft AI Cloud Partner Program",
+        "membershipNumber": "7195914",
+        "hostingOrganization": {
+          "@type": "Organization",
+          "name": "Microsoft",
+          "url": "https://partner.microsoft.com/"
+        }
       },
       "sameAs": [
         "https://dbdregistered.dbd.go.th/api/public/shopinfo?param=E016A0310699BBD7D37CE6CA584AAEF5EAF18008E27AC61CC81688A586F819CC"
@@ -95,7 +105,7 @@
       "jobTitle": "Microsoft Dynamics 365 Business Central Functional Consultant and AL Developer",
       "url": "https://www.jwicconsulting.com/#about",
       "image": "https://www.jwicconsulting.com/img/jirapat.jpg",
-      "email": "jirapat.wi@outlook.co.th",
+      "email": "jirapat@jwicconsulting.com",
       "telephone": "+66841487480",
       "worksFor": {
         "@id": "https://www.jwicconsulting.com/#organization"
@@ -848,6 +858,22 @@
     transition: color .2s ease, text-decoration-color .2s ease;
   }
   .hero-learn-link::after { content: "↗"; font-size: .92em; }
+  /* สถานะสมาชิก Microsoft AI Cloud Partner Program: ข้อความล้วน ไม่ทำหน้าตาเหมือน badge
+     (badge ทางการจาก Logo Builder ออกให้เฉพาะ Solutions Partner designation, สมาชิกทั่วไปไม่มี) */
+  .hero-partner {
+    display: grid; grid-template-columns: 16px auto auto; justify-content: start; align-items: center;
+    gap: 0 10px; margin-top: 4px; font-size: .82rem; line-height: 1.5;
+  }
+  .hero-partner svg {
+    width: 16px; height: 16px; margin-left: -2px;
+    fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .hero-partner-id { padding-left: 10px; border-left: 1px solid currentColor; font-variant-numeric: tabular-nums; }
+  /* จอแคบ: ID ลงบรรทัดใหม่ตรงกับตัวหนังสือบรรทัดบน ไม่มีเส้นคั่นค้างหัวบรรทัด */
+  @media (max-width: 600px) {
+    .hero-partner { grid-template-columns: 16px 1fr; }
+    .hero-partner-id { grid-column: 2; padding-left: 0; border-left: 0; }
+  }
   .hero-learn-link:hover { color: #fff; text-decoration-color: currentColor; }
   .hero-doc { width: 100%; animation: heroSceneIn .8s ease .38s both; }
   @keyframes heroSceneIn { from { opacity: 0; } to { opacity: 1; } }
@@ -1025,6 +1051,21 @@
     display: block; height: auto; aspect-ratio: 1104 / 585;
     border-radius: 6px; object-fit: contain; background: #fff;
   }
+  /* Microsoft AI Cloud Partner Program: ข้อความล้วน ไม่ใช้โลโก้ Microsoft (ใช้ได้เฉพาะ badge ทางการจาก Partner Center) */
+  .partner-program {
+    grid-column: 1 / -1; display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border: 1px solid rgba(124,203,196,.28); border-radius: var(--ui-radius-btn);
+    background: rgba(124,203,196,.07);
+  }
+  .partner-program-icon {
+    display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px;
+    border-radius: 50%; background: rgba(124,203,196,.16); color: var(--brand-mint);
+  }
+  .partner-program-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .partner-program p { margin: 0; line-height: 1.4; }
+  .partner-program-label { color: var(--brand-mist); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .partner-program-name { color: #fff; font-size: .95rem; font-weight: 600; }
+  .partner-program-id { color: #dce8e5; font-size: .85rem; font-variant-numeric: tabular-nums; }
   .credential-gallery {
     scroll-margin-top: 100px; margin-top: 12px; padding: 24px 26px 8px;
     border: 1px solid rgba(255,255,255,.15); 
@@ -1929,7 +1970,7 @@
   }
   header h1 { font-size: clamp(2.2rem, 3.4vw, 2.75rem); }
   header h1 .hero-accent { color: var(--brand-burgundy); -webkit-text-fill-color: currentColor; }
-  header p.lead, .hero-learn-link, header .tagline { color: var(--ui-muted); }
+  header p.lead, .hero-learn-link, .hero-partner, header .tagline { color: var(--ui-muted); }
   header .tagline { letter-spacing: .08em; }
   header .badge { background: #fff; color: var(--ui-ink); border: 1px solid var(--ui-line); }
   .hero-decor::before, .hero-decor::after { display: none; }
@@ -2313,6 +2354,8 @@
     color: #CBDCD8; font-size: .92rem;
   }
   .footer-col a:hover, .footer-col a:focus-visible { color: #fff; text-decoration: underline; }
+  .footer-bottom #cookie-manage { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .footer-partner { grid-column: 1; grid-row: 2; color: var(--brand-mint); font-size: .8rem; line-height: 1.75; font-variant-numeric: tabular-nums; }
   .footer-bottom {
     grid-template-columns: 1fr auto; justify-items: start; 
     padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12);
@@ -2386,6 +2429,7 @@
   @media (max-width: 760px) {
     .footer-main { grid-template-columns: 1fr; }
     .footer-bottom { grid-template-columns: 1fr; }
+    .footer-bottom #cookie-manage, .footer-partner { grid-column: auto; grid-row: auto; }
   }
 
   /* ==========================================================================
@@ -3375,7 +3419,7 @@
     .reveal, .hero-copy > * { opacity: 1 !important; transform: none !important; }
     .skip-link, .cookie-bar, .demo-toggle,
     .topnav .links, .topnav .social, .topnav .lang, .menu-toggle,
-    .hero-decor, .hero-doc, .hero-actions, .hero-learn-link,
+    .hero-decor, .hero-doc, .hero-actions, .hero-learn-link, .hero-partner,
     #business-central .bc-tabs, .feature-tab-scroll, .feature-visual, .feature-link, .tip-film,
     #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
     #pp36, #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
@@ -3443,7 +3487,7 @@
     footer .footer-main { display: flex; flex-wrap: wrap; gap: 6px 24px; }
     footer .footer-reach { display: flex; flex-wrap: wrap; gap: 0 16px; align-items: baseline; }
     footer .footer-reach a { min-height: 0; }
-    .footer-legal { font-size: 10px; }
+    .footer-legal, .footer-partner { font-size: 10px; }
     footer .footer-bottom::after { content: "jwicconsulting.com"; display: block; margin-top: 6px; font-weight: 600; }
   }
 </style>
@@ -3487,7 +3531,7 @@
       <a href="https://line.me/ti/p/~0841487480" aria-label="LINE" title="LINE">
         <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
       </a>
-      <a href="mailto:jirapat.wi@outlook.co.th" aria-label="Email" title="Email">
+      <a href="mailto:jirapat@jwicconsulting.com" aria-label="Email" title="Email">
         <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
@@ -3534,6 +3578,7 @@
       <a class="cta ghost" href="#pricing">ดูราคาแพ็กเกจ</a>
     </div>
     <a class="hero-learn-link" href="https://www.microsoft.com/en-us/dynamics-365/products/business-central" target="_blank" rel="noopener noreferrer" aria-label="ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central บนเว็บไซต์ Microsoft (เปิดในแท็บใหม่)">ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ Business Central</a>
+    <p class="hero-partner" lang="en"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span class="hero-partner-name">Microsoft AI Cloud Partner Program member</span><span class="hero-partner-id">Partner&nbsp;ID&nbsp;7195914</span></p>
     </div>
     <!-- คลิป "ครบทั้งเดือน ในระบบเดียว" 1:33 มีเพลง แบบหน้า Business Central ของ Microsoft (ผู้ใช้เลือก ต.ค. 2026)
          ภาพปกในกรอบกระจก + ปุ่ม ▶ กลางภาพ ไม่มีอะไรเล่นเอง · กดแล้วสคริปต์เปิด dialog#film และเล่นทันที
@@ -4012,7 +4057,7 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a>
+            <a href="mailto:jirapat@jwicconsulting.com">jirapat@jwicconsulting.com</a>
           </li>
           <li class="ci-flyer">
             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
@@ -4413,6 +4458,16 @@
             <img src="img/credentials/business-central-associate.webp" alt="Microsoft certificate for Dynamics 365 Business Central Functional Consultant Associate" width="1104" height="585" loading="lazy" decoding="async">
           </a>
         </div>
+        <div class="partner-program" lang="en">
+          <span class="partner-program-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+          </span>
+          <div>
+            <p class="partner-program-label">Member of the</p>
+            <p class="partner-program-name">Microsoft AI Cloud Partner&nbsp;Program</p>
+            <p class="partner-program-id">Partner ID 7195914</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="credential-gallery" id="credentials">
@@ -4587,12 +4642,13 @@
         <p class="footer-head">ติดต่อ</p>
         <a href="tel:0841487480">084-148-7480</a>
         <a href="https://line.me/ti/p/~0841487480" target="_blank" rel="noopener">LINE 0841487480</a>
-        <a href="mailto:jirapat.wi@outlook.co.th">jirapat.wi@outlook.co.th</a>
+        <a href="mailto:jirapat@jwicconsulting.com">jirapat@jwicconsulting.com</a>
         <a href="#contact">ติดต่อเรา</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p class="footer-legal">175 อุดมสุข 58 ถนนสุขุมวิท 103 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260 · เลขทะเบียนพาณิชย์ 1101700150933</p>
+      <p class="footer-partner" lang="en">Member of the Microsoft AI Cloud Partner Program (Partner&nbsp;ID&nbsp;7195914)</p>
       <button type="button" id="cookie-manage">จัดการคุกกี้</button>
     </div>
   </div>
