@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; connect-src 'self' https://api.jwicconsulting.com https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://ad.doubleclick.net https://stats.g.doubleclick.net; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; connect-src 'self' https://api.jwicconsulting.com https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com https://td.doubleclick.net https://www.googletagmanager.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- ภาพปกคลิป hero = LCP: แท็ก <img> อยู่หลัง CSS ในหน้า ~250 KB เบราว์เซอร์เลยเจอช้า จึงขอโหลดตั้งแต่ต้นหน้า (srcset/sizes ต้องตรงกับ <img> ไม่งั้นโหลดซ้ำ) -->
 <link rel="preload" as="image" href="video/month.webp" imagesrcset="video/month-640.webp 640w, video/month-1080.webp 1080w, video/month.webp 1920w" imagesizes="(max-width: 600px) calc(100vw - 72px), (max-width: 900px) 530px, (max-width: 1100px) 41vw, 504px" fetchpriority="high">
@@ -4655,7 +4655,7 @@
 </footer>
 
 <div class="cookie-bar" id="cookie-bar" hidden role="dialog" aria-label="การใช้คุกกี้">
-  <p>เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน</p>
+  <p>เราขอใช้คุกกี้วิเคราะห์และวัดผลโฆษณา (Google Analytics, Google Ads) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน</p>
   <div class="cookie-actions">
     <button type="button" class="accept" id="cookie-accept">ยอมรับ</button>
     <button type="button" id="cookie-decline">ปฏิเสธ</button>
@@ -5098,8 +5098,12 @@
     statNums.forEach(el => statIO.observe(el));
   }
 
-  // Google Analytics — โหลดเฉพาะเมื่อผู้ใช้กดยอมรับคุกกี้ (PDPA)
+  // Google Analytics + Google Ads — โหลดเฉพาะเมื่อผู้ใช้กดยอมรับคุกกี้ (PDPA)
+  // Consent Mode v2 แบบ basic: ก่อนกดยอมรับไม่มีแท็กใดโหลดเลย จึงส่ง consent granted พร้อมตอนโหลด
+  // ADS_ID และ ADS_CONTACT ต้องตรงกับใน js/article.js: conversion Contact ยิงจากแท็กนี้ event GA4 ที่ import เข้า Ads ตั้งเป็น Secondary ไว้ดูอย่างเดียว ไม่ให้นับซ้ำ
   const GA_ID = 'G-NGDPEC4BZ1';
+  const ADS_ID = 'AW-18434668129';
+  const ADS_CONTACT = ADS_ID + '/VUJVCIyYspMdEOHsqtZE'; // conversion action Contact: โทร, LINE, อีเมล, จอง Cal.com
   const cookieBar = document.getElementById('cookie-bar');
 
   function loadGA() {
@@ -5110,8 +5114,10 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     window.gtag = gtag;
+    gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
     gtag('js', new Date());
     gtag('config', GA_ID);
+    if (ADS_ID) gtag('config', ADS_ID);
   }
 
   const consent = localStorage.getItem('ga_consent');
@@ -5140,6 +5146,7 @@
   function trackSeoEvent(eventName, parameters = {}) {
     if (typeof window.gtag !== 'function') return;
     window.gtag('event', eventName, parameters);
+    if (eventName === 'contact_click' || eventName === 'generate_lead') window.gtag('event', 'conversion', { send_to: ADS_CONTACT });
   }
 
   // ── funnel events (ยิงผ่าน trackSeoEvent เท่านั้น — ไม่ได้ consent ก็ไม่มีอะไรออกไป) ──
@@ -6614,7 +6621,7 @@
     ['#faq details:nth-of-type(4) > p', 'Yes — the service covers migration from legacy systems: master data such as customers, vendors, items, and chart of accounts, plus opening balances, reconciled before go-live.'],
     ['#faq details:nth-of-type(5) summary', 'Is there support after go-live?'],
     ['#faq details:nth-of-type(5) > p', 'Absolutely — we provide continuous care after go-live: user support, fixing issues, and keeping up with new Microsoft releases.'],
-    ['#cookie-bar p', 'May we use Google Analytics cookies to improve this site? It works the same either way.', 'เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน'],
+    ['#cookie-bar p', 'May we use Google Analytics and Google Ads cookies to improve this site and measure our ads? It works the same either way.', 'เราขอใช้คุกกี้วิเคราะห์และวัดผลโฆษณา (Google Analytics, Google Ads) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการใช้งาน'],
     ['#cookie-accept', 'Accept', 'ยอมรับ'],
     ['#cookie-decline', 'Reject', 'ปฏิเสธ'],
     ['#cookie-manage', 'Cookie settings', 'จัดการคุกกี้'],

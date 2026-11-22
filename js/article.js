@@ -1,9 +1,11 @@
 /* หน้าบทความ: แถบขอความยินยอมคุกกี้ + GA4 + event ของปุ่มติดต่อ
    - ค่า ga_consent ใน localStorage ใช้ร่วมกับหน้าแรก (origin เดียวกัน) กดยอมรับ/ปฏิเสธที่หน้าไหนก็มีผลทั้งเว็บ
-   - GA โหลดหลังยินยอมเท่านั้น เหมือน index.html · GA_ID ต้องตรงกับใน index.html
-   - CSP ของบทความต้องมี script-src 'self' 'inline-speculation-rules' https://www.googletagmanager.com และ connect-src ของ GA */
+   - GA และ Google Ads โหลดหลังยินยอมเท่านั้น เหมือน index.html, GA_ID และ ADS_ID ต้องตรงกับใน index.html
+   - CSP ของบทความต้องมี script-src 'self' 'inline-speculation-rules' https://www.googletagmanager.com, โดเมน Google Ads (googleadservices, googleads.g.doubleclick, www.google.com) และ connect-src ของ GA */
 (function () {
   var GA_ID = 'G-NGDPEC4BZ1';
+  var ADS_ID = 'AW-18434668129'; // Google Ads ต้องตรงกับใน index.html
+  var ADS_CONTACT = ADS_ID + '/VUJVCIyYspMdEOHsqtZE'; // conversion action Contact
   var KEY = 'ga_consent';
   function getConsent() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function setConsent(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
@@ -16,17 +18,23 @@
     document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
+    if (ADS_ID) window.gtag('config', ADS_ID);
   }
-  function track(name, params) { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); }
+  function track(name, params) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', name, params || {});
+    if (name === 'contact_click') window.gtag('event', 'conversion', { send_to: ADS_CONTACT });
+  }
 
   var bar = document.createElement('div');
   bar.className = 'cookie-bar';
   bar.setAttribute('role', 'region');
   bar.setAttribute('aria-label', 'การใช้คุกกี้');
   bar.hidden = true;
-  bar.innerHTML = '<p>เราขอใช้คุกกี้วิเคราะห์ (Google Analytics) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการอ่าน</p>'
+  bar.innerHTML = '<p>เราขอใช้คุกกี้วิเคราะห์และวัดผลโฆษณา (Google Analytics, Google Ads) เพื่อปรับปรุงเว็บไซต์ ปฏิเสธได้โดยไม่กระทบการอ่าน</p>'
     + '<div class="cookie-actions"><button type="button" class="accept">ยอมรับ</button><button type="button" class="decline">ปฏิเสธ</button></div>';
   document.body.appendChild(bar);
 
