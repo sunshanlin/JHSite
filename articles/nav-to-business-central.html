@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://ad.doubleclick.net https://stats.g.doubleclick.net; script-src 'self' 'inline-speculation-rules' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src https://td.doubleclick.net https://www.googletagmanager.com">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>อัปเกรด Dynamics NAV เป็น Business Central: ต้องผ่านกี่ขั้น และงานภาษีไทยใน NAV ไปต่ออย่างไร | JWIC Consulting</title>
+<meta name="description" content="NAV ขึ้น Business Central online ตรง ๆ ไม่ได้ ต้องผ่านเวอร์ชัน 14 และ 25 ก่อน บทความนี้ไล่เส้นทางอัปเกรดตามเวอร์ชันของ NAV จากคู่มือ Microsoft ทางเลือกย้ายทั้งหมดหรือเริ่มใหม่ และงานภาษีไทยที่เขียนด้วย C/AL ต้องไปต่อเป็น extension อย่างไร">
+<link rel="canonical" href="https://www.jwicconsulting.com/articles/nav-to-business-central.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/brand/jwic-icon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="อัปเกรด Dynamics NAV เป็น Business Central: ต้องผ่านกี่ขั้น และงานภาษีไทยใน NAV ไปต่ออย่างไร">
+<meta property="og:description" content="เส้นทางอัปเกรดตามเวอร์ชันของ NAV ทางเลือกย้ายทั้งหมดหรือเริ่มใหม่ และงานภาษีไทยที่ต้องไปต่อเป็น extension">
+<meta property="og:url" content="https://www.jwicconsulting.com/articles/nav-to-business-central.html">
+<meta property="og:image" content="https://www.jwicconsulting.com/img/og/nav-to-business-central.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.jwicconsulting.com/img/og/nav-to-business-central.png">
+<link rel="stylesheet" href="/css/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "อัปเกรด Dynamics NAV เป็น Business Central: ต้องผ่านกี่ขั้น และงานภาษีไทยใน NAV ไปต่ออย่างไร",
+  "description": "เส้นทางอัปเกรดตามเวอร์ชันของ NAV ทางเลือกย้ายทั้งหมดหรือเริ่มใหม่ และงานภาษีไทยที่ต้องไปต่อเป็น extension",
+  "image": "https://www.jwicconsulting.com/img/og/nav-to-business-central.png",
+  "inLanguage": "th",
+  "mainEntityOfPage": "https://www.jwicconsulting.com/articles/nav-to-business-central.html",
+  "author": { "@type": "Person", "name": "Jirapat Wichayapong" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "JWIC Consulting",
+    "logo": { "@type": "ImageObject", "url": "https://www.jwicconsulting.com/img/brand/jwic-icon.png" }
+  },
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23"
+}
+</script>
+<script src="/js/article.js" defer></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="bar" data-nosnippet>
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" role="img" aria-label="JWIC Consulting">
+        <defs><clipPath id="lg"><rect width="64" height="64" rx="10"/></clipPath></defs>
+        <g clip-path="url(#lg)">
+          <rect width="64" height="64" fill="#1c4a3c"/>
+          <polygon points="42,0 42,22 64,22" fill="#000000" fill-opacity="0.16"/>
+          <polygon points="64,0 42,0 64,22" fill="#c07f8b"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Anuphan', sans-serif" font-size="27" font-weight="700" letter-spacing="-1.5" fill="#f5f1ea">JW</text>
+        </g>
+      </svg>
+      <span class="wordmark">JWIC <i>Consulting</i></span>
+    </a>
+    <a class="back" href="/#articles">← บทความทั้งหมด</a>
+  </div>
+</nav>
+
+<header class="article-head">
+  <div class="wrap">
+    <span class="tag">NAV</span>
+    <h1>อัปเกรด Dynamics NAV เป็น Business Central: ต้องผ่านกี่ขั้น และงานภาษีไทยใน NAV ไปต่ออย่างไร</h1>
+    <p class="lead">Dynamics NAV 2018 หมดการสนับสนุนจาก Microsoft วันที่ 11 มกราคม 2571 แต่ NAV ขึ้น Business Central ในขั้นเดียวไม่ได้ และรายงานภาษีไทยที่เขียนไว้ใน NAV ด้วย C/AL ก็ย้ายตามไปตรง ๆ ไม่ได้เหมือนกัน</p>
+    <p class="meta">โดย Jirapat Wichayapong, ที่ปรึกษาและนักพัฒนา Business Central, พฤศจิกายน 2026</p>
+  </div>
+</header>
+
+<div class="wrap">
+<article>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>ทำไม NAV ขึ้น Business Central online ตรง ๆ ไม่ได้?</h2>
+  <p>เครื่องมือย้ายข้อมูลขึ้น cloud ของ Microsoft รับต้นทางที่เป็น Business Central on-premises เวอร์ชัน 14 ขึ้นไปเท่านั้น NAV ทุกรุ่นจึงต้องอัปเกรดเป็น Business Central on-premises ก่อน แล้วค่อยย้ายข้อมูลขึ้น online</p>
+  <p>อีกเงื่อนไขมาจากฝั่ง Business Central เอง ตั้งแต่ 2025 release wave 1 (เวอร์ชัน 26) Microsoft เลิกรองรับการอัปเกรดจากเวอร์ชัน 14 ไปรุ่นล่าสุดในขั้นเดียว ต้องแวะที่ 2024 release wave 2 (เวอร์ชัน 25) ก่อน ส่วนเวอร์ชัน 14 เองหมด mainstream support ไปตั้งแต่ตุลาคม 2566 ลูกค้าใหม่ใช้เวอร์ชันนี้ใน production ไม่ได้ ใช้ได้แค่เป็นทางผ่านไปรุ่นล่าสุด</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><polyline points="3 6 4 7 6 5"/><polyline points="3 12 4 13 6 11"/><polyline points="3 18 4 19 6 17"/></svg></span>เส้นทางอัปเกรดตามเวอร์ชันของ NAV</h2>
+  <p>จำนวนขั้นขึ้นกับว่าตอนนี้ใช้ NAV รุ่นไหน ตารางนี้สรุปจากคู่มือ Microsoft Learn โดยปลายทางคือ Business Central online</p>
+  <table>
+    <tr><th>NAV ที่ใช้อยู่</th><th>ขั้นที่ต้องผ่าน</th><th>จำนวนขั้น</th></tr>
+    <tr><td>NAV 2015, 2016, 2017, 2018</td><td>Business Central 14 on-premises → Business Central on-premises 25 ขึ้นไป → Business Central online</td><td>3</td></tr>
+    <tr><td>NAV 2013, 2013 R2</td><td>NAV 2018 → Business Central 14 → Business Central 25 ขึ้นไป → online</td><td>4</td></tr>
+    <tr><td>NAV 2009 SP1, 2009 R2</td><td>NAV 2013 หรือ 2015 → NAV 2018 → Business Central 14 → Business Central 25 ขึ้นไป → online</td><td>5</td></tr>
+  </table>
+  <p>ทุกเส้นทางผ่านเวอร์ชัน 14 และตรงนั้นคือจุดที่โค้ดต้องแปลงจาก C/AL เป็น AL ถ้าจะใช้ต่อบน on-premises ก็จบที่เวอร์ชันล่าสุดของ on-premises ได้ โดยไม่ต้องย้ายขึ้น online รุ่นที่เก่ากว่า NAV 2009 SP1 ไม่อยู่ในตารางของ Microsoft</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>ย้ายทั้งหมด หรือเริ่มใหม่ด้วยข้อมูลที่จำเป็น?</h2>
+  <p>Microsoft เปิดไว้สองทาง ทั้งสองทางต้องอัปเกรดถึงเวอร์ชัน 14 ก่อนเหมือนกัน</p>
+  <table>
+    <tr><th></th><th>ย้ายทั้งหมด (Full migration)</th><th>เริ่มใหม่ (Business Central 14 reimplementation tool)</th></tr>
+    <tr><td>ข้อมูลที่ย้าย</td><td>ข้อมูลทั้งหมดและ customization</td><td>ข้อมูลหลัก ยอดยกมา และค่า Setup ที่จำเป็น ไม่ได้ย้ายรายการย้อนหลังทั้งหมด</td></tr>
+    <tr><td>Customization เดิม</td><td>แปลง C/AL เป็น AL extension ทุกตัว</td><td>ไม่ได้ย้ายไปด้วย จึงไม่ต้องแปลง</td></tr>
+    <tr><td>อัปเกรดถึงเวอร์ชัน</td><td>รุ่นล่าสุด โดยผ่านเวอร์ชัน 25</td><td>เวอร์ชัน 14</td></tr>
+  </table>
+  <p>ถ้ายังต้องเปิดดูรายการย้อนหลังหลายปีในระบบใหม่ ทางแรกเหมาะกว่า แต่ถ้า customization ส่วนใหญ่เขียนไว้ตั้งแต่สิบปีก่อนและไม่มีใครแน่ใจว่ายังใช้อยู่ ทางที่สองตัดงานแปลงโค้ดออกไปทั้งก้อน แล้วเริ่มกระบวนการบน Business Central มาตรฐาน</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="15" y1="15" x2="9" y2="15"/></svg></span>งานภาษีไทยที่เขียนไว้ใน NAV ไปต่ออย่างไร?</h2>
+  <p>ใน Business Central ไทยใช้ base app รุ่น W1 ไม่มี localization app จาก Microsoft (ที่มาอยู่ในบทความ <a href="/articles/localization-thailand.html">Localization ใน Business Central คืออะไร</a>) ยุค NAV ก็เหมือนกัน งานภาษีไทยอย่างรายงานภาษีซื้อ-ขาย แบบ ภ.พ.30 และหนังสือรับรองการหักภาษี ณ ที่จ่าย มักเป็นโค้ด C/AL ที่ partner เขียนแก้เข้าไปใน NAV โดยตรง</p>
+  <p>คู่มือการย้ายของ Microsoft เขียนไว้ว่า customization ทุกตัวต้องแปลงเป็น AL extension ก่อนขึ้น online และข้อมูลในตารางที่มีโค้ดแก้ไขจะย้ายตามไปไม่ได้ ถ้าไม่มี extension รองรับทั้งฝั่ง on-premises และ online หัวข้อ Localizations ในคู่มือเดียวกันยังให้ตรวจว่ารายงานภาษีและงานตามกฎหมายที่แก้เพิ่มไว้สำหรับประเทศนั้น แปลงเป็น extension ที่ใช้คู่กับ localization ปลายทางได้แล้ว</p>
+  <p>สำหรับไทย คำถามจึงไม่ได้อยู่ที่ว่าจะแปลงโค้ดเก่าทีละบรรทัดอย่างไร อยู่ที่ว่างานภาษีแต่ละอย่างมี extension รองรับแล้วหรือยังต่างหาก</p>
+  <table>
+    <tr><th>งานใน NAV</th><th>ทางไปต่อบน Business Central</th></tr>
+    <tr><td>รายงานภาษีซื้อ-ขายแยกสาขา และแบบ ภ.พ.30</td><td>มีใน JWIC Localization</td></tr>
+    <tr><td>แบบ ภ.พ.36 ค่าบริการที่จ่ายไปต่างประเทศ</td><td>มีใน JWIC Localization</td></tr>
+    <tr><td>หนังสือรับรองการหักภาษี ณ ที่จ่าย (50 ทวิ), ภ.ง.ด. และไฟล์ RD Prep</td><td>มีใน JWIC Localization</td></tr>
+    <tr><td>ใบวางบิล</td><td>มีใน JWIC Localization</td></tr>
+    <tr><td>ฟอร์มเอกสารหรือรายงานที่ออกแบบเฉพาะบริษัท</td><td>ทำใหม่เป็น report layout หรือ extension</td></tr>
+    <tr><td>โค้ดที่เคยเขียนเพิ่ม แต่ Business Central มาตรฐานรุ่นใหม่ทำได้เองแล้ว</td><td>ตรวจก่อนแปลง ถ้าเลิกได้ก็ไม่ต้องย้าย</td></tr>
+  </table>
+  <p>JWIC Localization ติดตั้งเป็น extension บน Business Central ไม่ได้แก้ base app งานภาษีในสี่แถวแรกจึงไม่ต้องแปลงจากโค้ด NAV เดิม งานที่เหลือคือตั้งค่าและย้ายข้อมูลหลักที่รายงานภาษีใช้ เช่น เลขประจำตัวผู้เสียภาษีและเลขสาขาของคู่ค้า (ดูสิ่งที่รวมในแต่ละแพ็กเกจได้ที่<a href="/#pricing">ส่วนราคาบนหน้าแรก</a>)</p>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>หกขั้นของการย้ายตามคู่มือ Microsoft</h2>
+  <div class="steps-box">
+    <h3>จาก NAV ถึง Business Central online</h3>
+    <ol>
+      <li>ประเมินระบบปัจจุบัน กำหนดขอบเขต คัดข้อมูลเก่าที่ไม่ใช้ออก และแบ่งบริษัทเป็นชุดถ้ามีหลายบริษัท</li>
+      <li>อัปเกรดเป็น Business Central on-premises เวอร์ชัน 14 ขึ้นไป พร้อมแปลง C/AL เป็น AL extension ยกเว้นเลือกทางเริ่มใหม่</li>
+      <li>ตั้งค่าการย้ายขึ้น cloud โดยเชื่อมฐานข้อมูล on-premises กับ tenant online ติดตั้ง Integration Runtime เลือกบริษัท แล้วตั้งรอบ replicate</li>
+      <li>Replicate ข้อมูลผ่าน Azure Data Factory ทั้งรอบแรกและรอบส่วนต่าง ตรวจผล แล้วแก้ปัญหาที่เจอ</li>
+      <li>รัน data upgrade เป็นขั้นสุดท้าย จากนั้นจบการย้ายให้ online เป็นระบบหลัก</li>
+      <li>เปิดสิทธิ์ผู้ใช้ เชื่อม integration กลับ แล้วติดตามความเร็วของระบบช่วงแรก</li>
+    </ol>
+  </div>
+
+  <h2><span class="h2-ic"><svg viewBox="0 0 24 24"><path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></span>เตรียมอะไรก่อนเริ่ม</h2>
+  <ul>
+    <li>เตรียม tenant ของ Business Central online และ license ให้ครบทุกคนที่จะเข้าระบบ ค่า license คิดรายผู้ใช้ แบ่งเป็น Essentials กับ Premium (ราคาอ้างอิงอยู่ในบทความ <a href="/articles/business-central-cost-thailand.html">งบวางระบบ Business Central ในไทย</a>)</li>
+    <li>ลดขนาดฐานข้อมูลก่อนอัปเกรด ย้ายรายการย้อนหลังที่ไม่ใช้แล้วไปเก็บนอกระบบ ลดตาราง log ที่โตเกิน และตรวจว่า SQL Server ตั้ง compatibility level ไว้ที่ 130 ขึ้นไป</li>
+    <li>ทำรายการ customization ใน NAV แยกว่าตัวไหนเป็นงานภาษี ตัวไหนเป็นฟอร์มเอกสาร และตัวไหนไม่มีใครใช้แล้ว ตารางในหัวข้อก่อนหน้าใช้เป็นจุดตั้งต้นได้</li>
+    <li>ซ้อมย้ายทั้งกระบวนการใน sandbox อย่างน้อยหนึ่งรอบก่อนวันจริง จับเวลา และให้ฝ่ายบัญชีตรวจยอดคงเหลือกับรายงานภาษีของเดือนล่าสุด</li>
+  </ul>
+
+  <div class="note">
+    <b>ก่อนวางแผน</b>
+    <p>เวอร์ชันและเส้นทางในบทความนี้อ้างอิงคู่มือ Microsoft Learn ณ พฤศจิกายน 2569 Microsoft ปรับตารางเส้นทางอัปเกรดทุก release wave ควรเปิดหน้าอ้างอิงล่าสุดอีกครั้งก่อนกำหนดวันย้ายจริง</p>
+  </div>
+
+  <p class="source-note">อ้างอิง: <a href="https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/migrate-nav">Migrate Dynamics NAV to Business Central online</a>, <a href="https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/upgrade/upgrade-paths">Supported upgrade paths to Business Central releases</a>, <a href="https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/migrate-bc14-reimplementation">Business Central 14 reimplementation tool</a>, <a href="https://learn.microsoft.com/en-us/lifecycle/end-of-support/end-of-support-2028">Microsoft Lifecycle: Ending Support in 2028</a></p>
+
+  <div class="article-cta">
+    <h2>ยังใช้ NAV อยู่ และอยากรู้ว่าต้องผ่านกี่ขั้น?</h2>
+    <p>นัดคุยเพื่อดูเวอร์ชัน NAV และงานภาษีไทยที่เขียนเพิ่มไว้ แล้วดู Demo งานภาษีไทยบน Business Central <span class="nb">ไม่มีค่าใช้จ่าย</span></p>
+    <div class="cta-row">
+      <a href="/#contact">ปรึกษาเรื่องอัปเกรด NAV →</a>
+      <a class="alt" href="https://line.me/ti/p/~0841487480" rel="noopener">คุยทาง LINE</a>
+      <a class="alt" href="tel:0841487480">โทร 084-148-7480</a>
+    </div>
+    <p class="cta-price"><a href="/#pricing">ดูราคาแพ็กเกจบนหน้าแรก</a></p>
+  </div>
+
+  <div class="more">
+    <h2>บทความอื่น</h2>
+    <ul>
+      <li><a href="/articles/localization-thailand.html">Localization ใน Business Central คืออะไร และสำหรับไทยประกอบด้วยอะไรบ้าง</a></li>
+      <li><a href="/articles/business-central-cost-thailand.html">งบวางระบบ Business Central ในไทยมีอะไรบ้าง</a></li>
+      <li><a href="/articles/success-by-design.html">Success by Design: กรอบที่ Microsoft ถอดบทเรียนจากโครงการ Dynamics 365 เป็นพัน</a></li>
+    </ul>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>JWIC Consulting</strong> — Honest Advice, Practical Solution</div>
+    <div class="foot-reach"><a href="tel:0841487480">084-148-7480</a> · <a href="https://line.me/ti/p/~0841487480" rel="noopener">LINE 0841487480</a> · <a href="mailto:jirapat@jwicconsulting.com">jirapat@jwicconsulting.com</a></div>
+    <div><a href="/">jwicconsulting.com</a><button type="button" class="cookie-manage" hidden>จัดการคุกกี้</button></div>
+  </div>
+</footer>
+
+</body>
+</html>
