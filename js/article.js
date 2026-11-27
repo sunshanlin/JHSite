@@ -1,10 +1,12 @@
-/* หน้าบทความ: แถบขอความยินยอมคุกกี้ + GA4 + event ของปุ่มติดต่อ
+/* หน้าบทความ: แถบขอความยินยอมคุกกี้ + GA4 + GTM + event ของปุ่มติดต่อ
    - ค่า ga_consent ใน localStorage ใช้ร่วมกับหน้าแรก (origin เดียวกัน) กดยอมรับ/ปฏิเสธที่หน้าไหนก็มีผลทั้งเว็บ
-   - GA และ Google Ads โหลดหลังยินยอมเท่านั้น เหมือน index.html, GA_ID และ ADS_ID ต้องตรงกับใน index.html
-   - CSP ของบทความต้องมี script-src 'self' 'inline-speculation-rules' https://www.googletagmanager.com, โดเมน Google Ads (googleadservices, googleads.g.doubleclick, www.google.com) และ connect-src ของ GA */
+   - GA, Google Ads และ GTM โหลดหลังยินยอมเท่านั้น เหมือน index.html, GA_ID ADS_ID และ GTM_ID ต้องตรงกับใน index.html
+   - CSP ของบทความต้องมี script-src 'self' 'inline-speculation-rules' https://www.googletagmanager.com, โดเมน Google Ads (googleadservices, googleads.g.doubleclick, www.google.com) และ connect-src ของ GA
+   - CSP ของบทความไม่มี 'unsafe-inline': แท็ก Custom HTML ใน GTM ที่มีสคริปต์ inline จึงไม่ทำงานในหน้าบทความ */
 (function () {
   var GA_ID = 'G-NGDPEC4BZ1';
   var ADS_ID = 'AW-18434668129'; // Google Ads ต้องตรงกับใน index.html
+  var GTM_ID = 'GTM-MZJ5QMM3'; // container GTM ต้องตรงกับใน index.html
   var ADS_CONTACT = ADS_ID + '/VUJVCIyYspMdEOHsqtZE'; // conversion action Contact
   var KEY = 'ga_consent';
   function getConsent() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -22,6 +24,12 @@
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
     if (ADS_ID) window.gtag('config', ADS_ID);
+    if (GTM_ID) {
+      var t = document.createElement('script');
+      t.async = true;
+      t.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(t);
+    }
   }
   function track(name, params) {
     if (typeof window.gtag !== 'function') return;

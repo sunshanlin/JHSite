@@ -5103,11 +5103,14 @@
     statNums.forEach(el => statIO.observe(el));
   }
 
-  // Google Analytics + Google Ads — โหลดเฉพาะเมื่อผู้ใช้กดยอมรับคุกกี้ (PDPA)
+  // Google Analytics + Google Ads + GTM — โหลดเฉพาะเมื่อผู้ใช้กดยอมรับคุกกี้ (PDPA)
   // Consent Mode v2 แบบ basic: ก่อนกดยอมรับไม่มีแท็กใดโหลดเลย จึงส่ง consent granted พร้อมตอนโหลด
   // ADS_ID และ ADS_CONTACT ต้องตรงกับใน js/article.js: conversion Contact ยิงจากแท็กนี้ event GA4 ที่ import เข้า Ads ตั้งเป็น Secondary ไว้ดูอย่างเดียว ไม่ให้นับซ้ำ
+  // GTM ใช้ dataLayer ร่วมกัน gtag('js') ด้านล่างคือ event gtm.js (trigger All Pages) ห้ามใส่แท็ก GA4 G-NGDPEC4BZ1 หรือ conversion Contact ซ้ำใน GTM จะนับสองรอบ
+  // แท็กใน GTM ที่โหลดสคริปต์จากโดเมนอื่นต้องเพิ่มโดเมนนั้นใน CSP ด้านบน และ CSP ของบทความ ไม่งั้นถูกบล็อกเงียบ ๆ
   const GA_ID = 'G-NGDPEC4BZ1';
   const ADS_ID = 'AW-18434668129';
+  const GTM_ID = 'GTM-MZJ5QMM3'; // ต้องตรงกับใน js/article.js
   const ADS_CONTACT = ADS_ID + '/VUJVCIyYspMdEOHsqtZE'; // conversion action Contact: โทร, LINE, อีเมล, จอง Cal.com
   const cookieBar = document.getElementById('cookie-bar');
 
@@ -5123,6 +5126,12 @@
     gtag('js', new Date());
     gtag('config', GA_ID);
     if (ADS_ID) gtag('config', ADS_ID);
+    if (GTM_ID) {
+      const t = document.createElement('script');
+      t.async = true;
+      t.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(t);
+    }
   }
 
   const consent = localStorage.getItem('ga_consent');
