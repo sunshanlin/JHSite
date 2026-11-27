@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://ad.doubleclick.net https://stats.g.doubleclick.net; script-src 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; connect-src 'self' https://api.jwicconsulting.com https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://app.cal.com https://cal.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net; base-uri 'self'; object-src 'none'; frame-src https://cal.com https://app.cal.com https://td.doubleclick.net https://www.googletagmanager.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://dbdregistered.dbd.go.th https://*.google-analytics.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://ad.doubleclick.net https://stats.g.doubleclick.net; script-src 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; connect-src 'self' https://api.jwicconsulting.com https://jwic-vat.jwic.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.th https://analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net; base-uri 'self'; object-src 'none'; frame-src https://td.doubleclick.net https://www.googletagmanager.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- ภาพปกคลิป hero = LCP: แท็ก <img> อยู่หลัง CSS ในหน้า ~250 KB เบราว์เซอร์เลยเจอช้า จึงขอโหลดตั้งแต่ต้นหน้า (srcset/sizes ต้องตรงกับ <img> ไม่งั้นโหลดซ้ำ) -->
 <link rel="preload" as="image" href="video/month.webp" imagesrcset="video/month-640.webp 640w, video/month-1080.webp 1080w, video/month.webp 1920w" imagesizes="(max-width: 600px) calc(100vw - 72px), (max-width: 900px) 530px, (max-width: 1100px) 41vw, 504px" fetchpriority="high">
@@ -700,7 +700,7 @@
   .ci-list a { text-decoration: none; }
   .ci-list a:hover { text-decoration: underline; }
   .contact-form { gap: 16px; }
-  /* ปุ่มจอง Cal.com: อ่านเป็น "เลือกระดับการคุย" ไม่ใช่ปุ่มเท่ากันสองปุ่ม — ไอคอนนำ ชื่อการกระทำ แล้วบอกความยาว/ใช้ตอนไหน */
+  /* ปุ่มติดต่อใน #contact (เหลือ LINE ปุ่มเดียวตั้งแต่ถอด Cal.com 27 พ.ย. 2026): ไอคอนนำ ชื่อการกระทำ แล้วบอกว่าใช้ตอนไหน */
   .contact-form .cal-actions { display: grid; gap: 16px; margin-top: 10px; }
   .contact-form .cal-actions .cta { justify-content: flex-start; gap: 18px; padding: 20px 24px; text-align: left; }
   /* ไอคอนใส่กรอบสี่เหลี่ยมมน + ลูกศรท้ายปุ่ม ให้อ่านเป็น "การ์ดให้เลือก" ไม่ใช่ปุ่มฟอร์ม */
@@ -3423,7 +3423,7 @@
     #business-central .bc-tabs, .feature-tab-scroll, .feature-visual, .feature-link, .tip-film,
     #reports, .pricing-cta, .plan-more > summary, .form-heading, .contact-form,
     #pp36, #billing-flow, #vat-service, #cost-trace, #faq, #about, #articles,
-    .footer-menu, #cookie-manage, footer a[href="#contact"], .ci-flyer { display: none !important; }
+    .footer-menu, #cookie-manage, footer a[href="#contact"] { display: none !important; }
 
     .topnav { position: static; border-bottom: 1px solid #c9d6d2; }
     .topnav .wrap { min-height: 0; padding-block: 0 8px; }
@@ -4059,10 +4059,6 @@
             <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             <a href="mailto:jirapat@jwicconsulting.com">jirapat@jwicconsulting.com</a>
           </li>
-          <li class="ci-flyer">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
-            <a href="flyer-overview.html" target="_blank" rel="noopener">สรุประบบ 1 หน้า ส่งต่อให้ทีมได้</a>
-          </li>
         </ul>
         <div class="form-heading">
           <h3>เลือกเวลาที่สะดวกเพื่อสอบถามได้ทันที</h3>
@@ -4079,10 +4075,6 @@
             <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             <span class="cal-copy"><strong>สอบถามทาง Line</strong><span>ปรึกษาได้ทันที</span></span>
           </a>
-          <button type="button" class="cta" data-cal-namespace="1hour" data-cal-link="jwicconsulting/1hour" data-cal-config='{"layout":"month_view"}'>
-            <svg viewBox="0 0 24 24"><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/><path d="M23 7l-7 5 7 5V7z"/></svg>
-            <span class="cal-copy"><strong>นัด Demo ผ่าน Zoom</strong><span>1 ชั่วโมง · ดูระบบจริงและสรุปขอบเขต</span></span>
-          </button>
         </div>
       </div>
     </div>
@@ -4668,34 +4660,6 @@
 </div>
 
 <script>
-  // ปุ่มจองคิว Cal.com ใน #contact — official embed snippet จาก cal.com/docs
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  // embed.js (25 KB + คุกกี้ __cf_bm ของ cal.com) ไม่โหลดพร้อมหน้า: Cal() ครั้งแรกคือตัวสั่งโหลด จึงเรียกเมื่อปุ่มเข้าใกล้จอ 800px
-  // หรือมีคนชี้/แตะ/โฟกัสปุ่ม · กดก่อน embed.js พร้อม = สั่ง modal เข้าคิวของ stub ไว้ ไม่งั้นคลิกแรกหาย (embed จับคลิกได้หลังโหลดเสร็จ)
-  const calBtn = document.querySelector('[data-cal-link]');
-  let calState = 0, calQueued = false;   // 0 ยังไม่เรียก · 1 กำลังโหลด · 2 embed.js ทำงานแล้ว
-  function loadCal() {
-    if (calState) return;
-    calState = 1;
-    Cal("init", "1hour", { origin: "https://cal.com" });
-    Cal.ns["1hour"]("ui", { styles: { branding: { brandColor: "#35AF9E" } }, hideEventTypeDetails: false, layout: "month_view" });
-    Cal("on", { action: "bookingSuccessful", callback: () => {
-      trackSeoEvent('generate_lead', { method: 'cal_booking' });
-    } });
-    document.querySelector('script[src="https://app.cal.com/embed/embed.js"]').addEventListener('load', () => { calState = 2; });
-  }
-  if (calBtn) {
-    ['pointerenter', 'touchstart', 'focusin'].forEach((t) => calBtn.addEventListener(t, loadCal, { once: true, passive: true }));
-    calBtn.addEventListener('click', () => {
-      if (calState === 2 || calQueued) return;
-      calQueued = true;
-      loadCal();
-      Cal.ns["1hour"]("modal", { calLink: calBtn.dataset.calLink, config: JSON.parse(calBtn.dataset.calConfig || '{}') });
-    });
-    const calIO = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { calIO.disconnect(); loadCal(); } }, { rootMargin: '800px 0px' });
-    calIO.observe(calBtn);
-  }
-
   // เมนูมือถือ
   const menuToggle = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('#primary-nav');
@@ -5111,7 +5075,7 @@
   const GA_ID = 'G-NGDPEC4BZ1';
   const ADS_ID = 'AW-18434668129';
   const GTM_ID = 'GTM-MZJ5QMM3'; // ต้องตรงกับใน js/article.js
-  const ADS_CONTACT = ADS_ID + '/VUJVCIyYspMdEOHsqtZE'; // conversion action Contact: โทร, LINE, อีเมล, จอง Cal.com
+  const ADS_CONTACT = ADS_ID + '/VUJVCIyYspMdEOHsqtZE'; // conversion action Contact: โทร, LINE, อีเมล
   const cookieBar = document.getElementById('cookie-bar');
 
   function loadGA() {
@@ -6617,11 +6581,9 @@
     ['.pricing-excludes', '<strong>Additional information</strong>*Prices and service fees exclude Microsoft licences, annual support fees, and additional customisation.'],
     ['#contact h2', 'Let\'s talk about the right system for your business'],
     ['.cal-actions .cal-line .cal-copy', '<strong>Chat on LINE</strong><span>Talk to us right away</span>'],
-    ['.cal-actions .cta[data-cal-namespace="1hour"] .cal-copy', '<strong>Book a Meeting (Zoom)</strong><span>1 hour · demo and scope</span>'],
     ['.profile-quote', '<p>I believe ERP implementation has reached a point where businesses can transition to a new system quickly, without compromising the accuracy of their data.</p><p>With experience in ERP consulting and implementation, I am committed to delivering practical solutions that align with your business processes, achieve measurable results, and provide the right balance of functionality, quality, and cost.</p>'],
     ['.contact-info .form-heading h3', 'Pick a time that works — book instantly'],
     ['.demo-toggle .dt-open', 'Try the demo'],
-    ['.ci-flyer a', 'One-page flyer to share with your team (Thai)'],
     ['.demo-toggle .dt-close', 'Hide the demo'],
     ['#faq h2', 'Frequently Asked Questions'],
     ['#faq details:nth-of-type(1) summary', 'Does Business Central support Thai tax and documents?'],
