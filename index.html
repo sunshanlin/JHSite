@@ -1927,9 +1927,8 @@
   /* box-shadow/radius: กฎ figure รวมของหน้า (.card, figure) วาดกรอบการ์ดรอบ caption — ที่นี่ไม่ใช่การ์ด */
   .line-qr { display: flex; align-items: center; gap: 26px; margin: 0; box-shadow: none; border-radius: 0; }
   .line-qr img { flex-shrink: 0; width: 168px; height: 168px; border-radius: 8px; }
-  .line-qr figcaption { display: grid; gap: 6px; line-height: 1.45; }
+  .line-qr figcaption { line-height: 1.45; }
   .line-qr strong { color: #fff; font-size: 1.15rem; font-weight: 600; }
-  .line-qr span { color: #BFD3D0; font-size: .95rem; }
   @media (max-width: 640px) { .line-qr { display: none; } }
   /* หัวข้อย้ายมาคอลัมน์ซ้าย + ลูกศรชี้ไปหาปุ่มจองคิวทางขวา */
   #contact .contact-info .form-heading {
@@ -4636,7 +4635,7 @@
         <!-- QR = ลิงก์เดียวกับปุ่ม LINE ข้างล่าง (สร้างด้วย D:\Riposte\qr.cjs) — แทนรูปทีมประชุม 28 พ.ย. 2026 -->
         <figure class="line-qr">
           <img src="img/line-qr.svg" alt="QR code เพิ่มเพื่อน LINE ไอดี 0841487480" width="180" height="180" loading="lazy" decoding="async">
-          <figcaption><strong>สแกนเพิ่มเพื่อนทาง LINE</strong><span>เปิดกล้องมือถือสแกน แล้วทักได้เลย</span></figcaption>
+          <figcaption><strong>สแกนเพิ่มเพื่อนทาง LINE</strong></figcaption>
         </figure>
         <div class="cal-actions">
           <!-- ไทยเป็น default (หน้านี้ lang="th") — คำแปล EN อยู่ใน I18N -->
@@ -6615,7 +6614,7 @@
     ['.pricing-excludes', '<strong>Additional information</strong>*Prices and service fees exclude Microsoft licences, annual support fees, and additional customisation.'],
     ['#contact h2', 'Let\'s talk about the right system for your business'],
     ['.cal-actions .cal-line .cal-copy', '<strong>Chat on LINE</strong><span>Talk to us right away</span>'],
-    ['.line-qr figcaption', '<strong>Scan to add us on LINE</strong><span>Open your phone camera, scan, and send a message</span>'],
+    ['.line-qr figcaption', '<strong>Scan to add us on LINE</strong>'],
     ['.profile-quote', '<p>I believe ERP implementation has reached a point where businesses can transition to a new system quickly, without compromising the accuracy of their data.</p><p>With experience in ERP consulting and implementation, I am committed to delivering practical solutions that align with your business processes, achieve measurable results, and provide the right balance of functionality, quality, and cost.</p>'],
     ['.contact-info .form-heading h3', 'Message us — no appointment needed'],
     ['.demo-toggle .dt-open', 'Try the demo'],
