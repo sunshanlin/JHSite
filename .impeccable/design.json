@@ -372,11 +372,6 @@
         "name": "screen-float",
         "value": "0 0 0 1px rgba(0,0,0,.05), 0 18px 38px -18px rgba(1,47,42,.55)",
         "purpose": "The Business Central screen .hs-screen behind the invoice in the hero scene, and a smaller cut of it under the .hs-hinge label."
-      },
-      {
-        "name": "legacy-soft",
-        "value": "0 22px 60px -34px rgba(1,74,65,.32)",
-        "purpose": "DEPRECATED. The --shadow token from an earlier pass. Still declared in :root, but nothing uses it since card hover moved to hover-hairline (28 Nov 2026)."
       }
     ],
     "motion": [
