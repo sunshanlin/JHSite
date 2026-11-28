@@ -250,7 +250,7 @@ The hero contributes the system's one piece of geometry: a `200px` bottom-left r
 - **Hover:** background only → Deep Burgundy, 125ms ease. No transform, no shadow
 - **Focus:** 2px burgundy outline at 2px offset
 - **Secondary / Ghost:** transparent fill, 1px Ink Green-Black border, ink text; hover fills `rgba(1,47,42,.06)`
-- **Ghost on `#contact`:** the dark photo ground forces its own treatment — `rgba(0,0,0,.42)` scrim, 2px backdrop blur, `#f0f8f7` text, translucent white border. Without the scrim the label sinks into the photograph
+- **Ghost on `#contact`:** the deep-teal ground needs light ink: `#f0f8f7` text and icon, a `rgba(255,255,255,.55)` border and a faint `rgba(255,255,255,.05)` fill, the same translucency as the contact card around it. Hover fills `rgba(53,175,158,.16)`. Above it sits the LINE QR code, a white 8px tile with no padding (the file carries its own four-module quiet zone), hidden at 640px and below, where a phone cannot scan its own screen
 - **Character:** tactile and confident. The button is a solid object that changes color when pressed, not a surface that floats
 
 ### Cards / Containers

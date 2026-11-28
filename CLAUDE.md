@@ -5,7 +5,7 @@ Landing page selling Microsoft Dynamics 365 Business Central localization for Th
 - **Live: https://www.jwicconsulting.com/** — GitHub Pages deploys on every push to `main` (repo sunshanlin/JHSite, **public**). Never delete `CNAME` at the root, or the custom domain breaks.
 - One file: `index.html` — all HTML + CSS inline, no build step, no dependencies (`poster.html` = A4 poster, printed to PDF).
 - Run / screenshot / test: skill `/run-promote-site` (not `python -m http.server` — python on this machine is a Store stub).
-- Contact: phone/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · e-mail **`jirapat@jwicconsulting.com`** (domain mailbox on Microsoft 365, replaced `jirapat.wi@outlook.co.th` on 20 Nov 2026) in every file of this repo (page, JSON-LD, articles, print pages, llms.txt, PRODUCT.md), never mixed with the old Outlook addresses — schema and Google Business Profile should match.
+- Contact: phone/LINE 084-148-7480 (Jirapat Wichayapong — Sun) · e-mail **`jirapat@jwicconsulting.com`** (domain mailbox on Microsoft 365, replaced `jirapat.wi@outlook.co.th` on 20 Nov 2026) in every file of this repo (page, JSON-LD, articles, print pages, llms.txt, PRODUCT.md), never mixed with the old Outlook addresses — schema and Google Business Profile should match. The LINE QR code in `#contact` (`img/line-qr.svg`) is an image of the button's link, so grep cannot find it: a new LINE ID means remaking it with `D:\Riposte\qr.cjs`.
 - Microsoft AI Cloud Partner Program member, Partner ID 7195914: shown in `#about` (`.partner-program`) and the footer legal line. Text only — no Microsoft logo unless the official member badge is downloaded from Partner Center.
 - Style: read DESIGN.md before editing. All design tokens live in **one** `:root` block at the top of `<style>` (merged from 6 blocks on 23 Sep 2026, every value unchanged); add new tokens there, never open a second `:root`. `--ui-muted: #516661` and `--brand-pink-soft: #EFA9BB` came from the WCAG AA pass — don't roll them back. Legacy names (`--navy` `--accent` `--muted` …) are still used by early rules and now point at the brand.
 - Bilingual: the `I18N` dictionary (selector → EN/TH) sits at the end of `<script>` in index.html — adding, moving or editing page copy means updating its pair too, nth-child selectors above all; `#articles` is untranslated on purpose. Thai `aria-label` / `alt` / `title` need a pair in `I18N_ATTR` (it takes the first `querySelector` match only, so the selector must be unique), except buttons whose label changes with state: they switch language in their own script. CI checks this.
@@ -33,7 +33,7 @@ Every committed file is served as a real URL on jwicconsulting.com, except folde
 
 ## Photo credits
 
-The people photos in `#features` and `#contact` come from [Pexels](https://www.pexels.com/license/) and [Unsplash](https://unsplash.com/license) — both free for commercial use with no credit required; sources kept here so they aren't lost.
+The people photos in `#features` come from [Pexels](https://www.pexels.com/license/) and [Unsplash](https://unsplash.com/license) — both free for commercial use with no credit required; sources kept here so they aren't lost.
 
 Unsplash+ (Getty) images fail to load (403), which works as a built-in license filter:
 
@@ -46,7 +46,7 @@ Unsplash+ (Getty) images fail to load (403), which works as a built-in license f
 | `feat-messenger.webp` | supplied by the owner (rights confirmed) |
 | `why-person.webp` | supplied by the owner (rights confirmed) |
 | `feat-api.webp` | Pexels 36706460 |
-| `consult-meeting.webp` | Pexels 7643897 |
+| `consult-meeting.webp` | Pexels 7643897 (no longer on the page, kept for old links) |
 | `pricing-consultation.webp` | (already in the project) |
 
 Every file went through `ffmpeg -vf "eq=brightness=..:saturation=1.18.."` to brighten it before the WebP conversion.
