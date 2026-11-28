@@ -229,6 +229,21 @@
           "#F6F8F7"
         ]
       },
+      "ui-tint": {
+        "role": "neutral",
+        "displayName": "Teal Tint",
+        "canonical": "#E6F2EE",
+        "tonalRamp": [
+          "#19221F",
+          "#2F3835",
+          "#48514E",
+          "#646E6B",
+          "#838E8A",
+          "#A7B2AF",
+          "#CCD8D4",
+          "#E6F2EE"
+        ]
+      },
       "ui-ink": {
         "role": "neutral",
         "displayName": "Ink Green-Black",
@@ -344,6 +359,11 @@
         "purpose": "The default for every card, figure, feature panel, and price card below the hero. Reads as a printed edge, not a lifted object."
       },
       {
+        "name": "hover-hairline",
+        "value": "0 0 2px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.14)",
+        "purpose": "The --ui-shadow-hover token: the hover state of .card. The hairline with a deeper second layer, so a card deepens instead of lifting (28 Nov 2026)."
+      },
+      {
         "name": "document-lift",
         "value": "0 1px 2px rgba(1,47,42,.16), 0 12px 22px -10px rgba(1,47,42,.3), 0 44px 80px -30px rgba(1,47,42,.66)",
         "purpose": "The printed tax invoice .hs-paper in the hero scene. Representational — paper lying on a desk."
@@ -356,7 +376,7 @@
       {
         "name": "legacy-soft",
         "value": "0 22px 60px -34px rgba(1,74,65,.32)",
-        "purpose": "DEPRECATED. The --shadow token from an earlier pass, still on .profile-panel and card hover. Replace with hairline outside the hero."
+        "purpose": "DEPRECATED. The --shadow token from an earlier pass. Still declared in :root, but nothing uses it since card hover moved to hover-hairline (28 Nov 2026)."
       }
     ],
     "motion": [
@@ -532,7 +552,7 @@
       },
       {
         "name": "The Paper Rule",
-        "body": "Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen.",
+        "body": "Every surface is ivory, cool page, or white. Never a colored tint of the accent, never a blue-grey. The page is printed matter, not a screen. The one section ground outside this is the flat Teal Tint band of #reports: a pale tint of the institutional teal, not of the accent, and in one section only.",
         "section": "colors"
       },
       {
@@ -567,7 +587,7 @@
       },
       {
         "name": "The No Hover Lift Rule",
-        "body": ".cta explicitly kills transform and box-shadow on hover and changes background only, in 125ms. Buttons do not rise. Cards still lift 5px, which is a live inconsistency the system has not yet resolved.",
+        "body": ".cta explicitly kills transform and box-shadow on hover and changes background only, in 125ms. Buttons do not rise. Cards no longer lift either: since 28 Nov 2026 .card deepens to the hover-hairline shadow instead of rising 5px.",
         "section": "elevation"
       },
       {
